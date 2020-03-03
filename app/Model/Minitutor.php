@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Model;
+
+use Illuminate\Database\Eloquent\Model;
+use Overtrue\LaravelFollow\Traits\CanBeSubscribed;
+
+class Minitutor extends Model
+{
+    use CanBeSubscribed;
+
+    protected $fillable = [
+        'user_id',
+        'active',
+        'last_education',
+        'university',
+        'city_and_country_of_study',
+        'majors',
+        'interest_talent',
+        'contact',
+        'expectation',
+        'reason',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+}

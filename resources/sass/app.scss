@@ -1,0 +1,53 @@
+@import "vars";
+@import "variables";
+@import "vendor/perfect-scrollbar";
+@import "~swiper/swiper.scss";
+html {
+  // overflow: hidden;
+  width: 100%;
+  // height: 100%;
+}
+
+body {
+  width: 100%;
+  // height: 100%;
+  // overflow: hidden;
+  overflow-x: hidden;
+  padding: 0;
+  margin: 0;
+  padding-top: 60px;
+  padding-left: 260px;
+  background-color: $gray-100;
+  transition: padding-left 400ms cubic-bezier(.785,.135,.15,.86);
+  &.ab-sidebar--close {
+    padding-left: 0px;
+  }
+  @include media-breakpoint-down(md) {
+    padding-left: 0px;
+  }
+  &.preload {
+    transition: none;
+  }
+}
+
+.ab-layout {
+  width: 100%;
+  // height: 100%;
+  // overflow-y: scroll;
+  min-height: 100%;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+@import "layouts/header";
+@import "layouts/sidebar";
+@import "layouts/footer";
+@import "pages/dashboard";
+@import "pages/minitutor";
+@import "pages/home";
+@import "custom/utilities";
+
+.ab-post-card {
+  height: 100%;
+}
