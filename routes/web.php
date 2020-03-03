@@ -30,10 +30,7 @@ Route::prefix('category')->as('category.')->group(function(){
     Route::get('/{slug}', 'CategoryController@show')->name('show');
 });
 
-Route::prefix('minitutor')->as('minitutor.')->group(function(){
-    Route::get('/', 'MinitutorController@index')->name('index');
-    Route::get('/{username}', 'MinitutorController@show')->name('show');
-});
+
 
 Route::middleware('auth')->group(function(){
     // Dashboard routes
@@ -78,4 +75,10 @@ Route::middleware('auth')->group(function(){
             Route::put('/update', 'JoinMinitutorController@update')->name('update');
         });
     });
+});
+
+
+Route::prefix('minitutor')->as('minitutor.')->group(function(){
+    Route::get('/', 'MinitutorController@index')->name('index');
+    Route::get('/{username}', 'MinitutorController@show')->name('show');
 });
