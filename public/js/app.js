@@ -36508,7 +36508,7 @@ if (apiToken) window.axios.defaults.headers.common.Authorization = 'Bearer ' + a
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! c:\Users\dev\Documents\ajar-belajar\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\dev\Documents\ajar-belajar\resources\js\app.js */"./resources/js/app.js");
 
 
 /***/ })

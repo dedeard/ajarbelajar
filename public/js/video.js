@@ -108,7 +108,7 @@ var template = function template(data) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! c:\Users\dev\Documents\ajar-belajar\resources\js\video.js */"./resources/js/video.js");
+module.exports = __webpack_require__(/*! C:\Users\dev\Documents\ajar-belajar\resources\js\video.js */"./resources/js/video.js");
 
 
 /***/ })

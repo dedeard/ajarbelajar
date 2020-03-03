@@ -14,7 +14,7 @@
     <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('icons/apple-icon-144x144.png') }}">
     <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('icons/apple-icon-152x152.png') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('icons/apple-icon-180x180.png') }}">
-    <link rel="icon" type="image/png" sizes="192x192"  href="{{ asset('icons/android-icon-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('icons/android-icon-192x192.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('icons/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('icons/favicon-96x96.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('icons/favicon-16x16.png') }}">
@@ -23,53 +23,55 @@
     <meta name="msapplication-TileImage" content="{{ asset('icons/ms-icon-144x144.png') }}">
     <meta name="theme-color" content="#677ae4">
     <title>@yield('title') - Ajarbelajar</title>
-    <link href="{{ asset('remark/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('remark/css/bootstrap-extend.min.css') }}" rel="stylesheet">
-    <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{{ asset('remark/fonts/web-icons/web-icons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('remark/fonts/font-awesome/font-awesome.min.css') }}">
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
+    <link rel="stylesheet" href="{{ asset('remark/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('remark/css/bootstrap-extend.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('remark/css/site.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
-<body>
-<div id="app">
-  <div class="ab-auth--layout bg-light">
-    <header class="py-4 d-flex bg-white shadow-sm">
-      <a href="/" class="d-block m-auto">
-        <img src="{{ asset('img/logo/logo.svg') }}" height="40" alt="Logo Ajarbelajar" />
-      </a>
-    </header>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-lg-6 mx-auto">
-          <div class="my-4"></div>
-          <div class="card border-0 shadow-sm">
-            <div class="card-body">
-              <div class="container">
-                <div class="row">
-                  <div class="col-6">
-                    <a data-detect="exact" href="{{ route('login') }}" class="btn btn-primary btn--label btn-block">LOGIN</a>
-                  </div>
-                  <div class="col-6">
-                    <a data-detect="exact" href="{{ route('register') }}" class="btn btn-primary btn--label btn-block">DAFTAR</a>
-                  </div>
-                </div>
+<body class="ab-auth--layout bg-light p-0">
+<header class="py-4 d-flex bg-white shadow-sm">
+  <a href="/" class="d-block m-auto">
+    <img src="{{ asset('img/logo/logo.svg') }}" height="40" alt="Logo Ajarbelajar" />
+  </a>
+</header>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-5 col-md-8 mx-auto">
+      <div class="my-4"></div>
+      <div class="card border-0 shadow-sm">
+        <div class="card-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-6 pl-0">
+                <a href="{{ route('login') }}" class="font-weight-bold btn btn-primary btn--label btn-block @if(Route::is('login')) disabled @endif">MASUK</a>
               </div>
-              <div class="my-4"></div>
-              <div class="py-3">
-                <h3 class="text-uppercase text-center font-weight-bolder">
-                  @yield('heading')
-                </h3>
-                @yield('content')
+              <div class="col-6 pr-0">
+                <a href="{{ route('register') }}" class="font-weight-bold btn btn-primary btn--label btn-block @if(Route::is('register')) disabled @endif">DAFTAR</a>
               </div>
             </div>
           </div>
           <div class="my-4"></div>
+          <div class="py-3">
+            <h3 class="text-uppercase text-center font-weight-bold text-secondary">
+              @yield('heading')
+            </h3>
+            @yield('content')
+          </div>
         </div>
       </div>
+      <div class="my-4"></div>
     </div>
-    <footer class="ab-auth--footer bg-white border-top py-4">
-      <div class="container">
-        <div class="text-center font-weight-bolder text-uppercase">
-          <i class="fa fa-copyright"></i> Ajarbelajar 2020
-        </div>
-      </div>
-    </footer>
   </div>
 </div>
+<footer class="ab-auth--footer bg-white border-top py-4">
+  <div class="container">
+    <div class="text-center font-weight-bolder text-uppercase">
+      <i class="fa fa-copyright"></i> Ajarbelajar 2020
+    </div>
+  </div>
+</footer>
+</body>
+</html>

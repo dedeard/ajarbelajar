@@ -1217,8 +1217,8 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! c:\Users\dev\Documents\ajar-belajar\resources\js\editor.js */"./resources/js/editor.js");
-module.exports = __webpack_require__(/*! c:\Users\dev\Documents\ajar-belajar\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\dev\Documents\ajar-belajar\resources\js\editor.js */"./resources/js/editor.js");
+module.exports = __webpack_require__(/*! C:\Users\dev\Documents\ajar-belajar\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

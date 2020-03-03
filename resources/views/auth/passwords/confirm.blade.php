@@ -1,49 +1,33 @@
-@extends('layouts.app')
+@extends('auth.layouts.auth')
+@section('title', 'konfirmasi Password')
+@section('heading', 'konfirmasi Password')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Confirm Password') }}</div>
+<form method="POST" action="{{ route('password.confirm') }}" class="row">
+            @csrf
+            <div class="col-12 mb-3">
+                <p class="lead text-center">Harap konfirmasi Password Anda sebelum melanjutkan.</p>
+            </div>
 
-                <div class="card-body">
-                    {{ __('Please confirm your password before continuing.') }}
-
-                    <form method="POST" action="{{ route('password.confirm') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Confirm Password') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
+            <div class="col-12">
+                <div class="form-group">
+                    <input type="password" class="form-control ab-form-control @error('password') is-invalid @enderror" name="password" placeholder="Password">
+                    @error('password')
+                        <span class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+
+            <div class="col-12">
+                <div class="form-group mb-3">
+                    <button class="btn btn-primary btn-block btn--float font-weight-bold">KONFIRMASI PASSWORD</button>
+                    @if (Route::has('password.request'))
+                        <a href="{{ route('password.request') }}" class="btn btn-link btn-label btn-block font-weight-bold text-uppercase">Lupa Password?</a>
+                    @endif
+                </div>
+            </div>
+
+        </form>
 @endsection

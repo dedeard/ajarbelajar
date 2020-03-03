@@ -126,7 +126,7 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! c:\Users\dev\Documents\ajar-belajar\resources\js\admin.js */"./resources/js/admin.js");
+module.exports = __webpack_require__(/*! C:\Users\dev\Documents\ajar-belajar\resources\js\admin.js */"./resources/js/admin.js");
 
 
 /***/ })

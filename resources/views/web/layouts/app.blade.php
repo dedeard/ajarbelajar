@@ -31,8 +31,7 @@
   <!-- Fonts -->
   <link rel="stylesheet" href="{{ asset('remark/fonts/web-icons/web-icons.min.css') }}">
   <link rel="stylesheet" href="{{ asset('remark/fonts/font-awesome/font-awesome.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('remark/fonts/roboto/roboto.min.css') }}">
-  <!-- <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'> -->
+  <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
 
   <!-- Core -->
   <link rel="stylesheet" href="{{ asset('remark/css/bootstrap.min.css') }}">
