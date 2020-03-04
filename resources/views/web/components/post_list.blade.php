@@ -1,4 +1,4 @@
-<div class="@if(empty($grid)) col-lg-6 @else col-lg-{{$grid}} @endif">
+<div class="@if(empty($grid)) col-lg-6 @else col-lg-{{$grid}} @endif mb-30">
   <div class="card card-shadow ab-post-card">
     <div class="card-header cover overlay">
       @if($post->type === 'article')
