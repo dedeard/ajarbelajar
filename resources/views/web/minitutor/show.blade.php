@@ -14,7 +14,7 @@ window.SIDEBAR_CLOSE = true
   <div class="col-lg-9 mt-15">
   <div class="panel panel-bordered">
     <div class="panel-heading">
-      <h3 class="panel-title">Daftar Kategori</h3>
+      <h3 class="panel-title">Daftar Postingan</h3>
     </div>
     <div class="panel-body bg-light">
       <div class="row">
