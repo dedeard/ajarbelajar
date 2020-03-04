@@ -8,33 +8,33 @@
       <a href="{{ route('minitutor.show', $minitutor->user->username) }}" class="font-size-14 text-lowercase text-light">{{ '@' . $minitutor->user->username }}</a>
     </div>
     
-    <div class="card-footer bg-white">
-      <div class="card-block">
-        <a href="{{ route('minitutor.show', $minitutor->user->username) }}" class="btn btn-primary btn-sm btn-block">Lihat Minitutor</a>
-        @if(Auth::user() && Auth::user()->hasSubscribed($minitutor))
-          <a href="{{ route('followable.unfollow', $minitutor->user->id) }}" class="btn btn-primary btn-sm btn-block">Berhenti Mengikuti</a>
-        @else
-          <a href="{{ route('followable.follow', $minitutor->user->id) }}" class="btn btn-primary btn-sm btn-block">Ikuti</a>
-        @endif
+  </div>
+  <div class="card-footer bg-white">
+    <div class="card-block">
+      <a href="{{ route('minitutor.show', $minitutor->user->username) }}" class="btn btn-primary btn-sm btn-block">Lihat Minitutor</a>
+      @if(Auth::user() && Auth::user()->hasSubscribed($minitutor))
+        <a href="{{ route('followable.unfollow', $minitutor->user->id) }}" class="btn btn-primary btn-sm btn-block">Berhenti Mengikuti</a>
+      @else
+        <a href="{{ route('followable.follow', $minitutor->user->id) }}" class="btn btn-primary btn-sm btn-block">Ikuti</a>
+      @endif
+    </div>
+    <div class="row">
+      <div class="col-4">
+        <div class="counter">
+          <div class="counter-label">Pengikut</div>
+          <span class="counter-number">{{ $minitutor->subscribers->count() }}</span>
+        </div>
       </div>
-      <div class="row">
-        <div class="col-4">
-          <div class="counter">
-            <div class="counter-label">Pengikut</div>
-            <span class="counter-number">{{ $minitutor->subscribers->count() }}</span>
-          </div>
+      <div class="col-4">
+        <div class="counter">
+          <div class="counter-label">Artikel</div>
+          <span class="counter-number">{{ $minitutor->user->articleCount() }}</span>
         </div>
-        <div class="col-4">
-          <div class="counter">
-            <div class="counter-label">Artikel</div>
-            <span class="counter-number">{{ $minitutor->user->articleCount() }}</span>
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="counter">
-            <div class="counter-label">Vidio</div>
-            <span class="counter-number">{{ $minitutor->user->videoCount() }}</span>
-          </div>
+      </div>
+      <div class="col-4">
+        <div class="counter">
+          <div class="counter-label">Vidio</div>
+          <span class="counter-number">{{ $minitutor->user->videoCount() }}</span>
         </div>
       </div>
     </div>
