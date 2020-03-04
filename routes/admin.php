@@ -32,6 +32,10 @@ Route::prefix('article')->as('article.')->group(function(){
   route::get('/requested/{id}', 'ArticleController@showRequested')->name('requested.show');
   route::get('/requested/{id}/accept', 'ArticleController@acceptRequest')->name('requested.accept');
   route::get('/requested/{id}/reject', 'ArticleController@rejectRequest')->name('requested.reject');
+
+  route::get('/create', 'CreateArticleController@index')->name('create.index');
+  route::get('/create/{userId}', 'CreateArticleController@create')->name('create.create');
+  route::post('/create/{userId}', 'CreateArticleController@store')->name('create.store');
 });
 
 Route::prefix('video')->as('video.')->group(function(){
@@ -46,4 +50,8 @@ Route::prefix('video')->as('video.')->group(function(){
   route::get('/requested/{id}', 'VideoController@showRequested')->name('requested.show');
   route::get('/requested/{id}/accept', 'VideoController@acceptRequest')->name('requested.accept');
   route::get('/requested/{id}/reject', 'VideoController@rejectRequest')->name('requested.reject');
+
+  route::get('/create', 'CreateVideoController@index')->name('create.index');
+  route::get('/create/{userId}', 'CreateVideoController@create')->name('create.create');
+  route::post('/create/{userId}', 'CreateVideoController@store')->name('create.store');
 });

@@ -77,10 +77,10 @@
               data-toggle="collapse">
               <i class="icon wb-more-horizontal" aria-hidden="true"></i>
           </button>
-          <div class="navbar-brand navbar-brand-center site-gridmenu-toggle" data-toggle="gridmenu">
+          <a class="navbar-brand navbar-brand-center" href="{{ route('home') }}">
               <img class="navbar-brand-logo" src="{{ asset('img/logo/logo-white.svg') }}" title="Logo ajarbelajar">
               <span class="navbar-brand-text hidden-xs-down"> Ajarbelajar</span>
-          </div>
+          </a>
           <button type="button" class="navbar-toggler collapsed" data-target="#site-navbar-search" data-toggle="collapse">
               <span class="sr-only">Toggle Search</span>
               <i class="icon wb-search" aria-hidden="true"></i>
@@ -433,6 +433,11 @@
                       <span class="site-menu-title">Permintaan</span>
                     </a>
                   </li>
+                  <li class="site-menu-item @if(Route::is('admin.article.create*')) active @endif">
+                    <a class="animsition-link" href="{{ route('admin.article.create.index') }}">
+                      <span class="site-menu-title">Buat Artikel</span>
+                    </a>
+                  </li>
                 </ul>
               </li>
 
@@ -451,6 +456,11 @@
                   <li class="site-menu-item @if(Route::is('admin.video.requested*')) active @endif">
                     <a class="animsition-link" href="{{ route('admin.video.requested') }}">
                       <span class="site-menu-title">Permintaan</span>
+                    </a>
+                  </li>
+                  <li class="site-menu-item @if(Route::is('admin.video.create*')) active @endif">
+                    <a class="animsition-link" href="{{ route('admin.video.create.index') }}">
+                      <span class="site-menu-title">Buat Video</span>
                     </a>
                   </li>
                 </ul>
@@ -488,62 +498,7 @@
           </a>
       </div>
   </div>
-  <div class="site-gridmenu">
-      <div>
-          <div>
-              <ul>
-                  <li>
-                      <a href="../apps/mailbox/mailbox.html">
-                          <i class="icon wb-envelope"></i>
-                          <span>Mailbox</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="../apps/calendar/calendar.html">
-                          <i class="icon wb-calendar"></i>
-                          <span>Calendar</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="../apps/contacts/contacts.html">
-                          <i class="icon wb-user"></i>
-                          <span>Contacts</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="../apps/media/overview.html">
-                          <i class="icon wb-camera"></i>
-                          <span>Media</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="../apps/documents/categories.html">
-                          <i class="icon wb-order"></i>
-                          <span>Documents</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="../apps/projects/projects.html">
-                          <i class="icon wb-image"></i>
-                          <span>Project</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="../apps/forum/forum.html">
-                          <i class="icon wb-chat-group"></i>
-                          <span>Forum</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="../index.html">
-                          <i class="icon wb-dashboard"></i>
-                          <span>Dashboard</span>
-                      </a>
-                  </li>
-              </ul>
-          </div>
-      </div>
-  </div>
+
   <!-- Page -->
   <div class="page">
     <div class="page-content">
