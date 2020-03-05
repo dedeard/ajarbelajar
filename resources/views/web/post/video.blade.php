@@ -10,7 +10,7 @@
   <img class="card-img-top img-fluid w-full" src="{{ $video->heroUrl() }}" alt="{{ $video->title }}">
   <div class="card-block">
     <p class="m-0 small text-muted">
-      Dibuat pada, {{ $video->created_at->format('d M Y') }} &nbsp; | &nbsp; <i class="icon wb-eye"></i>  {{ $video->views_count }}
+      Dibuat pada, {{ $video->created_at->format('d M Y') }} &nbsp; | &nbsp; <i class="icon wb-eye"></i>  {{ $video->views_count + 1 }}
       @if(Auth::user() && $video->isFavoritedBy(Auth::user()))
       <a href="{{ route('favorite.destroy', [$video->id, 'video']) }}" class="btn btn-icon btn-default btn-outline">
         <i class="icon wb-heart text-danger"></i>

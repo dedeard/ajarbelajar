@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Model\Video;
 use App\Model\Category;
+use App\Model\Post;
 use App\Model\RequestVideo;
 use Carbon\Carbon;
 use Helper;
@@ -18,11 +18,14 @@ class VideoController extends Controller
     const driver = 'public';
     public function index()
     {
-        $videos = Video::select(['id', 'user_id', 'title', 'draf', 'created_at'])->with(['user' => function($query){
-            $query->select(['id', 'username'])->with(['profile' => function($query){
-                $query->select(['id', 'user_id', 'first_name', 'last_name']);
-            }]);
-        }])->get();
+        $videos = Post::select(['id', 'user_id', 'title', 'draf', 'created_at'])
+                        ->where('type', 'video')
+                        ->with(['user' => function($query){
+                            $query->select(['id', 'username'])->with(['profile' => function($query){
+                                $query->select(['id', 'user_id', 'first_name', 'last_name']);
+                            }]);
+                        }])
+                        ->get();
 
         $data = [];
 
@@ -44,7 +47,7 @@ class VideoController extends Controller
 
     public function edit($id)
     {
-        $video = Video::findOrFail($id);
+        $video = Post::where('type', 'video')->findOrFail($id);
         Helper::compileEditorJs($video->body);
         $categories = Category::all();
         return view('admin.video.edit', ['video' => $video, 'categories' => $categories]);
@@ -52,7 +55,7 @@ class VideoController extends Controller
 
     public function update(Request $request, $id)
     {
-        $video = Video::findOrFail($id);
+        $video = Post::where('type', 'video')->findOrFail($id);
         $data = $request->validate([
             'title' => 'required|string|min:10|max:160',
             'description' => 'nullable|min:30|max:300',
@@ -63,11 +66,11 @@ class VideoController extends Controller
 
         if(isset($data['hero'])) {
             if($video->hero) {
-                if(Storage::disk(self::driver)->exists('video/hero/' . $video->hero)) {
-                    Storage::disk(self::driver)->delete('video/hero/' . $video->hero);
+                if(Storage::disk(self::driver)->exists('post/hero/' . $video->hero)) {
+                    Storage::disk(self::driver)->delete('post/hero/' . $video->hero);
                 }
-                if(Storage::disk(self::driver)->exists('video/hero/thumb/' . $video->hero)) {
-                    Storage::disk(self::driver)->delete('video/hero/thumb/' . $video->hero);
+                if(Storage::disk(self::driver)->exists('post/hero/thumb/' . $video->hero)) {
+                    Storage::disk(self::driver)->delete('post/hero/thumb/' . $video->hero);
                 }
             }
             $lg = Image::make($data['hero'])->fit(720*1.5, 480*1.5, function ($constraint) {
@@ -79,8 +82,8 @@ class VideoController extends Controller
 
             $name = Str::random(60) . '.jpg';
 
-            Storage::disk(self::driver)->put('video/hero/' . $name, (string) $lg->encode('jpg', 90));
-            Storage::disk(self::driver)->put('video/hero/thumb/' . $name, (string) $sm->encode('jpg', 90));
+            Storage::disk(self::driver)->put('post/hero/' . $name, (string) $lg->encode('jpg', 90));
+            Storage::disk(self::driver)->put('post/hero/thumb/' . $name, (string) $sm->encode('jpg', 90));
 
             $data['hero'] = $name;
         } else {
@@ -93,7 +96,7 @@ class VideoController extends Controller
 
     public function makePublic($id)
     {
-        $video = Video::findOrFail($id);
+        $video = Post::where('type', 'video')->findOrFail($id);
         $video->draf = false;
         $video->save();
         return redirect()->back()->withSuccess("Video berhasil di publikasikan.");
@@ -101,7 +104,7 @@ class VideoController extends Controller
 
     public function makeDraf($id)
     {
-        $video = Video::findOrFail($id);
+        $video = Post::where('type', 'video')->findOrFail($id);
         $video->draf = true;
         $video->save();
         return redirect()->back()->withSuccess("Video telah di jadikan draf");
@@ -109,13 +112,13 @@ class VideoController extends Controller
 
     public function destroy($id)
     {
-        $video = Video::findOrFail($id);
+        $video = Post::where('type', 'video')->findOrFail($id);
         if ($video->hero) {
-            if(Storage::disk(self::driver)->exists('video/hero/' . $video->hero)) {
-                Storage::disk(self::driver)->delete('video/hero/' . $video->hero);
+            if(Storage::disk(self::driver)->exists('post/hero/' . $video->hero)) {
+                Storage::disk(self::driver)->delete('post/hero/' . $video->hero);
             }
-            if(Storage::disk(self::driver)->exists('video/hero/thumb/' . $video->hero)) {
-                Storage::disk(self::driver)->delete('video/hero/thumb/' . $video->hero);
+            if(Storage::disk(self::driver)->exists('post/hero/thumb/' . $video->hero)) {
+                Storage::disk(self::driver)->delete('post/hero/thumb/' . $video->hero);
             }
         }
         $video->delete();
@@ -157,13 +160,14 @@ class VideoController extends Controller
         $video = RequestVideo::whereNotNull('requested_at')->findOrFail($id);
         if ($video->hero) {
             if(Storage::disk(self::driver)->exists('video/request/hero/' . $video->hero)) {
-                Storage::disk(self::driver)->move('video/request/hero/' . $video->hero, 'video/hero/' . $video->hero);
+                Storage::disk(self::driver)->move('video/request/hero/' . $video->hero, 'post/hero/' . $video->hero);
             }
             if(Storage::disk(self::driver)->exists('video/request/hero/thumb/' . $video->hero)) {
-                Storage::disk(self::driver)->move('video/request/hero/thumb/' . $video->hero, 'video/hero/thumb/' . $video->hero);
+                Storage::disk(self::driver)->move('video/request/hero/thumb/' . $video->hero, 'post/hero/thumb/' . $video->hero);
             }
         }
-        $data = Video::create([
+        $data = Post::create([
+            'type' => 'video',
             'title' => $video->title,
             'category_id' => $video->category_id,
             'hero' => $video->hero,

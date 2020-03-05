@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Model\Video;
-use App\Model\Category;
+use App\Model\Post;
 use App\Model\Minitutor;
 use App\Model\User;
 use Illuminate\Http\Request;
 
 class CreateVideoController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         $minitutors = Minitutor::select(['id', 'user_id', 'active'])->where('active', 1)->with(['user' => function($query){
             $query->select(['id', 'username'])->with(['profile' => function($query){
@@ -52,7 +51,7 @@ class CreateVideoController extends Controller
             'title' => 'required|string|min:10|max:160'
         ]);
 
-        $video = Video::create(['title' => $data['title'], 'user_id' => $user->id]);
+        $video = Post::create(['type' => 'video', 'title' => $data['title'], 'user_id' => $user->id]);
         return redirect()->route('admin.video.edit', $video->id)->withSuccess('Video minitutor telah dibuat.');
     }
 }

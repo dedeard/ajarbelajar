@@ -15,10 +15,11 @@ class CreatePostViewsTable extends Migration
     {
         Schema::create('post_views', function (Blueprint $table) {
             $table->increments("id");
+            $table->integer('post_id')->unsigned();
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->string("session_id");
             $table->string("ip");
             $table->string("agent");
-            $table->morphs('viewable');
             $table->timestamps();
         });
     }

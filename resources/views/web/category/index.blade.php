@@ -17,13 +17,13 @@
                 <li class="nav-item col-6">
                   <span class="nav-link">
                     <i class="icon wb-video" aria-hidden="true"></i>
-                    {{ $category->videos->count() }} Vidio
+                    {{ $category->video_count }} Vidio
                   </span>
                 </li>
                 <li class="nav-item col-6">
                   <span class="nav-link">
                     <i class="icon wb-order" aria-hidden="true"></i>
-                    {{ $category->articles->count() }} Artikel
+                    {{ $category->article_count }} Artikel
                   </span>
                 </li>
               </ul>

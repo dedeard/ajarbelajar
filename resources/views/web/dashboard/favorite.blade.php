@@ -1,21 +1,18 @@
 @extends('web.layouts.app')
-@section('title', 'Artikel Favorit')
+@section('title', 'Favorit')
 @section('content')
 @component('web.dashboard.components.layoutWrapper')
 
 <div class="panel bg-light panel-bordered">
   <div class="panel-heading bg-white">
-    <h3 class="panel-title">Artikel Favorit</h3>
-    <div class="panel-actions">
-      <a href="{{ route('dashboard.favorite.video') }}" class="btn btn-primary btn-sm">Video Favorite</a>
-    </div>
+    <h3 class="panel-title">Favorit</h3>
   </div>
   <div class="panel-body">
-    @if($articles->total())
+    @if($posts->total())
     <div class="row">
-      @foreach($articles as $article)
+      @foreach($posts as $post)
       @component('web.components.post_list')
-        @slot('post', $article)
+        @slot('post', $post)
       @endcomponent
       @endforeach
     </div>
@@ -26,7 +23,7 @@
     @endif
   </div>
   <div class="panel-footer">
-    {{ $articles->links() }}
+    {{ $posts->links() }}
   </div>
 </div>
 @endcomponent

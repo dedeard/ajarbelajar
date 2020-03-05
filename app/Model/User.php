@@ -94,19 +94,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(RequestArticle::class);
     }
 
-    public function articles()
-    {
-        return $this->hasMany(Article::class);
-    }
-
     public function requestVideos()
     {
         return $this->hasMany(RequestVideo::class);
     }
 
-    public function videos()
+    public function posts()
     {
-        return $this->hasMany(Video::class);
+        return $this->hasMany(Post::class);
     }
 
     public function image()
@@ -116,11 +111,11 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function articleCount()
     {
-        return $this->articles()->where('draf', 0)->count();
+        return $this->posts()->where('draf', 0)->where('type', 'article')->count();
     }
 
     public function videoCount()
     {
-        return $this->videos()->where('draf', 0)->count();
+        return $this->posts()->where('draf', 0)->where('type', 'video')->count();
     }
 }

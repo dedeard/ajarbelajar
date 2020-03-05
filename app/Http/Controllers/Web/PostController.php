@@ -3,17 +3,16 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Model\Article;
-use App\Model\Comment;
+use App\Model\PostComment;
+use App\Model\Post;
 use App\Model\PostView;
-use App\Model\Video;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     public function article(Request $request, $slug)
     {
-        $articles = Article::where('draf', 0)->where('slug', $slug)->with(['comments' => function($query) use($request) {
+        $articles = Post::where('draf', 0)->where('slug', $slug)->with(['comments' => function($query) use($request) {
             if ($request->user() && $request->user()->isAdmin()) {
                 $query->orderBy('created_at', 'desc');
             } else{
@@ -30,13 +29,17 @@ class PostController extends Controller
 
     public function video(Request $request, $slug)
     {
-        $videos = Video::where('draf', 0)->where('slug', $slug)->with(['comments' => function($query) use($request) {
-            if ($request->user() && $request->user()->isAdmin()) {
-                $query->orderBy('created_at', 'desc');
-            } else{
-                $query->where('approved', 1)->orderBy('created_at', 'desc');
-            }
-        }])->withCount('views');
+        $videos = Post::where('draf', 0)
+                ->where('type', 'video')
+                ->where('slug', $slug)
+                ->with(['comments' => function($query) use($request) {
+                    if ($request->user() && $request->user()->isAdmin()) {
+                        return $query->orderBy('created_at', 'desc');
+                    } else{
+                        return $query->where('approved', 1)->orderBy('created_at', 'desc');
+                    }
+                }])
+                ->withCount('views');
         if(!$videos->exists()) {
             return abort(404);
         }
@@ -53,13 +56,7 @@ class PostController extends Controller
         $user = $request->user();
         $data['user_id'] = $user->id;
 
-        if($type == 'article') {
-            $target = Article::where('draf', 0)->findOrFail($id);
-        } elseif ($type == 'video') {
-            $target = Video::where('draf', 0)->findOrFail($id);
-        } else {
-            return abort(404);
-        }
+        $target = Post::where('draf', 0)->findOrFail($id);
 
         if($target->user->id === $user->id || $user->isAdmin()) {
             $data['approved'] = 1;
@@ -67,20 +64,14 @@ class PostController extends Controller
             $data['approved'] = 0;
         }
 
-        $comment = new Comment($data);
+        $comment = new PostComment($data);
         $target->comments()->save($comment);
         return redirect()->back()->withSuccess('Komentar kamu telah terkirim dan akan segera terbit.');
     }
 
     public function approveComment($type, $id, $comment_id)
     {
-        if($type == 'article') {
-            $target = Article::findOrFail($id);
-        } elseif ($type == 'video') {
-            $target = Video::findOrFail($id);
-        } else {
-            return abort(404);
-        }
+        $target = Post::findOrFail($id);
         $comment = $target->comments()->findOrFail($comment_id);
         $comment->approved = true;
         $comment->save();
@@ -91,9 +82,9 @@ class PostController extends Controller
     public function destroyComment($type, $id, $comment_id)
     {
         if($type == 'article') {
-            $target = Article::findOrFail($id);
+            $target = Post::findOrFail($id);
         } elseif ($type == 'video') {
-            $target = Video::findOrFail($id);
+            $target = Post::findOrFail($id);
         } else {
             return abort(404);
         }

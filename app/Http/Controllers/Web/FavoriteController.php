@@ -3,19 +3,17 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Model\Article;
-use App\Model\Video;
+use App\Model\Post;
 use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
 {
     public function create(Request $request, $id, $type)
     {
+        $target = Post::where('draf', 0)->findOrFail($id);
         if($type === 'article'){
-            $target = Article::where('draf', 0)->findOrFail($id);
             $message = "Artikel telah ditambahkan ke daftar Favorite";
         }else {
-            $target = Video::where('draf', 0)->findOrFail($id);
             $message = "Video telah ditambahkan ke daftar Favorite";
         }
         $user = $request->user();
@@ -27,11 +25,10 @@ class FavoriteController extends Controller
     }
     public function destroy(Request $request, $id, $type)
     {
+        $target = Post::where('draf', 0)->findOrFail($id);
         if($type === 'article'){
-            $target = Article::where('draf', 0)->findOrFail($id);
             $message = "Artikel telah dihapus dari daftar Favorite";
         }else {
-            $target = Video::where('draf', 0)->findOrFail($id);
             $message = "Video telah dihapus dari daftar Favorite";
         }
 

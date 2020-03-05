@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Model\Article;
 use App\Model\Category;
+use App\Model\Post;
 use App\Model\RequestArticle;
 use Carbon\Carbon;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -14,14 +14,17 @@ use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
-    const driver = 'public';
+    const driver = 'gcs';
     public function index()
     {
-        $articles = Article::select(['id', 'user_id', 'title', 'draf', 'created_at'])->with(['user' => function($query){
-            $query->select(['id', 'username'])->with(['profile' => function($query){
-                $query->select(['id', 'user_id', 'first_name', 'last_name']);
-            }]);
-        }])->get();
+        $articles = Post::select(['id', 'user_id', 'title', 'draf', 'created_at'])
+                    ->where('type', 'article')
+                    ->with(['user' => function($query){
+                        $query->select(['id', 'username'])->with(['profile' => function($query){
+                            $query->select(['id', 'user_id', 'first_name', 'last_name']);
+                        }]);
+                    }])
+                    ->get();
 
         $data = [];
 
@@ -37,19 +40,19 @@ class ArticleController extends Controller
             ]);
         }
 
-        return view('admin.article.index', ['articles' => $data]);
+        return view('admin.article.index', ['articles' => $data ]);
     }
 
     public function edit($id)
     {
-        $article = Article::findOrFail($id);
+        $article = Post::where('type', 'article')->findOrFail($id);
         $categories = Category::all();
         return view('admin.article.edit', ['article' => $article, 'categories' => $categories]);
     }
 
     public function update(Request $request, $id)
     {
-        $article = Article::findOrFail($id);
+        $article = Post::where('type', 'article')->findOrFail($id);
         $data = $request->validate([
             'title' => 'required|string|min:10|max:160',
             'description' => 'nullable|min:30|max:300',
@@ -60,11 +63,11 @@ class ArticleController extends Controller
 
         if(isset($data['hero'])) {
             if($article->hero) {
-                if(Storage::disk(self::driver)->exists('article/hero/' . $article->hero)) {
-                    Storage::disk(self::driver)->delete('article/hero/' . $article->hero);
+                if(Storage::disk('public')->exists('post/hero/' . $article->hero)) {
+                    Storage::disk('public')->delete('post/hero/' . $article->hero);
                 }
-                if(Storage::disk(self::driver)->exists('article/hero/thumb/' . $article->hero)) {
-                    Storage::disk(self::driver)->delete('article/hero/thumb/' . $article->hero);
+                if(Storage::disk('public')->exists('post/hero/thumb/' . $article->hero)) {
+                    Storage::disk('public')->delete('post/hero/thumb/' . $article->hero);
                 }
             }
             $lg = Image::make($data['hero'])->fit(720*1.5, 480*1.5, function ($constraint) {
@@ -76,8 +79,8 @@ class ArticleController extends Controller
 
             $name = Str::random(60) . '.jpg';
 
-            Storage::disk(self::driver)->put('article/hero/' . $name, (string) $lg->encode('jpg', 90));
-            Storage::disk(self::driver)->put('article/hero/thumb/' . $name, (string) $sm->encode('jpg', 90));
+            Storage::disk('public')->put('post/hero/' . $name, (string) $lg->encode('jpg', 90));
+            Storage::disk('public')->put('post/hero/thumb/' . $name, (string) $sm->encode('jpg', 90));
 
             $data['hero'] = $name;
         } else {
@@ -90,7 +93,7 @@ class ArticleController extends Controller
 
     public function makePublic($id)
     {
-        $article = Article::findOrFail($id);
+        $article = Post::where('type', 'article')->findOrFail($id);
         $article->draf = false;
         $article->save();
         return redirect()->back()->withSuccess("Artikel berhasil di publikasikan.");
@@ -98,7 +101,7 @@ class ArticleController extends Controller
 
     public function makeDraf($id)
     {
-        $article = Article::findOrFail($id);
+        $article = Post::where('type', 'article')->findOrFail($id);
         $article->draf = true;
         $article->save();
         return redirect()->back()->withSuccess("Artikel telah di jadikan draf");
@@ -106,13 +109,13 @@ class ArticleController extends Controller
 
     public function destroy($id)
     {
-        $article = Article::findOrFail($id);
+        $article = Post::where('type', 'article')->findOrFail($id);
         if ($article->hero) {
-            if(Storage::disk(self::driver)->exists('article/hero/' . $article->hero)) {
-                Storage::disk(self::driver)->delete('article/hero/' . $article->hero);
+            if(Storage::disk('public')->exists('post/hero/' . $article->hero)) {
+                Storage::disk('public')->delete('post/hero/' . $article->hero);
             }
-            if(Storage::disk(self::driver)->exists('article/hero/thumb/' . $article->hero)) {
-                Storage::disk(self::driver)->delete('article/hero/thumb/' . $article->hero);
+            if(Storage::disk('public')->exists('post/hero/thumb/' . $article->hero)) {
+                Storage::disk('public')->delete('post/hero/thumb/' . $article->hero);
             }
         }
         $article->delete();
@@ -150,15 +153,18 @@ class ArticleController extends Controller
     public function acceptRequest($id)
     {
         $article = RequestArticle::whereNotNull('requested_at')->findOrFail($id);
+
         if ($article->hero) {
-            if(Storage::disk(self::driver)->exists('article/request/hero/' . $article->hero)) {
-                Storage::disk(self::driver)->move('article/request/hero/' . $article->hero, 'article/hero/' . $article->hero);
+            if(Storage::disk('public')->exists('article/request/hero/' . $article->hero)) {
+                Storage::disk('public')->move('article/request/hero/' . $article->hero, 'post/hero/' . $article->hero);
             }
-            if(Storage::disk(self::driver)->exists('article/request/hero/thumb/' . $article->hero)) {
-                Storage::disk(self::driver)->move('article/request/hero/thumb/' . $article->hero, 'article/hero/thumb/' . $article->hero);
+            if(Storage::disk('public')->exists('article/request/hero/thumb/' . $article->hero)) {
+                Storage::disk('public')->move('article/request/hero/thumb/' . $article->hero, 'post/hero/thumb/' . $article->hero);
             }
         }
-        $data = Article::create([
+
+        $post = Post::create([
+            'type' => 'article',
             'title' => $article->title,
             'hero' => $article->hero,
             'description' => $article->description,
@@ -166,8 +172,9 @@ class ArticleController extends Controller
             'body' => $article->body,
             'user_id' => $article->user_id
         ]);
+
         $article->delete();
-        return redirect()->route('admin.article.edit', $data->id)->withSuccess('Artikel minitutor telah diterima.');
+        return redirect()->route('admin.article.edit', $post->id)->withSuccess('Artikel minitutor telah diterima.');
     }
 
     public function showRequested($id)

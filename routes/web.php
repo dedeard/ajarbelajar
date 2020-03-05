@@ -42,10 +42,7 @@ Route::middleware('auth')->group(function(){
 
         Route::get('/following', 'DashbaordController@following')->name('following');
         Route::get('/settings', 'DashbaordController@following')->name('settings');
-        Route::get('/favorite', function(){ return redirect()->route('dashboard.favorite.video'); })->name('favorite');
-        Route::get('/favorite/article', 'Dashboard\FavoriteController@article')->name('favorite.article');
-        Route::get('/favorite/video', 'Dashboard\FavoriteController@video')->name('favorite.video');
-
+        Route::get('/favorite', 'DashbaordController@favorite')->name('favorite');
     });
 
     Route::middleware(['is.minitutor', 'minitutor:active'])->namespace('Dashboard')->prefix('dashboard')->as('dashboard.')->group(function(){

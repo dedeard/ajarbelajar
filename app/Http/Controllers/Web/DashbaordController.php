@@ -4,13 +4,11 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\UpdateProfileRequest;
-use App\Http\Resources\UserResource;
-use App\Model\Article;
 use App\Model\Image as ModelImage;
 use App\Model\Minitutor;
+use App\Model\Post;
 use App\Model\UserProfile;
 use App\Model\UserSocial;
-use App\Model\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -90,5 +88,13 @@ class DashbaordController extends Controller
     {
         $followings = $request->user()->subscriptions(Minitutor::class)->paginate(12);
         return view('web.dashboard.following', ['minitutors' => $followings]);
+    }
+
+    public function favorite(Request $request)
+    {
+        $posts = $request->user()->favorites(Post::class)->where('draf', 0)->withCount(['comments' => function($query){
+            return $query->where('approved', true);
+        }, 'views'])->paginate(4);
+        return view('web.dashboard.favorite', ['posts' => $posts]);
     }
 }

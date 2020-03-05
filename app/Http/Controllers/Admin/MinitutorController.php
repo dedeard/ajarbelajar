@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Model\Minitutor;
-use Illuminate\Http\Request;
 
 class MinitutorController extends Controller
 {

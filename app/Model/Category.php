@@ -19,13 +19,8 @@ class Category extends Model
             ->saveSlugsTo('slug');
     }
 
-    public function videos()
+    public function posts()
     {
-        return $this->hasMany(Video::class);
-    }
-
-    public function articles()
-    {
-        return $this->hasMany(Article::class);
+        return $this->hasMany(Post::class);
     }
 }

@@ -8,19 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 use Overtrue\LaravelFollow\Traits\CanBeFavorited;
 use Nagy\LaravelRating\Traits\Rate\Rateable;
 
-class Video extends Model
+class Post extends Model
 {
     use HasSlug, CanBeFavorited, Rateable;
 
     protected $fillable = [
         'user_id',
         'draf',
+        'type',
+        'videos',
         'category_id',
         'slug',
         'hero',
         'title',
         'description',
-        'videos',
         'body'
     ];
 
@@ -36,11 +37,10 @@ class Video extends Model
         return $this->belongsTo(User::class);
     }
 
-    
     public function heroUrl()
     {
         if($this->hero) {
-            return asset('storage/video/hero/' . $this->hero);
+            return asset('storage/post/hero/' . $this->hero);
         }
         return asset('img/placeholder/post-lg.jpg');
     }
@@ -48,33 +48,28 @@ class Video extends Model
     public function thumbUrl()
     {
         if($this->hero) {
-            return asset('storage/video/hero/thumb/' . $this->hero);
+            return asset('storage/post/hero/thumb/' . $this->hero);
         }
         return asset('img/placeholder/post-sm.jpg');
     }
 
-    public function type()
-    {
-        return 'video';
-    }
-
-    public function status()
-    {
-        return $this->draf ? 'Draf' : 'Publik';
-    }
-
     public function comments()
     {
-        return $this->morphMany(Comment::class, 'commentable');
+        return $this->hasMany(PostComment::class);
     }
 
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
-    
+
     public function views()
     {
-        return $this->morphMany(PostView::class, 'viewable');
+        return $this->hasMany(PostView::class);
+    }
+
+    public function status()
+    {
+        return $this->draf ? 'Draf' : 'Public';
     }
 }

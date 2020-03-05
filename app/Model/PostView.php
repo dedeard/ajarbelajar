@@ -5,11 +5,11 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 class PostView extends Model
 {
-    protected $fillable = [ 'session_id', 'ip', 'agent' ];
+    protected $fillable = [ 'post_id', 'session_id', 'ip', 'agent' ];
 
-    public function viewable()
+    public function post()
     {
-        return $this->morphTo('viewable');
+        return $this->belongsTo(Post::class);
     }
 
     public static function createViewLog($request)
