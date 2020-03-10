@@ -8,35 +8,23 @@ use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
 {
-    public function create(Request $request, $id, $type)
+    public function create(Request $request, $id)
     {
         $target = Post::where('draf', 0)->findOrFail($id);
-        if($type === 'article'){
-            $message = "Artikel telah ditambahkan ke daftar Favorite";
-        }else {
-            $message = "Video telah ditambahkan ke daftar Favorite";
-        }
         $user = $request->user();
         if(!$user->hasFavorited($target)) {
             $user->unfavorite($target);
             $user->favorite($target);
         }
-        return redirect()->back()->withSuccess($message);
+        return redirect()->back()->withSuccess("Postingan telah ditambahkan ke daftar Favorite");
     }
-    public function destroy(Request $request, $id, $type)
+    public function destroy(Request $request, $id)
     {
         $target = Post::where('draf', 0)->findOrFail($id);
-        if($type === 'article'){
-            $message = "Artikel telah dihapus dari daftar Favorite";
-        }else {
-            $message = "Video telah dihapus dari daftar Favorite";
-        }
-
         $user = $request->user();
         if($user->hasFavorited($target)) {
             $user->unfavorite($target);
         }
-
-        return redirect()->back()->withSuccess($message);
+        return redirect()->back()->withSuccess("Postingan telah dihapus dari daftar Favorite");
     }
 }

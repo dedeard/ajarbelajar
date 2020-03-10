@@ -17,11 +17,13 @@
           </div>
           <h3 class="card-title mb-20">{{ $popular->title }}</h3>
           <p class="text-white"><i class="wb wb-eye"></i> {{ $popular->views_count }} | <i class="wb wb-chat"></i> {{ $popular->comments_count }}</p>
-          @if($popular->type === 'video')
-          <a href="{{ route('post.video', $popular->slug) }}" class=" btn btn-outline btn-inverse">TONTON VIDEO</a>
-          @else
-          <a href="{{ route('post.article', $popular->slug) }}" class=" btn btn-outline btn-inverse">BACA ARTIKEL</a>
-          @endif
+          <a href="{{ route('post.show', $popular->slug) }}" class=" btn btn-outline btn-inverse">
+            @if($popular->type === 'video')
+              TONTON VIDEO
+            @else
+              BACA ARTIKEL
+            @endif
+          </a>
         </div>
       </div>
     </div>

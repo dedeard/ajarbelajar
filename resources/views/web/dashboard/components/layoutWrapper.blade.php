@@ -67,6 +67,20 @@ window.SIDEBAR_CLOSE = true
       </a>
     </li>
     <li class="nav-item col">
+      <a class="nav-link {{ Route::is('dashboard.comments*') ? 'active' : '' }}"
+        href="{{ route('dashboard.comments.index') }}">
+        <i class="icon wb-chat-group"></i>
+        <span class="d-lg-block d-none">Komentar</span>
+      </a>
+    </li>
+    <li class="nav-item col">
+      <a class="nav-link {{ Route::is('dashboard.review*') ? 'active' : '' }}"
+        href="{{ route('dashboard.review.index') }}">
+        <i class="icon wb-reply"></i>
+        <span class="d-lg-block d-none">Ulasan</span>
+      </a>
+    </li>
+    <li class="nav-item col">
       <a class="nav-link {{ Route::is('dashboard.article*') ? 'active' : '' }}"
         href="{{ route('dashboard.article.index') }}">
         <i class="icon wb-list"></i>

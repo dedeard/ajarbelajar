@@ -29,10 +29,10 @@
             @auth
               @if(Auth::user()->isAdmin())
                 @if(!$comment->approved)
-                <a href="{{ route('post.comment.approve', [$target, $post->id, $comment->id]) }}" class="btn btn-primary btn-sm">Terima</a>
+                <a href="{{ route('post.comment.approve', [$post->id, $comment->id]) }}" class="btn btn-primary btn-sm">Terima</a>
                 @endif
                 <button delete-confirm type="button" data-target="#form-delete-comment-{{$comment->id}}" class="btn btn-danger btn-sm">Hapus</button>
-                <form action="{{ route('post.comment.destroy', [$target, $post->id, $comment->id]) }}" method="post" id="form-delete-comment-{{$comment->id}}">
+                <form action="{{ route('post.comment.destroy', [$post->id, $comment->id]) }}" method="post" id="form-delete-comment-{{$comment->id}}">
                   @csrf
                   @method('delete')
                 </form>
@@ -44,7 +44,7 @@
     </div>
     @endforeach
   </div>
-  <form class="comments-add mt-35" action="{{ route('post.comment.store', [$target, $post->id]) }}" method="post">
+  <form class="comments-add mt-35" action="{{ route('post.comment.store', $post->id) }}" method="post">
     @csrf
     <h3 class="mb-35">Tulis Komentar</h3>
     <div class="form-group">

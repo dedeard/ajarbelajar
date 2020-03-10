@@ -68,8 +68,80 @@ class Post extends Model
         return $this->hasMany(PostView::class);
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(PostReview::class);
+    }
+
     public function status()
     {
         return $this->draf ? 'Draf' : 'Public';
+    }
+
+    public function avgRating()
+    {
+        return $this->reviews->avg('rating');
+    }
+
+    public function reviewCount()
+    {
+        return $this->reviews->count();
+    }
+
+    public static function articles($user = null)
+    {
+        $model_post = null;
+        if ($user && $user->minitutor()) {
+            $model_post = $user->posts();
+        } else {
+            $model_post = Post::query();
+        }
+        return self::postType($model_post, 'article', false);
+    }
+
+    public static function videos($user = null)
+    {
+        $model_post = null;
+        if ($user && $user->minitutor()) {
+            $model_post = $user->posts();
+        } else {
+            $model_post = Post::query();
+        }
+        return self::postType($model_post, 'video', false);
+    }
+
+    public static function posts($user = null)
+    {
+        $model_post = null;
+        if ($user && $user->minitutor()) {
+            $model_post = $user->posts();
+        } else {
+            $model_post = Post::query();
+        }
+        return self::postType($model_post, null, false);
+    }
+
+    public static function postType($model, $type = null, $draf = false)
+    {
+        $model->select(['id', 'category_id', 'user_id', 'title', 'slug', 'hero', 'created_at', 'type', 'draf', 'description' ]);
+        if(isset($draf)) $model->where('draf', $draf);
+        if($type) {
+            if($type == 'article') {
+                $model->where('type', 'article');
+            } else if ($type == 'video') {
+                $model->where('type', 'video');
+            }
+        }
+        $model->with(['reviews' => function($q){
+            return $q->select(['post_id', 'rating']);
+        }, 'user' => function($query){
+            return $query->select(['id', 'username'])->with(['profile' => function($query){
+                return $query->select(['user_id', 'first_name', 'last_name']);
+            }]);
+        }]);
+        $model->withCount(['views', 'comments' => function($query){
+            return $query->where('approved', true);
+        }]);
+        return $model;
     }
 }

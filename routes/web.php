@@ -7,12 +7,12 @@ Route::get('/article', 'HomeController@article')->name('article');
 Route::get('/video', 'HomeController@video')->name('video');
 
 Route::prefix('post')->as('post.')->group(function(){
-    Route::get('/article/{slug}', 'PostController@article')->name('article');
-    Route::get('/video/{slug}', 'PostController@video')->name('video');
+    Route::get('/{slug}', 'PostController@show')->name('show');
 
-    Route::middleware(['auth'])->post('/{type}/{id}/comment', 'PostController@storeComment')->name('comment.store');
-    Route::middleware(['auth', 'is.admin'])->get('/{type}/{id}/comment/{comment_id}', 'PostController@approveComment')->name('comment.approve');
-    Route::middleware(['auth', 'is.admin'])->delete('/{type}/{id}/comment/{comment_id}', 'PostController@destroyComment')->name('comment.destroy');
+    Route::middleware(['auth'])->post('/{id}/comment', 'PostController@storeComment')->name('comment.store');
+    Route::middleware(['auth', 'is.admin'])->get('/{id}/comment/{comment_id}', 'PostController@approveComment')->name('comment.approve');
+    Route::middleware(['auth', 'is.admin'])->delete('/{id}/comment/{comment_id}', 'PostController@destroyComment')->name('comment.destroy');
+    Route::middleware(['auth'])->post('/{post_id}/review', 'PostController@storeReview')->name('review.store');
 });
 
 Route::middleware(['auth'])->prefix('followable')->as('followable.')->group(function(){
@@ -21,8 +21,8 @@ Route::middleware(['auth'])->prefix('followable')->as('followable.')->group(func
 });
 
 Route::middleware(['auth'])->prefix('favorite')->as('favorite.')->group(function(){
-    Route::get('/{id}/{type}/create', 'FavoriteController@create')->name('create');
-    Route::get('/{id}/{type}/delete', 'FavoriteController@destroy')->name('destroy');
+    Route::get('/{id}/create', 'FavoriteController@create')->name('create');
+    Route::get('/{id}/delete', 'FavoriteController@destroy')->name('destroy');
 });
 
 Route::prefix('category')->as('category.')->group(function(){
@@ -56,6 +56,8 @@ Route::middleware('auth')->group(function(){
         Route::get('/requested', 'RequestedController@index')->name('requested.index');
         Route::get('/requested/{id}/{type}/create', 'RequestedController@create')->name('requested.create');
         Route::get('/requested/{id}/{type}/destroy', 'RequestedController@destroy')->name('requested.destroy');
+        Route::get('/review', 'ReviewController@index')->name('review.index');
+        Route::get('/comments', 'CommentsController@index')->name('comments.index');
     });
 
 

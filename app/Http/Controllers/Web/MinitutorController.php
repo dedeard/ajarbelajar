@@ -28,6 +28,8 @@ class MinitutorController extends Controller
                         return $query->select(['id', 'username'])->with(['profile' => function($query){
                             return $query->select(['user_id', 'first_name', 'last_name']);
                         }]);
+                    }, 'reviews' => function($q){
+                        return $q->select(['post_id', 'rating']);
                     }])
                     ->withCount(['comments' => function($query){
                         return $query->where('approved', true);
