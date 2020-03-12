@@ -170,6 +170,7 @@ return [
         Overtrue\LaravelFollow\FollowServiceProvider::class,
         Nagy\LaravelRating\LaravelRatingServiceProvider::class,
         Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
+        Akaunting\Setting\Provider::class,
 
         /*
          * Application Service Providers...
@@ -237,6 +238,7 @@ return [
         'OpenGraph' => Artesaos\SEOTools\Facades\OpenGraph::class,
         'Twitter'   => Artesaos\SEOTools\Facades\TwitterCard::class,
         'JsonLd'   => Artesaos\SEOTools\Facades\JsonLd::class,
+        'Setting' => Akaunting\Setting\Facade::class,
     ],
 
 ];
