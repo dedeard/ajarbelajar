@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="current-url" content="{{ url()->current() }}">
   <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="google-site-verification" content="muR53cbe3_dN-_UFdd8UVCB9pT7a8CkBj7iqpclnhw0" />
   @auth
   <meta name="api-token" content="{{ Auth::user()->apiToken() }}">
   @endauth
