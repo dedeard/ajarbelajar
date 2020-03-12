@@ -1,5 +1,4 @@
 @extends('web.layouts.app')
-@section('title', 'Artikel')
 @section('content')
 <div class="container-fluid">
 <div class="panel mt-15">

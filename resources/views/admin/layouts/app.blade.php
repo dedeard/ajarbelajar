@@ -356,6 +356,20 @@
                 </a>
               </li>
 
+              <li class="site-menu-item @if(Route::is('admin.seo*')) active @endif">
+                <a href="{{ route('admin.seo.index') }}">
+                  <i class="site-menu-icon wb-globe"></i>
+                  <span class="site-menu-title">Seo</span>
+                </a>
+              </li>
+
+              <li class="site-menu-item @if(Route::is('admin.comment*')) active @endif">
+                <a href="{{ route('admin.comment.index') }}">
+                  <i class="site-menu-icon wb-chat"></i>
+                  <span class="site-menu-title">Komentar</span>
+                </a>
+              </li>
+
               <li class="site-menu-item has-sub @if(Route::is('admin.categories*')) active open @endif">
                 <a href="javascript:;">
                   <i class="site-menu-icon wb-list"></i>

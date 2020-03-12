@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Model\Category;
 use App\Model\Post;
+use Artesaos\SEOTools\Facades\SEOTools;
 
 class CategoryController extends Controller
 {
     public function index()
     {
+        SEOTools::setTitle(setting('seo.category.title'));
+        SEOTools::setDescription(setting('seo.category.description'));
         $category = Category::withCount([
             'posts as article_count' => function($q){
                 return $q->where('type', 'article')->where('draf', false);
@@ -27,6 +30,8 @@ class CategoryController extends Controller
         if(!$query->exists()) return abort(404);
         $category = $query->first();
         $data['posts'] = Post::postType($category->posts(), null, false)->paginate(6);
+        SEOTools::setTitle($category->name);
+        SEOTools::setDescription($category->description);
         return view('web.category.show', $data);
     }
 }

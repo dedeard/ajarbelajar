@@ -26,8 +26,7 @@
   <meta name="msapplication-TileColor" content="#677ae4">
   <meta name="msapplication-TileImage" content="{{ asset('icons/ms-icon-144x144.png') }}">
   <meta name="theme-color" content="#677ae4">
-  @yield('meta')
-  {!! SEOMeta::generate() !!}
+  <title>@yield('title')</title>
   <!-- Fonts -->
   <link rel="stylesheet" href="{{ asset('remark/fonts/web-icons/web-icons.min.css') }}">
   <link rel="stylesheet" href="{{ asset('remark/fonts/font-awesome/font-awesome.min.css') }}">
@@ -38,64 +37,23 @@
   <link rel="stylesheet" href="{{ asset('remark/css/bootstrap-extend.min.css') }}">
   <link rel="stylesheet" href="{{ asset('remark/css/site.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
-  <!-- pluguns -->
-  <link rel="stylesheet" href="{{ asset('remark/vendor/ladda/ladda.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('remark/vendor/select2/select2.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('remark/vendor/dropify/dropify.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('remark/vendor/owl-carousel/owl.carousel.min.css') }}">
-  @yield('style')
   <script src="{{ asset('remark/vendor/breakpoints/breakpoints.js') }}"></script>
   <script>
   Breakpoints();
   </script>
 </head>
 
-<body class="preload">
-  <div class="ab-layout">
-    @include('web.layouts.components.header')
-    @include('web.layouts.components.sidebar')
-
-    <div class="container-fluid">
-      @if ($message = Session::get('success'))
-      <div class="mt-15 mb-0 alert alert-success alert-alt dark alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-        {{ $message }}
+<body class="page-error layout-full p-0">
+    <!-- Page -->
+    <div class="page vertical-align text-center" data-animsition-in="fade-in" data-animsition-out="fade-out">
+      <div class="page-content vertical-align-middle">
+        <header>
+          <h1 class="display-1">@yield('code')</h1>
+          <p class="lead">@yield('title')</p>
+        </header>
+        <a class="btn btn-primary btn-round" href="{{ route('home') }}">KEMBALI KE HOME</a>
       </div>
-      @endif
-      @if ($message = Session::get('error'))
-      <div class="mt-15 mb-0 alert alert-danger alert-alt dark alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-        {{ $message }}
-      </div>
-      @endif
-      @if ($message = Session::get('warning'))
-      <div class="mt-15 mb-0 alert alert-warning alert-alt dark alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-        {{ $message }}
-      </div>
-      @endif
-      @if ($message = Session::get('info'))
-      <div class="mt-15 mb-0 alert alert-info alert-alt dark alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-        {{ $message }}
-      </div>
-      @endif
     </div>
-    @yield('content')
-
-    @include('web.layouts.components.footer')
-  </div>
-  <script src="{{ asset('js/app.js') }}"></script>
-  @yield('script')
-</body>
+  </body>
 
 </html>

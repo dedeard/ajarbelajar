@@ -2,12 +2,10 @@
 
 use App\Model\User;
 use App\Model\Admin;
-use App\Model\RequestMinitutor;
 use App\Model\UserProfile;
 use App\Model\Category;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Faker\Factory as Faker;
 
 class DevSeeder extends Seeder
 {
@@ -21,13 +19,12 @@ class DevSeeder extends Seeder
         $user = User::create([
             'username' => 'admin',
             'email' => 'admin@admin.com',
-            'password' => Hash::make('admin')
+            'password' => Hash::make('admin123')
         ]);
 
         $admin = new Admin;
         $profile = new UserProfile([
-            'first_name' => 'dede',
-            'last_name' => 'ardiansya',
+            'first_name' => 'admin'
         ]);
 
         $user->admin()->save($admin);

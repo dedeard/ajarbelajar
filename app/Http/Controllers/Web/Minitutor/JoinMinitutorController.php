@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web\Minitutor;
 use App\Http\Controllers\Controller;
 use App\Model\RequestMinitutor;
 use Illuminate\Http\Request;
+use Artesaos\SEOTools\Facades\SEOTools;
 
 class JoinMinitutorController extends Controller
 {
@@ -12,6 +13,8 @@ class JoinMinitutorController extends Controller
 
     public function index()
     {
+        SEOTools::setTitle(setting('seo.joinminitutor.title'));
+        SEOTools::setDescription(setting('seo.joinminitutor.description'));
         return view('web.minitutor.join.index');
     }
 

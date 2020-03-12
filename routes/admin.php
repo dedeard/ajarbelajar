@@ -55,3 +55,14 @@ Route::prefix('video')->as('video.')->group(function(){
   route::get('/create/{userId}', 'CreateVideoController@create')->name('create.create');
   route::post('/create/{userId}', 'CreateVideoController@store')->name('create.store');
 });
+
+Route::prefix('seo')->as('seo.')->group(function(){
+  route::get('/', 'SeoController@index')->name('index');
+  route::get('/{page}', 'SeoController@edit')->name('edit');
+  route::put('/{page}', 'SeoController@update')->name('update');
+});
+
+Route::prefix('comment')->as('comment.')->group(function(){
+  route::get('/', 'CommentController@index')->name('index');
+  route::get('/{id}', 'CommentController@approveToggle')->name('approve.toggle');
+});

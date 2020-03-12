@@ -139,7 +139,7 @@ class Post extends Model
                 return $query->select(['user_id', 'first_name', 'last_name']);
             }]);
         }]);
-        $model->withCount(['views', 'comments' => function($query){
+        $model->withCount(['comments' => function($query){
             return $query->where('approved', true);
         }]);
         return $model;

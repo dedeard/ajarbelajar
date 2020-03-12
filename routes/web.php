@@ -10,9 +10,7 @@ Route::prefix('post')->as('post.')->group(function(){
     Route::get('/{slug}', 'PostController@show')->name('show');
 
     Route::middleware(['auth'])->post('/{id}/comment', 'PostController@storeComment')->name('comment.store');
-    Route::middleware(['auth', 'is.admin'])->get('/{id}/comment/{comment_id}', 'PostController@approveComment')->name('comment.approve');
-    Route::middleware(['auth', 'is.admin'])->delete('/{id}/comment/{comment_id}', 'PostController@destroyComment')->name('comment.destroy');
-    Route::middleware(['auth'])->post('/{post_id}/review', 'PostController@storeReview')->name('review.store');
+    Route::middleware(['auth'])->post('/{id}/review', 'PostController@storeReview')->name('review.store');
 });
 
 Route::middleware(['auth'])->prefix('followable')->as('followable.')->group(function(){
@@ -31,7 +29,7 @@ Route::prefix('category')->as('category.')->group(function(){
 });
 
 
-
+Route::get('/minitutor/join', 'Minitutor\JoinMinitutorController@index')->name('minitutor.join.index');
 Route::middleware('auth')->group(function(){
     // Dashboard routes
     Route::prefix('dashboard')->as('dashboard.')->group(function(){
@@ -67,7 +65,7 @@ Route::middleware('auth')->group(function(){
 
         // join to minitutor routes
         Route::middleware('is.not.minitutor')->namespace('Minitutor')->prefix('join')->as('join.')->group(function(){
-            Route::get('/', 'JoinMinitutorController@index')->name('index');
+            
             Route::get('/create', 'JoinMinitutorController@create')->name('create');
             Route::post('/store', 'JoinMinitutorController@store')->name('store');
             Route::get('/edit', 'JoinMinitutorController@edit')->name('edit');

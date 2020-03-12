@@ -114,6 +114,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasManyThrough(PostComment::class, Post::class);
     }
 
+    public function postReviews()
+    {
+        return $this->hasManyThrough(PostReview::class, Post::class);
+    }
+
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');

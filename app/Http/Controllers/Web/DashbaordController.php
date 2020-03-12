@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
+use Artesaos\SEOTools\Facades\SEOTools;
 
 class DashbaordController extends Controller
 {
@@ -24,6 +25,7 @@ class DashbaordController extends Controller
 
     public function edit()
     {
+        SEOTools::setTitle('Edit Profile');
         return view('web.dashboard.edit');
     }
 
@@ -86,12 +88,14 @@ class DashbaordController extends Controller
 
     public function following(Request $request)
     {
+        SEOTools::setTitle('Diikuti');
         $followings = $request->user()->subscriptions(Minitutor::class)->paginate(12);
         return view('web.dashboard.following', ['minitutors' => $followings]);
     }
 
     public function favorite(Request $request)
     {
+        SEOTools::setTitle('Favorit');
         $posts = $request->user()->favorites(Post::class)->where('draf', 0)->withCount(['comments' => function($query){
             return $query->where('approved', true);
         }, 'views'])->paginate(4);

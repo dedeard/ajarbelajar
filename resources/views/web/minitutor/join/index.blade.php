@@ -14,7 +14,7 @@
           Pengembangan kemampuan diri dan kualitas pendidikan Indonesia,
           dimulai dari sini!
         </p>
-        @if(Auth::user()->requestMinitutor)
+        @if(Auth::user() && Auth::user()->requestMinitutor)
         <a href="{{ route('minitutor.join.edit') }}" class="btn btn-primary">
           EDIT DATA PERMINTAAN ANDA
         </a>

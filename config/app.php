@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'id',
 
     /*
     |--------------------------------------------------------------------------
@@ -169,6 +169,8 @@ return [
         Superbalist\LaravelGoogleCloudStorage\GoogleCloudStorageServiceProvider::class,
         Overtrue\LaravelFollow\FollowServiceProvider::class,
         Nagy\LaravelRating\LaravelRatingServiceProvider::class,
+        Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -230,6 +232,11 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'LaravelRating' => \Nagy\LaravelRating\LaravelRatingFacade::class,
+        'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
+        'SEOMeta'   => Artesaos\SEOTools\Facades\SEOMeta::class,
+        'OpenGraph' => Artesaos\SEOTools\Facades\OpenGraph::class,
+        'Twitter'   => Artesaos\SEOTools\Facades\TwitterCard::class,
+        'JsonLd'   => Artesaos\SEOTools\Facades\JsonLd::class,
     ],
 
 ];
