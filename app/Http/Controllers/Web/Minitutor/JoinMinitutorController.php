@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Web\Minitutor;
 
 use App\Http\Controllers\Controller;
+use App\Model\Minitutor;
+use App\Model\Post;
 use App\Model\RequestMinitutor;
+use App\Model\User;
 use Illuminate\Http\Request;
 use Artesaos\SEOTools\Facades\SEOTools;
 
@@ -15,7 +18,12 @@ class JoinMinitutorController extends Controller
     {
         SEOTools::setTitle(setting('seo.joinminitutor.title'));
         SEOTools::setDescription(setting('seo.joinminitutor.description'));
-        return view('web.minitutor.join.index');
+        $data = [
+            'user_count' => User::count(),
+            'minitutor_count' => Minitutor::count(),
+            'post_count' => Post::where('draf', 0)->count()
+        ];
+        return view('web.minitutor.join.index', $data);
     }
 
     public function create(Request $request)

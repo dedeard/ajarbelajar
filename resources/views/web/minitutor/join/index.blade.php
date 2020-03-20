@@ -44,7 +44,7 @@
           </div>
           <div class="counter counter-md counter text-right">
             <div class="counter-number-group">
-              <span class="counter-number">550</span>
+              <span class="counter-number">{{ $user_count }}</span>
               <span class="counter-number-related text-capitalize">Pengguna</span>
             </div>
             <div class="counter-label text-capitalize font-size-16">Terdaftar</div>
@@ -59,7 +59,7 @@
           </div>
           <div class="counter counter-md counter text-right">
             <div class="counter-number-group">
-              <span class="counter-number">100</span>
+              <span class="counter-number">{{ $minitutor_count }}</span>
               <span class="counter-number-related text-capitalize">Minitutor</span>
             </div>
             <div class="counter-label text-capitalize font-size-16">Berkontribusi</div>
@@ -74,7 +74,7 @@
           </div>
           <div class="counter counter-md counter text-right">
             <div class="counter-number-group">
-              <span class="counter-number">100</span>
+              <span class="counter-number">{{ $post_count }}</span>
               <span class="counter-number-related text-capitalize">Postingan</span>
             </div>
             <div class="counter-label text-capitalize font-size-16">Terbit</div>

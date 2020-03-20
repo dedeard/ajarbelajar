@@ -15,7 +15,18 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable, CanSubscribe, CanFavorite, CanRate;
 
     protected $fillable = [
-        'username', 'email', 'password',
+        'first_name',
+        'last_name',
+        'about',
+        'website_url',
+        'twitter_url',
+        'facebook_url',
+        'instagram_url',
+        'youtube_url',
+        'avatar',
+        'username',
+        'email',
+        'password',
     ];
 
     protected $hidden = [
@@ -40,33 +51,18 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function name()
     {
-        $profile = $this->profile;
-
-        if ($profile) {
-            if($profile->last_name){
-                return $profile->first_name . ' ' . $profile->last_name;
-            }
-            return $profile->first_name;
+        if($this->last_name){
+            return $this->first_name . ' ' . $this->last_name;
         }
-        return "";
+        return $this->first_name;
     }
 
     public function imageUrl()
     {
-        if($image = $this->image){
-            return asset('storage/avatar/' . $image->name);
+        if($avatar = $this->avatar){
+            return asset('storage/avatar/' . $avatar);
         }
         return asset('img/placeholder/avatar.png');
-    }
-
-    public function profile()
-    {
-        return $this->hasOne(UserProfile::class);
-    }
-
-    public function socials()
-    {
-        return $this->hasOne(UserSocial::class);
     }
 
     public function admin()
@@ -117,11 +113,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function postReviews()
     {
         return $this->hasManyThrough(PostReview::class, Post::class);
-    }
-
-    public function image()
-    {
-        return $this->morphOne(Image::class, 'imageable');
     }
 
     public function articleCount()

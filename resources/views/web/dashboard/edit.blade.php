@@ -30,7 +30,7 @@
 
         <div class="form-group">
           <label class="mb-3">Nama Pengguna</label>
-          <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" placeholder="Nama Pengguna" value="{{ Auth()->user()->username }}">
+          <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" placeholder="Nama Pengguna" value="{{ Auth::user()->username }}">
           @error('username')
             <div class="invalid-feedback">
               <strong>{{ $message }}</strong>
@@ -40,7 +40,7 @@
 
         <div class="form-group">
           <label class="mb-3">Alamat Email</label>
-          <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Alamat Email" value="{{ Auth()->user()->email }}">
+          <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Alamat Email" value="{{ Auth::user()->email }}">
           @error('email')
             <div class="invalid-feedback">
               <strong>{{ $message }}</strong>
@@ -90,7 +90,7 @@
         <div class="row">
           <div class="form-group col-md-6">
             <label class="mb-3">Nama Depan</label>
-            <input type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" placeholder="Nama Depan" value="{{ Auth::user()->profile ? Auth::user()->profile->first_name : '' }}">
+            <input type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" placeholder="Nama Depan" value="{{ Auth::user()->first_name }}">
             @error('first_name')
               <div class="invalid-feedback">
                 <strong>{{ $message }}</strong>
@@ -99,7 +99,7 @@
           </div>
           <div class="form-group col-md-6">
             <label class="mb-3">Nama Belakang</label>
-            <input type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" placeholder="Nama Belakang" value="{{ Auth::user()->profile ? Auth::user()->profile->last_name : '' }}">
+            <input type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" placeholder="Nama Belakang" value="{{ Auth::user()->last_name }}">
             @error('last_name')
               <div class="invalid-feedback">
                 <strong>{{ $message }}</strong>
@@ -111,7 +111,7 @@
         <div class="form-group">
           <div class="form-group">
             <label class="mb-3">Tentang</label>
-            <textarea class="form-control @error('about') is-invalid @enderror" name="about" placeholder="Tentang">{{ Auth::user()->profile ? Auth::user()->profile->about : '' }}</textarea>
+            <textarea class="form-control @error('about') is-invalid @enderror" name="about" placeholder="Tentang">{{ Auth::user()->about }}</textarea>
             @error('about')
               <div class="invalid-feedback">
                 <strong>{{ $message }}</strong>
@@ -122,7 +122,7 @@
 
         <div class="form-group">
           <label class="mb-3">Website</label>
-          <input type="text" class="form-control @error('website_url') is-invalid @enderror" name="website_url" placeholder="Website" value="{{ Auth::user()->profile ? Auth::user()->profile->website_url : '' }}">
+          <input type="text" class="form-control @error('website_url') is-invalid @enderror" name="website_url" placeholder="Website" value="{{ Auth::user()->website_url }}">
           @error('website_url')
             <div class="invalid-feedback">
               <strong>{{ $message }}</strong>
@@ -140,7 +140,7 @@
 
         <div class="form-group">
           <label class="mb-3">Facebook</label>
-          <input type="text" class="form-control @error('facebook_url') is-invalid @enderror" name="facebook_url" placeholder="Facebook" value="{{ Auth::user()->socials ? Auth::user()->socials->facebook_url : '' }}">
+          <input type="text" class="form-control @error('facebook_url') is-invalid @enderror" name="facebook_url" placeholder="Facebook" value="{{ Auth::user()->facebook_url }}">
           @error('facebook_url')
             <div class="invalid-feedback">
               <strong>{{ $message }}</strong>
@@ -152,7 +152,7 @@
 
         <div class="form-group">
           <label class="mb-3">Instagram</label>
-          <input type="text" class="form-control @error('instagram_url') is-invalid @enderror" name="instagram_url" placeholder="Instagram" value="{{ Auth::user()->socials ? Auth::user()->socials->instagram_url : '' }}">
+          <input type="text" class="form-control @error('instagram_url') is-invalid @enderror" name="instagram_url" placeholder="Instagram" value="{{ Auth::user()->instagram_url }}">
           @error('instagram_url')
             <div class="invalid-feedback">
               <strong>{{ $message }}</strong>
@@ -164,7 +164,7 @@
 
         <div class="form-group">
           <label class="mb-3">Twitter</label>
-          <input type="text" class="form-control @error('twitter_url') is-invalid @enderror" name="twitter_url" placeholder="Twitter" value="{{ Auth::user()->socials ? Auth::user()->socials->twitter_url : '' }}">
+          <input type="text" class="form-control @error('twitter_url') is-invalid @enderror" name="twitter_url" placeholder="Twitter" value="{{ Auth::user()->twitter_url }}">
           @error('twitter_url')
             <div class="invalid-feedback">
               <strong>{{ $message }}</strong>
@@ -176,7 +176,7 @@
 
         <div class="form-group">
           <label class="mb-3">Youtube</label>
-          <input type="text" class="form-control @error('youtube_url') is-invalid @enderror" name="youtube_url" placeholder="Youtube" value="{{ Auth::user()->socials ? Auth::user()->socials->youtube_url : '' }}">
+          <input type="text" class="form-control @error('youtube_url') is-invalid @enderror" name="youtube_url" placeholder="Youtube" value="{{ Auth::user()->youtube_url }}">
           @error('youtube_url')
             <div class="invalid-feedback">
               <strong>{{ $message }}</strong>

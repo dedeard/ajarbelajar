@@ -2,12 +2,11 @@
 
 use App\Model\User;
 use App\Model\Admin;
-use App\Model\UserProfile;
 use App\Model\Category;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
-class DevSeeder extends Seeder
+class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,19 +16,14 @@ class DevSeeder extends Seeder
     public function run()
     {
         $user = User::create([
+            'first_name' => 'admin',
             'username' => 'admin',
             'email' => 'admin@admin.com',
             'password' => Hash::make('admin123')
         ]);
 
         $admin = new Admin;
-        $profile = new UserProfile([
-            'first_name' => 'admin'
-        ]);
-
         $user->admin()->save($admin);
-        $user->profile()->save($profile);
-
 
         $categories = [
             'Ilmu Komputer',

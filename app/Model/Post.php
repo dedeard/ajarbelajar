@@ -135,9 +135,7 @@ class Post extends Model
         $model->with(['reviews' => function($q){
             return $q->select(['post_id', 'rating']);
         }, 'user' => function($query){
-            return $query->select(['id', 'username'])->with(['profile' => function($query){
-                return $query->select(['user_id', 'first_name', 'last_name']);
-            }]);
+            return $query->select(['id', 'username', 'first_name', 'last_name']);
         }]);
         $model->withCount(['comments' => function($query){
             return $query->where('approved', true);
