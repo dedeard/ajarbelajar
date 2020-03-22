@@ -3,44 +3,44 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\Seo;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 
 class SeoController extends Controller
 {
-    const PAGES = [
-        'home' => 'Halaman utama',
-        'article' => 'Daftar artikel',
-        'video' => 'Daftar vidio',
-        'category' => 'Kategori',
-        'minitutor' => 'Daftar minitutor',
-        'joinminitutor' => 'Jadi minitutor',
-    ];
+    public function __construct()
+    {
+        $this->middleware(['permission:manage seo']);
+    }
 
     public function index()
     {
-        $data = [
-            'pages' => self::PAGES
-        ];
-        return view('admin.seo.index', $data);
+        $seos = Seo::all();
+        return view('admin.seo.index', [ 'seos' => $seos ]);
     }
 
-    public function edit($slug)
+    public function edit($id)
     {
-        if(empty(self::PAGES[$slug])) return abort(404);
-        $data = [
-            'name' => self::PAGES[$slug],
-            'slug' => $slug,
-            'data' => setting('seo.' . $slug)
-        ];
-        return view('admin.seo.edit', $data);
+        $seo = Seo::findOrFail($id);
+        return view('admin.seo.edit', ['seo' => $seo]);
     }
 
-    public function update(Request $request, $slug)
+    public function update(Request $request, $id)
     {
-        if(empty(self::PAGES[$slug])) return abort(404);
-        $data = $request->validate(['title' => 'required|string', 'description' => 'required|string']);
-        setting(['seo.' . $slug . '.title' => $data['title']])->save();
-        setting(['seo.' . $slug . '.description' => $data['description']])->save();
-        return redirect()->back()->withSuccess('Data berhasil di update.');
+        $seo = Seo::findOrFail($id);
+        $data = $request->validate([
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'keywords' => 'required|string',
+            'robots' => 'required|string',
+            'distribution' => 'required|string',
+        ]);
+        $seo->update($data);
+        Cache::forget('seo');
+        Cache::rememberForever('seo', function () {
+            return Seo::all();
+        });
+        return redirect()->back()->withSuccess('Data Seo berhasil di update.');
     }
 }

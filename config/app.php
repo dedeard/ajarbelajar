@@ -171,6 +171,7 @@ return [
         Nagy\LaravelRating\LaravelRatingServiceProvider::class,
         Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
         Akaunting\Setting\Provider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -180,7 +181,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        App\Providers\HelpersServiceProvider::class,
     ],
 
     /*
@@ -239,6 +240,8 @@ return [
         'Twitter'   => Artesaos\SEOTools\Facades\TwitterCard::class,
         'JsonLd'   => Artesaos\SEOTools\Facades\JsonLd::class,
         'Setting' => Akaunting\Setting\Facade::class,
+        'EditorjsHelp' => App\Helpers\Editorjs::class,
+        'SeoHelp' => App\Helpers\Seo::class,
+        'CategoryHelp' => App\Helpers\Category::class,
     ],
-
 ];

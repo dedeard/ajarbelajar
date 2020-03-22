@@ -1,10 +1,9 @@
 <?php
 
 use App\Model\User;
-use App\Model\Admin;
-use App\Model\Category;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UsersTableSeeder extends Seeder
 {
@@ -15,26 +14,34 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::create([
+        $superadmin = User::create([
+            'first_name' => 'super',
+            'last_name' => 'admin',
+            'username' => 'superadmin',
+            'email' => 'super@admin.com',
+            'password' => Hash::make('admin123')
+        ]);
+        $admin = User::create([
             'first_name' => 'admin',
+            'last_name' => 'admin',
             'username' => 'admin',
             'email' => 'admin@admin.com',
             'password' => Hash::make('admin123')
         ]);
+        $moderator = User::create([
+            'first_name' => 'moderator',
+            'last_name' => 'admin',
+            'username' => 'moderator',
+            'email' => 'moderator@admin.com',
+            'password' => Hash::make('admin123')
+        ]);
 
-        $admin = new Admin;
-        $user->admin()->save($admin);
+        $superAdminRole = Role::findByName('Super Admin');
+        $adminRole = Role::findByName('Administrator');
+        $moderatorRole = Role::findByName('Moderator');
 
-        $categories = [
-            'Ilmu Komputer',
-            'Ilmu Kedokteran',
-            'Sosial Politik',
-            'Keuangan',
-            'Kehutanan'
-        ];
-
-        foreach($categories as $category){
-            Category::create(['name' => $category]);
-        }
+        $superadmin->syncRoles($superAdminRole);
+        $admin->syncRoles($adminRole);
+        $moderator->syncRoles($moderatorRole);
     }
 }

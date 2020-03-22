@@ -35,18 +35,18 @@
             <a class="list-group-item @if(Route::is('article')) active @endif" href="{{ route('article') }}"><i class="icon wb-order"></i>Artikel</a>
             <a class="list-group-item @if(Route::is('video')) active @endif" href="{{ route('video') }}"><i class="icon wb-video"></i>Vidio</a>
             <a class="list-group-item @if(Route::is('category*')) active @endif" href="{{ route('category.index') }}"><i class="icon wb-grid-4"></i>Kategori</a>
-            <a class="list-group-item @if(Route::is('minitutor*') && !Route::is('minitutor.join*')) active @endif" href="{{ route('minitutor.index') }}"><i class="icon wb-users"></i>Minitutor</a>
+            <a class="list-group-item @if(Route::is('minitutor*')) active @endif" href="{{ route('minitutor.index') }}"><i class="icon wb-users"></i>Minitutor</a>
           </div>
         </section>
         <section class="page-aside-section">
           <div class="list-group">
             @if(!Auth::user())
-              <a class="list-group-item @if(Route::is('minitutor.join*')) active @endif" href="{{ route('minitutor.join.index') }}">
+              <a class="list-group-item @if(Route::is('join.minitutor*')) active @endif" href="{{ route('join.minitutor.index') }}">
                 <i class="icon wb-dashboard"></i>
                 Jadi Minitutor
               </a>
             @elseif(!Auth::user()->minitutor)
-              <a class="list-group-item @if(Route::is('minitutor.join*')) active @endif" href="{{ route('minitutor.join.index') }}">
+              <a class="list-group-item @if(Route::is('join.minitutor*')) active @endif" href="{{ route('join.minitutor.index') }}">
                 <i class="icon wb-dashboard"></i>
                 Jadi Minitutor
               </a>

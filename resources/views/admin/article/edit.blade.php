@@ -2,7 +2,7 @@
 @section('title', 'Minitutor')
 @section('content')
 
-<form class="row" method="POST" action="{{ route('admin.article.update', $article->id) }}" enctype="multipart/form-data">
+<form class="row" method="POST" action="{{ route('admin.articles.update', $article->id) }}" enctype="multipart/form-data">
   @csrf
   @method('put')
 
@@ -75,9 +75,9 @@
               <span class="ladda-label">Simpan</span>
             </button>
             @if($article->draf)
-              <a class="btn btn-sm btn-primary" href="{{ route('admin.article.make.public', $article->id) }}">Publikasikan</a>
+              <a class="btn btn-sm btn-primary" href="{{ route('admin.articles.make.public', $article->id) }}">Publikasikan</a>
             @else
-              <a class="btn btn-sm btn-primary" href="{{ route('admin.article.make.draf', $article->id) }}">Jadikan draf</a>
+              <a class="btn btn-sm btn-primary" href="{{ route('admin.articles.make.draf', $article->id) }}">Jadikan draf</a>
             @endif
             <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal-preview">Demo</button>
             <button delete-confirm data-target="#form-delete-article" class="btn btn-sm btn-danger">Hapus</button>
@@ -94,7 +94,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  {!! Helper::compileEditorJs($article->body) !!}
+                  {!! EditorjsHelp::compile($article->body) !!}
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -109,7 +109,7 @@
     </div>
   </div>
 </form>
-<form id="form-delete-article" action="{{ route('admin.article.destroy', $article->id) }}" method="POST">
+<form id="form-delete-article" action="{{ route('admin.articles.destroy', $article->id) }}" method="POST">
   @csrf
   @method('delete')
 </form>

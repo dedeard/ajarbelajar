@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Helpers\Seo;
 use App\Http\Controllers\Controller;
 use App\Model\Minitutor;
 use App\Model\User;
@@ -11,8 +12,7 @@ class MinitutorController extends Controller
 {
     public function index()
     {
-        SEOTools::setTitle(setting('seo.minitutor.title'));
-        SEOTools::setDescription(setting('seo.minitutor.description'));
+        Seo::set('Minitutor');
         $minitutors = Minitutor::where('active', 1)->paginate(20);
         return view('web.minitutor.index', ['minitutors' => $minitutors]);
     }

@@ -2,19 +2,19 @@
 @section('title', 'Minitutor')
 @section('content')
 
-<form class="row" method="POST" action="{{ route('admin.video.create.store', $user->id) }}">
+<form class="row" method="POST" action="{{ route('admin.videos.create.store', $user->id) }}">
   @csrf
 
   <div class="col-lg-12">
 
     <div class="panel">
       <div class="panel-heading">
-        <h3 class="panel-title">Buat artikel untuk minitutor <strong class="text-capitalize">{{ $user->name() }}</strong></h3>
+        <h3 class="panel-title">Buat video untuk minitutor <strong class="text-capitalize">{{ $user->name() }}</strong></h3>
       </div>
       <hr class="m-0">
       <div class="panel-body">
         <div class="form-group">
-          <label class="mb-3">Judul artikel</label>
+          <label class="mb-3">Judul video</label>
           <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}">
           @error('title')
             <div class="invalid-feedback">

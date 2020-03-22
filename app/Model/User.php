@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Overtrue\LaravelFollow\Traits\CanSubscribe;
@@ -12,7 +13,7 @@ use Nagy\LaravelRating\Traits\Rate\CanRate;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable, CanSubscribe, CanFavorite, CanRate;
+    use Notifiable, HasRoles, CanSubscribe, CanFavorite, CanRate;
 
     protected $fillable = [
         'first_name',
@@ -27,6 +28,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'username',
         'email',
         'password',
+        'email_verified_at',
     ];
 
     protected $hidden = [
@@ -65,16 +67,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return asset('img/placeholder/avatar.png');
     }
 
-    public function admin()
-    {
-        return $this->hasOne(Admin::class);
-    }
-
-    public function isAdmin()
-    {
-        return $this->admin ? true : false;
-    }
-
     public function requestMinitutor()
     {
         return $this->hasOne(RequestMinitutor::class);
@@ -85,14 +77,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Minitutor::class);
     }
 
-    public function requestArticles()
+    public function requestPosts()
     {
-        return $this->hasMany(RequestArticle::class);
-    }
-
-    public function requestVideos()
-    {
-        return $this->hasMany(RequestVideo::class);
+        return $this->hasMany(RequestPost::class);
     }
 
     public function posts()

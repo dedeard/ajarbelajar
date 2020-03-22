@@ -42,7 +42,7 @@
   <link rel="stylesheet" href="{{ asset('remark/vendor/switchery/switchery.min.css') }}">
   <link rel="stylesheet" href="{{ asset('remark/vendor/intro-js/introjs.min.css') }}">
   <link rel="stylesheet" href="{{ asset('remark/vendor/slidepanel/slidePanel.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('remark/vendor/bootstrap-table/bootstrap-table.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('remark/vendor/datatables.net-bs4/dataTables.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('remark/vendor/ladda/ladda.min.css') }}">
   <link rel="stylesheet" href="{{ asset('remark/vendor/bootstrap-sweetalert/sweetalert.min.css') }}">
   <link rel="stylesheet" href="{{ asset('remark/vendor/select2/select2.min.css') }}">
@@ -356,12 +356,14 @@
                 </a>
               </li>
 
+              @can('manage seo')
               <li class="site-menu-item @if(Route::is('admin.seo*')) active @endif">
                 <a href="{{ route('admin.seo.index') }}">
                   <i class="site-menu-icon wb-globe"></i>
                   <span class="site-menu-title">Seo</span>
                 </a>
               </li>
+              @endcan
 
               <li class="site-menu-item @if(Route::is('admin.comment*')) active @endif">
                 <a href="{{ route('admin.comment.index') }}">
@@ -370,46 +372,25 @@
                 </a>
               </li>
 
-              <li class="site-menu-item has-sub @if(Route::is('admin.categories*')) active open @endif">
-                <a href="javascript:;">
+              @can('manage category')
+              <li class="site-menu-item @if(Route::is('admin.categories*')) active @endif">
+                <a href="{{ route('admin.categories.index') }}">
                   <i class="site-menu-icon wb-list"></i>
-                  <span class="site-menu-title">Kategori</span>
-                  <span class="site-menu-arrow"></span>
+                  <span class="site-menu-title">Categories</span>
                 </a>
-                <ul class="site-menu-sub">
-                  <li class="site-menu-item @if(Route::is('admin.categories.index')) active @endif">
-                    <a class="animsition-link" href="{{ route('admin.categories.index') }}">
-                      <span class="site-menu-title">Daftar Kategori</span>
-                    </a>
-                  </li>
-                  <li class="site-menu-item @if(Route::is('admin.categories.create')) active @endif">
-                    <a class="animsition-link" href="{{ route('admin.categories.create') }}">
-                      <span class="site-menu-title">Buat Kategori</span>
-                    </a>
-                  </li>
-                </ul>
               </li>
+              @endcan
 
-              <li class="site-menu-item has-sub @if(Route::is('admin.user*')) active open @endif">
-                <a href="javascript:;">
+              @can('manage user')
+              <li class="site-menu-item @if(Route::is('admin.users*')) active @endif">
+                <a href="{{ route('admin.users.index') }}">
                   <i class="site-menu-icon wb-users"></i>
-                  <span class="site-menu-title">Pengguna</span>
-                  <span class="site-menu-arrow"></span>
+                  <span class="site-menu-title">Users</span>
                 </a>
-                <ul class="site-menu-sub">
-                  <li class="site-menu-item @if(Route::is('admin.user.index')) active @endif">
-                    <a class="animsition-link" href="{{ route('admin.user.index') }}">
-                      <span class="site-menu-title">Daftar Pengguna</span>
-                    </a>
-                  </li>
-                  <li class="site-menu-item @if(Route::is('admin.user.create')) active @endif">
-                    <a class="animsition-link" href="{{ route('admin.user.create') }}">
-                      <span class="site-menu-title">Buat Pengguna</span>
-                    </a>
-                  </li>
-                </ul>
               </li>
+              @endcan
 
+              @can('manage minitutor')
               <li class="site-menu-item has-sub @if(Route::is('admin.minitutor*')) active open @endif">
                 <a href="javascript:;">
                   <i class="site-menu-icon wb-user-circle"></i>
@@ -417,7 +398,7 @@
                   <span class="site-menu-arrow"></span>
                 </a>
                 <ul class="site-menu-sub">
-                  <li class="site-menu-item @if(Route::is('admin.minituror.index')) active @endif">
+                  <li class="site-menu-item @if(Route::is('admin.minitutor.index')) active @endif">
                     <a class="animsition-link" href="{{ route('admin.minitutor.index') }}">
                       <span class="site-menu-title">Daftar MiniTutor</span>
                     </a>
@@ -429,72 +410,62 @@
                   </li>
                 </ul>
               </li>
+              @endcan
 
-              <li class="site-menu-item has-sub @if(Route::is('admin.article*')) active open @endif">
+
+              @can('manage post')
+              <li class="site-menu-item has-sub @if(Route::is('admin.articles*')) active open @endif">
                 <a href="javascript:;">
                   <i class="site-menu-icon wb-order"></i>
                   <span class="site-menu-title">Artikel</span>
                   <span class="site-menu-arrow"></span>
                 </a>
                 <ul class="site-menu-sub">
-                  <li class="site-menu-item @if(Route::is('admin.article.index')) active @endif">
-                    <a class="animsition-link" href="{{ route('admin.article.index') }}">
+                  <li class="site-menu-item @if(Route::is('admin.articles.index')) active @endif">
+                    <a class="animsition-link" href="{{ route('admin.articles.index') }}">
                       <span class="site-menu-title">Daftar Artikel</span>
                     </a>
                   </li>
-                  <li class="site-menu-item @if(Route::is('admin.article.requested*')) active @endif">
-                    <a class="animsition-link" href="{{ route('admin.article.requested') }}">
+                  <li class="site-menu-item @if(Route::is('admin.articles.requested*')) active @endif">
+                    <a class="animsition-link" href="{{ route('admin.articles.requested') }}">
                       <span class="site-menu-title">Permintaan</span>
                     </a>
                   </li>
-                  <li class="site-menu-item @if(Route::is('admin.article.create*')) active @endif">
-                    <a class="animsition-link" href="{{ route('admin.article.create.index') }}">
+                  <li class="site-menu-item @if(Route::is('admin.articles.create*')) active @endif">
+                    <a class="animsition-link" href="{{ route('admin.articles.create.index') }}">
                       <span class="site-menu-title">Buat Artikel</span>
                     </a>
                   </li>
                 </ul>
               </li>
 
-              <li class="site-menu-item has-sub @if(Route::is('admin.video*')) active open @endif">
+              <li class="site-menu-item has-sub @if(Route::is('admin.videos*')) active open @endif">
                 <a href="javascript:;">
                   <i class="site-menu-icon wb-video"></i>
                   <span class="site-menu-title">Video</span>
                   <span class="site-menu-arrow"></span>
                 </a>
                 <ul class="site-menu-sub">
-                  <li class="site-menu-item @if(Route::is('admin.video.index')) active @endif">
-                    <a class="animsition-link" href="{{ route('admin.video.index') }}">
+                  <li class="site-menu-item @if(Route::is('admin.videos.index')) active @endif">
+                    <a class="animsition-link" href="{{ route('admin.videos.index') }}">
                       <span class="site-menu-title">Daftar Video</span>
                     </a>
                   </li>
-                  <li class="site-menu-item @if(Route::is('admin.video.requested*')) active @endif">
-                    <a class="animsition-link" href="{{ route('admin.video.requested') }}">
+                  <li class="site-menu-item @if(Route::is('admin.videos.requested*')) active @endif">
+                    <a class="animsition-link" href="{{ route('admin.videos.requested') }}">
                       <span class="site-menu-title">Permintaan</span>
                     </a>
                   </li>
-                  <li class="site-menu-item @if(Route::is('admin.video.create*')) active @endif">
-                    <a class="animsition-link" href="{{ route('admin.video.create.index') }}">
+                  <li class="site-menu-item @if(Route::is('admin.videos.create*')) active @endif">
+                    <a class="animsition-link" href="{{ route('admin.videos.create.index') }}">
                       <span class="site-menu-title">Buat Video</span>
                     </a>
                   </li>
                 </ul>
               </li>
+              @endcan
 
             </ul>
-            <div class="site-menubar-section">
-              <h5>
-                Milestone <span class="float-right">30%</span>
-              </h5>
-              <div class="progress progress-xs">
-                <div class="progress-bar active" style="width: 30%;" role="progressbar"></div>
-              </div>
-              <h5>
-                Release <span class="float-right">60%</span>
-              </h5>
-              <div class="progress progress-xs">
-                  <div class="progress-bar progress-bar-warning" style="width: 60%;" role="progressbar"></div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -577,8 +548,8 @@
   <script src="{{ asset('remark/vendor/intro-js/intro.min.js') }}"></script>
   <script src="{{ asset('remark/vendor/slidepanel/jquery-slidePanel.min.js') }}"></script>
   
-  <script src="{{ asset('remark/vendor/bootstrap-table/bootstrap-table.min.js') }}"></script>
-  <script src="{{ asset('remark/vendor/bootstrap-table/extensions/mobile/bootstrap-table-mobile.min.js') }}"></script>
+  <script src="{{ asset('remark/vendor/datatables.net/jquery.dataTables.js') }}"></script>
+  <script src="{{ asset('remark/vendor/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
   <script src="{{ asset('remark/vendor/ladda/spin.min.js') }}"></script>
   <script src="{{ asset('remark/vendor/ladda/ladda.min.js') }}"></script>
   <script src="{{ asset('remark/vendor/bootstrap-sweetalert/sweetalert.min.js') }}"></script>

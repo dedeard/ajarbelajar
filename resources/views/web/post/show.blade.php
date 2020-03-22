@@ -27,7 +27,7 @@
     @if($post->category)
       <p class="lead">Kategori <a href="#">{{ $post->category->name }}</a></p>
     @endif
-    {!! Helper::compileEditorJs($post->body) !!}
+    {!! EditorjsHelp::compile($post->body) !!}
   </article>
   <hr class="m-0">
   <div class="card-block">

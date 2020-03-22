@@ -7,26 +7,30 @@ use App\Model\Minitutor;
 
 class MinitutorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:manage minitutor']);
+    }
+
     public function index()
     {
-        $minitutors = [];
-        foreach(Minitutor::all() as $minitutor) {
-            array_push($minitutors, [
-                'id' => $minitutor->id,
-                'name' => $minitutor->user->name(),
-                'username' => $minitutor->user->username,
-                'email' => $minitutor->user->email,
-                'active' => $minitutor->active ? 'Aktiv' : 'Tidak Aktiv',
-                "created_at" => $minitutor->created_at->format('Y/m/d'),
-            ]);
-        }
-
-        return view('admin.minitutor.index', ['minitutors' => $minitutors]);
+        $minitutors = Minitutor::paginate(20);
+        return view('admin.minitutor.index', ['minitutors' => $minitutors ]);
     }
-    
+
+    public function show($id)
+    {
+        $minitutor = Minitutor::findOrFail($id);
+        return view('admin.minitutor.show', ['minitutor' => $minitutor ]);
+    }
+
     public function activeToggle($id)
     {
         $minitutor = Minitutor::findOrfail($id);
+
+        if($minitutor->user->hasRole('Super Admin')) {
+            return abort(403);
+        }
 
         if($minitutor->active) {
             $minitutor->active = false;
@@ -44,6 +48,11 @@ class MinitutorController extends Controller
     public function destroy($id)
     {
         $minitutor = Minitutor::findOrFail($id);
+
+        if($minitutor->user->hasRole('Super Admin')) {
+            return abort(403);
+        }
+
         $minitutor->delete();
         return redirect()->back()->withSuccess('Berhasil menghapus pengguna sebagai minitutor.');
     }

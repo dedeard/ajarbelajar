@@ -2,44 +2,45 @@
 @section('title', 'Buat Video')
 @section('content')
 
-<div class="panel">
+<div class="panel panel-bordered">
   <div class="panel-heading">
     <h3 class="panel-title">Buat Video untuk minitutor</h3>
   </div>
   <div class="panel-body">
-  <table id="table-video" data-height="500" data-mobile-responsive="true">
+    <div class="row mb-15">
+      <div class="col-lg-4 ml-auto">
+        <form method="get" class="row">
+          <div class="col-9 pr-0">
+            <input type="text" name="search" placeholder="Cari minitutor..." class="form-control" value="{{request()->input('search')}}">
+          </div>
+          <div class="col-3">
+            <button class="btn btn-primary btn-block">Cari</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <table class="table table-bordered">
       <thead>
         <tr>
-          <th data-field="id" data-sortable="true">ID</th>
-          <th data-field="name" data-sortable="true">Nama</th>
-          <th data-field="username" data-sortable="true">Nama pengguna</th>
+          <th>ID</th>
+          <th>Nama</th>
+          <th>Nama pengguna</th>
+          <th class="text-center">Action</th>
         </tr>
       </thead>
+      <tbody>
+        @foreach($minitutors as $minitutor)
+          <tr>
+            <td>{{ $minitutor->id }}</td>
+            <td>{{ $minitutor->user->name() }}</td>
+            <td>{{ $minitutor->user->username }}</td>
+            <td class="text-center">
+              <a href="{{ route('admin.videos.create.create', $minitutor->id) }}">Buat</a>
+            </td>
+          </tr>
+        @endforeach
+      </tbody>
     </table>
   </div>
 </div>
-@endsection
-
-
-@section('script')
-<script>
-  var data = @json($minitutors);
-  $(document).ready(function() {
-    $('#table-video').bootstrapTable({
-      data: data,
-      search: true,
-      showToggle: true,
-      showColumns: true,
-      iconSize: 'outline',
-      toolbar: '#table-category-toolbar',
-      icons: {
-        refresh: 'wb-refresh',
-        toggle: 'wb-order',
-        columns: 'wb-list-bulleted'
-      }
-    }).on('dbl-click-row.bs.table', function(e, row, $element) {
-      window.location.href = '/admin/video/create/'+ row.user_id
-    })
-  });
-</script>
 @endsection

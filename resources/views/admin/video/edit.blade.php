@@ -2,7 +2,7 @@
 @section('title', 'Minitutor')
 @section('content')
 
-<form class="row" method="POST" action="{{ route('admin.video.update', $video->id) }}" enctype="multipart/form-data">
+<form class="row" method="POST" action="{{ route('admin.videos.update', $video->id) }}" enctype="multipart/form-data">
   @csrf
   @method('put')
 
@@ -76,9 +76,9 @@
               <span class="ladda-label">Simpan</span>
             </button>
             @if($video->draf)
-              <a class="btn btn-sm btn-primary" href="{{ route('admin.video.make.public', $video->id) }}">Publikasikan</a>
+              <a class="btn btn-sm btn-primary" href="{{ route('admin.videos.make.public', $video->id) }}">Publikasikan</a>
             @else
-              <a class="btn btn-sm btn-primary" href="{{ route('admin.video.make.draf', $video->id) }}">Jadikan draf</a>
+              <a class="btn btn-sm btn-primary" href="{{ route('admin.videos.make.draf', $video->id) }}">Jadikan draf</a>
             @endif
             <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal-preview">Demo</button>
             <button delete-confirm data-target="#form-delete-video" class="btn btn-sm btn-danger">Hapus</button>
@@ -95,7 +95,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  {!! Helper::compileEditorJs($video->body) !!}
+                  {!! EditorjsHelp::compile($video->body) !!}
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -109,7 +109,7 @@
     </div>
   </div>
 </form>
-<form id="form-delete-video" action="{{ route('admin.video.destroy', $video->id) }}" method="POST">
+<form id="form-delete-video" action="{{ route('admin.videos.destroy', $video->id) }}" method="POST">
   @csrf
   @method('delete')
 </form>

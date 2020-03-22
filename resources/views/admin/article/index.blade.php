@@ -2,46 +2,39 @@
 @section('title', 'Daftar Artikel')
 @section('content')
 
-<div class="panel">
+<div class="panel panel-bordered">
   <div class="panel-heading">
     <h3 class="panel-title">Daftar Artikel</h3>
   </div>
   <div class="panel-body">
-  <table id="table-article" data-height="500" data-mobile-responsive="true">
+  <table class="table table-bordered">
       <thead>
         <tr>
-          <th data-field="id" data-sortable="true">ID</th>
-          <th data-field="name" data-sortable="true">Penulis</th>
-          <th data-field="title" data-sortable="true">Judul</th>
-          <th data-field="status" data-sortable="true">Status</th>
-          <th data-field="created_at" data-sortable="true">Dibuat</th>
+          <th>ID</th>
+          <th>Penulis</th>
+          <th>Judul</th>
+          <th>Status</th>
+          <th>Dibuat</th>
+          <th>Diupdate</th>
+          <th class="text-center">Actions</th>
         </tr>
       </thead>
+      <tbody>
+        @foreach($articles as $article)
+        <tr>
+          <td>{{ $article->id }}</td>
+          <td>{{ $article->user->name() }}</td>
+          <td>{{ $article->title }}</td>
+          <td>{{ $article->draf ? 'Draf' : 'Public' }}</td>
+          <td>{{ $article->created_at->format('d/m/Y') }}</td>
+          <td>{{ $article->updated_at->format('d/m/Y') }}</td>
+          <td class="text-center">
+            <a href="{{ route('admin.articles.edit', $article->id) }}">Edit</a>
+          </td>
+        </tr>
+        @endforeach
+      </tbody>
     </table>
   </div>
 </div>
-@endsection
-
-
-@section('script')
-<script>
-  var data = @json($articles);
-  $(document).ready(function() {
-    $('#table-article').bootstrapTable({
-      data: data,
-      search: true,
-      showToggle: true,
-      showColumns: true,
-      iconSize: 'outline',
-      toolbar: '#table-category-toolbar',
-      icons: {
-        refresh: 'wb-refresh',
-        toggle: 'wb-order',
-        columns: 'wb-list-bulleted'
-      }
-    }).on('dbl-click-row.bs.table', function(e, row, $element) {
-      window.location.href = '/admin/article/'+ row.id + '/edit'
-    })
-  });
-</script>
 @endsection

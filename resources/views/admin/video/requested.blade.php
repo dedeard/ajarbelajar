@@ -3,10 +3,10 @@
 @section('content')
 <div class="panel">
   <div class="panel-heading">
-    <h3 class="panel-title">Daftar Permintaan Video</h3>
+    <h3 class="panel-title">Daftar Permintaan Artikel</h3>
   </div>
   <div class="panel-body">
-    <table id="table-requested-article" data-height="500" data-mobile-responsive="true">
+    <table id="table-requested-video" data-height="500" data-mobile-responsive="true">
       <thead>
         <tr>
           <th data-field="id" data-sortable="true">ID</th>
@@ -16,29 +16,30 @@
         </tr>
       </thead>
     </table>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Username</th>
+          <th>Title</th>
+          <th>Direquest</th>
+          <th class="text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach($videos as $video)
+        <tr>
+          <td>{{ $video->id }}</td>
+          <td>{{ $video->user->username }}</td>
+          <td>{{ $video->title }}</td>
+          <td>{{ $video->requested_at }}</td>
+          <td class="text-center">
+            <a href="{{ route('admin.videos.requested.show', $video->id) }}">Lihat</a>
+          </td>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
   </div>
 </div>
-@endsection
-
-@section('script')
-<script>
-  var data = @json($videos);
-  $(document).ready(function() {
-    $('#table-requested-article').bootstrapTable({
-      data: data,
-      search: true,
-      showToggle: true,
-      showColumns: true,
-      iconSize: 'outline',
-      toolbar: '#table-category-toolbar',
-      icons: {
-        refresh: 'wb-refresh',
-        toggle: 'wb-order',
-        columns: 'wb-list-bulleted'
-      }
-    }).on('dbl-click-row.bs.table', function(e, row, $element) {
-      window.location.href = '/admin/video/requested/'+ row.id
-    })
-  });
-</script>
 @endsection

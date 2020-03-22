@@ -29,7 +29,22 @@ Route::prefix('category')->as('category.')->group(function(){
 });
 
 
-Route::get('/minitutor/join', 'Minitutor\JoinMinitutorController@index')->name('minitutor.join.index');
+Route::prefix('minitutor')->as('minitutor.')->group(function(){
+    Route::get('/', 'MinitutorController@index')->name('index');
+    Route::get('/{username}', 'MinitutorController@show')->name('show');
+});
+
+Route::prefix('join-minitutor')->as('join.minitutor.')->group(function(){
+    Route::get('/', 'JoinMinitutorController@index')->name('index');
+    Route::middleware(['auth', 'is.not.minitutor'])->group(function(){
+        Route::get('create', 'JoinMinitutorController@create')->name('create');
+        Route::post('store', 'JoinMinitutorController@store')->name('store');
+        Route::get('edit', 'JoinMinitutorController@edit')->name('edit');
+        Route::put('update', 'JoinMinitutorController@update')->name('update');
+    });
+});
+
+
 Route::middleware('auth')->group(function(){
     // Dashboard routes
     Route::prefix('dashboard')->as('dashboard.')->group(function(){
@@ -58,24 +73,4 @@ Route::middleware('auth')->group(function(){
         Route::get('/comments', 'CommentsController@index')->name('comments.index');
     });
 
-
-
-
-    Route::prefix('minitutor')->as('minitutor.')->group(function(){
-
-        // join to minitutor routes
-        Route::middleware('is.not.minitutor')->namespace('Minitutor')->prefix('join')->as('join.')->group(function(){
-            
-            Route::get('/create', 'JoinMinitutorController@create')->name('create');
-            Route::post('/store', 'JoinMinitutorController@store')->name('store');
-            Route::get('/edit', 'JoinMinitutorController@edit')->name('edit');
-            Route::put('/update', 'JoinMinitutorController@update')->name('update');
-        });
-    });
-});
-
-
-Route::prefix('minitutor')->as('minitutor.')->group(function(){
-    Route::get('/', 'MinitutorController@index')->name('index');
-    Route::get('/{username}', 'MinitutorController@show')->name('show');
 });

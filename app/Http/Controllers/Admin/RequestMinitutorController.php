@@ -5,31 +5,23 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Model\Minitutor;
 use App\Model\RequestMinitutor;
-use Illuminate\Http\Request;
 
 class RequestMinitutorController extends Controller
 {
-    public function index(Request $request)
+    public function __construct()
     {
-        $requestLists = [];
-        foreach(RequestMinitutor::all() as $requestList) {
-            array_push($requestLists, [
-                'id' => $requestList->id,
-                'name' => $requestList->user->name(),
-                'username' => $requestList->user->username,
-                'email' => $requestList->user->email,
-                "updated_at" => $requestList->updated_at->format('Y/m/d'),
-                "created_at" => $requestList->created_at->format('Y/m/d'),
-            ]);
-        }
-
-        return view('admin.minitutor.request', ["requestLists" => $requestLists]);
+        $this->middleware(['permission:manage minitutor']);
+    }
+    
+    public function index()
+    {
+        return view('admin.minitutor.request.index', ["requestMinitutor" => RequestMinitutor::orderBy('id', 'desc')->paginate(20)]);
     }
 
     public function show($id)
     {
         $data = RequestMinitutor::findOrFail($id);
-        return view('admin.minitutor.showRequest', ["data" => $data]);
+        return view('admin.minitutor.request.show', ["data" => $data]);
     }
 
     public function reject($id)

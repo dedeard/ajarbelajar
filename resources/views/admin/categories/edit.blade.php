@@ -4,7 +4,7 @@
 
 
 @section('content')
-<div class="panel">
+<div class="panel panel-bordered">
     <div class="panel-heading">
       <h3 class="panel-title">Edit kategori</h3>
     </div>

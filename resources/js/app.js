@@ -36,7 +36,7 @@ if (apiToken) window.axios.defaults.headers.common.Authorization = 'Bearer ' + a
   $(document).ready(() => {
     setTimeout(() => {
       $('body').removeClass('preload')
-    }, 300)
+    }, 500)
   })
 
 

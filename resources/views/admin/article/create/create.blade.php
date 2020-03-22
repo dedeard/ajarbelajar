@@ -2,7 +2,7 @@
 @section('title', 'Minitutor')
 @section('content')
 
-<form class="row" method="POST" action="{{ route('admin.article.create.store', $user->id) }}">
+<form class="row" method="POST" action="{{ route('admin.articles.create.store', $user->id) }}">
   @csrf
 
   <div class="col-lg-12">

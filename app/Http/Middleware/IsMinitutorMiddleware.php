@@ -16,7 +16,7 @@ class IsMinitutorMiddleware
     public function handle($request, Closure $next)
     {
         if (!$request->user()->minitutor) {
-            return redirect()->route('minitutor.join.index');
+            return redirect()->route('join.minitutor.index');
         }
         return $next($request);
     }

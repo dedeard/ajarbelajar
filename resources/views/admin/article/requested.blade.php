@@ -16,29 +16,30 @@
         </tr>
       </thead>
     </table>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Username</th>
+          <th>Title</th>
+          <th>Direquest</th>
+          <th class="text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach($articles as $article)
+        <tr>
+          <td>{{ $article->id }}</td>
+          <td>{{ $article->user->username }}</td>
+          <td>{{ $article->title }}</td>
+          <td>{{ $article->requested_at }}</td>
+          <td class="text-center">
+            <a href="{{ route('admin.articles.requested.show', $article->id) }}">Lihat</a>
+          </td>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
   </div>
 </div>
-@endsection
-
-@section('script')
-<script>
-  var data = @json($articles);
-  $(document).ready(function() {
-    $('#table-requested-article').bootstrapTable({
-      data: data,
-      search: true,
-      showToggle: true,
-      showColumns: true,
-      iconSize: 'outline',
-      toolbar: '#table-category-toolbar',
-      icons: {
-        refresh: 'wb-refresh',
-        toggle: 'wb-order',
-        columns: 'wb-list-bulleted'
-      }
-    }).on('dbl-click-row.bs.table', function(e, row, $element) {
-      window.location.href = 'requested/'+ row.id
-    })
-  });
-</script>
 @endsection

@@ -5,7 +5,7 @@
 
 @section('content')
 
-<div class="panel">
+<div class="panel panel-bordered">
     <div class="panel-heading">
       <h3 class="panel-title">Buat kategori baru</h3>
     </div>

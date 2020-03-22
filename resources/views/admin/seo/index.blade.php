@@ -2,20 +2,22 @@
 @section('title', 'Seo')
 @section('content')
 
-<div class="panel">
+<div class="panel panel-bordered">
   <div class="panel-heading">
     <h3 class="panel-title">Seo</h3>
   </div>
   <div class="panel-body">
-    <table class="table">
+    <table class="table table-bordered">
       <tr>
+        <th>Id</th>
         <th>Halaman</th>
-        <th>Aksi</th>
+        <th class="text-center">Aksi</th>
       </tr>
-      @foreach($pages as $slug => $name)
+      @foreach($seos as $seo)
         <tr>
-          <td>{{ $name }}</td>
-          <td><a href="{{ route('admin.seo.edit', $slug) }}">Edit</a></td>
+          <td>{{ $seo->id }}</td>
+          <td>{{ $seo->name }}</td>
+          <td class="text-center"><a href="{{ route('admin.seo.edit', $seo->id) }}">Edit</a></td>
         </tr>
       @endforeach
     </table>

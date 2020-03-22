@@ -2,46 +2,39 @@
 @section('title', 'Daftar Video')
 @section('content')
 
-<div class="panel">
+<div class="panel panel-bordered">
   <div class="panel-heading">
     <h3 class="panel-title">Daftar Video</h3>
   </div>
   <div class="panel-body">
-  <table id="table-article" data-height="500" data-mobile-responsive="true">
+  <table class="table table-bordered">
       <thead>
         <tr>
-          <th data-field="id" data-sortable="true">ID</th>
-          <th data-field="name" data-sortable="true">Penulis</th>
-          <th data-field="title" data-sortable="true">Judul</th>
-          <th data-field="status" data-sortable="true">Status</th>
-          <th data-field="created_at" data-sortable="true">Dibuat</th>
+          <th>ID</th>
+          <th>Penulis</th>
+          <th>Judul</th>
+          <th>Status</th>
+          <th>Dibuat</th>
+          <th>Diupdate</th>
+          <th class="text-center">Actions</th>
         </tr>
       </thead>
+      <tbody>
+        @foreach($videos as $video)
+        <tr>
+          <td>{{ $video->id }}</td>
+          <td>{{ $video->user->name() }}</td>
+          <td>{{ $video->title }}</td>
+          <td>{{ $video->draf ? 'Draf' : 'Public' }}</td>
+          <td>{{ $video->created_at->format('d/m/Y') }}</td>
+          <td>{{ $video->updated_at->format('d/m/Y') }}</td>
+          <td class="text-center">
+            <a href="{{ route('admin.videos.edit', $video->id) }}">Edit</a>
+          </td>
+        </tr>
+        @endforeach
+      </tbody>
     </table>
   </div>
 </div>
-@endsection
-
-
-@section('script')
-<script>
-  var data = @json($videos);
-  $(document).ready(function() {
-    $('#table-article').bootstrapTable({
-      data: data,
-      search: true,
-      showToggle: true,
-      showColumns: true,
-      iconSize: 'outline',
-      toolbar: '#table-category-toolbar',
-      icons: {
-        refresh: 'wb-refresh',
-        toggle: 'wb-order',
-        columns: 'wb-list-bulleted'
-      }
-    }).on('dbl-click-row.bs.table', function(e, row, $element) {
-      window.location.href = '/admin/video/'+ row.id + '/edit'
-    })
-  });
-</script>
 @endsection
