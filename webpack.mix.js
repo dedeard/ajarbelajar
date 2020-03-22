@@ -21,7 +21,6 @@ const config = {
 mix
    .webpackConfig(config)
    .js('resources/js/editor.js', 'public/js')
-   .js('resources/js/video.js', 'public/js')
    .js('resources/js/app.js', 'public/js')
    .js('resources/js/admin.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css');

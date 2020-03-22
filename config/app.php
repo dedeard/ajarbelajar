@@ -170,7 +170,6 @@ return [
         Overtrue\LaravelFollow\FollowServiceProvider::class,
         Nagy\LaravelRating\LaravelRatingServiceProvider::class,
         Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
-        Akaunting\Setting\Provider::class,
         Spatie\Permission\PermissionServiceProvider::class,
 
         /*

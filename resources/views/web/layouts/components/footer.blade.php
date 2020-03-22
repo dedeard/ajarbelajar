@@ -56,7 +56,7 @@
         <i class="fa fa-copyright"></i> 2020 Ajar Belajar. All Right Reserve
       </div>
       <div class="text-gray-600 small text-center">
-        Built by <a href="#">Dedeardh</a>
+        <!-- Built by <a href="#">Dedeardh</a> -->
       </div>
     </div>
   </div>

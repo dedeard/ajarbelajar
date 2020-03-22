@@ -102,7 +102,7 @@ window.SIDEBAR_CLOSE = true
                   </button>
                 </div>
                 <div class="modal-body">
-                  {!! Helper::compileEditorJs($article->body) !!}
+                  {!! EditorjsHelp::compile($article->body) !!}
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

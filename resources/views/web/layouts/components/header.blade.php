@@ -16,10 +16,10 @@
         </div>
       </div>
     </div>
-    <form action="#" class="ab-header__form-search" id="header-form-search">
+    <form action="{{ route('home') }}" class="ab-header__form-search" id="header-form-search" method="GET">
       <div class="container-fluid">
         <div class="ab-header__form-search-wrapper">
-          <input class="form-control ab-header__form-search-input" type="search"  placeholder="Apa yang anda cari?">
+          <input class="form-control ab-header__form-search-input" type="search" name="search" value="{{ request()->input('search') }}" placeholder="Apa yang anda cari?">
           <button class="btn ab-header__form-search-toggle">
             <i class="fa fa-search"></i>
           </button>

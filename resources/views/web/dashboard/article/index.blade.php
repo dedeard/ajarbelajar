@@ -26,7 +26,7 @@
           <div class="panel-body">
             <p>Di Edit {{ $article->updated_at->diffForHumans() }}</p>
             <div class="btn-group">
-              <a href="{{ route('dashboard.requested.create', [$article->id, $article->type()]) }}"
+              <a href="{{ route('dashboard.requested.create', $article->id) }}"
                 class="btn btn-sm btn-icon btn-outline btn-default" data-toggle="tooltip" title="Publikasikan">
                 <i class="icon wb-globe"></i>
               </a>

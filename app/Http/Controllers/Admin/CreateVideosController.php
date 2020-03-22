@@ -36,13 +36,10 @@ class CreateVideosController extends Controller
         return view('admin.video.create.index', ['minitutors' => $minitutors]);
     }
 
-    public function create($user_id)
+    public function create($id)
     {
-        $user = User::findOrFail($user_id);
-        if(!$user->minitutor){
-            return abort(404);
-        }
-        return view('admin.video.create.create', ['user' => $user]);
+        $minitutor = Minitutor::findOrFail($id);
+        return view('admin.video.create.create', ['user' => $minitutor->user]);
     }
 
     public function store(Request $request, $user_id)

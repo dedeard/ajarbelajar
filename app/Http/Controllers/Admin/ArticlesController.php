@@ -132,11 +132,11 @@ class ArticlesController extends Controller
         $article = RequestPost::whereNotNull('requested_at')->where('type', 'article')->findOrFail($id);
 
         if ($article->hero) {
-            if(Storage::disk('public')->exists('post/request/hero/' . $article->hero)) {
-                Storage::disk('public')->move('post/request/hero/' . $article->hero, 'post/hero/' . $article->hero);
+            if(Storage::disk('public')->exists('post/hero/request/' . $article->hero)) {
+                Storage::disk('public')->move('post/hero/request/' . $article->hero, 'post/hero/' . $article->hero);
             }
-            if(Storage::disk('public')->exists('post/request/hero/thumb/' . $article->hero)) {
-                Storage::disk('public')->move('post/request/hero/thumb/' . $article->hero, 'post/hero/thumb/' . $article->hero);
+            if(Storage::disk('public')->exists('post/hero/request/thumb/' . $article->hero)) {
+                Storage::disk('public')->move('post/hero/request/thumb/' . $article->hero, 'post/hero/thumb/' . $article->hero);
             }
         }
 

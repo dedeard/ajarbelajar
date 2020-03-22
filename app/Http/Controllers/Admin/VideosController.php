@@ -136,11 +136,11 @@ class VideosController extends Controller
         $video = RequestPost::whereNotNull('requested_at')->where('type', 'video')->findOrFail($id);
 
         if ($video->hero) {
-            if(Storage::disk('public')->exists('post/request/hero/' . $video->hero)) {
-                Storage::disk('public')->move('post/request/hero/' . $video->hero, 'post/hero/' . $video->hero);
+            if(Storage::disk('public')->exists('post/hero/request/' . $video->hero)) {
+                Storage::disk('public')->move('post/hero/request/' . $video->hero, 'post/hero/' . $video->hero);
             }
-            if(Storage::disk('public')->exists('post/request/hero/thumb/' . $video->hero)) {
-                Storage::disk('public')->move('post/request/hero/thumb/' . $video->hero, 'post/hero/thumb/' . $video->hero);
+            if(Storage::disk('public')->exists('post/hero/request/thumb/' . $video->hero)) {
+                Storage::disk('public')->move('post/hero/request/thumb/' . $video->hero, 'post/hero/thumb/' . $video->hero);
             }
         }
 

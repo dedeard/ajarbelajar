@@ -36,13 +36,10 @@ class CreateArticlesController extends Controller
         return view('admin.article.create.index', ['minitutors' => $minitutors]);
     }
 
-    public function create($user_id)
+    public function create($id)
     {
-        $user = User::findOrFail($user_id);
-        if(!$user->minitutor){
-            return abort(404);
-        }
-        return view('admin.article.create.create', ['user' => $user]);
+        $minitutor = Minitutor::findOrFail($id);
+        return view('admin.article.create.create', ['user' => $minitutor->user]);
     }
 
     public function store(Request $request, $user_id)

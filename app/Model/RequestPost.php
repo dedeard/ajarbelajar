@@ -26,7 +26,7 @@ class RequestPost extends Model
     public function heroUrl()
     {
         if($this->hero) {
-            return asset('storage/post/request/hero/' . $this->hero);
+            return asset('storage/post/hero/request/' . $this->hero);
         }
         return asset('img/placeholder/post-lg.jpg');
     }
@@ -34,7 +34,7 @@ class RequestPost extends Model
     public function thumbUrl()
     {
         if($this->hero) {
-            return asset('storage/post/request/hero/thumb/' . $this->hero);
+            return asset('storage/post/hero/request/thumb/' . $this->hero);
         }
         return asset('img/placeholder/post-sm.jpg');
     }

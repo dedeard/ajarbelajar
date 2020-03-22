@@ -1,35 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\Web;
+namespace App\Http\Controllers\Web\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Model\Minitutor;
-use App\Model\Post;
 use App\Rules\Username;
-use Illuminate\Http\Request;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
-use Artesaos\SEOTools\Facades\SEOTools;
 
-class DashbaordController extends Controller
+class EditController extends Controller
 {
     public function index()
     {
-        return redirect()->route('dashboard.edit');
-    }
-
-    public function edit()
-    {
         SEOTools::setTitle('Edit Profile');
-        return view('web.dashboard.edit');
+        return view('web.dashboard.edit.index');
     }
-
     public function update(Request $request)
     {
         $user = $request->user();
-
+        
         $data = $request->validate([
             'username' => ['required', 'string', new Username, 'max:64', 'min:6', 'unique:users,username,' . $user->id ],
             'email' => ['required', 'string', 'email', 'max:250', 'unique:users,email,' . $user->id ],
@@ -69,21 +61,5 @@ class DashbaordController extends Controller
         }
         $user->update($data);
         return redirect()->back();
-    }
-
-    public function following(Request $request)
-    {
-        SEOTools::setTitle('Diikuti');
-        $followings = $request->user()->subscriptions(Minitutor::class)->paginate(12);
-        return view('web.dashboard.following', ['minitutors' => $followings]);
-    }
-
-    public function favorite(Request $request)
-    {
-        SEOTools::setTitle('Favorit');
-        $posts = $request->user()->favorites(Post::class)->where('draf', 0)->withCount(['comments' => function($query){
-            return $query->where('approved', true);
-        }, 'views'])->paginate(4);
-        return view('web.dashboard.favorite', ['posts' => $posts]);
     }
 }

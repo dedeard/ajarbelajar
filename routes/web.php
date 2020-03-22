@@ -47,15 +47,15 @@ Route::prefix('join-minitutor')->as('join.minitutor.')->group(function(){
 
 Route::middleware('auth')->group(function(){
     // Dashboard routes
-    Route::prefix('dashboard')->as('dashboard.')->group(function(){
-        Route::get('/', 'DashbaordController@index')->name('index');
+    Route::prefix('dashboard')->as('dashboard.')->namespace('Dashboard')->group(function(){
+        Route::get('/', function(){
+            return redirect()->route('dashboard.edit');
+        })->name('index');
+        Route::get('edit', 'EditController@index')->name('edit');
+        Route::put('edit/update', 'EditController@update')->name('update');
 
-        Route::get('/edit', 'DashbaordController@edit')->name('edit');
-        Route::put('/update', 'DashbaordController@update')->name('update');
-
-        Route::get('/following', 'DashbaordController@following')->name('following');
-        Route::get('/settings', 'DashbaordController@following')->name('settings');
-        Route::get('/favorite', 'DashbaordController@favorite')->name('favorite');
+        Route::get('following', 'FollowingController@index')->name('following');
+        Route::get('favorite', 'FavoriteController@index')->name('favorite');
     });
 
     Route::middleware(['is.minitutor', 'minitutor:active'])->namespace('Dashboard')->prefix('dashboard')->as('dashboard.')->group(function(){
@@ -67,8 +67,8 @@ Route::middleware('auth')->group(function(){
 
         Route::get('/accepted', 'AcceptedController@index')->name('accepted.index');
         Route::get('/requested', 'RequestedController@index')->name('requested.index');
-        Route::get('/requested/{id}/{type}/create', 'RequestedController@create')->name('requested.create');
-        Route::get('/requested/{id}/{type}/destroy', 'RequestedController@destroy')->name('requested.destroy');
+        Route::get('/requested/{id}/create', 'RequestedController@create')->name('requested.create');
+        Route::get('/requested/{id}/destroy', 'RequestedController@destroy')->name('requested.destroy');
         Route::get('/review', 'ReviewController@index')->name('review.index');
         Route::get('/comments', 'CommentsController@index')->name('comments.index');
     });

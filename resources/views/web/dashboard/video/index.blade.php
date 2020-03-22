@@ -26,7 +26,7 @@
           <div class="panel-body">
             <p>Di Edit {{ $video->updated_at->diffForHumans() }}</p>
             <div class="btn-group">
-              <a href="{{ route('dashboard.requested.create', [$video->id, $video->type()]) }}"
+              <a href="{{ route('dashboard.requested.create', $video->id) }}"
                 class="btn btn-sm btn-icon btn-outline btn-default" data-toggle="tooltip" title="Publikasikan">
                 <i class="icon wb-globe"></i>
               </a>

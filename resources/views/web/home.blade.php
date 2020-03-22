@@ -4,11 +4,7 @@
   <div class="owl-carousel owl-carousel-landing">
     @foreach($populars as $popular)
     <div class="card card-inverse overlay">
-      @if($popular->type === 'article')
-      <img class="card-img overlay-figure img-fluid" src="{{ $popular->hero ? asset('storage/article/hero/thumb/' . $popular->hero) : asset('img/placeholder/post-sm.jpg') }}" alt="{{ $popular->title }}">
-      @else
-      <img class="card-img overlay-figure img-fluid" src="{{ $popular->hero ? asset('storage/video/hero/thumb/' . $popular->hero) : asset('img/placeholder/post-sm.jpg') }}" alt="{{ $popular->title }}">
-      @endif
+      <img class="card-img overlay-figure img-fluid" src="{{ $popular->heroUrl() }}" alt="{{ $popular->title }}">
       <div class="card-img-overlay overlay-background text-center vertical-align">
         <div class="vertical-align-middle">
           <div class="card-text card-divider">

@@ -20,7 +20,7 @@
             <p><span class="badge badge-primary">{{ $requested->type }}</span></p>
             <p>Diminta {{ \Carbon\Carbon::parse($requested->requested_at)->diffForHumans() }}</p>
             <div class="btn-group">
-              <a href="{{ route('dashboard.requested.destroy', [$requested->id, $requested->type]) }}" class="btn btn-sm btn-danger">
+              <a href="{{ route('dashboard.requested.destroy', $requested->id) }}" class="btn btn-sm btn-danger">
                 Batalkan
               </a>
             </div>
