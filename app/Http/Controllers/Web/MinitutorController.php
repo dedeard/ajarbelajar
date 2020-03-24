@@ -26,14 +26,12 @@ class MinitutorController extends Controller
         if(!$user->minitutor->active) return abort(404);
 
         SEOTools::setTitle('Minitutor ' . $user->name());
-        SEOTools::setDescription($user->profile->about);
+        SEOTools::setDescription($user->about);
 
         $posts = $user->posts()
                     ->select(['id', 'category_id', 'user_id', 'title', 'slug', 'hero', 'description', 'created_at', 'type'])
                     ->with(['user' => function($query){
-                        return $query->select(['id', 'username'])->with(['profile' => function($query){
-                            return $query->select(['user_id', 'first_name', 'last_name']);
-                        }]);
+                        return $query->select(['id', 'username', 'first_name', 'last_name']);
                     }, 'reviews' => function($q){
                         return $q->select(['post_id', 'rating']);
                     }])

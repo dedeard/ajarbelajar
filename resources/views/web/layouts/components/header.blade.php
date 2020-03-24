@@ -36,19 +36,7 @@
             </a>
             <a href="javascript:;" class="ab-header__right-action ab-notification-dropdown-toggle">
               <i class="fa fa-bell"></i>
-              <span class="ab-header__right-action-label"></span>
-              <div class="ab-notification-dropdown">
-                <span class="caret"></span>
-                <div class="ab-notification-dropdown__wrapper">
-                  <div class="ab-notification-dropdown__header">
-                    <span class="ab-notification-dropdown__header-title">
-                      <i class="fa fa-bell"></i>
-                      Notifikasi
-                    </span>
-                    <span class="badge badge-danger">10</span>
-                  </div>
-                </div>
-              </div>
+              <span class="ab-header__right-action-label" notification-count></span>
             </a>
           </div>
           <div class="ab-header__right-avatar">

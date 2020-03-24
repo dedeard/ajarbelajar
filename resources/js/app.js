@@ -12,6 +12,8 @@ $(function () {
 /**
  * Require library
  */
+import Echo from 'laravel-echo';
+window.Pusher = require('pusher-js');
 window.axios = require('axios')
 window.PerfectScrollbar = require('perfect-scrollbar').default
 window.Swal = require('sweetalert2')
@@ -28,6 +30,25 @@ const apiToken = document.head.querySelector('meta[name="api-token"]')
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 if (csrfToken) window.axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken.content
 if (apiToken) window.axios.defaults.headers.common.Authorization = 'Bearer ' + apiToken.content
+
+
+
+window.Echo = new Echo({
+  broadcaster: 'pusher',
+  key: '9dd48f6db8303f2f8bd6',
+  cluster: 'ap1',
+  forceTLS: true
+});
+
+
+if(AUTH_ID) {
+  $('[notification-count]').text(NOTIFICATION_COUNT);
+  window.Echo.private('App.User.' + AUTH_ID)
+  .notification((notification) => {
+    NOTIFICATION_COUNT++;
+    $('[notification-count]').text(NOTIFICATION_COUNT);
+  });
+}
 
 
 ;(function(){

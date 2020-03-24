@@ -6,6 +6,13 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/article', 'HomeController@article')->name('article');
 Route::get('/video', 'HomeController@video')->name('video');
 
+Route::middleware(['auth'])->prefix('notifications')->as('notifications.')->group(function(){
+    Route::get('/', 'NotificationsController@index')->name('index');
+
+    Route::middleware(['auth'])->post('/{id}/comment', 'PostController@storeComment')->name('comment.store');
+    Route::middleware(['auth'])->post('/{id}/review', 'PostController@storeReview')->name('review.store');
+});
+
 Route::prefix('post')->as('post.')->group(function(){
     Route::get('/{slug}', 'PostController@show')->name('show');
 

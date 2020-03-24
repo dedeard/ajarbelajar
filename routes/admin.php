@@ -1,7 +1,11 @@
 <?php
 
+Route::get('/', function(){
+  return redirect()->route('admin.dashboard');
+});
+
 Route::get('/dashboard', function(){
-  return redirect()->route('admin.users.index');
+  return view('admin.dashboard');
 })->name('dashboard');
 
 Route::resource('users', 'UsersController');

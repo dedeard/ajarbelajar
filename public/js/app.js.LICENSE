@@ -71,6 +71,14 @@
   */
 
 /*!
+ * Pusher JavaScript Library v5.1.1
+ * https://pusher.com/
+ *
+ * Copyright 2017, Pusher
+ * Released under the MIT licence.
+ */
+
+/*!
  * =============================================================
  * dropify v0.2.1 - Override your input files with style.
  * https://github.com/JeremyFagis/dropify
@@ -83,6 +91,13 @@
  * perfect-scrollbar v1.5.0
  * Copyright 2020 Hyunje Jun, MDBootstrap and Contributors
  * Licensed under MIT
+ */
+
+/*!
+ * The buffer module from node.js, for the browser.
+ *
+ * @author   Feross Aboukhadijeh <http://feross.org>
+ * @license  MIT
  */
 
 /*!

@@ -15,9 +15,11 @@ class HomeController extends Controller
 
         if ($request->input('search')) {
             $search = '%' . $request->input('search') . '%';
-            
-
-            return view('web.search');
+            $posts = Post::posts()->where('title', 'like', $search)
+                                  ->orWhere('description', 'like', $search)
+                                  ->paginate(12)
+                                  ->appends(['search' => $request->input('search')]);
+            return view('web.search', ['posts' => $posts]);
         } else {
             $data = [];
             $data['populars'] = Post::posts()->orderBy('comments_count', 'desc')->limit(3)->get();
@@ -32,7 +34,7 @@ class HomeController extends Controller
     {
         Seo::set('Article');
         $data = [];
-        $data['articles'] = Post::articles()->orderBy('created_at', 'desc')->paginate(12);
+        $data['articles'] = Post::articles()->orderBy('created_at', 'desc')->paginate(6);
         return view('web.article', $data);
     }
 
@@ -40,7 +42,7 @@ class HomeController extends Controller
     {
         Seo::set('Video');
         $data = [];
-        $data['videos'] = Post::videos()->orderBy('created_at', 'desc')->paginate(12);
+        $data['videos'] = Post::videos()->orderBy('created_at', 'desc')->paginate(6);
         return view('web.video', $data);
     }
 }

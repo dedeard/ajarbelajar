@@ -14,6 +14,10 @@
   <meta name="google-site-verification" content="muR53cbe3_dN-_UFdd8UVCB9pT7a8CkBj7iqpclnhw0" />
   @auth
   <meta name="api-token" content="{{ Auth::user()->apiToken() }}">
+  <script>
+    var AUTH_ID = {{ Auth::user()->id }};
+    var NOTIFICATION_COUNT = {{ Auth::user()->unreadNotifications()->groupBy('notifiable_type')->count() }};
+  </script>
   @endauth
   <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('icons/apple-icon-57x57.png') }}">
   <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('icons/apple-icon-60x60.png') }}">
@@ -107,7 +111,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'UA-160467804-1');
   </script>
   @yield('script')

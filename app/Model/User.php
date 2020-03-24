@@ -39,6 +39,21 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new \App\Notifications\Auth\VerifyEmail);
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new \App\Notifications\Auth\ResetPassword($token));
+    }
+
+    public function receivesBroadcastNotificationsOn()
+    {
+        return 'App.User.'.$this->id;
+    }
+
     public function apiToken()
     {
         $token = $this->api_token;
