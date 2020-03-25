@@ -16,7 +16,7 @@
   <meta name="api-token" content="{{ Auth::user()->apiToken() }}">
   <script>
     var AUTH_ID = {{ Auth::user()->id }};
-    var NOTIFICATION_COUNT = {{ Auth::user()->unreadNotifications()->groupBy('notifiable_type')->count() }};
+    var NOTIFICATION_COUNT = {{ Auth::user()->unreadNotifications()->count() }};
   </script>
   @endauth
   <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('icons/apple-icon-57x57.png') }}">
