@@ -8,9 +8,9 @@ Route::get('/video', 'HomeController@video')->name('video');
 
 Route::middleware(['auth'])->prefix('notifications')->as('notifications.')->group(function(){
     Route::get('/', 'NotificationsController@index')->name('index');
-
-    Route::middleware(['auth'])->post('/{id}/comment', 'PostController@storeComment')->name('comment.store');
-    Route::middleware(['auth'])->post('/{id}/review', 'PostController@storeReview')->name('review.store');
+    Route::get('/markAsRead', 'NotificationsController@markAsRead')->name('markasread');
+    Route::get('/destroy', 'NotificationsController@destroy')->name('destroy');
+    Route::get('/{id}', 'NotificationsController@read')->name('read');
 });
 
 Route::prefix('post')->as('post.')->group(function(){

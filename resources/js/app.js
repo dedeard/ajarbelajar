@@ -42,7 +42,7 @@ window.Echo = new Echo({
 
 
 if(AUTH_ID) {
-  $('[notification-count]').text(NOTIFICATION_COUNT);
+  if(NOTIFICATION_COUNT > 0) $('[notification-count]').text(NOTIFICATION_COUNT);
   window.Echo.private('App.User.' + AUTH_ID)
   .notification((notification) => {
     NOTIFICATION_COUNT++;

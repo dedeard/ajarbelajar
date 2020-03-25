@@ -31,10 +31,10 @@
         <div class="ab-header__right-wrapper">
           @auth
           <div class="ab-header__right-actions">
-            <a href="javascript:;" class="ab-header__right-action">
+            <!-- <a href="javascript:;" class="ab-header__right-action">
               <i class="fa fa-envelope"></i>
-            </a>
-            <a href="javascript:;" class="ab-header__right-action ab-notification-dropdown-toggle">
+            </a> -->
+            <a href="{{ route('notifications.index') }}" class="ab-header__right-action ab-notification-dropdown-toggle">
               <i class="fa fa-bell"></i>
               <span class="ab-header__right-action-label" notification-count></span>
             </a>
