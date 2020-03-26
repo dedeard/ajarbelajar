@@ -56,6 +56,12 @@
               <i class="icon wb-user-circle"></i>
               Dasbor Kamu
             </a>
+            @role('Super Admin|Administrator|Moderator')
+              <a class="list-group-item" href="{{ route('admin.dashboard') }}">
+                <i class="icon wb-lock"></i>
+                Dasbor Admin
+              </a>
+            @endrole
             @else
             <a class="list-group-item" href="{{ route('register') }}">
               <i class="icon wb-user-circle"></i>
