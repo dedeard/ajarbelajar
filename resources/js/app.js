@@ -65,7 +65,7 @@ if(AUTH_ID) {
   $(document).ready(function(){
     let open = false
     $(document).click(function (e) {
-      t = $(e.target)
+      var t = $(e.target)
 
       hitBtn = t.closest('[data-toggle="header-form-search"]').length
 
