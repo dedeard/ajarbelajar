@@ -66,8 +66,7 @@ if(AUTH_ID) {
     let open = false
     $(document).click(function (e) {
       var t = $(e.target)
-
-      hitBtn = t.closest('[data-toggle="header-form-search"]').length
+      var hitBtn = t.closest('[data-toggle="header-form-search"]').length
 
       if(hitBtn) e.preventDefault()
       if (!open && hitBtn) {
@@ -141,8 +140,8 @@ if(AUTH_ID) {
     $('[data-toggle="avatar-uploader"]').each(function(){
       const target = $(this).attr('data-target')
       $(target).change(function() {
-        fn = $(this).val()
-        filename = fn.match(/[^\\/]*$/)[0];
+        var fn = $(this).val()
+        var filename = fn.match(/[^\\/]*$/)[0];
         $(this).parent().children('p').html(filename)
       })
     })
