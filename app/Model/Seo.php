@@ -24,7 +24,12 @@ class Seo extends Model
         'Category',
         'Minitutor',
         'Join Minitutor',
-        'Login',
-        'Register',
+
+        'Auth Login',
+        'Auth Register',
+        'Auth Forget Password',
+        'Auth Reset Password',
+        'Auth Confirm Password',
+        'Auth Verification',
     ];
 }

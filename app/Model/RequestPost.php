@@ -3,9 +3,12 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Conner\Tagging\Taggable;
 
 class RequestPost extends Model
 {
+    use Taggable;
+
     protected $fillable = [
         'user_id',
         'requested_at',

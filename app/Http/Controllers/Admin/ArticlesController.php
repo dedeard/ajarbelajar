@@ -44,7 +44,8 @@ class ArticlesController extends Controller
             'description' => 'nullable|min:30|max:300',
             'category_id' => 'nullable|numeric|exists:categories,id',
             'body' => 'nullable',
-            'hero' => 'nullable|image|max:4000'
+            'hero' => 'nullable|image|max:4000',
+            'tags' => 'nullable|string|max:150',
         ]);
 
         if(isset($data['hero'])) {
@@ -74,6 +75,7 @@ class ArticlesController extends Controller
         }
 
         $article->update($data);
+        $article->retag($data['tags']);
         return redirect()->back()->withSuccess('Article berhasil di update.');
     }
 
@@ -149,6 +151,10 @@ class ArticlesController extends Controller
             'body' => $article->body,
             'user_id' => $article->user_id
         ]);
+
+        $tags = [];
+        foreach($article->tags as $tag) array_push($tags, $tag->name);
+        $post->retag($tags);
 
         $article->delete();
         return redirect()->route('admin.articles.edit', $post->id)->withSuccess('Artikel minitutor telah diterima.');

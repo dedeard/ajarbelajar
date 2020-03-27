@@ -61,6 +61,20 @@
           @enderror
         </div>
         <div class="form-group">
+          <label class="mb-3">Tag</label>
+          @php
+            $tags = [];
+            foreach($article->tags as $tag) array_push($tags, $tag->name);
+            $tags = implode(',', $tags);
+          @endphp
+          <input class="form-control @error('tags') is-invalid @enderror" name="tags" data-plugin="tagsinput" value="{{ $tags }}" />
+          @error('tags')
+            <div class="invalid-feedback">
+              <strong>{{ $message }}</strong>
+            </div>
+          @enderror
+        </div>
+        <div class="form-group">
           <label class="mb-3">Deskripsi</label>
           <textarea name="description"  rows="4" class="form-control @error('description') is-invalid @enderror">{{ $article->description }}</textarea>
           @error('description')

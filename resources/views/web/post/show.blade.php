@@ -1,9 +1,6 @@
 @extends('web.layouts.app')
 @section('title', $post->title)
 @section('content')
-@section('meta')
-<meta name="description" content="{{ $post->description }}">
-@endsection
 @component('web.post.components.layoutWrapper')
 
 @slot('post', $post)
@@ -29,6 +26,13 @@
     @endif
     {!! EditorjsHelp::compile($post->body) !!}
   </article>
+  <hr class="m-0">
+  <div class="card-block">
+    <div class="h4">Tag</div>
+    @foreach($post->tags as $tag)
+      <a href="{{ route('tags', $tag->slug) }}" class="btn btn-xs btn-primary">{{ $tag->name }}</a>
+    @endforeach
+  </div>
   <hr class="m-0">
   <div class="card-block">
     @component('web.post.components.review')

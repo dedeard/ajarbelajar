@@ -22,7 +22,8 @@
     <meta name="msapplication-TileColor" content="#677ae4">
     <meta name="msapplication-TileImage" content="{{ asset('icons/ms-icon-144x144.png') }}">
     <meta name="theme-color" content="#677ae4">
-    <title>@yield('title') - Ajarbelajar</title>
+    @yield('meta')
+    {!! SEOMeta::generate() !!}
     <link rel="stylesheet" href="{{ asset('remark/fonts/web-icons/web-icons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('remark/fonts/font-awesome/font-awesome.min.css') }}">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>

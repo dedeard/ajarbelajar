@@ -55,7 +55,8 @@ class ArticleController extends Controller
             'description' => 'nullable|min:30|max:300',
             'category_id' => 'nullable|numeric|exists:categories,id',
             'body' => 'nullable|min:30',
-            'hero' => 'nullable|image|max:4000'
+            'hero' => 'nullable|image|max:4000',
+            'tags' => 'nullable|string|max:150',
         ]);
 
         if(isset($data['hero'])) {
@@ -85,6 +86,7 @@ class ArticleController extends Controller
         }
 
         $article->update($data);
+        $article->retag($data['tags']);
         return redirect()->back()->withSuccess('Artikel berhasil di update.');
     }
 

@@ -33,7 +33,10 @@ class PostController extends Controller
 
         SEOMeta::setTitle($post->title);
         SEOMeta::setDescription($post->description);
-        if($post->category) SEOMeta::addKeyword([$post->category->name]);
+        $keywords = [];
+        if($post->category) array_push($keywords, $post->category->name);
+        foreach($post->tags as $tag) array_push($keywords, $tag->name);
+        SEOMeta::addKeyword($keywords);
 
         return view('web.post.show', ['post' => $post, 'review' => $rating ]);
     }

@@ -46,7 +46,8 @@ class VideosController extends Controller
             'description' => 'nullable|min:30|max:300',
             'category_id' => 'nullable|numeric|exists:categories,id',
             'body' => 'nullable',
-            'hero' => 'nullable|image|max:4000'
+            'hero' => 'nullable|image|max:4000',
+            'tags' => 'nullable|string|max:150',
         ]);
 
         if(isset($data['hero'])) {
@@ -76,6 +77,7 @@ class VideosController extends Controller
         }
 
         $video->update($data);
+        $video->retag($data['tags']);
         return redirect()->back()->withSuccess('Video berhasil di update.');
     }
 
@@ -153,6 +155,10 @@ class VideosController extends Controller
             'videos' => $video->videos,
             'user_id' => $video->user_id
         ]);
+
+        $tags = [];
+        foreach($video->tags as $tag) array_push($tags, $tag->name);
+        $post->retag($tags);
 
         $video->delete();
         return redirect()->route('admin.videos.edit', $post->id)->withSuccess('Artikel minitutor telah diterima.');

@@ -21,7 +21,7 @@ window.Ladda = require('ladda')
 require('owl.carousel2')
 require('select2')
 require('dropify')
-require('bootstrap-tagsinput')
+require('./vendors/tagsinput')
 require('jquery-raty-js')
 
  // Setup axios

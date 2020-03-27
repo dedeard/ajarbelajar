@@ -7,10 +7,11 @@ use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
 use Overtrue\LaravelFollow\Traits\CanBeFavorited;
 use Nagy\LaravelRating\Traits\Rate\Rateable;
+use Conner\Tagging\Taggable;
 
 class Post extends Model
 {
-    use HasSlug, CanBeFavorited, Rateable;
+    use HasSlug, CanBeFavorited, Rateable, Taggable;
 
     protected $fillable = [
         'user_id',

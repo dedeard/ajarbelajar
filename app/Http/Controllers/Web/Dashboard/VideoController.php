@@ -29,8 +29,8 @@ class VideoController extends Controller
     
     public function store(Request $request)
     {
-        
         $data = $request->validate([ 'title' => 'required|string|min:10|max:160', 'type' => 'video' ]);
+        $data['type'] = 'video';
         $video = new RequestPost($data);
         $request->user()->requestPosts()->save($video);
         return redirect()->route('dashboard.video.edit', $video->id);
@@ -51,7 +51,8 @@ class VideoController extends Controller
             'description' => 'nullable|min:30|max:300',
             'category_id' => 'nullable|numeric|exists:categories,id',
             'videos' => 'nullable|url|max:250',
-            'hero' => 'nullable|image|max:4000'
+            'hero' => 'nullable|image|max:4000',
+            'tags' => 'nullable|string|max:150',
         ]);
 
         if(isset($data['hero'])) {
@@ -81,6 +82,7 @@ class VideoController extends Controller
         }
 
         $video->update($data);
+        $video->retag($data['tags']);
         return redirect()->back()->withSuccess('Video berhasil di update.');
     }
 

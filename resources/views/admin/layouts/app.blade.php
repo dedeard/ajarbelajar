@@ -47,6 +47,7 @@
   <link rel="stylesheet" href="{{ asset('remark/vendor/bootstrap-sweetalert/sweetalert.min.css') }}">
   <link rel="stylesheet" href="{{ asset('remark/vendor/select2/select2.min.css') }}">
   <link rel="stylesheet" href="{{ asset('remark/vendor/dropify/dropify.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('remark/vendor/bootstrap-tagsinput/bootstrap-tagsinput.css') }}">
 
 
   <!-- Fonts -->
@@ -555,6 +556,7 @@
   <script src="{{ asset('remark/vendor/bootstrap-sweetalert/sweetalert.min.js') }}"></script>
   <script src="{{ asset('remark/vendor/dropify/dropify.min.js') }}"></script>
   <script src="{{ asset('remark/vendor/select2/select2.full.min.js') }}"></script>
+  <script src="{{ asset('remark/vendor/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"></script>
 
   <!-- Scripts -->
   <script src="{{ asset('remark/js/Component.js') }}"></script>
@@ -580,6 +582,7 @@
   <script src="{{ asset('remark/js/Plugin/ladda.js') }}"></script>
   <script src="{{ asset('remark/js/Plugin/dropify.js') }}"></script>
   <script src="{{ asset('remark/js/Plugin/select2.js') }}"></script>
+  <script src="{{ asset('remark/js/Plugin/bootstrap-tagsinput.js') }}"></script>
 
   
   <script>
