@@ -19,8 +19,13 @@ window.SIDEBAR_CLOSE = true
     </div>
   </div>
 </div>
-
 <div class="container-fluid">
+  @if(Auth::user()->email_verified_at)
+  <div class="alert alert-warning text-center">
+    Alamat Email Anda belum di Verifikasi. silahkan cek email anda kemudian klik link Verifikasinya, <br>
+    Jika anda belum menerima email Verifikasinya silahkan klik <a href="{{ route('verification.notice') }}" class="">Disini</a>
+  </div>
+  @endif
   <ul class="ab-dashboard__nav-quick nav-quick nav-quick-sm row">
 
     <li class="nav-item col">
