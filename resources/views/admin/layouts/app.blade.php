@@ -366,12 +366,14 @@
               </li>
               @endcan
 
+              @can('manage comment')
               <li class="site-menu-item @if(Route::is('admin.comment*')) active @endif">
                 <a href="{{ route('admin.comment.index') }}">
                   <i class="site-menu-icon wb-chat"></i>
                   <span class="site-menu-title">Komentar</span>
                 </a>
               </li>
+              @endcan
 
               @can('manage category')
               <li class="site-menu-item @if(Route::is('admin.categories*')) active @endif">
@@ -390,6 +392,21 @@
                 </a>
               </li>
               @endcan
+
+              @role('Super Admin')
+              <li class="site-menu-item @if(Route::is('admin.roles*')) active @endif">
+                <a href="{{ route('admin.roles.index') }}">
+                  <i class="site-menu-icon wb-lock"></i>
+                  <span class="site-menu-title">Roles</span>
+                </a>
+              </li>
+              <li class="site-menu-item @if(Route::is('admin.permissions*')) active @endif">
+                <a href="{{ route('admin.permissions.index') }}">
+                  <i class="site-menu-icon wb-lock"></i>
+                  <span class="site-menu-title">Permissions</span>
+                </a>
+              </li>
+              @endrole
 
               @can('manage minitutor')
               <li class="site-menu-item has-sub @if(Route::is('admin.minitutor*')) active open @endif">

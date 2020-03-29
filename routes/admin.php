@@ -10,6 +10,9 @@ Route::get('/dashboard', function(){
 
 Route::resource('users', 'UsersController');
 Route::resource('categories', 'CategoriesController')->except('show');
+Route::resource('permissions', 'PermissionsController')->except(['show', 'edit', 'update']);
+Route::get('roles/{id}/{permission_id}/{action}', 'RolesController@update')->name('roles.update');
+Route::resource('roles', 'RolesController')->except(['show', 'destroy', 'update']);
 
 Route::prefix('minitutor')->as('minitutor.')->group(function(){
   Route::get('/request', 'RequestMinitutorController@index')->name('request.index');
