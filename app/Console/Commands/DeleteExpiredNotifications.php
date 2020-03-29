@@ -40,5 +40,6 @@ class DeleteExpiredNotifications extends Command
     public function handle()
     {
         DB::table('notifications')->where('created_at', '<', Carbon::now()->subDays(30)->format('Y-m-d'))->delete();
+        $this->info('Clean notification running = ' . now());
     }
 }
