@@ -18,6 +18,10 @@
     var AUTH_ID = {{ Auth::user()->id }};
     var NOTIFICATION_COUNT = {{ Auth::user()->unreadNotifications()->count() }};
   </script>
+  @else
+  <script>
+    var AUTH_ID = null;
+  </script>
   @endauth
   <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('icons/apple-icon-57x57.png') }}">
   <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('icons/apple-icon-60x60.png') }}">
