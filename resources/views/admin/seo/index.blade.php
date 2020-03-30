@@ -5,6 +5,9 @@
 <div class="panel panel-bordered">
   <div class="panel-heading">
     <h3 class="panel-title">Seo</h3>
+    <div class="panel-actions">
+      <a href="{{ route('admin.seo.create') }}" class="btn btn-primary">CREATE</a>
+    </div>
   </div>
   <div class="panel-body">
     <table class="table table-bordered">

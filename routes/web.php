@@ -6,6 +6,8 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/article', 'HomeController@article')->name('article');
 Route::get('/video', 'HomeController@video')->name('video');
 Route::get('/tags/{slug}', 'TagsController@show')->name('tags');
+Route::get('/fax', 'HomeController@fax')->name('fax');
+Route::get('/constructive-feedback', 'HomeController@constructiveFeedback')->name('constructiveFeedback');
 
 Route::middleware(['auth'])->prefix('notifications')->as('notifications.')->group(function(){
     Route::get('/', 'NotificationsController@index')->name('index');

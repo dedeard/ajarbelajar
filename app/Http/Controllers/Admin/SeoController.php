@@ -30,6 +30,7 @@ class SeoController extends Controller
     {
         $seo = Seo::findOrFail($id);
         $data = $request->validate([
+            'name' => 'required|string|unique:seos,name,' . $seo->id,
             'title' => 'required|string',
             'description' => 'required|string',
             'keywords' => 'required|string',
@@ -42,5 +43,28 @@ class SeoController extends Controller
             return Seo::all();
         });
         return redirect()->back()->withSuccess('Data Seo berhasil di update.');
+    }
+
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required|string|unique:seos',
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'keywords' => 'required|string',
+            'robots' => 'required|string',
+            'distribution' => 'required|string',
+        ]);
+        Seo::create($data);
+        Cache::forget('seo');
+        Cache::rememberForever('seo', function () {
+            return Seo::all();
+        });
+        return redirect()->route('admin.seo.index');
+    }
+
+    public function create()
+    {
+        return view('admin.seo.create');
     }
 }

@@ -45,4 +45,16 @@ class HomeController extends Controller
         $data['videos'] = Post::videos()->orderBy('created_at', 'desc')->paginate(6);
         return view('web.video', $data);
     }
+
+    public function fax()
+    {
+        Seo::set('FAX');
+        return view('web.fax');
+    }
+
+    public function constructiveFeedback()
+    {
+        Seo::set('Constructive Feedback');
+        return view('web.constructive_feedback');
+    }
 }

@@ -14,16 +14,15 @@
           <div class="row">
             <div class="col-lg-6 py-30">
               <nav class="ab-footer__nav">
-                <a href="#" class="">Tentang Minitutor</a>
-                <a href="#" class="">Tentang Kontent</a>
-                <a href="#" class="">Feedback Konstruktif</a>
+                <!-- <a href="#" class="">Tentang Minitutor</a> -->
+                <a href="/constructive-feedback" class="">Tentang Konten dan Feedback Konstruktif</a>
               </nav>
             </div>
             <div class="col-lg-6 py-30">
               <nav class="ab-footer__nav">
-                <a href="#" class="">Tentang Kami</a>
-                <a href="#" class="">Visi & Misi</a>
-                <a href="#" class="">F.A.X</a>
+                <!-- <a href="#" class="">Tentang Kami</a> -->
+                <!-- <a href="/constructive-feedback" class="">Visi & Misi</a> -->
+                <a href="/fax" class="">F.A.X</a>
               </nav>
             </div>
           </div>

@@ -13,6 +13,7 @@ Route::resource('categories', 'CategoriesController')->except('show');
 Route::resource('permissions', 'PermissionsController')->except(['show', 'edit', 'update']);
 Route::get('roles/{id}/{permission_id}/{action}', 'RolesController@update')->name('roles.update');
 Route::resource('roles', 'RolesController')->except(['show', 'destroy', 'update']);
+Route::resource('seo', 'SeoController')->except(['show']);
 
 Route::prefix('minitutor')->as('minitutor.')->group(function(){
   Route::get('/request', 'RequestMinitutorController@index')->name('request.index');
@@ -65,11 +66,6 @@ Route::prefix('videos')->as('videos.')->group(function(){
   route::get('/{id}/make-draf', 'VideosController@makeDraf')->name('make.draf');
 });
 
-Route::prefix('seo')->as('seo.')->group(function(){
-  route::get('/', 'SeoController@index')->name('index');
-  route::get('/{page}', 'SeoController@edit')->name('edit');
-  route::put('/{page}', 'SeoController@update')->name('update');
-});
 
 Route::prefix('comment')->as('comment.')->group(function(){
   route::get('/', 'CommentController@index')->name('index');
