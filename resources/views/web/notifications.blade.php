@@ -30,6 +30,19 @@
                   $title = "Postingan baru";
                   $message = "MiniTutor " . $post->user->name() . " Telah membagikan " . $post->type . " Baru.";
               break;
+              case "App\Notifications\ApprovePost":
+                  $post = App\Model\Post::findOrFail($notification->data['id']);
+                  $title = "Postingan di terima";
+                  $message = 'Postingan anda telah di terima "'. $post->title .'"';
+              break;
+              case "App\Notifications\RequestMinitutorAccepted":
+                  $title = "MiniTutor diterima";
+                  $message = 'Permintaan kamu untuk menjadi minitutor telah diterima';
+              break;
+              case "App\Notifications\RequestMinitutorRejected":
+                  $title = "MiniTutor ditolak";
+                  $message = 'Permintaan kamu untuk menjadi minitutor tidak diterima';
+              break;
             }
           ?>
           <a class="list-group-item @if($notification->read_at) bg-white @endif" href="{{ route('notifications.read', $notification->id) }}">

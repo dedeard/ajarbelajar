@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Model\Minitutor;
 use App\Model\RequestMinitutor;
+use App\Notifications\RequestMinitutorAccepted;
+use App\Notifications\RequestMinitutorRejected;
 
 class RequestMinitutorController extends Controller
 {
@@ -26,7 +28,9 @@ class RequestMinitutorController extends Controller
 
     public function reject($id)
     {
-        RequestMinitutor::findOrFail($id)->delete();
+        $data = RequestMinitutor::findOrFail($id);
+        $data->user->notify(new RequestMinitutorRejected);
+        $data->delete();
         return redirect()->route('admin.minitutor.request.index')->withSuccess('Permintaan telah di ditolak.');
     }
 
@@ -42,6 +46,7 @@ class RequestMinitutorController extends Controller
 
         $requestDataCopy['active'] = true;
         Minitutor::create($requestDataCopy);
+        $requestData->user->notify(new RequestMinitutorAccepted);
         $requestData->delete();
         return redirect()->route('admin.minitutor.request.index')->withSuccess('Permintaan telah di terima.');
     }

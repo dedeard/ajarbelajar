@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Jobs\CreateNewPostNotificationJob;
 use App\Model\Post;
+use App\Notifications\ApprovePost;
 
 class PostObserver
 {
@@ -15,7 +16,7 @@ class PostObserver
      */
     public function created(Post $post)
     {
-        //
+        $post->user->notify(new ApprovePost($post));
     }
 
     /**

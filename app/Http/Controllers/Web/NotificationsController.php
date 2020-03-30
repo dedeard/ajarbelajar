@@ -29,6 +29,16 @@ class NotificationsController extends Controller
                 $post = Post::findOrFail($notification->data['id']);
                 return redirect()->route('post.show', $post->slug);
             break;
+            case "App\Notifications\ApprovePost":
+                $post = Post::findOrFail($notification->data['id']);
+                return redirect()->route('dashboard.accepted.index');
+            break;
+            case "App\Notifications\RequestMinitutorAccepted":
+                return redirect()->route('dashboard.index');
+            break;
+            case "App\Notifications\RequestMinitutorRejected":
+                return redirect()->route('join.minitutor.create');
+            break;
         }
     }
 
