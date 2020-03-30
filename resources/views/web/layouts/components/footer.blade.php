@@ -14,14 +14,14 @@
           <div class="row">
             <div class="col-lg-6 py-30">
               <nav class="ab-footer__nav">
-                <a href="#" class="">Tenatang Minitutor</a>
-                <a href="#" class="">Tenatang Kontent</a>
+                <a href="#" class="">Tentang Minitutor</a>
+                <a href="#" class="">Tentang Kontent</a>
                 <a href="#" class="">Feedback Konstruktif</a>
               </nav>
             </div>
             <div class="col-lg-6 py-30">
               <nav class="ab-footer__nav">
-                <a href="#" class="">Tenatang Kami</a>
+                <a href="#" class="">Tentang Kami</a>
                 <a href="#" class="">Visi & Misi</a>
                 <a href="#" class="">F.A.X</a>
               </nav>
@@ -31,18 +31,18 @@
 
         <div class="col-lg-3 py-30">
           <nav class="ab-footer__socials">
-            <a href="#" class="btn btn-icon social-instagram">
+            <a href="https://www.instagram.com/ajarbelajar" target="_blank" class="btn btn-icon social-instagram">
               <i class="icon fa-instagram"></i>
             </a>
-            <a href="#" class="btn btn-icon social-youtube">
+            <a href="https://www.youtube.com/channel/UC_RqkZkVSmRIKNnj_5QPv5Q" target="_blank" class="btn btn-icon social-youtube">
               <i class="icon fa-youtube"></i>
             </a>
-            <a href="#" class="btn btn-icon social-facebook">
+            <!-- <a href="#" target="_blank" class="btn btn-icon social-facebook">
               <i class="icon fa-facebook"></i>
             </a>
-            <a href="#" class="btn btn-icon social-twitter">
+            <a href="#" target="_blank" class="btn btn-icon social-twitter">
               <i class="icon fa-twitter"></i>
-            </a>
+            </a> -->
           </nav>
         </div>
 
