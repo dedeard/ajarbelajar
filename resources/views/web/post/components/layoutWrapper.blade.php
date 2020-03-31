@@ -1,6 +1,3 @@
-<script>
-window.SIDEBAR_CLOSE = true
-</script>
 <div class="container py-15">
   <div class="row">
     <div class="col-lg-8">

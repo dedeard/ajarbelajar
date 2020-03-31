@@ -30,7 +30,7 @@
     @csrf
     <h3 class="mb-35">Tulis Komentar</h3>
     <div class="form-group">
-      <textarea class="form-control" name="body" rows="5" placeholder="Comment here"></textarea>
+      <textarea class="form-control" name="body" rows="5" placeholder="Komentar..."></textarea>
     </div>
     <div class="form-group">
       <button type="submit" class="btn btn-primary ladda-button" data-style="slide-down">

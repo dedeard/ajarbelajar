@@ -1,7 +1,8 @@
-<form action="{{ route('post.review.store', $post->id) }}" method="post">
+<form action="{{ route('post.review.store', $post->id) }}" method="post" id="review">
   @csrf
-  <h3 class="mb-35">Beri Nilai</h3>
+  <h3 class="mb-35">Beri Ulasan</h3>
   <div class="form-group">
+    <label>Jumlah bintang</label>
     <select name="rating" class="form-control">
       <option value="0" disabled @if(!$review) selected @endif>0</option>
       <option value="1" @if($review && $review->rating == 1) selected @endif>1</option>
@@ -12,6 +13,7 @@
     </select>
   </div>
   <div class="form-group">
+    <label>Pesan</label>
     <textarea class="form-control" name="body" placeholder="Tuliskan pesan untuk MiniTutor">@if($review) {{$review->body}} @endif</textarea>
   </div>
   <div class="form-group">

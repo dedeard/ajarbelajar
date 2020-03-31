@@ -70,6 +70,6 @@ class PostController extends Controller
                 'rating' => $data['rating'],
             ]);
         }
-        return redirect()->back()->withSuccess('Terima kasih atas review kamu.');
+        return redirect()->back()->withSuccess('Terima kasih atas ulasan kamu.');
     }
 }
