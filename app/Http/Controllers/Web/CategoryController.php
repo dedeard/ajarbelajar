@@ -13,13 +13,13 @@ class CategoryController extends Controller
     public function index()
     {
         Seo::set('Category');
-        $category = Category::withCount([
+        $category = Category::has('posts')->withCount([
             'posts as article_count' => function($q){
                 return $q->where('type', 'article')->where('draf', false);
             },
             'posts as video_count' => function($q){
                 return $q->where('type', 'video')->where('draf', false);
-            },
+            }
         ])->paginate(12);
         return view('web.category.index', ['categories' => $category]);
     }
