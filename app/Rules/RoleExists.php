@@ -36,6 +36,6 @@ class RoleExists implements Rule
      */
     public function message()
     {
-        return 'Role not exists.';
+        return 'Role tidak tersedia.';
     }
 }
