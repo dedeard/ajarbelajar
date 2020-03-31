@@ -33,6 +33,7 @@
         </div>
         @endforeach
       </div>
+      {{ $categories->links() }}
     </div>
   </div>
 </div>

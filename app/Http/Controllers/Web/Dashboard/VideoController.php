@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
-use App\Helpers\Category;
+use App\Model\Category;
 use App\Model\RequestPost;
 
 class VideoController extends Controller
@@ -39,8 +39,7 @@ class VideoController extends Controller
     public function edit(Request $request, $id)
     {
         $video = $this->getVideo($request->user(), $id);
-        $categories = Category::all();
-        return view('web.dashboard.video.edit', ['video' => $video, 'categories' => $categories]);
+        return view('web.dashboard.video.edit', ['video' => $video]);
     }
 
     public function update(Request $request, $id)
@@ -49,7 +48,7 @@ class VideoController extends Controller
         $data = $request->validate([
             'title' => 'required|string|min:10|max:160',
             'description' => 'nullable|min:30|max:300',
-            'category_id' => 'nullable|numeric|exists:categories,id',
+            'category' => 'nullable|string|min:3|max:25',
             'videos' => 'nullable|url|max:250',
             'hero' => 'nullable|image|max:4000',
             'tags' => 'nullable|string|max:150',
@@ -79,6 +78,21 @@ class VideoController extends Controller
             $data['hero'] = $name;
         } else {
             unset($data['hero']);
+        }
+
+        if(isset($data['category'])){
+            $category = Category::where('slug', Str::slug($data['category'], '-'));
+            if($category->exists()) {
+                $category = $category->first();
+            } else {
+                $category = Category::create([
+                    'name' => $data['category'],
+                    'slug' => Str::slug($data['category'], '-')
+                ]);
+            }
+            $data['category_id'] = $category->id;
+        } else {
+            $data['category_id'] = null;
         }
 
         $video->update($data);

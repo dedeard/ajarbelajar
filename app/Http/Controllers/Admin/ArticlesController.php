@@ -42,7 +42,7 @@ class ArticlesController extends Controller
         $data = $request->validate([
             'title' => 'required|string|min:10|max:160',
             'description' => 'nullable|min:30|max:300',
-            'category_id' => 'nullable|numeric|exists:categories,id',
+            'category' => 'nullable|string|min:3|max:25',
             'body' => 'nullable',
             'hero' => 'nullable|image|max:4000',
             'tags' => 'nullable|string|max:150',
@@ -72,6 +72,21 @@ class ArticlesController extends Controller
             $data['hero'] = $name;
         } else {
             unset($data['hero']);
+        }
+
+        if(isset($data['category'])){
+            $category = Category::where('slug', Str::slug($data['category'], '-'));
+            if($category->exists()) {
+                $category = $category->first();
+            } else {
+                $category = Category::create([
+                    'name' => $data['category'],
+                    'slug' => Str::slug($data['category'], '-')
+                ]);
+            }
+            $data['category_id'] = $category->id;
+        } else {
+            $data['category_id'] = null;
         }
 
         $article->update($data);

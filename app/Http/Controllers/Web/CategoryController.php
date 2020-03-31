@@ -20,7 +20,7 @@ class CategoryController extends Controller
             'posts as video_count' => function($q){
                 return $q->where('type', 'video')->where('draf', false);
             },
-        ])->get();
+        ])->paginate(12);
         return view('web.category.index', ['categories' => $category]);
     }
 

@@ -49,15 +49,8 @@ window.SIDEBAR_CLOSE = true
       <div class="panel-body">
         <div class="form-group @error('last_education') has-invalid @enderror">
           <label class="mb-3">Kategori</label>
-          <select name="category_id"
-            class="select2-basic d-block form-control @error('category_id') is-invalid @enderror">
-            <option value="" disabled @if(!$video->category_id) selected @endif>Kategori</option>
-            @foreach($categories as $category)
-            <option value="{{ $category->id }}" @if($category->id === $video->category_id) selected
-              @endif>{{ $category->name }}</option>
-            @endforeach
-          </select>
-          @error('category_id')
+          <input type="text" name="category" class="form-control @error('category') is-invalid @enderror" value="{{ $video->category ? $video->category->name : '' }}">
+          @error('category')
           <div class="invalid-feedback">
             <strong>{{ $message }}</strong>
           </div>

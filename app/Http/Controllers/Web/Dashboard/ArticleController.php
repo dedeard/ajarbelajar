@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Web\Dashboard;
 
-use App\Helpers\Category;
 use App\Http\Controllers\Controller;
+use App\Model\Category;
 use App\Model\RequestPost;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -39,8 +39,7 @@ class ArticleController extends Controller
                             ->whereNull('requested_at')
                             ->where('type', 'article')
                             ->findOrFail($id);
-        $categories = Category::all();
-        return view('web.dashboard.article.edit', ['article' => $article, 'categories' => $categories]);
+        return view('web.dashboard.article.edit', ['article' => $article]);
     }
 
     public function update(Request $request, $id)
@@ -53,7 +52,7 @@ class ArticleController extends Controller
         $data = $request->validate([
             'title' => 'required|string|min:10|max:160',
             'description' => 'nullable|min:30|max:300',
-            'category_id' => 'nullable|numeric|exists:categories,id',
+            'category' => 'nullable|string|min:3|max:25',
             'body' => 'nullable|min:30',
             'hero' => 'nullable|image|max:4000',
             'tags' => 'nullable|string|max:150',
@@ -83,6 +82,21 @@ class ArticleController extends Controller
             $data['hero'] = $name;
         } else {
             unset($data['hero']);
+        }
+
+        if(isset($data['category'])){
+            $category = Category::where('slug', Str::slug($data['category'], '-'));
+            if($category->exists()) {
+                $category = $category->first();
+            } else {
+                $category = Category::create([
+                    'name' => $data['category'],
+                    'slug' => Str::slug($data['category'], '-')
+                ]);
+            }
+            $data['category_id'] = $category->id;
+        } else {
+            $data['category_id'] = null;
         }
 
         $article->update($data);

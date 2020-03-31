@@ -37,15 +37,10 @@
       </div>
       <hr class="m-0">
       <div class="panel-body">
-        <div class="form-group @error('last_education') has-invalid @enderror">
+        <div class="form-group">
           <label class="mb-3">Kategori</label>
-          <select name="category_id" data-plugin="select2" class="d-block form-control @error('category_id') is-invalid @enderror">
-            <option value="" disabled @if(!$article->category_id) selected @endif>Kategori</option>
-            @foreach($categories as $category)
-              <option value="{{ $category->id }}" @if($category->id === $article->category_id)  selected  @endif>{{ $category->name }}</option>
-            @endforeach
-          </select>
-          @error('category_id')
+          <input type="text" name="category" class="form-control @error('category') is-invalid @enderror" value="{{ $article->category ? $article->category->name : '' }}">
+          @error('category')
             <div class="invalid-feedback">
               <strong>{{ $message }}</strong>
             </div>
