@@ -62,6 +62,11 @@
                 Dasbor Admin
               </a>
             @endrole
+            <a href="{{ route('logout') }}" class="list-group-item" onclick="event.preventDefault(); $('#form-logout-sidebar').submit();">
+              <i class="icon wb-power"></i>
+              Keluar
+              <form action="{{ route('logout') }}" class="d-none" method="post" id="form-logout-sidebar">@csrf </form>
+            </a>
             @else
             <a class="list-group-item" href="{{ route('register') }}">
               <i class="icon wb-user-circle"></i>

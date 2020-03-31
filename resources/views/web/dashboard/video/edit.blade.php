@@ -1,13 +1,9 @@
 @extends('web.layouts.app')
-@section('title', 'Edit vidio')
-@section('meta')
+@section('content')
+@component('web.dashboard.components.layoutWrapper')
 <script>
 window.SIDEBAR_CLOSE = true
 </script>
-@endsection
-@section('content')
-@component('web.dashboard.components.layoutWrapper')
-
 <form class="row" method="POST" action="{{ route('dashboard.video.update', $video->id) }}"
   enctype="multipart/form-data">
   @csrf
@@ -105,6 +101,8 @@ window.SIDEBAR_CLOSE = true
           <button type="submit" class="btn btn-primary ladda-button" data-style="slide-down">
             <span class="ladda-label">Simpan</span>
           </button>
+          <a href="{{ route('dashboard.requested.create', $video->id) }}" class="btn btn-success">Publikasikan</a>
+
         </div>
       </div>
     </div>

@@ -1,7 +1,3 @@
-<script>
-window.SIDEBAR_CLOSE = true
-</script>
-
 <div class="container-fluid mt-15 ">
   <div class="card card-inverse card-shadow cover white">
     <div class="cover-background" style="background-image: url({{asset('img/background/snow.jpg')}})">

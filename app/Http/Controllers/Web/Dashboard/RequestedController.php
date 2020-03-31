@@ -28,9 +28,9 @@ class RequestedController extends Controller
         $article->save();
 
         if($article->type === 'article'){
-            return redirect()->back()->withSuccess('Terimakasih.. Artikel anda segera akan kami tinjau untuk di publikasikan.');
+            return redirect()->route('dashboard.requested.index')->withSuccess('Terimakasih.. Artikel anda segera akan kami tinjau untuk di publikasikan.');
         } else {
-            return redirect()->back()->withSuccess('Terimakasih.. Video anda segera akan kami tinjau untuk di publikasikan.');
+            return redirect()->route('dashboard.requested.index')->withSuccess('Terimakasih.. Video anda segera akan kami tinjau untuk di publikasikan.');
         }
     }
 }

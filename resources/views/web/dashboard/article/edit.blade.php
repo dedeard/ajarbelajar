@@ -1,13 +1,9 @@
 @extends('web.layouts.app')
-@section('title', 'Edit Artikel')
-@section('meta')
+@section('content')
+@component('web.dashboard.components.layoutWrapper')
 <script>
 window.SIDEBAR_CLOSE = true
 </script>
-@endsection
-@section('content')
-@component('web.dashboard.components.layoutWrapper')
-
 <form class="row" method="POST" action="{{ route('dashboard.article.update', $article->id) }}"
   enctype="multipart/form-data">
   @csrf
@@ -99,10 +95,11 @@ window.SIDEBAR_CLOSE = true
           <button type="submit" class="btn btn-primary ladda-button" data-style="slide-down">
             <span class="ladda-label">Simpan</span>
           </button>
+          <a href="{{ route('dashboard.requested.create', $article->id) }}" class="btn btn-success">Publikasikan</a>
 
           <!-- Button trigger modal -->
           <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-preview">
-            Demo
+            Preview
           </button>
 
           <!-- Modal -->
