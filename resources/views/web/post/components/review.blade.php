@@ -1,6 +1,6 @@
 <form action="{{ route('post.review.store', $post->id) }}" method="post" id="review">
   @csrf
-  <h3 class="mb-35">Beri Ulasan</h3>
+  <h3 class="mb-35">Feedback kontruktif</h3>
   <div class="form-group">
     <label>Jumlah bintang</label>
     <select name="rating" class="form-control">
