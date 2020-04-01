@@ -11,7 +11,6 @@ class AcceptedController extends Controller
 {
     public function index(Request $request)
     {
-        Seo::set('Dashboard Accepted');
         $accepteds = Post::postType($request->user()->posts(), null, null)->paginate(12);
         return view('web.dashboard.accepted.index', ['accepteds' => $accepteds]);
     }

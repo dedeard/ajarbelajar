@@ -18,7 +18,7 @@ class RolesTableSeeder extends Seeder
         Permission::create(['name' => 'manage user']);
         Permission::create(['name' => 'manage minitutor']);
         Permission::create(['name' => 'manage post']);
-        Permission::create(['name' => 'manage role']);
+        Permission::create(['name' => 'manage comment']);
         Permission::create(['name' => 'manage category']);
         Permission::create(['name' => 'manage seo']);
 

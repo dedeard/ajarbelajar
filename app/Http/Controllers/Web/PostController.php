@@ -9,6 +9,8 @@ use App\Model\PostReview;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Artesaos\SEOTools\Facades\SEOMeta;
+use Artesaos\SEOTools\Facades\JsonLd;
+use Artesaos\SEOTools\Facades\OpenGraph;
 
 class PostController extends Controller
 {
@@ -31,12 +33,27 @@ class PostController extends Controller
             $rating = ($rating->exists()) ? $rating->first() : null; 
         }
 
+        $keywords = [];
+        foreach($post->tags as $tag) array_push($keywords, $tag->name);
+
         SEOMeta::setTitle($post->title);
         SEOMeta::setDescription($post->description);
-        $keywords = [];
-        if($post->category) array_push($keywords, $post->category->name);
-        foreach($post->tags as $tag) array_push($keywords, $tag->name);
+        SEOMeta::addMeta('article:published_time', $post->created_at->toW3CString(), 'property');
+        if($post->category) SEOMeta::addMeta('article:section', $post->category->name, 'property');
         SEOMeta::addKeyword($keywords);
+
+        OpenGraph::setDescription($post->description);
+        OpenGraph::setTitle($post->title);
+        OpenGraph::setUrl(url()->current());
+        OpenGraph::addProperty('type', 'article');
+        OpenGraph::addProperty('locale', 'id-ID');
+
+        OpenGraph::addImage($post->heroUrl());
+        
+        JsonLd::setTitle($post->title);
+        JsonLd::setDescription($post->description);
+        JsonLd::setType('Article');
+        // JsonLd::addImage($post->images->list('url'));
 
         return view('web.post.show', ['post' => $post, 'review' => $rating ]);
     }

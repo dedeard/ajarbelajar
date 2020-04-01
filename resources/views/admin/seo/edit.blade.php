@@ -12,9 +12,9 @@
       @method('put')
 
       <div class="form-group">
-        <label for="name">name</label>
-        <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ $seo->name }}">
-        @error('name')
+        <label for="path">Path</label>
+        <input type="text" name="path" id="path" class="form-control @error('path') is-invalid @enderror" value="{{ $seo->path }}">
+        @error('path')
           <span class="invalid-feedback font-weight-bold">{{ $message }}</span>
         @enderror
       </div>
@@ -36,9 +36,9 @@
       </div>
 
       <div class="form-group">
-        <label for="keywords">Kata kunci</label>
-        <input type="text" name="keywords" id="keywords" class="form-control @error('keywords') is-invalid @enderror" value="{{ $seo->keywords }}">
-        @error('keywords')
+        <label for="type">Type</label>
+        <input type="text" name="type" id="type" class="form-control @error('type') is-invalid @enderror" value="{{ $seo->type }}">
+        @error('type')
           <span class="invalid-feedback font-weight-bold">{{ $message }}</span>
         @enderror
       </div>
@@ -47,14 +47,6 @@
         <label for="robots">robots</label>
         <input type="text" name="robots" id="robots" class="form-control @error('robots') is-invalid @enderror" value="{{ $seo->robots }}">
         @error('robots')
-          <span class="invalid-feedback font-weight-bold">{{ $message }}</span>
-        @enderror
-      </div>
-
-      <div class="form-group">
-        <label for="distribution">distribution</label>
-        <input type="text" name="distribution" id="distribution" class="form-control @error('distribution') is-invalid @enderror" value="{{ $seo->distribution }}">
-        @error('distribution')
           <span class="invalid-feedback font-weight-bold">{{ $message }}</span>
         @enderror
       </div>

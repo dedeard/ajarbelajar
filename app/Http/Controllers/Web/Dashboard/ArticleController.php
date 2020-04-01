@@ -17,7 +17,6 @@ class ArticleController extends Controller
     const driver = 'public';
     public function index(Request $request)
     {
-        Seo::set('Dashboard Article');
         $articles = $request->user()->requestPosts()
                                 ->whereNull('requested_at')
                                 ->where('type', 'article')

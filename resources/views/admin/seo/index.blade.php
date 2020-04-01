@@ -13,14 +13,21 @@
     <table class="table table-bordered">
       <tr>
         <th>Id</th>
-        <th>Halaman</th>
+        <th>Path</th>
         <th class="text-center">Aksi</th>
       </tr>
       @foreach($seos as $seo)
         <tr>
           <td>{{ $seo->id }}</td>
-          <td>{{ $seo->name }}</td>
-          <td class="text-center"><a href="{{ route('admin.seo.edit', $seo->id) }}">Edit</a></td>
+          <td>{{ $seo->path }}</td>
+          <td class="text-center">
+            <a href="{{ route('admin.seo.edit', $seo->id) }}">Edit</a> | 
+            <a href="{{ route('admin.seo.destroy', $seo->id) }}" delete-confirm data-target="#form-delete-seo-{{$seo->id}}">Hapus</a>
+            <form id="form-delete-seo-{{$seo->id}}" action="{{ route('admin.seo.destroy', $seo->id) }}" method="POST" class="d-none">
+              @csrf
+              @method('delete')
+            </form>
+          </td>
         </tr>
       @endforeach
     </table>

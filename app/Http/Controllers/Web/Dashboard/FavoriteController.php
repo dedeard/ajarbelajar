@@ -12,7 +12,6 @@ class FavoriteController extends Controller
 {
     public function index(Request $request)
     {
-        Seo::set('Dashboard Favorite');
         $posts = $request->user()->favorites(Post::class)->where('draf', 0)->withCount(['comments' => function($query){
             return $query->where('approved', true);
         }, 'views'])->paginate(4);

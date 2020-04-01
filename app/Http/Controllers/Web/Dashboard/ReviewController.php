@@ -10,7 +10,6 @@ class ReviewController extends Controller
 {
     public function index(Request $request)
     {
-        Seo::set('Dashboard Review');
         $data = [];
         $reviews = $request->user()->postReviews()->select(['*'])->with(['post' => function($q){
             $q->select(['id', 'title', 'slug', 'created_at', 'updated_at']);

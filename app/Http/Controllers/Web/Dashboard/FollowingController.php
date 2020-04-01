@@ -11,7 +11,6 @@ class FollowingController extends Controller
 {
     public function index(Request $request)
     {
-        Seo::set('Dashboard Following');
         $followings = $request->user()->subscriptions(Minitutor::class)->paginate(12);
         return view('web.dashboard.following.index', ['minitutors' => $followings]);
     }

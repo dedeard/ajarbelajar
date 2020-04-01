@@ -16,7 +16,6 @@ class JoinMinitutorController extends Controller
 
     public function index()
     {
-        Seo::set('Join Minitutor');
         $data = [
             'user_count' => User::count(),
             'minitutor_count' => Minitutor::count(),
@@ -27,7 +26,6 @@ class JoinMinitutorController extends Controller
 
     public function create(Request $request)
     {
-        Seo::set('Join Minitutor Create');
         $user = $request->user();
         if($user->requestMinitutor) {
             return redirect()->route('join.minitutor.edit');
@@ -37,7 +35,6 @@ class JoinMinitutorController extends Controller
 
     public function store(Request $request)
     {
-        Seo::set('Join Minitutor Edit');
         $user = $request->user();
         $data = $request->validate([
             'last_education' => 'required|string|max:50',

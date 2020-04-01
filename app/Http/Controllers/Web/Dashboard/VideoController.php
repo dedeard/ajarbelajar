@@ -25,7 +25,6 @@ class VideoController extends Controller
 
     public function index(Request $request)
     {
-        Seo::set('Dashboard Video');
         $videos = $request->user()->requestPosts()->whereNull('requested_at')->where('type', 'video')->orderBy('updated_at', 'desc')->paginate(12);
         return view('web.dashboard.video.index', ['videos' => $videos]);
     }

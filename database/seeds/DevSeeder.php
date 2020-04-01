@@ -23,7 +23,6 @@ class DevSeeder extends Seeder
         $this->call([RolesTableSeeder::class]);
         $this->call([UsersTableSeeder::class]);
         $this->call([CategoriesTableSeeder::class]);
-        $this->call([SeoTableSeeder::class]);
 
         $faker = Faker::create('id_ID');
 

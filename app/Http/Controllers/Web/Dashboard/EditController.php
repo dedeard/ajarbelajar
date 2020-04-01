@@ -15,8 +15,6 @@ class EditController extends Controller
 {
     public function index()
     {
-        
-        Seo::set('Dashboard Edit Profile');
         return view('web.dashboard.edit.index');
     }
     public function update(Request $request)

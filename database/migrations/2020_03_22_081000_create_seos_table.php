@@ -15,12 +15,11 @@ class CreateSeosTable extends Migration
     {
         Schema::create('seos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
-            $table->string('title')->default('Ajarbelajar');
-            $table->text('description')->nullable()->default(null);
-            $table->string('keywords')->default('ajarbelajar,ajarbelajar.com,minitutor,artikel,videos,belajar,berbagi,berkontribusi');
-            $table->string('robots')->default('index,follow');
-            $table->string('distribution')->default('web');
+            $table->string('path')->unique();
+            $table->string('title')->nullable();
+            $table->text('description')->nullable();
+            $table->string('robots')->nullable();
+            $table->string('type')->nullable();
         });
     }
 

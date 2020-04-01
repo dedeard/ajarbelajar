@@ -9,6 +9,9 @@
 <head>
   @include('web.layouts.components.head')
   {!! SEOMeta::generate() !!}
+  {!! OpenGraph::generate() !!}
+  {!! Twitter::generate() !!}
+  {!! JsonLd::generate() !!}
   @yield('style')
 </head>
 

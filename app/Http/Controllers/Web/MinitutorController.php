@@ -12,7 +12,6 @@ class MinitutorController extends Controller
 {
     public function index()
     {
-        Seo::set('Minitutor');
         $minitutors = Minitutor::where('active', 1)->paginate(20);
         return view('web.minitutor.index', ['minitutors' => $minitutors]);
     }

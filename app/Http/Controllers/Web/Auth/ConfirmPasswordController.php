@@ -37,6 +37,5 @@ class ConfirmPasswordController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        Seo::set('Auth Confirm Password');
     }
 }

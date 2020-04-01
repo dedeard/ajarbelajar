@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Helpers\Seo;
 use App\Http\Controllers\Controller;
 use App\Model\Post;
 use Illuminate\Http\Request;
@@ -11,8 +10,6 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        Seo::set('Home');
-
         if ($request->input('search')) {
             $search = '%' . $request->input('search') . '%';
             $posts = Post::posts()->where('title', 'like', $search)
@@ -32,7 +29,6 @@ class HomeController extends Controller
 
     public function article()
     {
-        Seo::set('Article');
         $data = [];
         $data['articles'] = Post::articles()->orderBy('created_at', 'desc')->paginate(6);
         return view('web.article', $data);
@@ -40,7 +36,6 @@ class HomeController extends Controller
 
     public function video()
     {
-        Seo::set('Video');
         $data = [];
         $data['videos'] = Post::videos()->orderBy('created_at', 'desc')->paginate(6);
         return view('web.video', $data);
@@ -48,13 +43,11 @@ class HomeController extends Controller
 
     public function fax()
     {
-        Seo::set('FAX');
         return view('web.fax');
     }
 
     public function constructiveFeedback()
     {
-        Seo::set('Constructive Feedback');
         return view('web.constructive_feedback');
     }
 }

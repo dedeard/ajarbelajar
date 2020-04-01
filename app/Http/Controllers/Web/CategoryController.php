@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Helpers\Seo;
 use App\Http\Controllers\Controller;
 use App\Model\Category;
 use App\Model\Post;
@@ -12,7 +11,6 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        Seo::set('Category');
         $category = Category::has('posts')->withCount([
             'posts as article_count' => function($q){
                 return $q->where('type', 'article')->where('draf', false);
@@ -31,7 +29,7 @@ class CategoryController extends Controller
         $category = $query->first();
         $data['posts'] = Post::postType($category->posts(), null, false)->paginate(6);
         SEOTools::setTitle($category->name);
-        SEOTools::setDescription($category->description);
+        SEOTools::setRobots('noindex');
         return view('web.category.show', $data);
     }
 }

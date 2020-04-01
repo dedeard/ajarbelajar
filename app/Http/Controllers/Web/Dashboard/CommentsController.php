@@ -10,7 +10,6 @@ class CommentsController extends Controller
 {
     public function index(Request $request)
     {
-        Seo::set('Dashboard Comment');
         $data = [];
         $comments = $request->user()->postComments();
         $data['comments'] = $comments->select(['*'])->where('approved', 1)->with(['post' => function($q){
