@@ -1,5 +1,4 @@
 @extends('web.layouts.app')
-@section('title', $post->title)
 @section('content')
 @component('web.post.components.layoutWrapper')
 

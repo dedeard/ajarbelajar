@@ -5,7 +5,7 @@
     </div>
     <div class="card-block">
       <div class="card-content">
-        <h3 class="card-title">{{ $post->title . $post->title }}</h3>
+        <h3 class="card-title">{{ $post->title }}</h3>
         <p class="card-text">
           <span class="badge badge-primary rounded-0 text-uppercase">{{ $post->type }}</span>
           <small>
