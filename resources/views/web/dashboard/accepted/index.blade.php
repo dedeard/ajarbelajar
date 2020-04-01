@@ -1,11 +1,10 @@
 @extends('web.layouts.app')
-@section('title', 'Postingan terbit')
 @section('content')
 @component('web.dashboard.components.layoutWrapper')
 
 <div class="panel bg-light panel-bordered">
   <div class="panel-heading bg-white">
-    <h3 class="panel-title">Postingan terbit</h3>
+    <h3 class="panel-title">Artikel dan Video kamu yang telah diterima.</h3>
   </div>
   <div class="panel-body">
     @if($accepteds->total())
@@ -25,7 +24,7 @@
     </div>
     @else
     <div class="text-center py-100">
-      <h3 class="text-muted">Belum ada Permintaan Satupun.</h3>
+      <h3 class="text-muted">Belum ada Artikel atau Video yang diterima.</h3>
     </div>
     @endif
   </div>

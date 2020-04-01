@@ -9,7 +9,7 @@ import Marker from '@editorjs/marker'
 import CodeTool from '@editorjs/code'
 import Delimiter from '@editorjs/delimiter'
 import InlineCode from '@editorjs/inline-code'
-// import LinkTool from '@editorjs/link'
+import LinkTool from '@editorjs/link'
 import Embed from '@editorjs/embed'
 import Table from '@editorjs/table'
 
@@ -67,7 +67,7 @@ const editor = new EditorJS({
       class: InlineCode,
       shortcut: 'CMD+SHIFT+C'
     },
-    // linkTool: LinkTool,
+    linkTool: LinkTool,
     embed: Embed,
     table: {
       class: Table,

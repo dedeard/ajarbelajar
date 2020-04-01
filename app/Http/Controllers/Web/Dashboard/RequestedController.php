@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web\Dashboard;
 
+use App\Helpers\Seo;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -9,6 +10,7 @@ class RequestedController extends Controller
 {
     public function index(Request $request)
     {
+        Seo::set('Dashboard Requested');
         $requesteds = $request->user()->requestPosts()->select( ['id', 'user_id', 'category_id', 'requested_at', 'title', 'type'] )->whereNotNull('requested_at')->orderBy('requested_at', 'desc')->paginate(12);
         return view('web.dashboard.requested.index', ['requesteds' => $requesteds]);
     }

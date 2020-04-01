@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Web\Dashboard;
 
+use App\Helpers\Seo;
 use App\Http\Controllers\Controller;
 use App\Rules\Username;
-use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -15,7 +15,8 @@ class EditController extends Controller
 {
     public function index()
     {
-        SEOTools::setTitle('Edit Profile');
+        
+        Seo::set('Dashboard Edit Profile');
         return view('web.dashboard.edit.index');
     }
     public function update(Request $request)

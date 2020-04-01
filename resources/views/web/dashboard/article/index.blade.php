@@ -1,11 +1,10 @@
 @extends('web.layouts.app')
-@section('title', 'Daftar Artikel')
 @section('content')
 @component('web.dashboard.components.layoutWrapper')
 
 <div class="panel panel-bordered bg-light">
   <div class="panel-heading bg-white">
-    <h3 class="panel-title">Dafatar Artikel</h3>
+    <h3 class="panel-title">Dafatar Artikel yang sedang kamu kelola.</h3>
     <div class="panel-actions">
       <div class="btn-group">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-create-article">
@@ -51,7 +50,7 @@
     </div>
     @else
     <div class="text-center py-100">
-      <h3 class="text-muted">Belum ada Postingan Satupun.</h3>
+      <h3 class="text-muted">Belum ada Artikel.</h3>
       <a data-toggle="modal" data-target="#modal-create-article" href="#" class="btn btn-primary px-50">Buat
         Sekarang</a>
     </div>

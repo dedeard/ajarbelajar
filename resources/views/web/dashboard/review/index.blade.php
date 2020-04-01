@@ -4,7 +4,7 @@
 
 <div class="panel bg-light panel-bordered">
   <div class="panel-heading bg-white">
-    <h3 class="panel-title">Ulasan</h3>
+    <h3 class="panel-title">Daftar Feedback yang ada pada Artikel dan Video</h3>
   </div>
   <div class="panel-body">
     @if($reviews->total())
@@ -17,7 +17,7 @@
       @endforeach
     @else
     <div class="text-center py-100">
-      <h3 class="text-muted">Belum ada Ulasan Satupun.</h3>
+      <h3 class="text-muted">Belum ada Feedback.</h3>
     </div>
     @endif
   </div>

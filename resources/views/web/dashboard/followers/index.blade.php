@@ -1,11 +1,10 @@
 @extends('web.layouts.app')
-@section('title', 'Pengikut')
 @section('content')
 @component('web.dashboard.components.layoutWrapper')
 
 <div class="panel bg-light panel-bordered">
   <div class="panel-heading bg-white">
-    <h3 class="panel-title">Pengikut</h3>
+    <h3 class="panel-title">Daftar Pengguna yang mengukuti kamu</h3>
   </div>
   <div class="panel-body">
     @if($followers->total())
@@ -28,7 +27,7 @@
     </div>
     @else
     <div class="text-center py-100">
-      <h3 class="text-muted">Belum ada Permintaan Satupun.</h3>
+      <h3 class="text-muted">Belum ada pengikut.</h3>
     </div>
     @endif
   </div>

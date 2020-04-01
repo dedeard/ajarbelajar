@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web\Dashboard;
 
+use App\Helpers\Seo;
 use App\Http\Controllers\Controller;
 use App\Model\Post;
 use Artesaos\SEOTools\Facades\SEOTools;
@@ -11,7 +12,7 @@ class FavoriteController extends Controller
 {
     public function index(Request $request)
     {
-        SEOTools::setTitle('Favorit');
+        Seo::set('Dashboard Favorite');
         $posts = $request->user()->favorites(Post::class)->where('draf', 0)->withCount(['comments' => function($query){
             return $query->where('approved', true);
         }, 'views'])->paginate(4);

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Web\Dashboard;
 
+use App\Helpers\Seo;
+use Artesaos\SEOTools\Facades\SEOTools;
 use App\Http\Controllers\Controller;
 use App\Model\Category;
 use App\Model\RequestPost;
@@ -15,6 +17,7 @@ class ArticleController extends Controller
     const driver = 'public';
     public function index(Request $request)
     {
+        Seo::set('Dashboard Article');
         $articles = $request->user()->requestPosts()
                                 ->whereNull('requested_at')
                                 ->where('type', 'article')
@@ -39,6 +42,7 @@ class ArticleController extends Controller
                             ->whereNull('requested_at')
                             ->where('type', 'article')
                             ->findOrFail($id);
+        SEOTools::setTitle($article->title);
         return view('web.dashboard.article.edit', ['article' => $article]);
     }
 

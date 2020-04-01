@@ -17,7 +17,7 @@
           EDIT DATA PERMINTAAN ANDA
         </a>
         @else
-        <a href="{{ route('join.minitutor.create') }}" class="btn btn-primary">
+        <a href="{{ route('join.minitutor.create') }}" class="btn btn-primary" rel="nofollow">
           GABUNG SEKARANG
         </a>
         @endif

@@ -1,5 +1,4 @@
 @extends('web.layouts.app')
-@section('title', 'Form permintaan jadi Minitutor')
 @section('content')
 <div class="container-fluid">
 

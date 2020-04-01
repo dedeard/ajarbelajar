@@ -14,7 +14,6 @@ $(function () {
  */
 import Echo from 'laravel-echo';
 window.Pusher = require('pusher-js');
-window.axios = require('axios')
 window.PerfectScrollbar = require('perfect-scrollbar').default
 window.Swal = require('sweetalert2')
 window.Ladda = require('ladda')
@@ -22,24 +21,19 @@ require('owl.carousel2')
 require('select2')
 require('dropify')
 require('./vendors/tagsinput')
-require('jquery-raty-js')
 
  // Setup axios
 const csrfToken = document.head.querySelector('meta[name="csrf-token"]')
 const apiToken = document.head.querySelector('meta[name="api-token"]')
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-if (csrfToken) window.axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken.content
-if (apiToken) window.axios.defaults.headers.common.Authorization = 'Bearer ' + apiToken.content
 
 
 
 window.Echo = new Echo({
   broadcaster: 'pusher',
-  key: '9dd48f6db8303f2f8bd6',
-  cluster: 'ap1',
+  key: process.env.MIX_PUSHER_APP_KEY,
+  cluster: process.env.MIX_PUSHER_APP_CLUSTER,
   forceTLS: true
 });
-
 
 if(AUTH_ID) {
   if(NOTIFICATION_COUNT > 0) $('[notification-count]').text(NOTIFICATION_COUNT);
@@ -174,20 +168,7 @@ if(AUTH_ID) {
   })
 
 
-  // Rating
-  $(document).ready(function(){
-    $('.rating').raty({
-      targetKeep: true,
-      icon: 'font',
-      starType: 'i',
-      starOff: 'icon wb-star',
-      starOn: 'icon wb-star orange-600',
-      cancelOff: 'icon wb-minus-circle',
-      cancelOn: 'icon wb-minus-circle orange-600',
-      starHalf: 'icon wb-star-half orange-500'
-    });
-  })
-
+  // home owl.carousel
   $(document).ready(function(){
     $(".owl-carousel.owl-carousel-landing").owlCarousel({
       loop: true,

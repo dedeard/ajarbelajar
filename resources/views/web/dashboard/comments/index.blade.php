@@ -1,11 +1,10 @@
 @extends('web.layouts.app')
-@section('title', 'Komentar')
 @section('content')
 @component('web.dashboard.components.layoutWrapper')
 
 <div class="panel bg-light panel-bordered">
   <div class="panel-heading bg-white">
-    <h3 class="panel-title">Komentar</h3>
+    <h3 class="panel-title">Daftar Komentar pada Artikel dan Video kamu.</h3>
   </div>
   <div class="panel-body">
     @if($comments->count())
@@ -22,7 +21,7 @@
     </div>
     @else
     <div class="text-center py-100">
-      <h3 class="text-muted">Belum ada Komentar Satupun.</h3>
+      <h3 class="text-muted">Belum ada Komentar.</h3>
     </div>
     @endif
   </div>

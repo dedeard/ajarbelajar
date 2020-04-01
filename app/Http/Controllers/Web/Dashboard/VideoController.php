@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Web\Dashboard;
 
+use App\Helpers\Seo;
+use Artesaos\SEOTools\Facades\SEOTools;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -23,6 +25,7 @@ class VideoController extends Controller
 
     public function index(Request $request)
     {
+        Seo::set('Dashboard Video');
         $videos = $request->user()->requestPosts()->whereNull('requested_at')->where('type', 'video')->orderBy('updated_at', 'desc')->paginate(12);
         return view('web.dashboard.video.index', ['videos' => $videos]);
     }
@@ -39,6 +42,7 @@ class VideoController extends Controller
     public function edit(Request $request, $id)
     {
         $video = $this->getVideo($request->user(), $id);
+        SEOTools::setTitle($video->title);
         return view('web.dashboard.video.edit', ['video' => $video]);
     }
 

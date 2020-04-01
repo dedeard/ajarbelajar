@@ -1,6 +1,4 @@
 @extends('web.layouts.app')
-@section('title', 'Edit Profil')
-
 @section('content')
 @component('web.dashboard.components.layoutWrapper')
 <div class="panel rounded-0 rounded-bottom">
