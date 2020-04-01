@@ -27,7 +27,7 @@
     <hr class="m-0">
       <p class="my-15">
         dari <a class="text-dark" href="{{ route('minitutor.show', $post->user->username) }}">{{ $post->user->name() }}</a> - 
-        <a class="text-dark" href="{{ route('category.show', $post->category->slug) }}">{{ $post->category->name }}</a> - 
+        @if($post->category) <a class="text-dark" href="{{ route('category.show', $post->category->slug) }}">{{ $post->category->name }}</a> - @endif
         {{ $post->created_at->format('d M Y') }}        
       </p>
     <hr class="m-0">
