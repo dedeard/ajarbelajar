@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Model\Category;
 use App\Model\Post;
-use Artesaos\SEOTools\Facades\SEOTools;
+use Artesaos\SEOTools\Facades\SEOMeta;
 
 class CategoryController extends Controller
 {
@@ -28,8 +28,8 @@ class CategoryController extends Controller
         if(!$query->exists()) return abort(404);
         $category = $query->first();
         $data['posts'] = Post::postType($category->posts(), null, false)->paginate(6);
-        SEOTools::setTitle($category->name);
-        SEOTools::setRobots('noindex');
+        SEOMeta::setTitle($category->name);
+        SEOMeta::setRobots('noindex');
         return view('web.category.show', $data);
     }
 }
