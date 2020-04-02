@@ -30,14 +30,14 @@ class HomeController extends Controller
     public function article()
     {
         $data = [];
-        $data['articles'] = Post::articles()->orderBy('created_at', 'desc')->paginate(6);
+        $data['articles'] = Post::articles()->orderBy('created_at', 'desc')->paginate(12);
         return view('web.article', $data);
     }
 
     public function video()
     {
         $data = [];
-        $data['videos'] = Post::videos()->orderBy('created_at', 'desc')->paginate(6);
+        $data['videos'] = Post::videos()->orderBy('created_at', 'desc')->paginate(12);
         return view('web.video', $data);
     }
 

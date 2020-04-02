@@ -18,6 +18,11 @@
           <div class="panel-body">
             <p>Status {{ $accepted->status() }}</p>
           </div>
+          <div class="panel-footer">
+            @if(!$accepted->draf)
+            <a class="btn btn-default btn-block btn-sm" href="{{ route('post.show', $accepted->slug) }}">LIHAT</a>
+            @endif
+          </div>
         </div>
       </div>
       @endforeach
