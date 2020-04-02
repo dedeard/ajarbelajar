@@ -66,17 +66,17 @@ class VideoController extends Controller
                     Storage::disk(self::driver)->delete('post/hero/request/thumb/' . $video->hero);
                 }
             }
-            $lg = Image::make($data['hero'])->fit(720*1.5, 480*1.5, function ($constraint) {
+            $lg = Image::make($data['hero'])->fit(1280, 720, function ($constraint) {
                 $constraint->aspectRatio();
             });
-            $sm = Image::make($data['hero'])->fit(720/1.5, 480/1.5, function ($constraint) {
+            $sm = Image::make($data['hero'])->fit(640, 360, function ($constraint) {
                 $constraint->aspectRatio();
             });
 
             $name = Str::random(60) . '.jpg';
 
-            Storage::disk(self::driver)->put('post/hero/request/' . $name, (string) $lg->encode('jpg', 90));
-            Storage::disk(self::driver)->put('post/hero/request/thumb/' . $name, (string) $sm->encode('jpg', 90));
+            Storage::disk(self::driver)->put('post/hero/request/' . $name, (string) $lg->encode('jpg', 75));
+            Storage::disk(self::driver)->put('post/hero/request/thumb/' . $name, (string) $sm->encode('jpg', 75));
 
             $data['hero'] = $name;
         } else {
