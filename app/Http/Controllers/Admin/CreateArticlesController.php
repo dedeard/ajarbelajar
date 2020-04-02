@@ -31,7 +31,7 @@ class CreateArticlesController extends Controller
 
         $minitutors = $minitutors->where('active', 1)->with(['user' => function($query){
             $query->select(['id', 'username', 'first_name', 'last_name']);
-        }])->orderBy('id', 'desc')->get();
+        }])->orderBy('id', 'desc')->paginate(20);
 
         return view('admin.article.create.index', ['minitutors' => $minitutors]);
     }

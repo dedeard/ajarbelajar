@@ -41,6 +41,7 @@
         @endforeach
       </tbody>
     </table>
+    {{ $minitutors->links() }}
   </div>
 </div>
 @endsection
