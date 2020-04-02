@@ -33,7 +33,7 @@
           <div class="list-group">
             <a class="list-group-item @if(Route::is('home')) active @endif" href="{{ route('home') }}"><i class="icon wb-home"></i>Home</a>
             <a class="list-group-item @if(Route::is('article')) active @endif" href="{{ route('article') }}"><i class="icon wb-order"></i>Artikel</a>
-            <a class="list-group-item @if(Route::is('video')) active @endif" href="{{ route('video') }}"><i class="icon wb-video"></i>Vidio</a>
+            <a class="list-group-item @if(Route::is('video')) active @endif" href="{{ route('video') }}"><i class="icon wb-video"></i>Video</a>
             <a class="list-group-item @if(Route::is('category*')) active @endif" href="{{ route('category.index') }}"><i class="icon wb-grid-4"></i>Kategori</a>
             <a class="list-group-item @if(Route::is('minitutor*')) active @endif" href="{{ route('minitutor.index') }}"><i class="icon wb-users"></i>Minitutor</a>
           </div>
