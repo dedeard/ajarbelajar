@@ -1670,20 +1670,24 @@ class Minitutor extends Seeder
                     'email' => $minitutor['Email'],
                     'password' => Hash::make($minitutor['ID-MiniTutor']),
                 ];
-                $user = User::create($data);
+                if(User::where('email', $minitutor['Email'])->exists() || User::where('username', $uname)->exists()) {
+                    echo $minitutor['Nama Lengkap'] . "ready";
+                } else {
+                    $user = User::create($data);
 
-                $minitutorData = [
-                    'active' => true,
-                    'last_education' => $minitutor['Pendidikan terakhir/saat ini'] ?? '-',
-                    'university' => $minitutor['Nama Universitas'] ?? '-',
-                    'city_and_country_of_study' => $minitutor['Kota dan Negara tempat studi'] ?? '-',
-                    'majors' => $minitutor['Nama program studi'] ?? '-',
-                    'interest_talent' => $minitutor['Spesialisasi/Bidang Minat'] ?? '-',
-                    'contact' => $minitutor['Kontak'] ?? '-',
-                    'expectation' => substr($minitutor['Ekspektasi kamu terhadap AjarBelajar'] ?? '-',0,250),
-                    'reason' => substr($minitutor['Apa motivasi kamu bergabung di AjarBelajar?'] ?? '-',0,250),
-                ];
-                $user->minitutor()->save(new ModelMinitutor($minitutorData));
+                    $minitutorData = [
+                        'active' => true,
+                        'last_education' => $minitutor['Pendidikan terakhir/saat ini'] ?? '-',
+                        'university' => $minitutor['Nama Universitas'] ?? '-',
+                        'city_and_country_of_study' => $minitutor['Kota dan Negara tempat studi'] ?? '-',
+                        'majors' => $minitutor['Nama program studi'] ?? '-',
+                        'interest_talent' => $minitutor['Spesialisasi/Bidang Minat'] ?? '-',
+                        'contact' => $minitutor['Kontak'] ?? '-',
+                        'expectation' => substr($minitutor['Ekspektasi kamu terhadap AjarBelajar'] ?? '-',0,250),
+                        'reason' => substr($minitutor['Apa motivasi kamu bergabung di AjarBelajar?'] ?? '-',0,250),
+                    ];
+                    $user->minitutor()->save(new ModelMinitutor($minitutorData));
+                }
             }
         }
     }
