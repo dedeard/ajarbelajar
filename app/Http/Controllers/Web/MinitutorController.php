@@ -13,7 +13,7 @@ class MinitutorController extends Controller
     {
         $minitutors = Minitutor::where('active', 1)->withCount(['posts' => function($q){
             return $q->where('draf', 0);
-        }])->orderBy('posts_count', 'desc')->paginate(5);
+        }])->orderBy('posts_count', 'desc')->paginate(18);
         return view('web.minitutor.index', ['minitutors' => $minitutors]);
     }
 
