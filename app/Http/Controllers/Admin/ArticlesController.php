@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Model\Category;
+use App\Model\Image as ModelImage;
 use App\Model\Post;
 use App\Model\RequestPost;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -91,6 +92,25 @@ class ArticlesController extends Controller
 
         $article->update($data);
         $article->retag($data['tags']);
+
+        $body = json_decode($data['body']);
+        $images = $article->images;
+
+        foreach($images as $image) {
+            $exists = false;
+            foreach ($body->blocks as $block) {
+                if($block->type === 'image'){
+                    if($block->data->file->url === '/storage/post/image/' . $image->name) $exists = true;
+                }
+            }
+            if(!$exists) {
+                if(Storage::disk('public')->exists('post/image/' . $image->name)) {
+                    Storage::disk('public')->delete('post/image/' . $image->name);
+                }
+                $image->delete();
+            }
+        }
+
         return redirect()->back()->withSuccess('Article berhasil di update.');
     }
 
@@ -120,6 +140,12 @@ class ArticlesController extends Controller
             if(Storage::disk('public')->exists('post/hero/thumb/' . $article->hero)) {
                 Storage::disk('public')->delete('post/hero/thumb/' . $article->hero);
             }
+        }
+        foreach($article->images as $image) {
+            if(Storage::disk('public')->exists('post/image/' . $image->name)) {
+                Storage::disk('public')->delete('post/image/' . $image->name);
+            }
+            $image->delete();
         }
         $article->delete();
         return redirect()->route('admin.articles.index')->withSuccess("Artikel telah dihapus.");
@@ -170,7 +196,10 @@ class ArticlesController extends Controller
         $tags = [];
         foreach($article->tags as $tag) array_push($tags, $tag->name);
         $post->retag($tags);
-
+        foreach($article->images as $image) {
+            $post->images()->save(new ModelImage(['name' => $image->name]));
+            $image->delete();
+        }
         $article->delete();
         return redirect()->route('admin.articles.edit', $post->id)->withSuccess('Artikel minitutor telah diterima.');
     }
@@ -179,5 +208,15 @@ class ArticlesController extends Controller
     {
         $article = RequestPost::whereNotNull('requested_at')->where('type', 'article')->findOrFail($id);
         return view('admin.article.showRequested', ['article' => $article]);
+    }
+
+    public function image(Request $request, $id)
+    {
+        $article = Post::where('type', 'article')->findOrFail($id);
+        $data = $request->validate(['file' => 'required|image|max:4000']);
+        $name = Str::random(60) . '.jpg';
+        Storage::disk('public')->put('post/image/' . $name, (string) Image::make($data['file'])->encode('jpg', 75));
+        $article->images()->save(new ModelImage(['name' => $name]));
+        return response()->json(['success' => 1, 'file' => ['url' => '/storage/post/image/' . $name]]);
     }
 }

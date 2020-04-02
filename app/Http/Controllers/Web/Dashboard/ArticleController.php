@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Web\Dashboard;
 
-use App\Helpers\Seo;
 use Artesaos\SEOTools\Facades\SEOTools;
 use App\Http\Controllers\Controller;
 use App\Model\Category;
+use App\Model\Image as ModelImage;
 use App\Model\RequestPost;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -104,6 +104,25 @@ class ArticleController extends Controller
 
         $article->update($data);
         $article->retag($data['tags']);
+
+        $body = json_decode($data['body']);
+        $images = $article->images;
+
+        foreach($images as $image) {
+            $exists = false;
+            foreach ($body->blocks as $block) {
+                if($block->type === 'image'){
+                    if($block->data->file->url === '/storage/post/image/' . $image->name) $exists = true;
+                }
+            }
+            if(!$exists) {
+                if(Storage::disk(self::driver)->exists('post/image/' . $image->name)) {
+                    Storage::disk(self::driver)->delete('post/image/' . $image->name);
+                }
+                $image->delete();
+            }
+        }
+
         return redirect()->back()->withSuccess('Artikel berhasil di update.');
     }
 
@@ -123,7 +142,23 @@ class ArticleController extends Controller
                 Storage::disk(self::driver)->delete('post/hero/request/thumb/' . $article->hero);
             }
         }
+        foreach($article->images as $image) {
+            if(Storage::disk(self::driver)->exists('post/image/' . $image->name)) {
+                Storage::disk(self::driver)->delete('post/image/' . $image->name);
+            }
+            $image->delete();
+        }
         $article->delete();
         return redirect()->back()->withSuccess('Artikel berhasil di hapus.');
+    }
+
+    public function image(Request $request, $id)
+    {
+        $article = $request->user()->requestPosts()->whereNull('requested_at')->where('type', 'article')->findOrFail($id);
+        $data = $request->validate(['file' => 'required|image|max:4000']);
+        $name = Str::random(60) . '.jpg';
+        Storage::disk(self::driver)->put('post/image/' . $name, (string) Image::make($data['file'])->encode('jpg', 75));
+        $article->images()->save(new ModelImage(['name' => $name]));
+        return response()->json(['success' => 1, 'file' => ['url' => '/storage/post/image/' . $name]]);
     }
 }

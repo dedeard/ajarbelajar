@@ -11,15 +11,6 @@
         Nama, Alamat Email, Media Sosial dan Foto secara otomatis ikut dalam formulir Anda sesuai dengan profil akun Anda.
       </p>
     </div>
-    @if ($message = Session::get('success'))
-      <div class="alert alert-info alert-dismissible rounded-0" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">×</span>
-          <span class="sr-only">Close</span>
-        </button>
-        <strong>{{ $message }}</strong>
-      </div>
-    @endif
     <hr class="m-0">
     <form class="panel-body" method="POST" action="{{ route('join.minitutor.update') }}">
       @csrf

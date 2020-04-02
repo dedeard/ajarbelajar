@@ -1,5 +1,5 @@
 import EditorJS from '@editorjs/editorjs'
-// import Image from '@editorjs/image'
+import Image from '@editorjs/image'
 import Header from '@editorjs/header'
 import List from '@editorjs/list'
 import Checklist from '@editorjs/checklist'
@@ -12,21 +12,28 @@ import InlineCode from '@editorjs/inline-code'
 import LinkTool from '@editorjs/link'
 import Embed from '@editorjs/embed'
 import Table from '@editorjs/table'
+import FromData from 'form-data'
 
 const editor = new EditorJS({
   holder: document.getElementById('codex-editor'),
   autofocus: true,
   minHeight: 300,
   tools: {
-    // image: {
-    //   class: Image,
-    //   config: {
-    //     endpoints: {
-    //       byFile: '/api/test',
-    //       byUrl: '/api/test',
-    //     }
-    //   }
-    // },
+    image: {
+      class: Image,
+      config: {
+        uploader: {
+          uploadByFile(file){
+            var data = new FromData;
+            data.append('file', file);
+            const url = document.getElementById('codex-editor').getAttribute('image-url');
+            return axios.post(url, data).then((response) => {
+              return response.data
+            })
+          }
+        }
+      }
+    },
     header: {
       class: Header,
       inlineToolbar: ['link'],

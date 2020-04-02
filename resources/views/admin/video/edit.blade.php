@@ -15,7 +15,7 @@
       <div class="panel-body">
         <a href="{{ $video->videos }}" target="_blank" class="btn mb-4 btn-primary btn-block">Lihat video yang dikirim MiniTutor</a>
         <textarea name="body" id="post-editor" class="d-none">{{ $video->body }}</textarea>
-        <div id="codex-editor"></div>
+        <div id="codex-editor" image-url="{{ route('admin.videos.image', $video->id) }}"></div>
       </div>
     </div>
   </div>

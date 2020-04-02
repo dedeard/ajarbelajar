@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Web\Dashboard;
 
-use App\Helpers\Seo;
 use App\Http\Controllers\Controller;
 use App\Model\Post;
 use Illuminate\Http\Request;

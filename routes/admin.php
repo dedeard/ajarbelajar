@@ -33,6 +33,7 @@ Route::prefix('minitutor')->as('minitutor.')->group(function(){
 Route::prefix('articles')->as('articles.')->group(function(){
   route::get('/', 'ArticlesController@index')->name('index');
   route::get('/{id}/edit', 'ArticlesController@edit')->name('edit');
+  Route::post('{id}/image', 'ArticlesController@image')->name('image');
   route::put('/{id}', 'ArticlesController@update')->name('update');
   route::delete('/{id}', 'ArticlesController@destroy')->name('destroy');
   route::get('/{id}/make-public', 'ArticlesController@makePublic')->name('make.public');
@@ -60,6 +61,7 @@ Route::prefix('videos')->as('videos.')->group(function(){
 
   route::get('/', 'VideosController@index')->name('index');
   route::get('/{id}/edit', 'VideosController@edit')->name('edit');
+  Route::post('{id}/image', 'VideosController@image')->name('image');
   route::put('/{id}', 'VideosController@update')->name('update');
   route::delete('/{id}', 'VideosController@destroy')->name('destroy');
   route::get('/{id}/make-public', 'VideosController@makePublic')->name('make.public');

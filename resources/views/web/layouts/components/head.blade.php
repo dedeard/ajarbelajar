@@ -23,7 +23,6 @@
 
 <!-- Fonts -->
 <link rel="stylesheet" href="{{ asset('remark/fonts/web-icons/web-icons.min.css') }}">
-<link rel="stylesheet" href="{{ asset('remark/fonts/font-awesome/font-awesome.min.css') }}">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
 
 <!-- Core -->
@@ -34,7 +33,6 @@
 
 <!-- pluguns -->
 <link rel="stylesheet" href="{{ asset('remark/vendor/ladda/ladda.min.css') }}">
-<link rel="stylesheet" href="{{ asset('remark/vendor/select2/select2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('remark/vendor/dropify/dropify.min.css') }}">
 <link rel="stylesheet" href="{{ asset('remark/vendor/owl-carousel/owl.carousel.min.css') }}">
 

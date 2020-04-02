@@ -4,8 +4,7 @@
 <script>
 window.SIDEBAR_CLOSE = true
 </script>
-<form class="row" method="POST" action="{{ route('dashboard.video.update', $video->id) }}"
-  enctype="multipart/form-data">
+<form class="row" method="POST" action="{{ route('dashboard.video.update', $video->id) }}" enctype="multipart/form-data">
   @csrf
   @method('put')
 
@@ -94,8 +93,6 @@ window.SIDEBAR_CLOSE = true
           <button type="submit" class="btn btn-primary ladda-button" data-style="slide-down">
             <span class="ladda-label">Simpan</span>
           </button>
-          <a href="{{ route('dashboard.requested.create', $video->id) }}" class="btn btn-success">Publikasikan</a>
-
         </div>
       </div>
     </div>

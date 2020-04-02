@@ -17,7 +17,7 @@ window.SIDEBAR_CLOSE = true
       <hr class="m-0">
       <div class="panel-body">
         <textarea name="body" id="post-editor" class="d-none">{{ $article->body }}</textarea>
-        <div id="codex-editor"></div>
+        <div id="codex-editor" image-url="{{ route('dashboard.article.image', $article->id) }}"></div>
       </div>
     </div>
   </div>
@@ -87,32 +87,6 @@ window.SIDEBAR_CLOSE = true
           <button type="submit" class="btn btn-primary ladda-button" data-style="slide-down">
             <span class="ladda-label">Simpan</span>
           </button>
-          <a href="{{ route('dashboard.requested.create', $article->id) }}" class="btn btn-success">Publikasikan</a>
-
-          <!-- Button trigger modal -->
-          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-preview">
-            Preview
-          </button>
-
-          <!-- Modal -->
-          <div class="modal fade" id="modal-preview">
-            <div class="modal-dialog modal-lg">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">Preview</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  {!! EditorjsHelp::compile($article->body) !!}
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>

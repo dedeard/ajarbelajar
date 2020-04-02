@@ -18,7 +18,7 @@
 
       <div class="form-group @error('last_education') has-invalid @enderror">
         <label class="mb-3">Pendidikan terakhir</label>
-        <select name="last_education" class="form-control select2-basic @error('last_education') is-invalid @enderror"
+        <select name="last_education" class="form-control @error('last_education') is-invalid @enderror"
         >
           <option value="" disabled @if(!old('last_education')) selected @endif>Pendidikan terakhir</option>
           @foreach($last_educations as $education)

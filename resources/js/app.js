@@ -1,8 +1,15 @@
+window.CSRF_TOKEN = document.head.querySelector('meta[name="csrf-token"]')
+window.API_TOKEN = document.head.querySelector('meta[name="api-token"]')
+window.CSRF_TOKEN = window.CSRF_TOKEN ? window.CSRF_TOKEN.content : ''
+window.API_TOKEN = window.API_TOKEN ? window.API_TOKEN.content : ''
+
 /**
  * Init bootstrap and jquery
  */
 window.Popper = require('popper.js').default
 window.$ = window.jQuery = require('jquery')
+window.axios = require('axios').default
+
 require('bootstrap')
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
@@ -18,13 +25,13 @@ window.PerfectScrollbar = require('perfect-scrollbar').default
 window.Swal = require('sweetalert2')
 window.Ladda = require('ladda')
 require('owl.carousel2')
-require('select2')
 require('dropify')
 require('./vendors/tagsinput')
 
  // Setup axios
-const csrfToken = document.head.querySelector('meta[name="csrf-token"]')
-const apiToken = document.head.querySelector('meta[name="api-token"]')
+ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+ if (window.CSRF_TOKEN) window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.CSRF_TOKEN
+ if (window.API_TOKEN) window.axios.defaults.headers.common.Authorization = 'Bearer ' + window.API_TOKEN
 
 
 
@@ -189,8 +196,6 @@ if(AUTH_ID) {
   $(document).ready(function(){
     $('.tags-input').tagsinput()
     $('.dropify').dropify();
-    $('.select2-basic').select2();
     Ladda.bind('button.ladda-button')
   })
-
 }());

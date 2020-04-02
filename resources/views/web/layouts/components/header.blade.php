@@ -35,7 +35,7 @@
               <i class="fa fa-envelope"></i>
             </a> -->
             <a href="{{ route('notifications.index') }}" class="ab-header__right-action ab-notification-dropdown-toggle">
-              <i class="fa fa-bell"></i>
+              <i class="wb-bell"></i>
               <span class="ab-header__right-action-label" notification-count></span>
             </a>
           </div>

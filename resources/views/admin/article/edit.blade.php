@@ -14,7 +14,7 @@
       <hr class="m-0">
       <div class="panel-body">
         <textarea name="body" id="post-editor" class="d-none">{{ $article->body }}</textarea>
-        <div id="codex-editor"></div>
+        <div id="codex-editor" image-url="{{ route('admin.articles.image', $article->id) }}"></div>
       </div>
     </div>
   </div>

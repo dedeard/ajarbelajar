@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Model\Category;
+use App\Model\Image as ModelImage;
 use App\Model\Post;
 use App\Model\RequestPost;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -93,6 +94,25 @@ class VideosController extends Controller
 
         $video->update($data);
         $video->retag($data['tags']);
+
+        $body = json_decode($data['body']);
+        $images = $video->images;
+
+        foreach($images as $image) {
+            $exists = false;
+            foreach ($body->blocks as $block) {
+                if($block->type === 'image'){
+                    if($block->data->file->url === '/storage/post/image/' . $image->name) $exists = true;
+                }
+            }
+            if(!$exists) {
+                if(Storage::disk('public')->exists('post/image/' . $image->name)) {
+                    Storage::disk('public')->delete('post/image/' . $image->name);
+                }
+                $image->delete();
+            }
+        }
+
         return redirect()->back()->withSuccess('Video berhasil di update.');
     }
 
@@ -123,8 +143,15 @@ class VideosController extends Controller
                 Storage::disk('public')->delete('post/hero/thumb/' . $video->hero);
             }
         }
+
+        foreach($video->images as $image) {
+            if(Storage::disk('public')->exists('post/image/' . $image->name)) {
+                Storage::disk('public')->delete('post/image/' . $image->name);
+            }
+            $image->delete();
+        }
         $video->delete();
-        return redirect()->route('admin.video.index')->withSuccess("Video telah dihapus.");
+        return redirect()->route('admin.videos.index')->withSuccess("Video telah dihapus.");
     }
 
 
@@ -183,5 +210,15 @@ class VideosController extends Controller
     {
         $video = RequestPost::whereNotNull('requested_at')->where('type', 'video')->findOrFail($id);
         return view('admin.video.showRequested', ['video' => $video]);
+    }
+
+    public function image(Request $request, $id)
+    {
+        $video = Post::where('type', 'video')->findOrFail($id);
+        $data = $request->validate(['file' => 'required|image|max:4000']);
+        $name = Str::random(60) . '.jpg';
+        Storage::disk('public')->put('post/image/' . $name, (string) Image::make($data['file'])->encode('jpg', 75));
+        $video->images()->save(new ModelImage(['name' => $name]));
+        return response()->json(['success' => 1, 'file' => ['url' => '/storage/post/image/' . $name]]);
     }
 }

@@ -69,6 +69,7 @@ Route::middleware('auth')->group(function(){
     });
 
     Route::middleware(['is.minitutor', 'minitutor:active'])->namespace('Dashboard')->prefix('dashboard')->as('dashboard.')->group(function(){
+        Route::post('/article/{id}/image', 'ArticleController@image')->name('article.image');
         Route::resource('/article', 'ArticleController')->except(['show', 'create']);
 
         Route::resource('/video', 'VideoController')->except(['show', 'create']);

@@ -87,6 +87,14 @@ class Editorjs
             $html .= '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="' . $block->data->embed . '">';
             $html .= '</iframe></div>';
             break;
+          case "image":
+            $html .= '<figure>';
+              $html .= '<img';
+              if($block->data->caption) $html .= ' alt="'. $block->data->caption .'"';
+              $html .= ' class="img-fluid img-rounded" src="'. $block->data->file->url .'">';
+              if($block->data->caption) $html .= '<figcaption>'. $block->data->caption .'</figcaption>';
+            $html .= '</figure>';
+          break;
         }
       }
       return $html;
