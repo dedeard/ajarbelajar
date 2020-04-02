@@ -1,33 +1,54 @@
 @extends('web.layouts.app')
+@section('script')
+<script src="{{ mix('js/video-uploader.js') }}"></script>
+@endsection
 @section('content')
 @component('web.dashboard.components.layoutWrapper')
 <script>
-window.SIDEBAR_CLOSE = true
+  window.SIDEBAR_CLOSE = true
 </script>
 <form class="row" method="POST" action="{{ route('dashboard.video.update', $video->id) }}" enctype="multipart/form-data">
   @csrf
   @method('put')
 
-  <div class="col-lg-12">
+  <div class="col-lg-8">
     <div class="panel">
       <div class="panel-heading">
-        <h3 class="panel-title">Kontent</h3>
+        <h3 class="panel-title">Video</h3>
       </div>
       <hr class="m-0">
       <div class="panel-body">
-        <div class="form-group">
-          <label class="mb-3">Alamat URL Vidio</label>
-          <input type="text" name="videos" class="form-control @error('videos') is-invalid @enderror"
-            value="{{ $video->videos }}">
-          @error('videos')
-          <div class="invalid-feedback">
-            <strong>{{ $message }}</strong>
+
+        <!-- Video results -->
+        <div class="row">
+          @foreach($video->videos as $vid)
+          <div class="col-6">
+            <div class="card">
+              <div class="card-block bg-light">
+                <video class="img-fluid" controls>
+                  <source src="{{ asset('storage/post/video/' . $vid->name) }}" />
+                </video>
+                <a href="{{ route('dashboard.video.video.destroy', [$video->id, $vid->id]) }}" class="btn btn-danger btn-block" delete-confirm data-target="#form-delete-video-list-{{$vid->id}}">
+                  Hapus video
+                </a>
+              </div>
+            </div>
           </div>
-          @enderror
+          @endforeach
+        </div>
+        <!-- Video form -->
+        <div class="upload-video-wrapper">
+          <div class="upload-video-content">
+            <p class="message" id="video-upload-message">Jatuhkan Video anda disini atau Klik disini.</p>
+          </div>
+          <input type="file" id="video-input" upload-url="{{ route('dashboard.video.video.upload', $video->id) }}">
         </div>
       </div>
     </div>
+  </div>
 
+
+  <div class="col-lg-4">
     <div class="panel">
       <div class="panel-heading">
         <h3 class="panel-title">Hero</h3>
@@ -35,8 +56,7 @@ window.SIDEBAR_CLOSE = true
       <hr class="m-0">
       <div class="panel-body">
         <div class="p-0">
-          <input type="file" name="hero" class="dropify"
-            data-default-file="{{ $video->hero ? $video->heroUrl() : '' }}" />
+          <input type="file" name="hero" class="dropify" data-default-file="{{ $video->hero ? $video->heroUrl() : '' }}" />
         </div>
       </div>
     </div>
@@ -57,8 +77,7 @@ window.SIDEBAR_CLOSE = true
         </div>
         <div class="form-group">
           <label class="mb-3">Judul <small class="text-danger">*</small></label>
-          <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
-            value="{{ $video->title }}">
+          <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ $video->title }}">
           @error('title')
           <div class="invalid-feedback">
             <strong>{{ $message }}</strong>
@@ -68,9 +87,9 @@ window.SIDEBAR_CLOSE = true
         <div class="form-group">
           <label class="mb-3">Tag</label>
           @php
-            $tags = [];
-            foreach($video->tags as $tag) array_push($tags, $tag->name);
-            $tags = implode(',', $tags);
+          $tags = [];
+          foreach($video->tags as $tag) array_push($tags, $tag->name);
+          $tags = implode(',', $tags);
           @endphp
           <input type="text" class="tags-input form-controll @error('tags') is-invalid @enderror" name="tags" value="{{ $tags }}">
           @error('tags')
@@ -81,8 +100,7 @@ window.SIDEBAR_CLOSE = true
         </div>
         <div class="form-group">
           <label class="mb-3">Deskripsi</label>
-          <textarea name="description" rows="4"
-            class="form-control @error('description') is-invalid @enderror">{{ $video->description }}</textarea>
+          <textarea name="description" rows="4" class="form-control @error('description') is-invalid @enderror">{{ $video->description }}</textarea>
           @error('description')
           <div class="invalid-feedback">
             <strong>{{ $message }}</strong>
@@ -98,5 +116,11 @@ window.SIDEBAR_CLOSE = true
     </div>
   </div>
 </form>
+@foreach($video->videos as $vid)
+<form id="form-delete-video-list-{{$vid->id}}" action="{{ route('dashboard.video.video.destroy', [$video->id, $vid->id]) }}" method="post">
+  @csrf
+  @method('delete')
+</form>
+@endforeach
 @endcomponent
 @endsection

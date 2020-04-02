@@ -64,6 +64,7 @@ Route::prefix('videos')->as('videos.')->group(function(){
   Route::post('{id}/image', 'VideosController@image')->name('image');
   route::put('/{id}', 'VideosController@update')->name('update');
   route::delete('/{id}', 'VideosController@destroy')->name('destroy');
+  route::delete('/{id}/videos', 'VideosController@destroyVideos')->name('destroy.videos');
   route::get('/{id}/make-public', 'VideosController@makePublic')->name('make.public');
   route::get('/{id}/make-draf', 'VideosController@makeDraf')->name('make.draf');
 });

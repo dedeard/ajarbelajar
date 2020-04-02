@@ -7,6 +7,7 @@ use App\Model\Category;
 use App\Model\Image as ModelImage;
 use App\Model\Post;
 use App\Model\RequestPost;
+use App\Model\Video;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -30,7 +31,6 @@ class VideosController extends Controller
 
         return view('admin.video.index', ['videos' => $videos ]);
     }
-
 
     public function edit($id)
     {
@@ -150,6 +150,13 @@ class VideosController extends Controller
             }
             $image->delete();
         }
+
+        foreach($video->videoLists as $vid){
+            if(Storage::disk('public')->exists('post/video/' . $vid->name)) {
+                Storage::disk('public')->delete('post/video/' . $vid->name);
+            }
+            $vid->delete();
+        }
         $video->delete();
         return redirect()->route('admin.videos.index')->withSuccess("Video telah dihapus.");
     }
@@ -194,13 +201,17 @@ class VideosController extends Controller
             'hero' => $video->hero,
             'description' => $video->description,
             'category_id' => $video->category_id,
-            'videos' => $video->videos,
             'user_id' => $video->user_id
         ]);
 
         $tags = [];
         foreach($video->tags as $tag) array_push($tags, $tag->name);
         $post->retag($tags);
+
+        foreach($video->videos as $vid) {
+            $post->videoLists()->save(new Video(['name' => $vid->name]));
+            $vid->delete();
+        }
 
         $video->delete();
         return redirect()->route('admin.videos.edit', $post->id)->withSuccess('Artikel minitutor telah diterima.');
@@ -220,5 +231,17 @@ class VideosController extends Controller
         Storage::disk('public')->put('post/image/' . $name, (string) Image::make($data['file'])->encode('jpg', 75));
         $video->images()->save(new ModelImage(['name' => $name]));
         return response()->json(['success' => 1, 'file' => ['url' => '/storage/post/image/' . $name]]);
+    }
+
+    public function destroyVideos($id)
+    {
+        $video = Post::where('type', 'video')->findOrFail($id);
+        foreach($video->videoLists as $vid){
+            if(Storage::disk('public')->exists('post/video/' . $vid->name)) {
+                Storage::disk('public')->delete('post/video/' . $vid->name);
+            }
+            $vid->delete();
+        }
+        return redirect()->back()->withSuccess('Seluru video yang dikirim minitutor pada postingan ini telah dihapus permanant.');
     }
 }

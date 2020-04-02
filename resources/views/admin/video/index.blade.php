@@ -35,6 +35,7 @@
         @endforeach
       </tbody>
     </table>
+    {{ $videos->links() }}
   </div>
 </div>
 @endsection

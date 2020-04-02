@@ -11,7 +11,9 @@ class MinitutorController extends Controller
 {
     public function index()
     {
-        $minitutors = Minitutor::where('active', 1)->paginate(24);
+        $minitutors = Minitutor::where('active', 1)->withCount(['posts' => function($q){
+            return $q->where('draf', 0);
+        }])->orderBy('posts_count', 'desc')->paginate(5);
         return view('web.minitutor.index', ['minitutors' => $minitutors]);
     }
 

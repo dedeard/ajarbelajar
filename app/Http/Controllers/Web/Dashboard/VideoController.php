@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Web\Dashboard;
 
-use App\Helpers\Seo;
 use Artesaos\SEOTools\Facades\SEOTools;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -11,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Model\Category;
 use App\Model\RequestPost;
+use App\Model\Video;
 
 class VideoController extends Controller
 {
@@ -114,7 +114,37 @@ class VideoController extends Controller
                 Storage::disk(self::driver)->delete('post/hero/request/thumb/' . $video->hero);
             }
         }
+
+        foreach($video->videos as $vid){
+            if(Storage::disk(self::driver)->exists('post/video/' . $vid->name)) {
+                Storage::disk(self::driver)->delete('post/video/' . $vid->name);
+            }
+            $vid->delete();
+        }
+
         $video->delete();
         return redirect()->back()->withSuccess('Video berhasil di hapus.');
+    }
+
+    public function uploadVideo(Request $request, $id)
+    {
+        $video = $request->user()->requestPosts()->whereNull('requested_at')->where('type', 'video')->findOrFail($id);
+        $data = $request->validate([
+            'file' => 'required|mimes:mp4,mov,mkv,avi|max:250000'
+        ]);
+        $name = Str::random(60) . '.' . $data['file']->extension();
+        Storage::disk(self::driver)->put('post/video/' . $name, file_get_contents($data['file']));
+        $video->videos()->save(new Video(['name' => $name]));
+        return response()->json(['success' => 1, 'file' => ['url' => '/storage/post/video/' . $name]]);
+    }
+
+    public function destroyVideo(Request $request, $id, $video_id){
+        $post = $request->user()->requestPosts()->whereNull('requested_at')->where('type', 'video')->findOrFail($id);
+        $video = $post->videos()->findOrFail($video_id);
+        if(Storage::disk(self::driver)->exists('post/video/' . $video->name)) {
+            Storage::disk(self::driver)->delete('post/video/' . $video->name);
+        }
+        $video->delete();
+        return redirect()->back()->withSuccess('Video telah dihapus.');
     }
 }

@@ -17,7 +17,19 @@
       <h1 class="text-capitalize">{{ $video->title }}</h1>
       <p class="text-primary"><strong>{{ $video->category ? $video->category->name : '' }}</strong></p>
       <p>Oleh {{ $video->user->name() }} Di buat pada {{ $video->created_at->format('d-m-Y') }}</p>
-      <a href="{{ $video->videos }}" target="_blank" class="btn btn-primary btn-block btn-lg">LIHAT VIDEO</a>
+      <div class="row">
+        @foreach($video->videos as $vid)
+        <div class="col-6">
+          <div class="card">
+            <div class="card-block bg-light">
+              <video class="img-fluid" controls>
+                <source src="{{ asset('storage/post/video/' . $vid->name) }}" />
+              </video>
+            </div>
+          </div>
+        </div>
+        @endforeach
+      </div>
     </div>
   </div>
 </div>

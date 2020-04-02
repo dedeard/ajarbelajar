@@ -23,6 +23,7 @@ mix
    .js('resources/js/editor.js', 'public/js')
    .js('resources/js/app.js', 'public/js')
    .js('resources/js/admin.js', 'public/js')
+   .js('resources/js/video-uploader.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css');
 
 if (!mix.inProduction()) {

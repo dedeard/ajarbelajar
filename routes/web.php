@@ -71,7 +71,9 @@ Route::middleware('auth')->group(function(){
     Route::middleware(['is.minitutor', 'minitutor:active'])->namespace('Dashboard')->prefix('dashboard')->as('dashboard.')->group(function(){
         Route::post('/article/{id}/image', 'ArticleController@image')->name('article.image');
         Route::resource('/article', 'ArticleController')->except(['show', 'create']);
-
+        
+        Route::post('/video/{id}/video', 'VideoController@uploadVideo')->name('video.video.upload');
+        Route::delete('/video/{id}/video/{video_id}', 'VideoController@destroyVideo')->name('video.video.destroy');
         Route::resource('/video', 'VideoController')->except(['show', 'create']);
 
         Route::get('/followers', 'FollowersController@index')->name('followers.index');

@@ -17,7 +17,6 @@ class RequestPost extends Model
         'hero',
         'description',
         'type',
-        'videos',
         'body',
     ];
 
@@ -50,5 +49,10 @@ class RequestPost extends Model
     public function images()
     {
         return $this->morphMany(Image::class, 'imageable');
+    }
+
+    public function videos()
+    {
+        return $this->morphMany(Video::class, 'videoable');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateImagesTable extends Migration
+class UpdateRequestPostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('images', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->morphs('imageable');
-            $table->timestamps();
+        Schema::table('request_posts', function (Blueprint $table) {
+            $table->dropColumn('videos');
         });
     }
 
@@ -28,6 +25,8 @@ class CreateImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('images');
+        Schema::table('request_posts', function (Blueprint $table) {
+            $table->string('videos')->nullable()->comment('only if the type is the same as the video');
+        });
     }
 }

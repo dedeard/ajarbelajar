@@ -13,7 +13,44 @@
       </div>
       <hr class="m-0">
       <div class="panel-body">
-        <a href="{{ $video->videos }}" target="_blank" class="btn mb-4 btn-primary btn-block">Lihat video yang dikirim MiniTutor</a>
+        <button type="button" class="btn mb-4 btn-primary btn-block" data-toggle="modal" data-target="#modal-view-videos">
+          Lihat video yang dikirim MiniTutor
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modal-view-videos">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title">Video yang dikirim.</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  @foreach($video->videoLists as $vid)
+                  <div class="col-6">
+                    <div class="card">
+                      <div class="card-block bg-light">
+                        <video class="img-fluid" controls>
+                          <source src="{{ asset('storage/post/video/' . $vid->name) }}" />
+                        </video>
+                      </div>
+                    </div>
+                  </div>
+                  @endforeach
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button delete-confirm data-target="#form-delete-video-lists" class="btn btn-sm btn-danger">Hapus Semua Video</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
         <textarea name="body" id="post-editor" class="d-none">{{ $video->body }}</textarea>
         <div id="codex-editor" image-url="{{ route('admin.videos.image', $video->id) }}"></div>
       </div>
@@ -119,6 +156,10 @@
   </div>
 </form>
 <form id="form-delete-video" action="{{ route('admin.videos.destroy', $video->id) }}" method="POST">
+  @csrf
+  @method('delete')
+</form>
+<form id="form-delete-video-lists" action="{{ route('admin.videos.destroy.videos', $video->id) }}" method="POST">
   @csrf
   @method('delete')
 </form>

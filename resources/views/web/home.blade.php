@@ -47,7 +47,7 @@
       @endcomponent
     @endforeach
     <div class="col-12 text-center pt-30">
-      <a href="{{route('article')}}" class="btn btn-primary">TAMPILKAN LEBIH</a>
+      <a href="{{route('video')}}" class="btn btn-primary">TAMPILKAN LEBIH</a>
     </div>
   </div>
   <div class="my-30"></div>

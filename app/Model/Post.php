@@ -38,6 +38,11 @@ class Post extends Model
         return $this->morphMany(Image::class, 'imageable');
     }
 
+    public function videoLists()
+    {
+        return $this->morphMany(Video::class, 'videoable');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
