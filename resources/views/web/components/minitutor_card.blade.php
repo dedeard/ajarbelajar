@@ -39,4 +39,31 @@
       </div>
     </div>
   </div>
+  <div class="card-footer">
+    @if($minitutor->user->website_url)
+    <a href="{{ $minitutor->user->website_url }}" target="_blank" class="btn btn-icon btn-primary">
+      <i class="icon wb-globe"></i>
+    </a>
+    @endif
+    @if($minitutor->user->twitter_url)
+    <a href="{{ $minitutor->user->twitter_url }}" target="_blank" class="btn btn-icon social-twitter">
+      <i class="icon socicon-twitter"></i>
+    </a>
+    @endif
+    @if($minitutor->user->instagram_url)
+    <a href="{{ $minitutor->user->instagram_url }}" target="_blank" class="btn btn-icon social-instagram">
+      <i class="icon socicon-instagram"></i>
+    </a>
+    @endif
+    @if($minitutor->user->facebook_url)
+    <a href="{{ $minitutor->user->facebook_url }}" target="_blank" class="btn btn-icon social-facebook">
+      <i class="icon socicon-facebook"></i>
+    </a>
+    @endif
+    @if($minitutor->user->youtube_url)
+    <a href="{{ $minitutor->user->youtube_url }}" target="_blank" class="btn btn-icon social-youtube">
+      <i class="icon socicon-youtube"></i>
+    </a>
+    @endif
+  </div>
 </div>
