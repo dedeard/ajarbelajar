@@ -8,10 +8,10 @@
             <img src="{{ asset('img/logo/logo.svg') }}" alt="Logo ajarbelajar" class="d-block d-lg-none" />
           </a>
           <a href="#" class="ab-header__sidebar-toggle ml-lg-auto ml-10" data-toggle="sidebar">
-            <i class="fa fa-bars icon"></i>
+            <i class="wb-menu icon"></i>
           </a>
           <a href="#" class="ab-header__sidebar-toggle d-block d-lg-none" data-toggle="header-form-search">
-            <i class="fa fa-search icon"></i>
+            <i class="wb-search icon"></i>
           </a>
         </div>
       </div>
@@ -21,7 +21,7 @@
         <div class="ab-header__form-search-wrapper">
           <input class="form-control ab-header__form-search-input" type="search" name="search" value="{{ request()->input('search') }}" placeholder="Apa yang anda cari?">
           <button class="btn ab-header__form-search-toggle">
-            <i class="fa fa-search"></i>
+            <i class="wb-search"></i>
           </button>
         </div>
       </div>

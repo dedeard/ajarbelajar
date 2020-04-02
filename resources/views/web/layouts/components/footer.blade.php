@@ -31,10 +31,10 @@
         <div class="col-lg-3 py-30">
           <nav class="ab-footer__socials">
             <a href="https://www.instagram.com/ajarbelajar" target="_blank" class="btn btn-icon social-instagram">
-              <i class="icon fa-instagram"></i>
+              <i class="icon socicon-instagram"></i>
             </a>
             <a href="https://www.youtube.com/channel/UC_RqkZkVSmRIKNnj_5QPv5Q" target="_blank" class="btn btn-icon social-youtube">
-              <i class="icon fa-youtube"></i>
+              <i class="icon socicon-youtube"></i>
             </a>
             <!-- <a href="#" target="_blank" class="btn btn-icon social-facebook">
               <i class="icon fa-facebook"></i>

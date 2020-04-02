@@ -21,19 +21,31 @@
             $message = "";
             switch($notification->type){
               case "App\Notifications\ApproveComment":
-                  $post = App\Model\Post::findOrFail($notification->data['post_id']);
+                  $post = App\Model\Post::find($notification->data['post_id']);
                   $title = "Komentar di diterima";
-                  $message = "Komentar anda pada postingan MiniTutor " . $post->user->name() . " Telah diterima.";
+                  if($post) {
+                    $message = "Komentar anda pada postingan MiniTutor " . $post->user->name() . " Telah diterima.";
+                  } else {
+                    $message = "Postingan ini tidak tersedia lagi.";
+                  }
               break;
               case "App\Notifications\NewPost":
-                  $post = App\Model\Post::findOrFail($notification->data['id']);
+                  $post = App\Model\Post::find($notification->data['id']);
                   $title = "Postingan baru";
-                  $message = "MiniTutor " . $post->user->name() . " Telah membagikan " . $post->type . " Baru.";
+                  if($post) {
+                    $message = "MiniTutor " . $post->user->name() . " Telah membagikan " . $post->type . " Baru.";
+                  } else {
+                    $message = "Postingan ini tidak tersedia lagi.";
+                  }
               break;
               case "App\Notifications\ApprovePost":
-                  $post = App\Model\Post::findOrFail($notification->data['id']);
+                  $post = App\Model\Post::find($notification->data['id']);
                   $title = "Postingan di terima";
-                  $message = 'Postingan anda telah di terima "'. $post->title .'"';
+                  if($post) {
+                    $message = 'Postingan anda telah di terima "'. $post->title .'"';
+                  } else {
+                    $message = "Postingan ini tidak tersedia lagi.";
+                  }
               break;
               case "App\Notifications\RequestMinitutorAccepted":
                   $title = "MiniTutor diterima";

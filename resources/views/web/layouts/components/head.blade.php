@@ -23,6 +23,7 @@
 
 <!-- Fonts -->
 <link rel="stylesheet" href="{{ asset('remark/fonts/web-icons/web-icons.min.css') }}">
+<link rel="stylesheet" href="https://d1azc1qln24ryf.cloudfront.net/114779/Socicon/style-cf.css?u8vidh">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
 
 <!-- Core -->
