@@ -18,7 +18,7 @@ class SendMailToMinitutor extends Controller
         foreach(Minitutor::all() as $minitutor){
             $email = $minitutor->user->email;
             if($email) {
-                $job = (new BoroadcastMailToMinitutor('dedeariansya1@gmail.com', $request->subject, $request->body))->delay(5);
+                $job = (new BoroadcastMailToMinitutor($email, $request->subject, $request->body))->delay(5);
                 $this->dispatch($job);
             }
         }
