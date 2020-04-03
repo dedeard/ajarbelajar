@@ -41,9 +41,9 @@ class HomeController extends Controller
         return view('web.video', $data);
     }
 
-    public function fax()
+    public function faq()
     {
-        return view('web.fax');
+        return view('web.faq');
     }
 
     public function constructiveFeedback()

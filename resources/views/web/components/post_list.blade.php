@@ -3,31 +3,21 @@
     <div class="card-header cover overlay">
       <img class="cover-image overlay-figure overlay-spin" src="{{ $post->thumbUrl() }}" alt="{{ $post->title }}">
     </div>
+    <a href="{{ route('post.show', $post->slug) }}" class="btn btn-primary btn-sm m-0 rounded-0 text-uppercase">
+      @if($post->type === 'article')
+        Baca Artikel
+      @else
+        Tonton Video
+      @endif
+    </a>
     <div class="card-block">
       <div class="card-content">
-        <h3 class="card-title">{{ $post->title }}</h3>
-        <p class="card-text">
-          <span class="badge badge-primary rounded-0 text-uppercase">{{ $post->type }}</span>
-          <small>
-            {{ $post->created_at->format('M d, Y') }} | 
-            <i class="icon wb-star"></i> {{ $post->avgRating() }} Bintang dari {{ $post->reviewCount() }} Ulasan</small> | 
-            <i class="wb wb-eye"></i> {{ $post->views_count }}
-        </p>
+        {{ $post->created_at->format('M d, Y') }}
+        <h3 class="card-title"> <a href="{{route('post.show', $post->slug)}}" class="text-dark">{{ $post->title }}</a></h3>
+        <div class="card-text small mb-15">
+          {{ $post->avgRating() }} Bintang dari {{ $post->reviewCount() }} Review - {{ $post->views_count }} dilihat - {{ $post->comments_count }} Komentar
+        </div>
         <p class="card-text">{{ $post->description }}</p>
-      </div>
-      <div class="card-actions">
-        <a class="btn btn-primary btn-outline card-link" href="{{ route('post.show', $post->slug) }}">
-          @if($post->type === 'article')
-            BACA
-          @else
-            TONTON
-          @endif
-        </a>
-        <a href="{{ route('post.show', $post->slug) }}#comments">
-          <i class="icon wb-chat"></i>
-          <span>{{ $post->comments_count }}</span>
-        </a>
-        <!-- <div class="rating" data-score="4" data-number="5" data-read-only="true"></div> -->
       </div>
     </div>
   </div>

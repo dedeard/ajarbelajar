@@ -7,16 +7,16 @@
       <img class="card-img overlay-figure img-fluid" src="{{ $popular->heroUrl() }}" alt="{{ $popular->title }}">
       <div class="card-img-overlay overlay-background text-center vertical-align">
         <div class="vertical-align-middle">
-          <div class="card-text card-divider">
-            <span>{{ $popular->created_at->format('d M Y') }}</span>
+          <div class="text-light">{{ $popular->created_at->format('d M Y') }}</div>
+          <h3 class="card-title text-truncate">{{ $popular->title }}</h3>
+          <div class="card-text text-light">
+            {{ $popular->avgRating() }} Bintang dari {{ $popular->reviewCount() }} Review - {{ $popular->views_count }} dilihat - {{ $popular->comments_count }} Komentar
           </div>
-          <h3 class="card-title mb-20">{{ $popular->title }}</h3>
-          <p class="text-white"><i class="wb wb-star"></i> {{ $popular->avgRating() }}/{{ $popular->reviewCount() }} | <i class="wb wb-chat"></i> {{ $popular->comments_count }} | <i class="wb wb-eye"></i> {{ $popular->views_count }}</p>
-          <a href="{{ route('post.show', $popular->slug) }}" class=" btn btn-outline btn-inverse">
+          <a href="{{ route('post.show', $popular->slug) }}" class=" btn btn-primary btn-sm px-30">
             @if($popular->type === 'video')
-              TONTON VIDEO
+              Tonton Video
             @else
-              BACA ARTIKEL
+              Baca Artikel
             @endif
           </a>
         </div>

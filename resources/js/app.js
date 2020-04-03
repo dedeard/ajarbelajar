@@ -185,7 +185,7 @@ if(AUTH_ID) {
           items: 1
         },
         992: {
-          items: 2
+          items: 1
         }
       },
       dots: false

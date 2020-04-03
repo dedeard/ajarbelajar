@@ -4,15 +4,11 @@
 @import "vendor/tagsinput";
 @import "~swiper/swiper.scss";
 html {
-  // overflow: hidden;
   width: 100%;
-  // height: 100%;
 }
 
 body {
   width: 100%;
-  // height: 100%;
-  // overflow: hidden;
   overflow-x: hidden;
   padding: 0;
   margin: 0;
@@ -33,8 +29,6 @@ body {
 
 .ab-layout {
   width: 100%;
-  // height: 100%;
-  // overflow-y: scroll;
   min-height: 100%;
   overflow-x: hidden;
   display: flex;

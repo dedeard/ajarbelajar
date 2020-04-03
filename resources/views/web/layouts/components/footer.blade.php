@@ -22,7 +22,7 @@
               <nav class="ab-footer__nav">
                 <!-- <a href="#" class="">Tentang Kami</a> -->
                 <!-- <a href="/constructive-feedback" class="">Visi & Misi</a> -->
-                <a href="/fax" class="">F.A.X</a>
+                <a href="/faq" class="">F.A.Q</a>
               </nav>
             </div>
           </div>

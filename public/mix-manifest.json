@@ -1,7 +1,7 @@
 {
-    "/js/admin.js": "/js/admin.js?id=1a1dad0bbca20d8e0ac4",
-    "/js/app.js": "/js/app.js?id=70726d7df00050448c06",
-    "/js/editor.js": "/js/editor.js?id=ea20d1443be2bd63b02d",
-    "/css/app.css": "/css/app.css?id=ab7cc1c03da1ad907962",
-    "/js/video-uploader.js": "/js/video-uploader.js?id=dba42a74a877f15ab91b"
+    "/js/admin.js": "/js/admin.js",
+    "/js/app.js": "/js/app.js",
+    "/js/editor.js": "/js/editor.js",
+    "/css/app.css": "/css/app.css",
+    "/js/video-uploader.js": "/js/video-uploader.js"
 }
