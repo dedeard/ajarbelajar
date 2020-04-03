@@ -83,7 +83,13 @@ window.SIDEBAR_CLOSE = true
           </div>
           @enderror
         </div>
-        <div class="form-group mt-30">
+        <div class="form-group">
+          <div class="checkbox-custom checkbox-primary">
+            <input type="checkbox" id="publish-check" name="publish">
+            <label for="publish-check">Simpan dan publish.</label>
+          </div>
+        </div>
+        <div class="form-group mt-15">
           <button type="submit" class="btn btn-primary ladda-button" data-style="slide-down">
             <span class="ladda-label">Simpan</span>
           </button>

@@ -48,6 +48,7 @@
   <link rel="stylesheet" href="{{ asset('remark/vendor/select2/select2.min.css') }}">
   <link rel="stylesheet" href="{{ asset('remark/vendor/dropify/dropify.min.css') }}">
   <link rel="stylesheet" href="{{ asset('remark/vendor/bootstrap-tagsinput/bootstrap-tagsinput.css') }}">
+  <link rel="stylesheet" href="{{ asset('remark/vendor/summernote/summernote.css') }}">
 
 
   <!-- Fonts -->
@@ -574,6 +575,7 @@
   <script src="{{ asset('remark/vendor/dropify/dropify.min.js') }}"></script>
   <script src="{{ asset('remark/vendor/select2/select2.full.min.js') }}"></script>
   <script src="{{ asset('remark/vendor/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"></script>
+  <script src="{{ asset('remark/vendor/summernote/summernote.min.js') }}"></script>
 
   <!-- Scripts -->
   <script src="{{ asset('remark/js/Component.js') }}"></script>
@@ -600,7 +602,10 @@
   <script src="{{ asset('remark/js/Plugin/dropify.js') }}"></script>
   <script src="{{ asset('remark/js/Plugin/select2.js') }}"></script>
   <script src="{{ asset('remark/js/Plugin/bootstrap-tagsinput.js') }}"></script>
-
+  <script src="{{ asset('remark/js/Plugin/summernote.js') }}"></script>
+  <script src="{{ asset('remark/js/Plugin/summernote.js') }}"></script>
+    
+    <!-- <script src="../../assets/examples/js/forms/editor-summernote.js"></script> -->
   
   <script>
     (function(document, window, $){

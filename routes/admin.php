@@ -8,6 +8,9 @@ Route::get('/dashboard', function(){
   return view('admin.dashboard');
 })->name('dashboard');
 
+Route::get('/mail/minitutor', 'SendMailToMinitutor@index')->name('mail.minitutor.index');
+Route::post('/mail/minitutor', 'SendMailToMinitutor@send')->name('mail.minitutor.send');
+
 Route::resource('users', 'UsersController');
 Route::resource('categories', 'CategoriesController')->except('show');
 Route::resource('permissions', 'PermissionsController')->except(['show', 'edit', 'update']);
