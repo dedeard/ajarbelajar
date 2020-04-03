@@ -100,7 +100,14 @@ class VideoController extends Controller
 
         $video->update($data);
         $video->retag($data['tags']);
-        return redirect()->back()->withSuccess('Video berhasil di update.');
+
+        if($request->publish === 'on'){
+            $video->requested_at = now();
+            $video->save();
+            return redirect()->route('dashboard.requested.index')->withSuccess('Terimakasih.. Video anda segera akan kami tinjau untuk di publikasikan.');
+        } else {
+            return redirect()->back()->withSuccess('Video berhasil di update.');
+        }
     }
 
     public function destroy(Request $request, $id)

@@ -123,7 +123,13 @@ class ArticleController extends Controller
             }
         }
 
-        return redirect()->back()->withSuccess('Artikel berhasil di update.');
+        if($request->publish === 'on'){
+            $article->requested_at = now();
+            $article->save();
+            return redirect()->route('dashboard.requested.index')->withSuccess('Terimakasih.. Artikel anda segera akan kami tinjau untuk di publikasikan.');
+        } else {
+            return redirect()->back()->withSuccess('Artikel berhasil di update.');
+        }
     }
 
     public function destroy(Request $request, $id)
