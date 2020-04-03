@@ -10,7 +10,8 @@
           <span class="badge badge-primary rounded-0 text-uppercase">{{ $post->type }}</span>
           <small>
             {{ $post->created_at->format('M d, Y') }} | 
-            <i class="icon wb-star"></i> {{ $post->avgRating() }} Bintang dari {{ $post->reviewCount() }} Ulasan</small>
+            <i class="icon wb-star"></i> {{ $post->avgRating() }} Bintang dari {{ $post->reviewCount() }} Ulasan</small> | 
+            <i class="wb wb-eye"></i> {{ $post->views_count }}
         </p>
         <p class="card-text">{{ $post->description }}</p>
       </div>

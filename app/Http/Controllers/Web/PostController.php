@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Model\PostComment;
 use App\Model\Post;
 use App\Model\PostReview;
+use App\Model\PostView;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\JsonLd;
 use Artesaos\SEOTools\Facades\OpenGraph;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -20,6 +22,9 @@ class PostController extends Controller
             ->where('slug', $slug)
             ->with(['comments' => function($query) use($request) {
                 $query->where('approved', 1)->orderBy('created_at', 'desc');
+            }])
+            ->withCount(['views'=> function($q){
+                $q->select(DB::raw('count(distinct(ip))'));
             }]);
 
         if(!$posts->exists()) return abort(404);
@@ -49,12 +54,13 @@ class PostController extends Controller
         OpenGraph::addProperty('locale', 'id-ID');
 
         OpenGraph::addImage($post->heroUrl());
-        
+
         JsonLd::setTitle($post->title);
         JsonLd::setDescription($post->description);
         JsonLd::setType('Article');
         // JsonLd::addImage($post->images->list('url'));
 
+        $post->views()->save(PostView::createViewLog($request));
         return view('web.post.show', ['post' => $post, 'review' => $rating ]);
     }
 

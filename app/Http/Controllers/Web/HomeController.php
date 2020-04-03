@@ -19,7 +19,7 @@ class HomeController extends Controller
             return view('web.search', ['posts' => $posts]);
         } else {
             $data = [];
-            $data['populars'] = Post::posts()->orderBy('comments_count', 'desc')->limit(3)->get();
+            $data['populars'] = Post::posts()->orderBy('views_count', 'desc')->limit(3)->get();
             $data['newArticles'] = Post::articles()->orderBy('created_at', 'desc')->limit(3)->get();
             $data['newVideos'] = Post::videos()->orderBy('created_at', 'desc')->limit(3)->get();
     

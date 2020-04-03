@@ -11,7 +11,7 @@
             <span>{{ $popular->created_at->format('d M Y') }}</span>
           </div>
           <h3 class="card-title mb-20">{{ $popular->title }}</h3>
-          <p class="text-white"><i class="wb wb-star"></i> {{ $popular->avgRating() }}/{{ $popular->reviewCount() }} | <i class="wb wb-chat"></i> {{ $popular->comments_count }}</p>
+          <p class="text-white"><i class="wb wb-star"></i> {{ $popular->avgRating() }}/{{ $popular->reviewCount() }} | <i class="wb wb-chat"></i> {{ $popular->comments_count }} | <i class="wb wb-eye"></i> {{ $popular->views_count }}</p>
           <a href="{{ route('post.show', $popular->slug) }}" class=" btn btn-outline btn-inverse">
             @if($popular->type === 'video')
               TONTON VIDEO

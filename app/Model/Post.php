@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Overtrue\LaravelFollow\Traits\CanBeFavorited;
 use Nagy\LaravelRating\Traits\Rate\Rateable;
 use Conner\Tagging\Taggable;
+use Illuminate\Support\Facades\DB;
 
 class Post extends Model
 {
@@ -150,6 +151,8 @@ class Post extends Model
         }]);
         $model->withCount(['comments' => function($query){
             return $query->where('approved', true);
+        }, 'views'=> function($q){
+            $q->select(DB::raw('count(distinct(ip))'));
         }]);
         return $model;
     }
