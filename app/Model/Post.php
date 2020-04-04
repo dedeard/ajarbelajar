@@ -92,7 +92,7 @@ class Post extends Model
 
     public function avgRating()
     {
-        return $this->reviews->avg('rating');
+        return round($this->reviews->avg('rating'), 2);
     }
 
     public function reviewCount()
@@ -145,7 +145,7 @@ class Post extends Model
             }
         }
         $model->with(['reviews' => function($q){
-            return $q->select(['post_id', 'rating']);
+            return $q->select(['post_id', DB::raw('(understand + inspiring + language_style + content_flow)/4 as rating')]);
         }, 'user' => function($query){
             return $query->select(['id', 'username', 'first_name', 'last_name']);
         }]);

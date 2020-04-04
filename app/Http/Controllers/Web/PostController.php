@@ -79,20 +79,34 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $data = $request->validate([
-            'body' => 'required|string|min:3|max:600',
-            'rating' => 'required|numeric|digits_between:1,5'
+            'message' => 'required|string|min:3|max:600',
+            'understand' => 'required|numeric|digits_between:1,5',
+            'inspiring' => 'required|numeric|digits_between:1,5',
+            'language_style' => 'required|numeric|digits_between:1,5',
+            'content_flow' => 'required|numeric|digits_between:1,5',
         ]);
         $q = $post->reviews()->where('user_id', Auth::user()->id);
+
+        if($request->sync_with_me && $request->sync_with_me === 'on'){
+            $data['sync_with_me'] = 1;
+        } else {
+            $data['sync_with_me'] = 0;
+        }
+
         if($q->exists()) {
             $q->first()->update($data);
         } else {
             PostReview::create([
                 'user_id' => $request->user()->id,
                 'post_id' => $id,
-                'body' => $data['body'],
-                'rating' => $data['rating'],
+                'message' => $data['message'],
+                'understand' => $data['understand'],
+                'inspiring' => $data['inspiring'],
+                'language_style' => $data['language_style'],
+                'content_flow' => $data['content_flow'],
+                'sync_with_me' => $data['sync_with_me'],
             ]);
         }
-        return redirect()->back()->withSuccess('Terima kasih atas ulasan kamu.');
+        return redirect()->back()->withSuccess('Terima kasih atas feedback kamu.');
     }
 }

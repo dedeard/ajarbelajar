@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Web\Dashboard;
 
-use App\Helpers\Seo;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ReviewController extends Controller
 {
     public function index(Request $request)
     {
         $data = [];
-        $reviews = $request->user()->postReviews()->select(['*'])->with(['post' => function($q){
+        $reviews = $request->user()->postReviews()->select(['*', DB::raw('(understand + inspiring + language_style + content_flow)/4 as rating')])->with(['post' => function($q){
             $q->select(['id', 'title', 'slug', 'created_at', 'updated_at']);
         }, 'user' => function($q){
             $q->select('*');

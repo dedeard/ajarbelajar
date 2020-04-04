@@ -11,8 +11,26 @@
       @foreach($reviews as $review)
         <div class="card card-block">
           <a class="h4" href="{{ route('post.show', $review->post->slug) }}">{{ $review->post->title }}</a>
-          <p class="m-0"><strong>{{ $review->rating }} Bintang</strong>, dari <span class="text-primary">{{ $review->user->name() }}</span>, {{ $review->created_at->format('d M Y H:i') }}</p>
-          <p>{{$review->body}}</p>
+          <table class="table table-bordered">
+            <tr>
+              <th>berkaitan dengan topik revewer</th>
+              <th>Tingkat pemahaman</th>
+              <th>Inspiratif</th>
+              <th>Bahasa dan gaya</th>
+              <th>Alur</th>
+              <th>Rating</th>
+            </tr>
+            <tr>
+              <td>{{ $review->sync_with_me ? 'Ya' : 'Tidak' }}</td>
+              <td>{{ $review->understand }}</td>
+              <td>{{ $review->inspiring }}</td>
+              <td>{{ $review->language_style }}</td>
+              <td>{{ $review->content_flow }}</td>
+              <td>{{ round($review->rating, 2) }}</td>
+            </tr>
+          </table>
+          <h4>Pesan</h4>
+          <p>{{$review->message}}</p>
         </div>
       @endforeach
     @else
