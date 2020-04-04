@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Model\Minitutor;
+use App\Model\Post;
 use App\Model\User;
 use Artesaos\SEOTools\Facades\SEOTools;
+use Illuminate\Support\Facades\DB;
 
 class MinitutorController extends Controller
 {
@@ -28,16 +30,7 @@ class MinitutorController extends Controller
         SEOTools::setTitle('Minitutor ' . $user->name());
         SEOTools::setDescription($user->about);
 
-        $posts = $user->posts()
-                    ->select(['id', 'category_id', 'user_id', 'title', 'slug', 'hero', 'description', 'created_at', 'type'])
-                    ->with(['user' => function($query){
-                        return $query->select(['id', 'username', 'first_name', 'last_name']);
-                    }, 'reviews' => function($q){
-                        return $q->select(['post_id', 'rating']);
-                    }])
-                    ->withCount(['comments' => function($query){
-                        return $query->where('approved', true);
-                    }, 'views'])->where('draf', false);
+        $posts = Post::postType($user->posts());
 
         return view('web.minitutor.show', ['user' => $user, 'posts' => $posts->paginate(12)]);
     }
