@@ -1,13 +1,12 @@
 /**
  * Require library
  */
-window.Popper = require('popper.js').default
 window.axios = require('axios').default
 window.Echo = require('laravel-echo').default
 window.Pusher = require('pusher-js')
 window.PerfectScrollbar = require('perfect-scrollbar').default
 window.Swal = require('sweetalert2')
-window.Swiper = require('swiper')
+window.Swiper = require('swiper').default
 window.tippy = require('tippy.js').default
 
 /**
@@ -43,3 +42,4 @@ tippy('[data-tippy-content]')
 require('./script/layout')
 require('./script/avatar-toggle')
 require('./script/delete-confirm')
+require('./script/popular-video-lg')
