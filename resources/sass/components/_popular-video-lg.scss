@@ -80,6 +80,7 @@
     padding: 40px;
     height: 400px;
     display: flex;
+    position: relative;
 
     @include media-breakpoint-down(md) {
       width: 100%;
@@ -92,6 +93,20 @@
       overflow: hidden;
     }
 
+    .category-info {
+      display: inline-block;
+      line-height: 22px;
+      font-size: 12px;
+      background-color: $primary;
+      font-weight: $font-weight-bold;
+      letter-spacing: 1px;
+      border-radius: 22px;
+      color: $white;
+      padding: 0 8px;
+      box-shadow: $box-shadow;
+      text-transform: uppercase;
+    }
+
     .title-info {
       font-size: 28px;
       font-weight: $font-weight-bold;
@@ -101,6 +116,7 @@
       letter-spacing: 2px;
       line-height: 1;
       margin-bottom: 5px;
+      margin-top: 5px;
     }
 
     .description-info {
@@ -112,8 +128,8 @@
     }
 
     .btn.btn-watch {
-      padding-left: 30px;
-      padding-right: 30px;
+      padding-left: 15px;
+      padding-right: 15px;
       letter-spacing: 1px;
       font-weight: $font-weight-bold;
       text-transform: uppercase;

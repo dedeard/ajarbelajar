@@ -18,12 +18,7 @@ class HomeController extends Controller
                                   ->appends(['search' => $request->input('search')]);
             return view('web.search', ['posts' => $posts]);
         } else {
-            $data = [];
-            $data['populars'] = Post::posts()->orderBy('views_count', 'desc')->limit(3)->get();
-            $data['newArticles'] = Post::articles()->orderBy('created_at', 'desc')->limit(3)->get();
-            $data['newVideos'] = Post::videos()->orderBy('created_at', 'desc')->limit(3)->get();
-    
-            return view('web.home', $data);
+            return view('web.home');
         }
     }
 

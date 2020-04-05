@@ -1,7 +1,9 @@
 var mySwiper = new window.Swiper('#ab-popular-video-lg', {
   loop: true,
-  cubeEffect: {
-    slideShadows: false,
+  effect: 'coverflow',
+  speed: 600,
+  autoplay: {
+    delay: 5000,
   },
   pagination: {
     el: '.swiper-pagination',

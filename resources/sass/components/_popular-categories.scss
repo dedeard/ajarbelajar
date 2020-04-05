@@ -1,0 +1,40 @@
+.popular-categories {
+  padding: 15px 0;
+  .popular-categories-title {
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: $font-weight-bold;
+    margin: 0;
+    margin-bottom: 10px;
+    line-height: 1;
+  }
+
+  .popular-categories-card {
+    display: block;
+    padding: 5px;
+    box-shadow: $box-shadow-sm;
+    background-color: $white;
+    overflow: hidden;
+    border-radius: 4px;
+    transition: $transition-base;
+    text-decoration: none;
+    margin-bottom: 15px;
+    border-top: 4px solid $primary;
+
+    &:hover {
+      box-shadow: $box-shadow;
+    }
+
+    .info-title {
+      display: block;
+      margin: 0;
+      padding: 10px;
+      font-size: 14px;
+      font-weight: $font-weight-bold;
+      color: $dark;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  }
+}
