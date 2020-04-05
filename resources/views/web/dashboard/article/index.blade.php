@@ -2,16 +2,26 @@
 @section('content')
 @component('web.dashboard.components.layoutWrapper')
 
-<div class="panel panel-bordered bg-light">
+<div class="panel panel-bordered">
   <div class="panel-heading bg-white">
     <h3 class="panel-title">Dafatar Artikel yang sedang kamu kelola.</h3>
-    <div class="panel-actions">
-      <div class="btn-group">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-create-article">
-          Buat baru
-        </button>
+  </div>
+  <div class="panel-body bg-light">
+    <form method="POST" action="{{ route('dashboard.article.store') }}">
+      @csrf
+      <div class="form-group">
+        <label class="mb-3">Buat artikel baru <span class="text-danger">*</span></label>
+        <input name="title" class="form-control @error('title') is-invalid @enderror" type="text" value="{{ old('title') }}" placeholder="Judul artikel" />
+        @error('title')
+        <div class="invalid-feedback">
+          <strong>{{ $message }}</strong>
+        </div>
+        @enderror
       </div>
-    </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Buat artikel</button>
+      </div>
+    </form>
   </div>
   <div class="panel-body">
     @if($articles->total())
@@ -51,8 +61,6 @@
     @else
     <div class="text-center py-100">
       <h3 class="text-muted">Belum ada Artikel.</h3>
-      <a data-toggle="modal" data-target="#modal-create-article" href="#" class="btn btn-primary px-50">Buat
-        Sekarang</a>
     </div>
     @endif
   </div>
@@ -61,45 +69,4 @@
   </div>
 </div>
 @endcomponent
-<div class="modal fade" id="modal-create-article" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Buat pos baru</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form method="POST" action="{{ route('dashboard.article.store') }}">
-          @csrf
-          <div class="form-group">
-            <label class="mb-3">Judul <span class="text-danger">*</span></label>
-            <input name="title" class="form-control @error('title') is-invalid @enderror" type="text"
-              value="{{ old('title') }}" />
-            @error('title')
-            <div class="invalid-feedback">
-              <strong>{{ $message }}</strong>
-            </div>
-            @enderror
-          </div>
-          <div class="form-group mt-30">
-            <button type="submit" class="btn btn-primary ladda-button" data-style="slide-down">
-              <span class="ladda-label">Simpan</span>
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
 @endsection
-
-@if($errors->any())
-@section('script')
-<script>
-$('#modal-create-article').modal('show')
-</script>
-@endsection
-@endif
