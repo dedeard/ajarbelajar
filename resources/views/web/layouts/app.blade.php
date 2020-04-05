@@ -8,8 +8,8 @@
 
 <head>
   @include('web.layouts.components.head')
-  <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+  <link rel="stylesheet" href="{{ mix('css/theme.css') }}">
+  <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   {!! SEOMeta::generate() !!}
   {!! OpenGraph::generate() !!}
   {!! Twitter::generate() !!}
@@ -27,7 +27,7 @@
 
     @include('web.layouts.components.footer')
   </div>
-  <script src="{{ asset('js/app.js') }}"></script>
+  <script src="{{ mix('js/app.js') }}"></script>
   @yield('script')
 </body>
 

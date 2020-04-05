@@ -1,42 +1,11 @@
 @import "vars";
 @import "variables";
 
+@import "layouts/app/base";
+@import "layouts/app/header";
+@import "layouts/app/sidebar";
+@import "layouts/app/footer";
 
-html {
-  width: 100%;
-}
-
-body {
-  width: 100%;
-  overflow-x: hidden;
-  padding: 0;
-  margin: 0;
-  padding-top: 60px;
-  padding-left: 240px;
-  background-color: $gray-100;
-  transition: padding-left 400ms cubic-bezier(.785,.135,.15,.86);
-  @include media-breakpoint-down(md) {
-    padding-left: 0px;
-  }
-}
-
-.ab-layout {
-  width: 100%;
-  min-height: 100%;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.ab-post-card {
-  height: 100%;
-}
-
-@import "layouts/header";
-@import "layouts/sidebar";
-@import "layouts/footer";
-@import "pages/dashboard";
-@import "pages/minitutor";
-@import "pages/home";
-@import "pages/auth";
-@import "custom/utilities";
+@import "components/avatar-uploader";
+@import "components/dashboard-nav";
+@import "components/post-card";

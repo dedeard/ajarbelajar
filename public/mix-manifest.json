@@ -1,8 +1,9 @@
 {
     "/js/admin.js": "/js/admin.js?id=1a1dad0bbca20d8e0ac4",
     "/js/app.js": "/js/app.js?id=1f9872f709f5fc995ce3",
-    "/js/editor.js": "/js/editor.js?id=a3ad1a2a17c41a85bce1",
-    "/css/app.css": "/css/app.css?id=c690bf00bb165ca9a470",
-    "/css/editor.css": "/css/editor.css?id=3fcba969c312a14e764b",
-    "/css/theme.css": "/css/theme.css?id=89726312cd72154a9111"
+    "/js/editor.js": "/js/editor.js?id=89279247ddc5e4f0ad87",
+    "/css/app.css": "/css/app.css?id=f979a8ea45277d61452e",
+    "/css/auth.css": "/css/auth.css?id=5aae872c902f734a3f9a",
+    "/css/editor.css": "/css/editor.css?id=bf6fb3e3e6eb96017ff5",
+    "/css/theme.css": "/css/theme.css?id=89cfc83a29ce3a698fb4"
 }

@@ -17,18 +17,6 @@
   <div class="ab-sidebar__scroll">
     <div class="ab-sidebar__scroll-wrapper" id="ab-sidebar-scroll">
       <div class="ab-sidebar__scroll-content">
-        <!-- <section class="page-aside-section">
-          <div class="ab-sidebar__ads--wrapper px-40">
-            <div class="p-15 text-center" style="border: 1px dashed #e6e6e6">
-              <a href="#">
-                <img src="https://cdn4.buysellads.net/uu/1/57095/1576856619-ad3.png" alt="ads via Carbon" style="width: 100%; display: block" />
-              </a>
-              <a href="#" class="font-size-10 text-danger d-block font-weight-light">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              </a>
-            </div>
-          </div>
-        </section> -->
         <section class="page-aside-section">
           <div class="list-group">
             <a class="list-group-item @if(Route::is('home')) active @endif" href="{{ route('home') }}"><i class="icon wb-home"></i>Home</a>

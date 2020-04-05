@@ -8,8 +8,8 @@
 
 <head>
   @include('web.layouts.components.head')
-  <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/editor.css') }}">
+  <link rel="stylesheet" href="{{ mix('css/theme.css') }}">
+  <link rel="stylesheet" href="{{ mix('css/editor.css') }}">
   {!! SEOMeta::generate() !!}
   {!! OpenGraph::generate() !!}
   {!! Twitter::generate() !!}
@@ -19,7 +19,7 @@
 
 <body>
   @yield('content')
-  <script src="{{ asset('js/editor.js') }}"></script>
+  <script src="{{ mix('js/editor.js') }}"></script>
   @yield('script')
 </body>
 </html>
