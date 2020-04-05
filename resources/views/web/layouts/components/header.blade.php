@@ -60,7 +60,7 @@
                     <a href="{{ route('dashboard.edit') }}" class="btn btn-inverse btn-block">Edit profile</a>
                   </div>
                   <div class="card-footer card-footer-transparent">
-                    <a href="{{ route('logout') }}" class="btn btn-wide btn-sm btn-danger" onclick="event.preventDefault(); $('#form-logout').submit();">Keluar</a>
+                    <a href="{{ route('logout') }}" class="btn btn-wide btn-sm btn-danger" onclick="event.preventDefault(); document.getElementById('form-logout').submit();">Keluar</a>
                     <form action="{{ route('logout') }}" method="post" id="form-logout">@csrf </form>
                   </div>
                 </div>
