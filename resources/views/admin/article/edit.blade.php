@@ -2,7 +2,7 @@
 @section('title', 'Minitutor')
 @section('content')
 
-<form class="row" method="POST" action="{{ route('admin.articles.update', $article->id) }}" enctype="multipart/form-data">
+<form class="row" method="POST" action="{{ route('admin.articles.update', $article->id) }}" enctype="multipart/form-data" id="app-editor-layout">
   @csrf
   @method('put')
 
@@ -13,8 +13,7 @@
       </div>
       <hr class="m-0">
       <div class="panel-body">
-        <textarea name="body" id="post-editor" class="d-none">{{ $article->body }}</textarea>
-        <div id="codex-editor" image-url="{{ route('admin.articles.image', $article->id) }}"></div>
+        <app-editorjs image-url="{{ route('admin.articles.image', $article->id) }}" editor-body="{{ $article->body }}"></app-editorjs>
       </div>
     </div>
   </div>
@@ -26,9 +25,7 @@
       </div>
       <hr class="m-0">
       <div class="panel-body">
-        <div class="p-0">
-          <input type="file" name="hero" data-plugin="dropify" data-default-file="{{ $article->hero ? $article->heroUrl() : '' }}" />
-        </div>
+        <app-hero-chose name="hero" default-img="{{ $article->thumbUrl() }}"></app-hero-chose>
       </div>
     </div>
     <div class="panel">
@@ -57,17 +54,7 @@
         </div>
         <div class="form-group">
           <label class="mb-3">Tag</label>
-          @php
-            $tags = [];
-            foreach($article->tags as $tag) array_push($tags, $tag->name);
-            $tags = implode(',', $tags);
-          @endphp
-          <input class="form-control @error('tags') is-invalid @enderror" name="tags" data-plugin="tagsinput" value="{{ $tags }}" />
-          @error('tags')
-            <div class="invalid-feedback">
-              <strong>{{ $message }}</strong>
-            </div>
-          @enderror
+          <app-tags-input :tags="{{ $article->tags }}" name="tags"></app-tags-input>
         </div>
         <div class="form-group">
           <label class="mb-3">Deskripsi</label>

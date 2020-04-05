@@ -1,5 +1,5 @@
 .ab-header {
-  height: 60px;
+  // height: 60px;
   padding: 10px 0;
   background-color: $white;
   position: fixed;
@@ -15,7 +15,7 @@
   }
 
   &__left {
-    min-width: 260px;
+    min-width: 240px;
 
     @include media-breakpoint-down(md) {
       min-width: initial;

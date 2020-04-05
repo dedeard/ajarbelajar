@@ -53,33 +53,3 @@
         line-height: 1;
     }
 }
-
-
-.upload-video-wrapper {
-    display: flex;
-    position: relative;
-    width: 100%;
-    min-height: 200px;
-    background-color: $gray-100;
-    border: 1px dashed $gray-400;
-    &:hover {
-        border: 1px solid $gray-400;
-    }
-    .upload-video-content {
-        margin: auto;
-        .message {
-            font-size: 18px;
-            font-weight: $font-weight-bold;
-        }
-    }
-    input{
-        display: block;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        border: none;
-        opacity: 0;
-        z-index: 10;
-        cursor: pointer;
-    }
-}

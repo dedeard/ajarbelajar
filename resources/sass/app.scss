@@ -1,8 +1,7 @@
 @import "vars";
 @import "variables";
-@import "vendor/perfect-scrollbar";
-@import "vendor/tagsinput";
-@import "~swiper/swiper.scss";
+
+
 html {
   width: 100%;
 }
@@ -13,17 +12,11 @@ body {
   padding: 0;
   margin: 0;
   padding-top: 60px;
-  padding-left: 260px;
+  padding-left: 240px;
   background-color: $gray-100;
   transition: padding-left 400ms cubic-bezier(.785,.135,.15,.86);
-  &.ab-sidebar--close {
-    padding-left: 0px;
-  }
   @include media-breakpoint-down(md) {
     padding-left: 0px;
-  }
-  &.preload {
-    transition: none;
   }
 }
 
@@ -35,6 +28,10 @@ body {
   flex-direction: column;
 }
 
+.ab-post-card {
+  height: 100%;
+}
+
 @import "layouts/header";
 @import "layouts/sidebar";
 @import "layouts/footer";
@@ -43,7 +40,3 @@ body {
 @import "pages/home";
 @import "pages/auth";
 @import "custom/utilities";
-
-.ab-post-card {
-  height: 100%;
-}

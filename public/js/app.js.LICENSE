@@ -23,36 +23,11 @@
  * SOFTWARE.
  */
 
-/*!
- * jQuery JavaScript Library v3.4.1
- * https://jquery.com/
- *
- * Includes Sizzle.js
- * https://sizzlejs.com/
- *
- * Copyright JS Foundation and other contributors
- * Released under the MIT license
- * https://jquery.org/license
- *
- * Date: 2019-05-01T21:04Z
- */
-
-/*!
- * Sizzle CSS Selector Engine v2.3.4
- * https://sizzlejs.com/
- *
- * Copyright JS Foundation and other contributors
- * Released under the MIT license
- * https://js.foundation/
- *
- * Date: 2019-04-08
- */
-
-/*!
-  * Bootstrap v4.4.1 (https://getbootstrap.com/)
-  * Copyright 2011-2019 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
-  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-  */
+/**!
+* tippy.js v6.1.1
+* (c) 2017-2020 atomiks
+* MIT License
+*/
 
 /*!
  * Pusher JavaScript Library v5.1.1
@@ -60,15 +35,6 @@
  *
  * Copyright 2017, Pusher
  * Released under the MIT licence.
- */
-
-/*!
- * =============================================================
- * dropify v0.2.1 - Override your input files with style.
- * https://github.com/JeremyFagis/dropify
- *
- * (c) 2017 - Jeremy FAGIS <jeremy@fagis.fr> (http://fagis.fr)
- * =============================================================
  */
 
 /*!
@@ -82,12 +48,4 @@
  *
  * @author   Feross Aboukhadijeh <http://feross.org>
  * @license  MIT
- */
-
-/*!
- * Ladda
- * http://lab.hakim.se/ladda
- * MIT licensed
- *
- * Copyright (C) 2018 Hakim El Hattab, http://hakim.se
  */

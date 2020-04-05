@@ -1,30 +1,16 @@
 const mix = require('laravel-mix');
-
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel application. By default, we are compiling the Sass
- | file for the application as well as bundling up all the JS files.
- |
- */
-const config = {
-   resolve: {
-      alias: {
-         'vars': path.resolve('resources/sass/remark/scss/_vars.scss'),
-      }
-   }
-}
+const alias = { 'vars': path.resolve('resources/sass/remark/scss/_vars.scss') }
 
 mix
-   .webpackConfig(config)
+   .webpackConfig({ resolve: { alias } })
    .js('resources/js/editor.js', 'public/js')
    .js('resources/js/app.js', 'public/js')
    .js('resources/js/admin.js', 'public/js')
-   .js('resources/js/video-uploader.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+   .sass('resources/sass/app.scss', 'public/css')
+   .sass('resources/sass/editor.scss', 'public/css')
+   .sass('resources/sass/theme.scss', 'public/css')
+   .disableNotifications()
+   .options({ processCssUrls: false });
 
 if (!mix.inProduction()) {
    mix.browserSync({ proxy: 'http://127.0.0.1:8000' });

@@ -17,8 +17,8 @@
 <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('icons/favicon-96x96.png') }}">
 <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('icons/favicon-16x16.png') }}">
 <link rel="manifest" href="{{ asset('manifest.json') }}">
-<meta name="msapplication-TileColor" content="#677ae4">
 <meta name="msapplication-TileImage" content="{{ asset('icons/ms-icon-144x144.png') }}">
+<meta name="msapplication-TileColor" content="#677ae4">
 <meta name="theme-color" content="#677ae4">
 
 <!-- Fonts -->
@@ -26,19 +26,9 @@
 <link rel="stylesheet" href="https://d1azc1qln24ryf.cloudfront.net/114779/Socicon/style-cf.css?u8vidh">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
 
-<!-- Core -->
-<link rel="stylesheet" href="{{ asset('remark/css/bootstrap.min.css') }}">
-<link rel="stylesheet" href="{{ asset('remark/css/bootstrap-extend.min.css') }}">
-<link rel="stylesheet" href="{{ asset('remark/css/site.min.css') }}">
-<link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
-<!-- pluguns -->
-<link rel="stylesheet" href="{{ asset('remark/vendor/ladda/ladda.min.css') }}">
-<link rel="stylesheet" href="{{ asset('remark/vendor/dropify/dropify.min.css') }}">
-<link rel="stylesheet" href="{{ asset('remark/vendor/owl-carousel/owl.carousel.min.css') }}">
-
-@auth <meta name="api-token" content="{{ Auth::user()->apiToken() }}"> @endauth
-<script src="{{ asset('remark/vendor/breakpoints/breakpoints.js') }}"></script>
+@auth
+<meta name="api-token" content="{{ Auth::user()->apiToken() }}">
+@endauth
 <script>
   @auth
     var AUTH_ID = {{ Auth::user()->id }};
@@ -46,5 +36,4 @@
   @else
     var AUTH_ID = null;
   @endauth
-  Breakpoints();
 </script>

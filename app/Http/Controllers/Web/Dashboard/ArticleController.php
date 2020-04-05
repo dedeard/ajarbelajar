@@ -103,7 +103,7 @@ class ArticleController extends Controller
         }
 
         $article->update($data);
-        $article->retag($data['tags']);
+        if(isset($data['tags'])) $article->retag($data['tags']);
 
         $body = json_decode($data['body']);
         $images = $article->images;

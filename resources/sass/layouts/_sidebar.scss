@@ -9,7 +9,9 @@
 
 .ab-sidebar--close {
   .ab-sidebar {
-    transform: translateX(-100%);
+    @include media-breakpoint-down(md) {
+      transform: translateX(-100%);
+    }
   }
   .ab-sidebar-backdrop {
     opacity: 0;
@@ -17,12 +19,6 @@
   }
 }
 
-body.preload {
-  .ab-sidebar-backdrop,
-  .ab-sidebar {
-    transition: none !important;
-  }
-}
 
 .ab-sidebar-backdrop {
   position: fixed;
@@ -47,7 +43,7 @@ body.preload {
   top: 0;
   bottom: 0;
   padding-top: 60px;
-  width: 260px;
+  width: 240px;
   max-height: 100%;
   background-color: $white;
   box-shadow: $box-shadow;
@@ -66,7 +62,7 @@ body.preload {
       display: flex;
       width: 100%;
     }
-    width: 260px;
+    width: 240px;
     height: 60px;
     padding: 10px 0;
     box-shadow: $box-shadow-sm;

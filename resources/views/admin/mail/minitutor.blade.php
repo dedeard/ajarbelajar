@@ -14,10 +14,7 @@
       <div class="form-group">
         <textarea id="summernote" data-plugin="summernote" name="body">
           <h1>Hello Minitutor!</h1>
-          <p>
-            <span style="font-size: 1.5rem;">How's life? How do you do? Because we want to share something special for you!
-            </span></p>
-          <p><span style="font-size: 1.5rem;">Karena web AjarBelajar mau launching versi baru, kita mau kasih tau duluan nih ke minitutor yang udah nemenin kita sejak lama. Selain itu, ngobrol-ngobrol santai aja kita tentang AjarBelajar n beyond👍</span></p>
+          <h3>Meeting bersama Minitutor dan Media Partner Sebentar Lagi! Kami mulai tepat waktu :)</h3>
           <p><span style="font-size: 1.5rem;">Yuk join Zoom call kita "AjarBelajar Minitutor Meeting" di:</span></p>
           <p>
             <span style="font-size: 1.5rem;">

@@ -2,7 +2,7 @@
 @section('title', 'Minitutor')
 @section('content')
 
-<form class="row" method="POST" action="{{ route('admin.videos.update', $video->id) }}" enctype="multipart/form-data">
+<form class="row" method="POST" action="{{ route('admin.videos.update', $video->id) }}" enctype="multipart/form-data" id="app-editor-layout">
   @csrf
   @method('put')
 
@@ -50,9 +50,7 @@
           </div>
         </div>
 
-
-        <textarea name="body" id="post-editor" class="d-none">{{ $video->body }}</textarea>
-        <div id="codex-editor" image-url="{{ route('admin.videos.image', $video->id) }}"></div>
+        <app-editorjs image-url="{{ route('admin.videos.image', $video->id) }}" editor-body="{{ $video->body }}"></app-editorjs>
       </div>
     </div>
   </div>
@@ -64,9 +62,7 @@
       </div>
       <hr class="m-0">
       <div class="panel-body">
-        <div class="p-0">
-          <input type="file" name="hero" data-plugin="dropify" data-default-file="{{ $video->hero ? $video->heroUrl() : '' }}" />
-        </div>
+        <app-hero-chose name="hero" default-img="{{ $video->thumbUrl() }}"></app-hero-chose>
       </div>
     </div>
     <div class="panel">
@@ -95,12 +91,7 @@
         </div>
         <div class="form-group">
           <label class="mb-3">Tag</label>
-          @php
-            $tags = [];
-            foreach($video->tags as $tag) array_push($tags, $tag->name);
-            $tags = implode(',', $tags);
-          @endphp
-          <input class="form-control @error('tags') is-invalid @enderror" name="tags" data-plugin="tagsinput" value="{{ $tags }}" />
+          <app-tags-input :tags="{{ $video->tags }}" name="tags"></app-tags-input>
           @error('tags')
             <div class="invalid-feedback">
               <strong>{{ $message }}</strong>

@@ -7,7 +7,7 @@
             <img src="{{ asset('img/logo/logo-text.svg') }}" alt="Logo ajarbelajar" class="d-none d-lg-block" />
             <img src="{{ asset('img/logo/logo.svg') }}" alt="Logo ajarbelajar" class="d-block d-lg-none" />
           </a>
-          <a href="#" class="ab-header__sidebar-toggle ml-lg-auto ml-10" data-toggle="sidebar">
+          <a href="#" class="ab-header__sidebar-toggle ml-lg-auto ml-10 d-lg-none" data-toggle="sidebar">
             <i class="wb-menu icon"></i>
           </a>
           <a href="#" class="ab-header__sidebar-toggle d-block d-lg-none" data-toggle="header-form-search">
@@ -69,7 +69,7 @@
           </div>
           @else
           <div class="ab-header__right-auth-buttons">
-            <a href="{{ route('login') }}" class="ab-header__right-auth-button-signin btn btn-outline btn-default mr-10">Masuk</a>
+            <a href="{{ route('login') }}" class="ab-header__right-auth-button-signin btn btn-outline btn-default mr-10 d-none d-md-block">Masuk</a>
             <a href="{{ route('register') }}" class="ab-header__right-auth-button-signinup btn btn-primary">Daftar</a>
           </div>
           @endauth

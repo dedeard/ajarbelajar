@@ -1,7 +1,8 @@
 {
     "/js/admin.js": "/js/admin.js?id=1a1dad0bbca20d8e0ac4",
-    "/js/app.js": "/js/app.js?id=3bdf9a25d1db87a0be71",
-    "/js/editor.js": "/js/editor.js?id=ea20d1443be2bd63b02d",
-    "/css/app.css": "/css/app.css?id=ab7cc1c03da1ad907962",
-    "/js/video-uploader.js": "/js/video-uploader.js?id=dba42a74a877f15ab91b"
+    "/js/app.js": "/js/app.js?id=1f9872f709f5fc995ce3",
+    "/js/editor.js": "/js/editor.js?id=a3ad1a2a17c41a85bce1",
+    "/css/app.css": "/css/app.css?id=c690bf00bb165ca9a470",
+    "/css/editor.css": "/css/editor.css?id=3fcba969c312a14e764b",
+    "/css/theme.css": "/css/theme.css?id=89726312cd72154a9111"
 }

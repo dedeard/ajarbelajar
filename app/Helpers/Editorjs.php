@@ -8,6 +8,7 @@ class Editorjs
   {
     if ($data) {
       $data = json_decode($data);
+      if (!isset($data->blocks)) return "";
       $html = "";
       foreach ($data->blocks as $block) {
         switch ($block->type) {

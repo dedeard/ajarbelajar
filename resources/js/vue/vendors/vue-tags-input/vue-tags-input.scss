@@ -1,0 +1,181 @@
+@import 'vars';
+
+$primary: #5C6BC0 !default;
+$error: #e54d42 !default;
+$success: #68cd86 !default;
+$warn: $warning !default;
+
+.ti-tag-input {
+  background-color: transparent;
+  color: inherit;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  top: 0px;
+  position: absolute;
+  width: 100%;
+  line-height: inherit;
+}
+
+.ti-tag-input::-ms-clear {
+  display: none;
+}
+
+
+.ti-icon {
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  font-size: 0.6em;
+  padding-left: 3px;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ul {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+input:focus {
+  outline: none;
+}
+
+input[disabled] {
+  background-color: transparent;
+}
+
+.vue-tags-input {
+  max-width: 100%;
+  position: relative;
+  background-color: #fff;
+}
+
+div.vue-tags-input.disabled {
+  opacity: 0.5;
+
+  * {
+    cursor: default;
+  }
+}
+
+.ti-input {
+  border: 1px solid $input-border;
+  border-radius: $input-border-radius;
+  display: flex;
+  padding: 4px;
+  width: 100%;
+  flex-wrap: wrap;
+  font-weight: $font-weight-light;
+  box-shadow: none;
+  transition: box-shadow .25s linear, border .25s linear, color .25s linear, background-color .25s linear;
+}
+
+.ti-tags {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  line-height: 1em;
+}
+
+.ti-tag {
+  background-color: $primary;
+  color: #fff;
+  border-radius: 2px;
+  display: flex;
+  padding: 3px 5px;
+  margin: 2px;
+  font-size: .85em;
+
+  &:focus {
+    outline: none;
+  }
+
+  .ti-content {
+    display: flex;
+    align-items: center;
+  }
+
+  .ti-tag-center {
+    position: relative;
+  }
+
+  span {
+    line-height: .85em;
+  }
+
+  span.ti-hidden {
+    padding-left: 14px;
+    visibility: hidden;
+    height: 0px;
+    white-space: pre;
+  }
+
+  .ti-actions {
+    margin-left: 2px;
+    display: flex;
+    align-items: center;
+    font-size: 1.15em;
+
+    i {
+      cursor: pointer;
+    }
+  }
+
+  &:last-child {
+    margin-right: 4px;
+  }
+
+  &.ti-invalid, &.ti-tag.ti-deletion-mark {
+    background-color: $error;
+  }
+}
+
+.ti-new-tag-input-wrapper {
+  display: flex;
+  flex: 1 0 auto;
+  padding: 3px 5px;
+  margin: 2px;
+  font-size: .85em;
+
+  input {
+    flex: 1 0 auto;
+    min-width: 100px;
+    border: none;
+    padding: 0px;
+    margin: 0px;
+  }
+}
+
+.ti-new-tag-input {
+  line-height: initial;
+}
+
+.ti-autocomplete {
+  border: 1px solid #ccc;
+  border-top: none;
+  position: absolute;
+  width: 100%;
+  background-color: #fff;
+  z-index: 20;
+}
+
+.ti-item > div {
+  cursor: pointer;
+  padding: 3px 6px;
+  width: 100%;
+}
+
+.ti-selected-item {
+  background-color: $primary;
+  color: #fff;
+}
