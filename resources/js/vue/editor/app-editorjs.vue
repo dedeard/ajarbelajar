@@ -20,7 +20,8 @@ import InlineCode from '@editorjs/inline-code'
 import LinkTool from '@editorjs/link'
 import Embed from '@editorjs/embed'
 import Table from '@editorjs/table'
-import FromData from 'form-data'
+import FormData from 'form-data'
+import axios from 'axios';
 
 export default {
   props: ['image-url', 'editor-body'],
@@ -51,7 +52,7 @@ export default {
           config: {
             uploader: {
               uploadByFile(file){
-                var data = new FromData;
+                var data = new FormData;
                 data.append('file', file);
                 const url = self.imageUrl
                 return axios.post(url, data).then((response) => {

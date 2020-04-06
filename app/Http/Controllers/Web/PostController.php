@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Model\Activity;
 use App\Model\PostComment;
 use App\Model\Post;
 use App\Model\PostReview;
@@ -37,7 +38,8 @@ class PostController extends Controller
 
         if($request->user()) {
             $rating = $post->reviews()->where('user_id', Auth::user()->id);
-            $rating = ($rating->exists()) ? $rating->first() : null; 
+            $rating = ($rating->exists()) ? $rating->first() : null;
+            Activity::createUserActivity($request->user(), $post);
         }
 
         $keywords = [];
@@ -60,7 +62,14 @@ class PostController extends Controller
         JsonLd::setTitle($post->title);
         JsonLd::setDescription($post->description);
         JsonLd::setType('Article');
-        // JsonLd::addImage($post->images->list('url'));
+
+        if($post->images) {
+            $img_urls = [];
+            foreach($post->images as $img) {
+                array_push($img_urls, ['url' => asset('/storage/post/image/' . $img->name)]);
+            }
+            JsonLd::addImage($img_urls);
+        }
 
         $post->views()->save(PostView::createViewLog($request));
         return view('web.post.show', ['post' => $post, 'review' => $rating ]);
