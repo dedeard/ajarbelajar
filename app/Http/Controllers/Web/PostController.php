@@ -22,6 +22,8 @@ class PostController extends Controller
             ->where('slug', $slug)
             ->with(['comments' => function($query) use($request) {
                 $query->where('approved', 1)->orderBy('created_at', 'desc');
+            }, 'reviews' => function($q){
+                return $q->select(['post_id', DB::raw('(understand + inspiring + language_style + content_flow)/4 as rating')]);
             }])
             ->withCount(['views'=> function($q){
                 $q->select(DB::raw('count(distinct(ip))'));

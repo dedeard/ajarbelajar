@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Model\PostComment;
 use App\Notifications\ApproveComment;
+use App\Notifications\CommentToMinitutorPost;
 
 class PostCommentObserver
 {
@@ -28,6 +29,10 @@ class PostCommentObserver
     {
         if($postComment->approved !== $postComment->getOriginal('approved') && $postComment->approved === 1) {
             $postComment->user->notify(new ApproveComment($postComment));
+            if(isset($postComment->post->user->minitutor)) {
+                $postComment->post->user->minitutor->incrementPoint(4);
+                $postComment->post->user->notify(new CommentToMinitutorPost($postComment));
+            }
         }
     }
 

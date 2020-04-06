@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Jobs\CreateNewPostNotificationJob;
 use App\Model\Post;
 use App\Notifications\ApprovePost;
+use App\Notifications\PostUpdated;
 
 class PostObserver
 {
@@ -16,7 +17,10 @@ class PostObserver
      */
     public function created(Post $post)
     {
-        $post->user->notify(new ApprovePost($post));
+        if(isset($post->user->minitutor)){
+            $post->user->notify(new ApprovePost($post));
+            $post->user->minitutor->incrementPoint(25);
+        }
     }
 
     /**
@@ -27,6 +31,12 @@ class PostObserver
      */
     public function updated(Post $post)
     {
+        if(!$post->draf) {
+            if($post->user->minitutor){
+                $post->user->notify(new PostUpdated($post));
+            }
+        }
+
         if($post->draf !== $post->getOriginal('draf') && !$post->draf) {
             CreateNewPostNotificationJob::dispatch($post->id);
         }

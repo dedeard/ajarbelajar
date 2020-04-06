@@ -20,6 +20,7 @@ class Minitutor extends Model
         'contact',
         'expectation',
         'reason',
+        'points',
     ];
 
     public function user()
@@ -30,5 +31,10 @@ class Minitutor extends Model
     public function posts()
     {
         return $this->hasMany(Post::class, 'user_id', 'user_id');
+    }
+
+    public function incrementPoint($point) {
+        $this->points = $this->points + $point;
+        return $this->save();
     }
 }

@@ -29,11 +29,30 @@
                     $message = "Postingan ini tidak tersedia lagi.";
                   }
               break;
+              case "App\Notifications\CommentToMinitutorPost":
+                $post = App\Model\Post::find($notification->data['post_id']);
+                $comment = App\Model\PostComment::find($notification->data['comment_id']);
+                $title = "Postingan dikomentari";
+                if($post && $comment) {
+                  $message = $comment->user->name() . " Mengomentari " . $post->type . " Anda.";
+                } else {
+                  $message = "Postingan ini tidak tersedia lagi.";
+                }
+              break;
               case "App\Notifications\NewPost":
                   $post = App\Model\Post::find($notification->data['id']);
                   $title = "Postingan baru";
                   if($post) {
                     $message = "MiniTutor " . $post->user->name() . " Telah membagikan " . $post->type . " Baru.";
+                  } else {
+                    $message = "Postingan ini tidak tersedia lagi.";
+                  }
+              break;
+              case "App\Notifications\PostUpdated":
+                  $post = App\Model\Post::find($notification->data['id']);
+                  $title = "Postingan diedit";
+                  if($post) {
+                    $message = "Kontent kamu telah diedit.";
                   } else {
                     $message = "Postingan ini tidak tersedia lagi.";
                   }
@@ -54,6 +73,15 @@
               case "App\Notifications\RequestMinitutorRejected":
                   $title = "MiniTutor ditolak";
                   $message = 'Permintaan kamu untuk menjadi minitutor tidak diterima';
+              break;
+              case "App\Notifications\ReviewToMinitutorPost":
+                $postReview = App\Model\PostReview::find($notification->data['review_id']);
+                $title = "Feedback";
+                if($postReview) {
+                  $message = $postReview->user->name() . ' telah memberikan feedback pada kontent kamu.';
+                } else {
+                  $message = "Feedback ini tidak tersedia lagi.";
+                }
               break;
             }
           ?>

@@ -9,6 +9,9 @@
           <div class="vertical-align-middle">
             <div class="font-size-20 mb-5 text-truncate text-capitalize">{{ Auth::user()->name() }}</div>
             <div class="font-size-14 text-truncate">{{ '@' . Auth::user()->username }}</div>
+            @if(Auth::user()->minitutor)
+            <div class="font-size-14">EP. {{ Auth::user()->minitutor->points }}</div>
+            @endif
           </div>
         </div>
       </div>

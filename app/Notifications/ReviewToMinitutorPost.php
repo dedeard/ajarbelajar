@@ -2,23 +2,23 @@
 
 namespace App\Notifications;
 
-use App\Model\Post;
+use App\Model\PostReview;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 
-class ApprovePost extends Notification
+class ReviewToMinitutorPost extends Notification
 {
     use Queueable;
 
-    private $post = null;
+    private $postReview = null;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Post $post)
+    public function __construct(PostReview $postReview)
     {
-        $this->post = $post;
+        $this->postReview = $postReview;
     }
 
     /**
@@ -32,6 +32,7 @@ class ApprovePost extends Notification
         return ['database', 'broadcast'];
     }
 
+
     /**
      * Get the array representation of the notification.
      *
@@ -41,8 +42,7 @@ class ApprovePost extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id' => $this->post->id,
-            'type' => $this->post->type,
+            'review_id' => $this->postReview->id
         ];
     }
 }

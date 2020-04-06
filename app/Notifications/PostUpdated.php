@@ -6,11 +6,11 @@ use App\Model\Post;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 
-class ApprovePost extends Notification
+class PostUpdated extends Notification
 {
     use Queueable;
-
     private $post = null;
+
     /**
      * Create a new notification instance.
      *

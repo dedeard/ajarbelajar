@@ -2,23 +2,25 @@
 
 namespace App\Notifications;
 
-use App\Model\Post;
+use App\Model\PostComment;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 
-class ApprovePost extends Notification
+class CommentToMinitutorPost extends Notification
 {
     use Queueable;
 
-    private $post = null;
+    private $comment, $post;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Post $post)
+    public function __construct(PostComment $comment)
     {
-        $this->post = $post;
+        $this->post = $comment->post;
+        $this->comment = $comment;
     }
 
     /**
@@ -41,8 +43,8 @@ class ApprovePost extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id' => $this->post->id,
-            'type' => $this->post->type,
+            'post_id' => $this->post->id,
+            'comment_id' => $this->comment->id
         ];
     }
 }

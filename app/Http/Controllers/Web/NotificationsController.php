@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Model\Post;
+use App\Model\PostReview;
 use Illuminate\Http\Request;
 
 class NotificationsController extends Controller
@@ -25,13 +26,24 @@ class NotificationsController extends Controller
                 $post = Post::findOrFail($notification->data['post_id']);
                 return redirect()->route('post.show', $post->slug);
             break;
+            case "App\Notifications\CommentToMinitutorPost":
+                $post = Post::findOrFail($notification->data['post_id']);
+                return redirect()->route('post.show', $post->slug);
+            break;
             case "App\Notifications\NewPost":
+                $post = Post::findOrFail($notification->data['id']);
+                return redirect()->route('post.show', $post->slug);
+            break;
+            case "App\Notifications\PostUpdated":
                 $post = Post::findOrFail($notification->data['id']);
                 return redirect()->route('post.show', $post->slug);
             break;
             case "App\Notifications\ApprovePost":
                 $post = Post::findOrFail($notification->data['id']);
                 return redirect()->route('dashboard.accepted.index');
+            break;
+            case "App\Notifications\ReviewToMinitutorPost":
+                return redirect()->route('dashboard.review.index');
             break;
             case "App\Notifications\RequestMinitutorAccepted":
                 return redirect()->route('dashboard.index');
