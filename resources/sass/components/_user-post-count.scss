@@ -1,0 +1,31 @@
+.user-post-count {
+  display: block;
+  padding: 30px;
+  margin: 30px 0;
+  background-color: $white;
+  box-shadow: $box-shadow-sm;
+  border-radius: 4px;
+  border-top: 4px solid $primary;
+
+  &-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    margin: 10px 0;
+    margin-bottom: 5px;
+  }
+
+  &-description {
+    text-align: center;
+    color: $dark;
+    font-size: 14px;
+    font-weight: $font-weight-light;
+    margin-bottom: 15px;
+  }
+
+  .card {
+    box-shadow: $box-shadow;
+    border-bottom: 4px solid $primary;
+  }
+}
