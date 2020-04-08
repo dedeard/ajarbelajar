@@ -23,4 +23,16 @@ body {
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
+
+  .v-loading {
+    display: block;
+    position: fixed;
+    z-index: 999999;
+    background-color: $light;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: scale(1.5);
+  }
 }

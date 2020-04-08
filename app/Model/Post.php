@@ -80,6 +80,11 @@ class Post extends Model
         return $this->hasMany(PostView::class);
     }
 
+    public function allViewCount()
+    {
+        return $this->views()->count();
+    }
+
     public function reviews()
     {
         return $this->hasMany(PostReview::class);
@@ -135,7 +140,7 @@ class Post extends Model
 
     public static function postType($model, $type = null, $draf = false)
     {
-        $model->select(['id', 'category_id', 'user_id', 'title', 'slug', 'hero', 'created_at', 'type', 'draf', 'description' ]);
+        $model->select(['id', 'category_id', 'posts.user_id', 'title', 'slug', 'hero', 'posts.created_at', 'type', 'draf', 'description' ]);
         if(isset($draf)) $model->where('draf', $draf);
         if($type) {
             if($type == 'article') {

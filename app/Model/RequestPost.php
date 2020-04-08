@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Schema;
 use Conner\Tagging\Taggable;
 
 class RequestPost extends Model
@@ -17,8 +18,16 @@ class RequestPost extends Model
         'hero',
         'description',
         'type',
-        'body',
+        'body'
     ];
+
+    protected $columns = null;
+
+    public function scopeExclude($query, $value = [])
+    {
+        if(!$this->columns) $this->columns = Schema::getColumnListing($this->getTable());
+        return $query->select(array_diff($this->columns,(array) $value));
+    }
 
     public function user()
     {

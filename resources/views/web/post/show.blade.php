@@ -1,55 +1,74 @@
 @extends('web.layouts.app')
 @section('content')
-@component('web.post.components.layoutWrapper')
 
-@slot('post', $post)
-<div class="card" style="font-size: 16px">
-  <img class="card-img-top img-fluid w-full" src="{{ $post->heroUrl() }}" alt="{{ $post->title }}">
-  <div class="card-block">
-    <div class="row text-center">
-      <div class="col-lg-6">
-        @if(Auth::user() && $post->isFavoritedBy(Auth::user()))
-        <a href="{{ route('favorite.destroy', $post->id) }}" class="btn btn-danger btn-outline btn-block mb-5"><i class="icon wb-heart"></i> Hapus dari daftar Favorit</a>
-        @else
-        <a href="{{ route('favorite.create', $post->id) }}" class="btn btn-danger btn-outline btn-block mb-5"><i class="icon wb-heart"></i> Tambah ke daftar Favorit</a>
+<div class="container-fluid">
+  <div class="post-read-card">
+    <div class="post-read-card-content">
+      <article>
+        <img class="hero" src="{{ $post->heroUrl() }}" alt="{{ $post->title }}">
+        <div class="post-detail">
+          <div class="post-info">
+            <span class="info">Diposting di {{ $post->type === 'article' ? 'Artikel' : 'Video' }} pada {{ $post->created_at->format('d M Y') }}</span>
+            <span class="v-divider">|</span>
+            <span class="info"><i class="wb-eye"></i> {{$post->views_count}}</span>
+          </div>
+          <div class="post-action">
+          @if(Auth::user() && $post->isFavoritedBy(Auth::user()))
+          <a href="{{ route('favorite.destroy', $post->id) }}" class="btn btn-danger btn-sm d-none d-md-inline-block"><i class="wb-heart"></i> Hapus dari Favorit</a>
+          <a href="{{ route('favorite.destroy', $post->id) }}" class="btn btn-danger btn-xs btn-icon d-block d-md-none"><i class="wb-heart"></i></a>
+          @else
+          <a href="{{ route('favorite.create', $post->id) }}" class="btn btn-default btn-outline indigo-600 btn-sm d-none d-md-inline-block"><i class="wb-heart"></i> Tambah ke favorite</a>
+          <a href="{{ route('favorite.create', $post->id) }}" class="btn btn-default btn-outline indigo-600 btn-xs btn-icon d-block d-md-none"><i class="wb-heart"></i></a>
+          @endif
+          </div>
+        </div>
+        <div class="post-rating">
+          <star-rating
+            class="post-rating-star"
+            :rating="{{ $post->avgRating() }}"
+            :read-only="true"
+            :increment="0.01"
+            :star-size="14"
+            text-class="mt-0 font-weight-light"
+          ></star-rating>
+          <span class="post-rating-text">dari {{ $post->reviewCount() }} Feedback</span>
+        </div>
+        <div class="post-title">
+          <h1>{{ $post->title }}</h1>
+        </div>
+        @if($post->category)
+        <div class="post-category">
+          <a href="{{ route('category.show', $post->category->slug) }}">{{ $post->category->name }}</a>
+        </div>
         @endif
-      </div>
-      <div class="col-lg-6">
-      <a href="#review" class="btn btn-info btn-outline btn-block mb-5"><i class="icon wb-star"></i> {{ $post->avgRating() }} bintang dari {{ $post->reviewCount() }} ulasan</a>
-      </div>
+        <div class="post-body">
+          {!! EditorjsHelp::compile($post->body) !!}
+        </div>
+        @if($post->tags->count())
+        <div class="post-tags">
+          <div class="post-tags-title">Tags</div>
+          @foreach($post->tags as $tag)
+            <a href="{{ route('tags', $tag->slug) }}" class="btn btn-xs btn-default">{{ $tag->name }}</a>
+          @endforeach
+        </div>
+        @endif
+      </article>
+
+      @component('web.post.components.review')
+        @slot('post', $post)
+        @slot('review', $review)
+      @endcomponent
+
+      @component('web.post.components.comment')
+        @slot('post', $post)
+      @endcomponent
     </div>
-    
-  </div>
-  <hr class="m-0">
-  <article class="card-block">
-    <div class="mb-15">
-      by <a class="text-dark" href="{{ route('minitutor.show', $post->user->username) }}">{{ $post->user->name() }}</a> - 
-      {{ $post->created_at->format('d M Y') }} 
-      @if($post->category)- <a class="text-dark" href="{{ route('category.show', $post->category->slug) }}">{{ $post->category->name }}</a>@endif
+    <div class="post-read-card-side">
+      @component('web.post.components.creator_card')
+        @slot('user', $post->user)
+      @endcomponent
     </div>
-    <h1 class="card-title display-4">{{ $post->title }}</h1>
-    {!! EditorjsHelp::compile($post->body) !!}
-  </article>
-  <hr class="m-0">
-  <div class="card-block">
-    <div class="h4">Tag</div>
-    @foreach($post->tags as $tag)
-      <a href="{{ route('tags', $tag->slug) }}" class="btn btn-xs btn-primary">{{ $tag->name }}</a>
-    @endforeach
-  </div>
-  <hr class="m-0">
-  <div class="card-block">
-    @component('web.post.components.review')
-      @slot('post', $post)
-      @slot('review', $review)
-    @endcomponent
-  </div>
-  <hr class="m-0">
-  <div class="card-block">
-    @component('web.post.components.comment')
-      @slot('post', $post)
-    @endcomponent
   </div>
 </div>
-@endcomponent
+
 @endsection

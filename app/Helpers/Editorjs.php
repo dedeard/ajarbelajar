@@ -93,7 +93,7 @@ class Editorjs
               $html .= '<img';
               if($block->data->caption) $html .= ' alt="'. $block->data->caption .'"';
               $html .= ' class="img-fluid img-rounded" src="'. $block->data->file->url .'">';
-              if($block->data->caption) $html .= '<figcaption>'. $block->data->caption .'</figcaption>';
+              if($block->data->caption) $html .= '<figcaption class="text-center">'. $block->data->caption .'</figcaption>';
             $html .= '</figure>';
           break;
         }

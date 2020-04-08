@@ -2,20 +2,13 @@
 @section('title', 'Ketegori')
 @section('content')
 <div class="container-fluid mt-15">
-  <div class="panel panel-bordered">
-    <div class="panel-body bg-light">
-      <div class="row">
-        @foreach($posts as $post)
-          @component('web.components.post_list')
-          @slot('post', $post)
-          @endcomponent
-        @endforeach
-      </div>
-    </div>
-    <div class="panel-footer">
-      {{ $posts->links() }}
-    </div>
+  @foreach($posts as $post)
+  @component('web.components.post_list')
+  @slot('post', $post)
+  @endcomponent
+  @endforeach
+  <div class="card card-block mb-15 empty-none">
+    {{ $posts->links() }}
   </div>
 </div>
-
 @endsection

@@ -1,13 +1,13 @@
 /**
  * Require library
  */
+window.Vue = require('vue')
 window.axios = require('axios').default
 window.Echo = require('laravel-echo').default
 window.Pusher = require('pusher-js')
 window.PerfectScrollbar = require('perfect-scrollbar').default
 window.Swal = require('sweetalert2')
-window.Swiper = require('swiper').default
-window.tippy = require('tippy.js').default
+
 
 /**
  * Setup laravel echo
@@ -18,6 +18,7 @@ window.Echo = new Echo({
   cluster: process.env.MIX_PUSHER_APP_CLUSTER,
   forceTLS: true
 });
+
 
 /**
  * Setup axios
@@ -31,15 +32,50 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 if (window.CSRF_TOKEN) window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.CSRF_TOKEN
 if (window.API_TOKEN) window.axios.defaults.headers.common.Authorization = 'Bearer ' + window.API_TOKEN
 
-/**
- * Setup library
- */
-tippy('[data-tippy-content]')
 
 /**
- * import script
+ * vue app
  */
-require('./script/layout')
-require('./script/avatar-toggle')
-require('./script/delete-confirm')
-require('./script/popular-video-lg')
+import VTooltip from 'v-tooltip'
+
+//components
+import StarRating from 'vue-star-rating'
+import AvatarUploader from './vue/app/avatar-uploader'
+import PopularVideoLg from './vue/app/popular-video-lg'
+import SidebarScroll from './vue/app/sidebar-scroll'
+import FeedbackList from './vue/app/feedback-list'
+
+//directives
+import Sticky from 'vue-sticky-directive'
+import SidebarToggle from './vue/directives/sidabar-toggle'
+import SidebarBackdrop from './vue/directives/sidebar-backdrop'
+import DeleteConfirm from './vue/directives/delete-confirm'
+
+//mixins
+import FormsearchToggle from './vue/mixins/formsearch-toggle'
+import NotificationCount from './vue/mixins/notification-count'
+
+Vue.use(VTooltip)
+
+new Vue({
+  el: "#app",
+  data() {
+    return {
+      VLoading: false
+    }
+  },
+  mixins: [NotificationCount, FormsearchToggle],
+  components: {
+    AvatarUploader,
+    PopularVideoLg,
+    SidebarScroll,
+    StarRating,
+    FeedbackList
+  },
+  directives: {
+    Sticky,
+    SidebarToggle,
+    SidebarBackdrop,
+    DeleteConfirm
+  }
+})

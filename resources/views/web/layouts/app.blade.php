@@ -18,7 +18,8 @@
 </head>
 
 <body class="ab-sidebar--close">
-  <div class="ab-layout">
+  <div class="ab-layout" id="app">
+    <div class="v-loading" v-if="VLoading"></div>
     @include('web.layouts.components.header')
     @include('web.layouts.components.sidebar')
     @include('web.layouts.components.alert')

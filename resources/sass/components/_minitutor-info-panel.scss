@@ -1,0 +1,23 @@
+.minitutor-info-panel {
+  padding: 10px 15px;
+  border: 0;
+  border-left: 2px solid $primary;
+  span {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 5px;
+    color: $gray-500;
+    font-weight: $font-weight-bold;
+  }
+  p {
+    display: block;
+    margin: 0;
+    font-size: 16px;
+
+    &.name {
+      display: block;
+      font-weight: $font-weight-bold;
+      text-transform: capitalize;
+    }
+  }
+}

@@ -1,12 +1,16 @@
-.ab-dashboard__avatar-uploader {
+.ab-avatar-uploader {
   position: relative;
   padding-bottom: 30px;
 
   .avatar {
+      border-radius: 4px;
       width: 100%;
       max-width: 140px;
       display: block;
       margin: auto;
+      img {
+          border-radius: 4px;
+      }
   }
 
   .btn {

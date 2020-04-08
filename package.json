@@ -66,8 +66,15 @@
         "sweetalert2": "^9.7.1",
         "swiper": "^5.3.1",
         "tippy.js": "^6.1.1",
+        "v-tooltip": "^2.0.3",
         "vue-avatar-cropper": "^1.0.5",
+        "vue-awesome-swiper": "^4.1.0",
+        "vue-moment": "^4.1.0",
+        "vue-star-rating": "^1.6.1",
         "vue-sticky": "^3.3.4",
-        "vue-video-player": "^5.0.2"
+        "vue-sticky-directive": "0.0.10",
+        "vue-tables-2": "^2.0.14",
+        "vue-video-player": "^5.0.2",
+        "vuetable-2": "^2.0.0-beta.4"
     }
 }

@@ -1,0 +1,154 @@
+.minitutor-page-card {
+  display: flex;
+  width: 100%;
+  margin: 15px 0;
+  border-radius: 4px;
+  background-color: $white;
+  box-shadow: $box-shadow-sm;
+  border-bottom: 4px solid $primary;
+
+  @include media-breakpoint-down(sm) {
+    flex-direction: column;
+  }
+
+  &-left {
+    display: block;
+    padding: 20px;
+    .user-pic {
+      display: block;
+      .avatar {
+        display: block;
+        width: 120px;
+        position: relative;
+        border: 3px solid $primary;
+        img {
+          border: 3px solid $white;
+        }
+        @include media-breakpoint-down(sm) {
+          width: 100px;
+          margin: auto;
+        }
+      }
+
+      &-points {
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: block;
+        line-height: 20px;
+        padding: 0 10px;
+        background-color: $primary;
+        color: $white;
+        font-size: 10px;
+        font-weight: $font-weight-bold;
+        text-transform: uppercase;
+        border-radius: 20px;
+        box-shadow: $box-shadow;
+      }
+    }
+  }
+
+  &-center {
+    margin: auto 0;
+    display: block;
+    width: 100%;
+    max-width: calc(100% - 160px - 165px);
+    padding: 20px 0;
+    @include media-breakpoint-down(sm) {
+      text-align: center;
+      max-width: 100%;
+      padding: 0 20px;
+    }
+    .info-name {
+      margin: 0;
+      margin-bottom: 5px;
+      font-size: 24px;
+      line-height: 1;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: $font-weight-bold;
+      @include media-breakpoint-down(sm) {
+        font-size: 20px;
+      }
+      a {
+        color: $gray-600;
+        &:hover {
+          color: $primary;
+          text-decoration: none;
+        }
+      }
+    }
+    
+    .info-username {
+      margin: 0;
+      display: block;
+      font-size: 16px;
+      line-height: 20px;
+      text-transform: lowercase;
+      margin-bottom: 5px;
+      @include media-breakpoint-down(sm) {
+        font-size: 14px;
+      }
+      a {
+        color: $gray-400;
+        &:hover {
+          color: $primary;
+          text-decoration: none;
+        }
+      }
+    }
+    .social-info {
+      display: block;
+      margin: 0;
+
+      a {
+        display: inline-block;
+        font-size: 16px;
+        margin-right: 10px;
+        color: $gray-400;
+        text-decoration: none;
+        &:hover {
+          color: $primary;
+        }
+      }
+      @include media-breakpoint-down(md) {
+        text-align: center;
+        a {
+          margin: 0 5px;
+        }
+      } 
+    }
+
+
+
+  }
+
+  &-right {
+    padding: 20px;
+    width: 165px;
+    text-align: right;
+    @include media-breakpoint-down(sm) {
+      padding-top: 10px;
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
+
+
+.minitutor-layout-nav {
+  box-shadow: $box-shadow-sm;
+  overflow: hidden;
+
+  a.nav-link {
+      font-weight: $font-weight-bold;
+      transition: 150ms ease-in-out;
+
+      &.active,
+      &:hover {
+          background-color: $primary;
+          color: $white;
+      }
+  }
+}

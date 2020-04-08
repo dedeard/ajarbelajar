@@ -12,7 +12,7 @@ class NotificationsController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        return view('web.notifications', ['notifications' => $user->notifications()->paginate(3)]);
+        return view('web.notifications', ['notifications' => $user->notifications()->paginate(20)]);
     }
 
     public function read(Request $request, $id)

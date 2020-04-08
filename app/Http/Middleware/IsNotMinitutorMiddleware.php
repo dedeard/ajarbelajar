@@ -16,7 +16,7 @@ class IsNotMinitutorMiddleware
     public function handle($request, Closure $next)
     {
         if ($request->user()->minitutor) {
-            return redirect()->route('dashboard.index');
+            return redirect()->route('dashboard.minitutor.index');
         }
         return $next($request);
     }

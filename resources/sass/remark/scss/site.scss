@@ -38,13 +38,13 @@
 @import 'components/checkbox-radio';
 //}
 //@if $use-material-forms == true {
-@import 'components/material-forms';
+// @import 'components/material-forms';
 //}
 //@if $use-loader == true {
-@import 'components/loader';
+// @import 'components/loader';
 //}
 //@if $use-animation == true {
-@import 'components/animation';
+// @import 'components/animation';
 //}
 //@if $use-colors == true {
 @import 'components/colors';
@@ -56,7 +56,7 @@
 @import 'components/social';
 //}
 //@if $use-blocks == true {
-@import 'components/blocks';
+// @import 'components/blocks';
 //}
 //@import 'components/divider';
 //@if $use-avatar == true {
@@ -69,7 +69,7 @@
 @import 'components/icon';
 //}
 //@if $use-hamburger == true {
-@import 'components/hamburger';
+// @import 'components/hamburger';
 //}
 //@if $use-counter == true {
 @import 'components/counter';
@@ -81,10 +81,10 @@
 @import 'components/panel-groups';
 //}
 //@if $use-cover == true {
-@import 'components/cover';
+// @import 'components/cover';
 //}
 //@if $use-overlay == true {
-@import 'components/overlay';
+// @import 'components/overlay';
 //}
 //@if $use-comment == true {
 @import 'components/comment';
@@ -93,28 +93,28 @@
 @import 'components/chat';
 //}
 //@if $use-steps == true {
-@import 'components/steps';
+// @import 'components/steps';
 //}
 //@if $use-pearls == true {
-@import 'components/pearls';
+// @import 'components/pearls';
 //}
 //@if $use-timeline == true {
-@import 'components/timeline';
+// @import 'components/timeline';
 //}
 //@if $use-testimonial == true {
-@import 'components/testimonial';
+// @import 'components/testimonial';
 //}
 //@if $use-pricing-list == true {
-@import 'components/pricing-list';
+// @import 'components/pricing-list';
 //}
 //@if $use-pricing-table == true {
-@import 'components/pricing-table';
+// @import 'components/pricing-table';
 //}
 //@if $use-rating == true {
-@import 'components/rating';
+// @import 'components/rating';
 //}
 //@if $use-ribbon == true {
-@import 'components/ribbon';
+// @import 'components/ribbon';
 //}
 //@if $use-color-selector == true {
 @import 'components/color-selector';

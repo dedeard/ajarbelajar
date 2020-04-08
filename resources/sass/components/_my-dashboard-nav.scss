@@ -1,0 +1,15 @@
+.my-dashboard-nav {
+  box-shadow: $box-shadow-sm;
+  overflow: hidden;
+
+  a.nav-link {
+      font-weight: $font-weight-bold;
+      transition: 150ms ease-in-out;
+
+      &.active,
+      &:hover {
+          background-color: $primary;
+          color: $white;
+      }
+  }
+}

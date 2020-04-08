@@ -1,6 +1,9 @@
 // card and panel
 .card, .panel {
   box-shadow: $box-shadow-sm;
+  &.empty-none:empty {
+    display: none;
+  }
 }
 
 
@@ -48,4 +51,24 @@
 .select2-container {
   z-index: $zindex-dropdown;
   width: 100% !important;
+}
+
+
+// image
+.img-fluid {
+  width: 100%;
+}
+
+//line height
+.line-height-1 {
+  line-height: 1 !important;
+}
+
+//panel
+.panel {
+  box-shadow: $box-shadow-sm;
+  border-bottom: 4px solid $primary;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  overflow: hidden;
 }

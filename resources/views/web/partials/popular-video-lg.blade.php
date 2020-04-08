@@ -1,7 +1,7 @@
-<div class="swiper-container ab-popular-video-lg" id="ab-popular-video-lg">
-  <div class="swiper-wrapper">
+<popular-video-lg inline-template>
+  <swiper class="ab-popular-video-lg" :options="swiperOptions">
     @foreach(\App\Model\Post::videos()->orderBy('views_count', 'desc')->limit(5)->get() as $popular)
-    <div class="swiper-slide">
+    <swiper-slide>
       <div class="card" style="background-image: url({{ $popular->heroUrl() }})">
         <div class="card-block">
           <div class="filter">
@@ -21,14 +21,14 @@
           </div>
         </div>
       </div>
-    </div>
+    </swiper-slide>
     @endforeach
-  </div>
-  <div class="swiper-pagination"></div>
-  <div class="swiper-nav swiper-button-prev">
-    <i class="icon wb-chevron-left"></i>
-  </div>
-  <div class="swiper-nav swiper-button-next">
-    <i class="wb-chevron-right"></i>
-  </div>
-</div>
+    <div class="swiper-pagination" slot="pagination"></div>
+    <div class="swiper-nav swiper-button-prev" slot="button-prev">
+      <i class="wb-chevron-left"></i>
+    </div>
+    <div class="swiper-nav swiper-button-next" slot="button-next">
+      <i class="wb-chevron-right"></i>
+    </div>
+  </swiper>
+</popular-video-lg>

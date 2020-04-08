@@ -1,23 +1,48 @@
-<div class="@if(empty($grid)) col-lg-6 @else col-lg-{{$grid}} @endif mb-30">
-  <div class="card card-shadow ab-post-card">
-    <div class="card-header cover overlay">
-      <img class="cover-image overlay-figure overlay-spin" src="{{ $post->thumbUrl() }}" alt="{{ $post->title }}">
-    </div>
-    <a href="{{ route('post.show', $post->slug) }}" class="btn btn-primary btn-sm m-0 rounded-0 text-uppercase">
+<div class="ab-post-list">
+  <div class="ab-post-list-left">
+    <div class="ab-post-list-thumb">
+      <img src="{{ $post->thumbUrl() }}" alt="{{ $post->title }}">
       @if($post->type === 'article')
-        Baca Artikel
-      @else
-        Tonton Video
+        <span class="post-type">
+          Artikel
+        </span>
+        @else
+        <span class="post-type red">
+          Video
+        </span>
       @endif
-    </a>
-    <div class="card-block">
-      <div class="card-content">
-        {{ $post->created_at->format('M d, Y') }}
-        <h3 class="card-title"> <a href="{{route('post.show', $post->slug)}}" class="text-dark">{{ $post->title }}</a></h3>
-        <div class="card-text small mb-15">
-          {{ $post->avgRating() }} Bintang dari {{ $post->reviewCount() }} Review - {{ $post->views_count }} dilihat - {{ $post->comments_count }} Komentar
+    </div>
+  </div>
+  <div class="ab-post-list-right">
+    <span class="info-time">{{ $post->created_at->format('d M Y') }}</span>
+    <h3 class="info-title"><a href="{{route('post.show', $post->slug)}}">{{ $post->title }}</a></h3>
+    @if($post->category)
+    <span class="category-info">{{ $post->category->name }}</span>
+    @endif
+    <div class="more-info">
+      <span><i class="icon wb-star"></i> {{ $post->avgRating() }} Bintang dari {{ $post->reviewCount() }} Reviewer</span>
+      <span><i class="icon wb-chat"></i> {{ $post->comments_count }} Komentar</span>
+      <span><i class="icon wb-eye"></i> {{ $post->views_count }}x @if($post->type === 'article') Dibaca @else Ditonton @endif</span>
+      <span><i class="icon wb-user"></i> Dari <a href="{{ route('minitutor.show', $post->user->username) }}">{{ $post->user->name() }}</a></span>
+    </div>
+    <div class="actions mt-10">
+      <div class="row">
+        <div class="col-6">
+          <a href="{{route('post.show', $post->slug)}}" class="btn btn-primary btn-block btn-sm">
+            @if($post->type === 'article')
+              <i class="wb-book"></i> Baca Artikel
+            @else
+              <i class="wb-play"></i> Tonton Video
+            @endif
+          </a>
         </div>
-        <p class="card-text">{{ $post->description }}</p>
+        <div class="col-6">
+          @if(Auth::user() && $post->isFavoritedBy(Auth::user()))
+          <a href="{{ route('favorite.destroy', $post->id) }}" class="btn btn-danger btn-outline btn-block btn-sm"><i class="icon wb-heart"></i> Hapus Favorit</a>
+          @else
+          <a href="{{ route('favorite.create', $post->id) }}" class="btn btn-danger btn-outline btn-block btn-sm"><i class="icon wb-heart"></i> Tambah Favorit</a>
+          @endif
+        </div>
       </div>
     </div>
   </div>

@@ -1,0 +1,114 @@
+.ab-post-list {
+  display: flex;
+  background-color: $white;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: $box-shadow-sm;
+  margin-bottom: 15px;
+  border-bottom: 4px solid $primary;
+  @include media-breakpoint-down(md) {
+    flex-direction: column;
+  }
+
+  &-left {
+    display: block;
+    padding: 20px;
+    @include media-breakpoint-down(md) {
+      padding: 0;
+    }
+  }
+  &-thumb {
+    width: 340px;
+    position: relative;
+    img {
+      display: block;
+      width: 100%;
+      border-radius: 3px;
+    }
+    .post-type {
+      display: block;
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      line-height: 18px;
+      padding: 0 6px;
+      background-color: $white;
+      color: $primary;
+      font-size: 10px;
+      font-weight: $font-weight-bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      box-shadow: $box-shadow;
+      border-radius: 2px;
+      &.red {
+        color: $danger;
+      }
+    }
+    @include media-breakpoint-down(md) {
+      width: 100%;
+      img {
+        border-radius: 0;
+      }
+    }
+  }
+
+  &-right {
+    padding: 20px;
+    padding-left: 0;
+    width: 100%;
+    @include media-breakpoint-down(md) {
+      padding: 10px;
+    }
+
+    .info-time {
+      display: block;
+      font-size: 10px;
+      font-weight: $font-weight-bold;
+      color: $gray-600;
+      margin-bottom: 5px;
+    }
+
+    .info-title {
+      display: block;
+      margin: 0;
+      font-size: 18px;
+      font-weight: $font-weight-normal;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      a {
+        color: $gray-500;
+        &:hover {
+          text-decoration: none;
+          color: $primary;
+        }
+      }
+    }
+
+    .category-info {
+      display: inline-block;
+      line-height: 20px;
+      padding: 0 6px;
+      background-color: $primary;
+      color: $white;
+      font-size: 12px;
+      font-weight: $font-weight-light;
+      text-transform: uppercase;
+      box-shadow: $box-shadow;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    .more-info {
+      span {
+        display: block;
+        color: $gray-600;
+        font-size: 14px;
+        i {
+          display: inline-block;
+          width: 15px;
+          color: $gray-400;
+        }
+      }
+    }
+  }
+}
