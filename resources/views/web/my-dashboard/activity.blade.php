@@ -11,7 +11,11 @@
 @foreach($activities as $activity)
 <a class="activity-card" href="{{ route('post.show', $activity->post->slug) }}">
   <div class="left">
-    <img src="{{ $activity->post->thumbUrl() }}" alt="">
+    <v-lazy-image
+      src="{{ $activity->post->thumbUrl() }}"
+      src-placeholder="{{ asset('img/placeholder/post-sm.jpg') }}"
+      alt="{{ $activity->post->title }}"
+    ></v-lazy-image>
   </div>
   <div class="right">
     <div class="info-action">

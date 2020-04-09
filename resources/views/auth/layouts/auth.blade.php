@@ -24,10 +24,12 @@
   <meta name="theme-color" content="#677ae4">
   @yield('meta')
   {!! SEOMeta::generate() !!}
-  <link rel="stylesheet" href="{{ asset('remark/fonts/web-icons/web-icons.min.css') }}">
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
+  @if(env('APP_ENV') === 'local')
+  <link rel="stylesheet" href="{{ asset('remark/fonts/web-icons/web-icons.min.css') }}">
   <link rel="stylesheet" href="{{ mix('css/theme.css') }}">
-  <link rel="stylesheet" href="{{ mix('css/auth.css') }}">
+  @endif
+  <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 </head>
 <body class="ab-auth--layout bg-light p-0">
 <header class="py-4 d-flex bg-white shadow-sm">

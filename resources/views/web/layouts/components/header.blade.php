@@ -19,8 +19,8 @@
     <form action="{{ route('home') }}" class="ab-header__form-search" :class="formSearchShow ? 'd-block' : ''" method="GET">
       <div class="container-fluid">
         <div class="ab-header__form-search-wrapper">
-          <input class="form-control ab-header__form-search-input" type="search" name="search" value="{{ request()->input('search') }}" placeholder="Apa yang anda cari?">
-          <button class="btn ab-header__form-search-toggle">
+          <input class="form-control ab-header__form-search-input" aria-label="Search" type="search" name="search" value="{{ request()->input('search') }}" placeholder="Apa yang anda cari?">
+          <button class="btn ab-header__form-search-toggle" type="submit" aria-label="Right Align">
             <i class="wb-search"></i>
           </button>
         </div>
@@ -33,7 +33,7 @@
           <div class="ab-header__right-actions">
             <a href="{{ route('notifications.index') }}" class="ab-header__right-action ab-notification-dropdown-toggle">
               <i class="wb-bell"></i>
-              <span class="ab-header__right-action-label">@{{ notificationCount || '' }}</span>
+              <span class="ab-header__right-action-label" v-html="notificationCount || ''"></span>
             </a>
           </div>
           <div class="ab-header__right-avatar">

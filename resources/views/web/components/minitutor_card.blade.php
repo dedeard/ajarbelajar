@@ -2,7 +2,12 @@
   <div class="minitutor-card-top">
     <div class="minitutor-card-user-pic">
       <a href="{{ route('minitutor.show', $minitutor->user->username) }}" class="avatar">
-        <img class="avatar-holder" src="{{ $minitutor->user->imageUrl() }}" alt="{{ $minitutor->user->name() }}">
+        <v-lazy-image
+          class="avatar-holder"
+          src="{{ $minitutor->user->imageUrl() }}"
+          src-placeholder="{{ asset('img/placeholder/avatar.png') }}"
+          alt="{{ $minitutor->user->username }}"
+        ></v-lazy-image>
         <span class="minitutor-point">{{ $minitutor->points }} Poin</span>
       </a>
     </div>
@@ -23,27 +28,27 @@
       </div>
       <div class="minitutor-card-content-social-info">
         @if($minitutor->user->website_url)
-        <a href="{{ $minitutor->user->website_url }}" target="_blank">
+        <a href="{{ $minitutor->user->website_url }}" rel="noreferrer" target="_blank">
           <i class="icon wb-globe"></i>
         </a>
         @endif
         @if($minitutor->user->twitter_url)
-        <a href="{{ $minitutor->user->twitter_url }}" target="_blank">
+        <a href="{{ $minitutor->user->twitter_url }}" rel="noreferrer" target="_blank">
           <i class="icon socicon-twitter"></i>
         </a>
         @endif
         @if($minitutor->user->instagram_url)
-        <a href="{{ $minitutor->user->instagram_url }}" target="_blank">
+        <a href="{{ $minitutor->user->instagram_url }}" rel="noreferrer" target="_blank">
           <i class="icon socicon-instagram"></i>
         </a>
         @endif
         @if($minitutor->user->facebook_url)
-        <a href="{{ $minitutor->user->facebook_url }}" target="_blank">
+        <a href="{{ $minitutor->user->facebook_url }}" rel="noreferrer" target="_blank">
           <i class="icon socicon-facebook"></i>
         </a>
         @endif
         @if($minitutor->user->youtube_url)
-        <a href="{{ $minitutor->user->youtube_url }}" target="_blank">
+        <a href="{{ $minitutor->user->youtube_url }}" rel="noreferrer" target="_blank">
           <i class="icon socicon-youtube"></i>
         </a>
         @endif

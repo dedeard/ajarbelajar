@@ -8,8 +8,6 @@
 
 <head>
   @include('web.layouts.components.head')
-  <link rel="stylesheet" href="{{ mix('css/theme.css') }}">
-  <link rel="stylesheet" href="{{ mix('css/editor.css') }}">
   {!! SEOMeta::generate() !!}
   {!! OpenGraph::generate() !!}
   {!! Twitter::generate() !!}
@@ -17,7 +15,7 @@
   @yield('style')
 </head>
 
-<body>
+<body class="ab-editor-layout">
   @yield('content')
   <script src="{{ mix('js/editor.js') }}"></script>
   @yield('script')

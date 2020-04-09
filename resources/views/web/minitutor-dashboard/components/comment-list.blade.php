@@ -3,7 +3,12 @@
     <div class="dashboard-comment-list-left">
       <div class="user-pic">
         <a href="{{ route('users.show', $comment->user->username) }}" class="avatar">
-          <img class="avatar-holder" src="{{ $comment->user->imageUrl() }}" alt="{{ $comment->user->username }}">
+          <v-lazy-image
+            class="avatar-holder"
+            src="{{ $comment->user->imageUrl() }}"
+            src-placeholder="{{ asset('img/placeholder/avatar.png') }}"
+            alt="{{ $comment->user->username }}"
+          ></v-lazy-image>
         </a>
       </div>
     </div>

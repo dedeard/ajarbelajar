@@ -7,8 +7,18 @@
         <div class="overlay-icon-play">
           <i class="wb-play"></i>
         </div>
-        <img src="{{ $video->thumbUrl() }}" alt="$video->title" class="img-fluid">
-        <img src="{{ $video->user->imageUrl() }}" alt="$video->user->username" class="new-videos-card-avatar">
+        <v-lazy-image
+          src="{{ $video->thumbUrl() }}"
+          src-placeholder="{{ asset('img/placeholder/post-sm.jpg') }}"
+          alt="{{ $video->title }}"
+          class="img-fluid"
+        ></v-lazy-image>
+        <v-lazy-image
+          class="new-videos-card-avatar"
+          src="{{ $video->user->imageUrl() }}"
+          src-placeholder="{{ asset('img/placeholder/avatar.png') }}"
+          alt="{{ $video->user->username }}"
+        ></v-lazy-image>
         @if($video->category)
         <span class="info-category">{{ $video->category->name }}</span>
         @endif

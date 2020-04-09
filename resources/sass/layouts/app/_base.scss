@@ -3,7 +3,7 @@ html {
   width: 100%;
 }
 
-body {
+body.ab-base-layout {
   width: 100%;
   overflow-x: hidden;
   padding: 0;
@@ -15,24 +15,25 @@ body {
   @include media-breakpoint-down(md) {
     padding-left: 0px;
   }
-}
 
-.ab-layout {
-  width: 100%;
-  min-height: 100%;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
 
-  .v-loading {
-    display: block;
-    position: fixed;
-    z-index: 999999;
-    background-color: $light;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    transform: scale(1.5);
+  .ab-layout {
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+
+    .v-loading {
+      display: block;
+      position: fixed;
+      z-index: 999999;
+      background-color: $light;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      transform: scale(1.5);
+    }
   }
 }

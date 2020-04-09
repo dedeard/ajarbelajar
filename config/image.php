@@ -15,6 +15,21 @@ return [
     |
     */
 
-    'driver' => 'gd'
+    'driver' => 'gd',
 
+    'avatar' => [
+        'size' => 150,
+        'format' => 'jpg',
+        'extension' => 'jpeg',
+        'quality' => 80
+    ],
+
+    'hero' => [
+        'format' => 'jpg',
+        'extension' => 'jpeg',
+        'size' => [
+            'large' => [ 'width' => 1024, 'height' => 576, 'quality' => 75 ],
+            'thumb' => [ 'width' => 320, 'height' => 180, 'quality' => 75 ]
+        ]
+    ]
 ];

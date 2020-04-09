@@ -8,8 +8,6 @@
 
 <head>
   @include('web.layouts.components.head')
-  <link rel="stylesheet" href="{{ mix('css/theme.css') }}">
-  <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   {!! SEOMeta::generate() !!}
   {!! OpenGraph::generate() !!}
   {!! Twitter::generate() !!}
@@ -17,9 +15,8 @@
   @yield('style')
 </head>
 
-<body class="ab-sidebar--close">
+<body class="ab-sidebar--close ab-base-layout">
   <div class="ab-layout" id="app">
-    <div class="v-loading" v-if="VLoading"></div>
     @include('web.layouts.components.header')
     @include('web.layouts.components.sidebar')
     @include('web.layouts.components.alert')

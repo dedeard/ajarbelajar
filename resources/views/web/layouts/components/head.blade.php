@@ -22,10 +22,13 @@
 <meta name="theme-color" content="#677ae4">
 
 <!-- Fonts -->
-<link rel="stylesheet" href="{{ asset('remark/fonts/web-icons/web-icons.min.css') }}">
 <link rel="stylesheet" href="https://d1azc1qln24ryf.cloudfront.net/114779/Socicon/style-cf.css?u8vidh">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
-
+@if(env('APP_ENV') === 'local')
+<link rel="stylesheet" href="{{ asset('remark/fonts/web-icons/web-icons.min.css') }}">
+<link rel="stylesheet" href="{{ mix('css/theme.css') }}">
+@endif
+<link rel="stylesheet" href="{{ mix('css/app.css') }}">
 @auth
 <meta name="api-token" content="{{ Auth::user()->apiToken() }}">
 @endauth

@@ -4,7 +4,12 @@
       <div class="feedback-row-left">
         <div class="user-pic">
           <a href="{{ route('users.show', $review->user->username) }}" class="avatar">
-            <img class="avatar-holder" src="{{ $review->user->imageUrl() }}" alt="{{ $review->user->username }}">
+            <v-lazy-image
+              class="avatar-holder"
+              src="{{ $review->user->imageUrl() }}"
+              src-placeholder="{{ asset('img/placeholder/avatar.png') }}"
+              alt="{{ $review->user->username }}"
+            ></v-lazy-image>
           </a>
         </div>
       </div>

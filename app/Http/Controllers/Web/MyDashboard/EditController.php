@@ -47,14 +47,14 @@ class EditController extends Controller
         }
 
         if(isset($data['image'])) {
-            $avatar = Image::make($data['image'])->fit(200, 200, function ($constraint) {
+            $avatar = Image::make($data['image'])->fit(config('image.avatar.size'), config('image.avatar.size'), function ($constraint) {
                 $constraint->aspectRatio();
             });
-            $newName = hash('sha256', Str::random(60)) . '.jpg';
+            $newName = hash('sha256', Str::random(60)) . '.' . config('image.avatar.extension');
             if($user->avatar && Storage::disk('public')->exists('avatar/' . $user->avatar)) {
                 Storage::disk('public')->delete('avatar/' . $user->avatar);
             }
-            Storage::disk('public')->put('avatar/' . $newName, (string) $avatar->encode('jpg', 75));
+            Storage::disk('public')->put('avatar/' . $newName, (string) $avatar->encode(config('image.avatar.format'), config('image.avatar.quality')));
             $data['avatar'] = $newName;
         }
         $user->update($data);

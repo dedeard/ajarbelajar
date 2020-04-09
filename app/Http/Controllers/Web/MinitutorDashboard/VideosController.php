@@ -107,17 +107,17 @@ class VideosController extends Controller
                     Storage::disk('public')->delete('post/hero/request/thumb/' . $video->hero);
                 }
             }
-            $lg = Image::make($data['hero'])->fit(1280, 720, function ($constraint) {
+            $lg = Image::make($data['hero'])->fit(config('image.hero.size.large.width'), config('image.hero.size.large.height'), function ($constraint) {
                 $constraint->aspectRatio();
             });
-            $sm = Image::make($data['hero'])->fit(640, 360, function ($constraint) {
+            $sm = Image::make($data['hero'])->fit(config('image.hero.size.thumb.width'), config('image.hero.size.thumb.height'), function ($constraint) {
                 $constraint->aspectRatio();
             });
 
-            $name = Str::random(60) . '.jpg';
+            $name = Str::random(60) . '.' . config('image.hero.extension');
 
-            Storage::disk('public')->put('post/hero/request/' . $name, (string) $lg->encode('jpg', 75));
-            Storage::disk('public')->put('post/hero/request/thumb/' . $name, (string) $sm->encode('jpg', 75));
+            Storage::disk('public')->put('post/hero/request/' . $name, (string) $lg->encode(config('image.hero.format'), config('image.hero.size.large.quality')));
+            Storage::disk('public')->put('post/hero/request/thumb/' . $name, (string) $sm->encode(config('image.hero.format'), config('image.hero.size.thumb.quality')));
 
             $data['hero'] = $name;
         } else {

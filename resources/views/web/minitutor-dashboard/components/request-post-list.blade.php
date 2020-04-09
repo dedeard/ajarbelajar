@@ -2,7 +2,11 @@
   <div class="request-post-list-top">
     <div class="request-post-list-left">
       <div class="request-post-list-thumb">
-        <img src="{{ $post->thumbUrl() }}" alt="{{ $post->title }}">
+        <v-lazy-image
+          src="{{ $post->thumbUrl() }}"
+          src-placeholder="{{ asset('img/placeholder/post-sm.jpg') }}"
+          alt="{{ $post->title }}"
+        ></v-lazy-image>
         @if($post->requested_at)
         <span class="post-status">
           Menunggu Persetujuan Admin

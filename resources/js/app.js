@@ -6,8 +6,7 @@ window.axios = require('axios').default
 window.Echo = require('laravel-echo').default
 window.Pusher = require('pusher-js')
 window.PerfectScrollbar = require('perfect-scrollbar').default
-window.Swal = require('sweetalert2')
-
+window.Swal = require('sweetalert2/dist/sweetalert2')
 
 /**
  * Setup laravel echo
@@ -36,7 +35,7 @@ if (window.API_TOKEN) window.axios.defaults.headers.common.Authorization = 'Bear
 /**
  * vue app
  */
-import VTooltip from 'v-tooltip'
+import { VLazyImagePlugin } from 'v-lazy-image'
 
 //components
 import StarRating from 'vue-star-rating'
@@ -55,15 +54,10 @@ import DeleteConfirm from './vue/directives/delete-confirm'
 import FormsearchToggle from './vue/mixins/formsearch-toggle'
 import NotificationCount from './vue/mixins/notification-count'
 
-Vue.use(VTooltip)
+Vue.use(VLazyImagePlugin)
 
 new Vue({
   el: "#app",
-  data() {
-    return {
-      VLoading: false
-    }
-  },
   mixins: [NotificationCount, FormsearchToggle],
   components: {
     AvatarUploader,

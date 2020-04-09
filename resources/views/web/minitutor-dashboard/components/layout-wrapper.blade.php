@@ -3,7 +3,11 @@
     <div class="container-fluid pr-lg-0">
       <div class="ab-profile-card-side" v-sticky sticky-offset="{ top: 60 }">
         <div class="avatar">
-          <img src="{{ Auth::user()->imageUrl() }}" alt="{{ Auth::user()->username }}">
+          <v-lazy-image
+            src="{{ Auth::user()->imageUrl() }}"
+            src-placeholder="{{ asset('img/placeholder/avatar.png') }}"
+            alt="{{ Auth::user()->username }}"
+          ></v-lazy-image>
           <span class="point">{{ Auth::user()->minitutor->points }} Poin</span>
         </div>
 

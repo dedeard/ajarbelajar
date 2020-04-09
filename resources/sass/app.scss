@@ -1,32 +1,4 @@
-@import "vars";
 @import "variables";
-
-@import "layouts/app/base";
-@import "layouts/app/header";
-@import "layouts/app/sidebar";
-@import "layouts/app/footer";
-
-@import "components/avatar-uploader";
-@import "components/dashboard-nav";
-@import "components/popular-video-lg";
-@import "components/new-videos";
-@import "components/popular-categories";
-@import "components/most-minitutor-point";
-@import "components/user-post-count";
-@import "components/profile-card-lg";
-@import "components/my-dashboard-nav";
-@import "components/activity-card";
-@import "components/minitutor-card";
-@import "components/form-search-lg";
-@import "components/post_list";
-@import "components/minitutor-dashboard-layout";
-@import "components/my-dashboard-layout";
-@import "components/dashboard_post_list";
-@import "components/feedback-row";
-@import "components/dashboard-comment-list";
-@import "components/user-card-sm";
-@import "components/request-post-list";
-@import "components/minitutor-page-layout";
-@import "components/minitutor-info-panel";
-@import "components/post-read-card";
-@import "components/creator-card";
+@import "theme/app";
+@import "import";
+@import "fonts/web-icons/web-icons.min.css";

@@ -1,7 +1,11 @@
 <div class="ab-post-list">
   <div class="ab-post-list-left">
     <div class="ab-post-list-thumb">
-      <img src="{{ $post->thumbUrl() }}" alt="{{ $post->title }}">
+        <v-lazy-image
+          src="{{ $post->thumbUrl() }}"
+          src-placeholder="{{ asset('img/placeholder/post-sm.jpg') }}"
+          alt="{{ $post->title }}"
+        ></v-lazy-image>
       @if($post->type === 'article')
         <span class="post-type">
           Artikel

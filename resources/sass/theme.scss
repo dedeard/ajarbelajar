@@ -1,10 +1,2 @@
-@import "remark/scss/bootstrap";
-@import "remark/scss/bootstrap-extend";
-@import "remark/scss/site";
-
 @import "variables";
-@import "custom/utilities";
-
-@import "~swiper/swiper";
-@import "vendor/perfect-scrollbar";
-@import "vendor/v-tooltip";
+@import "theme/app";

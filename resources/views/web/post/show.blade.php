@@ -5,7 +5,12 @@
   <div class="post-read-card">
     <div class="post-read-card-content">
       <article>
-        <img class="hero" src="{{ $post->heroUrl() }}" alt="{{ $post->title }}">
+        <v-lazy-image
+          src="{{ $post->heroUrl() }}"
+          src-placeholder="{{ asset('img/placeholder/post-lg.jpg') }}"
+          alt="{{ $post->title }}"
+          class="hero"
+        ></v-lazy-image>
         <div class="post-detail">
           <div class="post-info">
             <span class="info">Diposting di {{ $post->type === 'article' ? 'Artikel' : 'Video' }} pada {{ $post->created_at->format('d M Y') }}</span>

@@ -6,7 +6,11 @@
       <div class="comment media">
         <div class="pr-20">
           <a href="{{ route('users.show', $comment->user->username) }}" class="avatar avatar-lg">
-            <img src="{{ $comment->user->imageUrl() }}" alt="$comment->user->username">
+            <v-lazy-image
+              src="{{ $comment->user->imageUrl() }}"
+              src-placeholder="{{ asset('img/placeholder/avatar.png') }}"
+              alt="{{ $comment->user->username }}"
+            ></v-lazy-image>
           </a>
         </div>
         <div class="media-body">

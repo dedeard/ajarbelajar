@@ -1,0 +1,23 @@
+// Bootstrap's functions
+@import "bootstrap/functions";
+
+// Bootstrap's variables
+@import 'bootstrap/variables';
+
+// Load mixins
+@import 'mixins';
+
+// Load color variables
+@import 'vars-color';
+
+// Load social color variables
+@import 'vars-social-color';
+
+// Load Bootstrap override variables
+@import 'vars-bootstrap';
+
+// Load Site variables
+@import 'vars-site';
+
+//web icons
+@import 'web-icons/variables';

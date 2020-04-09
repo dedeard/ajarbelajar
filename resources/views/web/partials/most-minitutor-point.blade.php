@@ -10,7 +10,12 @@
     <div class="col-lg-3">
       <a class="most-minitutor-point-card" href="{{ route('minitutor.show', $minitutor->user->username) }}">
         <div class="avatar">
-          <img class="avatar-holder" src="{{ $minitutor->user->imageUrl() }}" alt="{{ $minitutor->user->username }}">
+          <v-lazy-image
+            src="{{ $minitutor->user->imageUrl() }}"
+            src-placeholder="{{ asset('img/placeholder/avatar.png') }}"
+            alt="{{ $minitutor->user->username }}"
+            class="avatar-holder"
+          ></v-lazy-image>
         </div>
         <h4 class="info-name text-truncate">{{ $minitutor->user->name() }}</h4>
         <span class="info-point">{{ $minitutor->points }} Poin</span>
