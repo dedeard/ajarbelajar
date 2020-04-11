@@ -36,7 +36,7 @@ Route::middleware(['auth'])->prefix('notifications')->as('notifications.')->grou
 
 // Show posts routes
 Route::prefix('post')->as('post.')->group(function(){
-    Route::get('/{slug}', 'PostController@show')->name('show');
+    Route::middleware(['auth'])->get('/{slug}', 'PostController@show')->name('show');
     Route::middleware(['auth'])->post('/{id}/comment', 'PostController@storeComment')->name('comment.store');
     Route::middleware(['auth'])->post('/{id}/review', 'PostController@storeReview')->name('review.store');
 });

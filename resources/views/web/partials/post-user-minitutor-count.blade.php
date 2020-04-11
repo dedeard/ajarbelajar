@@ -30,7 +30,7 @@
         </div>
         <div class="counter counter-md counter text-right">
           <div class="counter-number-group">
-            <span class="counter-number">{{ \App\Model\Minitutor::count() }}</span>
+            <span class="counter-number">{{ \App\Model\Minitutor::where('active', 1)->count() }}</span>
             <span class="counter-number-related text-capitalize">MiniTutor</span>
           </div>
           <div class="counter-label text-capitalize font-size-16">Berkontribusi</div>

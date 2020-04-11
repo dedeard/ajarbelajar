@@ -40,13 +40,13 @@ class NotificationsController extends Controller
             break;
             case "App\Notifications\ApprovePost":
                 $post = Post::findOrFail($notification->data['id']);
-                return redirect()->route('dashboard.accepted.index');
+                return redirect()->route('dashboard.minitutor.accepted.index');
             break;
             case "App\Notifications\ReviewToMinitutorPost":
-                return redirect()->route('dashboard.review.index');
+                return redirect()->route('dashboard.minitutor.reviews.index');
             break;
             case "App\Notifications\RequestMinitutorAccepted":
-                return redirect()->route('dashboard.index');
+                return redirect()->route('dashboard.minitutor.index');
             break;
             case "App\Notifications\RequestMinitutorRejected":
                 return redirect()->route('join.minitutor.create');

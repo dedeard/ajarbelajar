@@ -4,6 +4,12 @@
  * Released under the MIT License.
  */
 
+/**
+ * v-lazy-image v1.4.0
+ * (c) 2020 Alex Jover Morales <alexjovermorales@gmail.com>
+ * @license MIT
+ */
+
 /*!
  * vue-awesome-swiper v4.1.0
  * Copyright (c) Surmon. All rights reserved.
@@ -32,12 +38,6 @@ and limitations under the License.
  *
  * Copyright 2017, Pusher
  * Released under the MIT licence.
- */
-
-/**
- * v-lazy-image v1.4.0
- * (c) 2020 Alex Jover Morales <alexjovermorales@gmail.com>
- * @license MIT
  */
 
 /*!

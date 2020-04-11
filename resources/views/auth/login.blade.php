@@ -2,6 +2,11 @@
 @section('title', 'Masuk')
 @section('heading', 'Masuk ke akun anda')
 @section('content')
+@if (session('message'))
+<div class="alert alert-success font-weight-bold text-center">
+    {{ session('message') }}
+</div>
+@endif
 <form method="POST" action="{{ route('login') }}" class="row mt-4">
     @csrf
 

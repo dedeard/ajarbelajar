@@ -35,7 +35,7 @@ if (window.API_TOKEN) window.axios.defaults.headers.common.Authorization = 'Bear
 /**
  * vue app
  */
-import { VLazyImagePlugin } from 'v-lazy-image'
+import { VLazyImagePlugin } from 'v-lazy-image/dist/v-lazy-image.es'
 
 //components
 import StarRating from 'vue-star-rating'

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -66,5 +67,16 @@ class LoginController extends Controller
             'email' => 'nullable|string|exists:users',
             'username' => 'nullable|string|exists:users',
         ], $messages);
+    }
+
+    protected function showLoginForm()
+    {
+        $intendedURL = Session::get('url.intended');
+
+        if($intendedURL) {
+            Session::flash('message', 'Anda harus Login untuk melajutkan.');
+        }
+
+        return view('auth.login');
     }
 }
