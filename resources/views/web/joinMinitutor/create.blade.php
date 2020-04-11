@@ -80,13 +80,20 @@
       </div>
 
       <div class="form-group">
-        <label class="mb-3">No.HP yang bisa dihubungi</label>
-        <input name="contact" placeholder="No.HP yang bisa dihubungi" type="text" class="form-control @error('contact') is-invalid @enderror" value="{{ old('contact') }}">
+        <label class="mb-3">No.HP (whatsapp only)</label>
+        <input name="contact" placeholder="No.HP (whatsapp only)" type="text" class="form-control @error('contact') is-invalid @enderror" value="{{ old('contact') }}">
         @error('contact')
           <div class="invalid-feedback">
             <strong>{{ $message }}</strong>
           </div>
         @enderror
+      </div>
+
+      <div class="form-group">
+        <div class="checkbox-custom checkbox-primary">
+          <input type="checkbox" id="join-group-check" name="join_group">
+          <label for="join-group-check">Apakah anda ingin dimasukan ke group whatsapp.</label>
+        </div>
       </div>
 
       <div class="form-group">

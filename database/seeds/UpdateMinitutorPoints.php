@@ -14,11 +14,6 @@ class UpdateMinitutorPoints extends Seeder
     public function run()
     {
         $minitutors = Minitutor::select(['id', 'user_id', 'points'])->get();
-        // post created = 25
-        // $rating = round(($postReview->understand + $postReview->inspiring + $postReview->language_style + $postReview->content_flow)/4);
-        // $postReview->post->user->minitutor->incrementPoint($rating*4);
-        // $postComment->post->user->minitutor->incrementPoint(4);
-
         foreach($minitutors as $minitutor) {
             $posts = $minitutor->posts()->select(['id'])->with(['reviews' => function($q){
                 return $q->select(['post_id', DB::raw('(understand + inspiring + language_style + content_flow)/4 as rating')]);
@@ -32,7 +27,6 @@ class UpdateMinitutorPoints extends Seeder
                 foreach($post->reviews as $review) {
                     $point += round($review->rating*4);
                 }
-
             }
             $minitutor->points = $point;
             $minitutor->save();

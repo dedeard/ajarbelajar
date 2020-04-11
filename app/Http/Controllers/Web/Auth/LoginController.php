@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Web\Auth;
 
-use App\Helpers\Seo;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -71,12 +69,6 @@ class LoginController extends Controller
 
     protected function showLoginForm()
     {
-        $intendedURL = Session::get('url.intended');
-
-        if($intendedURL) {
-            Session::flash('message', 'Anda harus Login untuk melajutkan.');
-        }
-
         return view('auth.login');
     }
 }

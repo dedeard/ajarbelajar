@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Model\Post;
-use App\Model\PostReview;
 use Illuminate\Http\Request;
 
 class NotificationsController extends Controller

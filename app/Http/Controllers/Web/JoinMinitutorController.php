@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Helpers\Seo;
 use App\Http\Controllers\Controller;
 use App\Model\Minitutor;
 use App\Model\Post;
@@ -18,7 +17,7 @@ class JoinMinitutorController extends Controller
     {
         $data = [
             'user_count' => User::count(),
-            'minitutor_count' => Minitutor::count(),
+            'minitutor_count' => Minitutor::where('active', 1)->count(),
             'post_count' => Post::where('draf', 0)->count()
         ];
         return view('web.joinMinitutor.index', $data);
@@ -46,6 +45,12 @@ class JoinMinitutorController extends Controller
             'reason' => 'required|string|max:250',
             'expectation' => 'required|string|max:250'
         ]);
+
+        if($request->join_group === 'on'){
+            $data['join_group'] = true;
+        } else {
+            $data['join_group'] = false;
+        }
 
         if ($user->requestMinitutor){
             $user->requestMinitutor()->update($data);
@@ -79,6 +84,12 @@ class JoinMinitutorController extends Controller
             'reason' => 'required|string|max:250',
             'expectation' => 'required|string|max:250'
         ]);
+
+        if($request->join_group === 'on'){
+            $data['join_group'] = true;
+        } else {
+            $data['join_group'] = false;
+        }
 
         if ($user->requestMinitutor !== null){
             $user->requestMinitutor()->update($data);

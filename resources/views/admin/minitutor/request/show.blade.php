@@ -46,8 +46,8 @@
 
         <h4 class="mt-30">Spesialisasi/Minat bakat</h4>
         <p class="mb-30">{{ $data->interest_talent }}</p>
-        <h4 class="mt-30">Kontak</h4>
-        <p class="mb-30">{{ $data->contact }}</p>
+        <h4 class="mt-30">Kontak (Whatsapp)</h4>
+        <p class="mb-30">{{ $data->contact }} @if($data->join_group) (tambahkan ke group whatsapp minitutor jika diterima) @endif </p>
         <h4 class="mt-30">Motivasi</h4>
         <p class="mb-30">{{ $data->reason }}</p>
         <h4 class="mt-30">Ekspektasi</h4>

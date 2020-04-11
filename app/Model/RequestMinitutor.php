@@ -15,7 +15,8 @@ class RequestMinitutor extends Model
         'interest_talent',
         'contact',
         'reason',
-        'expectation'
+        'expectation',
+        'join_group'
     ];
 
     public function user()
