@@ -38,7 +38,7 @@ return [
     'digits_between' => ':attribute harus terdiri dari :min sampai :max angka.',
     'dimensions'     => ':attribute tidak memiliki dimensi gambar yang valid.',
     'distinct'       => ':attribute memiliki nilai yang duplikat.',
-    'email'          => ':attribute harus berupa alamat surel yang valid.',
+    'email'          => ':attribute harus berupa Alamat Email yang valid.',
     'ends_with'      => ':attribute harus diakhiri salah satu dari berikut: :values',
     'exists'         => ':attribute yang dipilih tidak valid.',
     'file'           => ':attribute harus berupa sebuah berkas.',
@@ -140,11 +140,17 @@ return [
     |---------------------------------------------------------------------------------------
     |
     | Baris bahasa berikut digunakan untuk menukar 'placeholder' atribut dengan sesuatu
-    | yang lebih mudah dimengerti oleh pembaca seperti "Alamat Surel" daripada "surel" saja.
+    | yang lebih mudah dimengerti oleh pembaca seperti "Alamat Email" daripada "Email" saja.
     | Hal ini membantu kita dalam membuat pesan menjadi lebih ekspresif.
     |
     */
 
     'attributes' => [
+        'identity' => 'Alamat Email atau Username',
+        'password' => 'Kata Sandi',
+        'email' => 'Alamat Email',
+        'username' => 'Username',
+        'first_name' => 'Nama depan',
+        'last_name' => 'Nama belakang',
     ],
 ];

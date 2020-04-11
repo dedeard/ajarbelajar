@@ -171,6 +171,7 @@ return [
         Nagy\LaravelRating\LaravelRatingServiceProvider::class,
         Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        qoraiche\mailEclipse\mailEclipseServiceProvider::class,
 
         /*
          * Application Service Providers...
