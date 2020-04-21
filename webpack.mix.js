@@ -4,6 +4,7 @@ mix.webpackConfig({ resolve: { alias: { 'vars': path.resolve('resources/sass/the
    .js('resources/js/editor.js', 'public/js')
    .js('resources/js/app.js', 'public/js')
    .js('resources/js/admin.js', 'public/js')
+   .js('resources/js/markdown.js', 'public/js')
 
 if (!mix.inProduction()) {
    mix

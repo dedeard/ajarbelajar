@@ -11,7 +11,7 @@ $categories = \App\Model\Category::has('posts')->withCount([
   <div class="row">
     @foreach($categories as $category)
     <div class="col-lg-3">
-      <a class="popular-categories-card" href="{{ route('category.show', $category->slug) }}">
+      <a class="popular-categories-card" rel="nofollow" href="{{ route('category.show', $category->slug) }}">
         <h4 class="info-title text-truncate">{{ $category->name }}</h4>
       </a>
     </div>

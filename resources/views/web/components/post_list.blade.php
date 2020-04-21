@@ -19,7 +19,7 @@
   </div>
   <div class="ab-post-list-right">
     <span class="info-time">{{ $post->created_at->format('d M Y') }}</span>
-    <h3 class="info-title"><a href="{{route('post.show', $post->slug)}}">{{ $post->title }}</a></h3>
+    <h3 class="info-title"><a rel="nofollow" href="{{route('post.show', $post->slug)}}">{{ $post->title }}</a></h3>
     @if($post->category)
     <span class="category-info">{{ $post->category->name }}</span>
     @endif
@@ -32,7 +32,7 @@
     <div class="actions mt-10">
       <div class="row">
         <div class="col-6">
-          <a href="{{route('post.show', $post->slug)}}" class="btn btn-primary btn-block btn-sm">
+          <a rel="nofollow" href="{{route('post.show', $post->slug)}}" class="btn btn-primary btn-block btn-sm">
             @if($post->type === 'article')
               <i class="wb-book"></i> Baca Artikel
             @else
@@ -42,9 +42,9 @@
         </div>
         <div class="col-6">
           @if(Auth::user() && $post->isFavoritedBy(Auth::user()))
-          <a href="{{ route('favorite.destroy', $post->id) }}" class="btn btn-danger btn-outline btn-block btn-sm"><i class="icon wb-heart"></i> Hapus Favorit</a>
+          <a rel="nofollow" href="{{ route('favorite.destroy', $post->id) }}" class="btn btn-danger btn-outline btn-block btn-sm"><i class="icon wb-heart"></i> Hapus Favorit</a>
           @else
-          <a href="{{ route('favorite.create', $post->id) }}" class="btn btn-danger btn-outline btn-block btn-sm"><i class="icon wb-heart"></i> Tambah Favorit</a>
+          <a rel="nofollow" href="{{ route('favorite.create', $post->id) }}" class="btn btn-danger btn-outline btn-block btn-sm"><i class="icon wb-heart"></i> Tambah Favorit</a>
           @endif
         </div>
       </div>

@@ -43,7 +43,7 @@ return [
     |
     */
 
-    'allowed_environments' => ['local', 'staging', 'testing', 'production'],
+    'allowed_environments' => ['local', 'staging', 'testing'],
 
     /*
     |--------------------------------------------------------------------------

@@ -12,7 +12,7 @@
                 @endif
                 <h3 class="title-info">{{ $popular->title }}</h3>
                 <div class="description-info">by {{ $popular->user->first_name }} - {{ $popular->created_at->format('d M Y') }} - {{ $popular->views_count }}x dilihat</div>
-                <a href="{{ route('post.show', $popular->slug) }}" class=" btn btn-primary btn-round btn-watch btn-inverse">
+                <a rel="nofollow" href="{{ route('post.show', $popular->slug) }}" class=" btn btn-primary btn-round btn-watch btn-inverse">
                   <i class="icon wb-play" aria-hidden="true"></i>
                   Tonton Video
                 </a>

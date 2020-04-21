@@ -239,9 +239,9 @@ return [
         'OpenGraph' => Artesaos\SEOTools\Facades\OpenGraph::class,
         'Twitter'   => Artesaos\SEOTools\Facades\TwitterCard::class,
         'JsonLd'   => Artesaos\SEOTools\Facades\JsonLd::class,
-        'Setting' => Akaunting\Setting\Facade::class,
         'EditorjsHelp' => App\Helpers\Editorjs::class,
         'SeoHelp' => App\Helpers\Seo::class,
         'CategoryHelp' => App\Helpers\Category::class,
+        'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
     ],
 ];

@@ -407,6 +407,12 @@
                   <span class="site-menu-title">Permissions</span>
                 </a>
               </li>
+              <li class="site-menu-item @if(Route::is('admin.broadcast.mail*')) active @endif">
+                <a href="{{ route('admin.broadcast.mail.index') }}">
+                  <i class="site-menu-icon wb-envelope"></i>
+                  <span class="site-menu-title">Broadcast Mail</span>
+                </a>
+              </li>
               @endrole
 
               @can('manage minitutor')

@@ -43,6 +43,8 @@ class UsersController extends Controller
             'role' => ['nullable', new RoleExists],
         ]);
 
+        $data['username'] = strtolower($data['username']);
+
         $data['password'] = Hash::make($data['password']);
         if (isset($data['email_verified'])) $data['email_verified_at'] = now();
 
@@ -83,6 +85,8 @@ class UsersController extends Controller
             'email_verified' => ['nullable'],
             'role' => ['nullable', new RoleExists],
         ]);
+
+        $data['username'] = strtolower($data['username']);
 
         if ($data['password']) {
             $data['password'] = Hash::make($data['password']);

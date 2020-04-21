@@ -36,6 +36,8 @@ class EditController extends Controller
             'password' => ['nullable', 'required_with:new_password', 'password']
         ]);
 
+        $data['username'] = strtolower($data['username']);
+
         if(strtolower($data['email']) !== strtolower($user->email)) {
             $data['email_verified_at'] = null;
         }

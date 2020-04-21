@@ -3,7 +3,7 @@
   <div class="row">
     @foreach(\App\Model\Post::videos()->orderBy('created_at', 'desc')->limit(4)->get() as $video)
     <div class="col-lg-3">
-      <a class="new-videos-card" href="{{ route('post.show', $video->slug) }}">
+      <a class="new-videos-card" rel="nofollow" href="{{ route('post.show', $video->slug) }}">
         <div class="overlay-icon-play">
           <i class="wb-play"></i>
         </div>

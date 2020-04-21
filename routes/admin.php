@@ -8,8 +8,10 @@ Route::get('/dashboard', function(){
   return view('admin.dashboard');
 })->name('dashboard');
 
-Route::get('/mail/minitutor', 'SendMailToMinitutor@index')->name('mail.minitutor.index');
-Route::post('/mail/minitutor', 'SendMailToMinitutor@send')->name('mail.minitutor.send');
+Route::middleware(['role:Super Admin', 'password.confirm'])->prefix('broadcast-mail')->as('broadcast.mail.')->group(function(){
+  Route::get('/', 'BroadcastMailController@index')->name('index');
+  Route::post('/', 'BroadcastMailController@send')->name('send');
+});
 
 Route::resource('users', 'UsersController');
 Route::resource('categories', 'CategoriesController')->except('show');

@@ -25,7 +25,7 @@ class Username implements Rule
      */
     public function passes($attribute, $value)
     {
-        return preg_match("/^(?![_.])(?!.*[_]{2})[a-z0-9_]+(?<![_])$/", $value);
+        return preg_match("/^(?![_.])(?!.*[_]{2})[a-z0-9_]+(?<![_])$/", strtolower($value));
     }
 
     /**

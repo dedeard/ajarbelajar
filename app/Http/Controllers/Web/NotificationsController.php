@@ -59,7 +59,7 @@ class NotificationsController extends Controller
         $user->unreadNotifications->markAsRead();
         return redirect()->back();
     }
-    
+
     public function destroy(Request $request)
     {
         $user = $request->user();

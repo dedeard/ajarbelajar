@@ -20,9 +20,9 @@
         <div class="minitutor-card-content-actions">
           <a href="{{ route('minitutor.show', $minitutor->user->username) }}" class="btn btn-primary btn-sm">Lihat MiniTutor</a>
           @if(Auth::user() && Auth::user()->hasSubscribed($minitutor))
-            <a href="{{ route('followable.unfollow', $minitutor->user->id) }}" class="btn btn-danger btn-sm">Berhenti Mengikuti</a>
+            <a rel="nofollow" href="{{ route('followable.unfollow', $minitutor->user->id) }}" class="btn btn-danger btn-sm">Berhenti Mengikuti</a>
           @else
-            <a href="{{ route('followable.follow', $minitutor->user->id) }}" class="btn btn-primary btn-sm">Ikuti Minitutor</a>
+            <a rel="nofollow" href="{{ route('followable.follow', $minitutor->user->id) }}" class="btn btn-primary btn-sm">Ikuti Minitutor</a>
           @endif
         </div>
       </div>

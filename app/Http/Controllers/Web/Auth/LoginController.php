@@ -45,6 +45,9 @@ class LoginController extends Controller
     protected function username() {
         $login = request()->input('identity');
         $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        if($field == 'username') {
+            $login = strtolower($login);
+        }
         request()->merge([ $field => $login ]);
         return $field;
     }

@@ -4,7 +4,7 @@
 @slot('user', $user)
 
 @foreach($activities as $activity)
-<a class="activity-card" href="{{ route('post.show', $activity->post->slug) }}">
+<a rel="nofollow" class="activity-card" href="{{ route('post.show', $activity->post->slug) }}">
   <div class="left">
     <v-lazy-image
       src="{{ $activity->post->thumbUrl() }}"

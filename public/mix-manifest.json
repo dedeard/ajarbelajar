@@ -1,6 +1,7 @@
 {
     "/js/admin.js": "/js/admin.js?id=1a1dad0bbca20d8e0ac4",
     "/js/app.js": "/js/app.js?id=96636ec9171a2f5bebe8",
-    "/js/editor.js": "/js/editor.js?id=44b7358c429d650ca3a7",
-    "/css/app.css": "/css/app.css?id=45a6a5b67cc454ecc8fe"
+    "/js/editor.js": "/js/editor.js?id=828ae5b71137f8df3733",
+    "/css/app.css": "/css/app.css?id=5e5cffca7b8d3b4a2a2d",
+    "/js/markdown.js": "/js/markdown.js?id=1744abbf456755f972be"
 }
