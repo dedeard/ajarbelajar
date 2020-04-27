@@ -5,6 +5,8 @@
     <div class="my-20"></div>
     @include('web.partials.new-videos')
     <div class="my-20"></div>
+    @include('web.partials.new-articles')
+    <div class="my-20"></div>
     @include('web.partials.popular-categories')
     <div class="my-20"></div>
     @include('web.partials.most-minitutor-point')

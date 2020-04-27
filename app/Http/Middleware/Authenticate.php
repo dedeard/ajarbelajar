@@ -16,7 +16,7 @@ class Authenticate extends Middleware
     {
         if (! $request->expectsJson()) {
             if(\Route::is('post.show')) {
-                $request->session()->flash('message', 'Anda harus Login untuk melajutkan.');
+                $request->session()->flash('message', 'Anda harus Login untuk melanjutkan.');
             }
             return route('login');
         }

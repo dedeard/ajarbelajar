@@ -40,18 +40,29 @@ class PostController extends Controller
             $rating = $post->reviews()->where('user_id', Auth::user()->id);
             $rating = ($rating->exists()) ? $rating->first() : null;
             Activity::createUserActivity($request->user(), $post);
+            $post->views()->save(PostView::createViewLog($request));
+        }
+
+        $description = null;
+        $body = $post->body ? json_decode($post->body) : null;
+        if($body) {
+            foreach ($body->blocks as $block) {
+                if(!$description && $block->type === 'paragraph' && strlen($block->data->text) > 30){
+                    $description = substr($block->data->text, 0, 160);
+                }
+            }
         }
 
         $keywords = [];
         foreach($post->tags as $tag) array_push($keywords, $tag->name);
 
         SEOMeta::setTitle($post->title);
-        SEOMeta::setDescription($post->description);
+        SEOMeta::setDescription($post->description ?? $description);
         SEOMeta::addMeta('article:published_time', $post->created_at->toW3CString(), 'property');
         if($post->category) SEOMeta::addMeta('article:section', $post->category->name, 'property');
         SEOMeta::addKeyword($keywords);
 
-        OpenGraph::setDescription($post->description);
+        OpenGraph::setDescription($post->description ?? $description);
         OpenGraph::setTitle($post->title);
         OpenGraph::setUrl(url()->current());
         OpenGraph::addProperty('type', 'article');
@@ -60,7 +71,7 @@ class PostController extends Controller
         OpenGraph::addImage($post->heroUrl());
 
         JsonLd::setTitle($post->title);
-        JsonLd::setDescription($post->description);
+        JsonLd::setDescription($post->description ?? $description);
         JsonLd::setType('Article');
 
         if($post->images) {
@@ -71,7 +82,6 @@ class PostController extends Controller
             JsonLd::addImage($img_urls);
         }
 
-        $post->views()->save(PostView::createViewLog($request));
         return view('web.post.show', ['post' => $post, 'review' => $rating ]);
     }
 

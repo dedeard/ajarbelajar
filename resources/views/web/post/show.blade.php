@@ -46,27 +46,35 @@
           <a href="{{ route('category.show', $post->category->slug) }}">{{ $post->category->name }}</a>
         </div>
         @endif
-        <div class="post-body">
-          {!! EditorjsHelp::compile($post->body) !!}
-        </div>
-        @if($post->tags->count())
-        <div class="post-tags">
-          <div class="post-tags-title">Tags</div>
-          @foreach($post->tags as $tag)
-            <a href="{{ route('tags', $tag->slug) }}" class="btn btn-xs btn-default">{{ $tag->name }}</a>
-          @endforeach
-        </div>
-        @endif
+        @auth
+          <div class="post-body">
+            {!! EditorjsHelp::compile($post->body) !!}
+          </div>
+          @if($post->tags->count())
+          <div class="post-tags">
+            <div class="post-tags-title">Tags</div>
+            @foreach($post->tags as $tag)
+              <a href="{{ route('tags', $tag->slug) }}" class="btn btn-xs btn-default">{{ $tag->name }}</a>
+            @endforeach
+          </div>
+          @endif
+        @else
+          <div class="post-body text-center">
+            <p class="lead my-15">Anda harus login untuk mengakses postingan ini.</p>
+            <a href="{{ route('login') }}" class="btn btn-primary px-30">LOGIN</a>
+          </div>
+        @endauth
       </article>
+      @auth
+        @component('web.post.components.review')
+          @slot('post', $post)
+          @slot('review', $review)
+        @endcomponent
 
-      @component('web.post.components.review')
-        @slot('post', $post)
-        @slot('review', $review)
-      @endcomponent
-
-      @component('web.post.components.comment')
-        @slot('post', $post)
-      @endcomponent
+        @component('web.post.components.comment')
+          @slot('post', $post)
+        @endcomponent
+      @endauth
     </div>
     <div class="post-read-card-side">
       @component('web.post.components.creator_card')
