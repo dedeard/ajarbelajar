@@ -13,7 +13,7 @@ class PointSeeder extends Seeder
      */
     public function run()
     {
-        $minitutors = Minitutor::select(['id', 'user_id', 'points'])->get();
+        $minitutors = Minitutor::select(['id', 'user_id'])->get();
         foreach($minitutors as $minitutor) {
             $posts = $minitutor->posts()->select(['id'])->with(['reviews' => function($q){
                 return $q->select(['post_id', DB::raw('(understand + inspiring + language_style + content_flow)/4 as rating')]);
