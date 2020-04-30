@@ -4,7 +4,7 @@
       <div class="container-fluid">
         <div class="ab-header__left-wrapper">
           <a href="/" class="ab-header__brand">
-            <img src="{{ asset('img/logo/logo-text.svg') }}" alt="Logo ajarbelajar" class="d-none d-lg-block" />
+            <img src="{{ asset('img/logo/logo-text-v2.svg') }}" alt="Logo ajarbelajar" class="d-none d-lg-block" />
             <img src="{{ asset('img/logo/logo.svg') }}" alt="Logo ajarbelajar" class="d-block d-lg-none" />
           </a>
           <a href="#" class="ab-header__sidebar-toggle ml-lg-auto ml-10 d-lg-none" v-sidebar-toggle>

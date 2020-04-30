@@ -13,17 +13,17 @@ class MinitutorController extends Controller
     public function index(Request $request)
     {
         $minitutors = Minitutor::where('active', 1);
+        $minitutors->withCount(['posts' => function($q){
+            return $q->where('draf', 0);
+        }]);
         if ($request->input('search')) {
             $search = '%' . $request->input('search') . '%';
             $minitutors = $minitutors->whereHas('user', function($q) use($search) {
                 return $q->select('*')->where('first_name', 'like', $search)->orWhere('last_name', 'like', $search)->orWhere('username', 'like', $search);
             });
-            $minitutors = $minitutors->paginate(12)->appends(['search' => $request->input('search')]);
-        } else {
-            $minitutors = $minitutors->withCount(['posts' => function($q){
-                return $q->where('draf', 0);
-            }])->orderBy('posts_count', 'desc')->paginate(12)->appends(['search' => $request->input('search')]);
         }
+        $minitutors->orderBy('posts_count', 'desc')->orderBy('id', 'asc');
+        $minitutors = $minitutors->paginate(12)->appends(['search' => $request->input('search')]);
         return view('web.minitutor', ['minitutors' => $minitutors]);
     }
 

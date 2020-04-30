@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Model\Minitutor;
 use App\Model\User;
 use Illuminate\Http\Request;
 

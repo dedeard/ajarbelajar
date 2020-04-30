@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Model\Minitutor;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class UpdateMinitutorPoints extends Seeder
+class PointSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -28,8 +28,8 @@ class UpdateMinitutorPoints extends Seeder
                     $point += round($review->rating*4);
                 }
             }
-            $minitutor->points = $point;
-            $minitutor->save();
+            $minitutor->user->points = $point;
+            $minitutor->user->save();
         }
     }
 }

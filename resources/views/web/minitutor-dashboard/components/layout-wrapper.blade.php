@@ -8,7 +8,7 @@
             src-placeholder="{{ asset('img/placeholder/avatar.png') }}"
             alt="{{ Auth::user()->username }}"
           ></v-lazy-image>
-          <span class="point">{{ Auth::user()->minitutor->points }} Poin</span>
+          <span class="point">{{ Auth::user()->points }} Poin</span>
         </div>
 
         <div class="info">

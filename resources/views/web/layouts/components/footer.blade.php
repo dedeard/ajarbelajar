@@ -5,7 +5,7 @@
 
         <div class="col-lg-4 py-30">
           <a href="/" class="ab-footer__brand">
-            <img src="{{ asset('img/logo/logo-text.svg') }}" alt="Logo ajarbelajar"/>
+            <img src="{{ asset('img/logo/logo-text-v2.svg') }}" alt="Logo ajarbelajar"/>
           </a>
           <p class="mb-0 mt-10">BELAJAR, BERBAGI, BERKONTRIBUSI</p>
         </div>

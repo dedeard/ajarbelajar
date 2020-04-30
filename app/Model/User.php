@@ -29,6 +29,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'email_verified_at',
+        'points'
     ];
 
     protected $hidden = [
@@ -52,6 +53,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function receivesBroadcastNotificationsOn()
     {
         return 'App.User.'.$this->id;
+    }
+
+    public function incrementPoint($point) {
+        $this->points = $this->points + $point;
+        return $this->save();
     }
 
     public function apiToken()

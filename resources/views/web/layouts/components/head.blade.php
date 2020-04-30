@@ -27,6 +27,14 @@
 <link rel="stylesheet" href="{{ asset('remark/fonts/web-icons/web-icons.min.css') }}">
 <link rel="stylesheet" href="https://s3.amazonaws.com/icomoon.io/114779/Socicon/style.css?u8vidh">
 <link rel="stylesheet" href="{{ mix('css/theme.css') }}">
+@else
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120546713-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-120546713-1');
+</script>
 @endif
 <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 @auth

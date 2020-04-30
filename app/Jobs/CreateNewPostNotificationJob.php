@@ -34,7 +34,7 @@ class CreateNewPostNotificationJob implements ShouldQueue
         if($notified) return 0;
 
         foreach($post->user->minitutor->subscribers()->get() as $user) {
-            $user->notify(new NewPost($post));
+            $user->notify(new NewPost($post, $user));
         }
 
         Notified::create([

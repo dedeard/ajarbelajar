@@ -6,7 +6,7 @@
     <div class="container-fluid">
       <div class="ab-sidebar__header-wrapper">
         <a href="/" class="ab-sidebar__brand">
-          <img src="{{ asset('img/logo/logo-text.svg') }}" alt="Logo ajarbelajar" />
+          <img src="{{ asset('img/logo/logo-text-v2.svg') }}" alt="Logo ajarbelajar" />
         </a>
         <a href="#" class="ab-sidebar__sidebar-toggle" v-sidebar-toggle>
           <i class="wb-menu icon"></i>

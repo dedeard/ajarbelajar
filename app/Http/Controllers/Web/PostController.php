@@ -45,7 +45,8 @@ class PostController extends Controller
 
         $description = null;
         $body = $post->body ? json_decode($post->body) : null;
-        if($body) {
+        if($body && isset($body->blocks)) {
+            
             foreach ($body->blocks as $block) {
                 if(!$description && $block->type === 'paragraph' && strlen($block->data->text) > 30){
                     $description = substr($block->data->text, 0, 160);

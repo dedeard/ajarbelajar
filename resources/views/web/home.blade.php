@@ -9,7 +9,7 @@
     <div class="my-20"></div>
     @include('web.partials.popular-categories')
     <div class="my-20"></div>
-    @include('web.partials.most-minitutor-point')
+    @include('web.partials.most-user-point')
     <div class="my-20"></div>
     @include('web.partials.post-user-minitutor-count')
     <div class="my-20"></div>

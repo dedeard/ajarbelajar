@@ -8,7 +8,7 @@
           src-placeholder="{{ asset('img/placeholder/avatar.png') }}"
           alt="{{ $user->username }}"
         ></v-lazy-image>
-        <span class="minitutor-point">{{ $user->minitutor->points }} Poin</span>
+        <span class="minitutor-point">{{ $user->points }} Poin</span>
       </a>
     </div>
     <div class="user-info">
