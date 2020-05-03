@@ -43,7 +43,7 @@ class ReviewToMinitutorPost extends Notification
     {
         return (new MailMessage)
                     ->subject('Anda memiliki 1 Feedback baru dari ' . $this->postReview->user->name())
-                    ->line('hi ' . $this->postReview->post->user->name() . ', Anda memiliki 1 Feedback baru dari ' . $this->postReview->user->name())
+                    ->line('Hi ' . $this->postReview->post->user->name() . ', Anda memiliki 1 Feedback baru dari ' . $this->postReview->user->name())
                     ->action('Lihat Feedback', url('/dashboard/minitutor/reviews'));
     }
 

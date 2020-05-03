@@ -44,7 +44,7 @@ class NewPost extends Notification
     {
         return (new MailMessage)
                     ->subject('Postingan baru dari MiniTutor ' . $this->post->user->name())
-                    ->line('hi ' . $this->user->name() . ', Minitutor ' . $this->post->user->name() . ' mempunyai satu postingan baru `' . $this->post->title . '`')
+                    ->line('Hi ' . $this->user->name() . ', Minitutor ' . $this->post->user->name() . ' mempunyai satu postingan baru `' . $this->post->title . '`')
                     ->action('Lihat Post', route('post.show', $this->post->slug));
     }
 
