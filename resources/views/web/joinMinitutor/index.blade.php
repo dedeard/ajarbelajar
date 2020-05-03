@@ -19,7 +19,9 @@
       </div>
     </div>
   </div>
-
+  <div class="panel panel-body text-center mt-30 mb-0">
+    <a download href="{{asset('pdf/SOP-Pembuatan-Konten-AjarBelajar-2020.pdf')}}" class="btn btn-primary">Download SOP Pembuatan Konten AjarBelajar</a>
+  </div>
   @include('web.partials.post-user-minitutor-count')
 </div>
 @endsection

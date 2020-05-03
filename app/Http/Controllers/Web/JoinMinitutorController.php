@@ -46,7 +46,6 @@ class JoinMinitutorController extends Controller
             'contact' => 'required|string|max:250',
             'reason' => 'required|string|max:250',
             'expectation' => 'required|string|max:250',
-            'video' => 'required|mimes:mp4,mov,mkv,avi|max:50000',
             'cv' => 'required|mimes:pdf|max:10000',
         ]);
 
@@ -55,10 +54,6 @@ class JoinMinitutorController extends Controller
         } else {
             $data['join_group'] = false;
         }
-
-        $name = Str::random(60) . '.' . $data['video']->extension();
-        Storage::disk('public')->put('minitutor/video/' . $name, file_get_contents($data['video']));
-        $data['video'] = $name;
 
         $name = Str::random(60) . '.' . $data['cv']->extension();
         Storage::disk('public')->put('minitutor/cv/' . $name, file_get_contents($data['cv']));

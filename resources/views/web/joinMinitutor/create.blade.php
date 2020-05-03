@@ -10,6 +10,9 @@
       <p class="text-center">
         Nama, Alamat Email, Media Sosial dan Foto secara otomatis ikut dalam formulir Anda sesuai dengan profil akun Anda.
       </p>
+      <center>
+        <a download href="{{asset('pdf/SOP-Pembuatan-Konten-AjarBelajar-2020.pdf')}}" class="btn btn-primary">Download SOP Pembuatan Konten AjarBelajar</a>
+      </center>
     </div>
     <hr class="m-0">
     <form class="panel-body" method="POST" action="{{ route('join.minitutor.store') }}" enctype="multipart/form-data">
@@ -64,21 +67,6 @@
           </div>
         @enderror
       </div>
-
-      <file-input inline-template>
-        <div class="form-group">
-          <label class="mb-3">Contoh Video penyampaian materi (max: 50mb )</label>
-          <label class="custom-file d-block">
-            <input type="file" @change="handleChange" name="video" class="custom-file-input" accept=".mp4, .mov, .mkv, .avi">
-            <span class="custom-file-control">@{{ name || 'Pilih file : *.(mp4, mov, mkv, avi)' }}</span>
-          </label>
-          @error('video')
-            <div class="text-danger">
-              <strong>{{ $message }}</strong>
-            </div>
-          @enderror
-        </div>
-      </file-input>
 
       <hr class="my-4" />
 

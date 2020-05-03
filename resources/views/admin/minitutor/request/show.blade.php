@@ -54,11 +54,6 @@
         <h4 class="mt-30">Ekspektasi</h4>
         <p class="mb-30">{{ $data->expectation }}</p>
 
-        <h4 class="mt-30">Contoh video penyampaian materi.</h4>
-        <video class="img-fluid" controls>
-          <source src="{{ asset('storage/minitutor/video/' . $data->video) }}" />
-        </video>
-
       </div>
     </div>
   </div>
