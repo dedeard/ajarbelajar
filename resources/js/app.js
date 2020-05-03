@@ -43,6 +43,7 @@ import AvatarUploader from './vue/app/avatar-uploader'
 import PopularVideoLg from './vue/app/popular-video-lg'
 import SidebarScroll from './vue/app/sidebar-scroll'
 import FeedbackList from './vue/app/feedback-list'
+import FileInput from './vue/app/file-input'
 
 //directives
 import Sticky from 'vue-sticky-directive'
@@ -64,7 +65,8 @@ new Vue({
     PopularVideoLg,
     SidebarScroll,
     StarRating,
-    FeedbackList
+    FeedbackList,
+    FileInput
   },
   directives: {
     Sticky,

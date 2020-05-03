@@ -80,8 +80,6 @@ Route::prefix('join-minitutor')->as('join.minitutor.')->group(function(){
     Route::middleware(['auth', 'is.not.minitutor'])->group(function(){
         Route::get('create', 'JoinMinitutorController@create')->name('create');
         Route::post('store', 'JoinMinitutorController@store')->name('store');
-        Route::get('edit', 'JoinMinitutorController@edit')->name('edit');
-        Route::put('update', 'JoinMinitutorController@update')->name('update');
     });
 });
 

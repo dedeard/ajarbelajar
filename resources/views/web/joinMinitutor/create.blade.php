@@ -12,7 +12,7 @@
       </p>
     </div>
     <hr class="m-0">
-    <form class="panel-body" method="POST" action="{{ route('join.minitutor.store') }}">
+    <form class="panel-body" method="POST" action="{{ route('join.minitutor.store') }}" enctype="multipart/form-data">
       @csrf
       <h5 class="h4">Informasi akun</h5>
 
@@ -65,9 +65,39 @@
         @enderror
       </div>
 
+      <file-input inline-template>
+        <div class="form-group">
+          <label class="mb-3">Contoh Video penyampaian materi (max: 50mb )</label>
+          <label class="custom-file d-block">
+            <input type="file" @change="handleChange" name="video" class="custom-file-input" accept=".mp4, .mov, .mkv, .avi">
+            <span class="custom-file-control">@{{ name || 'Pilih file : *.(mp4, mov, mkv, avi)' }}</span>
+          </label>
+          @error('video')
+            <div class="text-danger">
+              <strong>{{ $message }}</strong>
+            </div>
+          @enderror
+        </div>
+      </file-input>
+
       <hr class="my-4" />
 
       <h5 class="h4">Tentang anda</h5>
+
+      <file-input inline-template>
+        <div class="form-group">
+          <label class="mb-3">Curriculum Vitae (CV)</label>
+          <label class="custom-file d-block">
+            <input type="file" @change="handleChange" name="cv" class="custom-file-input" accept=".pdf">
+            <span class="custom-file-control">@{{ name || 'Pilih file: *.pdf' }}</span>
+          </label>
+          @error('cv')
+          <div class="text-danger">
+            <strong>{{ $message }}</strong>
+          </div>
+          @enderror
+        </div>
+      </file-input>
 
       <div class="form-group">
         <label class="mb-3">Spesialisasi atau Minat bakat</label>

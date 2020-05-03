@@ -19,7 +19,8 @@ class Minitutor extends Model
         'interest_talent',
         'contact',
         'expectation',
-        'reason'
+        'reason',
+        'cv'
     ];
 
     public function user()

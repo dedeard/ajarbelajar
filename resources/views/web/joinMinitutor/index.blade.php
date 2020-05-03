@@ -8,9 +8,9 @@
         <h1 class="display-4 text-white text-shadow">Belajar, Berbagi, Berkontribusi.</h1>
         <p class="lead text-white text-shadow">Pengembangan kemampuan diri dan kualitas pendidikan Indonesia, dimulai dari sini!</p>
         @if(Auth::user() && Auth::user()->requestMinitutor)
-        <a rel="nofollow" href="{{ route('join.minitutor.edit') }}" class="btn btn-primary">
-          EDIT DATA PERMINTAAN ANDA
-        </a>
+        <span class="bg-indigo-600 text-light font-weight-bold d-inline-block p-15 rounded">
+          PERMINTAAN ANDA UNTUK MENJADI MINITUTOR SEDANG Di TINJAU
+        </span>
         @else
         <a rel="nofollow" href="{{ route('join.minitutor.create') }}" class="btn btn-primary">
           GABUNG SEKARANG
@@ -19,9 +19,6 @@
       </div>
     </div>
   </div>
-
-
-
 
   @include('web.partials.post-user-minitutor-count')
 </div>

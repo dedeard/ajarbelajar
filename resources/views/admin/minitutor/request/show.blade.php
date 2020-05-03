@@ -20,10 +20,11 @@
   </div>
   <div class="panel-body">
     <div class="row">
-      <div class="col-lg-2 col-md-4 mb-30">
+      <div class="col-lg-2 col-md-4 mb-30 text-center">
         <a href="#show-activity" class="avatar avatar-100">
           <img alt="photo" src="{{ $data->user->imageUrl() }}">
         </a>
+        <a download href="{{ asset('storage/minitutor/cv/' . $data->cv) }}" class="btn btn-block btn-primary btn-sm mt-15">DOWNLOAD CV</a>
       </div>
       <div class="col-lg-10 col-md-6 mb-3">
         <h4 class="mt-0">Nama</h4>
@@ -52,6 +53,11 @@
         <p class="mb-30">{{ $data->reason }}</p>
         <h4 class="mt-30">Ekspektasi</h4>
         <p class="mb-30">{{ $data->expectation }}</p>
+
+        <h4 class="mt-30">Contoh video penyampaian materi.</h4>
+        <video class="img-fluid" controls>
+          <source src="{{ asset('storage/minitutor/video/' . $data->video) }}" />
+        </video>
 
       </div>
     </div>

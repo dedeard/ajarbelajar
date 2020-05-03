@@ -7,6 +7,7 @@ use App\Model\Minitutor;
 use App\Model\RequestMinitutor;
 use App\Notifications\RequestMinitutorAccepted;
 use App\Notifications\RequestMinitutorRejected;
+use Illuminate\Support\Facades\Storage;
 
 class RequestMinitutorController extends Controller
 {
@@ -29,6 +30,12 @@ class RequestMinitutorController extends Controller
     public function reject($id)
     {
         $data = RequestMinitutor::findOrFail($id);
+        if(Storage::disk('public')->exists('minitutor/video/' . $data->video)){
+            Storage::disk('public')->delete('minitutor/video/' . $data->video);
+        }
+        if(Storage::disk('public')->exists('minitutor/cv/' . $data->cv)){
+            Storage::disk('public')->delete('minitutor/cv/' . $data->cv);
+        }
         $data->user->notify(new RequestMinitutorRejected);
         $data->delete();
         return redirect()->route('admin.minitutor.request.index')->withSuccess('Permintaan telah di ditolak.');
@@ -43,6 +50,11 @@ class RequestMinitutorController extends Controller
         unset($requestDataCopy['created_at']);
         unset($requestDataCopy['updated_at']);
         unset($requestDataCopy['id']);
+        unset($requestDataCopy['video']);
+
+        if(Storage::disk('public')->exists('minitutor/video/' . $requestData->video)){
+            Storage::disk('public')->delete('minitutor/video/' . $requestData->video);
+        }
 
         $requestDataCopy['active'] = true;
         Minitutor::create($requestDataCopy);
