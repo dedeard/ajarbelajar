@@ -1,7 +1,16 @@
 @extends('web.layouts.app')
 @section('content')
 <div class="container-fluid mt-15">
-  <div class="row">
+  @if($categories->total() || request()->input('search'))
+    <form method="get" class="form-search-lg">
+      <div class="input-group">
+        <input type="text" class="form-control" name="search" placeholder="Cari Kategori..." value="{{ request()->input('search') }}">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-primary"><i class="icon wb-search" aria-hidden="true"></i></button>
+        </span>
+      </div>
+    </form>
+    <div class="row">
     @foreach($categories as $category)
     <div class="col-lg-4">
       <div class="card text-center">
@@ -26,9 +35,20 @@
       </div>
     </div>
     @endforeach
-  </div>
-  <div class="card card-block mb-15 empty-none">
-    {{ $categories->links() }}
-  </div>
+    </div>
+    @if(!$categories->total())
+      <div class="py-100 panel panel-body">
+        <h3 class="text-muted text-center">Tidak ada hasil pencarian untuk "{{ request()->input('search') }}"</h3>
+      </div>
+    @endif
+    <div class="card card-block mb-15 empty-none">
+      {{ $categories->links() }}
+    </div>
+  @else
+    <div class="py-100 panel panel-body">
+      <h3 class="text-muted text-center">Belum ada Artikel atau Video yang di Favoritkan.</h3>
+    </div>
+  @endif
+
 </div>
 @endsection

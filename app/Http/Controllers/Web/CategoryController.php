@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Model\Category;
 use App\Model\Post;
+use Illuminate\Http\Request;
 use Artesaos\SEOTools\Facades\SEOMeta;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $category = Category::has('posts')->withCount([
             'posts as article_count' => function($q){
@@ -18,7 +19,12 @@ class CategoryController extends Controller
             'posts as video_count' => function($q){
                 return $q->where('type', 'video')->where('draf', false);
             }
-        ])->paginate(12);
+        ]);
+        if ($request->input('search')) {
+            $search = '%' . $request->input('search') . '%';
+            $category = $category->where('name', 'like', $search);
+        }
+        $category = $category->paginate(12)->appends(['search' => $request->input('search')]);
         return view('web.category.index', ['categories' => $category]);
     }
 

@@ -3,6 +3,8 @@
 <div class="container-fluid mt-15">
     @include('web.partials.popular-video-lg')
     <div class="my-20"></div>
+    @include('web.partials.home-categories')
+    <div class="my-20"></div>
     @include('web.partials.new-videos')
     <div class="my-20"></div>
     @include('web.partials.new-articles')

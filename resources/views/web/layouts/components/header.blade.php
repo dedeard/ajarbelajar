@@ -19,7 +19,7 @@
     <form action="{{ route('home') }}" class="ab-header__form-search" :class="formSearchShow ? 'd-block' : ''" method="GET">
       <div class="container-fluid">
         <div class="ab-header__form-search-wrapper">
-          <input class="form-control ab-header__form-search-input" aria-label="Search" type="search" name="search" value="{{ request()->input('search') }}" placeholder="Apa yang anda cari?">
+          <input class="form-control ab-header__form-search-input" aria-label="Search" type="search" name="search" value="{{ Route::is('home') ? request()->input('search') : '' }}" placeholder="Apa yang anda cari?">
           <button class="btn ab-header__form-search-toggle" type="submit" aria-label="Right Align">
             <i class="wb-search"></i>
           </button>
