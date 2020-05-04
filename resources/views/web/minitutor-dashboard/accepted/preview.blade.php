@@ -58,7 +58,7 @@
           @endcomponent
         @endforeach
       @else
-      <h4 class="my-40 text-center grey-500">Belum ada Feedback Konstruktif pada postingan ini.</h4>
+      <h4 class="my-40 text-center grey-500">Belum ada feedback konstruktif pada postingan ini.</h4>
       @endif
     </div>
   </div>
@@ -75,7 +75,7 @@
           @endcomponent
         @endforeach
       @else
-      <h4 class="my-40 text-center grey-500">Belum ada Komentar pada postingan ini.</h4>
+      <h4 class="my-40 text-center grey-500">Belum ada komentar pada postingan ini.</h4>
       @endif
     </div>
   </div>

@@ -15,7 +15,7 @@
   </div>
   @else
   <div class="py-100 panel panel-body">
-    <h3 class="text-muted text-center">Belum ada Feedback pada Artikel atau Video anda.</h3>
+    <h3 class="text-muted text-center">Belum ada feedback pada artikel atau video anda.</h3>
   </div>
   @endif
 </div>

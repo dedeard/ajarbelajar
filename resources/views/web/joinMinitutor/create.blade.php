@@ -88,8 +88,8 @@
       </file-input>
 
       <div class="form-group">
-        <label class="mb-3">Spesialisasi atau Minat bakat</label>
-        <input name="interest_talent" placeholder="Spesialisasi atau Minat bakat" type="text" class="form-control @error('interest_talent') is-invalid @enderror" value="{{ old('interest_talent') }}">
+        <label class="mb-3">Spesialisasi atau minat bakat</label>
+        <input name="interest_talent" placeholder="Spesialisasi atau minat bakat" type="text" class="form-control @error('interest_talent') is-invalid @enderror" value="{{ old('interest_talent') }}">
         @error('interest_talent')
           <div class="invalid-feedback">
             <strong>{{ $message }}</strong>
@@ -110,7 +110,7 @@
       <div class="form-group">
         <div class="checkbox-custom checkbox-primary">
           <input type="checkbox" id="join-group-check" name="join_group">
-          <label for="join-group-check">Apakah anda ingin dimasukan ke group whatsapp.</label>
+          <label for="join-group-check">Apakah anda ingin dimasukan ke group whatsapp MiniTutor AjarBelajar?</label>
         </div>
       </div>
 

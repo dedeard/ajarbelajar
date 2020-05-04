@@ -41,6 +41,6 @@
     @endif
   </div>
   <div class="actions">
-    <a href="{{ route('users.show', $user->username) }}" class="btn btn-primary btn-sm px-30">Lihat Profile Pengguna</a>
+    <a href="{{ route('users.show', $user->username) }}" class="btn btn-primary btn-sm px-30">Lihat Profil Pengguna</a>
   </div>
 </div>

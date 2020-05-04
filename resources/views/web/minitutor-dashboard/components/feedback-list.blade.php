@@ -51,7 +51,7 @@
           <td>{{ $review->content_flow }}</td>
         </tr>
         <tr>
-          <th>Total Rating</th>
+          <th>Total rating</th>
           <td>{{ round($review->rating, 2) }}</td>
         </tr>
         <tr>
@@ -62,6 +62,7 @@
     </div>
     <div class="feedback-row-action">
       <button type="button" class="btn btn-default btn-sm btn-block" @click="showDetail = !showDetail">@{{ showDetail ? 'Tutup' : 'Detail' }}</button>
+      <a class="btn btn-primary btn-sm btn-block text-light" href="{{ route('post.show', $review->post->slug) }}">Lihat Postingan</a>
     </div>
   </div>
 </feedback-list>

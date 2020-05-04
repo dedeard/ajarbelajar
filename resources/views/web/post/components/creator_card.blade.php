@@ -46,7 +46,7 @@
       @if(Auth::user() && Auth::user()->hasSubscribed($user->minitutor))
         <a href="{{ route('followable.unfollow', $user->id) }}" class="btn btn-danger btn-sm">Berhenti Mengikuti</a>
       @else
-        <a href="{{ route('followable.follow', $user->id) }}" class="btn btn-primary btn-sm">Ikuti Minitutor</a>
+        <a href="{{ route('followable.follow', $user->id) }}" class="btn btn-primary btn-sm">Ikuti MiniTutor</a>
       @endif
     </div>
   </div>

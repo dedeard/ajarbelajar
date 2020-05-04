@@ -30,7 +30,7 @@
   @else
   <div class="py-100 panel panel-body text-center">
     <h3 class="text-muted">Belum ada Video</h3>
-    <a href="{{ route('dashboard.minitutor.videos.create') }}" class="btn btn-primary px-30">Buat Video</a>
+    <a href="{{ route('dashboard.minitutor.videos.create') }}" class="btn btn-primary px-30">Buat video</a>
   </div>
   @endif
 </div>

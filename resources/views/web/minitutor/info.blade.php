@@ -31,7 +31,7 @@
 </div>
 
 <div class="panel panel-body minitutor-info-panel">
-  <span>Minat dan Bakat</span>
+  <span>Minat dan bakat</span>
   <p class="name">{{ $minitutor->interest_talent }}</p>
 </div>
 

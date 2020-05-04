@@ -7,7 +7,7 @@
     <div class="panel-heading">
       <h3 class="panel-title">{{ $notifications->total() }} Notifikasi</h3>
       <div class="panel-actions">
-        <a href="{{ route('notifications.markasread') }}" class="btn btn-primary">Tandai semua Telah di baca</a>
+        <a href="{{ route('notifications.markasread') }}" class="btn btn-primary">Tandai semua telah di baca</a>
         <a href="{{ route('notifications.destroy') }}" class="btn btn-danger">Hapus Semua</a>
       </div>
     </div>
@@ -22,9 +22,9 @@
             switch($notification->type){
               case "App\Notifications\ApproveComment":
                   $post = App\Model\Post::find($notification->data['post_id']);
-                  $title = "Komentar di diterima";
+                  $title = "Komentar diterima";
                   if($post) {
-                    $message = "Komentar anda pada postingan MiniTutor " . $post->user->name() . " Telah diterima.";
+                    $message = "Komentar anda pada postingan MiniTutor " . $post->user->name() . " telah diterima.";
                   } else {
                     $message = "Postingan ini tidak tersedia lagi.";
                   }
@@ -34,7 +34,7 @@
                 $comment = App\Model\PostComment::find($notification->data['comment_id']);
                 $title = "Postingan dikomentari";
                 if($post && $comment) {
-                  $message = $comment->user->name() . " Mengomentari " . $post->type . " Anda.";
+                  $message = $comment->user->name() . " mengomentari " . $post->type . " anda.";
                 } else {
                   $message = "Postingan ini tidak tersedia lagi.";
                 }
@@ -43,16 +43,16 @@
                   $post = App\Model\Post::find($notification->data['id']);
                   $title = "Postingan baru";
                   if($post) {
-                    $message = "MiniTutor " . $post->user->name() . " Telah membagikan " . $post->type . " Baru.";
+                    $message = "MiniTutor " . $post->user->name() . " telah membagikan " . $post->type . " baru.";
                   } else {
                     $message = "Postingan ini tidak tersedia lagi.";
                   }
               break;
               case "App\Notifications\PostUpdated":
                   $post = App\Model\Post::find($notification->data['id']);
-                  $title = "Postingan diedit";
+                  $title = "Postingan diperbarui";
                   if($post) {
-                    $message = "Kontent kamu telah diedit.";
+                    $message = "Kontent kamu telah diperbarui.";
                   } else {
                     $message = "Postingan ini tidak tersedia lagi.";
                   }
@@ -61,18 +61,18 @@
                   $post = App\Model\Post::find($notification->data['id']);
                   $title = "Postingan di terima";
                   if($post) {
-                    $message = 'Postingan anda telah di terima "'. $post->title .'"';
+                    $message = 'Postingan anda telah diterima "'. $post->title .'"';
                   } else {
                     $message = "Postingan ini tidak tersedia lagi.";
                   }
               break;
               case "App\Notifications\RequestMinitutorAccepted":
                   $title = "MiniTutor diterima";
-                  $message = 'Permintaan kamu untuk menjadi minitutor telah diterima';
+                  $message = 'Permintaan kamu untuk menjadi MiniTutor telah diterima';
               break;
               case "App\Notifications\RequestMinitutorRejected":
                   $title = "MiniTutor ditolak";
-                  $message = 'Permintaan kamu untuk menjadi minitutor tidak diterima';
+                  $message = 'Permintaan kamu untuk menjadi MiniTutor tidak diterima';
               break;
               case "App\Notifications\ReviewToMinitutorPost":
                 $postReview = App\Model\PostReview::find($notification->data['review_id']);
@@ -94,7 +94,7 @@
       {{ $notifications->links() }}
       @else
       <div class="py-100">
-        <h3 class="text-center"> Tidak ada Notifikasi</h3>
+        <h3 class="text-center"> Tidak ada notifikasi</h3>
       </div>
       @endif
     </div>

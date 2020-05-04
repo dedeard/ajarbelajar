@@ -9,7 +9,7 @@
         <p class="lead text-white text-shadow">Pengembangan kemampuan diri dan kualitas pendidikan Indonesia, dimulai dari sini!</p>
         @if(Auth::user() && Auth::user()->requestMinitutor)
         <span class="bg-indigo-600 text-light font-weight-bold d-inline-block p-15 rounded">
-          PERMINTAAN ANDA UNTUK MENJADI MINITUTOR SEDANG Di TINJAU
+          PERMINTAAN ANDA UNTUK MENJADI MINITUTOR SEDANG DI TINJAU
         </span>
         @else
         <a rel="nofollow" href="{{ route('join.minitutor.create') }}" class="btn btn-primary">

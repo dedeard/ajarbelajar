@@ -46,7 +46,7 @@
     </div>
   @else
     <div class="py-100 panel panel-body">
-      <h3 class="text-muted text-center">Belum ada Artikel atau Video yang di Favoritkan.</h3>
+      <h3 class="text-muted text-center">Belum ada artikel atau video yang di favoritkan.</h3>
     </div>
   @endif
 

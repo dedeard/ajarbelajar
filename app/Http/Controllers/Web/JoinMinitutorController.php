@@ -66,6 +66,6 @@ class JoinMinitutorController extends Controller
             $user->requestMinitutor()->save($requestMinitutor);
         }
 
-        return redirect()->route('join.minitutor.index')->withSuccess('Permintaan anda untuk menjadi Minitutor telah dibuat. Silahkan tunngu notifikasi selenjutnta');
+        return redirect()->route('join.minitutor.index')->withSuccess('Permintaan anda untuk menjadi MiniTutor telah dibuat. Jangan lupa kirim konten pertama kamu ke email support@ajarbelajar.com sebagai syarat diterimanya jadi MiniTutor!');
     }
 }

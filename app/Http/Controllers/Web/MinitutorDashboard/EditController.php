@@ -29,6 +29,6 @@ class EditController extends Controller
         if(isset($request->user()->minitutor)) {
             $request->user()->minitutor->update($data);
         }
-        return redirect()->back()->withSuccess("Informasi MiniTutor telah di update.");
+        return redirect()->back()->withSuccess("Informasi MiniTutor telah diperbarui.");
     }
 }

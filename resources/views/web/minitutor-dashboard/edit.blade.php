@@ -60,7 +60,7 @@
         </div>
 
         <div class="form-group">
-          <label class="mb-3">Spesialisasi atau Minat bakat</label>
+          <label class="mb-3">Spesialisasi atau minat bakat</label>
           <input name="interest_talent" placeholder="Spesialisasi atau Minat bakat" type="text" class="form-control @error('interest_talent') is-invalid @enderror" value="{{ Auth::user()->minitutor->interest_talent }}">
           @error('interest_talent')
           <div class="invalid-feedback">
@@ -72,7 +72,7 @@
         <hr class="my-4" />
 
         <h5 class="h4">Tentang anda</h5>
-        <p><strong>Semua data dibawah, Tidak ditampilkan ke Publik.</strong></p>
+        <p><strong>Semua data dibawah, tidak ditampilkan ke publik.</strong></p>
 
         <div class="form-group">
           <label class="mb-3">No.HP yang bisa dihubungi</label>
@@ -95,7 +95,7 @@
         </div>
 
         <div class="form-group">
-          <label class="mb-3">Ekspektasi kamu terhadap Ajarbelajar.</label>
+          <label class="mb-3">Ekspektasi kamu terhadap AjarBelajar.</label>
           <textarea name="expectation" class="form-control @error('expectation') is-invalid @enderror">{{ Auth::user()->minitutor->expectation }}</textarea>
           @error('expectation')
           <div class="invalid-feedback">

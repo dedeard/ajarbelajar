@@ -16,7 +16,7 @@ class FavoriteController extends Controller
             $user->unfavorite($target);
             $user->favorite($target);
         }
-        return redirect()->back()->withSuccess("Postingan telah ditambahkan ke daftar Favorite");
+        return redirect()->back()->withSuccess("Postingan telah ditambahkan ke daftar favorite");
     }
     public function destroy(Request $request, $id)
     {
@@ -25,6 +25,6 @@ class FavoriteController extends Controller
         if($user->hasFavorited($target)) {
             $user->unfavorite($target);
         }
-        return redirect()->back()->withSuccess("Postingan telah dihapus dari daftar Favorite");
+        return redirect()->back()->withSuccess("Postingan telah dihapus dari daftar favorite");
     }
 }

@@ -147,7 +147,7 @@ class ArticlesController extends Controller
             $article->updated_at = now();
             $article->save();
         }
-        return redirect()->back()->withSuccess('Artikel berhasil di update.');
+        return redirect()->back()->withSuccess('Artikel berhasil diperbarui.');
     }
 
     public function destroy(Request $request, $id)
@@ -169,7 +169,7 @@ class ArticlesController extends Controller
             $image->delete();
         }
         $article->delete();
-        return redirect()->back()->withSuccess('Artikel berhasil di hapus.');
+        return redirect()->back()->withSuccess('Artikel berhasil dihapus.');
     }
 
     public function image(Request $request, $id)

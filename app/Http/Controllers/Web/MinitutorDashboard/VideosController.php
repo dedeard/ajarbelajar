@@ -151,7 +151,7 @@ class VideosController extends Controller
             $video->updated_at = now();
             $video->save();
         }
-        return redirect()->back()->withSuccess('Video berhasil di update.');
+        return redirect()->back()->withSuccess('Video berhasil diperbarui.');
     }
 
     public function destroy(Request $request, $id)
@@ -174,6 +174,6 @@ class VideosController extends Controller
         }
 
         $video->delete();
-        return redirect()->back()->withSuccess('Video berhasil di hapus.');
+        return redirect()->back()->withSuccess('Video berhasil dihapus.');
     }
 }

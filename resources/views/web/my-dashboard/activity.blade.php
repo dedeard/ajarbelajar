@@ -21,9 +21,9 @@
     <div class="info-action">
       {{ $activity->updated_at->diffForHumans() }} -
       @if($activity->post->type == 'article')
-      Kamu membaca Artikel
+      Kamu membaca artikel
       @else
-      Kamu menonton Video
+      Kamu menonton video
       @endif
     </div>
     <h3 class="info-title">

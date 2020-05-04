@@ -33,7 +33,7 @@
     </div>
   @else
     <div class="py-100 panel panel-body">
-      <h3 class="text-muted text-center">Belum ada MiniTutor yang kamu Ikuti.</h3>
+      <h3 class="text-muted text-center">Belum ada MiniTutor yang kamu ikuti.</h3>
     </div>
   @endif
 </div>

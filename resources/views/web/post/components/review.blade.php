@@ -2,7 +2,7 @@
   <form action="{{ route('post.review.store', $post->id) }}" method="post" id="review">
     @csrf
     <h3 class="mt-10 mt-md-0">Feedback konstruktif</h3>
-    <p class="mb-35">Feedback akan kami teruskan langsung ke Minitutor, tidak akan ditampilkan ke Publik, Feedback kamu sangat berharga untuk kemajuan kontent minitutor kedepannya.</p>
+    <p class="mb-35">Feedback akan kami teruskan langsung ke MiniTutor, tidak akan ditampilkan ke publik, feedback kamu sangat berharga untuk kemajuan konten MiniTutor kedepannya.</p>
     <div class="row">
       <div class="col-lg-6">
         <div class="form-group">

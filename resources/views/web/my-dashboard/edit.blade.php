@@ -59,7 +59,7 @@
 
           <!-- User Passsword :start -->
           <h5 class="h4">Ubah Kata Sandi </h5>
-          <p>Kosongkan jika Tidak ingin diubah.</p>
+          <p>Kosongkan jika tidak ingin diubah.</p>
 
           <div class="row">
             <div class="form-group col-md-6">

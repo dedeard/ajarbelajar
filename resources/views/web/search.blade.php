@@ -18,7 +18,7 @@
       {{ $posts->links() }}
       @else
       <div class="py-100">
-        <h3 class="text-center"> Tidak ada hasil Pencarian dari "{{ request()->input('search') }}"</h3>
+        <h3 class="text-center">Tidak ada hasil pencarian dari "{{ request()->input('search') }}"</h3>
       </div>
       @endif
     </div>
