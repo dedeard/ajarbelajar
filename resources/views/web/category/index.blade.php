@@ -20,7 +20,7 @@
             <li class="nav-item col-6">
               <span class="nav-link">
                 <i class="icon wb-video" aria-hidden="true"></i>
-                {{ $category->video_count }} Vidio
+                {{ $category->video_count }} Video
               </span>
             </li>
             <li class="nav-item col-6">
