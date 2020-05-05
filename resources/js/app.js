@@ -44,6 +44,7 @@ import PopularVideoLg from './vue/app/popular-video-lg'
 import SidebarScroll from './vue/app/sidebar-scroll'
 import FeedbackList from './vue/app/feedback-list'
 import FileInput from './vue/app/file-input'
+import HomeCategoryScroll from './vue/app/home-category-scroll'
 
 //directives
 import Sticky from 'vue-sticky-directive'
@@ -66,7 +67,8 @@ new Vue({
     SidebarScroll,
     StarRating,
     FeedbackList,
-    FileInput
+    FileInput,
+    HomeCategoryScroll
   },
   directives: {
     Sticky,

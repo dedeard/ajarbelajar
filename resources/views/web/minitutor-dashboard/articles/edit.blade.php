@@ -23,7 +23,7 @@
         <div class="col-lg-9">
           <div class="panel">
             <div class="panel-heading">
-              <h3 class="panel-title">Kontent</h3>
+              <h3 class="panel-title">Konten</h3>
             </div>
             <hr class="m-0">
             <div class="panel-body">

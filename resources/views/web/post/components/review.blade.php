@@ -32,7 +32,7 @@
       </div>
       <div class="col-lg-6">
         <div class="form-group">
-          <label>Bahasa dan gaya penyampaian kontent</label>
+          <label>Bahasa dan gaya penyampaian konten</label>
           <select name="language_style" class="form-control @error('language_style') is-invalid @enderror">
             <option disabled @if(!$review) selected @endif>Nilai</option>
             <option value="1" @if($review && $review->language_style == 1) selected @endif>1</option>
@@ -45,7 +45,7 @@
       </div>
       <div class="col-lg-6">
         <div class="form-group">
-          <label>Alur penyampaian kontent</label>
+          <label>Alur penyampaian konten</label>
           <select name="content_flow" class="form-control @error('content_flow') is-invalid @enderror">
             <option disabled @if(!$review) selected @endif>Nilai</option>
             <option value="1" @if($review && $review->content_flow == 1) selected @endif>1</option>

@@ -47,7 +47,7 @@
           <td>{{ $review->language_style }}</td>
         </tr>
         <tr>
-          <th>Alur kontent</th>
+          <th>Alur konten</th>
           <td>{{ $review->content_flow }}</td>
         </tr>
         <tr>

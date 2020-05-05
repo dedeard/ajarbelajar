@@ -4,4 +4,27 @@
     font-weight: $font-weight-bold;
     text-transform: uppercase;
   }
+  .scroll {
+    height: 300px;
+    padding: 0;
+    display: block;
+    position: relative;
+    @include perfect-scrollbar-ver-size(4px);
+    @include perfect-scrollbar-skin($gray-400);
+    .ps__rail-y{ 
+      left: auto !important;
+      right: 0 !important;
+      z-index: 20;
+    }
+    .ps__scrollbar-x-rail{ display: none; }
+    &-wrapper {
+      position: relative;
+      height: 300px;
+      width: 100%;
+      overflow: hidden;
+      @include media-breakpoint-down(md) {
+        overflow-y: auto !important;
+      }
+    }
+  }
 }

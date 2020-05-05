@@ -52,7 +52,7 @@
                   $post = App\Model\Post::find($notification->data['id']);
                   $title = "Postingan diperbarui";
                   if($post) {
-                    $message = "Kontent kamu telah diperbarui.";
+                    $message = "Konten kamu telah diperbarui.";
                   } else {
                     $message = "Postingan ini tidak tersedia lagi.";
                   }
@@ -78,7 +78,7 @@
                 $postReview = App\Model\PostReview::find($notification->data['review_id']);
                 $title = "Feedback";
                 if($postReview) {
-                  $message = $postReview->user->name() . ' telah memberikan feedback pada kontent kamu.';
+                  $message = $postReview->user->name() . ' telah memberikan feedback pada konten kamu.';
                 } else {
                   $message = "Feedback ini tidak tersedia lagi.";
                 }

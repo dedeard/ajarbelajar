@@ -3,7 +3,7 @@
 @component('web.minitutor-dashboard.components.layout-wrapper')
 <div class="container-fluid">
   <div class="panel panel-body">
-    <h2 class="font-weight-bold text-center">Hy, MiniTutor <span class="text-uppercase indigo-600">{{ Auth::user()->first_name }}</span> Sukses selalu dan terima kasih atas kontribusinya dengan ajarbelajar.com</h2>
+    <h2 class="font-weight-bold text-center">Halo, MiniTutor <span class="text-uppercase indigo-600">{{ Auth::user()->first_name }}</span> Sukses selalu dan terima kasih atas kontribusinya dengan ajarbelajar.com</h2>
   </div>
   <div class="panel panel-bordered">
     <div class="panel-body">
