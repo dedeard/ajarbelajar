@@ -36,6 +36,11 @@ class HomeController extends Controller
         return view('web.video', $data);
     }
 
+    public function about()
+    {
+        return view('web.about');
+    }
+
     public function faq()
     {
         return view('web.faq');

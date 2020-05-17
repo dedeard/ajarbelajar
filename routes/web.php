@@ -9,6 +9,7 @@ Route::get('/video', 'HomeController@video')->name('video');
 
 
 // Footer link route
+Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/faq', 'HomeController@faq')->name('faq');
 Route::get('/constructive-feedback', 'HomeController@constructiveFeedback')->name('constructiveFeedback');
 

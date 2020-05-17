@@ -25,6 +25,7 @@
               <a class="list-group-item @if(Route::is('video')) active @endif" href="{{ route('video') }}"><i class="icon wb-video"></i>Video</a>
               <a class="list-group-item @if(Route::is('category*')) active @endif" href="{{ route('category.index') }}"><i class="icon wb-grid-4"></i>Kategori</a>
               <a class="list-group-item @if(Route::is('minitutor*')) active @endif" href="{{ route('minitutor.index') }}"><i class="icon wb-users"></i>Minitutor</a>
+              <a class="list-group-item @if(Route::is('about')) active @endif" href="{{ route('about') }}"><i class="icon wb-info"></i>Tentang AjarBelajar</a>
             </div>
           </section>
           <section class="page-aside-section">

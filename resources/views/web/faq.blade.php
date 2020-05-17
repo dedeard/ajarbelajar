@@ -18,16 +18,16 @@
     <p>Tidak, AjarBelajar adalah gerakan non-profit. Biaya sistem, waktu dan tenaga adalah suka rela dari tim maupun kontributor. Namun, seiring dengan pertumbuhan sistem dan jumlah konten AjarBelajar di kemudian hari, kami tidak menutup kemungkinan untuk kamu mendukung kami secara materi dan non-materi, dan hubungi tim AjarBelajar melalui email ajarbelajarcom@gmail.com untuk detail lebih lanjut :)</p>
 
     <h4>Apa yang saya dapat jika saya menjadi kontributor?</h4>
-    <p>Selain manfaat yang tertera <a href="/tentang-minitutor">di sini</a> AjarBelajar tidak memberikan insentif berupa materi. Namun kontribusimu bisa menjadi pengalaman berharga bukan? :) Yuk mari sama-sama belajar, sama-sama ingin membangun bangsa, semua secara suka rela.</p>
+    <p>Selain manfaat yang tertera <a href="{{ route('about') }}">di sini</a> AjarBelajar tidak memberikan insentif berupa materi. Namun kontribusimu bisa menjadi pengalaman berharga bukan? :) Yuk mari sama-sama belajar, sama-sama ingin membangun bangsa, semua secara suka rela.</p>
 
     <h4>Apa syarat menjadi kontributor?</h4>
-    <p>Lihat segala informasi tentang menjadi kontributor <a href="/tentang-minitutor">di sini</a>. Pastinya untuk jadi kontributor kamu semangat dan dapat meluangkan waktu untuk berkontribusi tanpa menunda-nunda (#IndonesiaAntiWacana). Gerak cepat, maju terus.</p>
+    <p>Lihat segala informasi tentang menjadi kontributor <a href="{{ route('about') }}">di sini</a>. Pastinya untuk jadi kontributor kamu semangat dan dapat meluangkan waktu untuk berkontribusi tanpa menunda-nunda (#IndonesiaAntiWacana). Gerak cepat, maju terus.</p>
 
     <h4>Wih mantap, jadi pengen kontribusi nih. Alurnya gimana?</h4>
     <p>Silakan cek cara jadi kontributor <a href="/join-minitutor">di sini</a>. Alurnya sudah lengkap sekali :)</p>
 
     <h4>Bentuk konten yang bisa dibuat apa aja tuh?</h4>
-    <p>Bentuk konten yang kamu bisa buat ada <a href="#">di sini</a>.</p>
+    <p>Bentuk konten yang kamu bisa buat ada <a href="{{ route('about') }}">di sini</a>.</p>
 
     <h4>Saya ada koneksi ke organisasi pemuda yang saya nilai seprinsip dengan AjarBelajar dan mungkin bisa jadi partner kerjasama. Bisakah?</h4>
     <p>Wah terimakasih banyak, untuk tim AjarBelajar mencapai telinga calon-calon kontributor mumpuni memang perlu bantuan kamu! Silakan kontak ajarbelajarcom@gmail.com untuk proses lebih lanjut.</p>
