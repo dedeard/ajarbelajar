@@ -21,7 +21,7 @@
           <section class="page-aside-section">
             <div class="list-group">
               <a class="list-group-item @if(Route::is('home')) active @endif" href="{{ route('home') }}"><i class="icon wb-home"></i>Home</a>
-              <a class="list-group-item @if(Route::is('about')) active @endif" href="{{ route('about') }}"><i class="icon wb-info"></i>Tentang AjarBelajar</a>
+              <a class="list-group-item @if(Route::is('about')) active @endif" href="{{ route('about') }}"><i class="icon wb-info-circle"></i>Tentang AjarBelajar</a>
               <a class="list-group-item @if(Route::is('article')) active @endif" href="{{ route('article') }}"><i class="icon wb-order"></i>Artikel</a>
               <a class="list-group-item @if(Route::is('video')) active @endif" href="{{ route('video') }}"><i class="icon wb-video"></i>Video</a>
               <a class="list-group-item @if(Route::is('category*')) active @endif" href="{{ route('category.index') }}"><i class="icon wb-grid-4"></i>Kategori</a>
