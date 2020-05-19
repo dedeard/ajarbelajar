@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Model\Notified;
 use App\Model\Post;
+use App\Notifications\MinitutorPostPublished;
 use App\Notifications\NewPost;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -36,6 +37,7 @@ class CreateNewPostNotificationJob implements ShouldQueue
         foreach($post->user->minitutor->subscribers()->get() as $user) {
             $user->notify(new NewPost($post, $user));
         }
+        $post->user->notify(new MinitutorPostPublished($post));
 
         Notified::create([
             'type' => 'App\Notifications\NewPost',
