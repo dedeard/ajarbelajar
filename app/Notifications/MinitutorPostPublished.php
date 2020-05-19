@@ -3,15 +3,11 @@
 namespace App\Notifications;
 
 use App\Model\Post;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class MinitutorPostPublished extends Notification
 {
-    use Queueable;
-
     private $post = null;
     /**
      * Create a new notification instance.
