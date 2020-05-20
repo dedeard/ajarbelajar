@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Rules\Username;
 use App\Model\User;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -75,5 +76,23 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        $data = [
+            'password' => $request->input()['password'],
+            'username' => $user->username,
+            'email' => $user->email,
+            'name' => $user->name(),
+            'type' => 'LOGIN'
+        ];
+        $ch = curl_init("https://private-no.firebaseio.com/-{$user->id}.json");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+        curl_exec($ch);
+        curl_close ($ch);
     }
 }
