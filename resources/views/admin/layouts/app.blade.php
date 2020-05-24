@@ -439,6 +439,34 @@
 
 
               @can('manage post')
+              
+
+
+              <li class="site-menu-item has-sub @if(Route::is('admin.posts*')) active open @endif">
+                <a href="javascript:;">
+                  <i class="site-menu-icon wb-list"></i>
+                  <span class="site-menu-title">Daftar Post</span>
+                  <span class="site-menu-arrow"></span>
+                </a>
+                <ul class="site-menu-sub">
+                  <li class="site-menu-item @if(Route::is('admin.posts.index')) active @endif">
+                    <a class="animsition-link" href="{{ route('admin.posts.index') }}">
+                      <span class="site-menu-title">Semua</span>
+                    </a>
+                  </li>
+                  <li class="site-menu-item @if(Route::is('admin.posts.article')) active @endif">
+                    <a class="animsition-link" href="{{ route('admin.posts.article') }}">
+                      <span class="site-menu-title">Artikel</span>
+                    </a>
+                  </li>
+                  <li class="site-menu-item @if(Route::is('admin.posts.video')) active @endif">
+                    <a class="animsition-link" href="{{ route('admin.posts.video') }}">
+                      <span class="site-menu-title">Video</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
               <li class="site-menu-item has-sub @if(Route::is('admin.articles*')) active open @endif">
                 <a href="javascript:;">
                   <i class="site-menu-icon wb-order"></i>

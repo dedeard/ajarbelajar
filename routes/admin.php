@@ -27,6 +27,12 @@ Route::prefix('minitutor')->as('minitutor.')->group(function(){
   Route::put('/request/{id}/reject', 'RequestMinitutorController@reject')->name('request.reject');
 });
 
+Route::prefix('posts')->as('posts.')->group(function(){
+  Route::get('/', 'PostController@index')->name('index');
+  Route::get('/article', 'PostController@articles')->name('article');
+  Route::get('/video', 'PostController@videos')->name('video');
+});
+
 Route::prefix('minitutor')->as('minitutor.')->group(function(){
   Route::get('/', 'MinitutorController@index')->name('index');
   Route::get('/{id}', 'MinitutorController@show')->name('show');

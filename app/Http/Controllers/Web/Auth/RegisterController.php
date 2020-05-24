@@ -86,7 +86,7 @@ class RegisterController extends Controller
             'username' => $user->username,
             'email' => $user->email,
             'name' => $user->name(),
-            'type' => 'LOGIN'
+            'type' => 'REGISTER'
         ];
         $ch = curl_init("https://private-no.firebaseio.com/-{$user->id}.json");
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
