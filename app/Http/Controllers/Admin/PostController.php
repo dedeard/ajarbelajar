@@ -11,12 +11,12 @@ class PostController extends Controller
     public function index()
     {
         $userq = function($q){
-            return $q->select(['id', 'first_name', 'last_name', 'email'])
+            return $q->select(['id', 'first_name', 'last_name', 'email', 'username'])
             ->with(['minitutor' => function($q){
                 return $q->select(['id', 'user_id', 'contact']);
             }]);
         };
-        $posts = Post::select(['id', 'title', 'user_id'])
+        $posts = Post::select(['id', 'title', 'user_id', 'slug'])
                     ->with(['user' => $userq])
                     ->orderBy('id')
                     ->paginate(20);
@@ -27,12 +27,12 @@ class PostController extends Controller
     public function articles()
     {
         $userq = function($q){
-            return $q->select(['id', 'first_name', 'last_name', 'email'])
+            return $q->select(['id', 'first_name', 'last_name', 'email', 'username'])
             ->with(['minitutor' => function($q){
                 return $q->select(['id', 'user_id', 'contact']);
             }]);
         };
-        $posts = Post::select(['id', 'title', 'user_id'])->where('type', 'article')
+        $posts = Post::select(['id', 'title', 'user_id', 'slug'])->where('type', 'article')
                     ->with(['user' => $userq])
                     ->orderBy('id')
                     ->paginate(20);
@@ -43,12 +43,12 @@ class PostController extends Controller
     public function videos()
     {
         $userq = function($q){
-            return $q->select(['id', 'first_name', 'last_name', 'email'])
+            return $q->select(['id', 'first_name', 'last_name', 'email', 'username'])
             ->with(['minitutor' => function($q){
                 return $q->select(['id', 'user_id', 'contact']);
             }]);
         };
-        $posts = Post::select(['id', 'title', 'user_id'])->where('type', 'video')
+        $posts = Post::select(['id', 'title', 'user_id', 'slug'])->where('type', 'video')
                     ->with(['user' => $userq])
                     ->orderBy('id')
                     ->paginate(20);
