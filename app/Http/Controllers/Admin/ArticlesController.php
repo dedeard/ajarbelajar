@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Model\Category;
-use App\Model\Image as ModelImage;
-use App\Model\Post;
-use App\Model\RequestPost;
+use App\Models\Category;
+use App\Models\Image as ModelImage;
+use App\Models\Post;
+use App\Models\RequestPost;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;

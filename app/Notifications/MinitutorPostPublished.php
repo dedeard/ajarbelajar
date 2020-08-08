@@ -2,7 +2,7 @@
 
 namespace App\Notifications;
 
-use App\Model\Post;
+use App\Models\Post;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 

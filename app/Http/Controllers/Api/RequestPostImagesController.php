@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Model\Image as ModelImage;
-use App\Model\RequestPost;
+use App\Models\Image as ModelImage;
+use App\Models\RequestPost;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Str;

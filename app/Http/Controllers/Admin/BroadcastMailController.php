@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\BroadcastMail;
-use App\Model\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BroadcastMailController extends Controller

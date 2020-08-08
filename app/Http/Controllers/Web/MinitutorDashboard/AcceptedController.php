@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Web\MinitutorDashboard;
 
 use App\Http\Controllers\Controller;
-use App\Model\Post;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -24,7 +24,7 @@ class AcceptedController extends Controller
     {
         $post = $request->user()->posts()->where('slug', $slug);
         if(!$post->exists()) return abort(404);
-    
+
 
         $review = function($q){
             return $q->select(['*', DB::raw('(understand + inspiring + language_style + content_flow)/4 as rating')])->with(['user' => function($q){

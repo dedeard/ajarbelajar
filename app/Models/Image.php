@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Video extends Model
+class Image extends Model
 {
     protected $fillable = ['name'];
-    public function videoable()
+    public function imageable()
     {
         return $this->morphTo();
     }

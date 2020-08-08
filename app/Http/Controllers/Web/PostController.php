@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Model\Activity;
-use App\Model\PostComment;
-use App\Model\Post;
-use App\Model\PostReview;
-use App\Model\PostView;
+use App\Models\Activity;
+use App\Models\PostComment;
+use App\Models\Post;
+use App\Models\PostReview;
+use App\Models\PostView;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Artesaos\SEOTools\Facades\SEOMeta;
@@ -46,7 +46,7 @@ class PostController extends Controller
         $description = null;
         $body = $post->body ? json_decode($post->body) : null;
         if($body && isset($body->blocks)) {
-            
+
             foreach ($body->blocks as $block) {
                 if(!$description && $block->type === 'paragraph' && strlen($block->data->text) > 30){
                     $description = substr($block->data->text, 0, 160);

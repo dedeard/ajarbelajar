@@ -2,8 +2,8 @@
 
 namespace App\Jobs;
 
-use App\Model\Notified;
-use App\Model\Post;
+use App\Models\Notified;
+use App\Models\Post;
 use App\Notifications\MinitutorPostPublished;
 use App\Notifications\NewPost;
 use Illuminate\Bus\Queueable;

@@ -21,7 +21,7 @@
             $message = "";
             switch($notification->type){
               case "App\Notifications\ApproveComment":
-                  $post = App\Model\Post::find($notification->data['post_id']);
+                  $post = App\Models\Post::find($notification->data['post_id']);
                   $title = "Komentar diterima";
                   if($post) {
                     $message = "Komentar anda pada postingan MiniTutor " . $post->user->name() . " telah diterima.";
@@ -30,8 +30,8 @@
                   }
               break;
               case "App\Notifications\CommentToMinitutorPost":
-                $post = App\Model\Post::find($notification->data['post_id']);
-                $comment = App\Model\PostComment::find($notification->data['comment_id']);
+                $post = App\Models\Post::find($notification->data['post_id']);
+                $comment = App\Models\PostComment::find($notification->data['comment_id']);
                 $title = "Postingan dikomentari";
                 if($post && $comment) {
                   $message = $comment->user->name() . " mengomentari " . $post->type . " anda.";
@@ -40,7 +40,7 @@
                 }
               break;
               case "App\Notifications\NewPost":
-                  $post = App\Model\Post::find($notification->data['id']);
+                  $post = App\Models\Post::find($notification->data['id']);
                   $title = "Postingan baru";
                   if($post) {
                     $message = "MiniTutor " . $post->user->name() . " telah membagikan " . $post->type . " baru.";
@@ -49,7 +49,7 @@
                   }
               break;
               case "App\Notifications\PostUpdated":
-                  $post = App\Model\Post::find($notification->data['id']);
+                  $post = App\Models\Post::find($notification->data['id']);
                   $title = "Postingan diperbarui";
                   if($post) {
                     $message = "Konten kamu telah diperbarui.";
@@ -58,7 +58,7 @@
                   }
               break;
               case "App\Notifications\ApprovePost":
-                  $post = App\Model\Post::find($notification->data['id']);
+                  $post = App\Models\Post::find($notification->data['id']);
                   $title = "Postingan di terima";
                   if($post) {
                     $message = 'Postingan anda telah diterima "'. $post->title .'"';
@@ -75,7 +75,7 @@
                   $message = 'Permintaan kamu untuk menjadi MiniTutor tidak diterima';
               break;
               case "App\Notifications\ReviewToMinitutorPost":
-                $postReview = App\Model\PostReview::find($notification->data['review_id']);
+                $postReview = App\Models\PostReview::find($notification->data['review_id']);
                 $title = "Feedback";
                 if($postReview) {
                   $message = $postReview->user->name() . ' telah memberikan feedback pada konten kamu.';

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Model\Category;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cache;
@@ -62,7 +62,7 @@ class CategoriesController extends Controller
                 'name' => $data['name'],
                 'slug' => Str::slug($data['name'], '-')
             ]);
-            
+
         } else {
             $category->update($data);
         }

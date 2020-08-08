@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Model\Minitutor;
-use App\Model\Post;
+use App\Models\Minitutor;
+use App\Models\Post;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 

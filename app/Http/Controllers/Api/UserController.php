@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Model\Image as ModelImage;
-use App\Model\UserProfile;
-use App\Model\UserSocial;
+use App\Models\Image as ModelImage;
+use App\Models\UserProfile;
+use App\Models\UserSocial;
 use App\Rules\Username;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -24,7 +24,7 @@ class UserController extends Controller
         ]);
 
         $user->username = $data['username'];
-        
+
         if(strtolower($data['email']) !== strtolower($user->email)) {
             $user->email = strtolower($data['email']);
             $user->email_verified_at = null;
@@ -63,7 +63,7 @@ class UserController extends Controller
             'about' => ['nullable', 'string', 'min:20', 'max:250'],
             'website' => ['nullable', 'url', 'max:250'],
         ]);
-        
+
         if (!$user->profile) {
             $profile = new UserProfile($data);
             $user->profile()->save($profile);

@@ -3,7 +3,7 @@
 namespace App\Observers;
 
 use App\Helpers\AddPoint;
-use App\Model\PostReview;
+use App\Models\PostReview;
 use App\Notifications\ReviewToMinitutorPost;
 
 class PostReviewObserver

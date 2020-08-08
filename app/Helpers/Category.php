@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-use App\Model\Category as ModelCategory;
+use App\Models\Category as ModelCategory;
 use Illuminate\Support\Facades\Cache;
 
 class Category

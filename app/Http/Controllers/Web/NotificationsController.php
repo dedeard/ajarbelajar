@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Model\Post;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class NotificationsController extends Controller
@@ -19,7 +19,7 @@ class NotificationsController extends Controller
         $user = $request->user();
         $notification = $user->notifications()->findOrFail($id);
         $notification->markAsRead();
-        
+
         switch($notification->type){
             case "App\Notifications\ApproveComment":
                 $post = Post::findOrFail($notification->data['post_id']);

@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="row">
-    @foreach(\App\Model\User::orderBy('points', 'desc')->limit(4)->get() as $user)
+    @foreach(\App\Models\User::orderBy('points', 'desc')->limit(4)->get() as $user)
     <div class="col-lg-3">
       <a class="most-user-point-card" href="{{ route('users.show', $user->username) }}">
         <div class="avatar">

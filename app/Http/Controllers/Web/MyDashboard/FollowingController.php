@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Web\MyDashboard;
 
 use App\Http\Controllers\Controller;
-use App\Model\Minitutor;
+use App\Models\Minitutor;
 use Illuminate\Http\Request;
 
 class FollowingController extends Controller

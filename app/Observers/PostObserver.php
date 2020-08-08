@@ -4,7 +4,7 @@ namespace App\Observers;
 
 use App\Helpers\AddPoint;
 use App\Jobs\CreateNewPostNotificationJob;
-use App\Model\Post;
+use App\Models\Post;
 use App\Notifications\ApprovePost;
 use App\Notifications\PostUpdated;
 

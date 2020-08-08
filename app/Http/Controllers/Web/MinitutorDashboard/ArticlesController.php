@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Web\MinitutorDashboard;
 
 use App\Http\Controllers\Controller;
-use App\Model\Category;
-use App\Model\Image as ModelImage;
-use App\Model\RequestPost;
+use App\Models\Category;
+use App\Models\Image as ModelImage;
+use App\Models\RequestPost;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;

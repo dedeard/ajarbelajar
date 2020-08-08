@@ -1,6 +1,6 @@
 <popular-video-lg inline-template>
   <swiper class="ab-popular-video-lg" :options="swiperOptions">
-    @foreach(\App\Model\Post::videos()->orderBy('views_count', 'desc')->limit(5)->get() as $popular)
+    @foreach(\App\Models\Post::videos()->orderBy('views_count', 'desc')->limit(5)->get() as $popular)
     <swiper-slide>
       <div class="card" style="background-image: url({{ $popular->heroUrl() }})">
         <div class="card-block">

@@ -8,7 +8,7 @@
       <div class="panel-body scroll" v-show="open">
         <div class="scroll-wrapper" ref="elScroll">
           <div class="list-group scroll-content">
-            @foreach(\App\Model\Category::has('posts')->orderBy('name', 'asc')->get() as $category)
+            @foreach(\App\Models\Category::has('posts')->orderBy('name', 'asc')->get() as $category)
               <a href="{{ route('category.show', $category->slug) }}" class="list-group-item">{{ $category->name }}</a>
             @endforeach
           </div>

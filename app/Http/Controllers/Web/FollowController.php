@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Model\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class FollowController extends Controller
 {
     public function follow(Request $request, $id)
     {
-        $target_user = User::findOrFail($id); 
+        $target_user = User::findOrFail($id);
         if(!$target_user->minitutor || $target_user->minitutor && !$target_user->minitutor->active) {
             return abort(404);
         }
@@ -22,7 +22,7 @@ class FollowController extends Controller
     }
     public function unFollow(Request $request, $id)
     {
-        $target_user = User::findOrFail($id); 
+        $target_user = User::findOrFail($id);
         if(!$target_user->minitutor || $target_user->minitutor && !$target_user->minitutor->active) {
             return abort(404);
         }

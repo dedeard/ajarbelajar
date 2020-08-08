@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Model\Minitutor;
+use App\Models\Minitutor;
 
 class MinitutorController extends Controller
 {

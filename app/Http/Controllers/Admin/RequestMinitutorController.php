@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Model\Minitutor;
-use App\Model\RequestMinitutor;
+use App\Models\Minitutor;
+use App\Models\RequestMinitutor;
 use App\Notifications\RequestMinitutorAccepted;
 use App\Notifications\RequestMinitutorRejected;
 use Illuminate\Support\Facades\Storage;
@@ -15,7 +15,7 @@ class RequestMinitutorController extends Controller
     {
         $this->middleware(['permission:manage minitutor']);
     }
-    
+
     public function index()
     {
         return view('admin.minitutor.request.index', ["requestMinitutor" => RequestMinitutor::orderBy('id', 'desc')->paginate(20)]);

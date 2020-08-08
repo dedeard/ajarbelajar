@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
 use Conner\Tagging\Model\Tag as ModelTag;
 

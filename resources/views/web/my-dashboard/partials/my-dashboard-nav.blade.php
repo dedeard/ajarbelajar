@@ -14,18 +14,18 @@
       'route' => 'dashboard.me.following.index',
       'name' => 'Diikuti',
       'icon' => 'wb-star',
-      'badge' => Auth::user()->subscriptions(\App\Model\Minitutor::class)->where('active', 1)->count()
+      'badge' => Auth::user()->subscriptions(\App\Models\Minitutor::class)->where('active', 1)->count()
     ],
     [
       'route' => 'dashboard.me.favorite.index',
       'name' => 'Favorit',
       'icon' => 'wb-heart',
-      'badge' => Auth::user()->favorites(\App\Model\Post::class)->where('draf', 0)->count()
+      'badge' => Auth::user()->favorites(\App\Models\Post::class)->where('draf', 0)->count()
     ],
   ];
 ?>
 
-<div class="container-fluid">  
+<div class="container-fluid">
   <ul class="my-dashboard-nav nav-quick nav-quick-sm row">
     @foreach($myDashboardLinks as $link)
     <li class="nav-item col">

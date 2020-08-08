@@ -2,7 +2,7 @@
 
 namespace App\Notifications;
 
-use App\Model\PostComment;
+use App\Models\PostComment;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 

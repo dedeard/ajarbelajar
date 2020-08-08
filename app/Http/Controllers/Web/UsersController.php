@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Model\Minitutor;
-use App\Model\Post;
-use App\Model\User;
+use App\Models\Minitutor;
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller

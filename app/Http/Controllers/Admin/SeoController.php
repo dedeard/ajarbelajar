@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Model\Seo;
+use App\Models\Seo;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 

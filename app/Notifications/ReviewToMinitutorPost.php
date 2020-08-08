@@ -2,7 +2,7 @@
 
 namespace App\Notifications;
 
-use App\Model\PostReview;
+use App\Models\PostReview;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;

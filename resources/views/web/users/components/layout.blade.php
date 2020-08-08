@@ -61,17 +61,17 @@
       'route' => 'users.following',
       'name' => 'Diikuti',
       'icon' => 'wb-star',
-      'badge' => $user->subscriptions(\App\Model\Minitutor::class)->where('active', 1)->count()
+      'badge' => $user->subscriptions(\App\Models\Minitutor::class)->where('active', 1)->count()
     ],
     [
       'route' => 'users.favorite',
       'name' => 'Favorit',
       'icon' => 'wb-heart',
-      'badge' => $user->favorites(\App\Model\Post::class)->where('draf', 0)->count()
+      'badge' => $user->favorites(\App\Models\Post::class)->where('draf', 0)->count()
     ],
   ];
 ?>
- 
+
   <ul class="my-dashboard-nav nav-quick nav-quick-sm row">
     @foreach($userLinks as $link)
     <li class="nav-item col">

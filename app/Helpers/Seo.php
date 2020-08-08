@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-use App\Model\Seo as ModelSeo;
+use App\Models\Seo as ModelSeo;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Artesaos\SEOTools\Facades\SEOMeta;

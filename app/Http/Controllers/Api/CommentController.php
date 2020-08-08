@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Model\Article;
-use App\Model\Comment;
-use App\Model\Video;
+use App\Models\Article;
+use App\Models\Comment;
+use App\Models\Video;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller

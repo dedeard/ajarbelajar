@@ -3,7 +3,7 @@
 namespace App\Observers;
 
 use App\Helpers\AddPoint;
-use App\Model\PostComment;
+use App\Models\PostComment;
 use App\Notifications\ApproveComment;
 use App\Notifications\CommentToMinitutorPost;
 

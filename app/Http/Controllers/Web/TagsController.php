@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Model\Post;
-use App\Model\Tagged;
+use App\Models\Post;
+use App\Models\Tagged;
 
 class TagsController extends Controller
 {

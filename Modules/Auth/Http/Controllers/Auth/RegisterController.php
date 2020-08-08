@@ -5,7 +5,7 @@ namespace Modules\Auth\Http\Controllers\Auth;
 use Illuminate\Routing\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Rules\Username;
-use App\Model\User;
+use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;

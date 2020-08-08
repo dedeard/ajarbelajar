@@ -1,6 +1,6 @@
 <?php
 
-use App\Model\Minitutor;
+use App\Models\Minitutor;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 

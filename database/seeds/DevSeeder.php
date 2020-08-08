@@ -1,11 +1,11 @@
 <?php
 
-use App\Model\Minitutor;
-use App\Model\RequestArticle;
-use App\Model\RequestMinitutor;
-use App\Model\RequestPost;
-use App\Model\RequestVideo;
-use App\Model\User;
+use App\Models\Minitutor;
+use App\Models\RequestArticle;
+use App\Models\RequestMinitutor;
+use App\Models\RequestPost;
+use App\Models\RequestVideo;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\DB;
@@ -59,11 +59,11 @@ class DevSeeder extends Seeder
             $requestData = RequestMinitutor::findOrFail($id);
             $requestDataCopy = $requestData;
             $requestDataCopy = $requestDataCopy->toArray();
-    
+
             unset($requestDataCopy['created_at']);
             unset($requestDataCopy['updated_at']);
             unset($requestDataCopy['id']);
-    
+
             $requestDataCopy['active'] = true;
             $minitutor = Minitutor::create($requestDataCopy);
             $requestData->delete();

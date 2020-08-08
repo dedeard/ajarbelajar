@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Model\Category;
-use App\Model\Post;
+use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Artesaos\SEOTools\Facades\SEOMeta;
 

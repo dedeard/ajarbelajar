@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use App\Model\Post;
-use App\Model\PostComment;
-use App\Model\PostReview;
+use App\Models\Post;
+use App\Models\PostComment;
+use App\Models\PostReview;
 use App\Observers\PostCommentObserver;
 use App\Observers\PostObserver;
 use App\Observers\PostReviewObserver;

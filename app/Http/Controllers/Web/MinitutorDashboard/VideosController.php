@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Web\MinitutorDashboard;
 
 use App\Http\Controllers\Controller;
-use App\Model\Category;
-use App\Model\RequestPost;
-use App\Model\Video;
+use App\Models\Category;
+use App\Models\RequestPost;
+use App\Models\Video;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -42,7 +42,7 @@ class VideosController extends Controller
         }
     }
 
-    
+
     public function store(Request $request)
     {
         $data = $request->validate([ 'title' => 'required|string|min:3|max:160' ]);

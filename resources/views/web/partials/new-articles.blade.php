@@ -1,7 +1,7 @@
 <div class="new-articles">
   <h3 class="new-articles-title">Artikel Terbaru</h3>
   <div class="row">
-    @foreach(\App\Model\Post::articles()->orderBy('created_at', 'desc')->limit(4)->get() as $video)
+    @foreach(\App\Models\Post::articles()->orderBy('created_at', 'desc')->limit(4)->get() as $video)
     <div class="col-lg-3">
       <a class="new-articles-card" rel="nofollow" href="{{ route('post.show', $video->slug) }}">
         <div class="overlay-icon-play">

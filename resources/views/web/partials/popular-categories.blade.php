@@ -1,5 +1,5 @@
 <?php
-$categories = \App\Model\Category::has('posts')->withCount([
+$categories = \App\Models\Category::has('posts')->withCount([
   'posts as post_count' => function($q){
       return $q->where('draf', false);
   }
