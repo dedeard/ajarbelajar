@@ -7,15 +7,16 @@ window.Echo = require('laravel-echo').default
 window.Pusher = require('pusher-js')
 window.PerfectScrollbar = require('perfect-scrollbar').default
 window.Swal = require('sweetalert2/dist/sweetalert2')
+window.$ = window.jQuery = require('jquery')
 
 /**
  * Setup laravel echo
  */
 window.Echo = new Echo({
-  broadcaster: 'pusher',
-  key: process.env.MIX_PUSHER_APP_KEY,
-  cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-  forceTLS: true
+    broadcaster: 'pusher',
+    key: process.env.MIX_PUSHER_APP_KEY,
+    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+    forceTLS: true
 });
 
 
@@ -35,45 +36,19 @@ if (window.API_TOKEN) window.axios.defaults.headers.common.Authorization = 'Bear
 /**
  * vue app
  */
-import { VLazyImagePlugin } from 'v-lazy-image/dist/v-lazy-image.es'
+import {
+    VLazyImagePlugin
+} from 'v-lazy-image/dist/v-lazy-image.es'
 
 //components
 import StarRating from 'vue-star-rating'
-import AvatarUploader from './vue/app/avatar-uploader'
-import PopularVideoLg from './vue/app/popular-video-lg'
-import SidebarScroll from './vue/app/sidebar-scroll'
-import FeedbackList from './vue/app/feedback-list'
-import FileInput from './vue/app/file-input'
-import HomeCategoryScroll from './vue/app/home-category-scroll'
 
 //directives
 import Sticky from 'vue-sticky-directive'
-import SidebarToggle from './vue/directives/sidabar-toggle'
-import SidebarBackdrop from './vue/directives/sidebar-backdrop'
-import DeleteConfirm from './vue/directives/delete-confirm'
 
-//mixins
-import FormsearchToggle from './vue/mixins/formsearch-toggle'
-import NotificationCount from './vue/mixins/notification-count'
 
 Vue.use(VLazyImagePlugin)
 
-new Vue({
-  el: "#app",
-  mixins: [NotificationCount, FormsearchToggle],
-  components: {
-    AvatarUploader,
-    PopularVideoLg,
-    SidebarScroll,
-    StarRating,
-    FeedbackList,
-    FileInput,
-    HomeCategoryScroll
-  },
-  directives: {
-    Sticky,
-    SidebarToggle,
-    SidebarBackdrop,
-    DeleteConfirm
-  }
-})
+Vue.component('StarRating', StarRating)
+
+Vue.directive('Sticky', Sticky)
