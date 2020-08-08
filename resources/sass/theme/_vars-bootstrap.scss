@@ -373,7 +373,7 @@ $enable-print-styles: true;
 // Control the default styling of most Bootstrap elements by modifying these
 // variables. Mostly focused on spacing.
 //
-$spacer: pxToRem(16px);
+$spacer: pxToRem(20px);
 $spacers: (
   0: 0,
   1: ($spacer * .25),
@@ -470,7 +470,7 @@ $container-max-widths: (
 //
 //** Number of columns in the grid.
 $grid-columns: 12;
-$grid-gutter-width: pxToRem(30px);
+$grid-gutter-width: $spacer;
 $grid-lg-gutter-width: pxToRem(50px);
 
 //** Padding between columns. Gets divided in half for the left and right.

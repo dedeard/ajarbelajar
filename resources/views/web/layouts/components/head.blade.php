@@ -20,14 +20,19 @@
 <meta name="msapplication-TileImage" content="{{ asset('icons/ms-icon-144x144.png') }}">
 <meta name="msapplication-TileColor" content="#677ae4">
 <meta name="theme-color" content="#677ae4">
+@auth <meta name="api-token" content="{{ Auth::user()->apiToken() }}"> @endauth
 
 <!-- Fonts -->
-<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
-@if(env('APP_ENV') === 'local')
-<link rel="stylesheet" href="{{ asset('remark/fonts/web-icons/web-icons.min.css') }}">
-<link rel="stylesheet" href="https://s3.amazonaws.com/icomoon.io/114779/Socicon/style.css?u8vidh">
-<link rel="stylesheet" href="{{ mix('css/theme.css') }}">
-@else
+<link rel='stylesheet' href='{{ asset('fonts/roboto/style.css') }}'>
+<link rel='stylesheet' href='{{ asset('fonts/web-icons/style.css') }}'>
+<link rel='stylesheet' href='{{ asset('fonts/socicon/style.css') }}'>
+
+<!-- css -->
+<link rel="stylesheet" href="{{ mix('css/app.css') }}">
+<link rel="stylesheet" href="{{ mix('css/public.css') }}">
+
+@if(env('APP_ENV') !== 'local')
+<!-- gtag -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120546713-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -36,10 +41,8 @@
   gtag('config', 'UA-120546713-1');
 </script>
 @endif
-<link rel="stylesheet" href="{{ mix('css/app.css') }}">
-@auth
-<meta name="api-token" content="{{ Auth::user()->apiToken() }}">
-@endauth
+
+<!-- script -->
 <script>
   @auth
     var AUTH_ID = {{ Auth::user()->id }};

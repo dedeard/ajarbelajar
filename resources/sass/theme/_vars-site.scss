@@ -161,12 +161,12 @@ $layout-boxed-bg: $gray-200;
 //
 ///##
 $panel-bg: #fff;
-$panel-padding-horizontal: 30px;
-$panel-body-padding-vertical: 30px;
+$panel-padding-horizontal: remToPx($spacer);
+$panel-body-padding-vertical: remToPx($spacer);
 $panel-body-padding: $panel-body-padding-vertical $panel-padding-horizontal;
-$panel-heading-padding-vertical: 20px;
+$panel-heading-padding-vertical: remToPx($spacer);
 $panel-heading-padding: $panel-heading-padding-vertical $panel-padding-horizontal;
-$panel-footer-padding-vertical: 15px;
+$panel-footer-padding-vertical: remToPx($spacer / 2);
 $panel-footer-padding: 0 $panel-padding-horizontal $panel-footer-padding-vertical;
 $panel-border-radius: $border-radius-large;
 $panel-border: $border-color-base;

@@ -4,5 +4,12 @@
     "/js/editor.js": "/js/editor.js",
     "/css/app.css": "/css/app.css",
     "/css/theme.css": "/css/theme.css",
-    "/js/markdown.js": "/js/markdown.js"
+    "/js/markdown.js": "/js/markdown.js",
+    "/css/admin.css": "/css/admin.css",
+    "/js/auth.js": "/js/auth.js",
+    "/js/minitutor.js": "/js/minitutor.js",
+    "/js/public.js": "/js/public.js",
+    "/css/public.css": "/css/public.css",
+    "/css/auth.css": "/css/auth.css",
+    "/css/minitutor.css": "/css/minitutor.css"
 }

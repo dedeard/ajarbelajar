@@ -1,33 +1,39 @@
-const mix = require("laravel-mix");
+const mix = require("laravel-mix")
 
 /* Allow multiple Laravel Mix applications*/
-require("laravel-mix-merge-manifest");
-mix.mergeManifest();
+require("laravel-mix-merge-manifest")
+mix.mergeManifest()
 
-mix.webpackConfig({
+const webpackConfig = {
     resolve: {
         alias: {
-            vars: path.resolve("resources/sass/theme/_vars.scss")
+            vars: path.resolve("resources/sass/_vars.scss")
         }
     }
+}
+
+mix.webpackConfig(webpackConfig)
+mix.js("resources/js/app.js", "public/js")
+mix.js("resources/js/public.js", "public/js")
+mix.js("resources/js/auth.js", "public/js")
+mix.js("resources/js/admin.js", "public/js")
+mix.js("resources/js/minitutor.js", "public/js")
+
+mix.sass("resources/sass/app.scss", "public/css/app.css")
+mix.sass("resources/sass/modules/public/public.scss", "public/css/public.css")
+mix.sass("resources/sass/modules/auth/auth.scss", "public/css/auth.css")
+mix.sass("resources/sass/modules/admin/admin.scss", "public/css/admin.css")
+mix.sass("resources/sass/modules/minitutor/minitutor.scss", "public/css/minitutor.css")
+
+mix.disableNotifications()
+mix.options({
+    processCssUrls: false
 })
-    .js("resources/js/editor.js", "public/js")
-    .js("resources/js/app.js", "public/js")
-    .js("resources/js/admin.js", "public/js")
-    .js("resources/js/markdown.js", "public/js");
 
 if (!mix.inProduction()) {
-    mix.sass("resources/sass/dev.scss", "public/css/app.css")
-        .sass("resources/sass/theme.scss", "public/css")
-        .disableNotifications()
-        .options({
-            processCssUrls: false
-        })
-        .browserSync({
-            proxy: "http://127.0.0.1:8000"
-        });
+    mix.browserSync({
+        proxy: "http://127.0.0.1:8000"
+    })
 } else {
-    mix.sass("resources/sass/app.scss", "public/css")
-        .disableNotifications()
-        .version();
+    mix.version()
 }
