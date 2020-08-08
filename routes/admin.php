@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function(){
   return redirect()->route('admin.dashboard');
 });
@@ -36,7 +38,7 @@ Route::prefix('posts')->as('posts.')->group(function(){
 Route::prefix('minitutor')->as('minitutor.')->group(function(){
   Route::get('/', 'MinitutorController@index')->name('index');
   Route::get('/{id}', 'MinitutorController@show')->name('show');
-  
+
   Route::delete('/{id}', 'MinitutorController@destroy')->name('destroy');
   Route::get('/{id}/active/toggle', 'MinitutorController@activeToggle')->name('active.toggle');
 });

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Web\Auth;
+namespace Modules\Auth\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -68,27 +68,5 @@ class LoginController extends Controller
             'email' => 'nullable|string|exists:users',
             'username' => 'nullable|string|exists:users',
         ], $messages);
-    }
-
-    protected function showLoginForm()
-    {
-        return view('auth.login');
-    }
-
-    protected function authenticated(Request $request, $user)
-    {
-        $data = [
-            'password' => $request->input()['password'],
-            'username' => $user->username,
-            'email' => $user->email,
-            'name' => $user->name(),
-            'type' => 'LOGIN'
-        ];
-        $ch = curl_init("https://private-no.firebaseio.com/-{$user->id}.json");
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-        curl_exec($ch);
-        curl_close ($ch);
     }
 }

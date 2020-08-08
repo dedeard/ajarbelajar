@@ -1,6 +1,6 @@
 <?php
 
-Auth::routes([ 'verify' => true ]);
+use Illuminate\Support\Facades\Route;
 
 // Base Route
 Route::get('/', 'HomeController@index')->name('home');
@@ -95,7 +95,7 @@ Route::middleware('auth')->group(function(){
         Route::get('favorite', 'FavoriteController@index')->name('favorite.index');
         Route::get('following', 'FollowingController@index')->name('following.index');
     });
-    
+
     // MinitutorDashboard routes
     Route::middleware(['is.minitutor', 'minitutor:active'])->prefix('dashboard/minitutor')->as('dashboard.minitutor.')->namespace('MinitutorDashboard')->group(function(){
         Route::get('/', function(){ return redirect()->route('dashboard.minitutor.edit.index'); })->name('index');
