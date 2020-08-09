@@ -96,16 +96,43 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _admin_components_AppSidebar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./admin/components/AppSidebar */ "./resources/js/admin/components/AppSidebar.js");
-/* harmony import */ var _admin_directives_Sidebar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin/directives/Sidebar */ "./resources/js/admin/directives/Sidebar.js");
+/* harmony import */ var _admin_components_AppAlert__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin/components/AppAlert */ "./resources/js/admin/components/AppAlert.js");
+/* harmony import */ var _admin_directives_Sidebar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin/directives/Sidebar */ "./resources/js/admin/directives/Sidebar.js");
+
 
 
 var Vue = window.Vue;
-Vue.directive('toggle-sidebar', _admin_directives_Sidebar__WEBPACK_IMPORTED_MODULE_1__["toggleSidebar"]);
-Vue.directive('open-sidebar', _admin_directives_Sidebar__WEBPACK_IMPORTED_MODULE_1__["openSidebar"]);
-Vue.directive('close-sidebar', _admin_directives_Sidebar__WEBPACK_IMPORTED_MODULE_1__["closeSidebar"]);
+Vue.directive('toggle-sidebar', _admin_directives_Sidebar__WEBPACK_IMPORTED_MODULE_2__["toggleSidebar"]);
+Vue.directive('open-sidebar', _admin_directives_Sidebar__WEBPACK_IMPORTED_MODULE_2__["openSidebar"]);
+Vue.directive('close-sidebar', _admin_directives_Sidebar__WEBPACK_IMPORTED_MODULE_2__["closeSidebar"]);
 Vue.component('AppSidebar', _admin_components_AppSidebar__WEBPACK_IMPORTED_MODULE_0__["default"]);
+Vue.component('AppAlert', _admin_components_AppAlert__WEBPACK_IMPORTED_MODULE_1__["default"]);
 new Vue({
   el: '#app'
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/components/AppAlert.js":
+/*!***************************************************!*\
+  !*** ./resources/js/admin/components/AppAlert.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      open: true
+    };
+  },
+  methods: {
+    close: function close() {
+      this.open = false;
+    }
+  }
 });
 
 /***/ }),

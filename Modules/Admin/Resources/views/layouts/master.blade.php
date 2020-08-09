@@ -15,6 +15,8 @@
   <div class="app-layout" id="app">
     @include('admin::partials.header')
     @include('admin::partials.sidebar')
+    @include('admin::partials.alert')
+
     @yield('content')
   </div>
   @yield('script:before')
