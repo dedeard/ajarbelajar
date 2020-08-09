@@ -90,13 +90,106 @@
 /*!*******************************!*\
   !*** ./resources/js/admin.js ***!
   \*******************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _admin_components_AppSidebar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./admin/components/AppSidebar */ "./resources/js/admin/components/AppSidebar.js");
+/* harmony import */ var _admin_directives_Sidebar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin/directives/Sidebar */ "./resources/js/admin/directives/Sidebar.js");
+
 
 var Vue = window.Vue;
+Vue.directive('toggle-sidebar', _admin_directives_Sidebar__WEBPACK_IMPORTED_MODULE_1__["toggleSidebar"]);
+Vue.directive('open-sidebar', _admin_directives_Sidebar__WEBPACK_IMPORTED_MODULE_1__["openSidebar"]);
+Vue.directive('close-sidebar', _admin_directives_Sidebar__WEBPACK_IMPORTED_MODULE_1__["closeSidebar"]);
+Vue.component('AppSidebar', _admin_components_AppSidebar__WEBPACK_IMPORTED_MODULE_0__["default"]);
 new Vue({
   el: '#app'
 });
+
+/***/ }),
+
+/***/ "./resources/js/admin/components/AppSidebar.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/admin/components/AppSidebar.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      elSidebarScroll: null,
+      elSidebarScrollStyle: null,
+      sidebarPs: null,
+      open: false
+    };
+  },
+  methods: {
+    sidebarScroll: function sidebarScroll() {
+      console.log(this.elSidebarScrollStyle.getPropertyValue('overflow-y'));
+
+      if (this.elSidebarScrollStyle.getPropertyValue('overflow-y') != 'auto') {
+        if (!this.sidebarPs) {
+          this.sidebarPs = new window.PerfectScrollbar(this.elSidebarScroll);
+        }
+      } else {
+        if (this.sidebarPs) {
+          this.sidebarPs.destroy();
+          this.sidebarPs = null;
+        }
+      }
+    }
+  },
+  mounted: function mounted() {
+    this.elSidebarScroll = this.$refs.elSidebarScroll;
+    this.elSidebarScrollStyle = window.getComputedStyle(this.elSidebarScroll);
+    this.sidebarScroll();
+    window.onresize = this.sidebarScroll;
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/directives/Sidebar.js":
+/*!**************************************************!*\
+  !*** ./resources/js/admin/directives/Sidebar.js ***!
+  \**************************************************/
+/*! exports provided: toggleSidebar, openSidebar, closeSidebar */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleSidebar", function() { return toggleSidebar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openSidebar", function() { return openSidebar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "closeSidebar", function() { return closeSidebar; });
+var toggleSidebar = {
+  bind: function bind(el) {
+    el.addEventListener('click', function (ev) {
+      ev.preventDefault();
+      document.querySelector('body').classList.toggle('sidebar-open');
+    });
+  }
+};
+var openSidebar = {
+  bind: function bind(el) {
+    el.addEventListener('click', function (ev) {
+      ev.preventDefault();
+      document.querySelector('body').classList.add('sidebar-open');
+    });
+  }
+};
+var closeSidebar = {
+  bind: function bind(el) {
+    el.addEventListener('click', function (ev) {
+      ev.preventDefault();
+      document.querySelector('body').classList.remove('sidebar-open');
+    });
+  }
+};
 
 /***/ }),
 
