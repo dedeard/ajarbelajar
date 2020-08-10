@@ -15,9 +15,10 @@
   <div class="app-layout" id="app">
     @include('admin::partials.header')
     @include('admin::partials.sidebar')
-    @include('admin::partials.alert')
-
-    @yield('content')
+    <div class="pt-2">
+      @include('admin::partials.alert')
+      @yield('content')
+    </div>
   </div>
   @yield('script:before')
   <script src="{{ mix('js/app.js') }}"></script>

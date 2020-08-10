@@ -98,6 +98,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _admin_components_AppSidebar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./admin/components/AppSidebar */ "./resources/js/admin/components/AppSidebar.js");
 /* harmony import */ var _admin_components_AppAlert__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin/components/AppAlert */ "./resources/js/admin/components/AppAlert.js");
 /* harmony import */ var _admin_directives_Sidebar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin/directives/Sidebar */ "./resources/js/admin/directives/Sidebar.js");
+/* harmony import */ var _admin_directives_delete_confirm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./admin/directives/delete-confirm */ "./resources/js/admin/directives/delete-confirm.js");
+
 
 
 
@@ -105,6 +107,7 @@ var Vue = window.Vue;
 Vue.directive('toggle-sidebar', _admin_directives_Sidebar__WEBPACK_IMPORTED_MODULE_2__["toggleSidebar"]);
 Vue.directive('open-sidebar', _admin_directives_Sidebar__WEBPACK_IMPORTED_MODULE_2__["openSidebar"]);
 Vue.directive('close-sidebar', _admin_directives_Sidebar__WEBPACK_IMPORTED_MODULE_2__["closeSidebar"]);
+Vue.directive('delete-confirm', _admin_directives_delete_confirm__WEBPACK_IMPORTED_MODULE_3__["default"]);
 Vue.component('AppSidebar', _admin_components_AppSidebar__WEBPACK_IMPORTED_MODULE_0__["default"]);
 Vue.component('AppAlert', _admin_components_AppAlert__WEBPACK_IMPORTED_MODULE_1__["default"]);
 new Vue({
@@ -217,6 +220,47 @@ var closeSidebar = {
     });
   }
 };
+
+/***/ }),
+
+/***/ "./resources/js/admin/directives/delete-confirm.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/admin/directives/delete-confirm.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  bind: function bind(el, binding) {
+    el.addEventListener('click', function (e) {
+      e.preventDefault();
+      var target = document.getElementById(binding.arg);
+
+      if (target) {
+        window.Swal.fire({
+          title: 'Anda yakin?',
+          text: "Kamu akan menghapus ini secara permanen!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Ya, Hapus!',
+          cancelButtonText: 'Tidak, Batalkan!',
+          reverseButtons: true,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: 'btn btn-danger ml-1 font-weight-bold w-150',
+            cancelButton: 'btn btn-primary mr-1 font-weight-bold w-150'
+          }
+        }).then(function (result) {
+          if (result.value) {
+            target.submit();
+          }
+        });
+      }
+    });
+  }
+});
 
 /***/ }),
 
