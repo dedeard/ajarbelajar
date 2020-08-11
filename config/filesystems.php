@@ -64,15 +64,25 @@ return [
             'url' => env('AWS_URL'),
         ],
 
+
         'gcs' => [
             'driver' => 'gcs',
-            'project_id' => env('GOOGLE_CLOUD_PROJECT_ID', 'hpmmkomstmikdp'),
-            'key_file' => __DIR__ . '/../storage/gcs.json',
-            'bucket' => env('GOOGLE_CLOUD_STORAGE_BUCKET', 'hpmmkomstmikdp.appspot.com'),
-            'path_prefix' => env('GOOGLE_CLOUD_STORAGE_PATH_PREFIX', 'ajarbelajar'),
-            'storage_api_uri' => env('GOOGLE_CLOUD_STORAGE_API_URI', 'https://storage.googleapis.com/hpmmkomstmikdp.appspot.com/'),
+            'project_id' => env('FB_PROJECT_ID'),
+            'key_file' => [
+                'type' => env('FB_TYPE'),
+                'private_key_id' => env('FB_PRIVATE_KEY_ID'),
+                'private_key' => env('FB_PRIVATE_KEY'),
+                'client_email' => env('FB_CLIENT_EMAIL'),
+                'client_id' => env('FB_CLIENT_ID'),
+                'auth_uri' => env('FB_AUTH_URI'),
+                'token_uri' => env('FB_TOKEN_URI'),
+                'auth_provider_x509_cert_url' => env('FB_AUTH_PROVIDER_X509_CERT_URL'),
+                'client_x509_cert_url' => env('FB_CLIENT_X509_CERT_URL'),
+            ],
+            'bucket' => env('FB_PROJECT_ID') . 'appspot.com',
+            'path_prefix' => env('GOOGLE_CLOUD_STORAGE_PATH_PREFIX', '/'),
+            'storage_api_uri' => 'https://storage.googleapis.com/' . env('FB_PROJECT_ID') . '.appspot.com/',
             'visibility' => 'public',
         ],
     ],
-
 ];

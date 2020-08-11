@@ -166,12 +166,13 @@ return [
          * Package Service Providers...
          */
         Intervention\Image\ImageServiceProvider::class,
-        Superbalist\LaravelGoogleCloudStorage\GoogleCloudStorageServiceProvider::class,
+        // Superbalist\LaravelGoogleCloudStorage\GoogleCloudStorageServiceProvider::class,
         Overtrue\LaravelFollow\FollowServiceProvider::class,
         Nagy\LaravelRating\LaravelRatingServiceProvider::class,
         Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         qoraiche\mailEclipse\mailEclipseServiceProvider::class,
+        Kreait\Laravel\Firebase\ServiceProvider::class,
 
         /*
          * Application Service Providers...
