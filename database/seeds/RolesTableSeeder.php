@@ -15,6 +15,9 @@ class RolesTableSeeder extends Seeder
     {
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
+        Permission::create(['name' => 'admin access']);
+        Permission::create(['name' => 'manage role']);
+        Permission::create(['name' => 'manage permission']);
         Permission::create(['name' => 'manage user']);
         Permission::create(['name' => 'manage minitutor']);
         Permission::create(['name' => 'manage post']);
@@ -23,11 +26,5 @@ class RolesTableSeeder extends Seeder
         Permission::create(['name' => 'manage seo']);
 
         Role::create(['name' => 'Super Admin']);
-
-        $roleAdmin = Role::create(['name' => 'Administrator']);
-        $roleAdmin->givePermissionTo(['manage user', 'manage minitutor', 'manage post', 'manage category', 'manage seo']);
-
-        $roleModerator = Role::create(['name' => 'Moderator']);
-        $roleModerator->givePermissionTo(['manage post', 'manage category']);
     }
 }
