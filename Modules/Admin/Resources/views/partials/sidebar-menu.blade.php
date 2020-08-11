@@ -6,9 +6,13 @@ $linkGroups = [
       'route' => 'admin.dashboard',
       'is' => 'admin.dashboard',
       'icon' => 'wb-dashboard'
-    ]
-  ],
-  [
+    ],
+    [
+      'name' => 'Seo',
+      'route' => 'admin.seo.index',
+      'is' => 'admin.seo*',
+      'icon' => 'wb-globe'
+    ],
     [
       'name' => 'Users',
       'route' => 'admin.users.index',
