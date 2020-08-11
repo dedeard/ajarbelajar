@@ -10,6 +10,14 @@ $linkGroups = [
   ],
   [
     [
+      'name' => 'Users',
+      'route' => 'admin.users.index',
+      'is' => 'admin.users*',
+      'icon' => 'wb-users'
+    ]
+  ],
+  [
+    [
       'name' => 'Permission',
       'route' => 'admin.permissions.index',
       'is' => 'admin.permissions*',

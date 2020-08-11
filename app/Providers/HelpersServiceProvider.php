@@ -17,6 +17,7 @@ class HelpersServiceProvider extends ServiceProvider
         require_once app_path() . '/Helpers/Seo.php';
         require_once app_path() . '/Helpers/Category.php';
         require_once app_path() . '/Helpers/AddPoint.php';
+        require_once app_path() . '/Helpers/AvatarHelper.php';
     }
 
     /**

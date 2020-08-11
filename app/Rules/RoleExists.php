@@ -26,7 +26,7 @@ class RoleExists implements Rule
      */
     public function passes($attribute, $value)
     {
-        return Role::where('name', '!=', 'Super Admin')->where('name', $value)->exists();
+        return Role::where('name', '!=', 'Super Admin')->where('id', $value)->exists();
     }
 
     /**

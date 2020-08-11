@@ -21,7 +21,8 @@ return [
         'size' => 150,
         'format' => 'jpg',
         'extension' => 'jpeg',
-        'quality' => 80
+        'quality' => 80,
+        'dir' => 'avatar/'
     ],
 
     'hero' => [

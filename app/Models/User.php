@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\AvatarHelper;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
@@ -80,12 +81,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->first_name;
     }
 
-    public function imageUrl()
+    public function avatarUrl()
     {
-        if($avatar = $this->avatar){
-            return asset('storage/avatar/' . $avatar);
-        }
-        return asset('img/placeholder/avatar.png');
+        return AvatarHelper::getAvatarUrl($this->avatar);
     }
 
     public function requestMinitutor()

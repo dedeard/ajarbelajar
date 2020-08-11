@@ -40419,7 +40419,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var v_lazy_image_dist_v_lazy_image_es__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! v-lazy-image/dist/v-lazy-image.es */ "./node_modules/v-lazy-image/dist/v-lazy-image.es.js");
 /* harmony import */ var vue_star_rating__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-star-rating */ "./node_modules/vue-star-rating/dist/star-rating.min.js");
 /* harmony import */ var vue_star_rating__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_star_rating__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vue_sticky_directive__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-sticky-directive */ "./node_modules/vue-sticky-directive/src/index.js");
+/* harmony import */ var _app_components_avatar_chooser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app/components/avatar-chooser */ "./resources/js/app/components/avatar-chooser.js");
+/* harmony import */ var vue_sticky_directive__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-sticky-directive */ "./node_modules/vue-sticky-directive/src/index.js");
 /**
  * Require library
  */
@@ -40457,12 +40458,56 @@ if (window.API_TOKEN) window.axios.defaults.headers.common.Authorization = 'Bear
 
  //components
 
+
  //directives
 
 
 Vue.use(v_lazy_image_dist_v_lazy_image_es__WEBPACK_IMPORTED_MODULE_0__["VLazyImagePlugin"]);
 Vue.component('StarRating', vue_star_rating__WEBPACK_IMPORTED_MODULE_1___default.a);
-Vue.directive('Sticky', vue_sticky_directive__WEBPACK_IMPORTED_MODULE_2__["default"]);
+Vue.component('AvatarChooser', _app_components_avatar_chooser__WEBPACK_IMPORTED_MODULE_2__["default"]);
+Vue.directive('Sticky', vue_sticky_directive__WEBPACK_IMPORTED_MODULE_3__["default"]);
+
+/***/ }),
+
+/***/ "./resources/js/app/components/avatar-chooser.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/app/components/avatar-chooser.js ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      url: '',
+      file: null,
+      name: ''
+    };
+  },
+  methods: {
+    handleClick: function handleClick(e) {
+      e.preventDefault();
+      this.$refs.input.click();
+    },
+    handleChange: function handleChange(ev) {
+      var files = ev.target.files;
+      if (!files.length) return false;
+      this.file = files[0];
+      if (!this.file) return false;
+      this.name = this.file.name;
+      var reader = new FileReader();
+      var self = this;
+
+      reader.onload = function () {
+        self.url = reader.result;
+      };
+
+      reader.readAsDataURL(this.file);
+    }
+  }
+});
 
 /***/ }),
 

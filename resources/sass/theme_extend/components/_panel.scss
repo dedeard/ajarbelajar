@@ -1,6 +1,19 @@
 .panel {
-    margin-bottom: $spacer;
-    box-shadow: $box-shadow-sm;
-    border-bottom: 4px solid $primary;
-    border-radius: 4px;
+  margin-bottom: $spacer;
+  box-shadow: $box-shadow-sm;
+  border-bottom: 4px solid $primary;
+  border-radius: 4px;
+  @include media-breakpoint-down(sm) {
+    .panel-actions {
+      position: absolute;
+      right: initial;
+      display: block;
+      padding: 0;
+      top: 50%;
+      right: 20.006px;
+      z-index: 1;
+      margin: auto;
+      transform: translate(0%, -50%);
+    }
+  }
 }

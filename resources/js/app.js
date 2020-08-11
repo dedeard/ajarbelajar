@@ -42,6 +42,7 @@ import {
 
 //components
 import StarRating from 'vue-star-rating'
+import AvatarChooser from './app/components/avatar-chooser'
 
 //directives
 import Sticky from 'vue-sticky-directive'
@@ -50,5 +51,6 @@ import Sticky from 'vue-sticky-directive'
 Vue.use(VLazyImagePlugin)
 
 Vue.component('StarRating', StarRating)
+Vue.component('AvatarChooser', AvatarChooser)
 
 Vue.directive('Sticky', Sticky)

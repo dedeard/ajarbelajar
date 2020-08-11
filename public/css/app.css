@@ -25281,9 +25281,57 @@ ul.panel-actions > li:first-child {
   border-bottom: 4px solid #677ae4;
   border-radius: 4px;
 }
+@media (max-width: 767px) {
+  .panel .panel-actions {
+    position: absolute;
+    right: initial;
+    display: block;
+    padding: 0;
+    top: 50%;
+    right: 20.006px;
+    z-index: 1;
+    margin: auto;
+    transform: translate(0%, -50%);
+  }
+}
 
 .img-fluid {
   width: 100%;
+}
+
+.avatar-chooser {
+  position: relative;
+  padding-bottom: 30px;
+}
+.avatar-chooser .avatar {
+  border-radius: 4px;
+  width: 100%;
+  max-width: 140px;
+  display: block;
+  margin: auto;
+}
+.avatar-chooser .avatar img {
+  border-radius: 4px;
+}
+.avatar-chooser .btn {
+  position: absolute;
+  z-index: 20;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.avatar-chooser-input {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+}
+.avatar-chooser .file-name {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: 0;
+  margin: 0;
+  line-height: 1;
 }
 
 .m-0 {
