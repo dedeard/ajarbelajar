@@ -14,6 +14,12 @@ $linkGroups = [
       'icon' => 'wb-globe'
     ],
     [
+      'name' => 'Categories',
+      'route' => 'admin.categories.index',
+      'is' => 'admin.categories*',
+      'icon' => 'wb-list'
+    ],
+    [
       'name' => 'Users',
       'route' => 'admin.users.index',
       'is' => 'admin.users*',

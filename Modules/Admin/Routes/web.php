@@ -6,6 +6,7 @@ Route::get('/', 'AdminController@index');
 Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
 
 Route::resource('seo', 'SeoController')->except(['show']);
+Route::resource('categories', 'CategoriesController')->except(['show']);
 
 Route::resource('users', 'UsersController');
 
