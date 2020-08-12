@@ -25,33 +25,30 @@
           </div>
         </form>
       </div>
-      <div class="panel-body">
-        <h4>Edit Role Permissions</h4>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th class="text-center" style="width: 120px;">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            @foreach($permissions as $permission)
-            <tr>
-              <td class="font-weight-bold">{{ $permission->name }}</td>
-              <td class="text-center">
-                <a href="{{ route('admin.roles.toggle.sync.permission', [$role->id, $permission->id]) }}" class="btn btn-sm btn-outline-default">
-                  @if($role->hasPermissionTo($permission->name))
-                  {{_('Revoke')}}
-                  @else
-                  {{__('Give')}}
-                  @endif
-                </a>
-              </td>
-            </tr>
-            @endforeach
-          </tbody>
-        </table>
-      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th class="text-center" style="width: 120px;">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach($permissions as $permission)
+          <tr>
+            <td class="font-weight-bold">{{ $permission->name }}</td>
+            <td class="text-center py-0 align-middle">
+              <a href="{{ route('admin.roles.toggle.sync.permission', [$role->id, $permission->id]) }}" class="btn btn-sm btn-outline-default">
+                @if($role->hasPermissionTo($permission->name))
+                {{_('Revoke')}}
+                @else
+                {{__('Give')}}
+                @endif
+              </a>
+            </td>
+          </tr>
+          @endforeach
+        </tbody>
+      </table>
     </div>
   </div>
 @endsection

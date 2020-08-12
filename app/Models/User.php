@@ -86,6 +86,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return AvatarHelper::getAvatarUrl($this->avatar);
     }
 
+    public function imageUrl()
+    {
+        return AvatarHelper::getAvatarUrl($this->avatar);
+    }
+
     public function requestMinitutor()
     {
         return $this->hasOne(RequestMinitutor::class);

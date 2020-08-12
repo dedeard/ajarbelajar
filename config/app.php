@@ -165,8 +165,8 @@ return [
         /*
          * Package Service Providers...
          */
+        App\Providers\GoogleCloudStorageProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        // Superbalist\LaravelGoogleCloudStorage\GoogleCloudStorageServiceProvider::class,
         Overtrue\LaravelFollow\FollowServiceProvider::class,
         Nagy\LaravelRating\LaravelRatingServiceProvider::class,
         Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,

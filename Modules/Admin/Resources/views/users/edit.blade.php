@@ -6,6 +6,9 @@
       <div class="panel-heading">
         <h3 class="panel-title">EDIT USER</h3>
         <div class="panel-actions">
+          @if(empty($user->minitutor))
+          <a href="{{ route('admin.users.minitutor.create', $user->id) }}" class="btn btn-sm btn-primary">Create MiniTutor</a>
+          @endif
           <a href="{{ route('admin.users.index') }}" class="btn btn-sm btn-primary">Back</a>
         </div>
       </div>

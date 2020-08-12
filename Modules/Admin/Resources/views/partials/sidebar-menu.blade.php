@@ -20,10 +20,16 @@ $linkGroups = [
       'icon' => 'wb-list'
     ],
     [
-      'name' => 'Users',
+      'name' => 'User',
       'route' => 'admin.users.index',
       'is' => 'admin.users*',
       'icon' => 'wb-users'
+    ],
+    [
+      'name' => 'Minitutor',
+      'route' => 'admin.minitutors.index',
+      'is' => 'admin.minitutors*',
+      'icon' => 'wb-user-circle'
     ]
   ],
   [

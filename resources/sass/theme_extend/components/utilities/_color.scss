@@ -1,0 +1,7 @@
+@include text-emphasis-variant(".text-primary", $primary);
+@include text-emphasis-variant(".text-success", $success);
+@include text-emphasis-variant(".text-info", $info);
+@include text-emphasis-variant(".text-warning", $warning);
+@include text-emphasis-variant(".text-danger", $danger);
+@include text-emphasis-variant(".text-light", $light);
+@include text-emphasis-variant(".text-dark", $dark);

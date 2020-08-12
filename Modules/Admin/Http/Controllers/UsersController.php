@@ -3,6 +3,7 @@
 namespace Modules\Admin\Http\Controllers;
 
 use App\Helpers\AvatarHelper;
+use App\Models\Minitutor;
 use App\Models\User;
 use App\Rules\RoleExists;
 use App\Rules\Username;
@@ -14,6 +15,8 @@ use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
 {
+  const EDUCATIONS = [ 'D1', 'D2', 'D3', 'S1', 'S2', 'S3' ];
+
   public function __construct()
   {
     $this->middleware('can:manage user');
@@ -144,5 +147,32 @@ class UsersController extends Controller
     AvatarHelper::destroy($user->avatar);
     $user->delete();
     return redirect()->route('admin.users.index')->withSuccess('Berhasil menghapus user.');
+  }
+
+  public function createMinitutor($id)
+  {
+    SEOMeta::setTitle('Buat Minitutor');
+    $user = User::findOrFail($id);
+    if(isset($user->minitutor)) return abort(404);
+    return view('admin::users.create_minitutor', ['user' => $user, 'last_educations' => self::EDUCATIONS]);
+  }
+
+  public function storeMinitutor(Request $request, $id)
+  {
+    $user = User::findOrFail($id);
+    if(isset($user->minitutor)) return abort(404);
+    $data = $request->validate([
+      'last_education' => 'required|string|max:50',
+      'university' => 'required|string|max:250',
+      'city_and_country_of_study' => 'required|string|max:250',
+      'majors' => 'required|string|max:250',
+      'contact' => 'required|string|max:250',
+    ]);
+    $data['interest_talent'] = '';
+    $data['reason'] = '';
+    $data['expectation'] = '';
+    $minitutor = new Minitutor($data);
+    $user->minitutor()->save($minitutor);
+    return redirect()->route('admin.minitutors.show', $minitutor->id)->withSuccess('Berhasil mejadikan pengguna sebagai minitutor.');
   }
 }

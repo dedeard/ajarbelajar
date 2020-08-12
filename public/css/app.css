@@ -27251,6 +27251,62 @@ ul.panel-actions > li:first-child {
   line-height: 1 !important;
 }
 
+.text-primary {
+  color: #677ae4 !important;
+}
+
+a.text-primary:focus, a.text-primary:hover {
+  color: #3c54dc !important;
+}
+
+.text-success {
+  color: #11c26d !important;
+}
+
+a.text-success:focus, a.text-success:hover {
+  color: #0d9353 !important;
+}
+
+.text-info {
+  color: #0bb2d4 !important;
+}
+
+a.text-info:focus, a.text-info:hover {
+  color: #0889a4 !important;
+}
+
+.text-warning {
+  color: #eb6709 !important;
+}
+
+a.text-warning:focus, a.text-warning:hover {
+  color: #ba5107 !important;
+}
+
+.text-danger {
+  color: #ff4c52 !important;
+}
+
+a.text-danger:focus, a.text-danger:hover {
+  color: #ff1921 !important;
+}
+
+.text-light {
+  color: #f3f7f9 !important;
+}
+
+a.text-light:focus, a.text-light:hover {
+  color: #d1e0e8 !important;
+}
+
+.text-dark {
+  color: #263238 !important;
+}
+
+a.text-dark:focus, a.text-dark:hover {
+  color: #11171a !important;
+}
+
 /*
  * Container style
  */

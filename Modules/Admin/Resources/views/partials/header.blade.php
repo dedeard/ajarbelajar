@@ -15,7 +15,7 @@
         <div class="wrapper">
           <div class="quick-actions">
             <ul class="nav">
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a class="active nav-link" href="javascript:;">New Video</a>
               </li>
               <li class="nav-item">
@@ -23,17 +23,17 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="javascript:;">Messages</a>
-              </li>
+              </li> --}}
             </ul>
           </div>
           <div class="user-actions">
             <a href="javascript:;" class="btn btn-action sidebar-toggle" v-open-sidebar>
               <i class="wb-grid-4"></i>
             </a>
-            <a href="javascript:;" class="btn btn-action">
+            {{-- <a href="javascript:;" class="btn btn-action">
               <i class="wb-bell"></i>
               <span class="label">5</span>
-            </a>
+            </a> --}}
             <a href="javascript:;" class="avatar img-bordered bg-white"
               ><img
                 src="https://www.ajarbelajar.com/img/placeholder/avatar.png"
