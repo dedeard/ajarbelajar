@@ -1,23 +1,28 @@
-@extends('auth.layouts.auth')
-@section('title', 'Verifikasi Alamat Email')
-@section('heading', 'Verifikasi Alamat Email Anda')
+@extends('layouts.app')
 
 @section('content')
-@if (session('resent'))
-<div class="alert alert-success font-weight-bold text-center">
-    {{ __('A fresh verification link has been sent to your email address.') }}
-</div>
-@endif
-<form method="POST" action="{{ route('verification.resend') }}" class="row">
-    @csrf
-    <div class="col-12 mb-3">
-        <p class="lead text-center">Sebelum melanjutkan, silahkan periksa Email Anda untuk tautan verifikasi. Jika Anda tidak menerima Email.</p>
-    </div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
 
-    <div class="col-12">
-        <div class="form-group mb-3">
-            <button class="btn btn-primary btn-block btn--float font-weight-bold">KLIK DISINI UNTUK MEMINTA LAGI</button>
+                <div class="card-body">
+                    @if (session('resent'))
+                        <div class="alert alert-success" role="alert">
+                            {{ __('A fresh verification link has been sent to your email address.') }}
+                        </div>
+                    @endif
+
+                    {{ __('Before proceeding, please check your email for a verification link.') }}
+                    {{ __('If you did not receive the email') }},
+                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                        @csrf
+                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-</form>
+</div>
 @endsection

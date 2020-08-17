@@ -16,7 +16,7 @@ class IsNotMinitutorMiddleware
     public function handle($request, Closure $next)
     {
         if ($request->user()->minitutor) {
-            return redirect()->route('dashboard.minitutor.index');
+            return response()->json(['message' => __('You are a MiniTutor.')], 403);
         }
         return $next($request);
     }

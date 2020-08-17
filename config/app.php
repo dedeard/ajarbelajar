@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => (bool) env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'id',
+    'locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -165,24 +165,20 @@ return [
         /*
          * Package Service Providers...
          */
-        App\Providers\GoogleCloudStorageProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
-        Overtrue\LaravelFollow\FollowServiceProvider::class,
-        Nagy\LaravelRating\LaravelRatingServiceProvider::class,
-        Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
-        qoraiche\mailEclipse\mailEclipseServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
         Kreait\Laravel\Firebase\ServiceProvider::class,
 
         /*
-         * Application Service Providers...
-         */
+        * Application Service Providers...
+        */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        App\Providers\BroadcastServiceProvider::class,
+        // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\HelpersServiceProvider::class,
+        App\Providers\GoogleCloudStorageServiceProvider::class,
+
     ],
 
     /*
@@ -215,6 +211,7 @@ return [
         'File' => Illuminate\Support\Facades\File::class,
         'Gate' => Illuminate\Support\Facades\Gate::class,
         'Hash' => Illuminate\Support\Facades\Hash::class,
+        'Http' => Illuminate\Support\Facades\Http::class,
         'Lang' => Illuminate\Support\Facades\Lang::class,
         'Log' => Illuminate\Support\Facades\Log::class,
         'Mail' => Illuminate\Support\Facades\Mail::class,
@@ -233,16 +230,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Image' => Intervention\Image\Facades\Image::class,
-        'LaravelRating' => \Nagy\LaravelRating\LaravelRatingFacade::class,
-        'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
-        'SEOMeta'   => Artesaos\SEOTools\Facades\SEOMeta::class,
-        'OpenGraph' => Artesaos\SEOTools\Facades\OpenGraph::class,
-        'Twitter'   => Artesaos\SEOTools\Facades\TwitterCard::class,
-        'JsonLd'   => Artesaos\SEOTools\Facades\JsonLd::class,
-        'EditorjsHelp' => App\Helpers\Editorjs::class,
-        'SeoHelp' => App\Helpers\Seo::class,
-        'CategoryHelp' => App\Helpers\Category::class,
-        'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
+
     ],
+
 ];

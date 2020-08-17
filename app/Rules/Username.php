@@ -35,6 +35,6 @@ class Username implements Rule
      */
     public function message()
     {
-        return 'Format :attribute tidak valid.';
+        return __('validation.username');
     }
 }

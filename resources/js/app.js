@@ -36,21 +36,4 @@ if (window.API_TOKEN) window.axios.defaults.headers.common.Authorization = 'Bear
 /**
  * vue app
  */
-import {
-    VLazyImagePlugin
-} from 'v-lazy-image/dist/v-lazy-image.es'
-
-//components
-import StarRating from 'vue-star-rating'
-import AvatarChooser from './app/components/avatar-chooser'
-
-//directives
-import Sticky from 'vue-sticky-directive'
-
-
-Vue.use(VLazyImagePlugin)
-
-Vue.component('StarRating', StarRating)
-Vue.component('AvatarChooser', AvatarChooser)
-
-Vue.directive('Sticky', Sticky)
+require('./vue')

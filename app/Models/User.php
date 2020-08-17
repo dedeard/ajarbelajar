@@ -3,141 +3,76 @@
 namespace App\Models;
 
 use App\Helpers\AvatarHelper;
+use App\Notifications\Auth\VerifyEmailNotification;
+use App\Notifications\Auth\ResetPasswordNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
-use Overtrue\LaravelFollow\Traits\CanSubscribe;
-use Overtrue\LaravelFollow\Traits\CanFavorite;
-use Nagy\LaravelRating\Traits\Rate\CanRate;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable, HasRoles, CanSubscribe, CanFavorite, CanRate;
+    use Notifiable;
 
     protected $fillable = [
-        'first_name',
-        'last_name',
+        'name',
+        'avatar',
         'about',
         'website_url',
         'twitter_url',
         'facebook_url',
         'instagram_url',
         'youtube_url',
-        'avatar',
         'username',
         'email',
-        'password',
-        'email_verified_at',
-        'points'
+        'password'
     ];
 
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
 
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    protected $casts = ['email_verified_at' => 'datetime'];
 
-    public function sendEmailVerificationNotification()
+    public function apiToken($forceUpdate = false)
     {
-        $this->notify(new \App\Notifications\Auth\VerifyEmail);
-    }
-
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new \App\Notifications\Auth\ResetPassword($token));
-    }
-
-    public function receivesBroadcastNotificationsOn()
-    {
-        return 'App.User.'.$this->id;
-    }
-
-    public function incrementPoint($point) {
-        $this->points = $this->points + $point;
-        return $this->save();
-    }
-
-    public function apiToken()
-    {
-        $token = $this->api_token;
-        if(!$token) {
-            $token = Str::random(80);
+        $token = Str::random(100);
+        if(!$this->api_token || $forceUpdate) {
             $this->timestamps = false;
-            $this->forceFill([ 'api_token' => $token ])->save();
+            $this->forceFill(['api_token' => $token])->save();
             $this->timestamps = true;
+        } else {
+            $token = $this->api_token;
         }
         return $token;
     }
 
-    public function name()
+    public function clearApiToken()
     {
-        if($this->last_name){
-            return $this->first_name . ' ' . $this->last_name;
+        $this->timestamps = false;
+        $this->forceFill(['api_token' => null])->save();
+        $this->timestamps = true;
+    }
+
+    public function avatarUrl($nulllable = false)
+    {
+        if($nulllable && !$this->avatar) {
+            return null;
         }
-        return $this->first_name;
+        return AvatarHelper::getUrl($this->avatar);
     }
 
-    public function avatarUrl()
+    public function sendMemberEmailVerify() : void
     {
-        return AvatarHelper::getAvatarUrl($this->avatar);
+        $this->notify(new VerifyEmailNotification);
     }
 
-    public function imageUrl()
+    public function generateRemeberPasswordToken() : string
     {
-        return AvatarHelper::getAvatarUrl($this->avatar);
+        return Password::broker()->createToken($this);
     }
 
-    public function requestMinitutor()
+    public function sendMemberEmailResetPassword() : void
     {
-        return $this->hasOne(RequestMinitutor::class);
-    }
-
-    public function activities()
-    {
-        return $this->hasMany(Activity::class);
-    }
-
-    public function minitutor()
-    {
-        return $this->hasOne(Minitutor::class);
-    }
-
-    public function requestPosts()
-    {
-        return $this->hasMany(RequestPost::class);
-    }
-
-    public function posts()
-    {
-        return $this->hasMany(Post::class);
-    }
-
-    public function comments()
-    {
-        return $this->hasMany(PostComment::class);
-    }
-
-    public function postComments()
-    {
-        return $this->hasManyThrough(PostComment::class, Post::class);
-    }
-
-    public function postReviews()
-    {
-        return $this->hasManyThrough(PostReview::class, Post::class);
-    }
-
-    public function articleCount()
-    {
-        return $this->posts()->where('draf', 0)->where('type', 'article')->count();
-    }
-
-    public function videoCount()
-    {
-        return $this->posts()->where('draf', 0)->where('type', 'video')->count();
+        $this->notify(new ResetPasswordNotification($this->generateRemeberPasswordToken()));
     }
 }

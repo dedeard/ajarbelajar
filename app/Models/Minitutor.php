@@ -3,12 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Overtrue\LaravelFollow\Traits\CanBeSubscribed;
 
 class Minitutor extends Model
 {
-    use CanBeSubscribed;
-
     protected $fillable = [
         'user_id',
         'active',
@@ -26,10 +23,5 @@ class Minitutor extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function posts()
-    {
-        return $this->hasMany(Post::class, 'user_id', 'user_id');
     }
 }
