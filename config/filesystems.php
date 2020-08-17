@@ -85,6 +85,12 @@ return [
             'visibility' => 'public',
         ],
 
+        'gcs_public' => [
+            'driver' => 'gcs',
+            'path_prefix' => env('GOOGLE_CLOUD_STORAGE_PATH_PREFIX') . 'public/',
+            'visibility' => 'public',
+        ],
+
     ],
 
     /*

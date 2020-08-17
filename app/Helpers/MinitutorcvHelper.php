@@ -26,7 +26,7 @@ class MinitutorcvHelper
 
     public static function getRequestUrl($name) : String
     {
-        return Storage::url(self::REQUEST_DIR . $name);
+        return Storage::temporaryUrl(self::REQUEST_DIR . $name, now()->addMinutes(5));
     }
 
     public static function moveToAccepted($name) : void
@@ -44,6 +44,6 @@ class MinitutorcvHelper
 
     public static function getAcceptedUrl($name) : String
     {
-        return Storage::url(self::ACCEPTED_DIR . $name);
+        return Storage::temporaryUrl(self::ACCEPTED_DIR . $name, now()->addMinutes(5));
     }
 }

@@ -26,14 +26,22 @@ class JoinMinitutorController extends Controller
         $user = $request->user();
         $ref = $this->getRef($user);
         $snap = $ref->getSnapshot();
-        if(!$snap->exists()) {
-            return response()->json(["message" => __("You haven't submitted your request to become a minitutor.")], 404);
+        if($snap->exists()) {
+            $data = $snap->getValue();
+            $data['cv'] = MinitutorcvHelper::getRequestUrl($data['cv']);
+            return response()->json($data, 200);
         }
+        return response()->json(["message" => __("You have submitted a request to become a minitutor.")], 403);
+    }
 
-        $data = $snap->getValue();
-        $data['cv'] = MinitutorcvHelper::getRequestUrl($data['cv']);
-
-        return response()->json((Array) $data, 200);
+    public function status(Request $request)
+    {
+        $user = $request->user();
+        $ref = $this->getRef($user);
+        $snap = $ref->getSnapshot();
+        $alowCreate = true;
+        if($snap->exists()) $alowCreate = false;
+        return response()->json(["allowCreate" => $alowCreate], 200);
     }
 
     public function store(Request $request)
