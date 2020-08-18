@@ -8,6 +8,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 class AvatarHelper
 {
+
     /**
      * Generate avatar
      *
@@ -22,7 +23,7 @@ class AvatarHelper
             $constraint->aspectRatio();
         });
 
-        Storage::put(config('image.avatar.dir') . $name, (string) $tmp->encode(config('image.avatar.format'), config('image.avatar.quality')));
+        Storage::disk('gcs_public')->put(config('image.avatar.dir') . $name, (string) $tmp->encode(config('image.avatar.format'), config('image.avatar.quality')));
         return $name;
     }
 
@@ -33,7 +34,7 @@ class AvatarHelper
     public static function getUrl($name)
     {
         if($name) {
-            return Storage::url(config('image.avatar.dir') . $name);
+            return Storage::disk('gcs_public')->url(config('image.avatar.dir') . $name);
         }
         return asset('img/placeholder/avatar.png');
     }
@@ -54,6 +55,6 @@ class AvatarHelper
     public static function destroy($name)
     {
         $name = config('image.avatar.dir') . $name;
-        if(Storage::exists($name)) Storage::delete($name);
+        if(Storage::disk('gcs_public')->exists($name)) Storage::disk('gcs_public')->delete($name);
     }
 }
