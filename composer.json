@@ -49,7 +49,7 @@
         "classmap": [
             "database/seeds",
             "database/factories",
-            "App/Helpers"
+            "app/Helpers"
         ]
     },
     "autoload-dev": {

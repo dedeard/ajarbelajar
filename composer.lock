@@ -1933,16 +1933,16 @@
         },
         {
             "name": "league/commonmark",
-            "version": "1.5.3",
+            "version": "1.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "2574454b97e4103dc4e36917bd783b25624aefcd"
+                "reference": "21819c989e69bab07e933866ad30c7e3f32984ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/2574454b97e4103dc4e36917bd783b25624aefcd",
-                "reference": "2574454b97e4103dc4e36917bd783b25624aefcd",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/21819c989e69bab07e933866ad30c7e3f32984ba",
+                "reference": "21819c989e69bab07e933866ad30c7e3f32984ba",
                 "shasum": ""
             },
             "require": {
@@ -2024,7 +2024,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-07-19T22:47:30+00:00"
+            "time": "2020-08-18T01:19:12+00:00"
         },
         {
             "name": "league/flysystem",
@@ -3573,16 +3573,16 @@
         },
         {
             "name": "spatie/laravel-permission",
-            "version": "3.13.0",
+            "version": "3.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-permission.git",
-                "reference": "49b8063fbb9ec52ebef98cc6ec527a80d8853141"
+                "reference": "72f9d2dc202323f2a535ca326b817ae55534ac2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/49b8063fbb9ec52ebef98cc6ec527a80d8853141",
-                "reference": "49b8063fbb9ec52ebef98cc6ec527a80d8853141",
+                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/72f9d2dc202323f2a535ca326b817ae55534ac2f",
+                "reference": "72f9d2dc202323f2a535ca326b817ae55534ac2f",
                 "shasum": ""
             },
             "require": {
@@ -3643,7 +3643,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2020-05-20T00:31:29+00:00"
+            "time": "2020-08-15T20:32:30+00:00"
         },
         {
             "name": "spatie/laravel-sluggable",
