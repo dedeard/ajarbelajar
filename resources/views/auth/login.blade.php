@@ -1,73 +1,106 @@
-@extends('layouts.app')
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="current-url" content="{{ url()->current() }}">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('icons/apple-icon-57x57.png') }}">
+  <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('icons/apple-icon-60x60.png') }}">
+  <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('icons/apple-icon-72x72.png') }}">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('icons/apple-icon-76x76.png') }}">
+  <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('icons/apple-icon-114x114.png') }}">
+  <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('icons/apple-icon-120x120.png') }}">
+  <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('icons/apple-icon-144x144.png') }}">
+  <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('icons/apple-icon-152x152.png') }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('icons/apple-icon-180x180.png') }}">
+  <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('icons/android-icon-192x192.png') }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('icons/favicon-32x32.png') }}">
+  <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('icons/favicon-96x96.png') }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('icons/favicon-16x16.png') }}">
+  <link rel="manifest" href="{{ asset('manifest.json') }}">
+  <meta name="msapplication-TileImage" content="{{ asset('icons/ms-icon-144x144.png') }}">
+  <meta name="msapplication-TileColor" content="#677ae4">
+  <meta name="theme-color" content="#677ae4">
+  <title>LOGIN | admin.ajarbelajar.com</title>
+  <!-- Fonts -->
+  <link rel='stylesheet' href='{{ asset('fonts/roboto/style.css') }}'>
+  <link rel='stylesheet' href='{{ asset('css/theme.css') }}'>
+  <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
+</head>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+<body class="ab-auth--layout bg-light p-0">
+  <header class="py-4 d-flex bg-white shadow-sm">
+    <a href="/" class="d-block m-auto">
+      <img src="{{ asset('img/logo/logo.svg') }}" height="40" alt="Logo Ajarbelajar" />
+    </a>
+  </header>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-5 col-md-8 mx-auto">
+        <div class="my-4"></div>
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <h2 class="text-uppercase text-center font-weight-bold text-secondary mb-3">
+              {{ __('Login') }}
+            </h2>
+            <form method="POST" action="{{ route('login') }}" class="row">
+              @csrf
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
+              <div class="col-12">
+                <div class="form-group">
+                  <input placeholder="Email" name="email" type="text"
+                    class="form-control @error('email') is-invalid @enderror" />
+                  @error('email')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
                 </div>
-            </div>
+              </div>
+
+              <div class="col-12">
+                <div class="form-group">
+                  <input placeholder="Kata Sandi" name="password" type="password"
+                    class="form-control @error('password') is-invalid @enderror" />
+                  @error('password')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="form-group">
+                  <div class="checkbox-custom checkbox-primary">
+                    <input type="checkbox" id="remember"
+                      {{ old('remember') ? 'checked' : '' }}
+                      name="remember">
+                    <label for="remember">Remember me</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 mt-3">
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary font-weight-bold btn-block btn--float">MASUK</button>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-@endsection
+  </div>
+  <footer class="ab-auth--footer bg-white border-top py-4">
+    <div class="container">
+      <div class="text-center font-weight-bold text-uppercase">
+        &copy; Ajarbelajar 2020
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

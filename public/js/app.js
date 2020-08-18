@@ -36627,10 +36627,10 @@ new Vue({
 
 /***/ }),
 
-/***/ "./resources/sass/app/app.scss":
-/*!*************************************!*\
-  !*** ./resources/sass/app/app.scss ***!
-  \*************************************/
+/***/ "./resources/sass/app.scss":
+/*!*********************************!*\
+  !*** ./resources/sass/app.scss ***!
+  \*********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -36638,10 +36638,10 @@ new Vue({
 
 /***/ }),
 
-/***/ "./resources/sass/auth/auth.scss":
-/*!***************************************!*\
-  !*** ./resources/sass/auth/auth.scss ***!
-  \***************************************/
+/***/ "./resources/sass/auth.scss":
+/*!**********************************!*\
+  !*** ./resources/sass/auth.scss ***!
+  \**********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -36661,16 +36661,16 @@ new Vue({
 /***/ }),
 
 /***/ 0:
-/*!*****************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/theme.scss ./resources/sass/app/app.scss ./resources/sass/auth/auth.scss ***!
-  \*****************************************************************************************************************************/
+/*!********************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/theme.scss ./resources/sass/app.scss ./resources/sass/auth.scss ***!
+  \********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /home/dede/project/ab-laravel/resources/js/app.js */"./resources/js/app.js");
 __webpack_require__(/*! /home/dede/project/ab-laravel/resources/sass/theme.scss */"./resources/sass/theme.scss");
-__webpack_require__(/*! /home/dede/project/ab-laravel/resources/sass/app/app.scss */"./resources/sass/app/app.scss");
-module.exports = __webpack_require__(/*! /home/dede/project/ab-laravel/resources/sass/auth/auth.scss */"./resources/sass/auth/auth.scss");
+__webpack_require__(/*! /home/dede/project/ab-laravel/resources/sass/app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! /home/dede/project/ab-laravel/resources/sass/auth.scss */"./resources/sass/auth.scss");
 
 
 /***/ })
