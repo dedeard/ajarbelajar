@@ -6,7 +6,7 @@
       <div class="panel-heading">
         <h3 class="panel-title">MINITUTORS</h3>
         <div class="panel-actions">
-          <a href="#" class="btn btn-sm btn-danger">Requested</a>
+        <a href="{{ route('minitutors.requests') }}" class="btn btn-sm btn-danger">Requested</a>
         </div>
       </div>
       <div class="panel-body">

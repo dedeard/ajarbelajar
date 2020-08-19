@@ -16,6 +16,10 @@ Route::resource('users', 'UsersController');
 // manage minitutor
 Route::prefix('minitutors')->as('minitutors.')->group(function(){
     Route::get('{id}/active-toggle', 'MinitutorsController@activeToggle')->name('active.toggle');
+    Route::get('requests', 'MinitutorsController@requests')->name('requests');
+    Route::get('request/{id}', 'MinitutorsController@showRequest')->name('request.show');
+    Route::put('request/{id}/accept', 'MinitutorsController@acceptRequest')->name('request.accept');
+    Route::put('request/{id}/reject', 'MinitutorsController@rejectRequest')->name('request.reject');
 });
 Route::resource('minitutors', 'MinitutorsController')->except(['create', 'store', 'edit']);
 
