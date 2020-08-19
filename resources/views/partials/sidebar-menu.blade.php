@@ -7,7 +7,14 @@ $linkGroups = [
       'is' => 'roles*',
       'icon' => 'wb-lock',
       'can' => 'manage role',
-    ]
+    ],
+    [
+      'name' => 'Permission',
+      'route' => 'permissions.index',
+      'is' => 'permissions*',
+      'icon' => 'wb-lock',
+      'can' => 'manage permission',
+    ],
   ]
 ];
 @endphp
