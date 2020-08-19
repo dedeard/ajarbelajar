@@ -4,7 +4,7 @@
   <div class="container-fluid">
     <div class="panel panel-bordered">
       <div class="panel-heading">
-        <h3 class="panel-title">ROLES</h3>
+        <h3 class="panel-title">USERS</h3>
         <div class="panel-actions">
           <a href="{{ route('users.create') }}" class="btn btn-sm btn-primary">Create</a>
         </div>
