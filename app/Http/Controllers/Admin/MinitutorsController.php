@@ -20,8 +20,7 @@ class MinitutorsController extends Controller
         if (!empty($request->input('search'))) {
             $search = '%' . $request->input('search') . '%';
             $minitutors = Minitutor::whereHas('user', function ($q) use ($search) {
-                return $q->where('first_name', 'like', $search)
-                    ->orWhere('last_name', 'like', $search)
+                return $q->where('name', 'like', $search)
                     ->orWhere('username', 'like', $search)
                     ->orWhere('email', 'like', $search);
             })->orderBy('id', 'desc');

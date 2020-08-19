@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Helpers\AvatarHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
+use App\Http\Resources\AuthResource;
 use App\Rules\Username;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -19,7 +19,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        return response()->json(UserResource::make($user), 200);
+        return response()->json(AuthResource::make($user), 200);
     }
 
     public function updateAvatar(Request $request)
@@ -29,7 +29,7 @@ class UserController extends Controller
         $avatar = AvatarHelper::generate($data['avatar'], $user->avatar);
         $user->avatar = $avatar;
         $user->save();
-        return response()->json(UserResource::make($user), 200);
+        return response()->json(AuthResource::make($user), 200);
     }
 
     public function update(Request $request)
@@ -66,6 +66,6 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return response()->json(UserResource::make($user), 200);
+        return response()->json(AuthResource::make($user), 200);
     }
 }

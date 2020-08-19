@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
+use App\Http\Resources\AuthResource;
 use App\Models\User;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\VerifiesEmails;
@@ -26,7 +26,7 @@ class VerificationController extends Controller
             if (!$request->user()->hasVerifiedEmail()) {
                 $request->user()->markEmailAsVerified();
                 event(new Verified(User::find($request->route('id'))));
-                return response()->json(UserResource::make($request->user()), 200);
+                return response()->json(AuthResource::make($request->user()), 200);
             } else {
                 return response()->json(['message' => __('Your Email Address has previously been verified.')], 422);
             }

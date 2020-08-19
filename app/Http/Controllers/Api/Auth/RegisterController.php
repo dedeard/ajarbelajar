@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
+use App\Http\Resources\AuthResource;
 use App\Models\User;
 use App\Rules\Username;
 use Illuminate\Http\Request;
@@ -39,6 +39,6 @@ class RegisterController extends Controller
 
         $user->sendMemberEmailVerify();
 
-        return response()->json(UserResource::make($user), 200);
+        return response()->json(AuthResource::make($user), 200);
     }
 }

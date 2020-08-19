@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
+use App\Http\Resources\AuthResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +19,7 @@ class LoginController extends Controller
             'username' => 'string',
         ]);
         if (Auth::attempt([$identity => $data[$identity], 'password' => $data['password']])) {
-            return response()->json(UserResource::make(Auth::user()), 200);
+            return response()->json(AuthResource::make(Auth::user()), 200);
         }
         return response()->json(['message' => __('auth.failed')], 401);
     }
