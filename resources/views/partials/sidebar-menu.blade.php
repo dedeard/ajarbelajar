@@ -2,6 +2,22 @@
 $linkGroups = [
   [
     [
+      'name' => 'User',
+      'route' => 'users.index',
+      'is' => 'users*',
+      'icon' => 'wb-users',
+      'can' => 'manage user',
+    ],
+    [
+      'name' => 'Minitutor',
+      'route' => 'minitutors.index',
+      'is' => 'minitutors*',
+      'icon' => 'wb-user-circle',
+      'can' => 'manage minitutor',
+    ]
+  ],
+  [
+    [
       'name' => 'Role',
       'route' => 'roles.index',
       'is' => 'roles*',

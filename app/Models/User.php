@@ -54,6 +54,11 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->timestamps = true;
     }
 
+    public function minitutor()
+    {
+        return $this->hasOne(Minitutor::class);
+    }
+
     public function avatarUrl($nulllable = false)
     {
         if($nulllable && !$this->avatar) {

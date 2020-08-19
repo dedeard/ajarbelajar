@@ -82,7 +82,6 @@ return [
             'bucket' => env('FB_PROJECT_ID') . 'appspot.com',
             'path_prefix' => env('GOOGLE_CLOUD_STORAGE_PATH_PREFIX'),
             'storage_api_uri' => 'https://storage.googleapis.com/' . env('FB_PROJECT_ID') . '.appspot.com/',
-            'visibility' => 'public',
         ],
 
         'gcs_public' => [
