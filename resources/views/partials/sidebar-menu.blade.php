@@ -2,6 +2,13 @@
 $linkGroups = [
   [
     [
+      'name' => 'Categories',
+      'route' => 'categories.index',
+      'is' => 'categories*',
+      'icon' => 'wb-list',
+      'can' => 'manage category'
+    ],
+    [
       'name' => 'User',
       'route' => 'users.index',
       'is' => 'users*',

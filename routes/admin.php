@@ -6,6 +6,9 @@ Route::get('/', function(){
     return view('dashboard');
 })->name('dashboard');
 
+// manage category
+Route::resource('categories', 'CategoriesController')->except(['show']);
+
 // manage user
 Route::prefix('users/{id}/minitutor')->as('users.minitutor.')->group(function(){
     Route::get('/create', 'UsersController@createMinitutor')->name('create');
