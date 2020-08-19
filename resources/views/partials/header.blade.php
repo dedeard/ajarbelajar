@@ -3,7 +3,7 @@
     <div class="app-header__left">
       <div class="container-fluid">
         <div class="wrapper">
-          <a href="{{ route('admin.dashboard') }}" class="brand">
+          <a href="{{ route('dashboard') }}" class="brand">
             <span class="first">AB</span>
             <span class="last">ADMIN</span>
           </a>
