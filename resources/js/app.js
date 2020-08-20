@@ -8,6 +8,7 @@ window.Pusher = require('pusher-js')
 window.PerfectScrollbar = require('perfect-scrollbar').default
 window.Swal = require('sweetalert2/dist/sweetalert2')
 window.$ = window.jQuery = require('jquery')
+window.autoComplete = require("@tarekraafat/autocomplete.js/dist/js/autoComplete")
 
 /**
  * Setup laravel echo

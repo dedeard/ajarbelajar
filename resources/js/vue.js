@@ -8,8 +8,10 @@ import DeleteConfirm from './directives/delete-confirm'
 
 import StarRating from 'vue-star-rating'
 import AvatarChooser from './components/avatar-chooser'
+import HeroChooser from './components/HeroChooser'
 import AppSidebar from './components/AppSidebar'
 import AppAlert from './components/AppAlert'
+import CategoryAutocomplete from './components/CategoryAutocomplete'
 
 
 Vue.use(VLazyImagePlugin)
@@ -24,8 +26,10 @@ Vue.directive('delete-confirm', DeleteConfirm)
 
 Vue.component('StarRating', StarRating)
 Vue.component('AvatarChooser', AvatarChooser)
+Vue.component('HeroChooser', HeroChooser)
 Vue.component('AppSidebar', AppSidebar)
 Vue.component('AppAlert', AppAlert)
+Vue.component('CategoryAutocomplete', CategoryAutocomplete)
 
 
 new Vue({

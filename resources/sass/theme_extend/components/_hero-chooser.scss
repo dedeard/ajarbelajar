@@ -1,0 +1,11 @@
+.hero-chooser {
+  display: block;
+  width: 100%;
+  padding: 5px;
+  border: 1px dashed $border-color;
+
+  img {
+      display: block;
+      width: 100%;
+  }
+}

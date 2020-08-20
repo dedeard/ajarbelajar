@@ -25334,6 +25334,51 @@ ul.panel-actions > li:first-child {
   line-height: 1;
 }
 
+.hero-chooser {
+  display: block;
+  width: 100%;
+  padding: 5px;
+  border: 1px dashed #e4eaec;
+}
+.hero-chooser img {
+  display: block;
+  width: 100%;
+}
+
+.category-autocomplete {
+  position: relative;
+}
+.category-autocomplete .form-control:focus + ul:not(:empty) {
+  display: block;
+}
+.category-autocomplete ul {
+  display: none;
+  position: absolute;
+  z-index: 5;
+  padding: 0.4763333333rem 0;
+  margin: 0;
+  width: 100%;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  list-style: none;
+  border-radius: 0.215rem;
+  background-color: #fff;
+}
+.category-autocomplete ul li {
+  display: block;
+  padding: 0.4763333333rem 1.429rem;
+  line-height: 1;
+  font-size: 14px;
+  color: #a3afb7;
+  font-weight: 400;
+  cursor: pointer;
+}
+.category-autocomplete ul li:hover {
+  background-color: #f3f7f9;
+}
+.category-autocomplete ul li span {
+  color: #263238;
+}
+
 .m-0 {
   margin: 0 !important;
 }

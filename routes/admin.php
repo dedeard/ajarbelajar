@@ -6,6 +6,9 @@ Route::get('/', function(){
     return view('dashboard');
 })->name('dashboard');
 
+// manage video
+Route::resource('videos', 'VideosController')->except('show');
+
 // manage category
 Route::resource('categories', 'CategoriesController')->except(['show']);
 

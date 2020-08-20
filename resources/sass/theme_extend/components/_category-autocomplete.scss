@@ -1,0 +1,38 @@
+.category-autocomplete {
+  position: relative;
+
+  .form-control {
+    &:focus + ul:not(:empty) {
+      display: block;
+    }
+  }
+  ul {
+    display: none;
+    position: absolute;
+    z-index: 5;
+    padding: ($spacer / 3) 0;
+    margin: 0;
+    width: 100%;
+    box-shadow: $box-shadow;
+    list-style: none;
+    border-radius: $border-radius;
+    background-color: $white;
+    li {
+      display: block;
+      padding: ($spacer / 3) $spacer;
+      line-height: 1;
+      font-size: 14px;
+      color: $gray-400;
+      font-weight: $font-weight-medium;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $gray-100;
+      }
+
+      span {
+        color: $gray-800;
+      }
+    }
+  }
+}

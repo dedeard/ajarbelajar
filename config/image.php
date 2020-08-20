@@ -27,10 +27,12 @@ return [
 
     'hero' => [
         'format' => 'jpg',
-        'extension' => 'jpeg',
-        'size' => [
+        'extension' => '.jpeg',
+        'dir' => 'hero/',
+        'sizes' => [
             'large' => [ 'width' => 1024, 'height' => 576, 'quality' => 75 ],
-            'thumb' => [ 'width' => 320, 'height' => 180, 'quality' => 75 ]
+            'thumb' => [ 'width' => 320, 'height' => 180, 'quality' => 75 ],
+            'small' => [ 'width' => 64, 'height' => 36, 'quality' => 85 ],
         ]
     ]
 ];
