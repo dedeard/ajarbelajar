@@ -136,7 +136,6 @@ class VideosController extends Controller
     {
         $playlist = Playlist::findOrFail($id);
         foreach($playlist->videos as $video) {
-            VideoHelper::destroy($video->name);
             $video->delete();
         }
         HeroHelper::destroy($playlist->hero);

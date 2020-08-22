@@ -39,6 +39,6 @@ return [
     'article' => [
         'format' => 'jpg',
         'extension' => '.jpeg',
-        'dir' => 'article/image/'
+        'dir' => 'images/'
     ]
 ];

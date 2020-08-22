@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Api\Minitutor;
 
 use App\Helpers\CategoryHelper;
 use App\Helpers\HeroHelper;
-use App\Helpers\VideoHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RequestPlaylistResorurce;
 use App\Models\RequestPlaylist;
-use App\Models\RequestVideo;
+use App\Models\Video;
 use Illuminate\Http\Request;
 
 class RequestVideosController extends Controller
@@ -85,11 +84,11 @@ class RequestVideosController extends Controller
             'file' => 'required|mimes:mp4,mov,avi,fly|max:250000'
         ]);
 
-        $name = VideoHelper::generate($data['file']);
+        $name = Video::upload($data['file']);
         $last = $playlist->videos()->orderBy('index', 'desc')->first();
         $index = 1;
         if($last) $index = $last->index + 1;
-        $video = new RequestVideo([
+        $video = new Video([
             'name' => $name,
             'index' => $index,
         ]);
@@ -107,7 +106,6 @@ class RequestVideosController extends Controller
         $playlist = $minitutor->requestPlaylists()->findOrFail($playlist_id);
 
         $video = $playlist->videos()->findOrFail($video_id);
-        VideoHelper::destroy($video->name);
         $video->delete();
         return response()->json([], 200);
     }
@@ -117,7 +115,6 @@ class RequestVideosController extends Controller
         $minitutor = $request->user()->minitutor;
         $playlist = $minitutor->requestPlaylists()->findOrFail($id);
         foreach($playlist->videos as $video) {
-            VideoHelper::destroy($video->name);
             $video->delete();
         }
         HeroHelper::destroy($playlist->hero);

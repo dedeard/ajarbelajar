@@ -150,9 +150,11 @@ class EditorjsHelper
         $ext = config('image.article.extension');
         foreach ($images as $image) {
             $exists = false;
-            foreach ($body->blocks as $block) {
-                if ($block->type === 'image') {
-                    if ($block->data->file->url === "/storage/{$dir}{$image->name}") $exists = true;
+            if(!!(array) $body) {
+                foreach ($body->blocks as $block) {
+                    if ($block->type === 'image') {
+                        if ($block->data->file->url === "/storage/{$dir}{$image->name}") $exists = true;
+                    }
                 }
             }
             if (!$exists) {

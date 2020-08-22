@@ -15,8 +15,7 @@ class CreateVideosTable extends Migration
     {
         Schema::create('videos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('playlist_id')->unsigned();
-            $table->foreign('playlist_id')->references('id')->on('playlists')->onDelete('cascade');
+            $table->morphs('videoable');
             $table->string('name')->unique();
             $table->integer('index');
             $table->timestamps();

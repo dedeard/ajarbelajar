@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Helpers\HeroHelper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -35,9 +35,9 @@ class Playlist extends Model
         return $this->belongsTo(Minitutor::class);
     }
 
-    public function videos() : HasMany
+    public function videos() : MorphMany
     {
-        return $this->hasMany(Video::class);
+        return $this->morphMany(Video::class, 'videoable');
     }
 
     public function category() : BelongsTo

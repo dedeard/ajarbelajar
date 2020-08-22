@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Helpers\HeroHelper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -36,9 +36,9 @@ class Article extends Model
         return $this->belongsTo(Minitutor::class);
     }
 
-    public function images() : HasMany
+    public function images() : MorphMany
     {
-        return $this->hasMany(Image::class);
+        return $this->morphMany(Image::class, 'imageable');
     }
 
     public function user() : BelongsTo
