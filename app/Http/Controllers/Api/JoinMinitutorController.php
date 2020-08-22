@@ -11,7 +11,7 @@ class JoinMinitutorController extends Controller
 {
     public function __construct(Database $database)
     {
-        $this->middleware(['auth:api', 'is.not.minitutor']);
+        $this->middleware(['auth:api', 'not.minitutor']);
         $this->database = $database;
     }
 
