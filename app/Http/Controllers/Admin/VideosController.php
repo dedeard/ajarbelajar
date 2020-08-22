@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Minitutor;
 use App\Models\Playlist;
+use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
 
 class VideosController extends Controller
@@ -18,9 +19,18 @@ class VideosController extends Controller
         $this->middleware('can:manage video');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        //
+        SEOMeta::setTitle('Daftar Video');
+        if (!empty($request->input('search'))) {
+            $search = '%' . $request->input('search') . '%';
+            $videos = Playlist::where('title', 'like', $search);
+            $videos->orWhere('description', 'like', $search);
+        } else {
+            $videos = Playlist::query();
+        }
+        $videos = $videos->orderBy('id', 'desc')->paginate(20)->appends(['search' => $request->input('search')]);
+        return view('videos.index', ['playlists' => $videos]);
     }
 
     public function create(Request $request)

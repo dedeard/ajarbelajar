@@ -11,7 +11,7 @@ class HeroHelper
 
     public static function disk()
     {
-        return Storage::disk('gcs_public');
+        return Storage::disk('public');
     }
 
     public static function generate($img, $oldName = null)

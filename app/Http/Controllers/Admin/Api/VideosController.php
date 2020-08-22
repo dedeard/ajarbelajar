@@ -51,4 +51,28 @@ class VideosController extends Controller
         $video->delete();
         return response()->json([], 200);
     }
+
+    public function upload(Request $request, $id)
+    {
+        $playlist = Playlist::findOrFail($id);
+        $data = $request->validate([
+            'file' => 'required|mimes:mp4,mov,avi,fly|max:250000'
+        ]);
+        $name = VideoHelper::generate($data['file']);
+        $last = $playlist->videos()->orderBy('index', 'desc')->first();
+        $index = 1;
+        if($last) {
+            $index = $last->index + 1;
+        }
+        $video = new Video([
+            'name' => $name,
+            'index' => $index,
+        ]);
+        $playlist->videos()->save($video);
+        return response()->json([
+            'id' => $video->id,
+            'url' => $video->getUrl(),
+            'index' => $video->index,
+        ], 200);
+    }
 }

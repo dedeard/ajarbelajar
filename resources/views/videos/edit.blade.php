@@ -18,7 +18,7 @@
         <div class="panel-heading">
           <h3 class="panel-title">Daftar video</h3>
         </div>
-        <video-order :videos="{{ json_encode($videos) }}" upload-url="http://192.168.1.7:5000/api/admin/upload-video?id={{$playlist->id}}"></video-order>
+        <video-order :videos="{{ json_encode($videos) }}" upload-url="{{ route('api.admin.videos.upload', $playlist->id) }}"></video-order>
       </div>
     </div>
     <div class="col-lg-4">
