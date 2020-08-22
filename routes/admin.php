@@ -6,7 +6,9 @@ Route::get('/', function(){
     return view('dashboard');
 })->name('dashboard');
 
+// create new post
 // manage video
+Route::get('videos/minitutors', 'VideosController@minitutors')->name('videos.minitutors');
 Route::resource('videos', 'VideosController')->except('show');
 
 // manage category

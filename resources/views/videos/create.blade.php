@@ -5,6 +5,9 @@
     <div class="panel panel-bordered">
       <div class="panel-heading">
         <h3 class="panel-title">CREATE VIDEO</h3>
+        <div class="panel-actions">
+          <a href="{{ route('videos.minitutors') }}" class="btn btn-sm btn-primary">Back</a>
+        </div>
       </div>
       <div class="panel-body">
         <form action="{{ route('videos.store', ['id' => $minitutor->id]) }}" method="post">

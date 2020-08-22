@@ -5,6 +5,9 @@
     <div class="panel panel-bordered">
       <div class="panel-heading">
         <h3 class="panel-title">DAFTAR VIDEO</h3>
+        <div class="panel-actions">
+          <a href="{{ route('videos.minitutors') }}" class="btn btn-sm btn-primary">Buat Video</a>
+        </div>
       </div>
       <div class="panel-body">
         <div class="form-group">

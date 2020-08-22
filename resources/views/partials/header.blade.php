@@ -15,10 +15,10 @@
         <div class="wrapper">
           <div class="quick-actions">
             <ul class="nav">
-              {{-- <li class="nav-item">
-                <a class="active nav-link" href="javascript:;">New Video</a>
-              </li>
               <li class="nav-item">
+                <a class="active nav-link" href="{{ route('videos.minitutors') }}">New Video</a>
+              </li>
+              {{-- <li class="nav-item">
                 <a class="nav-link" href="javascript:;">Profile</a>
               </li>
               <li class="nav-item">

@@ -21,6 +21,13 @@ $linkGroups = [
       'is' => 'minitutors*',
       'icon' => 'wb-user-circle',
       'can' => 'manage minitutor',
+    ],
+    [
+      'name' => 'Videos',
+      'route' => 'videos.index',
+      'is' => 'videos*',
+      'icon' => 'wb-video',
+      'can' => 'manage video',
     ]
   ],
   [

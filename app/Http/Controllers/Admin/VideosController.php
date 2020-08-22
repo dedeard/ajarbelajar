@@ -33,6 +33,23 @@ class VideosController extends Controller
         return view('videos.index', ['playlists' => $videos]);
     }
 
+    public function minitutors(Request $request)
+    {
+        SEOMeta::setTitle('Pilih Minitutor untuk video baru');
+        if (!empty($request->input('search'))) {
+            $search = '%' . $request->input('search') . '%';
+            $minitutors = Minitutor::whereHas('user', function ($q) use ($search) {
+                return $q->where('name', 'like', $search)
+                    ->orWhere('username', 'like', $search)
+                    ->orWhere('email', 'like', $search);
+            })->where('active', true)->orderBy('id', 'desc');
+        } else {
+            $minitutors = Minitutor::where('active', true)->orderBy('id', 'desc');
+        }
+        $minitutors = $minitutors->paginate(20)->appends(['search' => $request->input('search')]);
+        return view('videos.minitutors', ['minitutors' => $minitutors]);
+    }
+
     public function create(Request $request)
     {
         $minitutor = Minitutor::where('active', true)->findOrFail($request->input('id') ?? 0);
