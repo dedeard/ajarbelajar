@@ -68,4 +68,21 @@ class UserController extends Controller
 
         return response()->json(AuthResource::make($user), 200);
     }
+
+    public function updateMinitutor(Request $request)
+    {
+        $user = $request->user();
+        $data = $request->validate([
+            'last_education' => 'required|string|max:255',
+            'university' => 'required|string|max:255',
+            'city_and_country_of_study' => 'required|string|max:255',
+            'majors' => 'required|string|max:255',
+            'interest_talent' => 'required|string|max:255',
+            'contact' => 'required|string|max:255',
+            'reason' => 'required|string|max:255',
+            'expectation' => 'required|string|max:255',
+        ]);
+        $user->minitutor->update($data);
+        return response()->json(AuthResource::make($user), 200);
+    }
 }
