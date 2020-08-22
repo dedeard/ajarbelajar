@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class IsNotMinitutorMiddleware
+class NotMinitutorMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class IsNotMinitutorMiddleware
     public function handle($request, Closure $next)
     {
         if ($request->user()->minitutor) {
-            return response()->json(['message' => __('You are a MiniTutor.')], 403);
+            return abort(403);
         }
         return $next($request);
     }
