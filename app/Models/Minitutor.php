@@ -31,4 +31,9 @@ class Minitutor extends Model
     {
         return $this->hasMany(Video::class);
     }
+
+    public function articles() : HasMany
+    {
+        return $this->hasMany(Article::class);
+    }
 }

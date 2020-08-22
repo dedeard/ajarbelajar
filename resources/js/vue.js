@@ -13,6 +13,7 @@ import AppSidebar from './components/AppSidebar'
 import AppAlert from './components/AppAlert'
 import CategoryAutocomplete from './components/CategoryAutocomplete'
 import VideoOrder from './components/VideoOrder'
+import AppEditorjs from './components/AppEditorjs'
 
 
 Vue.use(VLazyImagePlugin)
@@ -32,6 +33,7 @@ Vue.component('AppSidebar', AppSidebar)
 Vue.component('AppAlert', AppAlert)
 Vue.component('CategoryAutocomplete', CategoryAutocomplete)
 Vue.component('VideoOrder', VideoOrder)
+Vue.component('AppEditorjs', AppEditorjs)
 
 
 new Vue({

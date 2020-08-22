@@ -18,6 +18,9 @@
               <li class="nav-item">
                 <a class="active nav-link" href="{{ route('videos.minitutors') }}">New Video</a>
               </li>
+              <li class="nav-item">
+                <a class="active nav-link" href="{{ route('articles.minitutors') }}">New Artikel</a>
+              </li>
               {{-- <li class="nav-item">
                 <a class="nav-link" href="javascript:;">Profile</a>
               </li>

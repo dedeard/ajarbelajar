@@ -6,7 +6,10 @@ Route::get('/', function(){
     return view('dashboard');
 })->name('dashboard');
 
-// create new post
+// manage article
+Route::get('articles/minitutors', 'ArticlesController@minitutors')->name('articles.minitutors');
+Route::resource('articles', 'ArticlesController')->except('show');
+
 // manage video
 Route::get('videos/minitutors', 'VideosController@minitutors')->name('videos.minitutors');
 Route::resource('videos', 'VideosController')->except('show');
