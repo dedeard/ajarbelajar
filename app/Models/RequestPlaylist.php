@@ -6,29 +6,17 @@ use App\Helpers\HeroHelper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
 
-class Playlist extends Model
+class RequestPlaylist extends Model
 {
-    use HasSlug;
-
     protected $fillable = [
         'user_id',
         'category_id',
-        'draf',
+        'requested_at',
         'title',
-        'slug',
         'hero',
         'description'
     ];
-
-    public function getSlugOptions() : SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('title')
-            ->saveSlugsTo('slug');
-    }
 
     public function minitutor() : BelongsTo
     {
@@ -37,7 +25,7 @@ class Playlist extends Model
 
     public function videos() : HasMany
     {
-        return $this->hasMany(Video::class);
+        return $this->hasMany(RequestVideo::class);
     }
 
     public function category() : BelongsTo

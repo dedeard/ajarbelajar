@@ -29,11 +29,16 @@ class Minitutor extends Model
 
     public function playlists() : HasMany
     {
-        return $this->hasMany(Video::class);
+        return $this->hasMany(Playlist::class);
     }
 
     public function articles() : HasMany
     {
         return $this->hasMany(Article::class);
+    }
+
+    public function requestPlaylists() : HasMany
+    {
+        return $this->hasMany(RequestPlaylist::class);
     }
 }
