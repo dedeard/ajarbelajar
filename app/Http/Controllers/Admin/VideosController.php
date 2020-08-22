@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\CategoryHelper;
 use App\Helpers\HeroHelper;
+use App\Helpers\VideoHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Minitutor;
@@ -47,7 +48,17 @@ class VideosController extends Controller
     {
         $playlist = Playlist::findOrFail($id);
         $categories = Category::all();
-        return view('videos.edit', ['playlist' => $playlist, 'categories' => $categories]);
+        $videos = [];
+
+        foreach($playlist->videos()->orderBy('index', 'asc')->get() as $video) {
+            array_push($videos, [
+                'id' => $video['id'],
+                'index' => $video['index'],
+                'url' => $video->getUrl(),
+            ]);
+        }
+
+        return view('videos.edit', ['playlist' => $playlist, 'categories' => $categories, 'videos' => $videos]);
     }
 
     public function update(Request $request, $id)
@@ -77,11 +88,32 @@ class VideosController extends Controller
 
         $playlist->update($data);
 
+        if($request->input('index')) {
+            $index = explode('|', $request->input('index'));
+            if(count($index) === $playlist->videos()->count()) {
+                $x = 1;
+                foreach($index as $id) {
+                    $video = $playlist->videos()->find($id);
+                    if($video) {
+                        $video->update(['index' => $x]);
+                        $x = $x+1;
+                    }
+                }
+            }
+        }
+
         return redirect()->back()->withSuccess('Video berhasil di update.');
     }
 
     public function destroy($id)
     {
-        //
+        $playlist = Playlist::findOrFail($id);
+        foreach($playlist->videos as $video) {
+            VideoHelper::destroy($video->name);
+            $video->delete();
+        }
+        HeroHelper::destroy($playlist->hero);
+        $playlist->delete();
+        return redirect()->route('videos.index')->withSuccess('Video berhasil dihapus.');
     }
 }

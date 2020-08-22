@@ -25,14 +25,17 @@
         "form-data": "^3.0.0",
         "jquery": "^3.5.1",
         "laravel-echo": "^1.8.1",
+        "mux.js": "^5.6.4",
         "perfect-scrollbar": "^1.5.0",
         "popper.js": "^1.16.1",
         "pusher-js": "^7.0.0",
+        "sortablejs": "^1.10.2",
         "sweetalert2": "^9.17.1",
         "swiper": "^6.1.1",
         "v-lazy-image": "^1.4.0",
         "vue": "^2.6.11",
         "vue-star-rating": "^1.6.1",
-        "vue-sticky-directive": "^0.0.10"
+        "vue-sticky-directive": "^0.0.10",
+        "vuedraggable": "^2.24.1"
     }
 }

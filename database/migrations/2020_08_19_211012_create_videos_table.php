@@ -18,7 +18,7 @@ class CreateVideosTable extends Migration
             $table->integer('playlist_id')->unsigned();
             $table->foreign('playlist_id')->references('id')->on('playlists')->onDelete('cascade');
             $table->string('name')->unique();
-            $table->string('status')->nullable();
+            $table->integer('index');
             $table->timestamps();
         });
     }

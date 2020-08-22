@@ -1,16 +1,24 @@
 @extends('layouts.app')
 
+@section('style:before')
+<link href="https://unpkg.com/video.js/dist/video-js.min.css" rel="stylesheet">
+<link href="https://unpkg.com/@videojs/themes@1/dist/forest/index.css" rel="stylesheet">
+@endsection
+@section('script:before')
+<script src="https://vjs.zencdn.net/7.8.4/video.js"></script>
+@endsection
+
 @section('content')
 <div class="container-fluid">
   <form class="row" method="post" enctype="multipart/form-data" action="{{ route('videos.update', $playlist->id) }}">
     @csrf
     @method('PUT')
     <div class="col-lg-8">
-      <div class="panel">
+      <div class="panel panel-bordered">
         <div class="panel-heading">
           <h3 class="panel-title">Daftar video</h3>
         </div>
-        <div class="panel-body"></div>
+        <video-order :videos="{{ json_encode($videos) }}" upload-url="http://192.168.1.7:5000/api/admin/upload-video?id={{$playlist->id}}"></video-order>
       </div>
     </div>
     <div class="col-lg-4">

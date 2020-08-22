@@ -12,6 +12,7 @@ import HeroChooser from './components/HeroChooser'
 import AppSidebar from './components/AppSidebar'
 import AppAlert from './components/AppAlert'
 import CategoryAutocomplete from './components/CategoryAutocomplete'
+import VideoOrder from './components/VideoOrder'
 
 
 Vue.use(VLazyImagePlugin)
@@ -30,6 +31,7 @@ Vue.component('HeroChooser', HeroChooser)
 Vue.component('AppSidebar', AppSidebar)
 Vue.component('AppAlert', AppAlert)
 Vue.component('CategoryAutocomplete', CategoryAutocomplete)
+Vue.component('VideoOrder', VideoOrder)
 
 
 new Vue({

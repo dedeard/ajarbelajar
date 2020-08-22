@@ -2,41 +2,25 @@
 
 namespace App\Models;
 
+use App\Helpers\VideoHelper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
 
 class Video extends Model
 {
-
-    use HasSlug;
-
     protected $fillable = [
-        'user_id',
-        'category_id',
-        'draf',
-        'title',
-        'slug',
-        'video',
-        'hero',
-        'description'
+        'playlist_id',
+        'name',
+        'index'
     ];
 
-    public function getSlugOptions() : SlugOptions
+    public function playlist() : BelongsTo
     {
-        return SlugOptions::create()
-            ->generateSlugsFrom('title')
-            ->saveSlugsTo('slug');
+        return $this->belongsTo(Playlist::class);
     }
 
-    public function user() : BelongsTo
+    public function getUrl()
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function category() : BelongsTo
-    {
-        return $this->belongsTo(Category::class);
+        return VideoHelper::getUrl($this->name);
     }
 }
