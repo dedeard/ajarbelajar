@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\models\RequestArticle;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -40,5 +41,10 @@ class Minitutor extends Model
     public function requestPlaylists() : HasMany
     {
         return $this->hasMany(RequestPlaylist::class);
+    }
+
+    public function requestArticles() : HasMany
+    {
+        return $this->hasMany(RequestArticle::class);
     }
 }

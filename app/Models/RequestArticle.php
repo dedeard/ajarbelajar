@@ -1,34 +1,22 @@
 <?php
 
-namespace App\Models;
+namespace App\models;
 
 use App\Helpers\HeroHelper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
 
-class Article extends Model
+class RequestArticle extends Model
 {
-    use HasSlug;
-
     protected $fillable = [
         'category_id',
-        'draf',
+        'requested_at',
         'title',
-        'slug',
         'hero',
         'description',
-        'body'
+        'body',
     ];
-
-    public function getSlugOptions() : SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('title')
-            ->saveSlugsTo('slug');
-    }
 
     public function minitutor() : BelongsTo
     {

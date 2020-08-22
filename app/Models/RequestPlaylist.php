@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 class RequestPlaylist extends Model
 {
     protected $fillable = [
-        'user_id',
         'category_id',
         'requested_at',
         'title',
