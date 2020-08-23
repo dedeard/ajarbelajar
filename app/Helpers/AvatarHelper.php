@@ -2,59 +2,54 @@
 
 namespace App\Helpers;
 
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
 
-class AvatarHelper
+class AvatarHelper extends Helper
 {
 
     /**
-     * Generate avatar
-     *
+     * define constant variable.
      */
-    public static function generate($img, $oldName = null)
+    const FORMAT = 'jpg';
+    const EXT = '.jpeg';
+    const SIZE = 150;
+    const QUALITY = 80;
+    const DIR = 'avatar/';
+
+    /**
+     * Get Disk driver.
+     */
+    static function disk() : Filesystem
     {
-        $name = self::generateName();
+        return Storage::disk('public');
+    }
 
-        if($oldName) self::destroy($oldName);
+    /**
+     * Generate avatar name, upload new avatar delete old avatar.
+     */
+    static function generate($img, $oldName = null) : String
+    {
+        if($oldName && self::disk()->exists(self::DIR . $oldName)) {
+            self::disk()->delete(self::DIR . $oldName);
+        }
 
-        $tmp = Image::make($img)->fit(config('image.avatar.size'), config('image.avatar.size'), function ($constraint) {
+        $name = parent::uniqueName(self::EXT);
+        $tmp = Image::make($img)->fit(self::SIZE, self::SIZE, function ($constraint) {
             $constraint->aspectRatio();
         });
+        self::disk()->put(self::DIR . $name, (string) $tmp->encode(self::FORMAT, self::QUALITY));
 
-        Storage::put(config('image.avatar.dir') . $name, (string) $tmp->encode(config('image.avatar.format'), config('image.avatar.quality')));
         return $name;
     }
 
     /**
-     * Get the avatar url
-     *
+     * Get the avatar url.
      */
-    public static function getUrl($name)
+    static function getUrl($name) : String
     {
-        if($name) {
-            return Storage::url(config('image.avatar.dir') . $name);
-        }
+        if($name) return self::disk()->url(self::DIR . $name);
         return asset('img/placeholder/avatar.png');
-    }
-
-    /**
-     * Generate unique name
-     *
-     */
-    public static function generateName()
-    {
-        return now()->format('hisdmY') . Str::random(60) . '.' . config('image.avatar.extension');
-    }
-
-    /**
-     * Destroy the avatar
-     *
-     */
-    public static function destroy($name)
-    {
-        $name = config('image.avatar.dir') . $name;
-        if(Storage::exists($name)) Storage::delete($name);
     }
 }

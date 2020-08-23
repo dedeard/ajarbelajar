@@ -5,13 +5,13 @@ namespace App\Helpers;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
 
-class MinitutorcvHelper extends Helper
+class VideoHelper extends Helper
 {
 
     /**
      * define constant variable.
      */
-    const DIR = 'minitutor/cv/';
+    const DIR = 'videos/';
 
     /**
      * Get Disk driver.
@@ -24,28 +24,31 @@ class MinitutorcvHelper extends Helper
     /**
      * Generate name and upload.
      */
-    static function generate($file, $oldName = null) : String
+    static function upload($data) : String
     {
-        $name = parent::uniqueName('.' . $file->extension());
-        if($oldName) self::destroy($oldName);
-        self::disk()->put(self::DIR . $name, file_get_contents($file));
+        $name = parent::uniqueName('.' . $data->extension());
+        self::disk()->put(self::DIR . $name, file_get_contents($data));
         return $name;
     }
 
     /**
-     * Delete file.
+     * Delete video.
      */
     static function destroy($name) : void
     {
-        $name = self::DIR . $name;
-        if(self::disk()->exists($name)) self::disk()->delete($name);
+        if ($name && self::disk()->exists(self::DIR . $name)) {
+            self::disk()->delete(self::DIR . $name);
+        }
     }
 
     /**
-     * Get file url.
+     * Get video url.
      */
     static function getUrl($name) : String
     {
-        return self::disk()->url(self::DIR . $name);
+        if($name) {
+            return self::disk()->url(self::DIR . $name);
+        }
+        return '';
     }
 }

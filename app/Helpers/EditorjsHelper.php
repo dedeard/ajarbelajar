@@ -2,13 +2,96 @@
 
 namespace App\Helpers;
 
-use Illuminate\Support\Str;
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Storage;
 
-class EditorjsHelper
+class EditorjsHelper extends Helper
 {
-    public static function compile($data)
+
+    /**
+     * define constant variable.
+     */
+    const FORMAT = 'jpg';
+    const EXT = '.jpeg';
+    const DIR = 'images/';
+
+    /**
+     * Get Disk driver.
+     */
+    static function disk() : Filesystem
+    {
+        return Storage::disk('public');
+    }
+
+    /**
+     * Uploading the image and get name, relative url.
+     */
+    static function uploadImage($data) : Array
+    {
+        $format = self::FORMAT;
+        $dir = self::DIR;
+        $ext = self::EXT;
+        $name = parent::uniqueName($ext);
+        $dotName = "{$name}.dot{$ext}";
+
+        $tmp = Image::make($data)->resize(640, 640, function($constraint){
+            $constraint->aspectRatio();
+        });
+        self::disk()->put($dir . $name, (string) $tmp->encode($format, 80));
+
+        $tmp = Image::make($data)->resize(50, 50, function($constraint){
+            $constraint->aspectRatio();
+        });
+        self::disk()->put($dir . $dotName, (string) $tmp->encode($format, 75));
+
+        return ['name' => $name, "url" => "/storage/{$dir}{$name}"];
+    }
+
+    /**
+     * Deleting the image.
+     */
+    static function deleteImage($name) : void
+    {
+        $dir = self::DIR;
+        $ext = self::EXT;
+        $dotName = "{$name}.dot{$ext}";
+
+        if (self::disk()->exists($dir . $name)) {
+            self::disk()->delete($dir . $name);
+        }
+        if (self::disk()->exists($dir . $dotName)) {
+            self::disk()->delete($dir . $dotName);
+        }
+    }
+
+    /**
+     * Delete not used images.
+     */
+    static function cleanImage($data, $images)
+    {
+        $body = json_decode($data);
+        $dir = self::DIR;
+        foreach ($images as $image) {
+            $exists = false;
+            if(!!(array) $body) {
+                foreach ($body->blocks as $block) {
+                    if ($block->type === 'image') {
+                        if ($block->data->file->url === "/storage/{$dir}{$image->name}") $exists = true;
+                    }
+                }
+            }
+            if (!$exists) {
+                self::deleteImage($image->name);
+                $image->delete();
+            }
+        }
+    }
+
+    /**
+     * Compile editor.js Object to HTML.
+     */
+    static function compile($data) : String
     {
         if ($data) {
             $data = json_decode($data);
@@ -105,67 +188,5 @@ class EditorjsHelper
             return $html;
         }
         return "";
-    }
-
-    public static function generateName()
-    {
-        $ext = config('image.article.extension');
-        return now()->format('hisdmY') . Str::random(60) . $ext;
-    }
-
-    public static function uploadImage($data)
-    {
-        $name = self::generateName();
-        $format = config('image.article.format');
-        $dir = config('image.article.dir');
-        $ext = config('image.article.extension');
-
-        $tmp = Image::make($data);
-        Storage::put($dir . $name, (string) $tmp->encode($format, 75));
-
-        $tmp = Image::make($data)->resize(50, 50, function($constraint){
-            $constraint->aspectRatio();
-        });
-        Storage::put($dir . $name . '.dot' . $ext, (string) $tmp->encode($format, 75));
-
-        return ['name' => $name, "url" => "/storage/{$dir}{$name}"];
-    }
-
-    public static function deleteImage($name)
-    {
-        $dir = config('image.article.dir');
-        $ext = config('image.article.extension');
-        if (Storage::exists($dir . $name)) {
-            Storage::delete($dir . $name);
-        }
-        if (Storage::exists($dir . $name . '.dot' . $ext)) {
-            Storage::delete($dir . $name . '.dot' . $ext);
-        }
-    }
-
-    public static function cleanImage($data, $images)
-    {
-        $body = json_decode($data);
-        $dir = config('image.article.dir');
-        $ext = config('image.article.extension');
-        foreach ($images as $image) {
-            $exists = false;
-            if(!!(array) $body) {
-                foreach ($body->blocks as $block) {
-                    if ($block->type === 'image') {
-                        if ($block->data->file->url === "/storage/{$dir}{$image->name}") $exists = true;
-                    }
-                }
-            }
-            if (!$exists) {
-                if (Storage::exists($dir . $image->name)) {
-                    Storage::delete($dir . $image->name);
-                }
-                if (Storage::exists($dir . $image->name . '.dot' . $ext)) {
-                    Storage::delete($dir . $image->name . '.dot' . $ext);
-                }
-                $image->delete();
-            }
-        }
     }
 }

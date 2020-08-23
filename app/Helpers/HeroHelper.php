@@ -2,62 +2,74 @@
 
 namespace App\Helpers;
 
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
 
-class HeroHelper
+class HeroHelper extends Helper
 {
 
-    public static function disk()
+    /**
+     * define constant variable.
+     */
+    const FORMAT = 'jpg';
+    const EXT = '.jpeg';
+    const DIR = 'hero/';
+    const SIZES = [
+        'large' => ['width' => 1024, 'height' => 576, 'quality' => 75],
+        'thumb' => ['width' => 320, 'height' => 180, 'quality' => 75],
+        'small' => ['width' => 64, 'height' => 36, 'quality' => 85],
+    ];
+
+    /**
+     * Get Disk driver.
+     */
+    static function disk() : Filesystem
     {
         return Storage::disk('public');
     }
 
-    public static function generate($img, $oldName = null)
+    /**
+     * Generate hero name, upload new hero delete old hero.
+     */
+    static function generate($img, $oldName = null) : String
     {
-        $name = self::generateName();
-        $format = config('image.hero.format');
-        $ext = config('image.hero.extension');
-        $dir = config('image.hero.dir');
+        $name = parent::uniqueName();
         if($oldName) self::destroy($oldName);
 
-        foreach(config('image.hero.sizes') as $key => $size) {
-
+        foreach(self::SIZES as $key => $size) {
             $tmp = Image::make($img)->fit($size['width'], $size['height'], function ($c) {
                 $c->aspectRatio();
             });
-
-            $newName = $dir . $name . '-' . $key . $ext;
-            self::disk()->put($newName, (string) $tmp->encode($format, $size['quality']));
+            $newName = self::DIR . $name . '-' . $key . self::EXT;
+            self::disk()->put($newName, (string) $tmp->encode(self::FORMAT, $size['quality']));
         }
 
         return $name;
     }
 
-    public static function destroy($name)
+    /**
+     * Delete the hero.
+     */
+    static function destroy($name) : void
     {
-        $ext = config('image.hero.extension');
-        $dir = config('image.hero.dir');
-
-        foreach(config('image.hero.sizes') as $key => $size) {
-            $newName = $dir . $name . '-' . $key . $ext;
+        foreach(self::SIZES as $key => $size) {
+            $newName = self::DIR . $name . '-' . $key . self::EXT;
             if(self::disk()->exists($newName)) {
                 self::disk()->delete($newName);
             }
         }
     }
 
-    public static function getUrl($name)
+    /**
+     * Get the hero urls.
+     */
+    static function getUrl($name = null) : Array
     {
-        $ext = config('image.hero.extension');
-        $dir = config('image.hero.dir');
-
         $urls = [];
-
-        foreach(config('image.hero.sizes') as $key => $size) {
+        foreach(self::SIZES as $key => $size) {
             if($name) {
-                $newName = $dir . $name . '-' . $key . $ext;
+                $newName = self::DIR . $name . '-' . $key . self::EXT;
                 $urls[$key] = self::disk()->url($newName);
             } else {
                 $urls[$key] = asset('/img/placeholder/hero-' . $key . '.jpg');
@@ -65,10 +77,4 @@ class HeroHelper
         }
         return $urls;
     }
-
-    public static function generateName()
-    {
-        return now()->format('hisdmY') . Str::random(60);
-    }
-
 }

@@ -90,7 +90,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Return the hero url or placeholder url.
+     * Return the avatar url or placeholder url.
      */
     public function avatarUrl($nulllable = false)
     {
