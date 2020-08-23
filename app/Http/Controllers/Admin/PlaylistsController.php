@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\CategoryHelper;
 use App\Helpers\HeroHelper;
-use App\Helpers\VideoHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Minitutor;
@@ -12,30 +11,30 @@ use App\Models\Playlist;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
 
-class VideosController extends Controller
+class PlaylistsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:manage video');
+        $this->middleware('can:manage playlist');
     }
 
     public function index(Request $request)
     {
-        SEOMeta::setTitle('Daftar Video');
+        SEOMeta::setTitle('Daftar Playlist');
         if (!empty($request->input('search'))) {
             $search = '%' . $request->input('search') . '%';
-            $videos = Playlist::where('title', 'like', $search);
-            $videos->orWhere('description', 'like', $search);
+            $playlists = Playlist::where('title', 'like', $search);
+            $playlists->orWhere('description', 'like', $search);
         } else {
-            $videos = Playlist::query();
+            $playlists = Playlist::query();
         }
-        $videos = $videos->orderBy('id', 'desc')->paginate(20)->appends(['search' => $request->input('search')]);
-        return view('videos.index', ['playlists' => $videos]);
+        $playlists = $playlists->orderBy('id', 'desc')->paginate(20)->appends(['search' => $request->input('search')]);
+        return view('playlists.index', ['playlists' => $playlists]);
     }
 
     public function minitutors(Request $request)
     {
-        SEOMeta::setTitle('Pilih Minitutor untuk video baru');
+        SEOMeta::setTitle('Pilih Minitutor untuk playlist baru');
         if (!empty($request->input('search'))) {
             $search = '%' . $request->input('search') . '%';
             $minitutors = Minitutor::whereHas('user', function ($q) use ($search) {
@@ -47,13 +46,13 @@ class VideosController extends Controller
             $minitutors = Minitutor::where('active', true)->orderBy('id', 'desc');
         }
         $minitutors = $minitutors->paginate(20)->appends(['search' => $request->input('search')]);
-        return view('videos.minitutors', ['minitutors' => $minitutors]);
+        return view('playlists.minitutors', ['minitutors' => $minitutors]);
     }
 
     public function create(Request $request)
     {
         $minitutor = Minitutor::where('active', true)->findOrFail($request->input('id') ?? 0);
-        return view('videos.create', ['minitutor' => $minitutor]);
+        return view('playlists.create', ['minitutor' => $minitutor]);
     }
 
     public function store(Request $request)
@@ -68,7 +67,7 @@ class VideosController extends Controller
         $playlist = new Playlist($data);
         $minitutor->playlists()->save($playlist);
 
-        return redirect()->route('videos.edit', $playlist->id)->withSuccess('Berhasil membuat video baru.');
+        return redirect()->route('playlists.edit', $playlist->id)->withSuccess('Berhasil membuat playlist baru.');
     }
 
     public function edit($id)
@@ -85,7 +84,7 @@ class VideosController extends Controller
             ]);
         }
 
-        return view('videos.edit', ['playlist' => $playlist, 'categories' => $categories, 'videos' => $videos]);
+        return view('playlists.edit', ['playlist' => $playlist, 'categories' => $categories, 'videos' => $videos]);
     }
 
     public function update(Request $request, $id)
@@ -129,7 +128,7 @@ class VideosController extends Controller
             }
         }
 
-        return redirect()->back()->withSuccess('Video berhasil di update.');
+        return redirect()->back()->withSuccess('Playlist berhasil diupdate.');
     }
 
     public function destroy($id)
@@ -140,6 +139,6 @@ class VideosController extends Controller
         }
         HeroHelper::destroy($playlist->hero);
         $playlist->delete();
-        return redirect()->route('videos.index')->withSuccess('Video berhasil dihapus.');
+        return redirect()->route('playlists.index')->withSuccess('Playlist berhasil dihapus.');
     }
 }

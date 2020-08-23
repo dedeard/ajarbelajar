@@ -16,7 +16,7 @@
           <div class="quick-actions">
             <ul class="nav">
               <li class="nav-item">
-                <a class="active nav-link" href="{{ route('videos.minitutors') }}">New Video</a>
+                <a class="active nav-link" href="{{ route('playlists.minitutors') }}">New Playlist</a>
               </li>
               <li class="nav-item">
                 <a class="active nav-link" href="{{ route('articles.minitutors') }}">New Artikel</a>

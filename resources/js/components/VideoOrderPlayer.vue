@@ -64,7 +64,7 @@ export default {
       this.deleteLoading = true
       window.deleteConfirm(async () => {
         try {
-          await window.axios.delete('/api/admin/videos/' + this.video.id)
+          await window.axios.delete('/api/admin/playlists/' + this.video.id)
           this.$emit('videodeleted', this.video)
         } catch (e) {
           console.log(e)

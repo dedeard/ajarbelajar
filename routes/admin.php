@@ -10,9 +10,9 @@ Route::get('/', function(){
 Route::get('articles/minitutors', 'ArticlesController@minitutors')->name('articles.minitutors');
 Route::resource('articles', 'ArticlesController')->except('show');
 
-// manage video
-Route::get('videos/minitutors', 'VideosController@minitutors')->name('videos.minitutors');
-Route::resource('videos', 'VideosController')->except('show');
+// manage playlist
+Route::get('playlists/minitutors', 'PlaylistsController@minitutors')->name('playlists.minitutors');
+Route::resource('playlists', 'PlaylistsController')->except('show');
 
 // manage category
 Route::resource('categories', 'CategoriesController')->except(['show']);

@@ -10,21 +10,21 @@
 
 @section('content')
 <div class="container-fluid">
-  <form class="row" method="post" enctype="multipart/form-data" action="{{ route('videos.update', $playlist->id) }}">
+  <form class="row" method="post" enctype="multipart/form-data" action="{{ route('playlists.update', $playlist->id) }}">
     @csrf
     @method('PUT')
     <div class="col-lg-8">
       <div class="panel panel-bordered">
         <div class="panel-heading">
-          <h3 class="panel-title">Daftar video</h3>
+          <h3 class="panel-title">{{ __('Video lists') }}</h3>
         </div>
-        <video-order :videos="{{ json_encode($videos) }}" upload-url="{{ route('api.admin.videos.upload', $playlist->id) }}"></video-order>
+        <video-order :videos="{{ json_encode($videos) }}" upload-url="{{ route('api.admin.playlists.upload.video', $playlist->id) }}"></video-order>
       </div>
     </div>
     <div class="col-lg-4">
       <div class="panel">
         <div class="panel-heading">
-          <h3 class="panel-title">Hero image</h3>
+          <h3 class="panel-title">{{ __('Hero image') }}</h3>
         </div>
         <div class="panel-body">
         <hero-chooser inline-template>
@@ -83,7 +83,7 @@
           </div>
 
           <div class="form-group">
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
           </div>
         </div>
       </div>

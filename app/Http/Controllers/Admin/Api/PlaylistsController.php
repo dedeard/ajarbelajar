@@ -7,23 +7,23 @@ use App\Models\Playlist;
 use App\Models\Video;
 use Illuminate\Http\Request;
 
-class VideosController extends Controller
+class PlaylistsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:manage video');
+        $this->middleware('can:manage playlist');
     }
 
-    public function destroy($id)
+    public function destroyVideo($video_id)
     {
-        $video = Video::findOrFail($id);
+        $video = Video::findOrFail($video_id);
         $video->delete();
         return response()->json([], 200);
     }
 
-    public function upload(Request $request, $id)
+    public function uploadVideo(Request $request, $playlist_id)
     {
-        $playlist = Playlist::findOrFail($id);
+        $playlist = Playlist::findOrFail($playlist_id);
         $data = $request->validate([
             'file' => 'required|mimes:mp4,mov,avi,fly|max:250000'
         ]);

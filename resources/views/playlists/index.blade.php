@@ -4,9 +4,9 @@
   <div class="container-fluid">
     <div class="panel panel-bordered">
       <div class="panel-heading">
-        <h3 class="panel-title">DAFTAR VIDEO</h3>
+        <h3 class="panel-title">Daftar Playlist</h3>
         <div class="panel-actions">
-          <a href="{{ route('videos.minitutors') }}" class="btn btn-sm btn-primary">Buat Video</a>
+          <a href="{{ route('playlists.minitutors') }}" class="btn btn-sm btn-primary">Buat Playlist</a>
         </div>
       </div>
       <div class="panel-body">
@@ -42,13 +42,13 @@
               <td class="font-weight-bold align-middle">{{ $playlist->videos()->count() }}</td>
               <td class="font-weight-bold align-middle">{{ $playlist->created_at }}</td>
               <td class="text-center py-0 align-middle">
-                <a href="{{ route('videos.edit', $playlist->id) }}" class="btn btn-outline-default btn-sm btn-icon" title="Edit">
+                <a href="{{ route('playlists.edit', $playlist->id) }}" class="btn btn-outline-default btn-sm btn-icon" title="Edit">
                   <i class="wb-pencil"></i>
                 </a>
                 <button class="btn btn-danger btn-sm btn-icon" title="Delete" v-delete-confirm:form-delete-playlist-{{ $playlist->id }}>
                   <i class="wb-trash"></i>
                 </button>
-                <form action="{{ route('videos.destroy', $playlist->id) }}" method="post" id="form-delete-playlist-{{ $playlist->id }}">
+                <form action="{{ route('playlists.destroy', $playlist->id) }}" method="post" id="form-delete-playlist-{{ $playlist->id }}">
                   @csrf
                   @method('delete')
                 </form>

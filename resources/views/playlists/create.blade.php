@@ -4,17 +4,17 @@
   <div class="container-fluid">
     <div class="panel panel-bordered">
       <div class="panel-heading">
-        <h3 class="panel-title">CREATE VIDEO</h3>
+        <h3 class="panel-title">{{ __('Create New Playlist') }}</h3>
         <div class="panel-actions">
-          <a href="{{ route('videos.minitutors') }}" class="btn btn-sm btn-primary">Back</a>
+          <a href="{{ route('playlists.minitutors') }}" class="btn btn-sm btn-primary">{{ __('Cancel') }}</a>
         </div>
       </div>
       <div class="panel-body">
-        <form action="{{ route('videos.store', ['id' => $minitutor->id]) }}" method="post">
+        <form action="{{ route('playlists.store', ['id' => $minitutor->id]) }}" method="post">
           @csrf
 
           <div class="form-group">
-            <label for="title">Title</label>
+            <label for="title">{{ __('Title') }}</label>
             <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}">
             @error('title')
               <span class="invalid-feedback font-weight-bold">{{ $message }}</span>
@@ -22,7 +22,7 @@
           </div>
 
           <div class="form-group">
-          <label for="description">Description</label>
+            <label for="title">{{ __('Description') }}</label>
             <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror">
               {{ old('description') }}
             </textarea>
@@ -32,7 +32,7 @@
           </div>
 
           <div class="form-group">
-            <button type="submit" class="btn btn-primary">Create Video</button>
+            <button type="submit" class="btn btn-primary">{{ __('Create Playlist') }}</button>
           </div>
         </form>
       </div>

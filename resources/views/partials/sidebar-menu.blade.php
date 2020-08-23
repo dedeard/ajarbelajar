@@ -30,9 +30,9 @@ $linkGroups = [
       'can' => 'manage article',
     ],
     [
-      'name' => 'Videos',
-      'route' => 'videos.index',
-      'is' => 'videos*',
+      'name' => 'Playlist',
+      'route' => 'playlists.index',
+      'is' => 'playlists*',
       'icon' => 'wb-video',
       'can' => 'manage video',
     ]

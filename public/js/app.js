@@ -2980,7 +2980,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return window.axios["delete"]('/api/admin/videos/' + _this.video.id);
+                return window.axios["delete"]('/api/admin/playlists/' + _this.video.id);
 
               case 3:
                 _this.$emit('videodeleted', _this.video);

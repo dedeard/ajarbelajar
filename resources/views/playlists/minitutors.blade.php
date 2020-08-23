@@ -6,7 +6,7 @@
       <div class="panel-heading">
         <h3 class="panel-title">PILIH MINITUTOR</h3>
         <div class="panel-actions">
-          <a href="{{ route('videos.index') }}" class="btn btn-sm btn-primary">Back</a>
+          <a href="{{ route('playlists.index') }}" class="btn btn-sm btn-primary">Back</a>
         </div>
       </div>
       <div class="panel-body">
@@ -38,11 +38,11 @@
                   <img src="{{ $minitutor->user->avatarUrl() }}" />
                 </span>
               </td>
-              <td class="align-middle"><a href="{{ route('videos.create', ['id' => $minitutor->id]) }}">{{ $minitutor->user->name }}</a></td>
+              <td class="align-middle"><a href="{{ route('playlists.create', ['id' => $minitutor->id]) }}">{{ $minitutor->user->name }}</a></td>
               <td class="align-middle">{{ $minitutor->user->username }}</td>
               <td class="align-middle">{{ $minitutor->user->email }}</td>
               <td class="text-center p-0 align-middle">
-                <a href="{{ route('videos.create', ['id' => $minitutor->id]) }}" class="btn btn-outline-default btn-sm">Pilih</a>
+                <a href="{{ route('playlists.create', ['id' => $minitutor->id]) }}" class="btn btn-outline-default btn-sm">Pilih</a>
               </td>
             </tr>
             @endforeach
