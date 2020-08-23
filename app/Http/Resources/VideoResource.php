@@ -2,10 +2,9 @@
 
 namespace App\Http\Resources;
 
-use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RequestArticleResource extends JsonResource
+class VideoResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,14 +16,10 @@ class RequestArticleResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'title' => $this->title,
-            'description' => $this->description,
-            'body' => $this->body,
-            'hero' => $this->heroUrl(),
-            'requested_at' => $this->requested_at ? Carbon::parse($this->requested_at)->timestamp : null,
+            'index' => $this->index,
+            'url' => $this->getUrl(),
             'created_at' => $this->created_at->timestamp,
             'updated_at' => $this->updated_at->timestamp,
-            'category' => CategoryResource::make($this->category)
         ];
     }
 }
