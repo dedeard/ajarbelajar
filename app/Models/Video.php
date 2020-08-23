@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use App\Helpers\VideoHelper;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -13,6 +11,7 @@ class Video extends Model
 {
     protected $fillable = [
         'name',
+        'original_name',
         'index'
     ];
 

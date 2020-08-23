@@ -16,6 +16,11 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, HasRoles;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'email_verified_at',
         'name',
@@ -31,11 +36,29 @@ class User extends Authenticatable implements MustVerifyEmail
         'password'
     ];
 
-    protected $hidden = ['password', 'remember_token'];
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password',
+        'remember_token'
+    ];
 
-    protected $casts = ['email_verified_at' => 'datetime'];
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime'
+    ];
 
-    public function apiToken($forceUpdate = false)
+    /**
+     * Get and create the api token.
+     */
+    public function apiToken($forceUpdate = false) : string
     {
         $token = Str::random(100);
         if(!$this->api_token || $forceUpdate) {
@@ -48,18 +71,27 @@ class User extends Authenticatable implements MustVerifyEmail
         return $token;
     }
 
-    public function clearApiToken()
+    /**
+     * Delete the api token.
+     */
+    public function clearApiToken() : void
     {
         $this->timestamps = false;
         $this->forceFill(['api_token' => null])->save();
         $this->timestamps = true;
     }
 
+    /**
+     * Get the minitutor relation.
+     */
     public function minitutor()
     {
         return $this->hasOne(Minitutor::class);
     }
 
+    /**
+     * Return the hero url or placeholder url.
+     */
     public function avatarUrl($nulllable = false)
     {
         if($nulllable && !$this->avatar) {
@@ -68,16 +100,25 @@ class User extends Authenticatable implements MustVerifyEmail
         return AvatarHelper::getUrl($this->avatar);
     }
 
+    /**
+     * Send email verification.
+     */
     public function sendMemberEmailVerify() : void
     {
         $this->notify(new VerifyEmailNotification);
     }
 
+    /**
+     * Generate remember password token code.
+     */
     public function generateRemeberPasswordToken() : string
     {
         return Password::broker()->createToken($this);
     }
 
+    /**
+     * Send email forget password.
+     */
     public function sendMemberEmailResetPassword() : void
     {
         $this->notify(new ResetPasswordNotification($this->generateRemeberPasswordToken()));

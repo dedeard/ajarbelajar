@@ -17,6 +17,7 @@ class CreateVideosTable extends Migration
             $table->increments('id');
             $table->morphs('videoable');
             $table->string('name')->unique();
+            $table->string('original_name')->nullable();
             $table->integer('index');
             $table->timestamps();
         });

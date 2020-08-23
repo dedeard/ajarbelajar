@@ -25,7 +25,6 @@ class CreatePlaylistsTable extends Migration
             $table->boolean('draf')->default(true);
             $table->string('title');
             $table->string('slug')->unique();
-            $table->string('hero')->unique()->nullable();
             $table->longText('description')->nullable();
 
             $table->timestamps();

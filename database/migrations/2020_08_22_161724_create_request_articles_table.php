@@ -23,7 +23,6 @@ class CreateRequestArticlesTable extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
 
             $table->string('title');
-            $table->string('hero')->unique()->nullable();
             $table->longText('description')->nullable();
             $table->longText('body')->nullable();
             $table->dateTime('requested_at')->nullable();
