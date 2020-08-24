@@ -2,7 +2,7 @@
 $linkGroups = [
   [
     [
-      'name' => 'Categories',
+      'name' => 'Kategori',
       'route' => 'categories.index',
       'is' => 'categories*',
       'icon' => 'wb-list',
@@ -16,7 +16,7 @@ $linkGroups = [
       'can' => 'manage user',
     ],
     [
-      'name' => 'Minitutor',
+      'name' => 'MiniTutor',
       'route' => 'minitutors.index',
       'is' => 'minitutors*',
       'icon' => 'wb-user-circle',

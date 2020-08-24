@@ -4,9 +4,9 @@
   <div class="container-fluid">
     <div class="panel panel-bordered">
       <div class="panel-heading">
-        <h3 class="panel-title">USERS</h3>
+        <h3 class="panel-title">User</h3>
         <div class="panel-actions">
-          <a href="{{ route('users.create') }}" class="btn btn-sm btn-primary">Create</a>
+          <a href="{{ route('users.create') }}" class="btn btn-sm btn-primary">Buat User</a>
         </div>
       </div>
       <div class="panel-body">
@@ -23,12 +23,12 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th>{{__('Avatar')}}</th>
-              <th>{{__('Name')}}</th>
-              <th>{{__('Username')}}</th>
-              <th>{{__('Email')}}</th>
-              <th>{{__('Email Verified')}}</th>
-              <th class="text-center" style="width: 140px;">{{__('Actions')}}</th>
+              <th>Avatar</th>
+              <th>Nama</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Verifikasi Email</th>
+              <th class="text-center" style="width: 140px;">Aksi</th>
             </tr>
           </thead>
           <tbody>

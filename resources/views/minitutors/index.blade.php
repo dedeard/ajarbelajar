@@ -4,9 +4,9 @@
   <div class="container-fluid">
     <div class="panel panel-bordered">
       <div class="panel-heading">
-        <h3 class="panel-title">MINITUTORS</h3>
+        <h3 class="panel-title">MiniTutor</h3>
         <div class="panel-actions">
-        <a href="{{ route('minitutors.requests') }}" class="btn btn-sm btn-danger">Requested</a>
+        <a href="{{ route('minitutors.requests') }}" class="btn btn-sm btn-danger">Permintaan Jadi MiniTutor</a>
         </div>
       </div>
       <div class="panel-body">
@@ -23,13 +23,13 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th>{{__('Avatar')}}</th>
-              <th>{{__('Name')}}</th>
-              <th>{{__('Username')}}</th>
-              <th>{{__('Email')}}</th>
-              <th>{{__('Status')}}</th>
-              <th>{{__('Dibuat pada')}}</th>
-              <th class="text-center" style="width: 120px;">{{__('Actions')}}</th>
+              <th>Avatar</th>
+              <th>Nama</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Dibuat pada</th>
+              <th class="text-center" style="width: 120px;">Aksi</th>
             </tr>
           </thead>
           <tbody>

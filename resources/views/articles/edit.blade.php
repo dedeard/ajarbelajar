@@ -19,7 +19,7 @@
     <div class="col-lg-4">
       <div class="panel">
         <div class="panel-heading">
-          <h3 class="panel-title">Hero image</h3>
+          <h3 class="panel-title">Hero</h3>
         </div>
         <div class="panel-body">
         <hero-chooser inline-template>
@@ -41,7 +41,7 @@
           <category-autocomplete :categories="{{json_encode($categories)}}" inline-template>
             <div class="form-group category-autocomplete">
               <label>Kategori</label>
-              <input ref="input" id="autoComplete" placeholder="Kategory" type="text" name="category" class="form-control @error('category') is-invalid @enderror" value="{{ old('category') ?? $article->category ? $article->category->name : '' }}">
+              <input ref="input" id="autoComplete" placeholder="Kategori" type="text" name="category" class="form-control @error('category') is-invalid @enderror" value="{{ old('category') ?? $article->category ? $article->category->name : '' }}">
               @error('category')
                 <div class="invalid-feedback">
                   <strong>{{ $message }}</strong>
@@ -51,8 +51,8 @@
           </category-autocomplete>
 
           <div class="form-group">
-            <label>Title</label>
-            <input placeholder="Title" type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') ?? $article->title }}">
+            <label>Judul</label>
+            <input placeholder="Judul" type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') ?? $article->title }}">
             @error('title')
               <div class="invalid-feedback">
                 <strong>{{ $message }}</strong>
@@ -61,8 +61,8 @@
           </div>
 
           <div class="form-group">
-            <label>Description</label>
-            <textarea name="description" class="form-control @error('description') is-invalid @enderror">{{  old('description') ?? $article->description }}</textarea>
+            <label>Deskripsi</label>
+            <textarea placeholder="Deskripsi" name="description" class="form-control @error('description') is-invalid @enderror">{{  old('description') ?? $article->description }}</textarea>
             @error('description')
               <div class="invalid-feedback">
                 <strong>{{ $message }}</strong>
@@ -73,12 +73,12 @@
           <div class="form-group">
             <div class="checkbox-custom checkbox-primary">
               <input type="checkbox" id="public" name="public" @if(old('public') ?? !$article->draf) checked @endif>
-              <label for="public">Publikasikan video</label>
+              <label for="public">Publikasikan artikel ini</label>
             </div>
           </div>
 
           <div class="form-group">
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
           </div>
         </div>
       </div>

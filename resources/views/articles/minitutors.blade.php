@@ -4,9 +4,9 @@
   <div class="container-fluid">
     <div class="panel panel-bordered">
       <div class="panel-heading">
-        <h3 class="panel-title">PILIH MINITUTOR</h3>
+        <h3 class="panel-title">Pilih MiniTutor penulis artikel</h3>
         <div class="panel-actions">
-          <a href="{{ route('articles.index') }}" class="btn btn-sm btn-primary">Back</a>
+          <a href="{{ route('articles.index') }}" class="btn btn-sm btn-primary">Batal</a>
         </div>
       </div>
       <div class="panel-body">
@@ -23,11 +23,11 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th>{{__('Avatar')}}</th>
-              <th>{{__('Name')}}</th>
-              <th>{{__('Username')}}</th>
-              <th>{{__('Email')}}</th>
-              <th class="text-center" style="width: 120px;">{{__('Actions')}}</th>
+              <th>Avatar</th>
+              <th>Nama</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th class="text-center" style="width: 120px;">Aksi</th>
             </tr>
           </thead>
           <tbody>

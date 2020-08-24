@@ -4,9 +4,9 @@
   <div class="container-fluid">
     <div class="panel panel-bordered">
       <div class="panel-heading">
-        <h3 class="panel-title">CREATE CATEGORY</h3>
+        <h3 class="panel-title">Buat Kategori</h3>
         <div class="panel-actions">
-          <a href="{{ route('categories.index') }}" class="btn btn-sm btn-primary">Back</a>
+          <a href="{{ route('categories.index') }}" class="btn btn-sm btn-primary">Batal</a>
         </div>
       </div>
       <div class="panel-body">
@@ -22,7 +22,7 @@
           </div>
 
           <div class="form-group">
-            <button type="submit" class="btn btn-primary">Create Category</button>
+            <button type="submit" class="btn btn-primary">Buat Kategori</button>
           </div>
         </form>
       </div>

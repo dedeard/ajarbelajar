@@ -4,9 +4,9 @@
   <div class="container-fluid">
     <div class="panel panel-bordered">
       <div class="panel-heading">
-        <h3 class="panel-title">Data Permintaan Menjadi MiniTutor</h3>
+        <h3 class="panel-title">Data permintaan jadi MiniTutor</h3>
         <div class="panel-actions">
-          <a class="btn btn-sm btn-primary" href="{{ route('minitutors.requests') }}">Back</a>
+          <a class="btn btn-sm btn-primary" href="{{ route('minitutors.requests') }}">Batal</a>
           <button class="btn btn-sm btn-success" onclick="$('#form-accept-request').submit()">Terima</button>
           <button class="btn btn-sm btn-danger" onclick="$('#form-reject-request').submit()">Tolak</button>
 

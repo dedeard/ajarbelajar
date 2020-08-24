@@ -6,16 +6,16 @@
     <div class="panel-heading">
       <h3 class="panel-title">Kategori</h3>
       <div class="panel-actions">
-        <a href="{{ route('categories.create') }}" class="btn btn-sm btn-primary">Create</a>
+        <a href="{{ route('categories.create') }}" class="btn btn-sm btn-primary">Buat Kategori</a>
       </div>
     </div>
     <div class="table-responsive pt-2">
       <table class="table table-hover">
         <thead>
           <tr>
-            <th>{{ __('Name') }}</th>
-            <th>{{ __('Slug') }}</th>
-            <th class="text-center" style="width: 120px;">{{ __('Actions') }}</th>
+            <th>Nama</th>
+            <th>Slug</th>
+            <th class="text-center" style="width: 120px;">Aksi</th>
           </tr>
         </thead>
         <tbody>

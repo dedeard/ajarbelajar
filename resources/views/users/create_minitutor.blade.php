@@ -4,9 +4,9 @@
   <div class="container-fluid">
     <div class="panel panel-bordered">
       <div class="panel-heading">
-        <h3 class="panel-title">CREATE MINITUTOR</h3>
+        <h3 class="panel-title">Buat MiniTuor</h3>
         <div class="panel-actions">
-          <a href="{{ route('users.index') }}" class="btn btn-sm btn-primary">Back</a>
+          <a href="{{ route('users.index') }}" class="btn btn-sm btn-primary">Batal</a>
         </div>
       </div>
       <div class="panel-body">
@@ -61,7 +61,7 @@
           </div>
 
           <div class="form-group">
-            <label>No.HP (whatsapp only)</label>
+            <label>No.HP (whatsapp)</label>
             <input name="contact" placeholder="No.HP (whatsapp only)" type="text" class="form-control @error('contact') is-invalid @enderror" value="{{ old('contact') }}">
             @error('contact')
               <div class="invalid-feedback">
@@ -71,7 +71,7 @@
           </div>
 
           <div class="form-group">
-            <button type="submit" class="btn btn-primary">Create Minitutor</button>
+            <button type="submit" class="btn btn-primary">Buat MiniTutor</button>
           </div>
         </form>
       </div>

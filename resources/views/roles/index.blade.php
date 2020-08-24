@@ -4,23 +4,23 @@
   <div class="container-fluid">
     <div class="panel panel-bordered">
       <div class="panel-heading">
-        <h3 class="panel-title">ROLES</h3>
+        <h3 class="panel-title">Role</h3>
         <div class="panel-actions">
-          <a href="{{ route('roles.create') }}" class="btn btn-sm btn-primary">Create</a>
+          <a href="{{ route('roles.create') }}" class="btn btn-sm btn-primary">Buat Role</a>
         </div>
       </div>
       <div class="table-responsive pt-2">
         <table class="table table-hover">
           <thead>
             <tr>
-              <th>{{__('Name')}}</th>
-              <th class="text-center" style="width: 120px;">{{__('Actions')}}</th>
+              <th>Nama</th>
+              <th class="text-center" style="width: 120px;">Aksi</th>
             </tr>
           </thead>
           <tbody>
             @foreach($roles as $role)
             <tr>
-              <td class="font-weight-bold align-middle">{{ $role->name }}</td>
+              <td class="align-middle">{{ $role->name }}</td>
               <td class="text-center py-0 align-middle">
                 @if($role->name !== 'Super Admin')
                   <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-outline-default btn-sm btn-icon" title="Edit">

@@ -4,20 +4,20 @@
   <div class="container-fluid">
     <div class="panel panel-bordered">
       <div class="panel-heading">
-        <h3 class="panel-title">MINITUTORS</h3>
+        <h3 class="panel-title">Permintaan jadi MiniTutor</h3>
         <div class="panel-actions">
-          <a href="{{ route('minitutors.index') }}" class="btn btn-sm btn-primary">Back</a>
+          <a href="{{ route('minitutors.index') }}" class="btn btn-sm btn-primary">Kembali</a>
         </div>
       </div>
       <div class="table-responsive">
         <table class="table table-hover m-0">
           <thead>
             <tr>
-              <th>{{__('Avatar')}}</th>
-              <th>{{__('Name')}}</th>
-              <th>{{__('Username')}}</th>
-              <th>{{__('Email')}}</th>
-              <th class="text-center" style="width: 120px;">{{__('Actions')}}</th>
+              <th>Avatar</th>
+              <th>Nama</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th class="text-center" style="width: 120px;">Aksi</th>
             </tr>
           </thead>
           <tbody>

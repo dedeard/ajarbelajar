@@ -4,23 +4,23 @@
   <div class="container-fluid">
     <div class="panel panel-bordered">
       <div class="panel-heading">
-        <h3 class="panel-title">PERMISSiONS</h3>
+        <h3 class="panel-title">Permission</h3>
         <div class="panel-actions">
-          <a href="{{ route('permissions.create') }}" class="btn btn-sm btn-primary">Create</a>
+          <a href="{{ route('permissions.create') }}" class="btn btn-sm btn-primary">Buat Permission</a>
         </div>
       </div>
       <div class="table-responsive pt-2">
         <table class="table table-hover m-0">
           <thead>
             <tr>
-              <th>{{__('Name')}}</th>
-              <th class="text-center" style="width: 120px;">{{__('Actions')}}</th>
+              <th>Nama</th>
+              <th class="text-center" style="width: 120px;">Aksi</th>
             </tr>
           </thead>
           <tbody>
             @foreach($permissions as $permission)
             <tr>
-              <td class="font-weight-bold align-middle">{{ $permission->name }}</td>
+              <td class="align-middle">{{ $permission->name }}</td>
               <td class="text-center py-0 align-middle">
                 <a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-outline-default btn-sm btn-icon" title="Edit">
                   <i class="wb-pencil"></i>

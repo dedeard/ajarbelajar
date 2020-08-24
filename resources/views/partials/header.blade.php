@@ -16,10 +16,10 @@
           <div class="quick-actions">
             <ul class="nav">
               <li class="nav-item">
-                <a class="active nav-link" href="{{ route('playlists.minitutors') }}">New Playlist</a>
+                <a class="active nav-link" href="{{ route('playlists.minitutors') }}">Buat Playlist</a>
               </li>
               <li class="nav-item">
-                <a class="active nav-link" href="{{ route('articles.minitutors') }}">New Artikel</a>
+                <a class="active nav-link" href="{{ route('articles.minitutors') }}">Buat Artikel</a>
               </li>
               {{-- <li class="nav-item">
                 <a class="nav-link" href="javascript:;">Profile</a>

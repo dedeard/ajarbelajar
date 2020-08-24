@@ -4,9 +4,9 @@
   <div class="container-fluid">
     <div class="panel panel-bordered">
       <div class="panel-heading">
-        <h3 class="panel-title">CREATE USER</h3>
+        <h3 class="panel-title">Buat User</h3>
         <div class="panel-actions">
-          <a href="{{ route('users.index') }}" class="btn btn-sm btn-primary">Back</a>
+          <a href="{{ route('users.index') }}" class="btn btn-sm btn-primary">Batal</a>
         </div>
       </div>
       <div class="panel-body">
@@ -32,7 +32,7 @@
             <div class="form-group">
               <label for="role">Role</label>
               <select class="form-control @error('role') is-invalid @enderror" name="role" id="role">
-                <option value="">None</option>
+                <option value="">Bukan Admin</option>
                 @foreach($roles as $role)
                   <option value="{{ $role->id }}" @if(old('role') == $role->id) selected @endif>{{ $role->name }}</option>
                 @endforeach
@@ -44,8 +44,8 @@
             @endcan
 
             <div class="form-group">
-              <label>Name</label>
-              <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Name..." value="{{ old('name') }}">
+              <label>Nama</label>
+              <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Nama..." value="{{ old('name') }}">
               @error('name')
                 <span class="invalid-feedback">{{ $message }}</span>
               @enderror
@@ -83,7 +83,7 @@
             </div>
 
             <div class="form-group">
-              <button type="submit" class="btn btn-primary">Create User</button>
+              <button type="submit" class="btn btn-primary">Buat User</button>
             </div>
           </div>
         </form>

@@ -4,7 +4,7 @@
   <div class="container-fluid">
     <div class="panel panel-bordered">
       <div class="panel-heading">
-        <h3 class="panel-title">DAFTAR ARTIKEL</h3>
+        <h3 class="panel-title">Artikel</h3>
         <div class="panel-actions">
           <a href="{{ route('articles.minitutors') }}" class="btn btn-sm btn-primary">Buat Artikel</a>
         </div>
@@ -23,12 +23,12 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th>{{__('Title')}}</th>
-              <th>{{__('Author')}}</th>
-              <th>{{__('Category')}}</th>
-              <th>{{__('Status')}}</th>
-              <th>{{__('Created at')}}</th>
-              <th class="text-center" style="width: 120px;">{{__('Actions')}}</th>
+              <th>Judul</th>
+              <th>Penulis</th>
+              <th>Kategori</th>
+              <th>Status</th>
+              <th>Dibuat pada</th>
+              <th class="text-center" style="width: 120px;">Aksi</th>
             </tr>
           </thead>
           <tbody>

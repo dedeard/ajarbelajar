@@ -16,7 +16,7 @@
     <div class="col-lg-8">
       <div class="panel panel-bordered">
         <div class="panel-heading">
-          <h3 class="panel-title">{{ __('Video lists') }}</h3>
+          <h3 class="panel-title">Daftar Video</h3>
         </div>
         <video-order :videos="{{ json_encode($videos) }}" upload-url="{{ route('api.admin.playlists.upload.video', $playlist->id) }}"></video-order>
       </div>
@@ -24,7 +24,7 @@
     <div class="col-lg-4">
       <div class="panel">
         <div class="panel-heading">
-          <h3 class="panel-title">{{ __('Hero image') }}</h3>
+          <h3 class="panel-title">Hero</h3>
         </div>
         <div class="panel-body">
         <hero-chooser inline-template>
@@ -46,7 +46,7 @@
           <category-autocomplete :categories="{{json_encode($categories)}}" inline-template>
             <div class="form-group category-autocomplete">
               <label>Kategori</label>
-              <input ref="input" id="autoComplete" placeholder="Kategory" type="text" name="category" class="form-control @error('category') is-invalid @enderror" value="{{ old('category') ?? $playlist->category ? $playlist->category->name : '' }}">
+              <input ref="input" id="autoComplete" placeholder="Kategori" type="text" name="category" class="form-control @error('category') is-invalid @enderror" value="{{ old('category') ?? $playlist->category ? $playlist->category->name : '' }}">
               @error('category')
                 <div class="invalid-feedback">
                   <strong>{{ $message }}</strong>
@@ -56,8 +56,8 @@
           </category-autocomplete>
 
           <div class="form-group">
-            <label>Title</label>
-            <input placeholder="Title" type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') ?? $playlist->title }}">
+            <label>Judul</label>
+            <input placeholder="Judul" type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') ?? $playlist->title }}">
             @error('title')
               <div class="invalid-feedback">
                 <strong>{{ $message }}</strong>
@@ -66,8 +66,8 @@
           </div>
 
           <div class="form-group">
-            <label>Description</label>
-            <textarea name="description" class="form-control @error('description') is-invalid @enderror">{{  old('description') ?? $playlist->description }}</textarea>
+            <label>Deskripsi</label>
+            <textarea placeholder="Deskripsi" name="description" class="form-control @error('description') is-invalid @enderror">{{  old('description') ?? $playlist->description }}</textarea>
             @error('description')
               <div class="invalid-feedback">
                 <strong>{{ $message }}</strong>
@@ -78,7 +78,7 @@
           <div class="form-group">
             <div class="checkbox-custom checkbox-primary">
               <input type="checkbox" id="public" name="public" @if(old('public') ?? !$playlist->draf) checked @endif>
-              <label for="public">Publikasikan video</label>
+              <label for="public">Publikasikan playlist ini</label>
             </div>
           </div>
 

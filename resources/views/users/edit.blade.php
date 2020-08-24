@@ -4,12 +4,12 @@
   <div class="container-fluid">
     <div class="panel panel-bordered">
       <div class="panel-heading">
-        <h3 class="panel-title">EDIT USER</h3>
+        <h3 class="panel-title">Edit User</h3>
         <div class="panel-actions">
           @if(empty($user->minitutor))
-          <a href="{{ route('users.minitutor.create', $user->id) }}" class="btn btn-sm btn-primary">Create MiniTutor</a>
+          <a href="{{ route('users.minitutor.create', $user->id) }}" class="btn btn-sm btn-primary">Buat MiniTutor</a>
           @endif
-          <a href="{{ route('users.index') }}" class="btn btn-sm btn-primary">Back</a>
+          <a href="{{ route('users.index') }}" class="btn btn-sm btn-primary">Batal</a>
         </div>
       </div>
       <div class="panel-body">
@@ -37,7 +37,7 @@
               <div class="form-group">
                 <label for="role">Role</label>
                 <select class="form-control @error('role') is-invalid @enderror" name="role" id="role">
-                  <option value="">None</option>
+                  <option value="">Bukan Admin</option>
                   @foreach($roles as $role)
                     @php
                       if(count($user->roles)) {
@@ -57,8 +57,8 @@
             @endcan
 
             <div class="form-group">
-              <label>Name</label>
-              <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Name..." value="{{ $user->name }}">
+              <label>Nama</label>
+              <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Nama ..." value="{{ $user->name }}">
               @error('name')
                 <span class="invalid-feedback">{{ $message }}</span>
               @enderror
