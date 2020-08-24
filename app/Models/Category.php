@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Category extends Model
@@ -33,5 +34,21 @@ class Category extends Model
         }
 
         return $category;
+    }
+
+    /**
+     * Return Playlists reation.
+     */
+    public function playlists() : HasMany
+    {
+        return $this->hasMany(Playlist::class);
+    }
+
+    /**
+     * Return Articles reation.
+     */
+    public function articles() : HasMany
+    {
+        return $this->hasMany(Article::class);
     }
 }

@@ -20,3 +20,7 @@ Route::prefix('minitutor')->as('minitutor.')->group(function(){
     Route::post('request-articles/{id}/image', 'Minitutor\RequestArticlesController@uploadImage')->name('request-articles.upload.image');
     Route::resource('request-articles', 'Minitutor\RequestArticlesController')->except(['create', 'edit', 'show']);
 });
+
+
+// Category
+Route::resource('categories', 'CategoriesController')->only(['index', 'show']);
