@@ -59,7 +59,7 @@ class Playlist extends Model
      */
     public function hero() : MorphOne
     {
-        return $this->morphOne(Image::class, 'imageable');
+        return $this->morphOne(Image::class, 'imageable')->where('type', 'hero');
     }
 
     /**
@@ -75,6 +75,6 @@ class Playlist extends Model
      */
     public function heroUrl() : Array
     {
-        return HeroHelper::getUrl($this->hero);
+        return HeroHelper::getUrl($this->hero ? $this->hero->name : null);
     }
 }

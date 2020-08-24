@@ -32,7 +32,7 @@ class PermissionsController extends Controller
         $tableNames = config('permission.table_names.permissions');
         $data = $request->validate(['name' => 'required|string|max:64|min:3|unique:' . $tableNames]);
         Permission::create($data);
-        return redirect()->route('permissions.index')->withSuccess('Berhasil membuat Permission baru.');
+        return redirect()->route('permissions.index')->withSuccess('Permission telah dibuat.');
     }
 
     public function edit($id)
@@ -47,7 +47,7 @@ class PermissionsController extends Controller
         $tableNames = config('permission.table_names.permissions');
         $data = $request->validate(['name' => 'required|string|max:64|min:3|unique:' . $tableNames . ',name,' . $id]);
         $permission->update($data);
-        return redirect()->back()->withSuccess('Berhasil memperbarui Permission.');
+        return redirect()->back()->withSuccess('Permission telah diperbarui.');
     }
 
     public function destroy($id)
@@ -56,6 +56,6 @@ class PermissionsController extends Controller
         $users = User::permission($permission->name)->get();
         foreach ($users as $user) $user->revokePermissionTo($permission->name);
         $permission->delete();
-        return redirect()->route('permissions.index')->withSuccess('Berhasil menghapus Permission.');
+        return redirect()->route('permissions.index')->withSuccess('Permission telah dihapus.');
     }
 }

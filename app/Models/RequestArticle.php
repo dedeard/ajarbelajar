@@ -61,6 +61,6 @@ class RequestArticle extends Model
      */
     public function heroUrl() : Array
     {
-        return HeroHelper::getUrl($this->hero);
+        return HeroHelper::getUrl($this->hero ? $this->hero->name : null);
     }
 }

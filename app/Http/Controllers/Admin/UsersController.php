@@ -24,7 +24,7 @@ class UsersController extends Controller
 
     public function index(Request $request)
     {
-        SEOMeta::setTitle('Daftar Pengguna');
+        SEOMeta::setTitle('Daftar User');
         if (!empty($request->input('search'))) {
             $search = '%' . $request->input('search') . '%';
             $users = User::where('name', 'like', $search);
@@ -39,14 +39,13 @@ class UsersController extends Controller
 
     public function create()
     {
-        SEOMeta::setTitle('Buat Pengguna');
+        SEOMeta::setTitle('Buat User');
         $roles = Role::where('name', '!=', 'Super Admin')->get();
         return view('users.create', ['roles' => $roles]);
     }
 
     public function store(Request $request)
     {
-
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', new Username, 'max:64', 'min:6', 'unique:users'],
@@ -73,7 +72,7 @@ class UsersController extends Controller
             $user->assignRole($role->name);
         }
 
-        return redirect()->route('users.edit', $user->id)->withSuccess('Berhasil membuat User.');
+        return redirect()->route('users.edit', $user->id)->withSuccess('User telah dibuat.');
     }
 
     public function show($id)
@@ -83,7 +82,7 @@ class UsersController extends Controller
 
     public function edit($id)
     {
-        SEOMeta::setTitle('Edit Pengguna');
+        SEOMeta::setTitle('Edit User');
         $user = User::findOrFail($id);
         $roles = Role::where('name', '!=', 'Super Admin')->get();
         return view('users.edit', ['user' => $user, 'roles' => $roles]);
@@ -134,7 +133,7 @@ class UsersController extends Controller
         }
 
         $user->update($data);
-        return redirect()->back()->withSuccess('Berhasil memperbarui User.');
+        return redirect()->back()->withSuccess('User telah diperbarui.');
     }
 
     public function destroy($id)
@@ -143,7 +142,7 @@ class UsersController extends Controller
         if ($user->hasRole('Super Admin')) return abort(403);
         AvatarHelper::destroy($user->avatar);
         $user->delete();
-        return redirect()->route('users.index')->withSuccess('Berhasil menghapus user.');
+        return redirect()->route('users.index')->withSuccess('User telah dihapus.');
     }
 
     public function createMinitutor($id)
@@ -171,6 +170,6 @@ class UsersController extends Controller
         $data['active'] = true;
         $minitutor = new Minitutor($data);
         $user->minitutor()->save($minitutor);
-        return redirect()->route('minitutors.show', $minitutor->id)->withSuccess('Berhasil mejadikan pengguna sebagai minitutor.');
+        return redirect()->route('minitutors.show', $minitutor->id)->withSuccess('Berhasil mejadikan user sebagai minitutor.');
     }
 }

@@ -66,17 +66,10 @@ class MinitutorsController extends Controller
         return redirect()->back()->withSuccess($message);
     }
 
-    public function destroy($id)
-    {
-        $minitutor = Minitutor::findOrFail($id);
-        $minitutor->delete();
-        return redirect()->route('minitutors.index')->withSuccess('Berhasil menghapus pengguna sebagai minitutor.');
-    }
-
     public function requests(Request $request)
     {
+        SEOMeta::setTitle("Daftar permintaan manjadi Minitutor");
         $users = User::query();
-
         foreach($this->getRef()->getChildKeys() as $key) {
             $id = (Integer) trim($key, '_');
             $users->orWhere('id', $id);
@@ -84,16 +77,16 @@ class MinitutorsController extends Controller
         $users->orderBy('id');
         $data = $users->paginate(20)->appends(['search' => $request->input('search')]);
         return view('minitutors.requests', [ 'users' => $data ]);
-
     }
 
     public function showRequest($id)
     {
+        SEOMeta::setTitle("Permintaan manjadi Minitutor");
         $user = User::findOrFail($id);
         $snap = $this->getRef($user)->getSnapshot();
         if(!$snap->exists()) return abort(404);
         $data = $snap->getValue();
-        $data['cv'] = MinitutorcvHelper::getRequestUrl($data['cv']);
+        $data['cv'] = MinitutorcvHelper::getUrl($data['cv']);
         return view('minitutors.show_request', ["user" => $user, 'data' => (Object) $data]);
     }
 
@@ -104,7 +97,7 @@ class MinitutorsController extends Controller
         $snap = $ref->getSnapshot();
         if(!$snap->exists()) return abort(404);
         $data = $snap->getValue();
-        MinitutorcvHelper::destroyRequest($data['cv']);
+        MinitutorcvHelper::destroy($data['cv']);
         $ref->remove();
         // $data->user->notify(new RequestMinitutorRejected);
         return redirect()->route('minitutors.requests')->withSuccess('Permintaan telah di ditolak.');
@@ -117,7 +110,6 @@ class MinitutorsController extends Controller
         $snap = $ref->getSnapshot();
         if(!$snap->exists()) return abort(404);
         $data = $snap->getValue();
-        MinitutorcvHelper::moveToAccepted($data['cv']);
         unset($data['created_at']);
         $data['active'] = true;
         $minitutor = new Minitutor($data);

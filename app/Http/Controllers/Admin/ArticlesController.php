@@ -8,6 +8,7 @@ use App\Helpers\HeroHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\Minitutor;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
@@ -52,6 +53,7 @@ class ArticlesController extends Controller
 
     public function create(Request $request)
     {
+        SEOMeta::setTitle('Buat Artikel');
         $minitutor = Minitutor::where('active', true)->findOrFail($request->input('id') ?? 0);
         return view('articles.create', ['minitutor' => $minitutor]);
     }
@@ -68,11 +70,12 @@ class ArticlesController extends Controller
         $article = new Article($data);
         $minitutor->articles()->save($article);
 
-        return redirect()->route('articles.edit', $article->id)->withSuccess('Berhasil membuat artikel baru.');
+        return redirect()->route('articles.edit', $article->id)->withSuccess('Artikel telah dibuat.');
     }
 
     public function edit($id)
     {
+        SEOMeta::setTitle('Edit Artikel');
         $article = Article::findOrFail($id);
         $categories = Category::all();
         return view('articles.edit', ['article' => $article, 'categories' => $categories]);
@@ -92,13 +95,26 @@ class ArticlesController extends Controller
         $data['draf'] = (bool) !$request->input('public');
 
         if (isset($data['hero'])) {
-            $data['hero'] = HeroHelper::generate($data['hero'], $article->hero);
-        } else {
-            unset($data['hero']);
+            $name = HeroHelper::generate($data['hero'], $article->hero ? $article->hero->name : null);
+            $hero = $article->hero;
+            if($hero) {
+                $hero->update([
+                    'type'=> 'hero',
+                    'name'=> $name,
+                    'original_name'=> $data['hero']->getClientOriginalName()
+                ]);
+            } else {
+                $article->hero()->save(new Image([
+                    'type'=> 'hero',
+                    'name'=> $name,
+                    'original_name'=> $data['hero']->getClientOriginalName()
+                ]));
+            }
         }
+        unset($data['hero']);
 
         if (isset($data['category'])) {
-            $data['category_id'] = CategoryHelper::getCategoryIdOrCreate($data['category']);
+            $data['category_id'] = Category::getCategoryOrCreate($data['category'])->id;
         } else {
             $data['category_id'] = null;
         }
@@ -106,7 +122,7 @@ class ArticlesController extends Controller
         $article->update($data);
 
         if(isset($data['body'])) EditorjsHelper::cleanImage($data['body'], $article->images);
-        return redirect()->back()->withSuccess('Artikel berhasil di update.');
+        return redirect()->back()->withSuccess('Artikel telah diperbarui.');
     }
 
     public function destroy($id)
@@ -116,7 +132,7 @@ class ArticlesController extends Controller
             EditorjsHelper::deleteImage($image->name);
             $image->delete();
         }
-        HeroHelper::destroy($article->hero);
+        HeroHelper::destroy($article->hero ? $article->hero->name : null);
         $article->delete();
         return redirect()->route('articles.index')->withSuccess('Artikel berhasil dihapus.');
     }

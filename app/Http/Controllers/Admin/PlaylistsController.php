@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Helpers\CategoryHelper;
 use App\Helpers\HeroHelper;
+use App\Helpers\VideoHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\Minitutor;
 use App\Models\Playlist;
 use Artesaos\SEOTools\Facades\SEOMeta;
@@ -51,6 +52,7 @@ class PlaylistsController extends Controller
 
     public function create(Request $request)
     {
+        SEOMeta::setTitle('Buat Playlist');
         $minitutor = Minitutor::where('active', true)->findOrFail($request->input('id') ?? 0);
         return view('playlists.create', ['minitutor' => $minitutor]);
     }
@@ -67,11 +69,12 @@ class PlaylistsController extends Controller
         $playlist = new Playlist($data);
         $minitutor->playlists()->save($playlist);
 
-        return redirect()->route('playlists.edit', $playlist->id)->withSuccess('Berhasil membuat playlist baru.');
+        return redirect()->route('playlists.edit', $playlist->id)->withSuccess('Playlist telah dibuat.');
     }
 
     public function edit($id)
     {
+        SEOMeta::setTitle('Edit Playlist');
         $playlist = Playlist::findOrFail($id);
         $categories = Category::all();
         $videos = [];
@@ -80,6 +83,7 @@ class PlaylistsController extends Controller
             array_push($videos, [
                 'id' => $video['id'],
                 'index' => $video['index'],
+                'original_name' => $video['original_name'],
                 'url' => $video->getUrl(),
             ]);
         }
@@ -100,14 +104,27 @@ class PlaylistsController extends Controller
 
         $data['draf'] = (Boolean) !$request->input('public');
 
-        if(isset($data['hero'])) {
-            $data['hero'] = HeroHelper::generate($data['hero'], $playlist->hero);
-        } else {
-            unset($data['hero']);
+        if (isset($data['hero'])) {
+            $name = HeroHelper::generate($data['hero'], $playlist->hero ? $playlist->hero->name : null);
+            $hero = $playlist->hero;
+            if($hero) {
+                $hero->update([
+                    'type'=> 'hero',
+                    'name'=> $name,
+                    'original_name'=> $data['hero']->getClientOriginalName()
+                ]);
+            } else {
+                $playlist->hero()->save(new Image([
+                    'type'=> 'hero',
+                    'name'=> $name,
+                    'original_name'=> $data['hero']->getClientOriginalName()
+                ]));
+            }
         }
+        unset($data['hero']);
 
-        if(isset($data['category'])){
-            $data['category_id'] = CategoryHelper::getCategoryIdOrCreate($data['category']);
+        if (isset($data['category'])) {
+            $data['category_id'] = Category::getCategoryOrCreate($data['category'])->id;
         } else {
             $data['category_id'] = null;
         }
@@ -128,17 +145,18 @@ class PlaylistsController extends Controller
             }
         }
 
-        return redirect()->back()->withSuccess('Playlist berhasil diupdate.');
+        return redirect()->back()->withSuccess('Playlist telah diperbarui.');
     }
 
     public function destroy($id)
     {
         $playlist = Playlist::findOrFail($id);
         foreach($playlist->videos as $video) {
+            VideoHelper::destroy($video->name);
             $video->delete();
         }
-        HeroHelper::destroy($playlist->hero);
+        HeroHelper::destroy($playlist->hero ? $playlist->hero->name : null);
         $playlist->delete();
-        return redirect()->route('playlists.index')->withSuccess('Playlist berhasil dihapus.');
+        return redirect()->route('playlists.index')->withSuccess('Playlist telah dihapus.');
     }
 }

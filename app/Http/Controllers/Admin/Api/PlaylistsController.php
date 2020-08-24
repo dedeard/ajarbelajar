@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Api;
 
+use App\Helpers\VideoHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Playlist;
 use App\Models\Video;
@@ -17,6 +18,7 @@ class PlaylistsController extends Controller
     public function destroyVideo($video_id)
     {
         $video = Video::findOrFail($video_id);
+        VideoHelper::destroy($video->name);
         $video->delete();
         return response()->json([], 200);
     }
@@ -27,13 +29,14 @@ class PlaylistsController extends Controller
         $data = $request->validate([
             'file' => 'required|mimes:mp4,mov,avi,fly|max:250000'
         ]);
-        $name = Video::upload($data['file']);
+        $name = VideoHelper::upload($data['file']);
         $last = $playlist->videos()->orderBy('index', 'desc')->first();
         $index = 1;
         if($last) $index = $last->index + 1;
         $video = new Video([
             'name' => $name,
             'index' => $index,
+            'original_name' => $data['file']->getClientOriginalName()
         ]);
         $playlist->videos()->save($video);
         return response()->json([

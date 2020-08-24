@@ -33,7 +33,7 @@ class RolesController extends Controller
         $tableNames = config('permission.table_names.roles');
         $data = $request->validate(['name' => 'required|string|max:64|min:3|unique:'. $tableNames]);
         Role::create($data);
-        return redirect()->route('roles.index')->withSuccess('Berhasil membuat Role baru.');
+        return redirect()->route('roles.index')->withSuccess('Role telah dibuat.');
     }
 
     public function edit($id)
@@ -50,7 +50,7 @@ class RolesController extends Controller
         $tableNames = config('permission.table_names.roles');
         $data = $request->validate(['name' => 'required|string|max:64|min:3|unique:'. $tableNames . ',name,' . $id]);
         $role->update($data);
-        return redirect()->back()->withSuccess('Berhasil memperbarui Role.');
+        return redirect()->back()->withSuccess('Role telah diperbarui.');
     }
 
     public function destroy($id)
@@ -59,7 +59,7 @@ class RolesController extends Controller
         $users = User::role($role->name)->get();
         foreach($users as $user) $user->removeRole($role->name);
         $role->delete();
-        return redirect()->route('roles.index')->withSuccess('Berhasil menghapus Role.');
+        return redirect()->route('roles.index')->withSuccess('Role telah dihapus.');
     }
 
     public function toggleSyncPermission($role_id, $permission_id)
@@ -73,6 +73,6 @@ class RolesController extends Controller
             $role->givePermissionTo($permission->name);
         }
 
-        return redirect()->back()->withSuccess('Berhasil memperbarui role permission.');
+        return redirect()->back()->withSuccess('Role Permission telah diperbarui.');
     }
 }
