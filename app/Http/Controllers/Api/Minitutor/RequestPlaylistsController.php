@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Api\Minitutor;
 
-use App\Helpers\CategoryHelper;
 use App\Helpers\HeroHelper;
+use App\Helpers\VideoHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RequestPlaylistResorurce;
+use App\Models\Category;
+use App\Models\Image;
 use App\Models\RequestPlaylist;
 use App\Models\Video;
 use Illuminate\Http\Request;
 
-class RequestVideosController extends Controller
+class RequestPlaylistsController extends Controller
 {
     public function __construct()
     {
@@ -48,7 +50,7 @@ class RequestVideosController extends Controller
             'category' => 'nullable|string'
         ]);
         if(isset($data['category'])){
-            $data['category_id'] = CategoryHelper::getCategoryIdOrCreate($data['category']);
+            $data['category_id'] = Category::getCategoryOrCreate($data['category'])->id;
             unset($data['category']);
         } else {
             $data['category_id'] = null;
@@ -71,7 +73,23 @@ class RequestVideosController extends Controller
         $minitutor = $request->user()->minitutor;
         $playlist = $minitutor->requestPlaylists()->findOrFail($id);
         $data = $request->validate(['hero' => 'nullable|image|max:4000']);
-        $data['hero'] = HeroHelper::generate($data['hero'], $playlist->hero);
+
+        $name = HeroHelper::generate($data['hero'], $playlist->hero ? $playlist->hero->name : null);
+        $hero = $playlist->hero;
+        if($hero) {
+            $hero->update([
+                'type'=> 'hero',
+                'name'=> $name,
+                'original_name'=> $data['hero']->getClientOriginalName()
+            ]);
+        } else {
+            $playlist->hero()->save(new Image([
+                'type'=> 'hero',
+                'name'=> $name,
+                'original_name'=> $data['hero']->getClientOriginalName()
+            ]));
+        }
+
         return response()->json(RequestPlaylistResorurce::make($playlist), 200);
     }
 
@@ -84,19 +102,21 @@ class RequestVideosController extends Controller
             'file' => 'required|mimes:mp4,mov,avi,fly|max:250000'
         ]);
 
-        $name = Video::upload($data['file']);
+        $name = VideoHelper::upload($data['file']);
         $last = $playlist->videos()->orderBy('index', 'desc')->first();
         $index = 1;
         if($last) $index = $last->index + 1;
         $video = new Video([
             'name' => $name,
             'index' => $index,
+            'original_name' => $data['file']->getClientOriginalName()
         ]);
         $playlist->videos()->save($video);
         return response()->json([
             'id' => $video->id,
             'url' => $video->getUrl(),
             'index' => $video->index,
+            'original_name' => $data['file']->getClientOriginalName()
         ], 200);
     }
 
@@ -106,6 +126,7 @@ class RequestVideosController extends Controller
         $playlist = $minitutor->requestPlaylists()->findOrFail($playlist_id);
 
         $video = $playlist->videos()->findOrFail($video_id);
+        VideoHelper::destroy($video->name);
         $video->delete();
         return response()->json([], 200);
     }
@@ -115,9 +136,10 @@ class RequestVideosController extends Controller
         $minitutor = $request->user()->minitutor;
         $playlist = $minitutor->requestPlaylists()->findOrFail($id);
         foreach($playlist->videos as $video) {
+            VideoHelper::destroy($video->name);
             $video->delete();
         }
-        HeroHelper::destroy($playlist->hero);
+        HeroHelper::destroy($playlist->hero ? $playlist->hero->name : null);
         $playlist->delete();
         return response()->json([], 200);
     }

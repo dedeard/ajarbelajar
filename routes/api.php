@@ -9,11 +9,11 @@ Route::post('join-minitutor', 'JoinMinitutorController@store')->name('join.minit
 
 
 Route::prefix('minitutor')->as('minitutor.')->group(function(){
-    // minitutor request video
-    Route::post('request-videos/{id}/hero', 'Minitutor\RequestVideosController@updateHero')->name('request-videos.update.hero');
-    Route::post('request-videos/{id}/video', 'Minitutor\RequestVideosController@uploadVideo')->name('request-videos.upload.video');
-    Route::delete('request-videos/{playlist_id}/video/{video_id}', 'Minitutor\RequestVideosController@destroyVideo')->name('request-videos.destroy.video');
-    Route::resource('request-videos', 'Minitutor\RequestVideosController')->except(['create', 'edit', 'show']);
+    // minitutor request playlist
+    Route::post('request-playlists/{id}/hero', 'Minitutor\RequestPlaylistsController@updateHero')->name('request-playlists.update.hero');
+    Route::post('request-playlists/{id}/video', 'Minitutor\RequestPlaylistsController@uploadVideo')->name('request-playlists.upload.video');
+    Route::delete('request-playlists/{playlist_id}/playlist/{video_id}', 'Minitutor\RequestPlaylistsController@destroyVideo')->name('request-playlists.destroy.video');
+    Route::resource('request-playlists', 'Minitutor\RequestPlaylistsController')->except(['create', 'edit', 'show']);
 
     // minitutor request article
     Route::post('request-articles/{id}/hero', 'Minitutor\RequestArticlesController@updateHero')->name('request-articles.update.hero');

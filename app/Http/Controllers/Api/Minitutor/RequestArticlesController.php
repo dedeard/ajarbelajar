@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api\minitutor;
 
-use App\Helpers\CategoryHelper;
 use App\Helpers\EditorjsHelper;
 use App\Helpers\HeroHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RequestArticleResource;
+use App\Models\Category;
 use App\Models\Image;
 use App\models\RequestArticle;
 use Illuminate\Http\Request;
@@ -50,7 +50,7 @@ class RequestArticlesController extends Controller
             'body' => 'nullable',
         ]);
         if(isset($data['category'])){
-            $data['category_id'] = CategoryHelper::getCategoryIdOrCreate($data['category']);
+            $data['category_id'] = Category::getCategoryOrCreate($data['category'])->id;
             unset($data['category']);
         } else {
             $data['category_id'] = null;
@@ -76,7 +76,23 @@ class RequestArticlesController extends Controller
         $minitutor = $request->user()->minitutor;
         $article = $minitutor->requestArticles()->findOrFail($id);
         $data = $request->validate(['hero' => 'nullable|image|max:4000']);
-        $data['hero'] = HeroHelper::generate($data['hero'], $article->hero);
+
+        $name = HeroHelper::generate($data['hero'], $article->hero ? $article->hero->name : null);
+        $hero = $article->hero;
+        if($hero) {
+            $hero->update([
+                'type'=> 'hero',
+                'name'=> $name,
+                'original_name'=> $data['hero']->getClientOriginalName()
+            ]);
+        } else {
+            $article->hero()->save(new Image([
+                'type'=> 'hero',
+                'name'=> $name,
+                'original_name'=> $data['hero']->getClientOriginalName()
+            ]));
+        }
+
         return response()->json(RequestArticleResource::make($article), 200);
     }
 
@@ -86,7 +102,11 @@ class RequestArticlesController extends Controller
         $article = $minitutor->requestArticles()->findOrFail($id);
         $data = $request->validate(['file' => 'required|image|max:4000']);
         $upload = EditorjsHelper::uploadImage($data['file']);
-        $article->images()->save(new Image(['name' => $upload['name']]));
+        $article->images()->save(new Image([
+            'name' => $upload['name'],
+            'type' => 'image',
+            'original_name' => $data['file']->getClientOriginalName()
+        ]));
         return response()->json(['success' => 1, 'file' => $upload]);
     }
 
@@ -98,7 +118,7 @@ class RequestArticlesController extends Controller
             EditorjsHelper::deleteImage($image->name);
             $image->delete();
         }
-        HeroHelper::destroy($article->hero);
+        HeroHelper::destroy($article->hero ? $article->hero->name : null);
         $article->delete();
         return response()->json([], 200);
     }
