@@ -10,7 +10,6 @@ use App\Models\Playlist;
 use App\Models\RequestPlaylist;
 use App\Models\Video;
 use Artesaos\SEOTools\Facades\SEOMeta;
-use Illuminate\Http\Request;
 
 class RequestPlaylistsController extends Controller
 {
@@ -54,17 +53,6 @@ class RequestPlaylistsController extends Controller
         }
 
         return view('request_playlists.show', ['playlist' => $playlist, 'videos' => $videos]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -123,6 +111,6 @@ class RequestPlaylistsController extends Controller
         }
         HeroHelper::destroy($playlist->hero ? $playlist->hero->name : null);
         $playlist->delete();
-        return redirect()->route('request-playlists.index')->withSuccess('Playlist permintaan telah di hapus.');
+        return redirect()->route('request-playlists.index')->withSuccess('Playlist permintaan telah dihapus.');
     }
 }

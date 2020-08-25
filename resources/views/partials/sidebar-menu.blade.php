@@ -23,6 +23,13 @@ $linkGroups = [
       'can' => 'manage minitutor',
     ],
     [
+      'name' => 'Artikel Permintaan',
+      'route' => 'request-articles.index',
+      'is' => 'request-articles*',
+      'icon' => 'wb-order',
+      'can' => 'manage article',
+    ],
+    [
       'name' => 'Artikel',
       'route' => 'articles.index',
       'is' => 'articles*',

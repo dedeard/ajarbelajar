@@ -6,6 +6,11 @@ Route::get('/', function(){
     return view('dashboard');
 })->name('dashboard');
 
+
+// manage requested article
+Route::get('request-articles/{id}/accept', 'RequestArticlesController@accept')->name('request-articles.accept');
+Route::resource('request-articles', 'RequestArticlesController')->only(['index', 'show', 'destroy']);
+
 // manage article
 Route::get('articles/minitutors', 'ArticlesController@minitutors')->name('articles.minitutors');
 Route::resource('articles', 'ArticlesController')->except('show');
