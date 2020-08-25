@@ -19,6 +19,7 @@ class AuthResource extends JsonResource
             "apiToken" => $this->apiToken(),
             'name' => $this->name,
             'avatar' => $this->avatarUrl(),
+            'point' => $this->point,
             'about' => $this->about,
             'website_url' => $this->website_url,
             'twitter_url' => $this->twitter_url,
