@@ -72,7 +72,7 @@ class RequestPlaylistsController extends Controller
     {
         $minitutor = $request->user()->minitutor;
         $playlist = $minitutor->requestPlaylists()->findOrFail($id);
-        $data = $request->validate(['hero' => 'nullable|image|max:4000']);
+        $data = $request->validate(['hero' => 'required|image|max:4000']);
 
         $name = HeroHelper::generate($data['hero'], $playlist->hero ? $playlist->hero->name : null);
         $hero = $playlist->hero;
@@ -112,12 +112,7 @@ class RequestPlaylistsController extends Controller
             'original_name' => $data['file']->getClientOriginalName()
         ]);
         $playlist->videos()->save($video);
-        return response()->json([
-            'id' => $video->id,
-            'url' => $video->getUrl(),
-            'index' => $video->index,
-            'original_name' => $data['file']->getClientOriginalName()
-        ], 200);
+        return response()->json(RequestPlaylistResorurce::make($playlist), 200);
     }
 
     public function destroyVideo(Request $request, $playlist_id, $video_id)
@@ -128,7 +123,7 @@ class RequestPlaylistsController extends Controller
         $video = $playlist->videos()->findOrFail($video_id);
         VideoHelper::destroy($video->name);
         $video->delete();
-        return response()->json([], 200);
+        return response()->json(RequestPlaylistResorurce::make($playlist), 200);
     }
 
     public function destroy(Request $request, $id)
@@ -142,5 +137,29 @@ class RequestPlaylistsController extends Controller
         HeroHelper::destroy($playlist->hero ? $playlist->hero->name : null);
         $playlist->delete();
         return response()->json([], 200);
+    }
+
+    public function updateIndex(Request $request, $id)
+    {
+        $minitutor = $request->user()->minitutor;
+        $playlist = $minitutor->requestPlaylists()->findOrFail($id);
+        $data = $request->validate(['index' => 'required|string']);
+
+        $index = explode('|', $data['index']);
+        if(count($index) === $playlist->videos()->count()) {
+            $x = 1;
+            foreach($index as $id) {
+                $video = $playlist->videos()->find($id);
+                if($video) {
+                    $video->update(['index' => $x]);
+                    $x = $x+1;
+                } else {
+                    return abort(422);
+                }
+            }
+        } else {
+            return abort(422);
+        }
+        return response()->json(RequestPlaylistResorurce::make($playlist), 200);
     }
 }

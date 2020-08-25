@@ -12,7 +12,8 @@ Route::prefix('minitutor')->as('minitutor.')->group(function(){
     // minitutor request playlist
     Route::post('request-playlists/{id}/hero', 'Minitutor\RequestPlaylistsController@updateHero')->name('request-playlists.update.hero');
     Route::post('request-playlists/{id}/video', 'Minitutor\RequestPlaylistsController@uploadVideo')->name('request-playlists.upload.video');
-    Route::delete('request-playlists/{playlist_id}/playlist/{video_id}', 'Minitutor\RequestPlaylistsController@destroyVideo')->name('request-playlists.destroy.video');
+    Route::put('request-playlists/{id}/index', 'Minitutor\RequestPlaylistsController@updateIndex')->name('request-playlists.update.index');
+    Route::delete('request-playlists/{playlist_id}/video/{video_id}', 'Minitutor\RequestPlaylistsController@destroyVideo')->name('request-playlists.destroy.video');
     Route::resource('request-playlists', 'Minitutor\RequestPlaylistsController')->except(['create', 'edit', 'show']);
 
     // minitutor request article

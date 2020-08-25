@@ -24,7 +24,7 @@ class RequestPlaylistResorurce extends JsonResource
             'created_at' => $this->created_at->timestamp,
             'updated_at' => $this->updated_at->timestamp,
             'category' => CategoryResource::make($this->category),
-            'videos' => VideoResource::collection($this->videos)
+            'videos' => VideoResource::collection($this->videos()->orderBy('index')->get())
         ];
     }
 }
