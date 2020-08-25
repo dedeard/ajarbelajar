@@ -27,7 +27,7 @@ class HeroHelper extends Helper
      */
     static function disk() : Filesystem
     {
-        return Storage::disk('public');
+        return Storage::disk('gcs_public');
     }
 
     /**

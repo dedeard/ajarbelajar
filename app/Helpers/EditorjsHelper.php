@@ -21,7 +21,7 @@ class EditorjsHelper extends Helper
      */
     static function disk() : Filesystem
     {
-        return Storage::disk('public');
+        return Storage::disk('gcs_public');
     }
 
     /**
@@ -45,7 +45,7 @@ class EditorjsHelper extends Helper
         });
         self::disk()->put($dir . $dotName, (string) $tmp->encode($format, 75));
 
-        return ['name' => $name, "url" => "/storage/{$dir}{$name}"];
+        return ['name' => $name, "url" => self::disk()->url("{$dir}{$name}")];
     }
 
     /**
@@ -77,7 +77,7 @@ class EditorjsHelper extends Helper
             if(!!(array) $body) {
                 foreach ($body->blocks as $block) {
                     if ($block->type === 'image') {
-                        if ($block->data->file->url === "/storage/{$dir}{$image->name}") $exists = true;
+                        if ($block->data->file->url === self::disk()->url($dir . $image->name)) $exists = true;
                     }
                 }
             }
