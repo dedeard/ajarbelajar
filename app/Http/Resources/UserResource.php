@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AuthResource extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +16,9 @@ class AuthResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            "apiToken" => $this->apiToken(),
             'name' => $this->name,
             'avatar' => $this->avatarUrl(),
+            'username' => $this->username,
             'point' => $this->point,
             'about' => $this->about,
             'website_url' => $this->website_url,
@@ -27,12 +27,8 @@ class AuthResource extends JsonResource
             'facebook_url' => $this->facebook_url,
             'github_url' => $this->github_url,
             'youtube_url' => $this->youtube_url,
-            'username' => $this->username,
-            'email' => $this->email,
-            'email_verified_at' => $this->email_verified_at,
             'created_at' => $this->created_at->timestamp,
-            'updated_at' => $this->updated_at->timestamp,
-            'minitutor' => MinitutorResource::make($this->minitutor)
+            'updated_at' => $this->updated_at->timestamp
         ];
     }
 }

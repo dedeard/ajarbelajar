@@ -6,6 +6,7 @@ use App\Helpers\AvatarHelper;
 use App\Notifications\Auth\VerifyEmailNotification;
 use App\Notifications\Auth\ResetPasswordNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Password;
@@ -99,6 +100,14 @@ class User extends Authenticatable implements MustVerifyEmail
             return null;
         }
         return AvatarHelper::getUrl($this->avatar);
+    }
+
+    /**
+     * Get the comments relation.
+     */
+    public function comments() : BelongsToMany
+    {
+        return $this->belongsToMany(Comment::class);
     }
 
     /**

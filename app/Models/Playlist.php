@@ -54,6 +54,14 @@ class Playlist extends Model
     }
 
     /**
+     * Get the comments relation.
+     */
+    public function comments() : MorphMany
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    /**
      * Get the hero relation.
      */
     public function hero() : MorphOne
