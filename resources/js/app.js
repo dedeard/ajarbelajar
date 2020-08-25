@@ -9,6 +9,8 @@ window.PerfectScrollbar = require('perfect-scrollbar').default
 window.Swal = require('sweetalert2/dist/sweetalert2')
 window.$ = window.jQuery = require('jquery')
 window.autoComplete = require("@tarekraafat/autocomplete.js/dist/js/autoComplete")
+window.videojs = require('video.js').default
+require('videojs-vjsdownload')
 
 /**
  * Setup laravel echo

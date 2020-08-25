@@ -1,11 +1,11 @@
 <template>
   <div class="player" v-if="video">
     <div class="thumb">
-      <img src="https://storage.googleapis.com/ajarbelajarid.appspot.com/public/hero/04391120082020KMQCW2DRxKk8C2ix8P58zhm4L2YmcyvGKtHWYEYFjMz1CzGp1xvTX00glIJX-thumb.jpeg" alt="">
+      <img :src="thumb" />
       <div class="video-player" :class="{ play }">
         <button class="btn btn-danger close-toggle" @click.prevent="stopVideo">STOP</button>
         <div class="video-wrapper">
-          <video ref="video" class="video-js vjs-theme-forest">
+          <video ref="video" class="video-js">
             <source :src="video.url">
           </video>
         </div>
@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  props: ['video'],
+  props: ['video', 'thumb'],
   data() {
     return {
       player: null,
@@ -37,18 +37,16 @@ export default {
       if(!this.player) {
         this.player = window.videojs(this.$refs.video, {
           controls: true,
-          controlBar: {
-            children: [
-              'playToggle',
-              'progressControl',
-              'volumePanel',
-              'fullscreenToggle',
-            ],
-          },
           autoplay: true,
           aspectRatio: '16:9',
           fluid: true,
-          preload: 'auto'
+          preload: 'auto',
+          plugins: {
+            vjsdownload:{
+              textControl: 'Download video',
+              name: 'downloadButton'
+            }
+          }
         });
       } else {
         this.$refs.video.play()

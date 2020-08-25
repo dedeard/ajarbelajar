@@ -1,6 +1,5 @@
 import { VLazyImagePlugin } from 'v-lazy-image'
 
-
 import Sticky from 'vue-sticky-directive'
 import { openSidebar, closeSidebar, toggleSidebar } from './directives/Sidebar'
 import DeleteConfirm from './directives/delete-confirm'
@@ -14,6 +13,7 @@ import AppAlert from './components/AppAlert'
 import CategoryAutocomplete from './components/CategoryAutocomplete'
 import VideoOrder from './components/VideoOrder'
 import AppEditorjs from './components/AppEditorjs'
+import AppVideoSimple from './components/AppVideoSimple'
 
 
 Vue.use(VLazyImagePlugin)
@@ -34,6 +34,7 @@ Vue.component('AppAlert', AppAlert)
 Vue.component('CategoryAutocomplete', CategoryAutocomplete)
 Vue.component('VideoOrder', VideoOrder)
 Vue.component('AppEditorjs', AppEditorjs)
+Vue.component('AppVideoSimple', AppVideoSimple)
 
 
 new Vue({

@@ -30,11 +30,18 @@ $linkGroups = [
       'can' => 'manage article',
     ],
     [
+      'name' => 'Playlist Permintaan',
+      'route' => 'request-playlists.index',
+      'is' => 'request-playlists*',
+      'icon' => 'wb-video',
+      'can' => 'manage playlist',
+    ],
+    [
       'name' => 'Playlist',
       'route' => 'playlists.index',
       'is' => 'playlists*',
       'icon' => 'wb-video',
-      'can' => 'manage video',
+      'can' => 'manage playlist',
     ]
   ],
   [

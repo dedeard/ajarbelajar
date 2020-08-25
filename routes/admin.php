@@ -10,6 +10,10 @@ Route::get('/', function(){
 Route::get('articles/minitutors', 'ArticlesController@minitutors')->name('articles.minitutors');
 Route::resource('articles', 'ArticlesController')->except('show');
 
+// manage requested playlist
+Route::get('request-playlists/{id}/accept', 'RequestPlaylistsController@accept')->name('request-playlists.accept');
+Route::resource('request-playlists', 'RequestPlaylistsController')->only(['index', 'show', 'destroy']);
+
 // manage playlist
 Route::get('playlists/minitutors', 'PlaylistsController@minitutors')->name('playlists.minitutors');
 Route::resource('playlists', 'PlaylistsController')->except('show');

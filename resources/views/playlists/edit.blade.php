@@ -1,13 +1,5 @@
 @extends('layouts.app')
 
-@section('style:before')
-<link href="https://unpkg.com/video.js/dist/video-js.min.css" rel="stylesheet">
-<link href="https://unpkg.com/@videojs/themes@1/dist/forest/index.css" rel="stylesheet">
-@endsection
-@section('script:before')
-<script src="https://vjs.zencdn.net/7.8.4/video.js"></script>
-@endsection
-
 @section('content')
 <div class="container-fluid">
   <form class="row" method="post" enctype="multipart/form-data" action="{{ route('playlists.update', $playlist->id) }}">
@@ -18,7 +10,7 @@
         <div class="panel-heading">
           <h3 class="panel-title">Daftar Video</h3>
         </div>
-        <video-order :videos="{{ json_encode($videos) }}" upload-url="{{ route('api.admin.playlists.upload.video', $playlist->id) }}"></video-order>
+        <video-order :videos="{{ json_encode($videos) }}" thumb="{{ $playlist->heroUrl()['small'] }}" upload-url="{{ route('api.admin.playlists.upload.video', $playlist->id) }}"></video-order>
       </div>
     </div>
     <div class="col-lg-4">

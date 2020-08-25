@@ -11,7 +11,7 @@
     <li class="list-group-item" v-for="video in list" :key="video.index">
       <div class="wrapper">
         <span class="handle">:::</span>
-        <video-order-player :video="video" @videodeleted="handleDelete"></video-order-player>
+        <video-order-player :video="video" @videodeleted="handleDelete" :thumb="thumb"></video-order-player>
       </div>
     </li>
     <div slot="footer" key="footer">
@@ -27,7 +27,7 @@ import VideoOrderPlayer from './VideoOrderPlayer'
 import VideoUploader from './VideoUploader'
 
 export default {
-  props: ['videos', 'upload-url'],
+  props: ['videos', 'upload-url', 'thumb'],
   components: {
     draggable,
     VideoOrderPlayer,
