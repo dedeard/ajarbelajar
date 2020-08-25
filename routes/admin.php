@@ -6,6 +6,9 @@ Route::get('/', function(){
     return view('dashboard');
 })->name('dashboard');
 
+// manage comments
+Route::get('comments/{id}/make-public', 'CommentsController@makePublic')->name('comments.make-public');
+Route::resource('comments', 'CommentsController')->only(['index', 'destroy']);
 
 // manage requested article
 Route::get('request-articles/{id}/accept', 'RequestArticlesController@accept')->name('request-articles.accept');
