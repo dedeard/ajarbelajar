@@ -70,6 +70,14 @@ class Playlist extends Model
     }
 
     /**
+     * Get the views relation.
+     */
+    public function views() : MorphMany
+    {
+        return $this->morphMany(View::class, 'viewable');
+    }
+
+    /**
      * Get the hero relation.
      */
     public function hero() : MorphOne

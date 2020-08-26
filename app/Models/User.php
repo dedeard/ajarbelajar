@@ -111,6 +111,14 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Get the views relation.
+     */
+    public function views() : BelongsToMany
+    {
+        return $this->belongsToMany(View::class);
+    }
+
+    /**
      * Send email verification.
      */
     public function sendMemberEmailVerify() : void
