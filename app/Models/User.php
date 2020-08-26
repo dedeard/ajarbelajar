@@ -111,6 +111,14 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Get the feedback relation.
+     */
+    public function feedback() : BelongsToMany
+    {
+        return $this->belongsToMany(Feedback::class);
+    }
+
+    /**
      * Get the views relation.
      */
     public function views() : BelongsToMany
