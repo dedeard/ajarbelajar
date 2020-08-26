@@ -63,6 +63,14 @@ class Article extends Model
     }
 
     /**
+     * Get the feedback relation.
+     */
+    public function feedback() : MorphMany
+    {
+        return $this->morphMany(Feedback::class, 'feedbackable');
+    }
+
+    /**
      * Get the hero relation.
      */
     public function hero() : MorphOne

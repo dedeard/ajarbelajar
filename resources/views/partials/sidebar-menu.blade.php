@@ -2,13 +2,6 @@
 $linkGroups = [
   [
     [
-      'name' => 'Kategori',
-      'route' => 'categories.index',
-      'is' => 'categories*',
-      'icon' => 'wb-list',
-      'can' => 'manage category'
-    ],
-    [
       'name' => 'User',
       'route' => 'users.index',
       'is' => 'users*',
@@ -22,13 +15,24 @@ $linkGroups = [
       'icon' => 'wb-user-circle',
       'can' => 'manage minitutor',
     ],
+  ],
+  [
     [
-      'name' => 'Artikel Permintaan',
-      'route' => 'request-articles.index',
-      'is' => 'request-articles*',
-      'icon' => 'wb-order',
-      'can' => 'manage article',
+      'name' => 'Kategori',
+      'route' => 'categories.index',
+      'is' => 'categories*',
+      'icon' => 'wb-list',
+      'can' => 'manage category'
     ],
+    [
+      'name' => 'Komentar',
+      'route' => 'comments.index',
+      'is' => 'comments*',
+      'icon' => 'wb-chat',
+      'can' => 'manage comment',
+    ],
+  ],
+  [
     [
       'name' => 'Artikel',
       'route' => 'articles.index',
@@ -37,16 +41,23 @@ $linkGroups = [
       'can' => 'manage article',
     ],
     [
-      'name' => 'Playlist Permintaan',
-      'route' => 'request-playlists.index',
-      'is' => 'request-playlists*',
+      'name' => 'Playlist',
+      'route' => 'playlists.index',
+      'is' => 'playlists*',
       'icon' => 'wb-video',
       'can' => 'manage playlist',
     ],
     [
-      'name' => 'Playlist',
-      'route' => 'playlists.index',
-      'is' => 'playlists*',
+      'name' => 'Artikel Permintaan',
+      'route' => 'request-articles.index',
+      'is' => 'request-articles*',
+      'icon' => 'wb-order',
+      'can' => 'manage article',
+    ],
+    [
+      'name' => 'Playlist Permintaan',
+      'route' => 'request-playlists.index',
+      'is' => 'request-playlists*',
       'icon' => 'wb-video',
       'can' => 'manage playlist',
     ]

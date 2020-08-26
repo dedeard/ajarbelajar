@@ -30,3 +30,7 @@ Route::resource('categories', 'CategoriesController')->only(['index', 'show']);
 // Comment
 Route::get('comments/{type}/{id}', 'CommentsController@index')->name('comments.index');
 Route::post('comments/{type}/{id}', 'CommentsController@store')->name('comments.store');
+
+
+// feedback
+Route::post('feedback/{type}/{id}', 'FeedbackController@store')->name('feedback.store');
