@@ -27,8 +27,8 @@ class UserResource extends JsonResource
             'facebook_url' => $this->facebook_url,
             'github_url' => $this->github_url,
             'youtube_url' => $this->youtube_url,
-            'created_at' => $this->created_at->timestamp,
-            'updated_at' => $this->updated_at->timestamp
+            'created_at' => $this->created_at ? $this->created_at->timestamp : null,
+            'updated_at' => $this->updated_at ? $this->updated_at->timestamp : null,
         ];
     }
 }

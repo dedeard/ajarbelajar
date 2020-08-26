@@ -19,8 +19,7 @@ class CommentResource extends JsonResource
             'public' => $this->public,
             'body' => $this->body,
             'user' => UserResource::make($this->user),
-            'created_at' => $this->created_at->timestamp,
-            'updated_at' => $this->updated_at->timestamp
+            'created_at' => $this->created_at->timestamp
         ];
     }
 }

@@ -14,7 +14,7 @@ class ArticleResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
+        $data = [
             'id' => $this->id,
             'title' => $this->title,
             'slug' => $this->slug,
@@ -24,7 +24,27 @@ class ArticleResource extends JsonResource
             'draf' => $this->draf,
             'created_at' => $this->created_at->timestamp,
             'updated_at' => $this->updated_at->timestamp,
-            'category' => CategoryResource::make($this->category)
         ];
+
+        if ($this->feedback) {
+            $data['rating'] = $this->feedback->avg('rating');
+        }
+
+        if($this->category) {
+            $data['category'] = [
+                'id' => $this->category->id,
+                'name' => $this->category->name,
+                'slug' => $this->category->slug,
+            ];
+        }
+
+        if ($this->minitutor) {
+            $data['minitutor'] = MinitutorResource::make($this->minitutor);
+            if ($this->minitutor->user) {
+                $data['user'] = UserResource::make($this->minitutor->user);
+            }
+        }
+
+        return $data;
     }
 }

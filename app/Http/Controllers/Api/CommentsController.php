@@ -29,10 +29,20 @@ class CommentsController extends Controller
         if (empty($limit) || ($limit > 15)) {
             $limit = 15;
         }
-        $comments = $target->comments()->where('public', true)->orderBy('id')->paginate($limit);
+
+        $comments = $target->comments()
+                            ->select(['id', 'user_id', 'body', 'public', 'created_at'])
+                            ->where('public', true)
+                            ->with(['user' => function($q){
+                                $q->select(['id', 'name', 'avatar', 'username']);
+                            }])
+                            ->orderBy('id')
+                            ->paginate($limit);
+
         $comments->getCollection()->transform(function ($value) {
             return CommentResource::make($value);
         });
+
         return response()->json($comments, 200);
     }
 

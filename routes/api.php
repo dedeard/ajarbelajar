@@ -20,6 +20,12 @@ Route::prefix('minitutor')->as('minitutor.')->group(function(){
     Route::post('request-articles/{id}/hero', 'Minitutor\RequestArticlesController@updateHero')->name('request-articles.update.hero');
     Route::post('request-articles/{id}/image', 'Minitutor\RequestArticlesController@uploadImage')->name('request-articles.upload.image');
     Route::resource('request-articles', 'Minitutor\RequestArticlesController')->except(['create', 'edit', 'show']);
+
+    // minitutor playlist
+    Route::resource('playlists', 'Minitutor\PlaylistsController')->only('index');
+
+    // minitutor article
+    Route::resource('articles', 'Minitutor\ArticlesController')->only('index');
 });
 
 

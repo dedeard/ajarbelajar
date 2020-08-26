@@ -15,6 +15,7 @@ class MinitutorResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'active' => $this->active,
             'last_education' => $this->last_education,
             'university' => $this->university,
@@ -24,12 +25,8 @@ class MinitutorResource extends JsonResource
             'contact' => $this->contact,
             'expectation' => $this->expectation,
             'reason' => $this->reason,
-            'created_at' => $this->created_at->timestamp,
-            'updated_at' => $this->updated_at->timestamp,
-            'playlists' => PlaylistResource::collection($this->playlists),
-            'articles' => ArticleResource::collection($this->articles),
-            'request_playlists' => RequestPlaylistResorurce::collection($this->requestPlaylists),
-            'request_articles' => RequestArticleResource::collection($this->requestArticles),
+            'created_at' => $this->created_at ? $this->created_at->timestamp : null,
+            'updated_at' => $this->updated_at ? $this->updated_at->timestamp : null,
         ];
     }
 }
