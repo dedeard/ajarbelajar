@@ -110,7 +110,9 @@ class MinitutorsController extends Controller
         $snap = $ref->getSnapshot();
         if(!$snap->exists()) return abort(404);
         $data = $snap->getValue();
+        MinitutorcvHelper::destroy($data['cv']);
         unset($data['created_at']);
+        unset($data['cv']);
         $data['active'] = true;
         $minitutor = new Minitutor($data);
         $user->minitutor()->save($minitutor);

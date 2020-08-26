@@ -28,7 +28,7 @@ class JoinMinitutorController extends Controller
         $snap = $ref->getSnapshot();
         if($snap->exists()) {
             $data = $snap->getValue();
-            $data['cv'] = MinitutorcvHelper::getRequestUrl($data['cv']);
+            $data['cv'] = MinitutorcvHelper::getUrl($data['cv']);
             return response()->json($data, 200);
         }
         return response()->json(["message" => __("You have submitted a request to become a minitutor.")], 403);
@@ -65,7 +65,7 @@ class JoinMinitutorController extends Controller
             'cv' => 'required|mimes:pdf|max:10000',
         ]);
 
-        $data['cv'] = MinitutorcvHelper::generateRequest($data['cv']);
+        $data['cv'] = MinitutorcvHelper::generate($data['cv']);
 
         $ref->set(array_merge($data, ['created_at' =>  ['.sv' => 'timestamp']]));
 

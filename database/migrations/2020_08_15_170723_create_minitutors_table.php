@@ -29,7 +29,6 @@ class CreateMinitutorsTable extends Migration
             $table->string('contact')->nullable();
             $table->string('reason')->nullable();
             $table->string('expectation')->nullable();
-            $table->string('cv')->unique()->nullable();
 
             $table->timestamps();
         });

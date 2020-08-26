@@ -25,8 +25,7 @@ class Minitutor extends Model
         'interest_talent',
         'contact',
         'expectation',
-        'reason',
-        'cv'
+        'reason'
     ];
 
     /**
