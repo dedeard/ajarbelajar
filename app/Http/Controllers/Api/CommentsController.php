@@ -25,25 +25,20 @@ class CommentsController extends Controller
             $target = Playlist::where('draf', false)->findOrFail($id);
         }
         if (!$target) return abort(404);
-        $limit = $request->input('limit');
-        if (empty($limit) || ($limit > 15)) {
-            $limit = 15;
-        }
+
 
         $comments = $target->comments()
                             ->select(['id', 'user_id', 'body', 'public', 'created_at'])
                             ->where('public', true)
                             ->with(['user' => function($q){
-                                $q->select(['id', 'name', 'avatar', 'username']);
+                                $q->select(['id', 'name', 'avatar', 'username'])->with(['minitutor'=> function($q){
+                                    $q->select(['id', 'user_id', 'active'])->where('active', true);
+                                }]);
                             }])
                             ->orderBy('id')
-                            ->paginate($limit);
+                            ->get();
 
-        $comments->getCollection()->transform(function ($value) {
-            return CommentResource::make($value);
-        });
-
-        return response()->json($comments, 200);
+        return response()->json(CommentResource::collection($comments), 200);
     }
 
     public function store(Request $request, $type, $id)
