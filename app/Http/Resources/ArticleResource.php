@@ -22,6 +22,9 @@ class ArticleResource extends JsonResource
             'body' => $this->body,
             'hero' => $this->heroUrl(),
             'draf' => $this->draf,
+            'comments_count' => $this->comments_count,
+            'views_count' => $this->views_count,
+            'feedback_count' => $this->feedback_count,
             'created_at' => $this->created_at->timestamp,
             'updated_at' => $this->updated_at->timestamp,
         ];

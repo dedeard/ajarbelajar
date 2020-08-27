@@ -158,7 +158,7 @@ class Playlist extends Model
             return $query->where('public', true);
         }, 'views'=> function($q){
             $q->select(DB::raw('count(distinct(ip))'));
-        }]);
+        }, 'feedback']);
 
         return $model;
     }

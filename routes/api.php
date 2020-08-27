@@ -41,3 +41,11 @@ Route::post('comments/{type}/{id}', 'CommentsController@store')->name('comments.
 // feedback
 Route::get('feedback/{type}/{id}', 'FeedbackController@index')->name('feedback.index');
 Route::post('feedback/{type}/{id}', 'FeedbackController@store')->name('feedback.store');
+
+
+// Playlists
+Route::resource('playlists', 'PlaylistsController')->only(['index', 'show']);
+
+
+// Articles
+Route::resource('articles', 'ArticlesController')->only(['index', 'show']);
