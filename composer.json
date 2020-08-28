@@ -16,6 +16,7 @@
         "intervention/image": "^2.5",
         "kreait/laravel-firebase": "^2.2",
         "laravel/framework": "^7.24",
+        "laravel/passport": "^9.3",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
         "overtrue/laravel-subscribe": "^1.0",

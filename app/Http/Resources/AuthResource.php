@@ -16,7 +16,6 @@ class AuthResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            "apiToken" => $this->apiToken(),
             'name' => $this->name,
             'avatar' => $this->avatarUrl(),
             'point' => $this->point,

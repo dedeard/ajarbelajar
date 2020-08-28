@@ -6,18 +6,18 @@ use App\Helpers\AvatarHelper;
 use App\Notifications\Auth\VerifyEmailNotification;
 use App\Notifications\Auth\ResetPasswordNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use Laravel\Passport\HasApiTokens;
 use Overtrue\LaravelSubscribe\Traits\Subscriber;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable, HasRoles, Subscriber;
+    use Notifiable, HasRoles, Subscriber, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -58,32 +58,6 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime'
     ];
-
-    /**
-     * Get and create the api token.
-     */
-    public function apiToken($forceUpdate = false) : string
-    {
-        $token = Str::random(100);
-        if(!$this->api_token || $forceUpdate) {
-            $this->timestamps = false;
-            $this->forceFill(['api_token' => $token])->save();
-            $this->timestamps = true;
-        } else {
-            $token = $this->api_token;
-        }
-        return $token;
-    }
-
-    /**
-     * Delete the api token.
-     */
-    public function clearApiToken() : void
-    {
-        $this->timestamps = false;
-        $this->forceFill(['api_token' => null])->save();
-        $this->timestamps = true;
-    }
 
     /**
      * Get the minitutor relation.

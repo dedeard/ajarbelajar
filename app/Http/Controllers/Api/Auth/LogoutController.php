@@ -14,7 +14,9 @@ class LogoutController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->clearApiToken();
+        $request->user()->tokens->each(function($token, $key) {
+            $token->delete();
+        });
         return response()->json([], 200);
     }
 }

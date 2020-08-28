@@ -19,7 +19,9 @@ class LoginController extends Controller
             'username' => 'string',
         ]);
         if (Auth::attempt([$identity => $data[$identity], 'password' => $data['password']])) {
-            return response()->json(AuthResource::make(Auth::user()), 200);
+            $user = Auth::user();
+            $token = $user->createToken('auth-token')->accessToken;
+            return response()->json(['auth' => AuthResource::make($user), 'token' => $token], 200);
         }
         return response()->json(['message' => __('auth.failed')], 401);
     }
