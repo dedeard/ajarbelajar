@@ -15,6 +15,7 @@ class View extends Model
      * @var array
      */
     protected $fillable = [
+        'user_id',
         'ip',
         'agent'
     ];

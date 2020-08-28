@@ -106,45 +106,45 @@ class Article extends Model
     /**
      * Return the generated query.
      */
-    public static function generateQuery($model, $draf = false, $minitutor = true)
+    public static function generateQuery($model, $all = false)
     {
-        $model->select([
-            'id',
-            'minitutor_id',
-            'category_id',
-            'slug',
-            'title',
-            'draf',
-            'description',
-            'body',
-            'created_at',
-            'updated_at',
-        ]);
-
-        if($draf) {
-            $model->where('draf', $draf);
+        if(!$all) {
+            $model->select([
+                'id',
+                'minitutor_id',
+                'category_id',
+                'slug',
+                'title',
+                'draf',
+                'created_at',
+                'updated_at',
+            ]);
         }
 
-        $feedback = function($q) {
-            return $q->select([
-                'id',
-                'feedbackable_type',
-                'feedbackable_id',
-                DB::raw('(understand + inspiring + language_style + content_flow)/4 as rating')
-            ]);
-        };
-
-        $model->with(['feedback' => $feedback, 'hero', 'category']);
-
-        if($minitutor) {
-            $model->with(['minitutor' => function($q) {
-                $q->select(['id', 'user_id'])
-                ->with(['user' => function($q) {
+        $model->where('draf', false);
+        $model->with(['hero', 'category' => function($q){
+            $q->select(['id', 'name', 'slug']);
+        }]);
+        $model->with(['minitutor' => function($q) use ($all){
+            if(!$all) {
+                $q->select(['id', 'user_id', 'active']);
+            }
+            $q->with(['user' => function($q) use ($all) {
+                if(!$all) {
                     $q->select([
                         'id',
                         'name',
                         'avatar',
                         'point',
+                        'username',
+                    ]);
+                } else {
+                    $q->select([
+                        'id',
+                        'name',
+                        'avatar',
+                        'point',
+                        'about',
                         'website_url',
                         'twitter_url',
                         'facebook_url',
@@ -152,15 +152,37 @@ class Article extends Model
                         'youtube_url',
                         'username',
                     ]);
-                }]);
+                }
+            }]);
+        }]);
+
+        if($all) {
+            $model->with(['comments' => function($query){
+                return $query->with(['user' => function($q){
+                    $q->select([
+                        'id',
+                        'name',
+                        'avatar',
+                        'point',
+                        'username',
+                    ]);
+                }])->where('public', true);
+            }]);
+        } else {
+            $model->withCount(['comments' => function($query){
+                return $query->where('public', true);
             }]);
         }
 
-        $model->withCount(['comments' => function($query){
-            return $query->where('public', true);
-        }, 'views'=> function($q){
+        $model->withCount(['views'=> function($q){
             $q->select(DB::raw('count(distinct(ip))'));
+        }, 'feedback as rating' => function($q){
+            $q->select(DB::raw('coalesce(avg((understand + inspiring + language_style + content_flow)/5),0)'));
         }, 'feedback']);
+
+        $model->whereHas('minitutor', function($q){
+            $q->where('active', true);
+        });
 
         return $model;
     }

@@ -44,8 +44,10 @@ Route::post('feedback/{type}/{id}', 'FeedbackController@store')->name('feedback.
 
 
 // Playlists
+Route::get('playlists/{id}/view', 'PlaylistsController@storeView')->name('playlists.store.view');
 Route::resource('playlists', 'PlaylistsController')->only(['index', 'show']);
 
 
 // Articles
+Route::get('articles/{id}/view', 'ArticlesController@storeView')->name('articles.store.view');
 Route::resource('articles', 'ArticlesController')->only(['index', 'show']);
