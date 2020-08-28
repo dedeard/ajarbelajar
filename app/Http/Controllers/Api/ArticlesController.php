@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\AvatarHelper;
 use App\Helpers\HeroHelper;
 use App\Http\Controllers\Controller;
+use App\Models\Activity;
 use App\Models\Article;
 use App\Models\View;
 use Carbon\Carbon;
@@ -43,6 +44,21 @@ class ArticlesController extends Controller
     public function show(Request $request, $id)
     {
         $article = Article::generateQuery(Article::query(), true)->findOrFail($id);
+
+        if($user = auth('api')->user()) {
+            $q = $article->activities()->where('user_id', $user->id);
+            if ($q->exists()){
+                $activity = $q->first();
+                $activity->updated_at = now();
+                $activity->save();
+            } else {
+                $activity = new Activity([ 'user_id' => $user->id ]);
+                $article->activities()->save($activity);
+                if($user->activities()->count() > 8) {
+                    $user->activities()->orderBy('updated_at', 'asc')->first()->delete();
+                }
+            }
+        }
 
         $arr = $article->toArray();
         $arr['hero'] = HeroHelper::getUrl($arr['hero'] ? $arr['hero']['name'] : null);

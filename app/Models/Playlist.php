@@ -80,6 +80,14 @@ class Playlist extends Model
     }
 
     /**
+     * Get the activities relation.
+     */
+    public function activities() : MorphMany
+    {
+        return $this->morphMany(Activity::class, 'activitiable');
+    }
+
+    /**
      * Get the hero relation.
      */
     public function hero() : MorphOne

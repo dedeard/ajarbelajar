@@ -7,6 +7,7 @@ use App\Helpers\HeroHelper;
 use App\Helpers\VideoHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PlaylistResource;
+use App\Models\Activity;
 use App\Models\Playlist;
 use App\Models\View;
 use Carbon\Carbon;
@@ -45,6 +46,21 @@ class PlaylistsController extends Controller
     public function show($id)
     {
         $playlist = Playlist::generateQuery(Playlist::query(), true)->findOrFail($id);
+
+        if($user = auth('api')->user()) {
+            $q = $playlist->activities()->where('user_id', $user->id);
+            if ($q->exists()){
+                $activity = $q->first();
+                $activity->updated_at = now();
+                $activity->save();
+            } else {
+                $activity = new Activity([ 'user_id' => $user->id ]);
+                $playlist->activities()->save($activity);
+                if($user->activities()->count() > 8) {
+                    $user->activities()->orderBy('updated_at', 'asc')->first()->delete();
+                }
+            }
+        }
 
         $arr = $playlist->toArray();
         $arr['hero'] = HeroHelper::getUrl($arr['hero'] ? $arr['hero']['name'] : null);

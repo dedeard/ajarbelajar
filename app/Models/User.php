@@ -7,6 +7,7 @@ use App\Notifications\Auth\VerifyEmailNotification;
 use App\Notifications\Auth\ResetPasswordNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Password;
@@ -106,25 +107,33 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Get the comments relation.
      */
-    public function comments() : BelongsToMany
+    public function comments() : HasMany
     {
-        return $this->belongsToMany(Comment::class);
+        return $this->hasMany(Comment::class);
     }
 
     /**
      * Get the feedback relation.
      */
-    public function feedback() : BelongsToMany
+    public function feedback() : HasMany
     {
-        return $this->belongsToMany(Feedback::class);
+        return $this->hasMany(Feedback::class);
     }
 
     /**
      * Get the views relation.
      */
-    public function views() : BelongsToMany
+    public function views() : HasMany
     {
-        return $this->belongsToMany(View::class);
+        return $this->hasMany(View::class);
+    }
+
+    /**
+     * Get the activities relation.
+     */
+    public function activities() : HasMany
+    {
+        return $this->hasMany(Activity::class);
     }
 
     /**

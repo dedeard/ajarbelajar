@@ -63,3 +63,7 @@ Route::delete('follow/{minitutor_id}', 'FollowController@destroy')->name('follow
 Route::get('favorites/{user_id}', 'FavoritesController@index')->name('favorites.index');
 Route::post('favorites/{type}/{id}', 'FavoritesController@store')->name('favorites.store');
 Route::delete('favorites/{type}/{id}', 'FavoritesController@destroy')->name('favorites.destroy');
+
+
+// Activity
+Route::resource('activities', 'ActivitiesController')->only('show');
