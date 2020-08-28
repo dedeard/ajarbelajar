@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "46076d8b78cd309827544308712c8870",
+    "content-hash": "f2e7c2efd47cf5bd5da46e4766adbefd",
     "packages": [
         {
             "name": "artesaos/seotools",
@@ -2566,38 +2566,41 @@
             "time": "2020-08-11T08:46:50+00:00"
         },
         {
-            "name": "overtrue/laravel-follow",
-            "version": "1.1.16",
+            "name": "overtrue/laravel-subscribe",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/overtrue/laravel-follow.git",
-                "reference": "3f32a9570f6277d7f74c9bf94e8eb01434b84a3a"
+                "url": "https://github.com/overtrue/laravel-subscribe.git",
+                "reference": "067123ed31426fdf664b6ee3da1070efd78ed7b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overtrue/laravel-follow/zipball/3f32a9570f6277d7f74c9bf94e8eb01434b84a3a",
-                "reference": "3f32a9570f6277d7f74c9bf94e8eb01434b84a3a",
+                "url": "https://api.github.com/repos/overtrue/laravel-subscribe/zipball/067123ed31426fdf664b6ee3da1070efd78ed7b8",
+                "reference": "067123ed31426fdf664b6ee3da1070efd78ed7b8",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.0"
+                "laravel/framework": "^5.5||~6.0||~7.0"
             },
             "require-dev": {
-                "laravel/laravel": "~5.5||~6.0||~7.0",
-                "mockery/mockery": "1.3.1",
-                "phpunit/phpunit": "~7.5"
+                "brainmaestro/composer-git-hooks": "^2.7",
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "laravel/framework": "^5.8",
+                "mockery/mockery": "^1.2",
+                "orchestra/testbench": "^3.8",
+                "phpunit/phpunit": "~8.0"
             },
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "Overtrue\\LaravelFollow\\FollowServiceProvider"
+                        "Overtrue\\LaravelSubscribe\\SubscribeServiceProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Overtrue\\LaravelFollow\\": "src/"
+                    "Overtrue\\LaravelSubscribe\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2607,11 +2610,11 @@
             "authors": [
                 {
                     "name": "overtrue",
-                    "email": "i@overtrue.me"
+                    "email": "anzhengchao@gmail.com"
                 }
             ],
-            "description": "Laravel 5 User Based System",
-            "time": "2020-03-06T14:01:21+00:00"
+            "description": "User Subscribe/Unsubscribe features for Laravel Application.",
+            "time": "2020-04-09T16:52:08+00:00"
         },
         {
             "name": "paragonie/random_compat",

@@ -51,3 +51,9 @@ Route::resource('playlists', 'PlaylistsController')->only(['index', 'show']);
 // Articles
 Route::get('articles/{id}/view', 'ArticlesController@storeView')->name('articles.store.view');
 Route::resource('articles', 'ArticlesController')->only(['index', 'show']);
+
+
+// follow minitutor
+Route::get('follow/{user_id}', 'FollowController@index')->name('follow.index');
+Route::post('follow/{minitutor_id}', 'FollowController@store')->name('follow.store');
+Route::delete('follow/{minitutor_id}', 'FollowController@destroy')->name('follow.destroy');

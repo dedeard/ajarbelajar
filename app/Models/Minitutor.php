@@ -6,9 +6,11 @@ use App\models\RequestArticle;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Overtrue\LaravelSubscribe\Traits\Subscribable;
 
 class Minitutor extends Model
 {
+    use Subscribable;
 
     /**
      * The attributes that are mass assignable.
