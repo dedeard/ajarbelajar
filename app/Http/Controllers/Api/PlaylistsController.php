@@ -43,9 +43,9 @@ class PlaylistsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $playlist = Playlist::generateQuery(Playlist::query(), true)->findOrFail($id);
+        $playlist = Playlist::generateQuery(Playlist::query(), true)->where('slug', $slug)->firstOrFail();
 
         if($user = auth('api')->user()) {
             $q = $playlist->activities()->where('user_id', $user->id);

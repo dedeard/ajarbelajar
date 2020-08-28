@@ -41,9 +41,9 @@ class ArticlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show($slug)
     {
-        $article = Article::generateQuery(Article::query(), true)->findOrFail($id);
+        $article = Article::generateQuery(Article::query(), true)->where('slug', $slug)->firstOrFail();
 
         if($user = auth('api')->user()) {
             $q = $article->activities()->where('user_id', $user->id);
