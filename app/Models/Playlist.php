@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Facades\DB;
+use Overtrue\LaravelSubscribe\Traits\Subscribable;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 class Playlist extends Model
 {
-    use HasSlug;
+    use HasSlug, Subscribable;
 
     /**
      * The attributes that are mass assignable.

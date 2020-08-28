@@ -57,3 +57,9 @@ Route::resource('articles', 'ArticlesController')->only(['index', 'show']);
 Route::get('follow/{user_id}', 'FollowController@index')->name('follow.index');
 Route::post('follow/{minitutor_id}', 'FollowController@store')->name('follow.store');
 Route::delete('follow/{minitutor_id}', 'FollowController@destroy')->name('follow.destroy');
+
+
+// favorite minitutor
+Route::get('favorites/{user_id}', 'FavoritesController@index')->name('favorites.index');
+Route::post('favorites/{type}/{id}', 'FavoritesController@store')->name('favorites.store');
+Route::delete('favorites/{type}/{id}', 'FavoritesController@destroy')->name('favorites.destroy');
