@@ -8,7 +8,6 @@ use App\Models\Minitutor;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class FollowController extends Controller
 {
@@ -53,8 +52,6 @@ class FollowController extends Controller
             unset($arr['minitutor']['user']);
             array_push($response, $arr);
         }
-
-
         return $response;
     }
 
@@ -69,7 +66,7 @@ class FollowController extends Controller
         $user = $request->user();
         $minitutor = Minitutor::where('active', true)->findOrFail($minitutor_id);
         if(!$user->hasSubscribed($minitutor)) $user->subscribe($minitutor);
-        return response()->json([], 200);
+        return response()->json(['minitutor_id' => $minitutor->id], 200);
     }
 
     /**
