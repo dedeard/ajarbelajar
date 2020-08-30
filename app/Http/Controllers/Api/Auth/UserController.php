@@ -29,7 +29,7 @@ class UserController extends Controller
         $avatar = AvatarHelper::generate($data['avatar'], $user->avatar);
         $user->avatar = $avatar;
         $user->save();
-        return response()->json(AuthResource::make($user), 200);
+        return response()->json(['url' => AvatarHelper::getUrl($avatar)], 200);
     }
 
     public function update(Request $request)
@@ -66,7 +66,7 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return response()->json(AuthResource::make($user), 200);
+        return response()->json([], 200);
     }
 
     public function updateMinitutor(Request $request)
@@ -83,6 +83,6 @@ class UserController extends Controller
             'expectation' => 'required|string|max:255',
         ]);
         $user->minitutor->update($data);
-        return response()->json(AuthResource::make($user), 200);
+        return response()->json([], 200);
     }
 }

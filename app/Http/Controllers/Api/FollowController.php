@@ -27,16 +27,12 @@ class FollowController extends Controller
         $data = $user->subscriptions()
         ->withType(Minitutor::class)
         ->with(['minitutor' => function($q){
-            $q->select(['id', 'user_id', 'active']);
-            $q->with(['user'=> function($q){
-                $q->select([
-                    'id',
-                    'name',
-                    'avatar',
-                    'point',
-                    'username',
-                ]);
-            }]);
+            $q->with(['user']);
+            $q->withCount(['playlists' => function($q){
+                $q->where('draf', false);
+            },'articles' => function($q){
+                $q->where('draf', false);
+            }, 'subscriptions as followers_count']);
         }])
         ->whereHas('minitutor', function($q){
             $q->where('active', true);

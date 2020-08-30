@@ -44,6 +44,7 @@ class ArticlesController extends Controller
     public function show($slug)
     {
         $article = Article::generateQuery(Article::query(), true)->where('slug', $slug)->firstOrFail();
+        $minitutor = $article->minitutor;
 
         if($user = auth('api')->user()) {
             $q = $article->activities()->where('user_id', $user->id);
@@ -60,7 +61,45 @@ class ArticlesController extends Controller
             }
         }
 
+
+        $latesArticles = $minitutor->articles()
+        ->select(['minitutor_id', 'id', 'title', 'slug', 'draf', 'created_at'])
+        ->where('draf', false)
+        ->orderBy('id', 'desc')
+        ->take(4)
+        ->get()
+        ->toArray();
+
+        $latesPlaylists = $minitutor->playlists()
+        ->select(['minitutor_id', 'id', 'title', 'slug', 'draf', 'created_at'])
+        ->where('draf', false)
+        ->orderBy('id', 'desc')
+        ->take(4)
+        ->get()
+        ->toArray();
+
+        $lates = [];
+        foreach($latesArticles as $arr) {
+            array_push($lates, [
+                'id' => $arr['id'],
+                'title' => $arr['title'],
+                'slug' => $arr['slug'],
+                'created_at' => Carbon::parse($arr['created_at'])->timestamp,
+                'type' => 'Article'
+            ]);
+        }
+        foreach($latesPlaylists as $arr) {
+            array_push($lates, [
+                'id' => $arr['id'],
+                'title' => $arr['title'],
+                'slug' => $arr['slug'],
+                'created_at' => Carbon::parse($arr['created_at'])->timestamp,
+                'type' => 'Playlist'
+            ]);
+        }
+
         $arr = $article->toArray();
+        $arr['lates'] = $lates;
         $arr['hero'] = HeroHelper::getUrl($arr['hero'] ? $arr['hero']['name'] : null);
         $arr['created_at'] = Carbon::parse($arr['created_at'])->timestamp;
         $arr['updated_at'] = Carbon::parse($arr['updated_at'])->timestamp;
@@ -82,6 +121,7 @@ class ArticlesController extends Controller
             array_push($comments, $data);
         }
         $arr['comments'] = $comments;
+
         return response()->json($arr, 200);
     }
 

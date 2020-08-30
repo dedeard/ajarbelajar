@@ -2,6 +2,9 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Article;
+use App\Models\Minitutor;
+use App\Models\Playlist;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AuthResource extends JsonResource
@@ -14,6 +17,31 @@ class AuthResource extends JsonResource
      */
     public function toArray($request)
     {
+
+        $playlists = $this->subscriptions()->withType(Playlist::class)->get()->toArray();
+        $articles = $this->subscriptions()->withType(Article::class)->get()->toArray();
+
+        $favorites = [
+            'playlists' => [],
+            'articles' => [],
+        ];
+
+        foreach($playlists as $playlist){
+            array_push($favorites['playlists'], $playlist['subscribable_id']);
+        }
+        foreach($articles as $article){
+            array_push($favorites['articles'], $article['subscribable_id']);
+        }
+
+        $arr = $this->subscriptions()->withType(Minitutor::class)->whereHas('minitutor', function($q){
+            $q->where('active', true);
+        })->get()->toArray();
+
+        $followings = [];
+        foreach($arr as $following){
+            array_push($followings, $following['subscribable_id']);
+        }
+
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -31,7 +59,9 @@ class AuthResource extends JsonResource
             'email_verified_at' => $this->email_verified_at,
             'created_at' => $this->created_at->timestamp,
             'updated_at' => $this->updated_at->timestamp,
-            'minitutor' => MinitutorResource::make($this->minitutor)
+            'minitutor' => MinitutorResource::make($this->minitutor),
+            'favorites' => $favorites,
+            'followings' => $followings,
         ];
     }
 }

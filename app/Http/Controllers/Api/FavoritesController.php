@@ -40,34 +40,25 @@ class FavoritesController extends Controller
 
         $response = [];
         foreach(array_merge($playlists, $articles) as $arr){
-            $data = [
-                'id' => $arr['id'],
-                'created_at' => Carbon::parse($arr['created_at'])->timestamp,
-                'updated_at' => Carbon::parse($arr['updated_at'])->timestamp,
-            ];
-
             if(isset($arr['playlist'])) {
-                $post = $arr['playlist'];
+                $data = $arr['playlist'];
+                $data['type'] = 'Playlist';
             } else {
-                $post = $arr['article'];
+                $data = $arr['article'];
+                $data['type'] = 'Article';
             }
-
-            $post['hero'] = HeroHelper::getUrl($post['hero'] ? $post['hero']['name'] : null);
-            $post['created_at'] = Carbon::parse($post['created_at'])->timestamp;
-            $post['updated_at'] = Carbon::parse($post['updated_at'])->timestamp;
-            $post['user'] = $post['minitutor']['user'];
-            $post['user']['avatar'] = AvatarHelper::getUrl($post['user']['avatar']);
-            unset($post['minitutor']['user']);
-
-            if(isset($arr['playlist'])) {
-                $data['playlist'] = $post;
-            } else {
-                $data['article'] = $post;
-            }
+            $data['favorite_id'] = $arr['id'];
+            $data['favorited_at'] = Carbon::parse($arr['created_at'])->timestamp;
+            $data['hero'] = HeroHelper::getUrl($data['hero'] ? $data['hero']['name'] : null);
+            $data['created_at'] = Carbon::parse($data['created_at'])->timestamp;
+            $data['updated_at'] = Carbon::parse($data['updated_at'])->timestamp;
+            $data['user'] = $data['minitutor']['user'];
+            $data['user']['avatar'] = AvatarHelper::getUrl($data['user']['avatar']);
+            unset($data['minitutor']['user']);
 
             array_push($response, $data);
         }
-        $response = array_values(collect($response)->sortBy('id')->reverse()->toArray());
+        $response = array_values(collect($response)->sortBy('favorite_id')->reverse()->toArray());
 
         return response()->json($response, 200);
     }

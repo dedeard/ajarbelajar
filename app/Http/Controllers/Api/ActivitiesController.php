@@ -40,22 +40,16 @@ class ActivitiesController extends Controller
 
             if(isset($arr['playlist'])) {
                 $post = $arr['playlist'];
+                $data['type'] = 'Playlist';
             } else {
                 $post = $arr['article'];
+                $data['type'] = 'Article';
             }
 
-            $post['hero'] = HeroHelper::getUrl($post['hero'] ? $post['hero']['name'] : null);
-            $post['created_at'] = Carbon::parse($post['created_at'])->timestamp;
-            $post['updated_at'] = Carbon::parse($post['updated_at'])->timestamp;
-            $post['user'] = $post['minitutor']['user'];
-            $post['user']['avatar'] = AvatarHelper::getUrl($post['user']['avatar']);
-            unset($post['minitutor']['user']);
-
-            if(isset($arr['playlist'])) {
-                $data['playlist'] = $post;
-            } else {
-                $data['article'] = $post;
-            }
+            $data['hero'] = HeroHelper::getUrl($post['hero'] ? $post['hero']['name'] : null);
+            $data['title'] = $post['title'];
+            $data['slug'] = $post['slug'];
+            $data['user'] = $post['minitutor']['user'];
 
             array_push($response, $data);
         }
