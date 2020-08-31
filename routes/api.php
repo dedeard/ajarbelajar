@@ -67,3 +67,7 @@ Route::delete('favorites/{type}/{id}', 'FavoritesController@destroy')->name('fav
 
 // Activity
 Route::resource('activities', 'ActivitiesController')->only('show');
+
+
+// users
+Route::resource('users', 'UsersController')->only(['index', 'show']);
