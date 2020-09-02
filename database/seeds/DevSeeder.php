@@ -42,7 +42,16 @@ class DevSeeder extends Seeder
 
     public function run()
     {
+
         $faker = Factory::create();
+
+        $users = User::all();
+        foreach ($users as $user) {
+            $user->points = $faker->numberBetween(0,1000);
+            $user->save();
+        }
+
+        return true;
 
         // $this->call([RoleTableSeeder::class]);
         // $this->call([UserTableSeeder::class]);

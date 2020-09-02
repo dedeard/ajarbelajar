@@ -55,6 +55,7 @@ Route::resource('articles', 'ArticlesController')->only(['index', 'show']);
 
 // follow minitutor
 Route::get('follow/{user_id}', 'FollowController@index')->name('follow.index');
+Route::get('follow/{minitutor_id}/followers', 'FollowController@followers')->name('follow.followers');
 Route::post('follow/{minitutor_id}', 'FollowController@store')->name('follow.store');
 Route::delete('follow/{minitutor_id}', 'FollowController@destroy')->name('follow.destroy');
 
@@ -71,3 +72,9 @@ Route::resource('activities', 'ActivitiesController')->only('show');
 
 // users
 Route::resource('users', 'UsersController')->only(['index', 'show']);
+
+
+// minitutor
+Route::get('minitutors/{id}/articles', 'MinitutorsController@articles')->name('minitutors.articles');
+Route::get('minitutors/{id}/playlists', 'MinitutorsController@playlists')->name('minitutors.playlists');
+Route::resource('minitutors', 'MinitutorsController')->only(['index', 'show']);

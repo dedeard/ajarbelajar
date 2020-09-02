@@ -21,7 +21,6 @@
         "laravel/ui": "^2.1",
         "overtrue/laravel-subscribe": "^1.0",
         "pusher/pusher-php-server": "^4.1",
-        "rtconner/laravel-tagging": "^4.0",
         "spatie/laravel-permission": "^3.13",
         "spatie/laravel-sluggable": "^2.2",
         "superbalist/laravel-google-cloud-storage": "^2.2"

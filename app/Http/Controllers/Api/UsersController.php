@@ -44,7 +44,7 @@ class UsersController extends Controller
             'id',
             'name',
             'avatar',
-            'point',
+            'points',
             'about',
             'website_url',
             'twitter_url',

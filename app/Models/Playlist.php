@@ -146,7 +146,7 @@ class Playlist extends Model
                         'id',
                         'name',
                         'avatar',
-                        'point',
+                        'points',
                         'username',
                     ]);
                 } else {
@@ -154,7 +154,7 @@ class Playlist extends Model
                         'id',
                         'name',
                         'avatar',
-                        'point',
+                        'points',
                         'about',
                         'website_url',
                         'twitter_url',
@@ -174,7 +174,7 @@ class Playlist extends Model
                         'id',
                         'name',
                         'avatar',
-                        'point',
+                        'points',
                         'username',
                     ]);
                 }])->where('public', true);

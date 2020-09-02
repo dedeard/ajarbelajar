@@ -19,7 +19,7 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'avatar' => $this->avatarUrl(),
             'username' => $this->username,
-            'point' => $this->point,
+            'points' => $this->points,
             'about' => $this->about,
             'website_url' => $this->website_url,
             'twitter_url' => $this->twitter_url,

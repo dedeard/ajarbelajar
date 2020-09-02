@@ -13,7 +13,7 @@ class FollowController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->except('index');
+        $this->middleware('auth:api')->except(['index', 'followers']);
     }
 
     /**
@@ -27,7 +27,29 @@ class FollowController extends Controller
         $data = $user->subscriptions()
         ->withType(Minitutor::class)
         ->with(['minitutor' => function($q){
-            $q->with(['user']);
+            $q->select([
+                'id',
+                'user_id',
+                'active',
+                'last_education',
+                'majors',
+                'university',
+                'city_and_country_of_study'
+            ]);
+            $q->with(['user' => function($q){
+                $q->select([
+                    'id',
+                    'username',
+                    'name',
+                    'avatar',
+                    'points',
+                    'website_url',
+                    'twitter_url',
+                    'facebook_url',
+                    'instagram_url',
+                    'youtube_url',
+                ]);
+            }]);
             $q->withCount(['playlists' => function($q){
                 $q->where('draf', false);
             },'articles' => function($q){
@@ -77,5 +99,27 @@ class FollowController extends Controller
         $minitutor = Minitutor::where('active', true)->findOrFail($minitutor_id);
         if($user->hasSubscribed($minitutor)) $user->unsubscribe($minitutor);
         return response()->json([], 200);
+    }
+
+    public function followers($minitutor_id) {
+        $minitutor = Minitutor::where('active', true)->findOrFail($minitutor_id);
+        $response = [];
+        foreach ($minitutor->subscribers as $user) {
+            array_push($response, [
+                'id' => $user->id,
+                'name' => $user->name,
+                'avatar' =>  AvatarHelper::getUrl($user->avatar),
+                'points' => $user->points,
+                'username' => $user->username,
+                'website_url' => $user->website_url,
+                'twitter_url' => $user->twitter_url,
+                'facebook_url' => $user->facebook_url,
+                'instagram_url' => $user->instagram_url,
+                'youtube_url' => $user->youtube_url,
+                'created_at' => $user->created_at->timestamp,
+                'updated_at' => $user->updated_at->timestamp,
+            ]);
+        };
+        return $response;
     }
 }
