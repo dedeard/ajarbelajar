@@ -20,7 +20,8 @@ class Feedback extends Model
         'inspiring',
         'language_style',
         'content_flow',
-        'message'
+        'message',
+        'user_id',
     ];
 
     /**

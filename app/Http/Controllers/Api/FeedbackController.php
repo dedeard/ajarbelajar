@@ -61,6 +61,11 @@ class FeedbackController extends Controller
         if (!$target) return abort(404);
 
         $user = $request->user();
+
+        if($target->feedback()->where('user_id', $user->id)->exists()){
+            return abort(403);
+        }
+
         $data = $request->validate([
             'message' => 'required|string|min:3|max:600',
             'understand' => 'required|numeric|digits_between:1,5',
@@ -75,5 +80,20 @@ class FeedbackController extends Controller
         $target->feedback()->save($feedback);
 
         return response()->json([], 200);
+    }
+
+    public function show(Request $request, $type, $id)
+    {
+        $target = null;
+        if($type === 'article') {
+            $target = Article::where('draf', false)->findOrFail($id);
+        } else if ($type === 'playlist') {
+            $target = Playlist::where('draf', false)->findOrFail($id);
+        }
+        if (!$target) return abort(404);
+
+        $user = $request->user();
+        $data = $target->feedback()->where('user_id', $user->id)->firstOrFail();
+        return $data;
     }
 }

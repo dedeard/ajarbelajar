@@ -26,6 +26,12 @@ Route::prefix('minitutor')->as('minitutor.')->group(function(){
 
     // minitutor article
     Route::resource('articles', 'Minitutor\ArticlesController')->only('index');
+
+    // minitutor comments
+    Route::resource('comments', 'Minitutor\CommentsController')->only('index');
+
+    // minitutor feedback
+    Route::resource('feedback', 'Minitutor\FeedbackController')->only('index');
 });
 
 
@@ -40,6 +46,7 @@ Route::post('comments/{type}/{id}', 'CommentsController@store')->name('comments.
 
 // feedback
 Route::get('feedback/{type}/{id}', 'FeedbackController@index')->name('feedback.index');
+Route::get('feedback/{type}/{id}/show', 'FeedbackController@show')->name('feedback.show');
 Route::post('feedback/{type}/{id}', 'FeedbackController@store')->name('feedback.store');
 
 
