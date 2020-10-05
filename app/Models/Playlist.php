@@ -188,7 +188,7 @@ class Playlist extends Model
         $model->withCount(['views'=> function($q){
             $q->select(DB::raw('count(distinct(ip))'));
         }, 'feedback as rating' => function($q){
-            $q->select(DB::raw('coalesce(avg((understand + inspiring + language_style + content_flow)/5),0)'));
+            $q->select(DB::raw('coalesce(avg((understand + inspiring + language_style + content_flow)/4),0)'));
         }, 'feedback']);
 
         $model->whereHas('minitutor', function($q){
