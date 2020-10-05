@@ -85,3 +85,7 @@ Route::resource('users', 'UsersController')->only(['index', 'show']);
 Route::get('minitutors/{id}/articles', 'MinitutorsController@articles')->name('minitutors.articles');
 Route::get('minitutors/{id}/playlists', 'MinitutorsController@playlists')->name('minitutors.playlists');
 Route::resource('minitutors', 'MinitutorsController')->only(['index', 'show']);
+
+
+// Search
+Route::get('search', 'SearchController@index')->name('search');
