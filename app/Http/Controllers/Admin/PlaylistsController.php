@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Helpers\HeroHelper;
+use App\Helpers\PointHelper;
 use App\Helpers\VideoHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
@@ -68,6 +69,7 @@ class PlaylistsController extends Controller
 
         $playlist = new Playlist($data);
         $minitutor->playlists()->save($playlist);
+        PointHelper::onMinitutorPostCreated($minitutor->user);
 
         return redirect()->route('playlists.edit', $playlist->id)->withSuccess('Playlist telah dibuat.');
     }

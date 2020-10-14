@@ -53,6 +53,7 @@ class CommentsController extends Controller
 
         $user = $request->user();
         $data = $request->validate(['body' => 'required|string|min:10|max:300']);
+        $data['type'] = $type;
 
         $data['user_id'] = $user->id;
         $comment = new Comment($data);

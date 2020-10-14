@@ -87,6 +87,14 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Increment user point.
+     */
+    public function incrementPoint($point) {
+        $this->points = $this->points + $point;
+        return $this->save();
+    }
+
+    /**
      * Get the feedback relation.
      */
     public function feedback() : HasMany

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Helpers\CategoryHelper;
 use App\Helpers\EditorjsHelper;
 use App\Helpers\HeroHelper;
+use App\Helpers\PointHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Category;
@@ -69,6 +70,8 @@ class ArticlesController extends Controller
 
         $article = new Article($data);
         $minitutor->articles()->save($article);
+
+        PointHelper::onMinitutorPostCreated($minitutor->user);
 
         return redirect()->route('articles.edit', $article->id)->withSuccess('Artikel telah dibuat.');
     }

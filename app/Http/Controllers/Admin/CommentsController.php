@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\PointHelper;
 use App\Http\Controllers\Controller;
+use App\Models\Article;
 use App\Models\Comment;
+use App\Models\Playlist;
+use App\Notifications\ApproveCommentNotification;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
 
@@ -45,6 +49,14 @@ class CommentsController extends Controller
     {
         $comment = Comment::findOrFail($id);
         $comment->update(['public' => true]);
+        if($comment->type === 'article') {
+            $post = Article::findOrFail($comment->commentable_id);
+        } else {
+            $post = Playlist::findOrFail($comment->commentable_id);
+        }
+        PointHelper::onCommentAccepted($comment->user);
+        PointHelper::onMinitutorPostCommentAccepted($post->minitutor->user);
+        $comment->user->notify(new ApproveCommentNotification($comment, $post));
         return redirect()->back()->withSuccess('Komentar telah dipublikasikan.');
     }
 }

@@ -18,6 +18,8 @@ class Comment extends Model
         'user_id',
         'public',
         'body',
+        'type',
+        'commentable_id'
     ];
 
     /**

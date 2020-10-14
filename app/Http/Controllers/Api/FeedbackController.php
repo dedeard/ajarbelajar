@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\PointHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\FeedbackResource;
 use App\Models\Article;
@@ -75,6 +76,9 @@ class FeedbackController extends Controller
             'sync_with_me' => 'required|boolean',
         ]);
         $data['user_id'] = $user->id;
+
+        PointHelper::onReviewed($user);
+        PointHelper::onMinitutorPostReviewed($target->minitutor->user, round(($data['understand'] + $data['inspiring'] + $data['language_style'] + $data['content_flow'])/4));
 
         $feedback = new Feedback($data);
         $target->feedback()->save($feedback);

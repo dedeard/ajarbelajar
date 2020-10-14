@@ -89,3 +89,10 @@ Route::resource('minitutors', 'MinitutorsController')->only(['index', 'show']);
 
 // Search
 Route::get('search', 'SearchController@index')->name('search');
+
+
+// Notifications
+Route::get('notifications', 'NotificationsController@index')->name('notifications.index');
+Route::get('notifications/read/{id}', 'NotificationsController@read')->name('notifications.read');
+Route::get('notifications/read', 'NotificationsController@markAsRead')->name('notifications.read_all');
+Route::delete('notifications', 'NotificationsController@destroy')->name('notifications.destroy');

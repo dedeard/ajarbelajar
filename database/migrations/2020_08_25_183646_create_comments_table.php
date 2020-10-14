@@ -22,6 +22,7 @@ class CreateCommentsTable extends Migration
 
             $table->boolean('public')->default(false);
             $table->text('body');
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }
