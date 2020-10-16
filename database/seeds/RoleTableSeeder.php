@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -28,5 +29,9 @@ class RoleTableSeeder extends Seeder
         Role::create(['name' => 'Super Admin']);
         Role::create(['name' => 'Administrator']);
         Role::create(['name' => 'Moderator']);
+
+        $superadmin = User::where('username', 'superadmin')->first();
+        $superAdminRole = Role::findByName('Super Admin');
+        $superadmin->syncRoles($superAdminRole);
     }
 }
