@@ -18,3 +18,5 @@ Route::get('user', 'UserController@index')->name('user.index');
 Route::put('user', 'UserController@update')->name('user.update');
 Route::put('user/minitutor', 'UserController@updateMinitutor')->name('user.update.minitutor');
 Route::post('user/avatar', 'UserController@updateAvatar')->name('user.update.avatar');
+
+Route::post('broadcast', 'UserController@broadcast')->name('broadcast');

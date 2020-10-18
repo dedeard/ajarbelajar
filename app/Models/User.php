@@ -141,4 +141,12 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $this->notify(new ResetPasswordNotification($this->generateRemeberPasswordToken()));
     }
+
+    /**
+     * Return notification broadcast route.
+     */
+    public function receivesBroadcastNotificationsOn(): String
+    {
+        return 'App.User.'.$this->id;
+    }
 }

@@ -8,6 +8,7 @@ use App\Http\Resources\AuthResource;
 use App\Rules\Username;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Pusher\Pusher;
 
 class UserController extends Controller
 {
@@ -84,5 +85,11 @@ class UserController extends Controller
         ]);
         $user->minitutor->update($data);
         return response()->json([], 200);
+    }
+
+    public function broadcast(Request $request)
+    {
+        $pusher = new Pusher(env('PUSHER_APP_KEY'), env('PUSHER_APP_SECRET'), env('PUSHER_APP_ID'));
+        return $pusher->socket_auth($request->request->get('channel_name'), $request->request->get('socket_id'));
     }
 }
