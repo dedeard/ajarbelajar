@@ -153,6 +153,9 @@ class PlaylistsController extends Controller
     public function destroy($id)
     {
         $playlist = Playlist::findOrFail($id);
+        foreach($playlist->subscriptions()->get() as $subscribe) {
+            $subscribe->delete();
+        }
         foreach($playlist->videos as $video) {
             VideoHelper::destroy($video->name);
             $video->delete();

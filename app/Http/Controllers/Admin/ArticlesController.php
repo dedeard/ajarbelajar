@@ -131,6 +131,9 @@ class ArticlesController extends Controller
     public function destroy($id)
     {
         $article = Article::findOrFail($id);
+        foreach($article->subscriptions()->get() as $subscribe) {
+            $subscribe->delete();
+        }
         foreach($article->images as $image) {
             EditorjsHelper::deleteImage($image->name);
             $image->delete();
