@@ -77,6 +77,15 @@ $linkGroups = [
       'icon' => 'wb-lock',
       'can' => 'manage permission',
     ],
+  ],
+  [
+    [
+      'name' => 'SEO',
+      'route' => 'seos.index',
+      'is' => 'seos*',
+      'icon' => 'wb-globe',
+      'can' => 'manage seo',
+    ]
   ]
 ];
 @endphp
