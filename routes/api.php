@@ -36,6 +36,7 @@ Route::prefix('minitutor')->as('minitutor.')->group(function(){
 
 
 // Category
+Route::get('categories/popular', 'CategoriesController@popular')->name('categories.popular');
 Route::resource('categories', 'CategoriesController')->only(['index', 'show']);
 
 
@@ -52,11 +53,15 @@ Route::post('feedback/{type}/{id}', 'FeedbackController@store')->name('feedback.
 
 // Playlists
 Route::get('playlists/{id}/view', 'PlaylistsController@storeView')->name('playlists.store.view');
+Route::get('playlists/popular', 'PlaylistsController@popular')->name('playlists.popular');
+Route::get('playlists/news', 'PlaylistsController@news')->name('playlists.news');
 Route::resource('playlists', 'PlaylistsController')->only(['index', 'show']);
 
 
 // Articles
 Route::get('articles/{id}/view', 'ArticlesController@storeView')->name('articles.store.view');
+Route::get('articles/popular', 'ArticlesController@popular')->name('articles.popular');
+Route::get('articles/news', 'ArticlesController@news')->name('articles.news');
 Route::resource('articles', 'ArticlesController')->only(['index', 'show']);
 
 
@@ -78,6 +83,7 @@ Route::resource('activities', 'ActivitiesController')->only('show');
 
 
 // users
+Route::get('users/most-points', 'UsersController@mostPoints');
 Route::resource('users', 'UsersController')->only(['index', 'show']);
 
 
@@ -96,3 +102,7 @@ Route::get('notifications', 'NotificationsController@index')->name('notification
 Route::get('notifications/read/{id}', 'NotificationsController@read')->name('notifications.read');
 Route::get('notifications/read', 'NotificationsController@markAsRead')->name('notifications.read_all');
 Route::delete('notifications', 'NotificationsController@destroy')->name('notifications.destroy');
+
+
+// SEO
+Route::get('seos', 'SeosController@index')->name('seos.index');

@@ -9,6 +9,7 @@ use App\Models\Article;
 use App\Models\Category;
 use App\Models\Playlist;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class CategoriesController extends Controller
 {
@@ -70,6 +71,29 @@ class CategoriesController extends Controller
             $arr['user']['avatar'] = AvatarHelper::getUrl($arr['user']['avatar']);
             $arr['type'] = 'Playlist';
             unset($arr['minitutor']['user']);
+            array_push($response, $arr);
+        }
+        return $response;
+    }
+
+    public function popular() {
+        $categories = Category::withCount([
+            'articles' => function($q){
+                $q->where('draf', false);
+            },
+            'playlists' => function($q){
+                $q->where('draf', false);
+            },
+        ])
+        ->orderBy(DB::raw("`playlists_count` + `articles_count`"), 'desc')
+        ->limit(4)
+        ->get();
+        $response = [];
+
+        foreach($categories as $category) {
+            $arr = $category->toArray();
+            $arr['created_at'] = $category->created_at->timestamp;
+            $arr['updated_at'] = $category->updated_at->timestamp;
             array_push($response, $arr);
         }
         return $response;

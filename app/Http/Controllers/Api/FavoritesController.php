@@ -54,6 +54,7 @@ class FavoritesController extends Controller
             $data['updated_at'] = Carbon::parse($data['updated_at'])->timestamp;
             $data['user'] = $data['minitutor']['user'];
             $data['user']['avatar'] = AvatarHelper::getUrl($data['user']['avatar']);
+            $data['rating'] = round($data['rating'], 2);
             unset($data['minitutor']['user']);
 
             array_push($response, $data);

@@ -79,4 +79,18 @@ class UsersController extends Controller
 
         return $arr;
     }
+
+    public function mostPoints()
+    {
+        $data = User::select(['id', 'username', 'points', 'avatar', 'name', 'created_at', 'updated_at'])->orderBy('points', 'desc')->limit(4)->get();
+        $users = [];
+        foreach($data as $user) {
+            $arr = $user->toArray();
+            $arr['avatar'] = AvatarHelper::getUrl($arr['avatar']);
+            $arr['created_at'] = Carbon::parse($arr['created_at'])->timestamp;
+            $arr['updated_at'] = Carbon::parse($arr['updated_at'])->timestamp;
+            array_push($users, $arr);
+        }
+        return $users;
+    }
 }

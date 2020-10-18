@@ -29,6 +29,7 @@ class ArticlesController extends Controller
             $arr['updated_at'] = Carbon::parse($arr['updated_at'])->timestamp;
             $arr['user'] = $arr['minitutor']['user'];
             $arr['user']['avatar'] = AvatarHelper::getUrl($arr['user']['avatar']);
+            $arr['rating'] = round($arr['rating'], 2);
             unset($arr['minitutor']['user']);
             array_push($response, $arr);
         }
@@ -107,6 +108,7 @@ class ArticlesController extends Controller
         $arr['minitutor']['updated_at'] = Carbon::parse($arr['minitutor']['updated_at'])->timestamp;
         $arr['user'] = $arr['minitutor']['user'];
         $arr['user']['avatar'] = AvatarHelper::getUrl($arr['user']['avatar']);
+        $arr['rating'] = round($arr['rating'], 2);
         unset($arr['minitutor']['user']);
 
         $comments = [];
@@ -146,5 +148,41 @@ class ArticlesController extends Controller
         }
         $article->views()->save($view);
         return response()->json([], 200);
+    }
+
+    public function popular()
+    {
+        $articles = Article::generateQuery(Article::query())->orderBy('views_count', 'desc')->limit(5)->get()->toArray();
+        $response = [];
+        foreach($articles as $article) {
+            $arr = $article;
+            $arr['hero'] = HeroHelper::getUrl($arr['hero'] ? $arr['hero']['name'] : null);
+            $arr['created_at'] = Carbon::parse($arr['created_at'])->timestamp;
+            $arr['updated_at'] = Carbon::parse($arr['updated_at'])->timestamp;
+            $arr['user'] = $arr['minitutor']['user'];
+            $arr['user']['avatar'] = AvatarHelper::getUrl($arr['user']['avatar']);
+            $arr['rating'] = round($arr['rating'], 2);
+            unset($arr['minitutor']['user']);
+            array_push($response, $arr);
+        }
+        return response()->json($response, 200);
+    }
+
+    public function news()
+    {
+        $articles = Article::generateQuery(Article::query())->orderBy('id', 'desc')->limit(4)->get()->toArray();
+        $response = [];
+        foreach($articles as $article) {
+            $arr = $article;
+            $arr['hero'] = HeroHelper::getUrl($arr['hero'] ? $arr['hero']['name'] : null);
+            $arr['created_at'] = Carbon::parse($arr['created_at'])->timestamp;
+            $arr['updated_at'] = Carbon::parse($arr['updated_at'])->timestamp;
+            $arr['user'] = $arr['minitutor']['user'];
+            $arr['user']['avatar'] = AvatarHelper::getUrl($arr['user']['avatar']);
+            $arr['rating'] = round($arr['rating'], 2);
+            unset($arr['minitutor']['user']);
+            array_push($response, $arr);
+        }
+        return response()->json($response, 200);
     }
 }

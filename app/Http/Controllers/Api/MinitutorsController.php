@@ -101,6 +101,7 @@ class MinitutorsController extends Controller
             $arr['updated_at'] = Carbon::parse($arr['updated_at'])->timestamp;
             $arr['user'] = $arr['minitutor']['user'];
             $arr['user']['avatar'] = AvatarHelper::getUrl($arr['user']['avatar']);
+            $arr['rating'] = round($arr['rating'], 2);
             unset($arr['minitutor']['user']);
             array_push($response, $arr);
         }
@@ -128,6 +129,7 @@ class MinitutorsController extends Controller
             $arr['updated_at'] = Carbon::parse($arr['updated_at'])->timestamp;
             $arr['user'] = $arr['minitutor']['user'];
             $arr['user']['avatar'] = AvatarHelper::getUrl($arr['user']['avatar']);
+            $arr['rating'] = round($arr['rating'], 2);
             unset($arr['minitutor']['user']);
             array_push($response, $arr);
         }

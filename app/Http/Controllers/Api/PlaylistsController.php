@@ -6,7 +6,6 @@ use App\Helpers\AvatarHelper;
 use App\Helpers\HeroHelper;
 use App\Helpers\VideoHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\PlaylistResource;
 use App\Models\Activity;
 use App\Models\Playlist;
 use App\Models\View;
@@ -31,6 +30,7 @@ class PlaylistsController extends Controller
             $arr['updated_at'] = Carbon::parse($arr['updated_at'])->timestamp;
             $arr['user'] = $arr['minitutor']['user'];
             $arr['user']['avatar'] = AvatarHelper::getUrl($arr['user']['avatar']);
+            $arr['rating'] = round($arr['rating'], 2);
             unset($arr['minitutor']['user']);
             array_push($response, $arr);
         }
@@ -108,6 +108,7 @@ class PlaylistsController extends Controller
         $arr['minitutor']['updated_at'] = Carbon::parse($arr['minitutor']['updated_at'])->timestamp;
         $arr['user'] = $arr['minitutor']['user'];
         $arr['user']['avatar'] = AvatarHelper::getUrl($arr['user']['avatar']);
+        $arr['rating'] = round($arr['rating'], 2);
         unset($arr['minitutor']['user']);
 
         $comments = [];
@@ -158,5 +159,41 @@ class PlaylistsController extends Controller
         }
         $playlist->views()->save($view);
         return response()->json([], 200);
+    }
+
+    public function popular()
+    {
+        $playlists = Playlist::generateQuery(Playlist::query())->orderBy('views_count', 'desc')->limit(5)->get()->toArray();
+        $response = [];
+        foreach($playlists as $playlist) {
+            $arr = $playlist;
+            $arr['hero'] = HeroHelper::getUrl($arr['hero'] ? $arr['hero']['name'] : null);
+            $arr['created_at'] = Carbon::parse($arr['created_at'])->timestamp;
+            $arr['updated_at'] = Carbon::parse($arr['updated_at'])->timestamp;
+            $arr['user'] = $arr['minitutor']['user'];
+            $arr['user']['avatar'] = AvatarHelper::getUrl($arr['user']['avatar']);
+            $arr['rating'] = round($arr['rating'], 2);
+            unset($arr['minitutor']['user']);
+            array_push($response, $arr);
+        }
+        return response()->json($response, 200);
+    }
+
+    public function news()
+    {
+        $playlists = Playlist::generateQuery(Playlist::query())->orderBy('id', 'desc')->limit(4)->get()->toArray();
+        $response = [];
+        foreach($playlists as $playlist) {
+            $arr = $playlist;
+            $arr['hero'] = HeroHelper::getUrl($arr['hero'] ? $arr['hero']['name'] : null);
+            $arr['created_at'] = Carbon::parse($arr['created_at'])->timestamp;
+            $arr['updated_at'] = Carbon::parse($arr['updated_at'])->timestamp;
+            $arr['user'] = $arr['minitutor']['user'];
+            $arr['user']['avatar'] = AvatarHelper::getUrl($arr['user']['avatar']);
+            $arr['rating'] = round($arr['rating'], 2);
+            unset($arr['minitutor']['user']);
+            array_push($response, $arr);
+        }
+        return response()->json($response, 200);
     }
 }
