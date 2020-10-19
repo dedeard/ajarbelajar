@@ -10,6 +10,8 @@ use App\Models\Category;
 use App\Models\Image;
 use App\Models\Minitutor;
 use App\Models\Playlist;
+use App\Notifications\MinitutorPostPublishedNotification;
+use App\Notifications\NewPostNotification;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
 
@@ -129,6 +131,13 @@ class PlaylistsController extends Controller
             $data['category_id'] = Category::getCategoryOrCreate($data['category'])->id;
         } else {
             $data['category_id'] = null;
+        }
+
+        if(!$data['draf'] && $playlist->draf) {
+            $playlist->minitutor->user->notify(new MinitutorPostPublishedNotification($playlist, 'playlist'));
+            foreach($playlist->minitutor->subscribers()->get() as $user){
+                $user->notify(new NewPostNotification($playlist, 'playlist'));
+            }
         }
 
         $playlist->update($data);

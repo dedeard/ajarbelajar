@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\EditorjsHelper;
 use App\Helpers\HeroHelper;
+use App\Helpers\PointHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Image;
@@ -82,6 +83,7 @@ class RequestArticlesController extends Controller
         }
 
         $rArticle->delete();
+        PointHelper::onMinitutorPostCreated($minitutor->user);
         return redirect()->route('articles.edit', $article->id)->withSuccess('Artikel telah diterima.');
     }
 

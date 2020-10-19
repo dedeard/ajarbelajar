@@ -11,6 +11,8 @@ use App\Models\Article;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Minitutor;
+use App\Notifications\MinitutorPostPublishedNotification;
+use App\Notifications\NewPostNotification;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
 
@@ -120,6 +122,13 @@ class ArticlesController extends Controller
             $data['category_id'] = Category::getCategoryOrCreate($data['category'])->id;
         } else {
             $data['category_id'] = null;
+        }
+
+        if(!$data['draf'] && $article->draf) {
+            $article->minitutor->user->notify(new MinitutorPostPublishedNotification($article, 'article'));
+            foreach($article->minitutor->subscribers()->get() as $user){
+                $user->notify(new NewPostNotification($article, 'article'));
+            }
         }
 
         $article->update($data);

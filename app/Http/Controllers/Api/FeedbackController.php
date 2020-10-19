@@ -8,6 +8,7 @@ use App\Http\Resources\FeedbackResource;
 use App\Models\Article;
 use App\Models\Feedback;
 use App\Models\Playlist;
+use App\Notifications\FeedbackNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -82,7 +83,7 @@ class FeedbackController extends Controller
 
         $feedback = new Feedback($data);
         $target->feedback()->save($feedback);
-
+        $target->minitutor->user->notify(new FeedbackNotification($feedback));
         return response()->json([], 200);
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Helpers\HeroHelper;
+use App\Helpers\PointHelper;
 use App\Helpers\VideoHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Image;
@@ -93,6 +94,7 @@ class RequestPlaylistsController extends Controller
         }
 
         $rPlaylist->delete();
+        PointHelper::onMinitutorPostCreated($minitutor->user);
         return redirect()->route('playlists.edit', $playlist->id)->withSuccess('Playlist telah diterima.');
     }
 

@@ -8,6 +8,7 @@ use App\Models\Article;
 use App\Models\Comment;
 use App\Models\Playlist;
 use App\Notifications\ApproveCommentNotification;
+use App\Notifications\CommentToMinitutorPostNotification;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
 
@@ -57,6 +58,7 @@ class CommentsController extends Controller
         PointHelper::onCommentAccepted($comment->user);
         PointHelper::onMinitutorPostCommentAccepted($post->minitutor->user);
         $comment->user->notify(new ApproveCommentNotification($comment, $post));
+        $post->minitutor->user->notify(new CommentToMinitutorPostNotification($comment, $post));
         return redirect()->back()->withSuccess('Komentar telah dipublikasikan.');
     }
 }

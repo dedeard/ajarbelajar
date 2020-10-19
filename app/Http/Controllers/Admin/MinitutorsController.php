@@ -6,6 +6,8 @@ use App\Helpers\MinitutorcvHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Minitutor;
 use App\Models\User;
+use App\Notifications\RequestMinitutorAcceptedNotification;
+use App\Notifications\RequestMinitutorRejectedNotification;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
 use Kreait\Firebase\Database;
@@ -99,7 +101,7 @@ class MinitutorsController extends Controller
         $data = $snap->getValue();
         MinitutorcvHelper::destroy($data['cv']);
         $ref->remove();
-        // $data->user->notify(new RequestMinitutorRejected);
+        $user->notify(new RequestMinitutorRejectedNotification);
         return redirect()->route('minitutors.requests')->withSuccess('Permintaan telah di ditolak.');
     }
 
@@ -117,7 +119,7 @@ class MinitutorsController extends Controller
         $minitutor = new Minitutor($data);
         $user->minitutor()->save($minitutor);
         $ref->remove();
-        // $requestData->user->notify(new RequestMinitutorAccepted);
+        $user->notify(new RequestMinitutorAcceptedNotification);
         return redirect()->route('minitutors.requests')->withSuccess('Permintaan telah di terima.');
     }
 }
