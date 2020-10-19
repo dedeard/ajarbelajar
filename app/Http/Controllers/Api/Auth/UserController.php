@@ -90,6 +90,9 @@ class UserController extends Controller
     public function broadcast(Request $request)
     {
         $pusher = new Pusher(env('PUSHER_APP_KEY'), env('PUSHER_APP_SECRET'), env('PUSHER_APP_ID'));
-        return $pusher->socket_auth($request->request->get('channel_name'), $request->request->get('socket_id'));
+        if($request->request->get('channel_name') === 'private-App.User.' . $request->user()->id) {
+            return $pusher->socket_auth($request->request->get('channel_name'), $request->request->get('socket_id'));
+        }
+        return response()->json([], 400);
     }
 }

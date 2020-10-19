@@ -40,14 +40,14 @@ class NotificationsController extends Controller
         $response = [];
         switch($notification->type){
             case 'App\Notifications\ApproveCommentNotification' :
-                if($notification->data->type === 'article') {
-                    $post = Article::findOrFail($notification->data->post_id);
+                if($notification->data['type'] === 'article') {
+                    $post = Article::findOrFail($notification->data['post_id']);
                 } else {
-                    $post = Playlist::findOrFail($notification->data->post_id);
+                    $post = Playlist::findOrFail($notification->data['post_id']);
                 }
                 $response = [
                     'slug' => $post->slug,
-                    'type' => $notification->data->type
+                    'type' => $notification->data['type']
                 ];
             break;
         }

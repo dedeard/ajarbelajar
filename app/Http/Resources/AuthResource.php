@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use App\Models\Article;
 use App\Models\Minitutor;
 use App\Models\Playlist;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AuthResource extends JsonResource
@@ -62,6 +63,7 @@ class AuthResource extends JsonResource
             'minitutor' => MinitutorResource::make($this->minitutor),
             'favorites' => $favorites,
             'followings' => $followings,
+            'notification_count' => $this->unreadNotifications()->count(),
         ];
     }
 }
