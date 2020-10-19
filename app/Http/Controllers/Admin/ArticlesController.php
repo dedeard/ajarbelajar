@@ -14,6 +14,7 @@ use App\Models\Minitutor;
 use App\Notifications\MinitutorPostPublishedNotification;
 use App\Notifications\NewPostNotification;
 use Artesaos\SEOTools\Facades\SEOMeta;
+use Exception;
 use Illuminate\Http\Request;
 
 class ArticlesController extends Controller
@@ -127,7 +128,11 @@ class ArticlesController extends Controller
         if(!$data['draf'] && $article->draf) {
             $article->minitutor->user->notify(new MinitutorPostPublishedNotification($article, 'article'));
             foreach($article->minitutor->subscribers()->get() as $user){
-                $user->notify(new NewPostNotification($article, 'article'));
+                try {
+                    $user->notify(new NewPostNotification($article, 'article'));
+                } catch(Exception $e) {
+                    continue;
+                }
             }
         }
 

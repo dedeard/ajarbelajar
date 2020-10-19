@@ -3,9 +3,11 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class MinitutorPostPublishedNotification extends Notification
+class MinitutorPostPublishedNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -30,7 +32,23 @@ class MinitutorPostPublishedNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['database', 'broadcast'];
+        return ['database', 'broadcast', 'mail'];
+    }
+
+    /**
+     * Get the mail representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return \Illuminate\Notifications\Messages\MailMessage
+     */
+    public function toMail($notifiable)
+    {
+        $type = ($this->type) == 'article' ? 'Artikel' : 'Playlist';
+        return (new MailMessage)
+                    ->subject('[AjarBelajar] Yeay, kontenmu terbit!')
+                    ->line("Halo, MiniTutor yang baik!")
+                    ->line("Terima kasih sudah memberikan kontribusi yang konkret terhadap pendidikan gratis Indonesia! Konten kamu yang berjudul '{$this->post->title}' sudah terbit lho!")
+                    ->action('Lihat ' . $type, config('frontend.url') . '/' . $this->type . 's/' . $this->post->slug);
     }
 
     /**

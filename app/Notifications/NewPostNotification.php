@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewPostNotification extends Notification
+class NewPostNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -31,7 +31,23 @@ class NewPostNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['database', 'broadcast'];
+        return ['database', 'broadcast', 'mail'];
+    }
+
+    /**
+     * Get the mail representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return \Illuminate\Notifications\Messages\MailMessage
+     */
+    public function toMail($notifiable)
+    {
+        $type = ($this->type) == 'article' ? 'Artikel' : 'Playlist';
+        $minitutor = $this->post->minitutor->user;
+        return (new MailMessage)
+                    ->subject($type . ' baru dari MiniTutor ' . $minitutor->name . '.')
+                    ->line("Halo $notifiable->name, MiniTutor $minitutor->name mempunyai satu $type baru nihh, dengan judul '{$this->post->title}'.")
+                    ->action('Lihat ' . $type, config('frontend.url') . '/' . $this->type . 's/' . $this->post->slug);
     }
 
     /**

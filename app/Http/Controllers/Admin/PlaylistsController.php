@@ -13,6 +13,7 @@ use App\Models\Playlist;
 use App\Notifications\MinitutorPostPublishedNotification;
 use App\Notifications\NewPostNotification;
 use Artesaos\SEOTools\Facades\SEOMeta;
+use Exception;
 use Illuminate\Http\Request;
 
 class PlaylistsController extends Controller
@@ -136,7 +137,11 @@ class PlaylistsController extends Controller
         if(!$data['draf'] && $playlist->draf) {
             $playlist->minitutor->user->notify(new MinitutorPostPublishedNotification($playlist, 'playlist'));
             foreach($playlist->minitutor->subscribers()->get() as $user){
-                $user->notify(new NewPostNotification($playlist, 'playlist'));
+                try {
+                    $user->notify(new NewPostNotification($playlist, 'playlist'));
+                } catch(Exception $e) {
+                    continue;
+                }
             }
         }
 

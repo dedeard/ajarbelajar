@@ -100,7 +100,20 @@ class ArticlesController extends Controller
         }
 
         $arr = $article->toArray();
+
+        $description = null;
+        $body = $arr['body'] ? json_decode($arr['body']) : null;
+        if($body && isset($body->blocks)) {
+
+            foreach ($body->blocks as $block) {
+                if(!$description && $block->type === 'paragraph' && strlen($block->data->text) > 30){
+                    $description = substr($block->data->text, 0, 160);
+                }
+            }
+        }
+
         $arr['lates'] = $lates;
+        $arr['description'] = $arr['description'] ?? $description;
         $arr['hero'] = HeroHelper::getUrl($arr['hero'] ? $arr['hero']['name'] : null);
         $arr['created_at'] = Carbon::parse($arr['created_at'])->timestamp;
         $arr['updated_at'] = Carbon::parse($arr['updated_at'])->timestamp;
