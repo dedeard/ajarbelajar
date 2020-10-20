@@ -3,7 +3,7 @@
 use Illuminate\Support\Str;
 
 return [
-
+    'age' => env('CACHE_AGE', 90),
     /*
     |--------------------------------------------------------------------------
     | Default Cache Store

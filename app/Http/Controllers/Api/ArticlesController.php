@@ -10,6 +10,7 @@ use App\Models\Article;
 use App\Models\View;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class ArticlesController extends Controller
 {
@@ -18,11 +19,13 @@ class ArticlesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $articles = Article::generateQuery(Article::query())->get()->toArray();
+        $articles = Cache::remember('playlists.page.' . $request->input('page') ?? 1, config('cache.age'), function () {
+            return Article::generateQuery(Article::query())->orderBy('id', 'desc')->paginate(6)->toArray();
+        });
         $response = [];
-        foreach($articles as $article) {
+        foreach($articles['data'] as $article) {
             $arr = $article;
             $arr['hero'] = HeroHelper::getUrl($arr['hero'] ? $arr['hero']['name'] : null);
             $arr['created_at'] = Carbon::parse($arr['created_at'])->timestamp;
@@ -33,7 +36,8 @@ class ArticlesController extends Controller
             unset($arr['minitutor']['user']);
             array_push($response, $arr);
         }
-        return response()->json($response, 200);
+        $articles['data'] = $response;
+        return response()->json($articles, 200);
     }
 
     /**

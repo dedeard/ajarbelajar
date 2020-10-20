@@ -11,6 +11,7 @@ use App\Models\Playlist;
 use App\Models\View;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class PlaylistsController extends Controller
 {
@@ -19,11 +20,13 @@ class PlaylistsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $playlists = Playlist::generateQuery(Playlist::query())->orderBy('id', 'desc')->get()->toArray();
+        $playlists = Cache::remember('playlists.page.' . $request->input('page') ?? 1, config('cache.age'), function () {
+            return Playlist::generateQuery(Playlist::query())->orderBy('id', 'desc')->paginate(6)->toArray();
+        });
         $response = [];
-        foreach($playlists as $playlist) {
+        foreach($playlists['data'] as $playlist) {
             $arr = $playlist;
             $arr['hero'] = HeroHelper::getUrl($arr['hero'] ? $arr['hero']['name'] : null);
             $arr['created_at'] = Carbon::parse($arr['created_at'])->timestamp;
@@ -34,7 +37,8 @@ class PlaylistsController extends Controller
             unset($arr['minitutor']['user']);
             array_push($response, $arr);
         }
-        return response()->json($response, 200);
+        $playlists['data'] = $response;
+        return response()->json($playlists, 200);
     }
 
     /**
