@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class UsersResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -29,10 +29,6 @@ class UserResource extends JsonResource
             'youtube_url' => $this->youtube_url,
             'created_at' => $this->created_at ? $this->created_at->timestamp : null,
             'updated_at' => $this->updated_at ? $this->updated_at->timestamp : null,
-            'minitutor' => $this->active_minitutor,
-            'activities' => $this->listActivities,
-            'favorites' => $this->favorites,
-            'followings' => $this->followings,
         ];
     }
 }

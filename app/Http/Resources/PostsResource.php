@@ -2,10 +2,9 @@
 
 namespace App\Http\Resources;
 
-use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RequestPlaylistResorurce extends JsonResource
+class PostsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,14 +16,18 @@ class RequestPlaylistResorurce extends JsonResource
     {
         return [
             'id' => $this->id,
+            'slug' => $this->slug,
             'title' => $this->title,
-            'description' => $this->description,
-            'hero' => $this->heroUrl(),
-            'requested_at' => $this->requested_at ? Carbon::parse($this->requested_at)->timestamp : null,
+            'view_count' => $this->view_count,
             'created_at' => $this->created_at->timestamp,
             'updated_at' => $this->updated_at->timestamp,
+            'type' => $this->type,
+            'hero' => $this->hero_url,
             'category' => CategoryResource::make($this->category),
-            'videos' => VideoResource::collection($this->videos()->orderBy('index')->get())
+            'user' => UsersResource::make($this->minitutor->user),
+            'comments_count' => $this->comments_count,
+            'rating' => round($this->rating, 2),
+            'feedback_count' => $this->feedback_count,
         ];
     }
 }

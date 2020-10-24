@@ -35,4 +35,12 @@ class Video extends Model
     {
         return VideoHelper::getUrl($this->name);
     }
+
+    /**
+     * Atributes
+     */
+    public function getVideoUrlAttribute()
+    {
+        return VideoHelper::getUrl($this->name);
+    }
 }

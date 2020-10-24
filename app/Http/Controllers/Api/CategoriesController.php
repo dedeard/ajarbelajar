@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Helpers\AvatarHelper;
-use App\Helpers\HeroHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CategoryResource;
+use App\Http\Resources\PostsResource;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Playlist;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
 
 class CategoriesController extends Controller
 {
@@ -20,23 +19,22 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::withCount([
-            'articles' => function($q){
-                $q->where('draf', false);
-            },
-            'playlists' => function($q){
-                $q->where('draf', false);
-            },
-        ])->get();
-        $response = [];
-
-        foreach($categories as $category) {
-            $arr = $category->toArray();
-            $arr['created_at'] = $category->created_at->timestamp;
-            $arr['updated_at'] = $category->updated_at->timestamp;
-            array_push($response, $arr);
-        }
-        return $response;
+        $categories = Cache::remember('categories', config('cache.age'), function () {
+            return Category::withCount([
+                'articles' => function($q){
+                    $q->where('draf', false);
+                },
+                'playlists' => function($q){
+                    $q->where('draf', false);
+                },
+            ])
+            ->having('articles_count', '>', 0)
+            ->orHaving('playlists_count', '>', 0)
+            ->orderByRaw('articles_count + playlists_count DESC')
+            ->orderBy('id')
+            ->get();
+        });
+        return CategoryResource::collection($categories);
     }
 
     /**
@@ -47,55 +45,43 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        $category = Category::findOrFail($id);
-        $response = [];
-        $articles = Article::generateQuery($category->articles())->get()->toArray();
-        foreach($articles as $article) {
-            $arr = $article;
-            $arr['hero'] = HeroHelper::getUrl($arr['hero'] ? $arr['hero']['name'] : null);
-            $arr['created_at'] = Carbon::parse($arr['created_at'])->timestamp;
-            $arr['updated_at'] = Carbon::parse($arr['updated_at'])->timestamp;
-            $arr['user'] = $arr['minitutor']['user'];
-            $arr['user']['avatar'] = AvatarHelper::getUrl($arr['user']['avatar']);
-            $arr['type'] = 'Article';
-            unset($arr['minitutor']['user']);
-            array_push($response, $arr);
-        }
-        $playlists = Playlist::generateQuery($category->playlists())->get()->toArray();
-        foreach($playlists as $playlist) {
-            $arr = $playlist;
-            $arr['hero'] = HeroHelper::getUrl($arr['hero'] ? $arr['hero']['name'] : null);
-            $arr['created_at'] = Carbon::parse($arr['created_at'])->timestamp;
-            $arr['updated_at'] = Carbon::parse($arr['updated_at'])->timestamp;
-            $arr['user'] = $arr['minitutor']['user'];
-            $arr['user']['avatar'] = AvatarHelper::getUrl($arr['user']['avatar']);
-            $arr['type'] = 'Playlist';
-            unset($arr['minitutor']['user']);
-            array_push($response, $arr);
-        }
-        return $response;
+
+        return Cache::remember('categories.show.' . $id, config('cache.age'), function () use ($id) {
+            if(is_numeric($id)) {
+                $category = Category::findOrFail($id);
+            } else {
+                $category = Category::where('slug', $id)->firstOrFail();
+            }
+            $posts = Playlist::postListQuery($category->playlists())
+                ->unionAll(Article::postListQuery($category->articles()))
+                ->orderBy('created_at', 'desc')
+                ->get();
+            return [
+                'id' => $category->id,
+                'name' => $category->name,
+                'slug' => $category->slug,
+                'data' => PostsResource::collection($posts),
+            ];
+        });
     }
 
     public function popular() {
-        $categories = Category::withCount([
-            'articles' => function($q){
-                $q->where('draf', false);
-            },
-            'playlists' => function($q){
-                $q->where('draf', false);
-            },
-        ])
-        ->orderBy(DB::raw("`playlists_count` + `articles_count`"), 'desc')
-        ->limit(4)
-        ->get();
-        $response = [];
-
-        foreach($categories as $category) {
-            $arr = $category->toArray();
-            $arr['created_at'] = $category->created_at->timestamp;
-            $arr['updated_at'] = $category->updated_at->timestamp;
-            array_push($response, $arr);
-        }
-        return $response;
+        $categories = Cache::remember('categories.popular', config('cache.age'), function () {
+            return Category::withCount([
+                'articles' => function($q){
+                    $q->where('draf', false);
+                },
+                'playlists' => function($q){
+                    $q->where('draf', false);
+                },
+            ])
+            ->having('articles_count', '>', 0)
+            ->orHaving('playlists_count', '>', 0)
+            ->orderByRaw('articles_count + playlists_count DESC')
+            ->orderBy('id')
+            ->limit(8)
+            ->get();
+        });
+        return CategoryResource::collection($categories);
     }
 }

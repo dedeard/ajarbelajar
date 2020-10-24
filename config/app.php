@@ -169,6 +169,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Kreait\Laravel\Firebase\ServiceProvider::class,
         Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
+        Spatie\Analytics\AnalyticsServiceProvider::class,
 
         /*
         * Application Service Providers...
@@ -231,6 +232,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
 
     ],
 

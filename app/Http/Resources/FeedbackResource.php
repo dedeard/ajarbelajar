@@ -23,7 +23,7 @@ class FeedbackResource extends JsonResource
             'content_flow' => $this->content_flow,
             'message' => $this->message,
             'rating' => $this->rating,
-            'user' => UserResource::make($this->user),
+            'user' => UsersResource::make($this->user),
             'created_at' => $this->created_at->timestamp
         ];
     }

@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use App\Helpers\AvatarHelper;
+use App\Http\Resources\MinitutorsResource;
+use App\Http\Resources\PostsResource;
+use App\Http\Resources\UsersResource;
 use App\Notifications\Auth\VerifyEmailNotification;
 use App\Notifications\Auth\ResetPasswordNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -10,7 +13,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
 use Laravel\Passport\HasApiTokens;
 use Overtrue\LaravelSubscribe\Traits\Subscriber;
 use Spatie\Permission\Traits\HasRoles;
@@ -103,14 +105,6 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Get the views relation.
-     */
-    public function views() : HasMany
-    {
-        return $this->hasMany(View::class);
-    }
-
-    /**
      * Get the activities relation.
      */
     public function activities() : HasMany
@@ -148,5 +142,140 @@ class User extends Authenticatable implements MustVerifyEmail
     public function receivesBroadcastNotificationsOn(): String
     {
         return 'App.User.'.$this->id;
+    }
+
+    /**
+     * Return the generated Firebase Custom Token.
+     */
+    public function createFirebaseCustomToken(): String
+    {
+        $auth = app('firebase.auth');
+        $uid = 'id-' . $this->id;
+        $customToken = $auth->createCustomToken($uid);
+        return (string) $customToken;
+    }
+
+    /**
+     * Atributes
+     */
+    public function getAvatarUrlAttribute()
+    {
+        if(!$this->avatar) {
+            return null;
+        }
+        return AvatarHelper::getUrl($this->avatar);
+    }
+
+    public function getListActivitiesAttribute()
+    {
+        $playlists = $this->activities()->with(['playlist' => function($q){
+            Playlist::postListQuery($q);
+        }])->whereHas('playlist')->where('activitiable_type', Playlist::class)->get();
+        $articles = $this->activities()->with(['article' => function($q){
+            Article::postListQuery($q);
+        }])->whereHas('article')->where('activitiable_type', Article::class)->get();
+
+        return $playlists->merge($articles)->transform(function($item){
+            if($item->playlist){
+                $post = $item->playlist;
+            } else {
+                $post = $item->article;
+            }
+            return [
+                'id' => $item->id,
+                'created_at' => $item->created_at->timestamp,
+                'updated_at' => $item->updated_at->timestamp,
+                'post' => PostsResource::make($post),
+            ];
+        })->sortByDesc('updated_at')->values()->all();
+    }
+
+    public function getFollowingsAttribute()
+    {
+        return $this->subscriptions()
+            ->withType(Minitutor::class)
+            ->with(['minitutor' => function($q){
+                $q->with('user');
+            }])
+            ->whereHas('minitutor', function($q){
+                $q->where('active', true);
+            })
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->transform(function($item){
+                return [
+                    'id' => $item->id,
+                    'user' => UsersResource::make($item->minitutor->user),
+                    'minitutor' => MinitutorsResource::make($item->minitutor),
+                ];
+            });
+    }
+
+    public function getFavoritesAttribute()
+    {
+        $playlists = $this->subscriptions()
+            ->withType(Playlist::class)
+            ->with(['playlist' => function($q){
+                return Playlist::postListQuery($q);
+            }])
+            ->get();
+
+        $articles = $this->subscriptions()
+            ->withType(Article::class)
+            ->with(['article' => function($q){
+                return Article::postListQuery($q);
+            }])
+            ->get();
+
+        return $playlists->merge($articles)->transform(function($item){
+            if($item->playlist){
+                $post = $item->playlist;
+            } else {
+                $post = $item->article;
+            }
+            return [
+                'id' => $item->id,
+                'created_at' => $item->created_at->timestamp,
+                'updated_at' => $item->updated_at->timestamp,
+                'post' => PostsResource::make($post),
+            ];
+        })->sortByDesc('created_at')->values()->all();
+    }
+
+    public function getActiveMinitutorAttribute()
+    {
+        return $this->minitutor()->where('active', true)->exists();
+    }
+
+    public function getFavoriteIdsAttribute()
+    {
+        $playlists = $this->subscriptions()
+            ->withType(Playlist::class)
+            ->get()
+            ->transform(function($item) {
+                return $item->subscribable_id;
+            });
+
+        $articles = $this->subscriptions()
+            ->withType(Article::class)
+            ->get()
+            ->transform(function($item) {
+                return $item->subscribable_id;
+            });
+
+        return [
+            'playlists' => $playlists,
+            'articles' => $articles,
+        ];
+    }
+
+    public function getFollowingIdsAttribute()
+    {
+        return $this->subscriptions()
+            ->withType(Minitutor::class)
+            ->get()
+            ->transform(function($item) {
+                return $item->subscribable_id;
+            });
     }
 }

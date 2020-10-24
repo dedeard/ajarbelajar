@@ -6,6 +6,27 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class ArticleResource extends JsonResource
 {
+    private function createDescription($json)
+    {
+        $description = null;
+        $body = $json ? json_decode($json) : null;
+        if(isset($body) && isset($body->blocks)) {
+            foreach ($body->blocks as $block) {
+                if(!$description && $block->type === 'paragraph' && strlen($block->data->text) > 30){
+                    $description = substr($block->data->text, 0, 160);
+                }
+            }
+
+            if(!$description) {
+                foreach ($body->blocks as $block) {
+                    if(!$description && $block->type === 'paragraph'){
+                        $description = substr($block->data->text, 0, 160);
+                    }
+                }
+            }
+        }
+        return $description;
+    }
     /**
      * Transform the resource into an array.
      *
@@ -14,40 +35,24 @@ class ArticleResource extends JsonResource
      */
     public function toArray($request)
     {
-        $data = [
+        return [
             'id' => $this->id,
-            'title' => $this->title,
             'slug' => $this->slug,
-            'description' => $this->description,
+            'title' => $this->title,
+            'description' => $this->description ?? $this->createDescription($this->body),
             'body' => $this->body,
-            'hero' => $this->heroUrl(),
-            'draf' => $this->draf,
-            'comments_count' => $this->comments_count,
-            'views_count' => $this->views_count,
-            'feedback_count' => $this->feedback_count,
+            'view_count' => $this->view_count,
             'created_at' => $this->created_at->timestamp,
             'updated_at' => $this->updated_at->timestamp,
+            'type' => $this->type,
+            'hero' => $this->hero_url,
+            'category' => CategoryResource::make($this->category),
+            'minitutor' => MinitutorsResource::make($this->minitutor),
+            'user' => UsersResource::make($this->minitutor->user),
+            'comments' => CommentResource::collection($this->comments),
+            'comments_count' => count($this->comments),
+            'rating' => round($this->rating, 2),
+            'feedback_count' => $this->feedback_count,
         ];
-
-        if ($this->feedback) {
-            $data['rating'] = $this->feedback->avg('rating');
-        }
-
-        if($this->category) {
-            $data['category'] = [
-                'id' => $this->category->id,
-                'name' => $this->category->name,
-                'slug' => $this->category->slug,
-            ];
-        }
-
-        if ($this->minitutor) {
-            $data['minitutor'] = MinitutorResource::make($this->minitutor);
-            if ($this->minitutor->user) {
-                $data['user'] = UserResource::make($this->minitutor->user);
-            }
-        }
-
-        return $data;
     }
 }

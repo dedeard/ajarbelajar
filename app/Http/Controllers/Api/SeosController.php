@@ -10,8 +10,12 @@ class SeosController extends Controller
 {
     public function index()
     {
-        return Cache::remember('seo', 60 * 60 * 24, function () {
+        $data = Cache::remember('seo', 60 * 60 * 24, function () {
             return Seo::all();
         });
+
+        return [
+            'data' => $data
+        ];
     }
 }

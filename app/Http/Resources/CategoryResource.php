@@ -16,10 +16,11 @@ class CategoryResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'playlist_count' => $this->playlists()->where('draf', false)->count(),
-            'article_count' => $this->articles()->where('draf', false)->count(),
             'slug' => $this->slug,
+            'name' => $this->name,
+            'articles_count' => $this->articles_count,
+            'playlists_count' => $this->playlists_count,
+            'created_at' => $this->created_at ? $this->created_at->timestamp : null,
         ];
     }
 }

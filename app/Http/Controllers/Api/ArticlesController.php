@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Helpers\AvatarHelper;
-use App\Helpers\HeroHelper;
 use App\Http\Controllers\Controller;
-use App\Models\Activity;
+use App\Http\Resources\PostsResource;
+use App\Http\Resources\ArticleResource;
+use App\Jobs\AfterViewPostJob;
 use App\Models\Article;
-use App\Models\View;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use App\Http\Resources\LatesPostResource;
+use Illuminate\Support\Facades\DB;
 
 class ArticlesController extends Controller
 {
@@ -21,23 +21,10 @@ class ArticlesController extends Controller
      */
     public function index(Request $request)
     {
-        $articles = Cache::remember('playlists.page.' . $request->input('page') ?? 1, config('cache.age'), function () {
-            return Article::generateQuery(Article::query())->orderBy('id', 'desc')->paginate(6)->toArray();
+        return Cache::remember('articles.page.' . $request->input('page') ?? 1, config('cache.age'), function () {
+            $articles = Article::postListQuery(Article::query())->orderBy('id', 'desc')->paginate(12);
+            return PostsResource::collection($articles);
         });
-        $response = [];
-        foreach($articles['data'] as $article) {
-            $arr = $article;
-            $arr['hero'] = HeroHelper::getUrl($arr['hero'] ? $arr['hero']['name'] : null);
-            $arr['created_at'] = Carbon::parse($arr['created_at'])->timestamp;
-            $arr['updated_at'] = Carbon::parse($arr['updated_at'])->timestamp;
-            $arr['user'] = $arr['minitutor']['user'];
-            $arr['user']['avatar'] = AvatarHelper::getUrl($arr['user']['avatar']);
-            $arr['rating'] = round($arr['rating'], 2);
-            unset($arr['minitutor']['user']);
-            array_push($response, $arr);
-        }
-        $articles['data'] = $response;
-        return response()->json($articles, 200);
     }
 
     /**
@@ -48,158 +35,58 @@ class ArticlesController extends Controller
      */
     public function show($slug)
     {
-        $article = Article::generateQuery(Article::query(), true)->where('slug', $slug)->firstOrFail();
-        $minitutor = $article->minitutor;
+        $data = Cache::remember('articles.show.' . $slug, config('cache.age'), function () use ($slug) {
+            $query = Article::select('*', DB::raw("'Article' as type"));
+            $query->with(['hero', 'category']);
+            $query->with(['minitutor' => function($q) {
+                $q->with('user');
+            }]);
+            $query->with(['comments' => function($q){
+                $q->with(['user' => function($q){
+                    $q->select([
+                        'id',
+                        'name',
+                        'avatar',
+                        'points',
+                        'username'
+                    ]);
+                }]);
+                $q->where('public', true);
+            }]);
+            $query->withCount(['feedback as rating' => function($q){
+                $q->select(DB::raw('coalesce(avg((understand + inspiring + language_style + content_flow)/4),0)'));
+            }, 'feedback']);
+            $query->whereHas('minitutor', function($q){
+                $q->where('active', true);
+            });
 
-        if($user = auth('api')->user()) {
-            $q = $article->activities()->where('user_id', $user->id);
-            if ($q->exists()){
-                $activity = $q->first();
-                $activity->updated_at = now();
-                $activity->save();
-            } else {
-                $activity = new Activity([ 'user_id' => $user->id ]);
-                $article->activities()->save($activity);
-                if($user->activities()->count() > 8) {
-                    $user->activities()->orderBy('updated_at', 'asc')->first()->delete();
-                }
-            }
-        }
+            $article = $query->where('slug', $slug)->firstOrFail();
+            $latesPosts = $article->minitutor->latesPosts()->take(8)->get();
 
-
-        $latesArticles = $minitutor->articles()
-        ->select(['minitutor_id', 'id', 'title', 'slug', 'draf', 'created_at'])
-        ->where('draf', false)
-        ->orderBy('id', 'desc')
-        ->take(4)
-        ->get()
-        ->toArray();
-
-        $latesPlaylists = $minitutor->playlists()
-        ->select(['minitutor_id', 'id', 'title', 'slug', 'draf', 'created_at'])
-        ->where('draf', false)
-        ->orderBy('id', 'desc')
-        ->take(4)
-        ->get()
-        ->toArray();
-
-        $lates = [];
-        foreach($latesArticles as $arr) {
-            array_push($lates, [
-                'id' => $arr['id'],
-                'title' => $arr['title'],
-                'slug' => $arr['slug'],
-                'created_at' => Carbon::parse($arr['created_at'])->timestamp,
-                'type' => 'Article'
-            ]);
-        }
-        foreach($latesPlaylists as $arr) {
-            array_push($lates, [
-                'id' => $arr['id'],
-                'title' => $arr['title'],
-                'slug' => $arr['slug'],
-                'created_at' => Carbon::parse($arr['created_at'])->timestamp,
-                'type' => 'Playlist'
-            ]);
-        }
-
-        $arr = $article->toArray();
-
-        $description = null;
-        $body = $arr['body'] ? json_decode($arr['body']) : null;
-        if($body && isset($body->blocks)) {
-
-            foreach ($body->blocks as $block) {
-                if(!$description && $block->type === 'paragraph' && strlen($block->data->text) > 30){
-                    $description = substr($block->data->text, 0, 160);
-                }
-            }
-        }
-
-        $arr['lates'] = $lates;
-        $arr['description'] = $arr['description'] ?? $description;
-        $arr['hero'] = HeroHelper::getUrl($arr['hero'] ? $arr['hero']['name'] : null);
-        $arr['created_at'] = Carbon::parse($arr['created_at'])->timestamp;
-        $arr['updated_at'] = Carbon::parse($arr['updated_at'])->timestamp;
-        $arr['minitutor']['created_at'] = Carbon::parse($arr['minitutor']['created_at'])->timestamp;
-        $arr['minitutor']['updated_at'] = Carbon::parse($arr['minitutor']['updated_at'])->timestamp;
-        $arr['user'] = $arr['minitutor']['user'];
-        $arr['user']['avatar'] = AvatarHelper::getUrl($arr['user']['avatar']);
-        $arr['rating'] = round($arr['rating'], 2);
-        unset($arr['minitutor']['user']);
-
-        $comments = [];
-        foreach($arr['comments'] as $comment){
-            $data = [
-                'id' => $comment['id'],
-                'body' => $comment['body'],
-                'user' => $comment['user'],
-                'created_at' => Carbon::parse($comment['created_at'])->timestamp,
+            return [
+                'article' => ArticleResource::make($article),
+                'latesPosts' => LatesPostResource::collection($latesPosts)
             ];
-            $data['user']['avatar'] = AvatarHelper::getUrl($data['user']['avatar']);
-            array_push($comments, $data);
-        }
-        $arr['comments'] = $comments;
+        });
 
-        return response()->json($arr, 200);
-    }
+        AfterViewPostJob::dispatchAfterResponse($data['article'], auth('api')->user());
 
-    public function storeView(Request $request, $id)
-    {
-        $article = Article::where('draf', false)->whereHas('minitutor', function($q){
-            $q->where('active', true);
-        })->findOrFail($id);
-
-        $view = null;
-        if($user = auth('api')->user()) {
-            $view = new View([
-                'user_id' => $user->id,
-                'ip' => $request->getClientIp() ?? '',
-                'agent' => $request->header('User-Agent') ?? ''
-            ]);
-        } else {
-            $view = new View([
-                'ip' => $request->getClientIp() ?? '',
-                'agent' => $request->header('User-Agent') ?? ''
-            ]);
-        }
-        $article->views()->save($view);
-        return response()->json([], 200);
+        return $data;
     }
 
     public function popular()
     {
-        $articles = Article::generateQuery(Article::query())->orderBy('views_count', 'desc')->limit(5)->get()->toArray();
-        $response = [];
-        foreach($articles as $article) {
-            $arr = $article;
-            $arr['hero'] = HeroHelper::getUrl($arr['hero'] ? $arr['hero']['name'] : null);
-            $arr['created_at'] = Carbon::parse($arr['created_at'])->timestamp;
-            $arr['updated_at'] = Carbon::parse($arr['updated_at'])->timestamp;
-            $arr['user'] = $arr['minitutor']['user'];
-            $arr['user']['avatar'] = AvatarHelper::getUrl($arr['user']['avatar']);
-            $arr['rating'] = round($arr['rating'], 2);
-            unset($arr['minitutor']['user']);
-            array_push($response, $arr);
-        }
-        return response()->json($response, 200);
+        return Cache::remember('articles.popular', config('cache.age'), function () {
+            $articles = Article::postListQuery(Article::query())->orderBy('view_count', 'desc')->orderBy('id', 'desc')->limit(5)->get();
+            return PostsResource::collection($articles);
+        });
     }
 
     public function news()
     {
-        $articles = Article::generateQuery(Article::query())->orderBy('id', 'desc')->limit(4)->get()->toArray();
-        $response = [];
-        foreach($articles as $article) {
-            $arr = $article;
-            $arr['hero'] = HeroHelper::getUrl($arr['hero'] ? $arr['hero']['name'] : null);
-            $arr['created_at'] = Carbon::parse($arr['created_at'])->timestamp;
-            $arr['updated_at'] = Carbon::parse($arr['updated_at'])->timestamp;
-            $arr['user'] = $arr['minitutor']['user'];
-            $arr['user']['avatar'] = AvatarHelper::getUrl($arr['user']['avatar']);
-            $arr['rating'] = round($arr['rating'], 2);
-            unset($arr['minitutor']['user']);
-            array_push($response, $arr);
-        }
-        return response()->json($response, 200);
+        return Cache::remember('articles.news', config('cache.age'), function () {
+            $articles = Article::postListQuery(Article::query())->orderBy('id', 'desc')->limit(8)->get();
+            return PostsResource::collection($articles);
+        });
     }
 }

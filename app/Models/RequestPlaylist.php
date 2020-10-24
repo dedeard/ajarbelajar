@@ -56,9 +56,9 @@ class RequestPlaylist extends Model
     }
 
     /**
-     * Return the hero url or placeholder url lists.
+     * Atributes
      */
-    public function heroUrl() : Array
+    public function getHeroUrlAttribute() : Array
     {
         return HeroHelper::getUrl($this->hero ? $this->hero->name : null);
     }

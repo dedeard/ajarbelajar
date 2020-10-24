@@ -14,40 +14,24 @@ class PlaylistResource extends JsonResource
      */
     public function toArray($request)
     {
-        $data = [
+        return [
             'id' => $this->id,
-            'title' => $this->title,
             'slug' => $this->slug,
-            'description' => $this->description,
-            'videos' => VideoResource::collection($this->videos),
-            'hero' => $this->heroUrl(),
-            'draf' => $this->draf,
-            'comments_count' => $this->comments_count,
-            'views_count' => $this->views_count,
-            'feedback_count' => $this->feedback_count,
+            'title' => $this->title,
+            'description' => $this->description ?? '',
+            'view_count' => $this->view_count,
             'created_at' => $this->created_at->timestamp,
             'updated_at' => $this->updated_at->timestamp,
+            'type' => $this->type,
+            'hero' => $this->hero_url,
+            'category' => CategoryResource::make($this->category),
+            'minitutor' => MinitutorsResource::make($this->minitutor),
+            'user' => UsersResource::make($this->minitutor->user),
+            'videos' => VideoResource::collection($this->videos),
+            'comments' => CommentResource::collection($this->comments),
+            'comments_count' => count($this->comments),
+            'rating' => round($this->rating, 2),
+            'feedback_count' => $this->feedback_count,
         ];
-
-        if ($this->feedback) {
-            $data['rating'] = $this->feedback->avg('rating');
-        }
-
-        if($this->category) {
-            $data['category'] = [
-                'id' => $this->category->id,
-                'name' => $this->category->name,
-                'slug' => $this->category->slug,
-            ];
-        }
-
-        if ($this->minitutor) {
-            $data['minitutor'] = MinitutorResource::make($this->minitutor);
-            if ($this->minitutor->user) {
-                $data['user'] = UserResource::make($this->minitutor->user);
-            }
-        }
-
-        return $data;
     }
 }

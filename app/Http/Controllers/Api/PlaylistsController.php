@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Helpers\AvatarHelper;
-use App\Helpers\HeroHelper;
-use App\Helpers\VideoHelper;
 use App\Http\Controllers\Controller;
-use App\Models\Activity;
+use App\Http\Resources\PostsResource;
+use App\Http\Resources\LatesPostResource;
+use App\Http\Resources\PlaylistResource;
+use App\Jobs\AfterViewPostJob;
 use App\Models\Playlist;
-use App\Models\View;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class PlaylistsController extends Controller
 {
@@ -22,23 +21,10 @@ class PlaylistsController extends Controller
      */
     public function index(Request $request)
     {
-        $playlists = Cache::remember('playlists.page.' . $request->input('page') ?? 1, config('cache.age'), function () {
-            return Playlist::generateQuery(Playlist::query())->orderBy('id', 'desc')->paginate(6)->toArray();
+        return Cache::remember('playlists.page.' . $request->input('page') ?? 1, config('cache.age'), function () {
+            $playlists =  Playlist::postListQuery(Playlist::query())->orderBy('id', 'desc')->paginate(6);
+            return PostsResource::collection($playlists);
         });
-        $response = [];
-        foreach($playlists['data'] as $playlist) {
-            $arr = $playlist;
-            $arr['hero'] = HeroHelper::getUrl($arr['hero'] ? $arr['hero']['name'] : null);
-            $arr['created_at'] = Carbon::parse($arr['created_at'])->timestamp;
-            $arr['updated_at'] = Carbon::parse($arr['updated_at'])->timestamp;
-            $arr['user'] = $arr['minitutor']['user'];
-            $arr['user']['avatar'] = AvatarHelper::getUrl($arr['user']['avatar']);
-            $arr['rating'] = round($arr['rating'], 2);
-            unset($arr['minitutor']['user']);
-            array_push($response, $arr);
-        }
-        $playlists['data'] = $response;
-        return response()->json($playlists, 200);
     }
 
     /**
@@ -49,155 +35,58 @@ class PlaylistsController extends Controller
      */
     public function show($slug)
     {
-        $playlist = Playlist::generateQuery(Playlist::query(), true)->where('slug', $slug)->firstOrFail();
-        $minitutor = $playlist->minitutor;
+        $data = Cache::remember('playlists.show.' . $slug, config('cache.age'), function () use ($slug) {
+            $query = Playlist::select('*', DB::raw("'Playlist' as type"));
+            $query->with(['hero', 'category', 'videos']);
+            $query->with(['minitutor' => function($q) {
+                $q->with('user');
+            }]);
+            $query->with('videos');
+            $query->with(['comments' => function($q){
+                $q->with(['user' => function($q){
+                    $q->select([
+                        'id',
+                        'name',
+                        'avatar',
+                        'points',
+                        'username'
+                    ]);
+                }]);
+                $q->where('public', true);
+            }]);
+            $query->withCount(['feedback as rating' => function($q){
+                $q->select(DB::raw('coalesce(avg((understand + inspiring + language_style + content_flow)/4),0)'));
+            }, 'feedback']);
+            $query->whereHas('minitutor', function($q){
+                $q->where('active', true);
+            });
 
-        if($user = auth('api')->user()) {
-            $q = $playlist->activities()->where('user_id', $user->id);
-            if ($q->exists()){
-                $activity = $q->first();
-                $activity->updated_at = now();
-                $activity->save();
-            } else {
-                $activity = new Activity([ 'user_id' => $user->id ]);
-                $playlist->activities()->save($activity);
-                if($user->activities()->count() > 8) {
-                    $user->activities()->orderBy('updated_at', 'asc')->first()->delete();
-                }
-            }
-        }
+            $playlist = $query->where('slug', $slug)->firstOrFail();
+            $latesPosts = $playlist->minitutor->latesPosts()->take(8)->get();
 
-        $latesArticles = $minitutor->articles()
-        ->select(['minitutor_id', 'id', 'title', 'slug', 'draf', 'created_at'])
-        ->where('draf', false)
-        ->orderBy('id', 'desc')
-        ->take(4)
-        ->get()
-        ->toArray();
-
-        $latesPlaylists = $minitutor->playlists()
-        ->select(['minitutor_id', 'id', 'title', 'slug', 'draf', 'created_at'])
-        ->where('draf', false)
-        ->orderBy('id', 'desc')
-        ->take(4)
-        ->get()
-        ->toArray();
-
-        $lates = [];
-        foreach($latesArticles as $arr) {
-            array_push($lates, [
-                'id' => $arr['id'],
-                'title' => $arr['title'],
-                'slug' => $arr['slug'],
-                'created_at' => Carbon::parse($arr['created_at'])->timestamp,
-                'type' => 'Article'
-            ]);
-        }
-        foreach($latesPlaylists as $arr) {
-            array_push($lates, [
-                'id' => $arr['id'],
-                'title' => $arr['title'],
-                'slug' => $arr['slug'],
-                'created_at' => Carbon::parse($arr['created_at'])->timestamp,
-                'type' => 'Playlist'
-            ]);
-        }
-
-        $arr = $playlist->toArray();
-        $arr['lates'] = $lates;
-        $arr['hero'] = HeroHelper::getUrl($arr['hero'] ? $arr['hero']['name'] : null);
-        $arr['created_at'] = Carbon::parse($arr['created_at'])->timestamp;
-        $arr['updated_at'] = Carbon::parse($arr['updated_at'])->timestamp;
-        $arr['minitutor']['created_at'] = Carbon::parse($arr['minitutor']['created_at'])->timestamp;
-        $arr['minitutor']['updated_at'] = Carbon::parse($arr['minitutor']['updated_at'])->timestamp;
-        $arr['user'] = $arr['minitutor']['user'];
-        $arr['user']['avatar'] = AvatarHelper::getUrl($arr['user']['avatar']);
-        $arr['rating'] = round($arr['rating'], 2);
-        unset($arr['minitutor']['user']);
-
-        $comments = [];
-        foreach($arr['comments'] as $comment){
-            $data = [
-                'id' => $comment['id'],
-                'body' => $comment['body'],
-                'user' => $comment['user'],
-                'created_at' => Carbon::parse($comment['created_at'])->timestamp,
+            return [
+                'playlist' => PlaylistResource::make($playlist),
+                'latesPosts' => LatesPostResource::collection($latesPosts)
             ];
-            $data['user']['avatar'] = AvatarHelper::getUrl($data['user']['avatar']);
-            array_push($comments, $data);
-        }
-        $arr['comments'] = $comments;
+        });
 
-        $videos = [];
-        foreach($arr['videos'] as $video){
-            unset($video['videoable_type']);
-            unset($video['videoable_id']);
-            $video['created_at'] = Carbon::parse($video['created_at'])->timestamp;
-            $video['updated_at'] = Carbon::parse($video['created_at'])->timestamp;
-            $video['url'] = VideoHelper::getUrl($video['name']);
-            array_push($videos, $video);
-        }
-        $arr['videos'] = $videos;
-
-        return response()->json($arr, 200);
+        AfterViewPostJob::dispatchAfterResponse($data['playlist'], auth('api')->user());
     }
 
-    public function storeView(Request $request, $id)
-    {
-        $playlist = Playlist::where('draf', false)->whereHas('minitutor', function($q){
-            $q->where('active', true);
-        })->findOrFail($id);
-
-        $view = null;
-        if($user = auth('api')->user()) {
-            $view = new View([
-                'user_id' => $user->id,
-                'ip' => $request->getClientIp() ?? '',
-                'agent' => $request->header('User-Agent') ?? ''
-            ]);
-        } else {
-            $view = new View([
-                'ip' => $request->getClientIp() ?? '',
-                'agent' => $request->header('User-Agent') ?? ''
-            ]);
-        }
-        $playlist->views()->save($view);
-        return response()->json([], 200);
-    }
 
     public function popular()
     {
-        $playlists = Playlist::generateQuery(Playlist::query())->orderBy('views_count', 'desc')->limit(5)->get()->toArray();
-        $response = [];
-        foreach($playlists as $playlist) {
-            $arr = $playlist;
-            $arr['hero'] = HeroHelper::getUrl($arr['hero'] ? $arr['hero']['name'] : null);
-            $arr['created_at'] = Carbon::parse($arr['created_at'])->timestamp;
-            $arr['updated_at'] = Carbon::parse($arr['updated_at'])->timestamp;
-            $arr['user'] = $arr['minitutor']['user'];
-            $arr['user']['avatar'] = AvatarHelper::getUrl($arr['user']['avatar']);
-            $arr['rating'] = round($arr['rating'], 2);
-            unset($arr['minitutor']['user']);
-            array_push($response, $arr);
-        }
-        return response()->json($response, 200);
+        return Cache::remember('playlists.popular', config('cache.age'), function () {
+            $playlists = Playlist::postListQuery(Playlist::query())->orderBy('view_count', 'desc')->limit(5)->get();
+            return PostsResource::collection($playlists);
+        });
     }
 
     public function news()
     {
-        $playlists = Playlist::generateQuery(Playlist::query())->orderBy('id', 'desc')->limit(4)->get()->toArray();
-        $response = [];
-        foreach($playlists as $playlist) {
-            $arr = $playlist;
-            $arr['hero'] = HeroHelper::getUrl($arr['hero'] ? $arr['hero']['name'] : null);
-            $arr['created_at'] = Carbon::parse($arr['created_at'])->timestamp;
-            $arr['updated_at'] = Carbon::parse($arr['updated_at'])->timestamp;
-            $arr['user'] = $arr['minitutor']['user'];
-            $arr['user']['avatar'] = AvatarHelper::getUrl($arr['user']['avatar']);
-            $arr['rating'] = round($arr['rating'], 2);
-            unset($arr['minitutor']['user']);
-            array_push($response, $arr);
-        }
-        return response()->json($response, 200);
+        return Cache::remember('playlists.news', config('cache.age'), function () {
+            $playlists = Playlist::postListQuery(Playlist::query())->orderBy('id', 'desc')->limit(8)->get();
+            return PostsResource::collection($playlists);
+        });
     }
 }

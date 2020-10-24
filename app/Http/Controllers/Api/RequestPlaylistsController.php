@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Api\Minitutor;
+namespace App\Http\Controllers\Api;
 
 use App\Helpers\HeroHelper;
 use App\Helpers\VideoHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\RequestPlaylistResorurce;
+use App\Http\Resources\RequestPlaylistResource;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\RequestPlaylist;
@@ -19,13 +19,6 @@ class RequestPlaylistsController extends Controller
         $this->middleware(['auth:api', 'minitutor:active']);
     }
 
-    public function index(Request $request)
-    {
-        $minitutor = $request->user()->minitutor;
-        $playlists = $minitutor->requestPlaylists;
-        return response()->json(RequestPlaylistResorurce::collection($playlists), 200);
-    }
-
     public function store(Request $request)
     {
         $minitutor = $request->user()->minitutor;
@@ -37,7 +30,7 @@ class RequestPlaylistsController extends Controller
 
         $playlist = new RequestPlaylist($data);
         $minitutor->requestPlaylists()->save($playlist);
-        return response()->json(RequestPlaylistResorurce::make($playlist), 200);
+        return response()->json(RequestPlaylistResource::make($playlist), 200);
     }
 
     public function update(Request $request, $id)
@@ -65,7 +58,7 @@ class RequestPlaylistsController extends Controller
             $playlist->save();
         }
         $this->timestamps = true;
-        return response()->json(RequestPlaylistResorurce::make($playlist), 200);
+        return response()->json(RequestPlaylistResource::make($playlist), 200);
     }
 
     public function updateHero(Request $request, $id)
@@ -90,7 +83,7 @@ class RequestPlaylistsController extends Controller
             ]));
         }
 
-        return response()->json(RequestPlaylistResorurce::make($playlist), 200);
+        return response()->json(RequestPlaylistResource::make($playlist), 200);
     }
 
     public function uploadVideo(Request $request, $id)
@@ -112,7 +105,7 @@ class RequestPlaylistsController extends Controller
             'original_name' => $data['file']->getClientOriginalName()
         ]);
         $playlist->videos()->save($video);
-        return response()->json(RequestPlaylistResorurce::make($playlist), 200);
+        return response()->json(RequestPlaylistResource::make($playlist), 200);
     }
 
     public function destroyVideo(Request $request, $playlist_id, $video_id)
@@ -123,7 +116,7 @@ class RequestPlaylistsController extends Controller
         $video = $playlist->videos()->findOrFail($video_id);
         VideoHelper::destroy($video->name);
         $video->delete();
-        return response()->json(RequestPlaylistResorurce::make($playlist), 200);
+        return response()->json(RequestPlaylistResource::make($playlist), 200);
     }
 
     public function destroy(Request $request, $id)
@@ -160,6 +153,6 @@ class RequestPlaylistsController extends Controller
         } else {
             return abort(422);
         }
-        return response()->json(RequestPlaylistResorurce::make($playlist), 200);
+        return response()->json(RequestPlaylistResource::make($playlist), 200);
     }
 }

@@ -14,18 +14,12 @@ class CommentResource extends JsonResource
      */
     public function toArray($request)
     {
-        $data = [
+        return [
             'id' => $this->id,
-            'public' => $this->public,
             'body' => $this->body,
-            'user' => UserResource::make($this->user),
-            'created_at' => $this->created_at->timestamp
+            'created_at' => $this->created_at->timestamp,
+            'updated_at' => $this->updated_at->timestamp,
+            'user' => UsersResource::make($this->user),
         ];
-
-        if($this->user->minitutor) {
-            $data['minituor'] = MinitutorResource::make($this->user->minitutor);
-        }
-
-        return $data;
     }
 }

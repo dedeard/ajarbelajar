@@ -26,7 +26,8 @@ class Playlist extends Model
         'draf',
         'title',
         'slug',
-        'description'
+        'description',
+        'view_count'
     ];
 
     /**
@@ -72,14 +73,6 @@ class Playlist extends Model
     }
 
     /**
-     * Get the views relation.
-     */
-    public function views() : MorphMany
-    {
-        return $this->morphMany(View::class, 'viewable');
-    }
-
-    /**
      * Get the activities relation.
      */
     public function activities() : MorphMany
@@ -114,87 +107,61 @@ class Playlist extends Model
     /**
      * Return the generated query.
      */
-    public static function generateQuery($model, $all = false)
+    public static function postListQuery($model)
     {
-        if(!$all) {
-            $model->select([
+        $model
+            ->select([
                 'id',
                 'minitutor_id',
                 'category_id',
+                'draf',
                 'slug',
                 'title',
-                'draf',
+                'view_count',
                 'created_at',
                 'updated_at',
-            ]);
-        }
-
-        $model->where('draf', false);
-        $model->with(['hero', 'category' => function($q){
-            $q->select(['id', 'name', 'slug']);
-        }]);
-        if($all) {
-            $model->with('videos');
-        }
-        $model->with(['minitutor' => function($q) use ($all){
-            if(!$all) {
+                DB::raw("'Playlist' as type"),
+            ])
+            ->with(['hero', 'category'  => function($q){
+                $q->select(['id', 'name', 'slug']);
+            }])
+            ->with(['minitutor' => function($q){
                 $q->select(['id', 'user_id', 'active']);
-            }
-            $q->with(['user' => function($q) use ($all) {
-                if(!$all) {
+                $q->with(['user' => function($q) {
                     $q->select([
                         'id',
                         'name',
                         'avatar',
                         'points',
-                        'username',
+                        'username'
                     ]);
-                } else {
-                    $q->select([
-                        'id',
-                        'name',
-                        'avatar',
-                        'points',
-                        'about',
-                        'website_url',
-                        'twitter_url',
-                        'facebook_url',
-                        'instagram_url',
-                        'youtube_url',
-                        'username',
-                    ]);
-                }
-            }]);
-        }]);
-
-        if($all) {
-            $model->with(['comments' => function($query){
-                return $query->with(['user' => function($q){
-                    $q->select([
-                        'id',
-                        'name',
-                        'avatar',
-                        'points',
-                        'username',
-                    ]);
-                }])->where('public', true);
-            }]);
-        } else {
-            $model->withCount(['comments' => function($query){
+                }]);
+            }])
+            ->withCount(['comments' => function($query){
                 return $query->where('public', true);
-            }]);
-        }
-
-        $model->withCount(['views'=> function($q){
-            $q->select(DB::raw('count(distinct(ip))'));
-        }, 'feedback as rating' => function($q){
-            $q->select(DB::raw('coalesce(avg((understand + inspiring + language_style + content_flow)/4),0)'));
-        }, 'feedback']);
-
-        $model->whereHas('minitutor', function($q){
-            $q->where('active', true);
-        });
+            }])
+            ->withCount(['feedback as rating' => function($q){
+                $q->select(DB::raw('coalesce(avg((understand + inspiring + language_style + content_flow)/4),0)'));
+            }, 'feedback'])
+            ->whereHas('minitutor', function($q){
+                $q->where('active', true);
+            })
+            ->where('draf', false);
 
         return $model;
+    }
+
+    /**
+     * Atributes
+     */
+    public function getHeroUrlAttribute() : Array
+    {
+        if($this->hero) {
+            return HeroHelper::getUrl($this->hero->name);
+        }
+        $keyed = collect(HeroHelper::SIZES)->mapWithKeys(function($item, $key){
+            return [$key => null];
+        });
+        return $keyed->all();
     }
 }

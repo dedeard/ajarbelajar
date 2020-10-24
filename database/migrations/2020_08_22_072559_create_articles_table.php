@@ -22,6 +22,7 @@ class CreateArticlesTable extends Migration
             $table->integer('category_id')->unsigned()->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
 
+            $table->integer('view_count')->default(0);
             $table->boolean('draf')->default(true);
             $table->string('title');
             $table->string('slug')->unique();

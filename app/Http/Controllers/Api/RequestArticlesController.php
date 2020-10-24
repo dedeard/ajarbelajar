@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\minitutor;
+namespace App\Http\Controllers\Api;
 
 use App\Helpers\EditorjsHelper;
 use App\Helpers\HeroHelper;
@@ -16,13 +16,6 @@ class RequestArticlesController extends Controller
     public function __construct()
     {
         $this->middleware(['auth:api', 'minitutor:active']);
-    }
-
-    public function index(Request $request)
-    {
-        $minitutor = $request->user()->minitutor;
-        $articles = $minitutor->requestArticles;
-        return response()->json(RequestArticleResource::collection($articles), 200);
     }
 
     public function store(Request $request)

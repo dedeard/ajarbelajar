@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Helpers\HeroHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Playlist;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller
 {
@@ -18,34 +17,44 @@ class SearchController extends Controller
      */
     public function index()
     {
-        $articles = Article::generateQuery(Article::query())->get()->toArray();
-        $playlists = Playlist::generateQuery(Playlist::query())->orderBy('id', 'desc')->get()->toArray();
-        $response = [];
+        $data = Cache::remember('searching', 60 * 30, function () {
+            $union = Article::select(['id', 'minitutor_id', 'draf', 'slug', 'title', 'created_at', DB::raw("'Article' as type")])
+            ->with(['hero', 'minitutor' => function($q){
+                $q->select(['id', 'user_id', 'active']);
+                $q->with(['user' => function($q) {
+                    $q->select(['id', 'name']);
+                }]);
+            }])
+            ->whereHas('minitutor', function($q){
+                $q->where('active', true);
+            })
+            ->where('draf', false);
 
-        foreach($playlists as $playlist) {
-            $arr = [
-                'title' => $playlist['title'],
-                'slug' => $playlist['slug'],
-                'created_at' => Carbon::parse($playlist['created_at'])->timestamp,
-                'img' => HeroHelper::getUrl($playlist['hero'] ? $playlist['hero']['name'] : null)['small'],
-                'name' => $playlist['minitutor']['user']['name'],
-                'type' => 'Playlist'
-            ];
-            array_push($response, $arr);
-        }
+            return Playlist::select(['id', 'minitutor_id', 'draf', 'slug', 'title', 'created_at', DB::raw("'Playlist' as type")])
+            ->with(['hero', 'minitutor' => function($q){
+                $q->select(['id', 'user_id', 'active']);
+                $q->with(['user' => function($q) {
+                    $q->select(['id', 'name']);
+                }]);
+            }])
+            ->whereHas('minitutor', function($q){
+                $q->where('active', true);
+            })
+            ->where('draf', false)
+            ->union($union)
+            ->get()
+            ->transform(function($item){
+                return [
+                    'type' => $item->type,
+                    'title' => $item->title,
+                    'slug' => $item->slug,
+                    'created_at' => $item->created_at->timestamp,
+                    'img' => $item->hero_url ? $item->hero_url['small'] : null,
+                    'name' => $item->minitutor->user->name
+                ];
+            });
+        });
 
-        foreach($articles as $article) {
-            $arr = [
-                'title' => $article['title'],
-                'slug' => $article['slug'],
-                'created_at' => Carbon::parse($article['created_at'])->timestamp,
-                'img' => HeroHelper::getUrl($article['hero'] ? $article['hero']['name'] : null)['small'],
-                'name' => $article['minitutor']['user']['name'],
-                'type' => 'Article'
-            ];
-            array_push($response, $arr);
-        }
-
-        return $response;
+        return ['data' => $data];
     }
 }
