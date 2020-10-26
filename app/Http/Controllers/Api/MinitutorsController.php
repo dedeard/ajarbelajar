@@ -42,7 +42,7 @@ class MinitutorsController extends Controller
                 'minitutor' => MinitutorsResource::make($item),
             ];
         });
-        return response()->json($data);
+        return $data;
     }
 
     /**

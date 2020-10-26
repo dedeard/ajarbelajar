@@ -14,12 +14,12 @@ Route::prefix('minitutor')->as('minitutor.')->group(function(){
     Route::post('request-playlists/{id}/video', 'RequestPlaylistsController@uploadVideo')->name('request-playlists.upload.video');
     Route::put('request-playlists/{id}/index', 'RequestPlaylistsController@updateIndex')->name('request-playlists.update.index');
     Route::delete('request-playlists/{playlist_id}/video/{video_id}', 'RequestPlaylistsController@destroyVideo')->name('request-playlists.destroy.video');
-    Route::resource('request-playlists', 'RequestPlaylistsController')->except(['create', 'edit', 'show', 'index']);
+    Route::resource('request-playlists', 'RequestPlaylistsController')->except(['create', 'edit', 'show']);
 
     // minitutor request article
     Route::post('request-articles/{id}/hero', 'RequestArticlesController@updateHero')->name('request-articles.update.hero');
     Route::post('request-articles/{id}/image', 'RequestArticlesController@uploadImage')->name('request-articles.upload.image');
-    Route::resource('request-articles', 'RequestArticlesController')->except(['create', 'edit', 'show', 'index']);
+    Route::resource('request-articles', 'RequestArticlesController')->except(['create', 'edit', 'show']);
 });
 
 

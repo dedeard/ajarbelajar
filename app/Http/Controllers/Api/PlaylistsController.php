@@ -22,7 +22,7 @@ class PlaylistsController extends Controller
     public function index(Request $request)
     {
         return Cache::remember('playlists.page.' . $request->input('page') ?? 1, config('cache.age'), function () {
-            $playlists =  Playlist::postListQuery(Playlist::query())->orderBy('id', 'desc')->paginate(6);
+            $playlists =  Playlist::postListQuery(Playlist::query())->orderBy('id', 'desc')->paginate(12);
             return PostsResource::collection($playlists);
         });
     }
@@ -71,6 +71,8 @@ class PlaylistsController extends Controller
         });
 
         AfterViewPostJob::dispatchAfterResponse($data['playlist'], auth('api')->user());
+
+        return $data;
     }
 
 

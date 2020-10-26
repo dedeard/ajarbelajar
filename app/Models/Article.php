@@ -105,11 +105,6 @@ class Article extends Model
         return HeroHelper::getUrl($this->hero ? $this->hero->name : null);
     }
 
-    public function getType()
-    {
-        return 'Article';
-    }
-
     /**
      * Return the generated query.
      */

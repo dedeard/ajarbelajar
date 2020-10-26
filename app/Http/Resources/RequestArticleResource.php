@@ -20,7 +20,7 @@ class RequestArticleResource extends JsonResource
             'description' => $this->description,
             'body' => $this->body,
             'hero' => $this->hero_Url,
-            'requested_at' => $this->requested_at->timestamp,
+            'requested_at' => $this->requested_at ? $this->requested_at->timestamp : null,
             'created_at' => $this->created_at->timestamp,
             'updated_at' => $this->updated_at->timestamp,
             'category' => CategoryResource::make($this->category)

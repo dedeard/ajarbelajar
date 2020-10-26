@@ -19,6 +19,11 @@ class RequestPlaylistsController extends Controller
         $this->middleware(['auth:api', 'minitutor:active']);
     }
 
+    public function index()
+    {
+        return RequestPlaylistResource::collection(RequestPlaylist::all());
+    }
+
     public function store(Request $request)
     {
         $minitutor = $request->user()->minitutor;
@@ -81,7 +86,9 @@ class RequestPlaylistsController extends Controller
                 'name'=> $name,
                 'original_name'=> $data['hero']->getClientOriginalName()
             ]));
+            $playlist->load('hero');
         }
+        $playlist->touch();
 
         return response()->json(RequestPlaylistResource::make($playlist), 200);
     }
@@ -105,6 +112,7 @@ class RequestPlaylistsController extends Controller
             'original_name' => $data['file']->getClientOriginalName()
         ]);
         $playlist->videos()->save($video);
+        $playlist->touch();
         return response()->json(RequestPlaylistResource::make($playlist), 200);
     }
 

@@ -19,7 +19,7 @@ class RequestPlaylistResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'hero' => $this->hero_url,
-            'requested_at' => $this->requested_at->timestamp,
+            'requested_at' => $this->requested_at ? $this->requested_at->timestamp : null,
             'created_at' => $this->created_at->timestamp,
             'updated_at' => $this->updated_at->timestamp,
             'category' => CategoryResource::make($this->category),

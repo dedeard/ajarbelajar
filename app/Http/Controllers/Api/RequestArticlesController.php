@@ -18,6 +18,11 @@ class RequestArticlesController extends Controller
         $this->middleware(['auth:api', 'minitutor:active']);
     }
 
+    public function index()
+    {
+        return RequestArticleResource::collection(RequestArticle::all());
+    }
+
     public function store(Request $request)
     {
         $minitutor = $request->user()->minitutor;
@@ -84,7 +89,9 @@ class RequestArticlesController extends Controller
                 'name'=> $name,
                 'original_name'=> $data['hero']->getClientOriginalName()
             ]));
+            $article->load('hero');
         }
+        $article->touch();
 
         return response()->json(RequestArticleResource::make($article), 200);
     }

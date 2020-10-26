@@ -2,8 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Article;
-use App\Models\Playlist;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AuthResource extends JsonResource
@@ -36,26 +34,28 @@ class AuthResource extends JsonResource
             'favorites' => $this->favorite_ids,
             'followings' => $this->following_ids,
             'notifications' => NotificationResource::collection($this->notifications()->get()),
-            $this->mergeWhen($this->minitutor && $this->minitutor->active, [
-                "minitutor" => [
-                    'id' => $this->minitutor->id,
-                    'active' => $this->minitutor->active,
-                    'last_education' => $this->minitutor->last_education,
-                    'university' => $this->minitutor->university,
-                    'city_and_country_of_study' => $this->minitutor->city_and_country_of_study,
-                    'majors' => $this->minitutor->majors,
-                    'interest_talent' => $this->minitutor->interest_talent,
-                    'contact' => $this->minitutor->contact,
-                    'expectation' => $this->minitutor->expectation,
-                    'reason' => $this->minitutor->reason,
-                    'request_playlists' => RequestPlaylistResource::collection($this->minitutor->requestPlaylists),
-                    'request_articles' => RequestArticleResource::collection($this->minitutor->requestArticles),
-                    'feedback' => $this->minitutor->feedback,
-                    'comments' => $this->minitutor->comments,
-                    'created_at' => $this->minitutor->created_at->timestamp,
-                    'updated_at' => $this->minitutor->updated_at->timestamp,
-                ]
-            ]),
+            $this->mergeWhen($this->minitutor && $this->minitutor->active, function(){
+                return [
+                    "minitutor" => [
+                        'id' => $this->minitutor->id,
+                        'active' => $this->minitutor->active,
+                        'last_education' => $this->minitutor->last_education,
+                        'university' => $this->minitutor->university,
+                        'city_and_country_of_study' => $this->minitutor->city_and_country_of_study,
+                        'majors' => $this->minitutor->majors,
+                        'interest_talent' => $this->minitutor->interest_talent,
+                        'contact' => $this->minitutor->contact,
+                        'expectation' => $this->minitutor->expectation,
+                        'reason' => $this->minitutor->reason,
+                        'request_playlists' => RequestPlaylistResource::collection($this->minitutor->requestPlaylists),
+                        'request_articles' => RequestArticleResource::collection($this->minitutor->requestArticles),
+                        'feedback' => $this->minitutor->feedback,
+                        'comments' => $this->minitutor->comments,
+                        'created_at' => $this->minitutor->created_at->timestamp,
+                        'updated_at' => $this->minitutor->updated_at->timestamp,
+                    ]
+                ];
+            }),
         ];
     }
 }

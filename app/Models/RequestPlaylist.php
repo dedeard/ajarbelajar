@@ -24,6 +24,15 @@ class RequestPlaylist extends Model
     ];
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'requested_at' => 'datetime'
+    ];
+
+    /**
      * Get the minitutor relation.
      */
     public function minitutor() : BelongsTo

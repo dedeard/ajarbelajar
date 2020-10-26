@@ -161,7 +161,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getAvatarUrlAttribute()
     {
         if(!$this->avatar) {
-            return null;
+            return 'https://ui-avatars.com/api/?bold=true&background=f0f2fc&color=677ae4&size=120&name=' . $this->name;
         }
         return AvatarHelper::getUrl($this->avatar);
     }
@@ -175,11 +175,11 @@ class User extends Authenticatable implements MustVerifyEmail
             Article::postListQuery($q);
         }])->whereHas('article')->where('activitiable_type', Article::class)->get();
 
-        return $playlists->merge($articles)->transform(function($item){
-            if($item->playlist){
-                $post = $item->playlist;
-            } else {
+        return $articles->merge($playlists)->transform(function($item){
+            if(isset($item->article)){
                 $post = $item->article;
+            } else {
+                $post = $item->playlist;
             }
             return [
                 'id' => $item->id,
@@ -228,10 +228,10 @@ class User extends Authenticatable implements MustVerifyEmail
             ->get();
 
         return $playlists->merge($articles)->transform(function($item){
-            if($item->playlist){
-                $post = $item->playlist;
-            } else {
+            if(isset($item->article)){
                 $post = $item->article;
+            } else {
+                $post = $item->playlist;
             }
             return [
                 'id' => $item->id,
