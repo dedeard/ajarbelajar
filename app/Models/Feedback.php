@@ -39,4 +39,11 @@ class Feedback extends Model
     {
         return $this->morphTo();
     }
+
+    public function getRatingAttribute()
+    {
+        return ceil(($this->understand + $this->inspiring + $this->language_style + $this->content_flow)/4);
+    }
+
+
 }

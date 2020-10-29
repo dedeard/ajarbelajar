@@ -2,6 +2,12 @@
 $linkGroups = [
   [
     [
+      'name' => 'Dashboard',
+      'route' => 'dashboard',
+      'is' => 'dashboard',
+      'icon' => 'wb-globe',
+    ],
+    [
       'name' => 'User',
       'route' => 'users.index',
       'is' => 'users*',
@@ -18,6 +24,13 @@ $linkGroups = [
   ],
   [
     [
+      'name' => 'SEO',
+      'route' => 'seos.index',
+      'is' => 'seos*',
+      'icon' => 'wb-globe',
+      'can' => 'manage seo',
+    ],
+    [
       'name' => 'Kategori',
       'route' => 'categories.index',
       'is' => 'categories*',
@@ -33,6 +46,13 @@ $linkGroups = [
     ],
   ],
   [
+    [
+      'name' => 'Halaman',
+      'route' => 'pages.index',
+      'is' => 'pages*',
+      'icon' => 'wb-layout',
+      'can' => 'manage page'
+    ],
     [
       'name' => 'Artikel',
       'route' => 'articles.index',
@@ -80,13 +100,18 @@ $linkGroups = [
   ],
   [
     [
-      'name' => 'SEO',
-      'route' => 'seos.index',
-      'is' => 'seos*',
-      'icon' => 'wb-globe',
-      'can' => 'manage seo',
-    ]
-  ]
+      'name' => 'Profile (On progress)',
+      'route' => 'profile.index',
+      'is' => 'profile*',
+      'icon' => 'wb-user',
+    ],
+    [
+      'name' => 'Logout',
+      'route' => 'profile.logout',
+      'is' => 'profile*',
+      'icon' => 'wb-power text-danger',
+    ],
+  ],
 ];
 @endphp
 
@@ -94,12 +119,19 @@ $linkGroups = [
   @foreach($linkGroups as $linkGroup)
     <div class="list-group">
       @foreach($linkGroup as $l)
-        @can($l['can'])
+        @if(isset($l['can']))
+          @can($l['can'])
           <a class="list-group-item @if(Route::is($l['is'])) active @endif" href="{{ route($l['route']) }}">
             <i class="icon {{ $l['icon'] }}"></i>
             {{ $l['name'] }}
           </a>
-        @endcan
+          @endcan
+        @else
+        <a class="list-group-item @if(Route::is($l['is'])) active @endif" href="{{ route($l['route']) }}">
+          <i class="icon {{ $l['icon'] }}"></i>
+          {{ $l['name'] }}
+        </a>
+        @endif
       @endforeach
     </div>
   @endforeach

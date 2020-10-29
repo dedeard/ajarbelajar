@@ -25,6 +25,7 @@
             <tr>
               <th>Avatar</th>
               <th>Nama</th>
+              <th>Poin</th>
               <th>Username</th>
               <th>Email</th>
               <th>Verifikasi Email</th>
@@ -36,10 +37,11 @@
             <tr>
               <td class="align-middle">
                 <span class="avatar">
-                  <img src="{{ $user->avatarUrl() }}" />
+                  <img src="{{ $user->avatar_url }}" />
                 </span>
               </td>
               <td class="align-middle"><a href="{{ route('users.show', $user->id) }}">{{ $user->name }}</a></td>
+              <td  class="align-middle">{{ $user->points }}</td>
               <td  class="align-middle">{{ $user->username }}</td>
               <td  class="align-middle">{{ $user->email }}</td>
               <td  class="align-middle">{{ $user->email_verified_at ? $user->email_verified_at->format('d-m-Y') : '-' }}</td>

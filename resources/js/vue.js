@@ -14,6 +14,7 @@ import CategoryAutocomplete from './components/CategoryAutocomplete'
 import VideoOrder from './components/VideoOrder'
 import AppEditorjs from './components/AppEditorjs'
 import AppVideoSimple from './components/AppVideoSimple'
+import FeedbackList from './components/FeedbackList'
 
 
 Vue.use(VLazyImagePlugin)
@@ -35,6 +36,7 @@ Vue.component('CategoryAutocomplete', CategoryAutocomplete)
 Vue.component('VideoOrder', VideoOrder)
 Vue.component('AppEditorjs', AppEditorjs)
 Vue.component('AppVideoSimple', AppVideoSimple)
+Vue.component('FeedbackList', FeedbackList)
 
 
 new Vue({

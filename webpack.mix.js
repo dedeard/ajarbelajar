@@ -13,7 +13,7 @@ mix.options({
 
 if (!mix.inProduction()) {
   mix.browserSync({
-    proxy: "http://localhost"
+    proxy: "http://localhost:8000"
   })
 } else {
   mix.version()

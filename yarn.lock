@@ -933,6 +933,11 @@
   resolved "https://registry.yarnpkg.com/@tarekraafat/autocomplete.js/-/autocomplete.js-7.2.0.tgz#d6ac9fe78db92d864ec096639e577f7e4b323829"
   integrity sha512-p1aEcKC/WHpVBuFyRhXq/ie+mgO4QqCNEsdVIPUBgmNqmxV4dVfqYEpk///9vvKyranUUvrlVu4e2tdzAaXKIg==
 
+"@tinymce/tinymce-vue@^3.2.4":
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/@tinymce/tinymce-vue/-/tinymce-vue-3.2.4.tgz#c0817d5448caf9a10b20297a262555e3d3a69bd5"
+  integrity sha512-2nUj8Y0KzHDCQzs96ghZGGeyF1zPK6eULUdw/rovG/TseSZxAnq7PWFJEo2/xC8lJZTvnImq1Uaxc3o7jn+s0w==
+
 "@types/color-name@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"

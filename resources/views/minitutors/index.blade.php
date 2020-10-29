@@ -25,6 +25,7 @@
             <tr>
               <th>Avatar</th>
               <th>Nama</th>
+              <th>Poin</th>
               <th>Username</th>
               <th>Email</th>
               <th>Status</th>
@@ -37,10 +38,11 @@
             <tr>
               <td class="align-middle">
                 <span class="avatar">
-                  <img src="{{ $minitutor->user->avatarUrl() }}" />
+                  <img src="{{ $minitutor->user->avatar_url }}" />
                 </span>
               </td>
               <td class="align-middle"><a href="{{ route('minitutors.show', $minitutor->id) }}">{{ $minitutor->user->name }}</a></td>
+              <td class="align-middle">{{ $minitutor->user->points }}</td>
               <td class="align-middle">{{ $minitutor->user->username }}</td>
               <td class="align-middle">{{ $minitutor->user->email }}</td>
               <td class="align-middle">{{ $minitutor->active ? 'Aktif' : 'Tidak Aktif' }}</td>

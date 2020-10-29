@@ -23,7 +23,7 @@
             <tr>
               <td class="align-middle">
                 <span class="avatar">
-                  <img src="{{ $comment->user->avatarUrl() }}" />
+                  <img src="{{ $comment->user->avatar_url }}" />
                 </span>
               </td>
               <td class="align-middle text-nowrap font-weight-bold"><a href="{{ route('users.show', $comment->user->id) }}">{{ $comment->user->name }}</a></td>

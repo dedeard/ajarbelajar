@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\AvatarHelper;
 use App\Http\Controllers\Controller;
+use App\Models\Article;
 use App\Models\Minitutor;
+use App\Models\Playlist;
 use App\Models\User;
 use App\Rules\RoleExists;
 use App\Rules\Username;
@@ -77,13 +79,76 @@ class UsersController extends Controller
 
     public function show($id)
     {
-        return view('users.show', ['user' => User::findOrFail($id)]);
+        $user = User::findOrFail($id);
+        SEOMeta::setTitle($user->name);
+
+        $playlists = $user->activities()->with(['playlist' => function($q){
+            Playlist::postListQuery($q);
+        }])->whereHas('playlist')->where('activitiable_type', Playlist::class)->get();
+        $articles = $user->activities()->with(['article' => function($q){
+            Article::postListQuery($q);
+        }])->whereHas('article')->where('activitiable_type', Article::class)->get();
+
+        $activities = $articles->merge($playlists)->transform(function($item){
+            if(isset($item->article)){
+                $post = $item->article;
+            } else {
+                $post = $item->playlist;
+            }
+            return [
+                'id' => $item->id,
+                'created_at' => $item->created_at,
+                'updated_at' => $item->updated_at,
+                'post' => $post,
+            ];
+        })->sortByDesc('updated_at')->values()->all();
+        return view('users.show', ['user' => $user, 'activities' => $activities]);
+    }
+
+    public function showFavorites($id)
+    {
+        $user = User::findOrFail($id);
+        SEOMeta::setTitle($user->name);
+
+        $playlists = $user->subscriptions()
+            ->withType(Playlist::class)
+            ->with(['playlist' => function($q){
+                return Playlist::postListQuery($q);
+            }])
+            ->get();
+
+        $articles = $user->subscriptions()
+            ->withType(Article::class)
+            ->with(['article' => function($q){
+                return Article::postListQuery($q);
+            }])
+            ->get();
+
+        $favorites = $articles->merge($playlists)->transform(function($item){
+            if(isset($item->article)){
+                return $item->article;
+            } else {
+                return $item->playlist;
+            }
+        });
+
+        return view('users.favorites', ['user' => $user, 'favorites' => $favorites]);
+    }
+
+    public function showFollowings($id)
+    {
+        $user = User::findOrFail($id);
+        SEOMeta::setTitle($user->name);
+        $followings = $user->subscriptions()->withType(Minitutor::class)->with(['minitutor' => function($q){
+            $q->with('user');
+        }])->get();
+        return view('users.followings', ['user' => $user, 'followings' => $followings]);
     }
 
     public function edit($id)
     {
-        SEOMeta::setTitle('Edit User');
         $user = User::findOrFail($id);
+        SEOMeta::setTitle('Edit ' . $user->name);
         $roles = Role::where('name', '!=', 'Super Admin')->get();
         return view('users.edit', ['user' => $user, 'roles' => $roles]);
     }

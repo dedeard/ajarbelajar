@@ -17,6 +17,8 @@ class Image extends Model
         'name',
         'original_name',
         'type',
+        'imageable_type',
+        'imageable_id'
     ];
 
     /**

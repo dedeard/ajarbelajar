@@ -101,8 +101,8 @@ class Minitutor extends Model
 
     public function getFeedbackAttribute()
     {
-        $union = $this->playlists()->select('id')->with('feedback');
-        $feedback = $this->articles()->select('id')->with('feedback')->union($union)->get()->pluck('feedback')->flatten()->unique();
+        $union = $this->playlists()->select('id')->with(['feedback']);
+        $feedback = $this->articles()->select('id')->with(['feedback'])->union($union)->get()->pluck('feedback')->flatten()->unique();
         return FeedbackResource::collection($feedback);
     }
 }

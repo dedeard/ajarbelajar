@@ -183,8 +183,8 @@ class User extends Authenticatable implements MustVerifyEmail
             }
             return [
                 'id' => $item->id,
-                'created_at' => $item->created_at->timestamp,
-                'updated_at' => $item->updated_at->timestamp,
+                'created_at' => $item->created_at ? $item->created_at->timestamp : null,
+                'updated_at' => $item->updated_at ? $item->updated_at->timestamp : null,
                 'post' => PostsResource::make($post),
             ];
         })->sortByDesc('updated_at')->values()->all();
@@ -235,8 +235,8 @@ class User extends Authenticatable implements MustVerifyEmail
             }
             return [
                 'id' => $item->id,
-                'created_at' => $item->created_at->timestamp,
-                'updated_at' => $item->updated_at->timestamp,
+                'created_at' => $item->created_at ? $item->created_at->timestamp : null,
+                'updated_at' => $item->updated_at ? $item->updated_at->timestamp : null,
                 'post' => PostsResource::make($post),
             ];
         })->sortByDesc('created_at')->values()->all();

@@ -107,7 +107,7 @@ class Playlist extends Model
     /**
      * Return the generated query.
      */
-    public static function postListQuery($model)
+    public static function postListQuery($model, $draf = false)
     {
         $model
             ->select([
@@ -145,9 +145,11 @@ class Playlist extends Model
             }, 'feedback'])
             ->whereHas('minitutor', function($q){
                 $q->where('active', true);
-            })
-            ->where('draf', false);
+            });
 
+            if(!$draf) {
+                $model->where('draf', false);
+            }
         return $model;
     }
 

@@ -24,7 +24,7 @@
         <div class="row">
           <div class="col-lg-2 col-md-4 mb-30 text-center">
             <a href="#show-activity" class="avatar avatar-100">
-              <img alt="photo" src="{{ $user->avatarUrl() }}">
+              <img alt="photo" src="{{ $user->avatar_url }}">
             </a>
             <a download href="{{ $data->cv }}" target="_blank" class="btn btn-block btn-primary btn-sm mt-15">DOWNLOAD CV</a>
           </div>

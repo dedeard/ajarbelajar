@@ -80,3 +80,7 @@ Route::delete('notifications', 'NotificationsController@destroy')->name('notific
 
 // SEO
 Route::get('seos', 'SeosController@index')->name('seos.index');
+
+
+// Page
+Route::get('pages/{slug}', 'PagesController@show')->name('pages.show');

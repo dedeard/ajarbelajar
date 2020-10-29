@@ -25,7 +25,7 @@
             <tr>
               <td class="align-middle">
                 <span class="avatar">
-                  <img src="{{ $user->avatarUrl() }}" />
+                  <img src="{{ $user->avatar_url }}" />
                 </span>
               </td>
               <td class="align-middle"><a href="{{ route('users.show', $user->id) }}">{{ $user->name }}</a></td>

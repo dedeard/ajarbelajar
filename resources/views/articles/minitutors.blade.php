@@ -35,7 +35,7 @@
             <tr>
               <td class="align-middle">
                 <span class="avatar">
-                  <img src="{{ $minitutor->user->avatarUrl() }}" />
+                  <img src="{{ $minitutor->user->avatar_url }}" />
                 </span>
               </td>
               <td class="align-middle"><a href="{{ route('articles.create', ['id' => $minitutor->id]) }}">{{ $minitutor->user->name }}</a></td>
