@@ -2,6 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
+// Sitemap
+Route::get('sitemap/playlists', 'SitemapController@playlists')->name('sitemap.playlists');
+Route::get('sitemap/articles', 'SitemapController@articles')->name('sitemap.articles');
+Route::get('sitemap/categories', 'SitemapController@categories')->name('sitemap.categories');
+Route::get('sitemap/minitutors', 'SitemapController@minitutors')->name('sitemap.minitutors');
+Route::get('sitemap/pages', 'SitemapController@pages')->name('sitemap.pages');
+
+
 // join minitutor
 Route::get('join-minitutor', 'JoinMinitutorController@show')->name('join.minitutor.show');
 Route::get('join-minitutor/status', 'JoinMinitutorController@status')->name('join.minitutor.status');
@@ -84,3 +92,7 @@ Route::get('seos', 'SeosController@index')->name('seos.index');
 
 // Page
 Route::get('pages/{slug}', 'PagesController@show')->name('pages.show');
+
+
+// Nuxt page
+Route::get('nuxt/home', 'NuxtController@home')->name('nuxt.show');
