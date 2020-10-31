@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\RequestArticleResource;
 use App\Models\Category;
 use App\Models\Image;
-use App\models\RequestArticle;
+use App\Models\RequestArticle;
 use Illuminate\Http\Request;
 
 class RequestArticlesController extends Controller

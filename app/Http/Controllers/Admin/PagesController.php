@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Helpers\HeroHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Image;
-use App\models\Page;
+use App\Models\Page;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
 

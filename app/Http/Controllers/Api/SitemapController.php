@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Minitutor;
-use App\models\Page;
+use App\Models\Page;
 use App\Models\Playlist;
 
 class SitemapController extends Controller

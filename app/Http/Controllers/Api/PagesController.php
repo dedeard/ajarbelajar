@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PageResource;
-use App\models\Page;
+use App\Models\Page;
 
 class PagesController extends Controller
 {

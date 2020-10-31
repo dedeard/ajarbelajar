@@ -8,7 +8,7 @@ use App\Helpers\PointHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Image;
-use App\models\RequestArticle;
+use App\Models\RequestArticle;
 use Artesaos\SEOTools\Facades\SEOMeta;
 
 class RequestArticlesController extends Controller

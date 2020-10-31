@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\FeedbackResource;
-use App\models\RequestArticle;
+use App\Models\RequestArticle;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
