@@ -2,9 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function(){
-    return view('dashboard');
-})->name('dashboard');
+// Dashboard
+Route::get('/', 'DashboardController@index')->name('dashboard');
 
 
 // Profile
@@ -86,5 +85,5 @@ Route::resource('pages', 'PagesController')->except(['show']);
 
 // Handele Froala fileManager
 Route::get('froala/image', 'FroalaController@getImage')->name('froala.image');
-Route::post('froala/image', 'FroalaController@uploadImage')->name('froala.image');
-Route::delete('froala/image', 'FroalaController@destroyImage')->name('froala.image');
+Route::post('froala/image', 'FroalaController@uploadImage');
+Route::delete('froala/image', 'FroalaController@destroyImage');
