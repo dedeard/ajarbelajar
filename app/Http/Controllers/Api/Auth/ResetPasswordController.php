@@ -17,7 +17,7 @@ class ResetPasswordController extends Controller
 
     public function __construct()
     {
-        $this->middleware('throttle:3,1')->only('request');
+        $this->middleware('throttle:30,1')->only('request');
     }
 
     public function check(Request $request)
