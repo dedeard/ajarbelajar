@@ -21,6 +21,13 @@ $linkGroups = [
       'icon' => 'wb-user-circle',
       'can' => 'manage minitutor',
     ],
+    [
+      'name' => 'Email',
+      'route' => 'emails.index',
+      'is' => 'emails*',
+      'icon' => 'wb-envelope',
+      'can' => 'manage email',
+    ],
   ],
   [
     [
