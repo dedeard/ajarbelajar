@@ -32,7 +32,10 @@ class MinitutorPostPublishedNotification extends Notification implements ShouldQ
      */
     public function via($notifiable)
     {
-        return ['database', 'broadcast', 'mail'];
+        if((bool) $notifiable->email_notification) {
+            return ['database', 'broadcast', 'mail'];
+        }
+        return ['database', 'broadcast'];
     }
 
     /**

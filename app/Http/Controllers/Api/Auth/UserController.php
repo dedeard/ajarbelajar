@@ -52,7 +52,8 @@ class UserController extends Controller
             'youtube_url' => ['nullable', 'url', 'max:250'],
             'twitter_url' => ['nullable', 'url', 'max:250'],
             'new_password' => ['nullable', 'string', 'min:8'],
-            'password' => ['nullable', 'required_with:new_password', 'password']
+            'password' => ['nullable', 'required_with:new_password', 'password'],
+            'email_notification' => ['nullable', 'boolean'],
         ]);
 
         if(strtolower($data['email']) !== strtolower($user->email)) {

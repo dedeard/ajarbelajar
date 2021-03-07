@@ -28,6 +28,7 @@ class AuthResource extends JsonResource
             'youtube_url' => $this->youtube_url,
             'username' => $this->username,
             'email' => $this->email,
+            'email_notification' => $this->email_notification ? true : false,
             'email_verified_at' => $this->email_verified_at ? $this->email_verified_at->timestamp : null,
             'created_at' => $this->created_at->timestamp,
             'updated_at' => $this->updated_at->timestamp,

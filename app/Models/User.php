@@ -39,7 +39,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'youtube_url',
         'username',
         'email',
-        'password'
+        'password',
+        'email_notification',
     ];
 
     /**

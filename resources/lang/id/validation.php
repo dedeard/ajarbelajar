@@ -152,5 +152,6 @@ return [
         'username' => 'Username',
         'first_name' => 'Nama depan',
         'last_name' => 'Nama belakang',
+        'email_notification' => 'Notifikasi email',
     ],
 ];
