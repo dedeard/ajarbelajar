@@ -77,6 +77,13 @@
 
             <div class="form-group">
               <div class="checkbox-custom checkbox-primary">
+                <input type="checkbox" id="email_notification" name="email_notification" @if(old('email_notification')) checked @endif>
+                <label for="email_notification">Email Notifikasi</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="checkbox-custom checkbox-primary">
                 <input type="checkbox" id="email_verified" name="email_verified" @if(old('email_verified')) checked @endif>
                 <label for="email_verified">Verifikasi Alamat Email</label>
               </div>

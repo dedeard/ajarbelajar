@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@extends('layouts.app')
-
 @section('content')
 @component('components.user_show', ['user' => $user])
 <div class="p-3">
@@ -78,6 +76,13 @@
         @error('password')
           <span class="invalid-feedback">{{ $message }}</span>
         @enderror
+      </div>
+
+      <div class="form-group">
+        <div class="checkbox-custom checkbox-primary">
+          <input type="checkbox" id="email_notification" name="email_notification" @if($user->email_notification) checked @endif>
+          <label for="email_notification">Email Notifikasi</label>
+        </div>
       </div>
 
       <div class="form-group">

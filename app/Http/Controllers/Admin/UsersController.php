@@ -54,6 +54,7 @@ class UsersController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
             'email_verified' => ['nullable'],
+            'email_notification' => ['nullable'],
             'role' => ['nullable', 'integer', new RoleExists],
             'image' => 'nullable|image|max:4000'
         ]);
@@ -61,6 +62,7 @@ class UsersController extends Controller
         $data['username'] = strtolower($data['username']);
         $data['password'] = Hash::make($data['password']);
         if (isset($data['email_verified'])) $data['email_verified_at'] = now();
+        $data['email_notification'] = isset($data['email_notification']) ? true : false;
 
         if (isset($data['image'])) {
             $data['avatar'] = AvatarHelper::generate($data['image']);
@@ -163,6 +165,7 @@ class UsersController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $id],
             'password' => ['nullable', 'string', 'min:8'],
             'email_verified' => ['nullable'],
+            'email_notification' => ['nullable'],
             'role' => ['nullable', 'integer', new RoleExists],
             'image' => 'nullable|image|max:4000'
         ]);
@@ -190,6 +193,8 @@ class UsersController extends Controller
             AvatarHelper::destroy($user->avatar);
             unset($data['image']);
         }
+
+        $data['email_notification'] = isset($data['email_notification']) ? true : false;
 
         if (isset($data['email_verified'])) {
             $data['email_verified_at'] = $user->email_verified_at ?? now();
