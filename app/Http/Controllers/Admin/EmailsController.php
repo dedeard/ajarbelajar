@@ -46,7 +46,7 @@ class EmailsController extends Controller
                 ->get();
             break;
             case 'user:minitutor':
-                $users = User::select(['email'])
+                $users = User::select(['id', 'email'])
                 ->get();
             break;
         }
