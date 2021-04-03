@@ -92,6 +92,48 @@
         </div>
       </div>
 
+      <br>
+      <h3>Media Sosial</h3>
+      <div class="form-group">
+        <label>Website</label>
+        <input type="text" class="form-control @error('website_url') is-invalid @enderror" name="website_url" placeholder="Website..." value="{{ $user->website_url }}">
+        @error('website_url')
+          <span class="invalid-feedback">{{ $message }}</span>
+        @enderror
+      </div>
+
+      <div class="form-group">
+        <label>Facebook</label>
+        <input type="text" class="form-control @error('facebook_url') is-invalid @enderror" name="facebook_url" placeholder="Facebook..." value="{{ $user->facebook_url }}">
+        @error('facebook_url')
+          <span class="invalid-feedback">{{ $message }}</span>
+        @enderror
+      </div>
+
+      <div class="form-group">
+        <label>Instagram</label>
+        <input type="text" class="form-control @error('instagram_url') is-invalid @enderror" name="instagram_url" placeholder="Instagram..." value="{{ $user->instagram_url }}">
+        @error('instagram_url')
+          <span class="invalid-feedback">{{ $message }}</span>
+        @enderror
+      </div>
+
+      <div class="form-group">
+        <label>Twitter</label>
+        <input type="text" class="form-control @error('twitter_url') is-invalid @enderror" name="twitter_url" placeholder="Twitter..." value="{{ $user->twitter_url }}">
+        @error('twitter_url')
+          <span class="invalid-feedback">{{ $message }}</span>
+        @enderror
+      </div>
+
+      <div class="form-group">
+        <label>Youtube</label>
+        <input type="text" class="form-control @error('youtube_url') is-invalid @enderror" name="youtube_url" placeholder="Youtube..." value="{{ $user->youtube_url }}">
+        @error('youtube_url')
+          <span class="invalid-feedback">{{ $message }}</span>
+        @enderror
+      </div>
+
       <div class="form-group">
         <button type="submit" class="btn btn-primary">Edit User</button>
       </div>

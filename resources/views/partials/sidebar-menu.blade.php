@@ -107,7 +107,7 @@ $linkGroups = [
   ],
   [
     [
-      'name' => 'Profile (On progress)',
+      'name' => 'Profile',
       'route' => 'profile.index',
       'is' => 'profile*',
       'icon' => 'wb-user',

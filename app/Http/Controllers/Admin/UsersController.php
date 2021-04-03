@@ -167,7 +167,12 @@ class UsersController extends Controller
             'email_verified' => ['nullable'],
             'email_notification' => ['nullable'],
             'role' => ['nullable', 'integer', new RoleExists],
-            'image' => 'nullable|image|max:4000'
+            'image' => 'nullable|image|max:4000',
+            'website_url' => ['nullable', 'url', 'max:250'],
+            'facebook_url' => ['nullable', 'url', 'max:250'],
+            'instagram_url' => ['nullable', 'url', 'max:250'],
+            'youtube_url' => ['nullable', 'url', 'max:250'],
+            'twitter_url' => ['nullable', 'url', 'max:250'],
         ]);
 
         if (!$user->hasRole('Super Admin') && $request->user()->can('manage role')) {
