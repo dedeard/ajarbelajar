@@ -141,6 +141,7 @@
     }
 
     &:hover,
+    &:focus,
     &.active {
       background-color: darken($gray-800, 4) !important;
       color: $primary !important;
