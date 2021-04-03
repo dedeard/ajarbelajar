@@ -84,12 +84,16 @@ return [
             'storage_api_uri' => 'https://storage.googleapis.com/' . env('FB_PROJECT_ID') . '.appspot.com/',
         ],
 
-        'gcs_public' => [
+        'gcs_public' => env('APP_ENV') !== 'local' ? [
             'driver' => 'gcs',
             'path_prefix' => env('GOOGLE_CLOUD_STORAGE_PATH_PREFIX') . 'public/',
             'visibility' => 'public',
+        ] : [
+            'driver' => 'local',
+            'root' => storage_path('app/public/public'),
+            'url' => env('APP_URL').'/storage/public',
+            'visibility' => 'public',
         ],
-
     ],
 
     /*
