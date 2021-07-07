@@ -58,11 +58,13 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::middleware('web')
+        Route::domain('admin.' . env('APP_DOMAIN'))
+            ->middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/web.php'));
 
-        Route::middleware(['web', 'auth', 'can:admin access'])
+        Route::domain('admin.' . env('APP_DOMAIN'))
+            ->middleware(['web', 'auth', 'can:admin access'])
             ->namespace($this->namespace . '\Admin')
             ->group(base_path('routes/admin.php'));
     }
@@ -76,19 +78,20 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-        Route::prefix('api')
+        Route::domain('api.' . env('APP_DOMAIN'))
             ->middleware('api')
             ->as('api.')
             ->namespace($this->namespace . '\Api\Auth')
             ->group(base_path('routes/auth_api.php'));
 
-        Route::prefix('api')
+        Route::domain('api.' . env('APP_DOMAIN'))
             ->middleware('api')
             ->as('api.')
             ->namespace($this->namespace . '\Api')
             ->group(base_path('routes/api.php'));
 
-        Route::prefix('api/admin')
+        Route::domain('api.' . env('APP_DOMAIN'))
+            ->prefix('admin')
             ->middleware(['api', 'auth:api', 'can:admin access'])
             ->as('api.admin.')
             ->namespace($this->namespace . '\Admin\Api')
