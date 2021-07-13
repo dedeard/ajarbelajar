@@ -54,6 +54,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the join-minitutor relation.
+     */
+    public function joinMinitutor()
+    {
+        return $this->hasOne(JoinMinitutor::class);
+    }
+
+    /**
      * Return the avatar url or placeholder url.
      */
     public function avatarUrl($nulllable = false)

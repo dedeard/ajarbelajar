@@ -18,7 +18,7 @@ class MinitutorcvHelper extends Helper
      */
     static function disk() : Filesystem
     {
-        return Storage::disk('gcs_public');
+        return Storage::disk('public');
     }
 
     /**
