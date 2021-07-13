@@ -6,18 +6,16 @@ use App\Helpers\AvatarHelper;
 use App\Http\Resources\MinitutorsResource;
 use App\Http\Resources\PostsResource;
 use App\Http\Resources\UsersResource;
-use App\Notifications\Auth\VerifyEmailNotification;
 use App\Notifications\Auth\ResetPasswordNotification;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Password;
-use Laravel\Passport\HasApiTokens;
+use Laravel\Sanctum\HasApiTokens;
 use Overtrue\LaravelSubscribe\Traits\Subscriber;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
     use Notifiable, HasRoles, Subscriber, HasApiTokens;
 
@@ -27,16 +25,11 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'email_verified_at',
         'name',
         'avatar',
         'points',
         'about',
-        'website_url',
-        'twitter_url',
-        'facebook_url',
-        'instagram_url',
-        'youtube_url',
+        'website',
         'username',
         'email',
         'password',
@@ -51,15 +44,6 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password',
         'remember_token'
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime'
     ];
 
     /**
@@ -111,14 +95,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function activities() : HasMany
     {
         return $this->hasMany(Activity::class);
-    }
-
-    /**
-     * Send email verification.
-     */
-    public function sendMemberEmailVerify() : void
-    {
-        $this->notify(new VerifyEmailNotification);
     }
 
     /**

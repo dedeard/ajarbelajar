@@ -39,7 +39,7 @@ class RegisterController extends Controller
 
         $user->sendMemberEmailVerify();
 
-        $token = $user->createToken('auth-token')->accessToken;
+        $token = $user->createToken('auth-token')->plainTextToken;
         return response()->json(['auth' => AuthResource::make($user), 'token' => $token], 200);
     }
 }

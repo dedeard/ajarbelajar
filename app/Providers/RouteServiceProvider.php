@@ -78,21 +78,21 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-        Route::domain('api.' . env('APP_DOMAIN'))
+        Route::prefix('api')
             ->middleware('api')
             ->as('api.')
             ->namespace($this->namespace . '\Api\Auth')
             ->group(base_path('routes/auth_api.php'));
 
-        Route::domain('api.' . env('APP_DOMAIN'))
+        Route::prefix('api')
             ->middleware('api')
             ->as('api.')
             ->namespace($this->namespace . '\Api')
             ->group(base_path('routes/api.php'));
 
-        Route::domain('api.' . env('APP_DOMAIN'))
+        Route::prefix('api')
             ->prefix('admin')
-            ->middleware(['api', 'auth:api', 'can:admin access'])
+            ->middleware(['api', 'auth:sanctum', 'can:admin access'])
             ->as('api.admin.')
             ->namespace($this->namespace . '\Admin\Api')
             ->group(base_path('routes/admin_api.php'));

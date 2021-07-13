@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="current-url" content="{{ url()->current() }}">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<meta name="api-token" content="{{ Auth::user()->createToken('auth-token')->accessToken }}">
+{{-- <meta name="api-token" content="{{ Auth::user()->createToken('auth-token')->plainTextToken }}"> --}}
 <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('icon/apple-icon-57x57.png') }}">
 <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('icon/apple-icon-60x60.png') }}">
 <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('icon/apple-icon-72x72.png') }}">
@@ -21,14 +21,6 @@
 <meta name="msapplication-TileColor" content="#677ae4">
 <meta name="theme-color" content="#677ae4">
 {!! SEOMeta::generate() !!}
-
-<!-- script -->
-{{-- <script>
-  var AUTH_ID = {{ Auth::user()->id }};
-  var NOTIFICATION_COUNT = {{ Auth::user()->unreadNotifications()->count() }};
-</script> --}}
-
-<!-- Fonts -->
 <link rel='stylesheet' href='{{ asset('fonts/roboto/style.css') }}'>
 <link rel='stylesheet' href='{{ asset('fonts/web-icons/style.css') }}'>
 <link rel='stylesheet' href='{{ asset('fonts/socicon/style.css') }}'>

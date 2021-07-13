@@ -15,7 +15,7 @@ class RequestArticlesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:api', 'minitutor:active']);
+        $this->middleware(['auth:sanctum', 'minitutor:active']);
     }
 
     public function index()

@@ -15,7 +15,7 @@ class VerificationController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api');
+        $this->middleware('auth:sanctum');
         $this->middleware('signed')->only('verify');
         $this->middleware('throttle:30,1')->only('resend');
     }
