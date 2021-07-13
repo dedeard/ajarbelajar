@@ -21,18 +21,18 @@
             </tr>
           </thead>
           <tbody>
-            @foreach($users as $user)
+            @foreach($requests as $data)
             <tr>
               <td class="align-middle">
                 <span class="avatar">
-                  <img src="{{ $user->avatar_url }}" />
+                  <img src="{{ $data->user->avatar_url }}" />
                 </span>
               </td>
-              <td class="align-middle"><a href="{{ route('users.show', $user->id) }}">{{ $user->name }}</a></td>
-              <td class="align-middle">{{ $user->username }}</td>
-              <td class="align-middle">{{ $user->email }}</td>
+              <td class="align-middle"><a href="{{ route('users.show', $data->user->id) }}">{{ $data->user->name }}</a></td>
+              <td class="align-middle">{{ $data->user->username }}</td>
+              <td class="align-middle">{{ $data->user->email }}</td>
               <td class="text-center p-0 align-middle">
-                <a href="{{ route('minitutors.request.show', $user->id) }}" class="btn btn-outline-default btn-sm btn-icon"><i class="wb-eye"></i></a>
+                <a href="{{ route('minitutors.request.show', $data->id) }}" class="btn btn-outline-default btn-sm btn-icon"><i class="wb-eye"></i></a>
               </td>
             </tr>
             @endforeach
@@ -40,7 +40,7 @@
         </table>
       </div>
       <div class="panel-footer">
-        {{ $users->links() }}
+        {{ $requests->links() }}
       </div>
     </div>
   </div>

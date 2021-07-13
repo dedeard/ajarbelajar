@@ -6,29 +6,19 @@ use App\Helpers\MinitutorcvHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Minitutor;
+use App\Models\JoinMinitutor;
 use App\Models\Playlist;
 use App\Models\User;
 use App\Notifications\RequestMinitutorAcceptedNotification;
 use App\Notifications\RequestMinitutorRejectedNotification;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
-use Kreait\Firebase\Database;
 
 class MinitutorsController extends Controller
 {
-    public function __construct(Database $database)
+    public function __construct()
     {
         $this->middleware(['can:manage minitutor']);
-        $this->database = $database;
-    }
-
-    private function getRef($user = null)
-    {
-        if($user) {
-            $uid = (string) $user->id;
-            return $this->database->getReference('request_minitutor/_' . $uid);
-        }
-        return $this->database->getReference('request_minitutor');
     }
 
     public function index(Request $request)
@@ -65,54 +55,44 @@ class MinitutorsController extends Controller
     public function requests(Request $request)
     {
         SEOMeta::setTitle("Daftar permintaan manjadi Minitutor");
-        $users = User::query();
-        foreach($this->getRef()->getChildKeys() as $key) {
-            $id = (Integer) trim($key, '_');
-            $users->orWhere('id', $id);
-        };
-        $users->orderBy('id');
-        $data = $users->paginate(20)->appends(['search' => $request->input('search')]);
-        return view('minitutors.requests', [ 'users' => $data ]);
+        $joinMinitutors = JoinMinitutor::with('user');
+        $data = $joinMinitutors->paginate(20)->appends(['search' => $request->input('search')]);
+        return view('minitutors.requests', [ 'requests' => $data ]);
     }
 
     public function showRequest($id)
     {
         SEOMeta::setTitle("Permintaan manjadi Minitutor");
-        $user = User::findOrFail($id);
-        $snap = $this->getRef($user)->getSnapshot();
-        if(!$snap->exists()) return abort(404);
-        $data = $snap->getValue();
-        $data['cv'] = MinitutorcvHelper::getUrl($data['cv']);
-        return view('minitutors.show_request', ["user" => $user, 'data' => (Object) $data]);
+        $joinMinitutor = JoinMinitutor::findOrFail($id);
+        return view('minitutors.show_request', ["user" => $joinMinitutor->user, 'data' => $joinMinitutor]);
     }
 
     public function rejectRequest($id)
     {
-        $user = User::findOrFail($id);
-        $ref = $this->getRef($user);
-        $snap = $ref->getSnapshot();
-        if(!$snap->exists()) return abort(404);
-        $data = $snap->getValue();
+        $data = JoinMinitutor::findOrFail($id);
+        $user = $data->user;
         MinitutorcvHelper::destroy($data['cv']);
-        $ref->remove();
+        $data->delete();
         $user->notify(new RequestMinitutorRejectedNotification);
         return redirect()->route('minitutors.requests')->withSuccess('Permintaan telah di ditolak.');
     }
 
     public function acceptRequest($id)
     {
-        $user = User::findOrFail($id);
-        $ref = $this->getRef($user);
-        $snap = $ref->getSnapshot();
-        if(!$snap->exists()) return abort(404);
-        $data = $snap->getValue();
-        MinitutorcvHelper::destroy($data['cv']);
-        unset($data['created_at']);
-        unset($data['cv']);
-        $data['active'] = true;
-        $minitutor = new Minitutor($data);
+        $data = JoinMinitutor::findOrFail($id);
+        $user = $data->user;
+        $arr = $data->toArray();
+        MinitutorcvHelper::destroy($arr['cv']);
+        unset($arr['created_at']);
+        unset($arr['cv']);
+        unset($arr['id']);
+        unset($arr['user']);
+        unset($arr['user_id']);
+        unset($arr['updated_at']);
+        $arr['active'] = true;
+        $minitutor = new Minitutor($arr);
         $user->minitutor()->save($minitutor);
-        $ref->remove();
+        $data->delete();
         $user->notify(new RequestMinitutorAcceptedNotification);
         return redirect()->route('minitutors.requests')->withSuccess('Permintaan telah di terima.');
     }

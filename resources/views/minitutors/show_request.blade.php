@@ -10,11 +10,11 @@
           <button class="btn btn-sm btn-success" onclick="$('#form-accept-request').submit()">Terima</button>
           <button class="btn btn-sm btn-danger" onclick="$('#form-reject-request').submit()">Tolak</button>
 
-          <form action="{{ route('minitutors.request.reject', $user->id) }}" id="form-reject-request" method="post" class="d-none">
+          <form action="{{ route('minitutors.request.reject', $data->id) }}" id="form-reject-request" method="post" class="d-none">
             @csrf
             @method('put')
           </form>
-          <form action="{{ route('minitutors.request.accept', $user->id) }}" id="form-accept-request" method="post" class="d-none">
+          <form action="{{ route('minitutors.request.accept', $data->id) }}" id="form-accept-request" method="post" class="d-none">
             @csrf
             @method('put')
           </form>
@@ -26,7 +26,7 @@
             <a href="#show-activity" class="avatar avatar-100">
               <img alt="photo" src="{{ $user->avatar_url }}">
             </a>
-            <a download href="{{ $data->cv }}" target="_blank" class="btn btn-block btn-primary btn-sm mt-15">DOWNLOAD CV</a>
+            <a download href="{{ $data->cvUrl }}" target="_blank" class="btn btn-block btn-primary btn-sm mt-15">DOWNLOAD CV</a>
           </div>
           <div class="col-lg-10 col-md-6 mb-3">
             <h5 class="mb-0 mt-0">Nama</h5>
