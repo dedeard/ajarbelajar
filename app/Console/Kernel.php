@@ -25,6 +25,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('post:updateview')->daily();
+        $schedule->command('db:backup')->daily();
     }
 
     /**
