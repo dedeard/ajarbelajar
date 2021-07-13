@@ -44,7 +44,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes();
 
-        $this->mapWebRoutes();
+        // $this->mapWebRoutes();
 
         //
     }
@@ -78,23 +78,27 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-        Route::prefix('api')
+        Route::prefix('api/auth')
             ->middleware('api')
-            ->as('api.')
             ->namespace($this->namespace . '\Api\Auth')
-            ->group(base_path('routes/auth_api.php'));
+            ->group(base_path('routes/api/auth.php'));
 
-        Route::prefix('api')
-            ->middleware('api')
-            ->as('api.')
-            ->namespace($this->namespace . '\Api')
-            ->group(base_path('routes/api.php'));
+        Route::prefix('api/account')
+            ->middleware(['api', 'auth:sanctum'])
+            ->namespace($this->namespace . '\Api\Account')
+            ->group(base_path('routes/api/account.php'));
 
-        Route::prefix('api')
-            ->prefix('admin')
-            ->middleware(['api', 'auth:sanctum', 'can:admin access'])
-            ->as('api.admin.')
-            ->namespace($this->namespace . '\Admin\Api')
-            ->group(base_path('routes/admin_api.php'));
+        // Route::prefix('api')
+        //     ->middleware('api')
+        //     ->as('api.')
+        //     ->namespace($this->namespace . '\Api')
+        //     ->group(base_path('routes/api.php'));
+
+        // Route::prefix('api')
+        //     ->prefix('admin')
+        //     ->middleware(['api', 'auth:sanctum', 'can:admin access'])
+        //     ->as('api.admin.')
+        //     ->namespace($this->namespace . '\Admin\Api')
+        //     ->group(base_path('routes/admin_api.php'));
     }
 }

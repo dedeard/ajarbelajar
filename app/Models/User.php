@@ -6,7 +6,6 @@ use App\Helpers\AvatarHelper;
 use App\Http\Resources\MinitutorsResource;
 use App\Http\Resources\PostsResource;
 use App\Http\Resources\UsersResource;
-use App\Notifications\Auth\ResetPasswordNotification;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -98,22 +97,6 @@ class User extends Authenticatable
     }
 
     /**
-     * Generate remember password token code.
-     */
-    public function generateRemeberPasswordToken() : string
-    {
-        return Password::broker()->createToken($this);
-    }
-
-    /**
-     * Send email forget password.
-     */
-    public function sendMemberEmailResetPassword() : void
-    {
-        $this->notify(new ResetPasswordNotification($this->generateRemeberPasswordToken()));
-    }
-
-    /**
      * Return notification broadcast route.
      */
     public function receivesBroadcastNotificationsOn(): String
@@ -121,16 +104,6 @@ class User extends Authenticatable
         return 'App.User.'.$this->id;
     }
 
-    /**
-     * Return the generated Firebase Custom Token.
-     */
-    public function createFirebaseCustomToken(): String
-    {
-        $auth = app('firebase.auth');
-        $uid = 'id-' . $this->id;
-        $customToken = $auth->createCustomToken($uid);
-        return (string) $customToken;
-    }
 
     /**
      * Atributes
