@@ -11,13 +11,13 @@ use Hash;
 
 class ProfileController extends Controller
 {
-    public function get(Request $request)
+    public function show(Request $request)
     {
         $user = $request->user();
-        return response()->json(AuthResource::make($user), 200);
+        return response()->json(["auth" => AuthResource::make($user)], 200);
     }
 
-    public function put(Request $request)
+    public function update(Request $request)
     {
         $user = $request->user();
         if($request->input('username')) {
@@ -38,6 +38,6 @@ class ProfileController extends Controller
             unset($data['password']);
         }
         $user->update($data);
-        return response()->json(AuthResource::make($user), 200);
+        return response()->noContent();
     }
 }

@@ -10,13 +10,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Password;
-use Laravel\Sanctum\HasApiTokens;
 use Overtrue\LaravelSubscribe\Traits\Subscriber;
 use Spatie\Permission\Traits\HasRoles;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
-    use Notifiable, HasRoles, Subscriber, HasApiTokens;
+    use Notifiable, HasRoles, Subscriber;
 
     /**
      * The attributes that are mass assignable.
@@ -45,6 +45,26 @@ class User extends Authenticatable
         'remember_token'
     ];
 
+        /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
     /**
      * Get the minitutor relation.
      */
@@ -62,30 +82,11 @@ class User extends Authenticatable
     }
 
     /**
-     * Return the avatar url or placeholder url.
-     */
-    public function avatarUrl($nulllable = false)
-    {
-        if($nulllable && !$this->avatar) {
-            return null;
-        }
-        return AvatarHelper::getUrl($this->avatar);
-    }
-
-    /**
      * Get the comments relation.
      */
     public function comments() : HasMany
     {
         return $this->hasMany(Comment::class);
-    }
-
-    /**
-     * Increment user point.
-     */
-    public function incrementPoint($point) {
-        $this->points = $this->points + $point;
-        return $this->save();
     }
 
     /**
@@ -102,6 +103,14 @@ class User extends Authenticatable
     public function activities() : HasMany
     {
         return $this->hasMany(Activity::class);
+    }
+
+    /**
+     * Increment user point.
+     */
+    public function incrementPoint($point) {
+        $this->points = $this->points + $point;
+        return $this->save();
     }
 
     /**

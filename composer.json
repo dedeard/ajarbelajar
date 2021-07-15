@@ -16,7 +16,6 @@
         "intervention/image": "^2.5",
         "kreait/laravel-firebase": "^2.2",
         "laravel/framework": "^7.24",
-        "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
         "overtrue/laravel-subscribe": "^1.0",
@@ -25,7 +24,8 @@
         "spatie/laravel-analytics": "^3.10",
         "spatie/laravel-permission": "^3.13",
         "spatie/laravel-sluggable": "^2.2",
-        "superbalist/laravel-google-cloud-storage": "^2.2"
+        "superbalist/laravel-google-cloud-storage": "^2.2",
+        "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

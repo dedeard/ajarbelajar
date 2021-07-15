@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\AuthResource;
+use App\Http\Resources\Api\AuthResource;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -18,9 +17,8 @@ class LoginController extends Controller
             'email' => 'string',
             'username' => 'string',
         ]);
-        if (Auth::attempt([$identity => $data[$identity], 'password' => $data['password']])) {
-            $user = Auth::user();
-            $token = $user->createToken('auth-token')->plainTextToken;
+        if ($token = auth('api')->attempt([$identity => $data[$identity], 'password' => $data['password']])) {
+            $user = auth('api')->user();
             return response()->json(['auth' => AuthResource::make($user), 'token' => $token], 200);
         }
         return response()->json(['message' => __('auth.failed')], 401);

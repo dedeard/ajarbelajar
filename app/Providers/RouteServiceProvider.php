@@ -84,9 +84,14 @@ class RouteServiceProvider extends ServiceProvider
             ->group(base_path('routes/api/auth.php'));
 
         Route::prefix('api/account')
-            ->middleware(['api', 'auth:sanctum'])
+            ->middleware(['api', 'auth:api'])
             ->namespace($this->namespace . '\Api\Account')
             ->group(base_path('routes/api/account.php'));
+
+        Route::prefix('api/minitutor')
+            ->middleware(['api', 'auth:api', 'minitutor:active'])
+            ->namespace($this->namespace . '\Api\Minitutor')
+            ->group(base_path('routes/api/minitutor.php'));
 
         Route::prefix('api')
             ->middleware('api')
@@ -101,7 +106,7 @@ class RouteServiceProvider extends ServiceProvider
 
         // Route::prefix('api')
         //     ->prefix('admin')
-        //     ->middleware(['api', 'auth:sanctum', 'can:admin access'])
+        //     ->middleware(['api', 'auth:api', 'can:admin access'])
         //     ->as('api.admin.')
         //     ->namespace($this->namespace . '\Admin\Api')
         //     ->group(base_path('routes/admin_api.php'));

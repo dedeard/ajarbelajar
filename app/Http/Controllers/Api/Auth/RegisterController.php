@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\AuthResource;
+use App\Http\Resources\Api\AuthResource;
 use App\Models\User;
 use App\Rules\Username;
 use Illuminate\Http\Request;
@@ -37,9 +37,8 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        $user->sendMemberEmailVerify();
+        $token = auth('api')->login($user);
 
-        $token = $user->createToken('auth-token')->plainTextToken;
         return response()->json(['auth' => AuthResource::make($user), 'token' => $token], 200);
     }
 }

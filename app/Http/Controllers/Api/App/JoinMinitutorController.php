@@ -6,13 +6,12 @@ use App\Helpers\MinitutorcvHelper;
 use App\Models\JoinMinitutor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Resources\Api\JoinMinitutorResource;
 
 class JoinMinitutorController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum', 'not.minitutor']);
+        $this->middleware(['auth:api', 'not.minitutor']);
     }
 
     public function show(Request $request)
@@ -20,7 +19,9 @@ class JoinMinitutorController extends Controller
         $user = $request->user();
         $join = $user->joinMinitutor;
         if($join) {
-            return response()->json(JoinMinitutorResource::make($join), 200);
+            $data = $join->toArray();
+            $data['cv'] = $join->cvUrl;
+            return response()->json($data, 200);
         }
         return response()->json(["message" => __("You have submitted a request to become a minitutor.")], 403);
     }

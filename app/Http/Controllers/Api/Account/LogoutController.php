@@ -9,7 +9,7 @@ class LogoutController extends Controller
 {
     public function logout()
     {
-        $request->user()->tokens()->delete();
+        auth()->logout(true);
         return response()->noContent();
     }
 }
