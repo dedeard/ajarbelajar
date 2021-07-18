@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\Account;
 
 use App\Helpers\AvatarHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Api\AuthResource;
 use Illuminate\Http\Request;
 
 class AvatarController extends Controller

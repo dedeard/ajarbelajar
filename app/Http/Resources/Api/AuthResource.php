@@ -30,6 +30,11 @@ class AuthResource extends JsonResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
 
+            $this->mergeWhen($this->roles && $this->roles[0], function(){
+                return [
+                    "role" => $this->roles[0]->name
+                ];
+            }),
             $this->mergeWhen($this->minitutor && $this->minitutor->active, function(){
                 return [
                     "minitutor" => $this->minitutor

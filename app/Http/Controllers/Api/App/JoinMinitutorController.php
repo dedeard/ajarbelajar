@@ -3,24 +3,32 @@
 namespace App\Http\Controllers\Api\App;
 
 use App\Helpers\MinitutorcvHelper;
-use App\Models\JoinMinitutor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Kreait\Firebase\Database;
 
 class JoinMinitutorController extends Controller
 {
-    public function __construct()
+    public function __construct(Database $database)
     {
         $this->middleware(['auth:api', 'not.minitutor']);
+        $this->database = $database;
+    }
+
+    private function getRef($user)
+    {
+        $uid = (string) $user->id;
+        return $this->database->getReference('request_minitutor/_' . $uid);
     }
 
     public function show(Request $request)
     {
         $user = $request->user();
-        $join = $user->joinMinitutor;
-        if($join) {
-            $data = $join->toArray();
-            $data['cv'] = $join->cvUrl;
+        $ref = $this->getRef($user);
+        $snap = $ref->getSnapshot();
+        if($snap->exists()) {
+            $data = $snap->getValue();
+            $data['cv'] = MinitutorcvHelper::getUrl($data['cv']);
             return response()->json($data, 200);
         }
         return response()->json(["message" => __("You have submitted a request to become a minitutor.")], 403);
@@ -29,15 +37,18 @@ class JoinMinitutorController extends Controller
     public function status(Request $request)
     {
         $user = $request->user();
+        $ref = $this->getRef($user);
+        $snap = $ref->getSnapshot();
         $alowCreate = true;
-        if($user->joinMinitutor) $alowCreate = false;
+        if($snap->exists()) $alowCreate = false;
         return response()->json(["allowCreate" => $alowCreate], 200);
     }
 
     public function store(Request $request)
     {
         $user = $request->user();
-        if($user->joinMinitutor) {
+        $ref = $this->getRef($user);
+        if($ref->getSnapshot()->exists()) {
             return response()->json(["message" => __("You have submitted a request to become a minitutor.")], 403);
         }
         $data = $request->validate([
@@ -49,11 +60,10 @@ class JoinMinitutorController extends Controller
             'contact' => 'required|string|max:255',
             'reason' => 'required|string|max:255',
             'expectation' => 'required|string|max:255',
-            'cv' => 'required|mimes:pdf|max:10000',
+            'cv' => 'required|mimes:pdf|max:1024',
         ]);
         $data['cv'] = MinitutorcvHelper::generate($data['cv']);
-        $joinMinitutor = new JoinMinitutor($data);
-        $user->joinMinitutor()->save($joinMinitutor);
+        $ref->set(array_merge($data, ['created_at' =>  ['.sv' => 'timestamp']]));
         return response()->noContent();
     }
 }
