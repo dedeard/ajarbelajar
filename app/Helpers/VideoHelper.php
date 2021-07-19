@@ -18,7 +18,7 @@ class VideoHelper extends Helper
      */
     static function disk() : Filesystem
     {
-        return Storage::disk('public');
+        return Storage::disk('video');
     }
 
     /**
