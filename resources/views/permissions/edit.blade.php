@@ -2,14 +2,14 @@
 
 @section('content')
   <div class="container-fluid">
-    <div class="panel panel-bordered">
-      <div class="panel-heading">
-        <h3 class="panel-title">Edit Permission</h3>
-        <div class="panel-actions">
+    <div class="card">
+      <div class="card-header d-flex">
+        <h3>Edit Permission</h3>
+        <div class="my-auto ml-auto">
           <a href="{{ route('permissions.index') }}" class="btn btn-sm btn-primary">Batal</a>
         </div>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <form action="{{ route('permissions.update', $permission->id) }}" method="post">
           @csrf
           @method('put')

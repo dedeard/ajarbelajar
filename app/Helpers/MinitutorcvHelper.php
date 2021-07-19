@@ -16,18 +16,21 @@ class MinitutorcvHelper extends Helper
     /**
      * Get Disk driver.
      */
-    static function disk() : Filesystem
+    public static function disk(): Filesystem
     {
-        return Storage::disk('public');
+        return Storage::disk('cdn');
     }
 
     /**
      * Generate name and upload.
      */
-    static function generate($file, $oldName = null) : String
+    public static function generate($file, $oldName = null): String
     {
         $name = parent::uniqueName('.' . $file->extension());
-        if($oldName) self::destroy($oldName);
+        if ($oldName) {
+            self::destroy($oldName);
+        }
+
         self::disk()->put(self::DIR . $name, file_get_contents($file));
         return $name;
     }
@@ -35,16 +38,19 @@ class MinitutorcvHelper extends Helper
     /**
      * Delete file.
      */
-    static function destroy($name) : void
+    public static function destroy($name): void
     {
         $name = self::DIR . $name;
-        if(self::disk()->exists($name)) self::disk()->delete($name);
+        if (self::disk()->exists($name)) {
+            self::disk()->delete($name);
+        }
+
     }
 
     /**
      * Get file url.
      */
-    static function getUrl($name) : String
+    public static function getUrl($name): String
     {
         return self::disk()->url(self::DIR . $name);
     }

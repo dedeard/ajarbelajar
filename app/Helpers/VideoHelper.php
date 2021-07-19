@@ -11,12 +11,12 @@ class VideoHelper extends Helper
     /**
      * define constant variable.
      */
-    const DIR = 'videos/';
+    const DIR = '';
 
     /**
      * Get Disk driver.
      */
-    static function disk() : Filesystem
+    public static function disk(): Filesystem
     {
         return Storage::disk('video');
     }
@@ -24,7 +24,7 @@ class VideoHelper extends Helper
     /**
      * Generate name and upload.
      */
-    static function upload($data) : String
+    public static function upload($data): String
     {
         $name = parent::uniqueName('.' . $data->extension());
         self::disk()->put(self::DIR . $name, file_get_contents($data));
@@ -34,7 +34,7 @@ class VideoHelper extends Helper
     /**
      * Delete video.
      */
-    static function destroy($name) : void
+    public static function destroy($name): void
     {
         if ($name && self::disk()->exists(self::DIR . $name)) {
             self::disk()->delete(self::DIR . $name);
@@ -44,9 +44,9 @@ class VideoHelper extends Helper
     /**
      * Get video url.
      */
-    static function getUrl($name) : String
+    public static function getUrl($name): String
     {
-        if($name) {
+        if ($name) {
             return self::disk()->url(self::DIR . $name);
         }
         return '';

@@ -3,8 +3,8 @@
 namespace App\Helpers;
 
 use Illuminate\Contracts\Filesystem\Filesystem;
-use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class EditorjsHelper extends Helper
 {
@@ -19,15 +19,15 @@ class EditorjsHelper extends Helper
     /**
      * Get Disk driver.
      */
-    static function disk() : Filesystem
+    public static function disk(): Filesystem
     {
-        return Storage::disk('public');
+        return Storage::disk('cdn');
     }
 
     /**
      * Uploading the image and get name, relative url.
      */
-    static function uploadImage($data) : Array
+    public static function uploadImage($data): array
     {
         $format = self::FORMAT;
         $dir = self::DIR;
@@ -35,12 +35,12 @@ class EditorjsHelper extends Helper
         $name = parent::uniqueName($ext);
         $dotName = "{$name}.dot{$ext}";
 
-        $tmp = Image::make($data)->resize(640, 640, function($constraint){
+        $tmp = Image::make($data)->resize(640, 640, function ($constraint) {
             $constraint->aspectRatio();
         });
         self::disk()->put($dir . $name, (string) $tmp->encode($format, 80));
 
-        $tmp = Image::make($data)->resize(50, 50, function($constraint){
+        $tmp = Image::make($data)->resize(50, 50, function ($constraint) {
             $constraint->aspectRatio();
         });
         self::disk()->put($dir . $dotName, (string) $tmp->encode($format, 75));
@@ -51,7 +51,7 @@ class EditorjsHelper extends Helper
     /**
      * Deleting the image.
      */
-    static function deleteImage($name) : void
+    public static function deleteImage($name): void
     {
         $dir = self::DIR;
         $ext = self::EXT;
@@ -68,16 +68,19 @@ class EditorjsHelper extends Helper
     /**
      * Delete not used images.
      */
-    static function cleanImage($data, $images)
+    public static function cleanImage($data, $images)
     {
         $body = json_decode($data);
         $dir = self::DIR;
         foreach ($images as $image) {
             $exists = false;
-            if(!!(array) $body) {
+            if (!!(array) $body) {
                 foreach ($body->blocks as $block) {
                     if ($block->type === 'image') {
-                        if ($block->data->file->url === self::disk()->url($dir . $image->name)) $exists = true;
+                        if ($block->data->file->url === self::disk()->url($dir . $image->name)) {
+                            $exists = true;
+                        }
+
                     }
                 }
             }
@@ -91,11 +94,14 @@ class EditorjsHelper extends Helper
     /**
      * Compile editor.js Object to HTML.
      */
-    static function compile($data) : String
+    public static function compile($data): String
     {
         if ($data) {
             $data = json_decode($data);
-            if (!isset($data->blocks)) return "";
+            if (!isset($data->blocks)) {
+                return "";
+            }
+
             $html = "";
             foreach ($data->blocks as $block) {
                 switch ($block->type) {
@@ -132,7 +138,7 @@ class EditorjsHelper extends Helper
                             }
                             $html .= "</tr>";
                         }
-                        $html .=  '</tbody></table>';
+                        $html .= '</tbody></table>';
                         break;
                     case "quote":
                         $html .= '<blockquote class="blockquote';
@@ -178,9 +184,15 @@ class EditorjsHelper extends Helper
                     case "image":
                         $html .= '<figure>';
                         $html .= '<img';
-                        if ($block->data->caption) $html .= ' alt="' . $block->data->caption . '"';
+                        if ($block->data->caption) {
+                            $html .= ' alt="' . $block->data->caption . '"';
+                        }
+
                         $html .= ' class="img-fluid img-rounded" src="' . $block->data->file->url . '">';
-                        if ($block->data->caption) $html .= '<figcaption class="text-center">' . $block->data->caption . '</figcaption>';
+                        if ($block->data->caption) {
+                            $html .= '<figcaption class="text-center">' . $block->data->caption . '</figcaption>';
+                        }
+
                         $html .= '</figure>';
                         break;
                 }

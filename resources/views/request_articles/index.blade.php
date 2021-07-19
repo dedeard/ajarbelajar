@@ -2,9 +2,9 @@
 
 @section('content')
   <div class="container-fluid">
-    <div class="panel panel-bordered">
-      <div class="panel-heading">
-        <h3 class="panel-title">Daftar Artikel Permintaan</h3>
+    <div class="card">
+      <div class="card-header d-flex">
+        <h3>Daftar Artikel Permintaan</h3>
       </div>
       <div class="table-responsive pt-2">
         <table class="table table-hover">
@@ -19,24 +19,24 @@
             </tr>
           </thead>
           <tbody>
-            @foreach($articles as $article)
-            <tr>
-              <td class="font-weight-bold align-middle">{{ $article->title }}</td>
-              <td class="font-weight-bold align-middle">{{ $article->minitutor->user->name }}</td>
-              <td class="font-weight-bold align-middle">{{ $article->category ? $article->category->name : '-' }}</td>
-              <td class="font-weight-bold align-middle">{{ $article->requested_at }}</td>
-              <td class="font-weight-bold align-middle">{{ $article->created_at }}</td>
-              <td class="text-center py-0 align-middle">
-                <a href="{{ route('request-articles.show', $article->id) }}" class="btn btn-outline-default btn-sm btn-icon" title="lihat">
-                  <i class="wb-eye"></i>
-                </a>
-              </td>
-            </tr>
+            @foreach ($articles as $article)
+              <tr>
+                <td class="font-weight-bold align-middle">{{ $article->title }}</td>
+                <td class="font-weight-bold align-middle">{{ $article->minitutor->user->name }}</td>
+                <td class="font-weight-bold align-middle">{{ $article->category ? $article->category->name : '-' }}</td>
+                <td class="font-weight-bold align-middle">{{ $article->requested_at }}</td>
+                <td class="font-weight-bold align-middle">{{ $article->created_at }}</td>
+                <td class="text-center py-0 align-middle">
+                  <a href="{{ route('request-articles.show', $article->id) }}" class="btn btn-default btn-sm" title="lihat">
+                    <i class="fas fa-eye"></i>
+                  </a>
+                </td>
+              </tr>
             @endforeach
           </tbody>
         </table>
       </div>
-      <div class="panel-footer">
+      <div class="card-footer">
         {{ $articles->links() }}
       </div>
     </div>

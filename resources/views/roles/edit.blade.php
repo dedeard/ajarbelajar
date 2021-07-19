@@ -2,14 +2,14 @@
 
 @section('content')
   <div class="container-fluid">
-    <div class="panel panel-bordered">
-      <div class="panel-heading">
-        <h3 class="panel-title">Edit Role</h3>
-        <div class="panel-actions">
+    <div class="card">
+      <div class="card-header d-flex">
+        <h3>Edit Role</h3>
+        <div class="my-auto ml-auto">
           <a href="{{ route('roles.index') }}" class="btn btn-sm btn-primary">Batal</a>
         </div>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <form action="{{ route('roles.update', $role->id) }}" method="post">
           @csrf
           @method('put')
@@ -33,19 +33,19 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($permissions as $permission)
-          <tr>
-            <td>{{ $permission->name }}</td>
-            <td class="text-center py-0 align-middle">
-              <a href="{{ route('roles.toggle.sync.permission', [$role->id, $permission->id]) }}" class="btn btn-sm btn-outline-default">
-                @if($role->hasPermissionTo($permission->name))
-                Cabut Permission
-                @else
-                Beri Permission
-                @endif
-              </a>
-            </td>
-          </tr>
+          @foreach ($permissions as $permission)
+            <tr>
+              <td>{{ $permission->name }}</td>
+              <td class="text-center py-0 align-middle">
+                <a href="{{ route('roles.toggle.sync.permission', [$role->id, $permission->id]) }}" class="btn btn-sm btn-outline-default">
+                  @if ($role->hasPermissionTo($permission->name))
+                    Cabut Permission
+                  @else
+                    Beri Permission
+                  @endif
+                </a>
+              </td>
+            </tr>
           @endforeach
         </tbody>
       </table>

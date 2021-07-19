@@ -1,2 +1,6 @@
-@import "theme/vars";
-@import "theme_extend/vars";
+$indigo: #677ae4;
+$primary: $indigo;
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";

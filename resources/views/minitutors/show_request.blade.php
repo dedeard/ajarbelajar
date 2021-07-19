@@ -2,10 +2,10 @@
 
 @section('content')
   <div class="container-fluid">
-    <div class="panel panel-bordered">
-      <div class="panel-heading">
-        <h3 class="panel-title">Data permintaan jadi MiniTutor</h3>
-        <div class="panel-actions">
+    <div class="card">
+      <div class="card-header d-flex">
+        <h3>Data permintaan jadi MiniTutor</h3>
+        <div class="my-auto ml-auto">
           <a class="btn btn-sm btn-primary" href="{{ route('minitutors.requests') }}">Batal</a>
           <button class="btn btn-sm btn-success" onclick="$('#form-accept-request').submit()">Terima</button>
           <button class="btn btn-sm btn-danger" onclick="$('#form-reject-request').submit()">Tolak</button>
@@ -20,7 +20,7 @@
           </form>
         </div>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <div class="row">
           <div class="col-lg-2 col-md-4 mb-30 text-center">
             <a href="#show-activity" class="avatar avatar-100">

@@ -2,14 +2,14 @@
 
 @section('content')
   <div class="container-fluid">
-    <div class="panel panel-bordered">
-      <div class="panel-heading">
-        <h3 class="panel-title">Edit SEO</h3>
-        <div class="panel-actions">
+    <div class="card">
+      <div class="card-header d-flex">
+        <h3>Edit SEO</h3>
+        <div class="my-auto ml-auto">
           <a href="{{ route('seos.index') }}" class="btn btn-sm btn-primary">Batal</a>
         </div>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <form action="{{ route('seos.update', $seo->id) }}" method="post">
           @csrf
           @method('put')
@@ -29,7 +29,8 @@
           </div>
           <div class="form-group">
             <label for="description">Description</label>
-            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" placeholder="Description...">{{ old('description') ?? $seo->description }}</textarea>
+            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
+              placeholder="Description...">{{ old('description') ?? $seo->description }}</textarea>
             @error('description')
               <span class="invalid-feedback">{{ $message }}</span>
             @enderror

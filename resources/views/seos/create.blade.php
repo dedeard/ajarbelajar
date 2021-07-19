@@ -2,14 +2,14 @@
 
 @section('content')
   <div class="container-fluid">
-    <div class="panel panel-bordered">
-      <div class="panel-heading">
-        <h3 class="panel-title">Buat SEO</h3>
-        <div class="panel-actions">
+    <div class="card">
+      <div class="card-header d-flex">
+        <h3>Buat SEO</h3>
+        <div class="my-auto ml-auto">
           <a href="{{ route('seos.index') }}" class="btn btn-sm btn-primary">Batal</a>
         </div>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <form action="{{ route('seos.store') }}" method="post">
           @csrf
           <div class="form-group">

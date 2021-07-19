@@ -53,15 +53,14 @@ class UsersController extends Controller
             'username' => ['required', 'string', new Username, 'max:64', 'min:6', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
-            'email_verified' => ['nullable'],
             'email_notification' => ['nullable'],
             'role' => ['nullable', 'integer', new RoleExists],
-            'image' => 'nullable|image|max:4000'
+            'image' => 'nullable|image|max:4000',
         ]);
 
         $data['username'] = strtolower($data['username']);
         $data['password'] = Hash::make($data['password']);
-        if (isset($data['email_verified'])) $data['email_verified_at'] = now();
+
         $data['email_notification'] = isset($data['email_notification']) ? true : false;
 
         if (isset($data['image'])) {
@@ -84,15 +83,15 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
         SEOMeta::setTitle($user->name);
 
-        $playlists = $user->activities()->with(['playlist' => function($q){
+        $playlists = $user->activities()->with(['playlist' => function ($q) {
             Playlist::postListQuery($q);
         }])->whereHas('playlist')->where('activitiable_type', Playlist::class)->get();
-        $articles = $user->activities()->with(['article' => function($q){
+        $articles = $user->activities()->with(['article' => function ($q) {
             Article::postListQuery($q);
         }])->whereHas('article')->where('activitiable_type', Article::class)->get();
 
-        $activities = $articles->merge($playlists)->transform(function($item){
-            if(isset($item->article)){
+        $activities = $articles->merge($playlists)->transform(function ($item) {
+            if (isset($item->article)) {
                 $post = $item->article;
             } else {
                 $post = $item->playlist;
@@ -114,20 +113,20 @@ class UsersController extends Controller
 
         $playlists = $user->subscriptions()
             ->withType(Playlist::class)
-            ->with(['playlist' => function($q){
+            ->with(['playlist' => function ($q) {
                 return Playlist::postListQuery($q);
             }])
             ->get();
 
         $articles = $user->subscriptions()
             ->withType(Article::class)
-            ->with(['article' => function($q){
+            ->with(['article' => function ($q) {
                 return Article::postListQuery($q);
             }])
             ->get();
 
-        $favorites = $articles->merge($playlists)->transform(function($item){
-            if(isset($item->article)){
+        $favorites = $articles->merge($playlists)->transform(function ($item) {
+            if (isset($item->article)) {
                 return $item->article;
             } else {
                 return $item->playlist;
@@ -141,7 +140,7 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
         SEOMeta::setTitle($user->name);
-        $followings = $user->subscriptions()->withType(Minitutor::class)->with(['minitutor' => function($q){
+        $followings = $user->subscriptions()->withType(Minitutor::class)->with(['minitutor' => function ($q) {
             $q->with('user');
         }])->get();
         return view('users.followings', ['user' => $user, 'followings' => $followings]);
@@ -164,15 +163,10 @@ class UsersController extends Controller
             'username' => ['required', 'string', new Username, 'max:64', 'min:6', 'unique:users,username,' . $id],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $id],
             'password' => ['nullable', 'string', 'min:8'],
-            'email_verified' => ['nullable'],
             'email_notification' => ['nullable'],
             'role' => ['nullable', 'integer', new RoleExists],
             'image' => 'nullable|image|max:4000',
-            'website_url' => ['nullable', 'url', 'max:250'],
-            'facebook_url' => ['nullable', 'url', 'max:250'],
-            'instagram_url' => ['nullable', 'url', 'max:250'],
-            'youtube_url' => ['nullable', 'url', 'max:250'],
-            'twitter_url' => ['nullable', 'url', 'max:250'],
+            'website' => ['nullable', 'url', 'max:250'],
         ]);
 
         if (!$user->hasRole('Super Admin') && $request->user()->can('manage role')) {
@@ -183,7 +177,6 @@ class UsersController extends Controller
                 $user->syncRoles([]);
             }
         }
-
 
         $data['username'] = strtolower($data['username']);
 
@@ -201,12 +194,6 @@ class UsersController extends Controller
 
         $data['email_notification'] = isset($data['email_notification']) ? true : false;
 
-        if (isset($data['email_verified'])) {
-            $data['email_verified_at'] = $user->email_verified_at ?? now();
-        } else {
-            $data['email_verified_at'] = null;
-        }
-
         $user->update($data);
         return redirect()->back()->withSuccess('User telah diperbarui.');
     }
@@ -214,7 +201,10 @@ class UsersController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-        if ($user->hasRole('Super Admin')) return abort(403);
+        if ($user->hasRole('Super Admin')) {
+            return abort(403);
+        }
+
         AvatarHelper::destroy($user->avatar);
         $user->delete();
         return redirect()->route('users.index')->withSuccess('User telah dihapus.');
@@ -224,14 +214,20 @@ class UsersController extends Controller
     {
         SEOMeta::setTitle('Buat Minitutor');
         $user = User::findOrFail($id);
-        if (isset($user->minitutor)) return abort(404);
+        if (isset($user->minitutor)) {
+            return abort(404);
+        }
+
         return view('users.create_minitutor', ['user' => $user, 'last_educations' => self::EDUCATIONS]);
     }
 
     public function storeMinitutor(Request $request, $id)
     {
         $user = User::findOrFail($id);
-        if (isset($user->minitutor)) return abort(404);
+        if (isset($user->minitutor)) {
+            return abort(404);
+        }
+
         $data = $request->validate([
             'last_education' => 'required|string|max:50',
             'university' => 'required|string|max:250',
