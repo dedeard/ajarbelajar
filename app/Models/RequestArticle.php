@@ -30,13 +30,13 @@ class RequestArticle extends Model
      * @var array
      */
     protected $casts = [
-        'requested_at' => 'datetime'
+        'requested_at' => 'datetime',
     ];
 
     /**
      * Get the minitutor relation.
      */
-    public function minitutor() : BelongsTo
+    public function minitutor(): BelongsTo
     {
         return $this->belongsTo(Minitutor::class);
     }
@@ -44,7 +44,7 @@ class RequestArticle extends Model
     /**
      * Get the images relation.
      */
-    public function images() : MorphMany
+    public function images(): MorphMany
     {
         return $this->morphMany(Image::class, 'imageable')->where('type', 'image');
     }
@@ -52,7 +52,7 @@ class RequestArticle extends Model
     /**
      * Get the hero relation.
      */
-    public function hero() : MorphOne
+    public function hero(): MorphOne
     {
         return $this->morphOne(Image::class, 'imageable')->where('type', 'hero');
     }
@@ -60,7 +60,7 @@ class RequestArticle extends Model
     /**
      * Get the category relation.
      */
-    public function category() : BelongsTo
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
@@ -68,8 +68,11 @@ class RequestArticle extends Model
     /**
      * Atributes
      */
-    public function getHeroUrlAttribute() : Array
+    public function getHeroUrlAttribute(): ?array
     {
-        return HeroHelper::getUrl($this->hero ? $this->hero->name : null);
+        if ($this->hero) {
+            return HeroHelper::getUrl($this->hero->name);
+        }
+        return null;
     }
 }

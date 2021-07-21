@@ -23,7 +23,7 @@ class RequestArticleResource extends JsonResource
             'requested_at' => $this->requested_at,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'category' => $this->category
+            'category' => $this->category,
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Minitutor;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\MinitutorResource;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -15,12 +16,12 @@ class ProfileController extends Controller
             'university' => 'required|string|max:255',
             'city_and_country_of_study' => 'required|string|max:255',
             'majors' => 'required|string|max:255',
-            'interest_talent' => 'required|string|max:255',
-            'contact' => 'required|string|max:255',
-            'reason' => 'required|string|max:255',
-            'expectation' => 'required|string|max:255',
+            // 'interest_talent' => 'required|string|max:255',
+            // 'contact' => 'required|string|max:255',
+            // 'reason' => 'required|string|max:255',
+            // 'expectation' => 'required|string|max:255',
         ]);
         $user->minitutor->update($data);
-        return response()->json($user->minitutor, 200);
+        return response()->json(MinitutorResource::make($user->minitutor), 200);
     }
 }

@@ -20,7 +20,7 @@ class RequestPlaylist extends Model
         'category_id',
         'requested_at',
         'title',
-        'description'
+        'description',
     ];
 
     /**
@@ -29,13 +29,13 @@ class RequestPlaylist extends Model
      * @var array
      */
     protected $casts = [
-        'requested_at' => 'datetime'
+        'requested_at' => 'datetime',
     ];
 
     /**
      * Get the minitutor relation.
      */
-    public function minitutor() : BelongsTo
+    public function minitutor(): BelongsTo
     {
         return $this->belongsTo(Minitutor::class);
     }
@@ -43,7 +43,7 @@ class RequestPlaylist extends Model
     /**
      * Get the videos relation.
      */
-    public function videos() : MorphMany
+    public function videos(): MorphMany
     {
         return $this->morphMany(Video::class, 'videoable');
     }
@@ -51,7 +51,7 @@ class RequestPlaylist extends Model
     /**
      * Get the hero relation.
      */
-    public function hero() : MorphOne
+    public function hero(): MorphOne
     {
         return $this->morphOne(Image::class, 'imageable');
     }
@@ -59,7 +59,7 @@ class RequestPlaylist extends Model
     /**
      * Get the category relation.
      */
-    public function category() : BelongsTo
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
@@ -67,8 +67,11 @@ class RequestPlaylist extends Model
     /**
      * Atributes
      */
-    public function getHeroUrlAttribute() : Array
+    public function getHeroUrlAttribute(): ?array
     {
-        return HeroHelper::getUrl($this->hero ? $this->hero->name : null);
+        if ($this->hero) {
+            return HeroHelper::getUrl($this->hero->name);
+        }
+        return null;
     }
 }
