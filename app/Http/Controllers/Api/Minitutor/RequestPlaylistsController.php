@@ -6,6 +6,7 @@ use App\Helpers\HeroHelper;
 use App\Helpers\VideoHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\RequestPlaylistResource;
+use App\Http\Resources\Api\VideoResource;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\RequestPlaylist;
@@ -14,17 +15,21 @@ use Illuminate\Http\Request;
 
 class RequestPlaylistsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $minitutor = $request->user()->minitutor;
         $playlists = $minitutor->requestPlaylists()->with(['hero', 'category'])->orderBy('updated_at', 'desc')->get();
-        return response()->json(RequestPlaylistResource::collection($articles), 200);
+        return response()->json(RequestPlaylistResource::collection($playlists), 200);
     }
 
     public function show(Request $request, $id)
     {
         $minitutor = $request->user()->minitutor;
-        $playlist = $minitutor->requestPlaylists()->with(['hero', 'category', 'videos'])->findOrFail($id);
+        $playlist = $minitutor->requestPlaylists()->with(['hero', 'category'])
+            ->with(['videos' => function ($q) {
+                $q->orderBy('index', 'asc');
+            }])
+            ->findOrFail($id);
         return response()->json(RequestPlaylistResource::make($playlist), 200);
     }
 
@@ -120,8 +125,7 @@ class RequestPlaylistsController extends Controller
         ]);
         $playlist->videos()->save($video);
         $playlist->touch();
-        $playlist->load('videos');
-        return response()->json(RequestPlaylistResource::make($playlist), 200);
+        return response()->json(VideoResource::collection($playlist->videos()->orderBy('index', 'asc')->get()), 200);
     }
 
     public function destroyVideo(Request $request, $playlist_id, $video_id)
@@ -132,8 +136,7 @@ class RequestPlaylistsController extends Controller
         $video = $playlist->videos()->findOrFail($video_id);
         VideoHelper::destroy($video->name);
         $video->delete();
-        $playlist->load('videos');
-        return response()->json(RequestPlaylistResource::make($playlist), 200);
+        return response()->json(VideoResource::collection($playlist->videos()->orderBy('index', 'asc')->get()), 200);
     }
 
     public function destroy(Request $request, $id)
@@ -170,7 +173,6 @@ class RequestPlaylistsController extends Controller
         } else {
             return abort(422);
         }
-        $playlist->load('videos');
-        return response()->json(RequestPlaylistResource::make($playlist), 200);
+        return response()->json(VideoResource::collection($playlist->videos()->orderBy('index', 'asc')->get()), 200);
     }
 }

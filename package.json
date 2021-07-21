@@ -48,7 +48,7 @@
         "sweetalert2": "^9.17.1",
         "swiper": "^6.1.1",
         "v-lazy-image": "^1.4.0",
-        "video.js": "^7.8.4",
+        "video.js": "^7.13.3",
         "videojs-vjsdownload": "^1.0.4",
         "vue": "^2.6.11",
         "vue-star-rating": "^1.6.1",
