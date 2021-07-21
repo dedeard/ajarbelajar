@@ -28,13 +28,13 @@ class Article extends Model
         'slug',
         'description',
         'body',
-        'view_count'
+        'view_count',
     ];
 
     /**
      * Get the options for generating the slug.
      */
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('title')
@@ -44,7 +44,7 @@ class Article extends Model
     /**
      * Get the minitutor relation.
      */
-    public function minitutor() : BelongsTo
+    public function minitutor(): BelongsTo
     {
         return $this->belongsTo(Minitutor::class);
     }
@@ -52,7 +52,7 @@ class Article extends Model
     /**
      * Get the images relation.
      */
-    public function images() : MorphMany
+    public function images(): MorphMany
     {
         return $this->morphMany(Image::class, 'imageable')->where('type', 'image');
     }
@@ -60,7 +60,7 @@ class Article extends Model
     /**
      * Get the comments relation.
      */
-    public function comments() : MorphMany
+    public function comments(): MorphMany
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
@@ -68,7 +68,7 @@ class Article extends Model
     /**
      * Get the feedback relation.
      */
-    public function feedback() : MorphMany
+    public function feedback(): MorphMany
     {
         return $this->morphMany(Feedback::class, 'feedbackable');
     }
@@ -76,7 +76,7 @@ class Article extends Model
     /**
      * Get the activities relation.
      */
-    public function activities() : MorphMany
+    public function activities(): MorphMany
     {
         return $this->morphMany(Activity::class, 'activitiable');
     }
@@ -84,7 +84,7 @@ class Article extends Model
     /**
      * Get the hero relation.
      */
-    public function hero() : MorphOne
+    public function hero(): MorphOne
     {
         return $this->morphOne(Image::class, 'imageable')->where('type', 'hero');
     }
@@ -92,7 +92,7 @@ class Article extends Model
     /**
      * Get the category relation.
      */
-    public function category() : BelongsTo
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
@@ -100,7 +100,7 @@ class Article extends Model
     /**
      * Return the hero url or placeholder url lists.
      */
-    public function heroUrl() : Array
+    public function heroUrl(): array
     {
         return HeroHelper::getUrl($this->hero ? $this->hero->name : null);
     }
@@ -123,32 +123,32 @@ class Article extends Model
                 'updated_at',
                 DB::raw("'Article' as type"),
             ])
-            ->with(['hero', 'category'  => function($q){
+            ->with(['hero', 'category' => function ($q) {
                 $q->select(['id', 'name', 'slug']);
             }])
-            ->with(['minitutor' => function($q){
+            ->with(['minitutor' => function ($q) {
                 $q->select(['id', 'user_id', 'active']);
-                $q->with(['user' => function($q) {
+                $q->with(['user' => function ($q) {
                     $q->select([
                         'id',
                         'name',
                         'avatar',
                         'points',
-                        'username'
+                        'username',
                     ]);
                 }]);
             }])
-            ->withCount(['comments' => function($query){
+            ->withCount(['comments' => function ($query) {
                 return $query->where('public', true);
             }])
-            ->withCount(['feedback as rating' => function($q){
+            ->withCount(['feedback as rating' => function ($q) {
                 $q->select(DB::raw('coalesce(avg((understand + inspiring + language_style + content_flow)/4),0)'));
             }, 'feedback'])
-            ->whereHas('minitutor', function($q){
+            ->whereHas('minitutor', function ($q) {
                 $q->where('active', true);
             });
 
-        if(!$draf) {
+        if (!$draf) {
             $model->where('draf', false);
         }
 
@@ -158,12 +158,12 @@ class Article extends Model
     /**
      * Atributes
      */
-    public function getHeroUrlAttribute() : Array
+    public function getHeroUrlAttribute(): array
     {
-        if($this->hero) {
+        if ($this->hero) {
             return HeroHelper::getUrl($this->hero->name);
         }
-        $keyed = collect(HeroHelper::SIZES)->mapWithKeys(function($item, $key){
+        $keyed = collect(HeroHelper::SIZES)->mapWithKeys(function ($item, $key) {
             return [$key => null];
         });
         return $keyed->all();

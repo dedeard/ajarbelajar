@@ -26,8 +26,13 @@ class PostsResource extends JsonResource
             'comments_count' => $this->comments_count,
             'rating' => round($this->rating, 2),
             'feedback_count' => $this->feedback_count,
-            'category' => $this->whenLoaded('category'),
-            'minitutor' => MinitutorResource::make($this->whenLoaded('minitutor')),
+            'category' => $this->category,
+            'user' => [
+                'username' => $this->minitutor->user->username,
+                'name' => $this->minitutor->user->name,
+                'avatar' => $this->minitutor->user->avatar_url,
+                'points' => $this->minitutor->user->points,
+            ],
         ];
     }
 }

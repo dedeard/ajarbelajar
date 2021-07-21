@@ -7,3 +7,9 @@ Route::get('join-minitutor/status', 'JoinMinitutorController@status')->name('joi
 Route::post('join-minitutor', 'JoinMinitutorController@store')->name('join.minitutor.store');
 
 Route::get('categories', 'CategoriesController@index');
+
+Route::get('articles', 'ArticlesController@index');
+Route::get('articles/{slug}', 'ArticlesController@show');
+
+Route::get('playlists', 'PlaylistsController@index');
+Route::get('playlists/{slug}', 'PlaylistsController@show');
