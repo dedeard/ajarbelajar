@@ -7,6 +7,7 @@ Route::get('join-minitutor/status', 'JoinMinitutorController@status');
 Route::post('join-minitutor', 'JoinMinitutorController@store');
 
 Route::get('categories', 'CategoriesController@index');
+Route::get('categories/{slug}', 'CategoriesController@show');
 
 Route::get('articles', 'ArticlesController@index');
 Route::get('articles/{slug}', 'ArticlesController@show');
