@@ -22,3 +22,6 @@ Route::post('feedback/{type}/{id}', 'FeedbackController@store');
 
 Route::post('follow/{minitutor_id}', 'FollowController@store');
 Route::delete('follow/{minitutor_id}', 'FollowController@destroy');
+
+Route::post('favorites/{type}/{id}', 'FavoritesController@store');
+Route::delete('favorites/{type}/{id}', 'FavoritesController@destroy');
