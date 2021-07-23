@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 
-class Comment extends Model
+class Follow extends Model
 {
+    public $primaryKey = null;
+    public $incrementing = false;
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -16,10 +17,7 @@ class Comment extends Model
      */
     protected $fillable = [
         'user_id',
-        'public',
-        'body',
-        'type',
-        'post_id'
+        'minitutor_id'
     ];
 
     /**
@@ -31,10 +29,10 @@ class Comment extends Model
     }
 
     /**
-     * Get the post relation.
+     * Get the minitutor relation.
      */
-    public function post(): BelongsTo
+    public function minitutor(): BelongsTo
     {
-        return $this->belongsTo(Post::class);
+        return $this->belongsTo(Minitutor::class);
     }
 }

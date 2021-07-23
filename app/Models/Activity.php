@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Activity extends Model
 {
-
     /**
      * The attributes that are mass assignable.
      *
@@ -16,6 +15,7 @@ class Activity extends Model
      */
     protected $fillable = [
         'user_id',
+        'post_id',
     ];
 
     /**
@@ -27,26 +27,10 @@ class Activity extends Model
     }
 
     /**
-     * Get the owning activitiable model.
+     * Get the post relation.
      */
-    public function activitiable() : MorphTo
+    public function post(): BelongsTo
     {
-        return $this->morphTo();
-    }
-
-    /**
-     * Return Article reation.
-     */
-    public function article()
-    {
-        return $this->belongsTo(Article::class, 'activitiable_id');
-    }
-
-    /**
-     * Return Playlist reation.
-     */
-    public function playlist()
-    {
-        return $this->belongsTo(Playlist::class, 'activitiable_id');
+        return $this->belongsTo(Post::class);
     }
 }

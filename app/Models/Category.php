@@ -37,18 +37,10 @@ class Category extends Model
     }
 
     /**
-     * Return Playlists reation.
+     * Return Posts reation.
      */
-    public function playlists() : HasMany
+    public function posts() : HasMany
     {
-        return $this->hasMany(Playlist::class);
-    }
-
-    /**
-     * Return Articles reation.
-     */
-    public function articles() : HasMany
-    {
-        return $this->hasMany(Article::class);
+        return $this->hasMany(Post::class);
     }
 }

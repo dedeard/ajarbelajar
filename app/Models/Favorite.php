@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 
-class Feedback extends Model
+class Favorite extends Model
 {
+
+    public $primaryKey = null;
+    public $incrementing = false;
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -15,14 +17,8 @@ class Feedback extends Model
      * @var array
      */
     protected $fillable = [
-        'sync_with_me',
-        'understand',
-        'inspiring',
-        'language_style',
-        'content_flow',
-        'message',
         'user_id',
-        'post_id',
+        'post_id'
     ];
 
     /**

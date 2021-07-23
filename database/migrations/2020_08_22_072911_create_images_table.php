@@ -14,12 +14,8 @@ class CreateImagesTable extends Migration
     public function up()
     {
         Schema::create('images', function (Blueprint $table) {
-            $table->increments('id');
-            $table->morphs('imageable');
             $table->string('name')->unique();
-            $table->string('original_name')->nullable();
-            $table->string('type')->nullable();
-            $table->timestamps();
+            $table->morphs('imageable');
         });
     }
 

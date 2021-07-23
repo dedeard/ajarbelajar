@@ -168,7 +168,6 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Kreait\Laravel\Firebase\ServiceProvider::class,
-        Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
         Spatie\Analytics\AnalyticsServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 

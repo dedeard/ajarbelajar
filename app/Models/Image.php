@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 class Image extends Model
 {
 
+    public $primaryKey = 'name';
+    public $incrementing = false;
+    public $timestamps = false;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -15,8 +19,6 @@ class Image extends Model
      */
     protected $fillable = [
         'name',
-        'original_name',
-        'type',
         'imageable_type',
         'imageable_id'
     ];

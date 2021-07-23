@@ -4,78 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "790ceaf32bd6f70c683a9549a7991ca1",
+    "content-hash": "ab5f890d5080cc6ac991e4ea0309fe4c",
     "packages": [
-        {
-            "name": "artesaos/seotools",
-            "version": "v0.17.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/artesaos/seotools.git",
-                "reference": "ca27cd0edf917e0bc805227013859b8b5a1f01fb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/artesaos/seotools/zipball/ca27cd0edf917e0bc805227013859b8b5a1f01fb",
-                "reference": "ca27cd0edf917e0bc805227013859b8b5a1f01fb",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "illuminate/config": "5.8.* || ^6.0 || ^7.0",
-                "illuminate/support": "5.8.* || ^6.0 || ^7.0",
-                "php": ">=7.1"
-            },
-            "require-dev": {
-                "orchestra/testbench": "~3.8.4 || ^4.0 || ^5.0",
-                "phpspec/phpspec": "~5.1.1 || ^6.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Artesaos\\SEOTools\\Providers\\SEOToolsServiceProvider"
-                    ],
-                    "aliases": {
-                        "SEOMeta": "Artesaos\\SEOTools\\Facades\\SEOMeta",
-                        "OpenGraph": "Artesaos\\SEOTools\\Facades\\OpenGraph",
-                        "Twitter": "Artesaos\\SEOTools\\Facades\\TwitterCard",
-                        "SEO": "Artesaos\\SEOTools\\Facades\\SEOTools"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Artesaos\\SEOTools\\": "src/SEOTools/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Vinicius",
-                    "email": "luiz.vinicius73@gmail.com"
-                }
-            ],
-            "description": "SEO Tools for Laravel and Lumen",
-            "keywords": [
-                "JSON-LD",
-                "laravel",
-                "lumen",
-                "metatags",
-                "opengraph",
-                "seo",
-                "seotools",
-                "webmaster"
-            ],
-            "support": {
-                "issues": "https://github.com/artesaos/seotools/issues",
-                "source": "https://github.com/artesaos/seotools"
-            },
-            "time": "2020-04-02T19:53:38+00:00"
-        },
         {
             "name": "asm89/stack-cors",
             "version": "v2.0.3",
@@ -2893,71 +2823,6 @@
                 "source": "https://github.com/opis/closure/tree/3.6.2"
             },
             "time": "2021-04-09T13:42:10+00:00"
-        },
-        {
-            "name": "overtrue/laravel-subscribe",
-            "version": "1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/overtrue/laravel-subscribe.git",
-                "reference": "97f85cdffbe30fa47901d18a0aff39f24bbbe140"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/overtrue/laravel-subscribe/zipball/97f85cdffbe30fa47901d18a0aff39f24bbbe140",
-                "reference": "97f85cdffbe30fa47901d18a0aff39f24bbbe140",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/framework": "^5.5||~6.0||~7.0||^8.0"
-            },
-            "require-dev": {
-                "brainmaestro/composer-git-hooks": "^2.7",
-                "friendsofphp/php-cs-fixer": "^2.16",
-                "laravel/framework": "^5.8",
-                "mockery/mockery": "^1.2",
-                "orchestra/testbench": "^3.8",
-                "phpunit/phpunit": "~8.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Overtrue\\LaravelSubscribe\\SubscribeServiceProvider"
-                    ]
-                },
-                "hooks": {
-                    "pre-commit": [
-                        "composer test",
-                        "composer fix-style"
-                    ],
-                    "pre-push": [
-                        "composer test",
-                        "composer check-style"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Overtrue\\LaravelSubscribe\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "overtrue",
-                    "email": "anzhengchao@gmail.com"
-                }
-            ],
-            "description": "User Subscribe/Unsubscribe features for Laravel Application.",
-            "support": {
-                "issues": "https://github.com/overtrue/laravel-subscribe/issues",
-                "source": "https://github.com/overtrue/laravel-subscribe/tree/1.1.0"
-            },
-            "time": "2020-09-23T08:52:29+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",

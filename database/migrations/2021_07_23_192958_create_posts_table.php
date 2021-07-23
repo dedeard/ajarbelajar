@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRequestArticlesTable extends Migration
+class CreatePostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateRequestArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('request_articles', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('minitutor_id')->unsigned();
@@ -22,11 +22,16 @@ class CreateRequestArticlesTable extends Migration
             $table->integer('category_id')->unsigned()->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
 
+            $table->integer('view_count')->default(0);
+            $table->string('hero')->unique()->nullable();
             $table->string('title');
+            $table->string('slug')->unique();
             $table->longText('description')->nullable();
-            $table->longText('body')->nullable();
-            $table->dateTime('requested_at')->nullable();
 
+            $table->enum('type', ['article', 'video']);
+            $table->longText('body')->unique()->nullable();
+
+            $table->dateTime('posted_at')->nullable();
             $table->timestamps();
         });
     }
@@ -38,6 +43,6 @@ class CreateRequestArticlesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('request_articles');
+        Schema::dropIfExists('posts');
     }
 }
