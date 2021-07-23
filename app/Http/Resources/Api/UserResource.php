@@ -19,15 +19,11 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'avatar' => $this->avatar_url,
             'username' => $this->username,
-            'points' => $this->points,
             'about' => $this->about,
+            'points' => $this->points,
             'website' => $this->website,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'minitutor' => MinitutorResource::make($this->whenLoaded('minitutor')),
-            'activities' => $this->listActivities,
-            'favorites' => $this->favorites,
-            'followings' => $this->followings,
         ];
     }
 }

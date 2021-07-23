@@ -4,7 +4,7 @@ namespace App\Http\Resources\Api;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PostsResource extends JsonResource
+class PostResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -27,12 +27,7 @@ class PostsResource extends JsonResource
             'rating' => round($this->rating, 2),
             'feedback_count' => $this->feedback_count,
             'category' => $this->category,
-            'user' => [
-                'username' => $this->minitutor->user->username,
-                'name' => $this->minitutor->user->name,
-                'avatar' => $this->minitutor->user->avatar_url,
-                'points' => $this->minitutor->user->points,
-            ],
+            'user' => UserResource::make($this->minitutor->user),
         ];
     }
 }

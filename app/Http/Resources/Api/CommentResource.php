@@ -19,12 +19,7 @@ class CommentResource extends JsonResource
             'body' => $this->body,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'user' => [
-                'name' => $this->user->name,
-                'avatar' => $this->user->avatar_url,
-                'username' => $this->user->username,
-                'points' => $this->user->points
-            ],
+            'user' => UserResource::make($this->user),
         ];
     }
 }

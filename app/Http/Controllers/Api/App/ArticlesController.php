@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\App;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\ArticleResource;
 use App\Http\Resources\Api\LatesPostResource;
-use App\Http\Resources\Api\PostsResource;
+use App\Http\Resources\Api\PostResource;
 use App\Jobs\AfterViewPostJob;
 use App\Models\Article;
 use Cache;
@@ -18,7 +18,7 @@ class ArticlesController extends Controller
     {
         return Cache::remember('articles.page.' . $request->input('page') ?? 1, config('cache.age'), function () {
             $articles = Article::postListQuery(Article::query())->orderBy('id', 'desc')->paginate(12);
-            return PostsResource::collection($articles);
+            return PostResource::collection($articles);
         });
     }
 

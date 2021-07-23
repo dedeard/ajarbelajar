@@ -25,3 +25,10 @@ Route::delete('follow/{minitutor_id}', 'FollowController@destroy');
 
 Route::post('favorites/{type}/{id}', 'FavoritesController@store');
 Route::delete('favorites/{type}/{id}', 'FavoritesController@destroy');
+
+Route::get('minitutors', 'MinitutorsController@index');
+Route::get('minitutors/{username}', 'MinitutorsController@show');
+
+Route::get('users', 'UsersController@index');
+Route::get('users/most-points', 'UsersController@mostPoints');
+Route::get('users/{idOrUsername}', 'UsersController@show');

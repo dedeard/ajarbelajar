@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use App\Helpers\AvatarHelper;
-use App\Http\Resources\MinitutorsResource;
-use App\Http\Resources\PostsResource;
-use App\Http\Resources\UsersResource;
+use App\Http\Resources\Api\MinitutorResource;
+use App\Http\Resources\Api\PostResource;
+use App\Http\Resources\Api\UserResource;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -150,9 +150,9 @@ class User extends Authenticatable implements JWTSubject
             }
             return [
                 'id' => $item->id,
-                'created_at' => $item->created_at ? $item->created_at->timestamp : null,
-                'updated_at' => $item->updated_at ? $item->updated_at->timestamp : null,
-                'post' => PostsResource::make($post),
+                'created_at' => $item->created_at,
+                'updated_at' => $item->updated_at,
+                'post' => PostResource::make($post),
             ];
         })->sortByDesc('updated_at')->values()->all();
     }
@@ -172,8 +172,8 @@ class User extends Authenticatable implements JWTSubject
             ->transform(function($item){
                 return [
                     'id' => $item->id,
-                    'user' => UsersResource::make($item->minitutor->user),
-                    'minitutor' => MinitutorsResource::make($item->minitutor),
+                    'user' => UserResource::make($item->minitutor->user),
+                    'minitutor' => MinitutorResource::make($item->minitutor),
                 ];
             });
     }
@@ -204,7 +204,7 @@ class User extends Authenticatable implements JWTSubject
                 'id' => $item->id,
                 'created_at' => $item->created_at ? $item->created_at->timestamp : null,
                 'updated_at' => $item->updated_at ? $item->updated_at->timestamp : null,
-                'post' => PostsResource::make($post),
+                'post' => PostResource::make($post),
             ];
         })->sortByDesc('created_at')->values()->all();
     }

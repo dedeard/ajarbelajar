@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\App;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Api\PostsResource;
+use App\Http\Resources\Api\PostResource;
 use App\Models\Category;
 use App\Models\Article;
 use App\Models\Playlist;
@@ -47,7 +47,7 @@ class CategoriesController extends Controller
                 'id' => $category->id,
                 'name' => $category->name,
                 'slug' => $category->slug,
-                'data' => PostsResource::collection($posts),
+                'data' => PostResource::collection($posts),
             ];
         });
     }
