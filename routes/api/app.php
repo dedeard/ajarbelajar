@@ -17,7 +17,7 @@ Route::get('playlists/{slug}', 'PlaylistsController@show');
 
 Route::post('comments/{type}/{id}', 'CommentsController@store');
 
-Route::get('feedback/{type}/{id}/show', 'FeedbackController@show');
+Route::get('feedback/{type}/{id}', 'FeedbackController@show');
 Route::post('feedback/{type}/{id}', 'FeedbackController@store');
 
 Route::post('follow/{minitutor_id}', 'FollowController@store');

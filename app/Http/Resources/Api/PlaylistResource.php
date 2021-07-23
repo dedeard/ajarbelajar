@@ -27,7 +27,6 @@ class PlaylistResource extends JsonResource
             'category' => $this->category,
             'minitutor' => MinitutorResource::make($this->minitutor),
             'user' => UserResource::make($this->minitutor->user),
-            'videos' => VideoResource::collection($this->videos),
             'comments' => CommentResource::collection($this->comments),
             'comments_count' => count($this->comments),
             'rating' => round($this->rating, 2),

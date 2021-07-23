@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\PostResource;
 use App\Http\Resources\Api\LatesPostResource;
 use App\Http\Resources\Api\PlaylistResource;
+use App\Http\Resources\Api\VideoResource;
 use App\Jobs\AfterViewPostJob;
 use App\Models\Playlist;
 use Illuminate\Http\Request;
@@ -25,7 +26,10 @@ class PlaylistsController extends Controller
     {
         $data = Cache::remember('playlists.show.' . $slug, config('cache.age'), function () use ($slug) {
             $query = Playlist::select('*', DB::raw("'Playlist' as type"));
-            $query->with(['hero', 'category', 'videos']);
+            $query->with(['hero', 'category']);
+            $query->with(['videos' => function ($q) {
+                $q->orderBy('index');
+            }]);
             $query->with(['minitutor' => function ($q) {
                 $q->with(['user' => function ($q) {
                     $q->select([ 'id', 'name', 'avatar', 'points', 'username' ]);
@@ -49,6 +53,7 @@ class PlaylistsController extends Controller
 
             return [
                 'playlist' => PlaylistResource::make($playlist),
+                'videos' => VideoResource::collection($playlist->videos),
                 'latesPosts' => LatesPostResource::collection($latesPosts)
             ];
         });
