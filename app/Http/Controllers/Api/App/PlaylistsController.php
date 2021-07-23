@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\App;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Api\PostsResource;
+use App\Http\Resources\Api\PostResource;
 use App\Http\Resources\Api\LatesPostResource;
 use App\Http\Resources\Api\PlaylistResource;
 use App\Jobs\AfterViewPostJob;
@@ -17,7 +17,7 @@ class PlaylistsController extends Controller
     {
         return Cache::remember('playlists.page.' . $request->input('page') ?? 1, config('cache.age'), function () {
             $playlists =  Playlist::postListQuery(Playlist::query())->orderBy('id', 'desc')->paginate(12);
-            return PostsResource::collection($playlists);
+            return PostResource::collection($playlists);
         });
     }
 
