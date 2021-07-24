@@ -13,6 +13,6 @@ class RootController extends Controller
 
     public function index()
     {
-        return redirect()->route('dashboard')->withSuccess('Halo from laravel alert');
+        return redirect()->route('dashboard');
     }
 }
