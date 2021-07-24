@@ -7,6 +7,13 @@ $menu = [
             'is' => 'dashboard',
             'icon' => 'tachometer-alt',
         ],
+        [
+            'name' => 'User',
+            'route' => 'users.index',
+            'is' => 'users*',
+            'icon' => 'users',
+            'can' => 'manage user',
+        ],
     ],
     [
         [

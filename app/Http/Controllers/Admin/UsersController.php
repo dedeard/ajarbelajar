@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Helpers\AvatarHelper;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Minitutor;
 use App\Rules\RoleExists;
 use App\Rules\Username;
 use Illuminate\Http\Request;
@@ -74,8 +75,21 @@ class UsersController extends Controller
 
     public function show($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::with('activities.post')->findOrFail($id);
         return view('users.show', ['user' => $user]);
+    }
+
+
+    public function showFavorites($id)
+    {
+        $user = User::with('favorites.post.minitutor.user')->findOrFail($id);
+        return view('users.favorites', ['user' => $user ]);
+    }
+
+    public function showFollowings($id)
+    {
+        $user = User::with('followings.minitutor.user')->findOrFail($id);
+        return view('users.followings', ['user' => $user]);
     }
 
     public function edit($id)
@@ -138,5 +152,38 @@ class UsersController extends Controller
         AvatarHelper::destroy($user->avatar);
         $user->delete();
         return redirect()->route('users.index')->withSuccess('User telah dihapus.');
+    }
+
+
+    public function createMinitutor($id)
+    {
+        $user = User::findOrFail($id);
+        if (isset($user->minitutor)) {
+            return abort(404);
+        }
+        return view('users.create_minitutor', ['user' => $user, 'last_educations' => self::EDUCATIONS]);
+    }
+
+    public function storeMinitutor(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        if (isset($user->minitutor)) {
+            return abort(404);
+        }
+
+        $data = $request->validate([
+            'last_education' => 'required|string|max:50',
+            'university' => 'required|string|max:250',
+            'city_and_country_of_study' => 'required|string|max:250',
+            'majors' => 'required|string|max:250',
+            'contact' => 'required|string|max:250',
+        ]);
+        $data['interest_talent'] = '';
+        $data['reason'] = '';
+        $data['expectation'] = '';
+        $data['active'] = true;
+        $minitutor = new Minitutor($data);
+        $user->minitutor()->save($minitutor);
+        return redirect()->route('minitutors.show', $minitutor->id)->withSuccess('Berhasil mejadikan user sebagai minitutor.');
     }
 }
