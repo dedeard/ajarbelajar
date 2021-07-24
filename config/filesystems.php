@@ -42,6 +42,20 @@ return [
             'visibility' => 'public',
         ],
 
+        'cdn' => [
+            'driver' => 'local',
+            'root' => storage_path('../../cdn/storage'),
+            'url' => env('CDN_URL'),
+            'visibility' => 'public',
+        ],
+
+        'video' => [
+            'driver' => 'local',
+            'root' => storage_path('../../videos/storage'),
+            'url' => env('VIDEO_URL'),
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
