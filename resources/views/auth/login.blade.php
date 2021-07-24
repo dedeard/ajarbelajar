@@ -1,73 +1,83 @@
-@extends('layouts.app')
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="current-url" content="{{ url()->current() }}">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>Login</title>
+  <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+</head>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+<body class="bg-light d-flex flex-column" style="min-height: 100vh">
+  <header class="py-4 d-flex bg-white shadow-sm">
+    <a href="/" class="d-block m-auto">
+      <img src="{{ asset('img/logo/logo.svg') }}" height="40" alt="Logo Ajarbelajar" />
+    </a>
+  </header>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-5 col-md-8 mx-auto">
+        <div class="my-4"></div>
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <h2 class="text-uppercase text-center font-weight-bold text-secondary mb-3">
+              {{ __('Login') }}
+            </h2>
+            <form method="POST" action="{{ route('login') }}" class="row">
+              @csrf
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
+              <div class="col-12">
+                <div class="form-group">
+                  <input placeholder="Email" name="email" type="text" class="form-control @error('email') is-invalid @enderror" />
+                  @error('email')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
                 </div>
-            </div>
+              </div>
+
+              <div class="col-12">
+                <div class="form-group">
+                  <input placeholder="Kata Sandi" name="password" type="password" class="form-control @error('password') is-invalid @enderror" />
+                  @error('password')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="form-group">
+                  <div class="checkbox-custom checkbox-primary">
+                    <input type="checkbox" id="remember" {{ old('remember') ? 'checked' : '' }} name="remember">
+                    <label for="remember">Remember me</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 mt-3">
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary font-weight-bold btn-block btn--float">MASUK</button>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-@endsection
+  </div>
+  <footer class="bg-white border-top py-4 mt-auto">
+    <div class="container">
+      <div class="text-center font-weight-bold text-uppercase">
+        &copy; Ajarbelajar 2020
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

@@ -10,17 +10,18 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "axios": "^0.21",
-        "bootstrap": "^4.6.0",
         "browser-sync": "^2.27.4",
         "browser-sync-webpack-plugin": "2.3.0",
-        "jquery": "^3.6",
         "laravel-mix": "^6.0.6",
         "resolve-url-loader": "4.0.0",
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1"
     },
     "dependencies": {
-        "admin-lte": "^3.1.0"
+        "admin-lte": "^3.1.0",
+        "axios": "^0.21",
+        "bootstrap": "^4.6.0",
+        "jquery": "^3.6",
+        "sweetalert2": "^11.0.20"
     }
 }
