@@ -1858,6 +1858,8 @@ module.exports = {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__(/*! ./script/DeleteConfirm */ "./resources/js/script/DeleteConfirm.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -1901,6 +1903,38 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/script/DeleteConfirm.js":
+/*!**********************************************!*\
+  !*** ./resources/js/script/DeleteConfirm.js ***!
+  \**********************************************/
+/***/ (() => {
+
+$(function () {
+  $(document).on('click', '[delete-confirm]', function () {
+    var target = $(this).attr('delete-confirm');
+    Swal.fire({
+      title: 'Anda yakin?',
+      text: 'Kamu akan menghapus ini secara permanen!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Ya, Hapus!',
+      cancelButtonText: 'Tidak, Batalkan!',
+      reverseButtons: true,
+      buttonsStyling: false,
+      customClass: {
+        confirmButton: 'btn btn-danger',
+        cancelButton: 'btn btn-primary'
+      }
+    }).then(function (result) {
+      if (result.value) {
+        $(target).submit();
+      }
+    });
+  });
+});
 
 /***/ }),
 

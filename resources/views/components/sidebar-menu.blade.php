@@ -8,6 +8,22 @@ $menu = [
             'icon' => 'tachometer-alt',
         ],
     ],
+    [
+        [
+            'name' => 'Role',
+            'route' => 'roles.index',
+            'is' => 'roles*',
+            'icon' => 'lock',
+            'can' => 'manage role',
+        ],
+        [
+            'name' => 'Permission',
+            'route' => 'permissions.index',
+            'is' => 'permissions*',
+            'icon' => 'lock',
+            'can' => 'manage permission',
+        ],
+    ],
 ];
 $x = true;
 @endphp
