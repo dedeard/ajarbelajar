@@ -11,22 +11,9 @@ return [
     | by the framework. The "local" disk, as well as a variety of cloud
     | based disks are available to your application. Just store away!
     |
-     */
+    */
 
     'default' => env('FILESYSTEM_DRIVER', 'local'),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Default Cloud Filesystem Disk
-    |--------------------------------------------------------------------------
-    |
-    | Many applications store files both locally and in the cloud. For this
-    | reason, you may specify a default "cloud" driver here. This driver
-    | will be bound as the Cloud disk implementation in the container.
-    |
-     */
-
-    'cloud' => env('FILESYSTEM_CLOUD', 's3'),
 
     /*
     |--------------------------------------------------------------------------
@@ -39,7 +26,7 @@ return [
     |
     | Supported Drivers: "local", "ftp", "sftp", "s3"
     |
-     */
+    */
 
     'disks' => [
 
@@ -51,21 +38,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL') . '/storage',
-            'visibility' => 'public',
-        ],
-
-        'cdn' => [
-            'driver' => 'local',
-            'root' => storage_path('../../cdn/storage'),
-            'url' => env('CDN_URL'),
-            'visibility' => 'public',
-        ],
-
-        'video' => [
-            'driver' => 'local',
-            'root' => storage_path('../../videos/storage'),
-            'url' => env('VIDEO_URL'),
+            'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
 
@@ -77,37 +50,9 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
+            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
         ],
 
-        'gcs' => [
-            'driver' => 'gcs',
-            'project_id' => env('FB_PROJECT_ID'),
-            'key_file' => [
-                'type' => env('FB_TYPE'),
-                'private_key_id' => env('FB_PRIVATE_KEY_ID'),
-                'private_key' => env('FB_PRIVATE_KEY'),
-                'client_email' => env('FB_CLIENT_EMAIL'),
-                'client_id' => env('FB_CLIENT_ID'),
-                'auth_uri' => env('FB_AUTH_URI'),
-                'token_uri' => env('FB_TOKEN_URI'),
-                'auth_provider_x509_cert_url' => env('FB_AUTH_PROVIDER_X509_CERT_URL'),
-                'client_x509_cert_url' => env('FB_CLIENT_X509_CERT_URL'),
-            ],
-            'bucket' => env('FB_PROJECT_ID') . 'appspot.com',
-            'path_prefix' => env('GOOGLE_CLOUD_STORAGE_PATH_PREFIX'),
-            'storage_api_uri' => 'https://storage.googleapis.com/' . env('FB_PROJECT_ID') . '.appspot.com/',
-        ],
-
-        'gcs_public' => env('APP_ENV') !== 'local' ? [
-            'driver' => 'gcs',
-            'path_prefix' => env('GOOGLE_CLOUD_STORAGE_PATH_PREFIX') . 'public/',
-            'visibility' => 'public',
-        ] : [
-            'driver' => 'local',
-            'root' => storage_path('app/public/public'),
-            'url' => env('APP_URL') . '/storage/public',
-            'visibility' => 'public',
-        ],
     ],
 
     /*
@@ -119,7 +64,7 @@ return [
     | `storage:link` Artisan command is executed. The array keys should be
     | the locations of the links and the values should be their targets.
     |
-     */
+    */
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
