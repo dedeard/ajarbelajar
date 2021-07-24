@@ -16,7 +16,7 @@
 </head>
 
 
-<body class="app-layout">
+<body class="layout-navbar-fixed layout-fixed">
   <div class="wrapper" id="app">
     <x-navbar />
     <x-sidebar />

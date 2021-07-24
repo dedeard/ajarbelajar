@@ -29,8 +29,33 @@ class Minitutor extends Model
         return $this->hasMany(Post::class);
     }
 
+    public function articles()
+    {
+        return $this->hasMany(Post::class)->where('type', 'article');
+    }
+
+    public function videos()
+    {
+        return $this->hasMany(Post::class)->where('type', 'video');
+    }
+
     public function requestPosts()
     {
         return $this->hasMany(RequestPost::class);
+    }
+
+    public function followers()
+    {
+        return $this->hasMany(Follow::class);
+    }
+
+    public function feedback()
+    {
+        return $this->hasManyThrough(Feedback::class, Post::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasManyThrough(Comment::class, Post::class);
     }
 }

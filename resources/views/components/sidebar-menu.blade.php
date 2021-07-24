@@ -14,6 +14,13 @@ $menu = [
             'icon' => 'users',
             'can' => 'manage user',
         ],
+        [
+            'name' => 'MiniTutor',
+            'route' => 'minitutors.index',
+            'is' => 'minitutors*',
+            'icon' => 'user-circle',
+            'can' => 'manage minitutor',
+        ],
     ],
     [
         [
