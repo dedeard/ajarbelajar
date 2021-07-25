@@ -4,29 +4,8 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ArticleResource extends JsonResource
+class VideoResource extends JsonResource
 {
-    private function createDescription($json)
-    {
-        $description = null;
-        $body = $json ? json_decode($json) : null;
-        if(isset($body) && isset($body->blocks)) {
-            foreach ($body->blocks as $block) {
-                if(!$description && $block->type === 'paragraph' && strlen($block->data->text) > 30){
-                    $description = substr($block->data->text, 0, 160);
-                }
-            }
-
-            if(!$description) {
-                foreach ($body->blocks as $block) {
-                    if(!$description && $block->type === 'paragraph'){
-                        $description = substr($block->data->text, 0, 160);
-                    }
-                }
-            }
-        }
-        return $description;
-    }
     /**
      * Transform the resource into an array.
      *
@@ -39,8 +18,8 @@ class ArticleResource extends JsonResource
             'id' => $this->id,
             'slug' => $this->slug,
             'title' => $this->title,
-            'description' => $this->description ?? $this->createDescription($this->body),
-            'body' => $this->body,
+            'description' => $this->description,
+            'video' => $this->video_url,
             'view_count' => $this->view_count,
             'posted_at' => $this->posted_at,
             'created_at' => $this->created_at,
