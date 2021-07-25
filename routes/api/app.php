@@ -14,3 +14,6 @@ Route::delete('follow/{minitutor_id}', 'FollowController@destroy');
 
 Route::post('favorites/{post_id}', 'FavoritesController@store');
 Route::delete('favorites/{post_id}', 'FavoritesController@destroy');
+
+Route::get('articles', 'ArticlesController@index');
+Route::get('articles/{slug}', 'ArticlesController@show');
