@@ -95,12 +95,22 @@ class User extends Authenticatable implements JWTSubject
         }
         return AvatarHelper::getUrl($this->avatar);
     }
+
     public function getFollowingIdsAttribute()
     {
         return $this->followings()->select('minitutor_id')->whereHas('minitutor', function ($q) {
             $q->where('active', true);
         })->get()->map(function ($item){
             return $item->minitutor_id;
+        });
+    }
+
+    public function getFavoriteIdsAttribute()
+    {
+        return $this->favorites()->select('post_id')->whereHas('post', function ($q) {
+            $q->whereNotNull('posted_at');
+        })->get()->map(function ($item){
+            return $item->post_id;
         });
     }
 }

@@ -27,6 +27,7 @@ class AuthResource extends JsonResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'followings' => $this->following_ids,
+            'favorites' => $this->favorite_ids,
             'notifications' => NotificationResource::collection($this->notifications),
             "minitutor" => MinitutorResource::make($this->minitutor)
         ];

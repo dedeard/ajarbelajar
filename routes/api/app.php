@@ -11,3 +11,6 @@ Route::get('categories/{slug}', 'CategoriesController@show');
 
 Route::post('follow/{minitutor_id}', 'FollowController@store');
 Route::delete('follow/{minitutor_id}', 'FollowController@destroy');
+
+Route::post('favorites/{post_id}', 'FavoritesController@store');
+Route::delete('favorites/{post_id}', 'FavoritesController@destroy');
