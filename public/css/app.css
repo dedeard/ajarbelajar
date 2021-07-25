@@ -53197,3 +53197,37 @@ body.swal2-toast-shown .swal2-container.swal2-bottom-end, body.swal2-toast-shown
   bottom: 0;
   left: auto;
 }
+
+.category-autocomplete {
+  position: relative;
+}
+.category-autocomplete .form-control:focus + ul:not(:empty) {
+  display: block;
+}
+.category-autocomplete ul {
+  display: none;
+  position: absolute;
+  z-index: 5;
+  padding: 10px 0;
+  margin: 0;
+  width: 100%;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  list-style: none;
+  border-radius: 0.25rem;
+  background-color: #fff;
+}
+.category-autocomplete ul li {
+  display: block;
+  padding: 10px 30px;
+  line-height: 1;
+  font-size: 14px;
+  color: #6c757d;
+  font-weight: 600;
+  cursor: pointer;
+}
+.category-autocomplete ul li:hover {
+  background-color: #fafafa;
+}
+.category-autocomplete ul li span {
+  color: #007bff;
+}

@@ -24,6 +24,36 @@ $menu = [
     ],
     [
         [
+            'name' => 'Artikel',
+            'route' => 'articles.index',
+            'is' => 'articles*',
+            'icon' => 'newspaper',
+            'can' => 'manage article',
+        ],
+        [
+            'name' => 'Video',
+            'route' => 'videos.index',
+            'is' => 'videos*',
+            'icon' => 'video',
+            'can' => 'manage video',
+        ],
+        [
+            'name' => 'Artikel Permintaan',
+            'route' => 'request-articles.index',
+            'is' => 'request-articles*',
+            'icon' => 'newspaper',
+            'can' => 'manage article',
+        ],
+        [
+            'name' => 'Video Permintaan',
+            'route' => 'request-videos.index',
+            'is' => 'request-videos*',
+            'icon' => 'video',
+            'can' => 'manage video',
+        ],
+    ],
+    [
+        [
             'name' => 'Role',
             'route' => 'roles.index',
             'is' => 'roles*',

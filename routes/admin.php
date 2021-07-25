@@ -40,3 +40,26 @@ Route::prefix('minitutors')->as('minitutors.')->group(function(){
     Route::get('{id}/feedback', 'MinitutorsController@showFeedback')->name('show.feedback');
 });
 Route::resource('minitutors', 'MinitutorsController')->except(['create', 'store']);
+
+
+
+// manage requested article
+Route::get('request-articles/{id}/accept', 'RequestArticlesController@accept')->name('request-articles.accept');
+Route::resource('request-articles', 'RequestArticlesController')->only(['index', 'show', 'destroy']);
+
+
+// manage article
+Route::get('articles/minitutors', 'ArticlesController@minitutors')->name('articles.minitutors');
+Route::post('articles/{id}/image', 'ArticlesController@uploadImage')->name('articles.upload.image');
+Route::resource('articles', 'ArticlesController')->except('show');
+
+
+// manage requested video
+Route::get('request-videos/{id}/accept', 'RequestVideosController@accept')->name('request-videos.accept');
+Route::resource('request-videos', 'RequestVideosController')->only(['index', 'show', 'destroy']);
+
+
+// manage video
+Route::get('videos/minitutors', 'VideosController@minitutors')->name('videos.minitutors');
+Route::post('videos/{id}/upload-video', 'VideosController@uploadVideo')->name('videos.upload.video');
+Route::resource('videos', 'VideosController')->except('show');

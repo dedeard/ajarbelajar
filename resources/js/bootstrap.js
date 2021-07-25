@@ -7,7 +7,9 @@
 try {
   window.$ = window.jQuery = require('jquery')
   window.bsCustomFileInput = require('bs-custom-file-input')
+  window.FormData = require('form-data')
   window.Swal = require('sweetalert2/dist/sweetalert2')
+  window.autoComplete = require('@tarekraafat/autocomplete.js/dist/js/autoComplete')
   require('bootstrap')
   require('admin-lte')
 } catch (e) {
