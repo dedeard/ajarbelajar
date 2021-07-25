@@ -80,6 +80,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->save();
     }
 
+    public function receivesBroadcastNotificationsOn(): String
+    {
+        return 'App.User.'.$this->id;
+    }
+
     /**
      * Atributes
      */
