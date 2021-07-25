@@ -30,4 +30,14 @@ class Category extends Model
     {
         return $this->hasMany(Post::class);
     }
+
+    public function articles()
+    {
+        return $this->hasMany(Post::class)->where('type', 'article');
+    }
+
+    public function videos()
+    {
+        return $this->hasMany(Post::class)->where('type', 'video');
+    }
 }

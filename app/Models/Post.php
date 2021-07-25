@@ -7,6 +7,7 @@ use App\Helpers\VideoHelper;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use DB;
 
 class Post extends Model
 {
@@ -81,5 +82,57 @@ class Post extends Model
             return VideoHelper::getUrl($this->body);
         }
         return null;
+    }
+
+
+
+    // Query
+    public static function postListQuery($model, $publicOnly = true, $type = null)
+    {
+        $model
+            ->select([
+                'id',
+                'minitutor_id',
+                'category_id',
+                'posted_at',
+                'slug',
+                'title',
+                'hero',
+                'type',
+                'view_count',
+                'created_at',
+                'updated_at',
+            ])
+            ->with(['minitutor' => function ($q) {
+                $q->select(['id', 'user_id', 'active']);
+                $q->with(['user' => function ($q) {
+                    $q->select([
+                        'id',
+                        'name',
+                        'avatar',
+                        'points',
+                        'username',
+                    ]);
+                }]);
+            }])
+            ->withCount(['comments' => function ($query) {
+                return $query->where('public', true);
+            }])
+            ->withCount(['feedback as rating' => function ($q) {
+                $q->select(DB::raw('coalesce(avg((understand + inspiring + language_style + content_flow)/4),0)'));
+            }, 'feedback'])
+            ->whereHas('minitutor', function ($q) {
+                $q->where('active', true);
+            });
+
+        if($type) {
+            $model->where('type', $type);
+        }
+
+        if ($publicOnly) {
+            $model->whereNotNull('posted_at');
+        }
+
+        return $model;
     }
 }
