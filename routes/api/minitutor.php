@@ -9,7 +9,7 @@ Route::post('request-articles/{id}/hero', 'RequestArticlesController@updateHero'
 Route::post('request-articles/{id}/image', 'RequestArticlesController@uploadImage');
 Route::resource('request-articles', 'RequestArticlesController')->except(['create', 'edit']);
 
-// request playlist
+// request video
 Route::post('request-videos/{id}/hero', 'RequestVideosController@updateHero');
 Route::post('request-videos/{id}/video', 'RequestVideosController@uploadVideo');
 Route::resource('request-videos', 'RequestVideosController')->except(['create', 'edit']);

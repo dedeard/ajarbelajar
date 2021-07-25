@@ -106,10 +106,6 @@ class RequestVideosController extends Controller
     {
         $minitutor = $request->user()->minitutor;
         $video = $minitutor->requestPosts()->where('type', 'video')->findOrFail($id);
-
-        foreach ($playlist->videos as $video) {
-            $video->delete();
-        }
         VideoHelper::destroy($video->body);
         HeroHelper::destroy($video->hero);
         $video->delete();
