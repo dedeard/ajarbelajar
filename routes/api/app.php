@@ -20,3 +20,6 @@ Route::get('articles/{slug}', 'ArticlesController@show');
 
 Route::get('videos', 'VideosController@index');
 Route::get('videos/{slug}', 'VideosController@show');
+
+Route::get('feedback/{id}', 'FeedbackController@show');
+Route::post('feedback/{id}', 'FeedbackController@store');
