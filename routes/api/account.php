@@ -11,6 +11,8 @@ Route::get('activities', 'ActivitiesController@index');
 
 Route::get('followings', 'FollowingsController@index');
 
+Route::get('favorites', 'FavoritesController@index');
+
 Route::post('avatar', 'AvatarController@upload');
 
 Route::post('broadcast', 'PusherController@broadcast');
