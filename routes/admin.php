@@ -63,3 +63,8 @@ Route::resource('request-videos', 'RequestVideosController')->only(['index', 'sh
 Route::get('videos/minitutors', 'VideosController@minitutors')->name('videos.minitutors');
 Route::post('videos/{id}/upload-video', 'VideosController@uploadVideo')->name('videos.upload.video');
 Route::resource('videos', 'VideosController')->except('show');
+
+
+// manage comments
+Route::get('comments/{id}/make-public', 'CommentsController@makePublic')->name('comments.make-public');
+Route::resource('comments', 'CommentsController')->only(['index', 'destroy']);

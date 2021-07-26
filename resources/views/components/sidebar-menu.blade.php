@@ -24,6 +24,15 @@ $menu = [
     ],
     [
         [
+            'name' => 'Komentar',
+            'route' => 'comments.index',
+            'is' => 'comments*',
+            'icon' => 'comments',
+            'can' => 'manage comment',
+        ],
+    ],
+    [
+        [
             'name' => 'Artikel',
             'route' => 'articles.index',
             'is' => 'articles*',
