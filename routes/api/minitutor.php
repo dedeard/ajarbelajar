@@ -16,3 +16,6 @@ Route::resource('request-videos', 'RequestVideosController')->except(['create', 
 
 // comments
 Route::get('comments', 'CommentsController@index');
+
+// feedback
+Route::get('feedback', 'FeedbackController@index');
