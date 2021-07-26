@@ -9,6 +9,8 @@ Route::put('profile', 'ProfileController@update');
 
 Route::get('activities', 'ActivitiesController@index');
 
+Route::get('followings', 'FollowingsController@index');
+
 Route::post('avatar', 'AvatarController@upload');
 
 Route::post('broadcast', 'PusherController@broadcast');
