@@ -16,10 +16,10 @@ class FeedbackController extends Controller
         $this->middleware('auth:api');
     }
 
-    public function store(Request $request, $id)
+    public function store(Request $request, $post_id)
     {
         $user = $request->user();
-        $target = Article::whereNotNull('posted_at')->findOrFail($id);
+        $target = Post::whereNotNull('posted_at')->findOrFail($post_id);
 
         if($target->feedback()->where('user_id', $user->id)->exists()){
             return abort(403);
@@ -44,10 +44,10 @@ class FeedbackController extends Controller
         return response()->noContent();
     }
 
-    public function show(Request $request, $id)
+    public function show(Request $request, $post_id)
     {
         $user = $request->user();
-        $target = Article::whereNotNull('posted_at')->findOrFail($id);
+        $target = Post::whereNotNull('posted_at')->findOrFail($post_id);
         $data = $target->feedback()->where('user_id', $user->id)->firstOrFail();
         return $data;
     }

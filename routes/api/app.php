@@ -21,5 +21,7 @@ Route::get('articles/{slug}', 'ArticlesController@show');
 Route::get('videos', 'VideosController@index');
 Route::get('videos/{slug}', 'VideosController@show');
 
-Route::get('feedback/{id}', 'FeedbackController@show');
-Route::post('feedback/{id}', 'FeedbackController@store');
+Route::get('feedback/{post_id}', 'FeedbackController@show');
+Route::post('feedback/{post_id}', 'FeedbackController@store');
+
+Route::post('comments/{post_id}', 'CommentsController@store');

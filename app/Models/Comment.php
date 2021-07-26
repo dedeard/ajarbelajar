@@ -11,7 +11,6 @@ class Comment extends Model
         'user_id',
         'public',
         'body',
-        'type',
         'post_id'
     ];
 
