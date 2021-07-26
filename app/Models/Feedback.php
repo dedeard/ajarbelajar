@@ -26,4 +26,12 @@ class Feedback extends Model
     {
         return $this->belongsTo(Post::class);
     }
+
+    /**
+     * Atributes
+     */
+    public function getRatingAttribute()
+    {
+        return ($this->understand + $this->inspiring + $this->language_style + $this->content_flow)/4;
+    }
 }
