@@ -13,3 +13,6 @@ Route::resource('request-articles', 'RequestArticlesController')->except(['creat
 Route::post('request-videos/{id}/hero', 'RequestVideosController@updateHero');
 Route::post('request-videos/{id}/video', 'RequestVideosController@uploadVideo');
 Route::resource('request-videos', 'RequestVideosController')->except(['create', 'edit']);
+
+// comments
+Route::get('comments', 'CommentsController@index');
