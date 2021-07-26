@@ -12,7 +12,11 @@ class CommentsController extends Controller
     {
         $user = $request->user();
         $minitutor = $user->minitutor;
-        $comments = $minitutor->comments()->with('user')->where('public', true)->orderBy('id', 'desc')->get();
+        $comments = $minitutor->comments()->with(['user', 'post' => function($q){
+            $q->select('id', 'slug', 'title', 'type');
+        }])->whereHas('post', function($q){
+            $q->whereNotNull('posted_at');
+        })->where('public', true)->orderBy('id', 'desc')->get();
         return response()->json(CommentResource::collection($comments), 200);
     }
 }
