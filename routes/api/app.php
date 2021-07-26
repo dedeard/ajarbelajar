@@ -25,3 +25,6 @@ Route::get('feedback/{post_id}', 'FeedbackController@show');
 Route::post('feedback/{post_id}', 'FeedbackController@store');
 
 Route::post('comments/{post_id}', 'CommentsController@store');
+
+Route::get('minitutors', 'MinitutorsController@index');
+Route::get('minitutors/{username}', 'MinitutorsController@show');
