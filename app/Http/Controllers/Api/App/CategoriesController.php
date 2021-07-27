@@ -26,14 +26,8 @@ class CategoriesController extends Controller
     {
         return Cache::remember('categories.show.' . $slug, config('cache.age'), function () use ($slug) {
             $category = Category::where('slug', $slug)->firstOrFail();
-
-            $posts = Post::postListQuery($category->posts())->orderBy('posted_at', 'desc')->get();
-            return [
-                'id' => $category->id,
-                'name' => $category->name,
-                'slug' => $category->slug,
-                'data' => PostResource::collection($posts),
-            ];
+            $posts = Post::postListQuery($category->posts())->orderBy('posted_at', 'desc')->paginate(12);
+            return PostResource::collection($posts);
         });
     }
 }
