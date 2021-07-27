@@ -43,7 +43,7 @@ class MinitutorsController extends Controller
                 'minitutor' => $item,
             ];
         });
-        return $data;
+        return response()->json($data, 200);
     }
 
     public function show($username)
