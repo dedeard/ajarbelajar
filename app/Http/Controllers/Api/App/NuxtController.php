@@ -15,7 +15,12 @@ class NuxtController extends Controller
     public function home()
     {
         $popularPosts = Cache::remember('popular.posts', config('cache.age'), function () {
-            $posts = Post::postListQuery(Post::query())->orderBy('view_count', 'desc')->limit(8)->get();
+            $posts = Post::postListQuery(Post::query())->withCount(['activities as view_count_week' => function($q){
+                $q->whereBetween('updated_at', [
+                    \carbon\Carbon::now()->subdays(7),
+                    \carbon\Carbon::now()
+                ]);
+            }])->orderBy('view_count_week', 'desc')->limit(8)->get();
             return PostResource::collection($posts);
         });
 
