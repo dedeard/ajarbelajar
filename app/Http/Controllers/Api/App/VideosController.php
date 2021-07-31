@@ -68,4 +68,13 @@ class VideosController extends Controller
         AfterViewPostJob::dispatchAfterResponse($data['video'], auth('api')->user());
         return $data;
     }
+
+    public function news(Request $request)
+    {
+        $videos = Cache::remember('videos.news', config('cache.age'), function () {
+            $videos = Post::postListQuery(Post::where('type', 'video'))->orderBy('posted_at', 'desc')->limit(8)->get();
+            return PostResource::collection($videos);
+        });
+        return response()->json($videos, 200);
+    }
 }

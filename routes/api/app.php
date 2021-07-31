@@ -21,6 +21,7 @@ Route::get('articles/news', 'ArticlesController@news');
 Route::get('articles/{slug}', 'ArticlesController@show');
 
 Route::get('videos', 'VideosController@index');
+Route::get('videos/news', 'VideosController@news');
 Route::get('videos/{slug}', 'VideosController@show');
 
 Route::get('feedback/{post_id}', 'FeedbackController@show');
