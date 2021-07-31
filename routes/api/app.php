@@ -35,3 +35,6 @@ Route::get('minitutors/{username}', 'MinitutorsController@show');
 Route::get('users', 'UsersController@index');
 Route::get('users/most-points', 'UsersController@mostPoints');
 Route::get('users/{idOrUsername}', 'UsersController@show');
+
+Route::get('nuxt/home', 'NuxtController@home');
+Route::get('nuxt/landing', 'NuxtController@landing');

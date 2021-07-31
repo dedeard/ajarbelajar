@@ -46,6 +46,6 @@ class CategoriesController extends Controller
             ->limit(8)
             ->get();
         });
-        return response()->json($categories, 200);
+        return $categories;
     }
 }

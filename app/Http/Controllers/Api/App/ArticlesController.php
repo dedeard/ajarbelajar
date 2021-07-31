@@ -69,12 +69,12 @@ class ArticlesController extends Controller
         return $data;
     }
 
-    public function news(Request $request)
+    public function news()
     {
         $articles = Cache::remember('articles.news', config('cache.age'), function () {
             $articles = Post::postListQuery(Post::where('type', 'article'))->orderBy('posted_at', 'desc')->limit(8)->get();
             return PostResource::collection($articles);
         });
-        return response()->json($articles, 200);
+        return $articles;
     }
 }
