@@ -17,6 +17,7 @@ Route::post('favorites/{post_id}', 'FavoritesController@store');
 Route::delete('favorites/{post_id}', 'FavoritesController@destroy');
 
 Route::get('articles', 'ArticlesController@index');
+Route::get('articles/news', 'ArticlesController@news');
 Route::get('articles/{slug}', 'ArticlesController@show');
 
 Route::get('videos', 'VideosController@index');
