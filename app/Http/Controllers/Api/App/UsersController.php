@@ -52,7 +52,7 @@ class UsersController extends Controller
     public function mostPoints()
     {
         $users = Cache::remember('users.most.points', config('cache.age'), function () {
-            return UserResource::collection(User::orderBy('points', 'desc')->limit(4)->get());
+            return UserResource::collection(User::orderBy('points', 'desc')->limit(8)->get());
         });
         return $users;
     }
