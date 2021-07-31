@@ -20,7 +20,6 @@ class Post extends Model
         'title',
         'slug',
         'description',
-        'view_count',
         'hero',
         'type',
         'body',
@@ -104,7 +103,7 @@ class Post extends Model
                 'title',
                 'hero',
                 'type',
-                'view_count',
+                // 'view_count',
                 'created_at',
                 'updated_at',
             ])
@@ -123,6 +122,7 @@ class Post extends Model
             ->withCount(['comments' => function ($query) {
                 return $query->where('public', true);
             }])
+            ->withCount('activities as view_count')
             ->withCount(['feedback as rating' => function ($q) {
                 $q->select(DB::raw('coalesce(avg((understand + inspiring + language_style + content_flow)/4),0)'));
             }, 'feedback'])

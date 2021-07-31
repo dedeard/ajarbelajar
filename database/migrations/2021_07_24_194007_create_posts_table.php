@@ -22,7 +22,6 @@ class CreatePostsTable extends Migration
             $table->integer('category_id')->unsigned()->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
 
-            $table->integer('view_count')->default(0);
             $table->string('hero')->unique()->nullable();
             $table->string('title');
             $table->string('slug')->unique();

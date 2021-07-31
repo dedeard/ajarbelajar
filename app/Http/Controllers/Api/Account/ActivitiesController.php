@@ -16,6 +16,7 @@ class ActivitiesController extends Controller
             return Post::postListQuery($q);
         }])
         ->orderBy('updated_at', 'desc')
+        ->limit(12)
         ->get()
         ->map(function($item){
             $temp = $item->toArray();

@@ -36,6 +36,7 @@ class VideosController extends Controller
                 }]);
                 $q->where('public', true);
             }]);
+            $query->withCount('activities as view_count');
             $query->withCount(['feedback as rating' => function ($q) {
                 $q->select(DB::raw('coalesce(avg((understand + inspiring + language_style + content_flow)/4),0)'));
             }, 'feedback']);

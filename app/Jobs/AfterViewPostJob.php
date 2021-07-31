@@ -37,14 +37,10 @@ class AfterViewPostJob implements ShouldQueue
             $q = $this->post->activities()->where('user_id', $this->user->id);
             if ($q->exists()){
                 $activity = $q->first();
-                $activity->updated_at = now();
-                $activity->save();
+                $activity->touch();
             } else {
                 $activity = new Activity([ 'user_id' => $this->user->id ]);
                 $this->post->activities()->save($activity);
-                if($this->user->activities()->count() > 15) {
-                    $this->user->activities()->orderBy('updated_at', 'asc')->first()->delete();
-                }
             }
         }
     }
