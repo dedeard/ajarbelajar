@@ -30,4 +30,22 @@ class CategoriesController extends Controller
             return PostResource::collection($posts);
         });
     }
+
+    public function popular()
+    {
+        $categories = Cache::remember('categories.popular', config('cache.age'), function () {
+            return Category::whereHas('posts', function ($q) {
+                $q->whereNotNull('posted_at');
+            })
+            ->withCount([
+                'posts as post_count' => function($q){
+                    $q->whereNotNull('posted_at');
+                }
+            ])
+            ->orderBy('post_count', 'desc')
+            ->limit(8)
+            ->get();
+        });
+        return response()->json($categories, 200);
+    }
 }
