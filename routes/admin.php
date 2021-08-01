@@ -68,3 +68,17 @@ Route::resource('videos', 'VideosController')->except('show');
 // manage comments
 Route::get('comments/{id}/make-public', 'CommentsController@makePublic')->name('comments.make-public');
 Route::resource('comments', 'CommentsController')->only(['index', 'destroy']);
+
+
+// Handele Froala fileManager
+Route::get('froala/image', 'FroalaController@getImage')->name('froala.image');
+Route::post('froala/image', 'FroalaController@uploadImage');
+Route::delete('froala/image', 'FroalaController@destroyImage');
+
+
+// manage email
+Route::get('emails', 'EmailsController@index')->name('emails.index');
+Route::get('emails/broadcast', 'EmailsController@broadcast')->name('emails.broadcast');
+Route::post('emails/broadcast', 'EmailsController@sendBroadcastEmails');
+Route::get('emails/private', 'EmailsController@private')->name('emails.private');
+Route::post('emails/private', 'EmailsController@sendPrivateEmail');

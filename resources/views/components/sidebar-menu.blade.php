@@ -21,6 +21,13 @@ $menu = [
             'icon' => 'user-circle',
             'can' => 'manage minitutor',
         ],
+        [
+            'name' => 'Email',
+            'route' => 'emails.index',
+            'is' => 'emails*',
+            'icon' => 'envelope',
+            'can' => 'manage email',
+        ],
     ],
     [
         [
