@@ -118,28 +118,34 @@
 
   <div class="container-fluid">
     <div class="card card-shadow mb-3">
-      <div class="card-block pb-0">
-        <div class="blue-grey-700">TRAFFIC VIEWS</div>
-        <span class="blue-grey-400">Last 30 days</span>
+      <div class="card-header">
+        TRAFFIC VIEWS <br>
+        <small>Last 30 days</small>
+      </div>
+      <div class="card-body p-0">
         <div id="timeline-traffic-view"></div>
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-6 d-flex">
-        <div class="card card-shadow" style="width: 100%;">
-          <div class="card-block pb-0">
-            <div class="blue-grey-700">TOP COUNTRIES BY SESSIONS</div>
-            <span class="blue-grey-400">Last 30 days</span>
+        <div class="card card-shadow w-100">
+          <div class="card-header">
+            TOP COUNTRIES BY SESSIONS <br>
+            <small>Last 30 days</small>
+          </div>
+          <div class="card-block p-0">
             <div id="chart-1-container"></div>
           </div>
         </div>
       </div>
       <div class="col-md-6 d-flex">
-        <div class="card card-shadow" style="width: 100%;">
+        <div class="card card-shadow w-100">
+          <div class="card-header">
+            TOP BROWSERS BY SESSIONS <br>
+            <small>Last 30 days</small>
+          </div>
           <div class="card-block">
-            <div class="blue-grey-700">TOP BROWSERS BY SESSIONS</div>
-            <span class="blue-grey-400">Last 30 days</span>
             <div id="chart-2-container"></div>
           </div>
         </div>
