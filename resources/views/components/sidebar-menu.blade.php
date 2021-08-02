@@ -84,6 +84,20 @@ $menu = [
             'can' => 'manage permission',
         ],
     ],
+    [
+        [
+            'name' => 'Profile',
+            'route' => 'profile.index',
+            'is' => 'profile*',
+            'icon' => 'user',
+        ],
+        [
+            'name' => 'Logout',
+            'route' => 'profile.logout',
+            'is' => 'profile*',
+            'icon' => 'sign-out-alt text-danger',
+        ],
+    ],
 ];
 $x = true;
 @endphp

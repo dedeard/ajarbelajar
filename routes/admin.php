@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Route;
 // admin access
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
+// Profile
+Route::get('profile', 'ProfileController@index')->name('profile.index');
+Route::get('profile/logout', 'ProfileController@logout')->name('profile.logout');
+
 
 // manage permission
 Route::resource('permissions', 'PermissionsController')->except(['show']);
