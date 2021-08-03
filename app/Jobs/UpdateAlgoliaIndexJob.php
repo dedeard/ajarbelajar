@@ -51,7 +51,7 @@ class UpdateAlgoliaIndexJob implements ShouldQueue
                 'type' => $el->type,
                 'slug' => $el->slug,
                 'title' => $el->title,
-                'hero' => $el->heroUrl['blur'] ? $el->heroUrl['blur'] : null,
+                'hero' => $el->heroUrl['small'] ? $el->heroUrl['small'] : null,
                 'name' => $el->minitutor->user->name,
             ];
         });
