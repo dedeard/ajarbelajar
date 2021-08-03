@@ -32,7 +32,7 @@ class UpdateAlgoliaIndexJob implements ShouldQueue
      */
     public function handle()
     {
-        $client = SearchClient::create(env('ALGOLIA_APP_ID'), env('ALGOLIA_APP_ID'));
+        $client = SearchClient::create(env('ALGOLIA_APP_ID'), env('ALGOLIA_API_KEY'));
         $index = $client->initIndex(env('ALGOLIA_POSTS_INDEX'));
 
         $data = Post::select('id', 'title', 'slug', 'hero', 'type', 'minitutor_id')->with(['minitutor' => function($q){
