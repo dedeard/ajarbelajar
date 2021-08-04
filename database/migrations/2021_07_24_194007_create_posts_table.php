@@ -28,7 +28,7 @@ class CreatePostsTable extends Migration
             $table->longText('description')->nullable();
 
             $table->enum('type', ['article', 'video']);
-            $table->longText('body')->unique()->nullable();
+            $table->longText('body')->nullable();
 
             $table->dateTime('posted_at')->nullable();
             $table->timestamps();
