@@ -11,7 +11,7 @@ class VideoHelper extends Helper
     /**
      * define constant variable.
      */
-    const DIR = 'videos';
+    const DIR = 'videos/';
 
     /**
      * Get Disk driver.
