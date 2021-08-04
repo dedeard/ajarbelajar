@@ -26,11 +26,11 @@ class PostResource extends JsonResource
             'comments_count' => $this->comments_count,
             'rating' => round($this->rating, 2),
             'feedback_count' => $this->feedback_count,
-            'category' => [
+            'category' => $this->category ? [
                 'id' => $this->category->id,
                 'slug' => $this->category->slug,
                 'name' => $this->category->name,
-            ],
+            ] : null,
             'user' => [
                 'id' => $this->minitutor->user->id,
                 'name' => $this->minitutor->user->name,
