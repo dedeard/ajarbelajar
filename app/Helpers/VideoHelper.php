@@ -11,14 +11,14 @@ class VideoHelper extends Helper
     /**
      * define constant variable.
      */
-    const DIR = '';
+    const DIR = 'videos';
 
     /**
      * Get Disk driver.
      */
     public static function disk(): Filesystem
     {
-        return Storage::disk('video');
+        return Storage::disk('cdn');
     }
 
     /**
