@@ -7,5 +7,5 @@ apps:
     args:
       - queue:work
       - redis
-      - --tries=5
-      - --sleep=1
+      - --tries=3
+      - --sleep=3
