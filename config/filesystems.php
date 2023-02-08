@@ -38,21 +38,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
-            'visibility' => 'public',
-        ],
-
-        'cdn' => [
-            'driver' => 'local',
-            'root' => storage_path('../../cdn/storage'),
-            'url' => env('CDN_URL'),
-            'visibility' => 'public',
-        ],
-
-        'video' => [
-            'driver' => 'local',
-            'root' => storage_path('../../videos/storage'),
-            'url' => env('VIDEO_URL'),
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
         ],
 

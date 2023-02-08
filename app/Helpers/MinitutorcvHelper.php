@@ -18,7 +18,7 @@ class MinitutorcvHelper extends Helper
      */
     public static function disk(): Filesystem
     {
-        return Storage::disk('cdn');
+        return Storage::disk('public');
     }
 
     /**
@@ -44,7 +44,6 @@ class MinitutorcvHelper extends Helper
         if (self::disk()->exists($name)) {
             self::disk()->delete($name);
         }
-
     }
 
     /**

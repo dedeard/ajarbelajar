@@ -21,22 +21,22 @@ class FroalaHelper extends Helper
     /**
      * Get Disk driver.
      */
-    static function disk() : Filesystem
+    static function disk(): Filesystem
     {
-        return Storage::disk('cdn');
+        return Storage::disk('public');
     }
 
     /**
      * Uploading the image and get name, relative url.
      */
-    static function uploadImage($data) : Array
+    static function uploadImage($data): array
     {
         $format = self::FORMAT;
         $dir = self::DIR;
         $ext = self::EXT;
         $name = parent::uniqueName($ext);
 
-        $tmp = Image::make($data)->resize(640, 640, function($constraint){
+        $tmp = Image::make($data)->resize(640, 640, function ($constraint) {
             $constraint->aspectRatio();
         });
         self::disk()->put($dir . $name, (string) $tmp->encode($format, 80));
@@ -47,7 +47,7 @@ class FroalaHelper extends Helper
     /**
      * Deleting the image.
      */
-    static function deleteImage($url) : void
+    static function deleteImage($url): void
     {
         $name = Str::replaceFirst(self::disk()->url(self::DIR), '', $url);
         ModelsImage::where('imageable_type', 'froala')->where('name', $name)->firstOrFail()->delete();
@@ -59,7 +59,7 @@ class FroalaHelper extends Helper
     /**
      * Generate the image url.
      */
-    static function generateUrl($name) : String
+    static function generateUrl($name): String
     {
         return self::disk()->url(self::DIR . $name);
     }

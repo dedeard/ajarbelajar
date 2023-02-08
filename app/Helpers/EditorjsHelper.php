@@ -21,7 +21,7 @@ class EditorjsHelper extends Helper
      */
     public static function disk(): Filesystem
     {
-        return Storage::disk('cdn');
+        return Storage::disk('public');
     }
 
     /**
@@ -80,7 +80,6 @@ class EditorjsHelper extends Helper
                         if ($block->data->file->url === self::disk()->url($dir . $image->name)) {
                             $exists = true;
                         }
-
                     }
                 }
             }
