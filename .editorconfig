@@ -8,13 +8,10 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.blade.php]
-indent_size = 2
-
 [*.md]
 trim_trailing_whitespace = false
 
-[*.{yml,yaml}]
+[*.{yml,yaml,blade.php,js}]
 indent_size = 2
 
 [docker-compose.yml]
