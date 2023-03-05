@@ -13,7 +13,7 @@
   <div class="flex flex-1 overflow-y-auto p-3">
     <div class="w-full flex-1">
       @auth
-        <livewire:layouts.sidebar-profile-card />
+        <x-layouts.sidebar-profile-card />
       @endauth
       {{ $slot }}
     </div>

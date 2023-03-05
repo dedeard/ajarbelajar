@@ -36,7 +36,7 @@
               <span class="min-w-4 absolute -top-1 -right-1 block h-4 rounded-full bg-red-600 px-1 text-center text-xs leading-4 text-white">
                 30</span>
             </a>
-            <livewire:layouts.navbar-profile-dropdown />
+            <x-layouts.navbar-profile-dropdown />
           </div>
         @else
           <div class="ml-auto flex p-3">
