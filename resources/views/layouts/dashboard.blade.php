@@ -25,6 +25,7 @@
       <x-layouts.sidebar-link route="dashboard.activities" is="dashboard.activities" text="Aktifitas" icon="activity" />
       <x-layouts.sidebar-link route="dashboard.edit-profile" is="dashboard.edit-profile" text="Edit Profil" icon="settings" />
       <x-layouts.sidebar-link route="dashboard.edit-password" is="dashboard.edit-password" text="Edit Password" icon="lock" />
+      <x-layouts.sidebar-link route="dashboard.lessons.index" is="dashboard.lessons*" text="Pelajaran" icon="video" />
     </x-layouts.sidebar-wrap>
     <div class="relative flex min-h-screen max-w-full flex-1 flex-col pl-0 lg:pl-60">
       <div class="w-full flex-1 pt-16">
