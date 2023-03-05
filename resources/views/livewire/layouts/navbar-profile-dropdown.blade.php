@@ -20,7 +20,7 @@
         <a href="{{ route('dashboard.activities') }}"
           class="toggle-color mb-3 flex h-9 w-full items-center justify-center rounded-full p-0 text-sm font-semibold">
           Dasbor Saya</a>
-        <a href="{{ route('dashboard') }}"
+        <a href="{{ route('dashboard.edit-profile') }}"
           class="toggle-color mb-3 flex h-9 w-full items-center justify-center rounded-full p-0 text-sm font-semibold">
           Edit Profil</a>
 
