@@ -21,14 +21,9 @@
 
   <div class="flex">
     <x-layouts.sidebar-wrap>
-      <x-layouts.sidebar-link />
-      <br />
-      @auth
-        <x-layouts.sidebar-link text="Dasbor Saya" route="dashboard.activities" is="dashboard*" icon="clipboard" />
-      @else
-        <x-layouts.sidebar-link text="Masuk" route="login" is="login" icon="user" />
-        <x-layouts.sidebar-link text="Buat Akun" route="register" is="register" icon="user" />
-      @endauth
+      <x-layouts.sidebar-link icon="arrow-left" />
+      <x-layouts.sidebar-link route="dashboard.activities" is="dashboard.activities" text="Aktifitas" icon="activity" />
+      {{-- <x-layouts.sidebar-link route="dashboard.edit-profile" is="dashboard.edit-profile" text="Edit Profil" icon="settings" /> --}}
     </x-layouts.sidebar-wrap>
     <div class="relative flex min-h-screen max-w-full flex-1 flex-col pl-0 lg:pl-60">
       <div class="w-full flex-1 pt-16">

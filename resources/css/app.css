@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.profile-dropdown {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 250ms ease-out, visibility 250ms ease-out;
+}
+
+.avatar-toggle-wrapper:hover .profile-dropdown {
+  opacity: 1;
+  visibility: visible;
+}
+
+.toggle-color {
+  @apply bg-gray-100 hover:bg-gray-200;
+}

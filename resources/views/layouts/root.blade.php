@@ -23,26 +23,6 @@
     {{ $slot }}
   </div>
 
-  @auth
-    <script>
-      document.addEventListener('alpine:init', () => {
-        Alpine.store('auth', {
-          user: {
-            id: {{ Auth::user()->id }},
-            name: "{{ Auth::user()->name }}",
-            username: "{{ Auth::user()->username }}",
-            email: "{{ Auth::user()->email }}",
-            avatar: "{{ Auth::user()->avatar_url }}",
-            bio: "{{ Auth::user()->bio }}",
-            website: "{{ Auth::user()->website }}",
-          },
-          setAuth(user) {
-            this.user = user
-          }
-        })
-      })
-    </script>
-  @endauth
   @vite(['resources/js/main.js'])
   {{ $script }}
 </body>
