@@ -4,7 +4,6 @@
       {{ session('error') }}
     </div>
   @endif
-  <livewire:dashboard.lessons.upload-episode :lesson="$lesson" />
   <input type="text" id="index" wire:model="index" class="hidden" />
   <ul id="sortable">
     @foreach ($episodes as $episode)

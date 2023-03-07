@@ -9,3 +9,5 @@ Route::get('/edit-password', 'EditPasswordController@index')->name('edit-passwor
 Route::put('/edit-password', 'EditPasswordController@update')->name('edit-password');
 
 Route::resource('/lessons', 'LessonsController');
+Route::post('/lessons/{lesson}/cover', 'LessonsController@updateCover')->name('lessons.update.cover');
+Route::post('/lessons/{lesson}/episode', 'LessonsController@uploadEpisode')->name('lessons.store.episode');
