@@ -1,4 +1,5 @@
-<div>
+<div class="bg-white shadow rounded">
+  <p class="p-3 text-center">Setiap perubahan secara otomatis akan tersimpan</p>
   @if (session()->has('error'))
     <div class="border-l-4 border-primary-600 bg-primary-100 px-3 py-4 text-primary-600">
       {{ session('error') }}
@@ -7,7 +8,7 @@
   <input type="text" id="index" wire:model="index" class="hidden" />
   <ul id="sortable">
     @foreach ($episodes as $episode)
-      <livewire:dashboard.lessons.episode-list :wire:key="'episode-'.$episode->id" :episode="$episode" />
+      <livewire:dashboard.episode-list :wire:key="'episode-'.$episode->id" :episode="$episode" />
     @endforeach
   </ul>
   <script>

@@ -20,7 +20,7 @@
       </div>
     </div>
     @foreach ($lessons as $lesson)
-      <x-dashboard.lessons.lesson-list :lesson="$lesson" />
+      <x-dashboard.post-list :post="$lesson" type="lesson" />
     @endforeach
     {{ $lessons->links() }}
   </div>

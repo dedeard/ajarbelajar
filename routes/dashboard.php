@@ -11,6 +11,7 @@ Route::put('/edit-password', 'EditPasswordController@update')->name('edit-passwo
 Route::resource('/lessons', 'LessonsController');
 Route::post('/lessons/{lesson}/cover', 'LessonsController@updateCover')->name('lessons.update.cover');
 Route::post('/lessons/{lesson}/episode', 'LessonsController@uploadEpisode')->name('lessons.store.episode');
+Route::put('/lessons/{lesson}/description', 'LessonsController@updateDescription')->name('lessons.update.description');
 
 Route::resource('/articles', 'ArticlesController');
 Route::post('/articles/{article}/cover', 'ArticlesController@updateCover')->name('articles.update.cover');

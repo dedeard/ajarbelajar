@@ -8,7 +8,7 @@
     <div class="flex flex-1 items-center  overflow-hidden cursor-pointer py-2">
       <span class="block px-2 text-sm font-semibold">{{ $duration }}</span>
       <div class="flex-1">
-        <x-input model="title" placeholder="Judul" />
+        <x-input model="episode_title" placeholder="Judul" />
       </div>
     </div>
     <div class="px-3">

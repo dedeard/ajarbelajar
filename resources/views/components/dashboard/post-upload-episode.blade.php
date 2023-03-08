@@ -3,7 +3,7 @@
     uploading: false,
     progress: 0,
     get message() {
-        return (this.progress < 100) ? `SEDANG DIUNGGAH: ${this.progress}%` : 'VIDEO SEDANG DIPROSES'
+        return (this.progress < 100) ? `Sedang Diunggah: ${this.progress}%` : 'Video sedang diproses'
     },
     async onChange(e) {
         this.uploading = true
@@ -30,10 +30,10 @@
         this.uploading = false
         this.progress = 0
     }
-}">
-  <div class="flex min-h-[150px] w-full p-3">
+}" class="bg-white shadow rounded mb-3">
+  <div class="flex min-h-[100px] w-full p-3">
     <div class="relative flex flex-1 flex-col border border-dashed bg-gray-50 p-3">
-      <p class="m-auto text-center text-sm leading-none" x-text="name || 'KLIK DISINI ATAU SERET VIDIO KESINI UNTUK MEMBUAT EPISODE BARU'">
+      <p class="m-auto text-center text-sm leading-none" x-text="name || 'Klik disini untuk mengupload episode'">
       </p>
       <p class="text-center text-sm" x-show="uploading" x-text="message"></p>
       <input type="file" accept="video/*" x-on:change="onChange" class="absolute top-0 left-0 z-10 block h-full w-full opacity-0" />

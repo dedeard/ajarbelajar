@@ -25,9 +25,6 @@
             @endforeach
           </x-input>
         </x-input-wrap>
-        <x-input-wrap label="Deskripsi">
-          <x-input name="description" placeholder="Deskripsi" type="textarea" rows="8" />
-        </x-input-wrap>
       </div>
 
       <div class="block border-t p-3">

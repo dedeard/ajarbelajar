@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Dashboard\Lessons;
+namespace App\Http\Livewire\Dashboard;
 
 use App\Helpers\VideoHelper;
 use App\Http\Livewire\LivewireAuthorizes;
@@ -14,22 +14,23 @@ class EpisodeList extends Component
 
     public Episode $episode;
 
-    public $title;
+    public $episode_title;
     public $duration;
 
     public function mount()
     {
         $this->duration = CarbonInterval::seconds($this->episode->seconds)->cascade()->format('%H:%I:%S');
-        $this->title = $this->episode->title;
+        $this->episode_title = $this->episode->title;
     }
 
-    public function updatedTitle()
+    public function updatedEpisodeTitle()
     {
         $user = $this->auth();
         abort_unless($user->id === $this->episode->lesson->user_id, 403);
-
-        $data = $this->validate(['title' => 'required|string|max:250']);
-        $this->episode->update($data);
+        $data = $this->validate(['episode_title' => 'required|string|max:250']);
+        $this->episode->update([
+            'title' => $data['episode_title']
+        ]);
     }
 
     public function destroy()
@@ -44,6 +45,6 @@ class EpisodeList extends Component
 
     public function render()
     {
-        return view('livewire.dashboard.lessons.episode-list');
+        return view('livewire.dashboard.episode-list');
     }
 }

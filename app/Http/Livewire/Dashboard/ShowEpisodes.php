@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Dashboard\Lessons;
+namespace App\Http\Livewire\Dashboard;
 
 use App\Http\Livewire\LivewireAuthorizes;
 use App\Models\Lesson;
@@ -55,6 +55,6 @@ class ShowEpisodes extends Component
 
     public function render()
     {
-        return view('livewire.dashboard.lessons.show-episodes');
+        return view('livewire.dashboard.show-episodes');
     }
 }

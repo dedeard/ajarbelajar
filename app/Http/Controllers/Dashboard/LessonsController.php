@@ -45,7 +45,6 @@ class LessonsController extends Controller
         $data = $request->validate([
             'title' => 'required|string|max:250',
             'category' => 'required|exists:categories,id',
-            'description' => 'required|string|max:2500',
         ]);
         if (isset($data['category'])) $data['category_id'] = $data['category'];
         $lesson = new Lesson($data);
@@ -80,7 +79,6 @@ class LessonsController extends Controller
         $data = $request->validate([
             'title' => 'required|string|max:250',
             'category' => 'required|exists:categories,id',
-            'description' => 'required|string|max:2500',
         ]);
         $public = $request->get('public');
 
@@ -108,10 +106,16 @@ class LessonsController extends Controller
         $name = CoverHelper::generate($data['image'], $lesson->cover);
         $lesson->update(['cover' => $name]);
 
-        return response()->json([
-            'urls' => $lesson->cover_url,
-            'message' => 'Cover berhasil diperbarui',
-        ]);
+        return response()->json($lesson->cover_url);
+    }
+
+
+    public function updateDescription(Request $request, $id)
+    {
+        $lesson = $request->user()->lessons()->findOrFail($id);
+        $data = $request->validate(['description' => 'required|max:3000']);
+        $lesson->update($data);
+        return response()->noContent();
     }
 
     public function uploadEpisode(Request $request, $id)
