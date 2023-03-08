@@ -30,7 +30,7 @@ window.initEditor = ({ holder, value = '', onChange = null } = {}) => {
     },
     data,
     autofocus: true,
-    minHeight: 250,
+    minHeight: 150,
     tools: {
       header: { class: Header, inlineToolbar: true },
       paragraph: { class: Paragraph, inlineToolbar: true },

@@ -6,7 +6,7 @@
         <x-dashboard.post-edit-detail :post="$article" type="article" />
       </div>
       <div class="md:flex-1 md:pl-3">
-        <x-dashboard.article-edit-content :article="$article" />
+        <x-dashboard.post-edit-body :post="$article" type="article" name="content" label="kontent artikel" />
       </div>
     </div>
   </div>

@@ -31,7 +31,7 @@
 </x-slot:script>
 
 <textarea name="{{ $name }}" id="{{ $name }}-value" class="hidden">{{ $value }}</textarea>
-<div class="border-b bg-white p-3">
+<div class="border bg-white p-3 rounded">
   <div id="{{ $name }}-holder" placeholder='Let`s write an awesome story!'></div>
 </div>
 @if ($error)
