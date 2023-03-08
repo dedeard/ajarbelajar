@@ -5,7 +5,7 @@
     @csrf
     @method('PUT')
     <span class="block text-sm">{{ $label }}</span>
-    <x-editorjs :name="$name" :value="$post->content" />
+    <x-editorjs :name="$name" :value="$post[$name]" />
     <div class="py-3">
       <x-button value="Simpan" />
     </div>
