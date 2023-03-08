@@ -20,8 +20,8 @@
                 formData.append('image', file);
                 this.name = file ? file.name : ''
                 const { data } = await window.axios.post('{{ route('dashboard.' . $type . 's.update.cover', [$type => $post->id]) }}', formData, { onUploadProgress });
-                this.url = data.urls.large
-                window.fire.success(data.message)
+                this.url = data.large
+                window.fire.success('Gambar berhasil diubah.')
             }
         } catch (err) {
             window.fire.error(e.response?.data.message || e.message)
