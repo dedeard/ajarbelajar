@@ -19,9 +19,9 @@
 <body x-data="{ sidebarOpen: false }" class="bg-gray-100 text-gray-700">
   <x-alert />
 
-  <div class="min-h-screen">
+  <main class="min-h-screen">
     {{ $slot }}
-  </div>
+  </main>
 
   @vite(['resources/js/main.js'])
   {{ $script }}

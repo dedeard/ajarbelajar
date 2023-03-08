@@ -12,9 +12,6 @@
   x-bind:class="sidebarOpen ? '-translate-x-0' : '-translate-x-full'">
   <div class="flex flex-1 overflow-y-auto p-3">
     <div class="w-full flex-1">
-      @auth
-        <x-layouts.sidebar-profile-card />
-      @endauth
       {{ $slot }}
     </div>
   </div>
