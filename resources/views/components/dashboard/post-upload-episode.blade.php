@@ -30,7 +30,7 @@
         this.uploading = false
         this.progress = 0
     }
-}" class="bg-white shadow rounded mb-3">
+}" class="mb-3 rounded bg-white shadow">
   <div class="flex min-h-[100px] w-full p-3">
     <div class="relative flex flex-1 flex-col border border-dashed bg-gray-50 p-3">
       <p class="m-auto text-center text-sm leading-none" x-text="name || 'Klik disini untuk mengupload episode'">

@@ -1,6 +1,6 @@
 @props(['post', 'type' => 'lesson', 'name' => 'description', 'label' => 'Deskripsi pelajaran'])
 
-<div class="mb-3 bg-white rounded shadow pt-3 px-3">
+<div class="mb-3 rounded bg-white px-3 pt-3 shadow">
   <form action="{{ route('dashboard.' . $type . 's.update.' . $name, $post->id) }}" method="POST">
     @csrf
     @method('PUT')

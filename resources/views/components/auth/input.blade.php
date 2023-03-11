@@ -9,11 +9,11 @@
   if ($type === 'password') {
       $inputClass = $inputClass . ' pr-8';
   }
-
+  
   if (!$value) {
       $value = $type !== 'password' ? old($name) : '';
   }
-
+  
 @endphp
 
 <div class="relative pb-3" x-data="{ showPassword: false }">

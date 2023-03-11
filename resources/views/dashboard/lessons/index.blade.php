@@ -1,6 +1,6 @@
 <x-dashboard-layout>
   <div class="container p-3">
-    <div class="mb-3 rounded bg-white shadow overflow-hidden">
+    <div class="mb-3 overflow-hidden rounded bg-white shadow">
       <div class="flex items-center border-b px-3 py-4">
         <h3 class="flex-1 text-xl font-semibold">Pelajaran Saya</h3>
         <div>

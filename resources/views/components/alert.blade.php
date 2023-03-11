@@ -1,23 +1,23 @@
 @if ($message = Session::get('success'))
   <script>
-    window.flash = ['success','{{ $message }}']
+    window.flash = ['success', '{{ $message }}']
   </script>
 @endif
 @if ($message = Session::get('error'))
   <script>
-    window.flash = ['error','{{ $message }}']
+    window.flash = ['error', '{{ $message }}']
   </script>
 @endif
 
 @if (session()->has('success'))
-<script>
-  window.flash = ['success','{{ session('success') }}']
-</script>
+  <script>
+    window.flash = ['success', '{{ session('success') }}']
+  </script>
 @endif
 @if (session()->has('error'))
-<script>
-  window.flash = ['error','{{ session('error') }}']
-</script>
+  <script>
+    window.flash = ['error', '{{ session('error') }}']
+  </script>
 @endif
 
 

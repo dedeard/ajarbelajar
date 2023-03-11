@@ -11,7 +11,7 @@
     </div>
   </div>
 </div> --}}
-<div class="mb-3 p-3 w-full bg-gray-100 rounded border">
+<div class="mb-3 w-full rounded border bg-gray-100 p-3">
   <div class="mb-2">
     <figure class="m-auto block w-1/2 rounded-full border border-gray-200 bg-white p-1">
       <img class="block h-full w-full rounded-full" src="{{ Auth::user()->avatar_url }}" />

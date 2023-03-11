@@ -22,6 +22,10 @@
   <div class="flex">
     <x-layouts.sidebar-wrap>
       <x-layouts.sidebar-link />
+      <x-layouts.sidebar-link text="Artikel" icon="book-open" />
+      <x-layouts.sidebar-link text="Pelajaran" icon="film" />
+      <x-layouts.sidebar-link text="Kategori" icon="list" />
+      <x-layouts.sidebar-link text="Pengguna" icon="users" />
       <br />
       @auth
         <x-layouts.sidebar-link text="Dasbor Saya" route="dashboard.activities" is="dashboard*" icon="clipboard" />

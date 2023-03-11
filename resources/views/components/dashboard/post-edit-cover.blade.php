@@ -33,7 +33,7 @@
         this.uploading = false
         this.progress = 0
     }
-}" class="p-3 mb-3 bg-white rounded shadow">
+}" class="mb-3 rounded bg-white p-3 shadow">
   <img x-bind:src="url" class="block w-full" />
   <div class="flex">
     <div class="relative flex flex-1 flex-col border border-dashed bg-gray-50/10 p-3">

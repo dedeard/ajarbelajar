@@ -1,4 +1,4 @@
-<div class="bg-white shadow rounded">
+<div class="rounded bg-white shadow">
   <p class="p-3 text-center">Setiap perubahan secara otomatis akan tersimpan</p>
   @if (session()->has('error'))
     <div class="border-l-4 border-primary-600 bg-primary-100 px-3 py-4 text-primary-600">
