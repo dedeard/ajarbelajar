@@ -42,7 +42,6 @@ class ArticlesController extends Controller
         $data = $request->validate([
             'title' => 'required|max:250',
             'category' => 'required|exists:categories,id',
-            'description' => 'required|max:300',
         ]);
         $data['category_id'] = $data['category'];
         $article = new Article($data);

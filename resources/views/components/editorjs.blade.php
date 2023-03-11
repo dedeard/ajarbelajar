@@ -6,9 +6,7 @@
 @endphp
 
 <x-slot:script>
-  @vite(['resources/js/editor.js'])
   <script>
-    ;
     (() => {
       const holderEl = document.getElementById('{{ $name }}-holder')
       const valueEl = document.getElementById('{{ $name }}-value')
