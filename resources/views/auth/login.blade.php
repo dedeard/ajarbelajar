@@ -9,6 +9,10 @@
         <a class="text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">Lupa password?</a>
       </div>
     @endif
+    <div class="mb-3">
+      <input class="rounded shadow" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+      <label for="remember">Ingat saya</label>
+    </div>
     <div class="py-3 text-center">
       <x-button value="Masuk" class="w-1/2" />
     </div>
