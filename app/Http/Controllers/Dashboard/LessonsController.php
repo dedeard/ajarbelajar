@@ -45,6 +45,7 @@ class LessonsController extends Controller
         $data = $request->validate([
             'title' => 'required|string|max:250',
             'category' => 'required|exists:categories,id',
+            'description' => 'required|max:3000',
         ]);
         if (isset($data['category'])) $data['category_id'] = $data['category'];
         $lesson = new Lesson($data);

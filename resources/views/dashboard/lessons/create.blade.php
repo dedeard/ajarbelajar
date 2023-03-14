@@ -21,6 +21,9 @@
             @endforeach
           </x-input>
         </x-input-wrap>
+        <x-input-wrap label="Deskripsi">
+          <x-editorjs name="description" />
+        </x-input-wrap>
       </div>
 
       <div class="block border-t p-3">
