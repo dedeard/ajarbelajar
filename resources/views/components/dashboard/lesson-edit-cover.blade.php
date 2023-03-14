@@ -1,9 +1,9 @@
-@props(['post', 'type' => 'lesson'])
+@props(['lesson'])
 
 <div x-data="{
     name: '',
     uploading: false,
-    url: '{{ $post->cover_url['large'] }}',
+    url: '{{ $lesson->cover_url['large'] }}',
     progress: 0,
     get message() {
         return (this.progress < 100) ? `Sedang Diunggah: ${this.progress}%` : 'Gambar sedang diproses'
@@ -19,7 +19,7 @@
                 const formData = new FormData();
                 formData.append('image', file);
                 this.name = file ? file.name : ''
-                const { data } = await window.axios.post('{{ route('dashboard.' . $type . 's.update.cover', [$type => $post->id]) }}', formData, { onUploadProgress });
+                const { data } = await window.axios.post('{{ route('dashboard.lessons.update.cover', ['lesson' => $lesson->id]) }}', formData, { onUploadProgress });
                 this.url = data.large
                 window.fire.success('Gambar berhasil diubah.')
             }
@@ -33,7 +33,7 @@
         this.uploading = false
         this.progress = 0
     }
-}" class="mb-3 rounded bg-white p-3 shadow">
+}" class="mb-3 border bg-white p-3">
   <img x-bind:src="url" class="block w-full" />
   <div class="flex">
     <div class="relative flex flex-1 flex-col border border-dashed bg-gray-50/10 p-3">

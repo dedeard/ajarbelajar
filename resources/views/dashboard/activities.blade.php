@@ -1,3 +1,3 @@
-<x-dashboard-layout>
+<x-app-layout dashboard>
 
-</x-dashboard-layout>
+</x-app-layout>

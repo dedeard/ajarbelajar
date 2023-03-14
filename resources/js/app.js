@@ -5,6 +5,7 @@ import Swal from 'sweetalert2'
 // import Echo from 'laravel-echo'
 // import Pusher from 'pusher-js'
 import Sortable from 'sortablejs'
+import './editor'
 
 window.Alpine = Alpine
 window.axios = axios

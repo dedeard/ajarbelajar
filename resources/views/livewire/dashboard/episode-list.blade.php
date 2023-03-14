@@ -1,11 +1,11 @@
 <li data-id="{{ $episode->id }}" x-data="{
     open: false
-}" class="border-b first:border-t" @click.outside="open = false">
+}" class="border-t" @click.outside="open = false">
   <div class="flex items-center">
     <div class="handle flex h-12 cursor-grab items-center justify-center p-3">
       <i class="ft ft-menu"></i>
     </div>
-    <div class="flex flex-1 cursor-pointer items-center overflow-hidden py-2">
+    <div class="flex flex-1 cursor-pointer items-center py-2">
       <span class="block px-2 text-sm font-semibold">{{ $duration }}</span>
       <div class="flex-1">
         <x-input model="episode_title" placeholder="Judul" />

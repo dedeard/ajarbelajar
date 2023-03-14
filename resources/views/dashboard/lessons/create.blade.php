@@ -1,18 +1,14 @@
-<x-dashboard-layout title="Buat Pelajaran">
+<x-app-layout dashboard title="Buat Pelajaran" header="Buat Pelajaran Baru">
+  <x-slot:actions>
+    <a href="{{ route('dashboard.lessons.index') }}"
+      class="block rounded-full bg-primary-600 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white hover:bg-primary-700">
+      Batal
+    </a>
+  </x-slot:actions>
+
   <div class="container p-3">
-
-    <form method="POST" action="{{ route('dashboard.lessons.store') }}" class="mb-3 rounded border-b-4 border-primary-500 bg-white shadow">
+    <form method="POST" action="{{ route('dashboard.lessons.store') }}" class="border bg-white">
       @csrf
-      <div class="flex items-center border-b px-3 py-5">
-        <h3 class="flex-1 text-xl font-semibold">Buat Pelajaran Baru</h3>
-        <div>
-          <a href="{{ route('dashboard.lessons.index') }}"
-            class="block rounded-full bg-primary-600 px-4 py-2 text-sm text-white hover:bg-primary-700">
-            Batal
-          </a>
-        </div>
-      </div>
-
       <div class="p-3">
         <x-input-wrap label="Judul">
           <x-input name="title" placeholder="Judul" />
@@ -33,4 +29,4 @@
     </form>
   </div>
 
-</x-dashboard-layout>
+</x-app-layout>

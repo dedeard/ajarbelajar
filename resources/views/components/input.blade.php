@@ -13,7 +13,7 @@
   if (!$value) {
       $value = $type !== 'password' ? old($name) : '';
   }
-  $inputClass = 'block w-full flex-1 border-gray-300 rounded shadow placeholder:text-gray-500';
+  $inputClass = 'block w-full flex-1 border-gray-300 placeholder:text-gray-500';
   if ($error) {
       $inputClass = $inputClass . ' border-red-600';
   }

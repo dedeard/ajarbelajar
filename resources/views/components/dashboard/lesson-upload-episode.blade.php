@@ -1,3 +1,5 @@
+@props(['lesson'])
+
 <div x-data="{
     name: '',
     uploading: false,
@@ -30,7 +32,7 @@
         this.uploading = false
         this.progress = 0
     }
-}" class="mb-3 rounded bg-white shadow">
+}" class="mb-3 border bg-white">
   <div class="flex min-h-[100px] w-full p-3">
     <div class="relative flex flex-1 flex-col border border-dashed bg-gray-50 p-3">
       <p class="m-auto text-center text-sm leading-none" x-text="name || 'Klik disini untuk mengupload episode'">

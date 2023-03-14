@@ -1,11 +1,8 @@
-<x-dashboard-layout>
+<x-app-layout dashboard header="Edit Profil">
   <div class="container p-3">
-    <form class="mb-3 rounded border-b-4 border-primary-600 bg-white shadow" method="POST">
+    <form class="border bg-white" method="POST">
       @csrf
       @method('PUT')
-      <div class="border-b px-3 py-5">
-        <h3 class="text-xl font-semibold">Edit Profil</h3>
-      </div>
       <div class="px-3 py-5">
         <x-input-wrap label="Nama">
           <x-input name="name" placeholder="Nama kamu" value="{{ Auth::user()->name }}" />
@@ -25,4 +22,4 @@
       </div>
     </form>
   </div>
-</x-dashboard-layout>
+</x-app-layout>

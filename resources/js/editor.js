@@ -1,14 +1,8 @@
 import EditorJS from '@editorjs/editorjs'
-import Header from '@editorjs/header'
 import Paragraph from '@editorjs/paragraph'
 import List from '@editorjs/list'
-import Quote from '@editorjs/quote'
 import CodeTool from '@editorjs/code'
-import Delimiter from '@editorjs/delimiter'
 import InlineCode from '@editorjs/inline-code'
-import Underline from '@editorjs/underline'
-import Table from 'editorjs-table'
-// import FormData from 'form-data'
 
 window.initEditor = ({ holder, value = '', onChange = null } = {}) => {
   let data
@@ -32,15 +26,10 @@ window.initEditor = ({ holder, value = '', onChange = null } = {}) => {
     autofocus: false,
     minHeight: 150,
     tools: {
-      header: { class: Header, inlineToolbar: true },
       paragraph: { class: Paragraph, inlineToolbar: true },
       list: { class: List, inlineToolbar: true },
-      quote: { class: Quote, inlineToolbar: true },
-      table: { class: Table, inlineToolbar: true },
       code: CodeTool,
-      delimiter: Delimiter,
       inlineCode: InlineCode,
-      underline: Underline,
     },
   })
   return editor
