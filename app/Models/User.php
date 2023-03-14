@@ -49,11 +49,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Lesson::class);
     }
 
-    public function articles(): HasMany
-    {
-        return $this->hasMany(Article::class);
-    }
-
     public function getAvatarUrlAttribute(): string
     {
         $url = 'https://www.gravatar.com/avatar/';
