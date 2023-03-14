@@ -2,7 +2,7 @@
 
 @php
   $error = $errors->first($name);
-  $inputClass = 'block w-full flex-1 border-gray-300 rounded shadow pt-5 pb-1 placeholder:text-gray-400 text-gray-700';
+  $inputClass = 'block w-full flex-1 border-gray-300 pt-5 pb-1 placeholder:text-gray-400 text-gray-700';
   if ($error) {
       $inputClass = "$inputClass border-red-600";
   }

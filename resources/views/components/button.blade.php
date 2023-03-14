@@ -1,7 +1,7 @@
 @props(['value', 'variant' => 'primary'])
 
 @php
-  $btnClass = 'group relative py-3 px-4 border text-white hover:disabled:cursor-wait inline-block cursor-pointer select-none items-center justify-center rounded text-center text-sm font-medium leading-none disabled:opacity-70 disabled:text-transparent';
+  $btnClass = 'group relative inline-block cursor-pointer select-none items-center justify-center border py-3 px-4 text-center text-sm font-semibold uppercase leading-none tracking-wider text-white disabled:text-transparent disabled:opacity-70 hover:disabled:cursor-wait';
   if ($variant === 'primary') {
       $btnClass = $btnClass . ' bg-primary-600 hover:bg-primary-700 hover:disabled:bg-primary-600 border-primary-600 hover:border-primary-700 hover:disabled:border-primary-600';
       $loadingFill = 'fill-primary-600';

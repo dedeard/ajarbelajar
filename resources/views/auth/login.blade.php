@@ -5,7 +5,8 @@
     <x-auth.input name="email" label="Alamat Email" autofocus />
     <x-auth.input type="password" name="password" label="Password" />
     <div class="mb-3">
-      <input class="rounded shadow" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+      <input class="border-gray-300 shadow !ring-0 hover:border-primary-600" type="checkbox" name="remember" id="remember"
+        {{ old('remember') ? 'checked' : '' }}>
       <label for="remember">Ingat saya</label>
     </div>
     <div class="border-b py-3 text-center">
