@@ -5,33 +5,30 @@
   $value = $value ? $value : old($name);
 @endphp
 
-<x-slot:script>
-  <script>
-    (() => {
-      const holderEl = document.getElementById('{{ $name }}-holder')
-      const valueEl = document.getElementById('{{ $name }}-value')
-      const initEditorJS = () => {
-        window.initEditor({
-          holder: holderEl,
-          value: valueEl.value,
-          onChange: (value) => {
-            valueEl.value = value
-          }
-        })
-      }
-      if (window.initEditor) {
-        initEditorJS()
-      } else {
-        window.onload = initEditorJS
-      }
-    })()
-  </script>
-</x-slot:script>
-
 <textarea name="{{ $name }}" id="{{ $name }}-value" class="hidden">{{ $value }}</textarea>
-<div class="border bg-white p-3">
+<div class="@if ($error) border-red-600 @endif border bg-white p-3 md:px-5">
   <div id="{{ $name }}-holder" placeholder='Let`s write an awesome story!'></div>
 </div>
+<script>
+  (() => {
+    const holderEl = document.getElementById('{{ $name }}-holder')
+    const valueEl = document.getElementById('{{ $name }}-value')
+    const initEditorJS = () => {
+      window.initEditor({
+        holder: holderEl,
+        value: valueEl.value,
+        onChange: (value) => {
+          valueEl.value = value
+        }
+      })
+    }
+    if (window.initEditor) {
+      initEditorJS()
+    } else {
+      window.addEventListener('load', initEditorJS)
+    }
+  })()
+</script>
 @if ($error)
   <span class="block text-xs text-red-900">{{ $error }}</span>
 @endif
