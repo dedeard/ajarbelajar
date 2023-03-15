@@ -20,12 +20,12 @@ class LessonsController extends Controller
         if ($sort === 'oldest') {
             $query->orderBy('posted_at', 'asc');
         } else if ($sort === 'popularity') {
-            $query->withCount('favorites as favorite_count')->orderBy('favorite_count', 'desc');
+            $query->withCount('favorites as favorite_count')->orderBy('favorite_count', 'desc')->orderBy('title', 'asc');
         } else {
             $query->orderBy('posted_at', 'desc');
         }
 
-        $lessons = $query->orderBy('title', 'asc')->paginate(12)->appends(['sort' => $sort]);
+        $lessons = $query->paginate(12)->appends(['sort' => $sort]);
 
         return view('lessons.index', compact('lessons', 'sort'));
     }
