@@ -4,7 +4,7 @@
   <div class="block w-full flex-1 p-2">
     <div class="relative mb-2">
       @if ($lesson->category)
-        <a href="#"
+        <a href="{{ route('categories.show', $lesson->category->slug) }}"
           class="absolute top-1 left-1 block bg-primary-600 py-1 px-2 text-2xs font-semibold leading-none text-white shadow hover:shadow-lg">
           {{ $lesson->category->name }}
         </a>

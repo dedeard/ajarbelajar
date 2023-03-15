@@ -18,7 +18,8 @@
 
           <div class="flex p-3 pb-0">
             @if ($lesson->category)
-              <a href="#" class="leading-0 block border bg-gray-100 py-1 px-2 text-2xs font-semibold uppercase hover:bg-gray-200">
+              <a href="{{ route('categories.show', $lesson->category->slug) }}"
+                class="leading-0 block border bg-gray-100 py-1 px-2 text-2xs font-semibold uppercase hover:bg-gray-200">
                 {{ $lesson->category->name }}
               </a>
             @endif
