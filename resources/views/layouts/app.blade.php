@@ -42,7 +42,7 @@
           <x-layouts.sidebar-link text="Home" route="home" is="home" icon="home" />
           <x-layouts.sidebar-link text="Pelajaran" route="lessons.index" is="lessons*" icon="film" />
           <x-layouts.sidebar-link text="Kategori" route="categories.index" is="categories*" icon="grid" />
-          <x-layouts.sidebar-link text="Pengguna" icon="users" />
+          <x-layouts.sidebar-link text="Pengguna" route="users.index" is="users*" icon="users" />
           @auth
             <x-layouts.sidebar-link text="Dasbor Saya" route="dashboard.activities" is="dashboard*" icon="clipboard" />
             <x-layouts.sidebar-link route="logout" is="logout" text="Keluar" icon="arrow-left-circle" />
