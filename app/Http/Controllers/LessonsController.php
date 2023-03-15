@@ -10,10 +10,24 @@ class LessonsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $lessons = Lesson::listQuery(Lesson::query())->get();
-        return view('lessons.index', compact('lessons'));
+        $sort = $request->input('sort');
+        abort_unless(in_array($sort ?? 'newest', ['newest', 'oldest', 'popularity']), 404);
+
+        $query = Lesson::listQuery(Lesson::query());
+
+        if ($sort === 'oldest') {
+            $query->orderBy('posted_at', 'asc');
+        } else if ($sort === 'popularity') {
+            $query->withCount('favorites as favorite_count')->orderBy('favorite_count', 'desc');
+        } else {
+            $query->orderBy('posted_at', 'desc');
+        }
+
+        $lessons = $query->orderBy('title', 'asc')->paginate(12)->appends(['sort' => $sort]);
+
+        return view('lessons.index', compact('lessons', 'sort'));
     }
 
 

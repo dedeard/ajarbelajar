@@ -53,6 +53,11 @@ class Lesson extends Model
         return $this->hasMany(Episode::class);
     }
 
+    public function favorites(): HasMany
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
     /**
      * Atributes
      */
