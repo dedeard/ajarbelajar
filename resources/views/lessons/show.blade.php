@@ -51,15 +51,16 @@
         <div class="mb-3 overflow-hidden border bg-white">
           <div class="p-3">
             <div class="flex flex-col items-center justify-center pt-6 pb-3">
-              <a href="/users/username" class="m-auto flex w-24 items-center justify-center rounded-full border bg-gray-100 p-1">
+              <a href="{{ route('users.show', $lesson->user->username) }}"
+                class="m-auto flex w-24 items-center justify-center rounded-full border bg-gray-100 p-1">
                 <img class="block w-full rounded-full" src="{{ $lesson->user->avatar_url }}" alt="{{ $lesson->user->name }}" />
               </a>
             </div>
             <h4 class="truncate text-center text-lg font-bold uppercase tracking-wider">
-              <a href="/users/username">{{ $lesson->user->name }}</a>
+              <a href="{{ route('users.show', $lesson->user->username) }}">{{ $lesson->user->name }}</a>
             </h4>
             <div class="mb-3 truncate text-center text-sm text-gray-500">
-              <a href="/users/username">{{ '@' . $lesson->user->username }}</a>
+              <a href="{{ route('users.show', $lesson->user->username) }}">{{ '@' . $lesson->user->username }}</a>
             </div>
           </div>
           <div class="bg-gray-100 p-2">
