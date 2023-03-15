@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 
 class ActivitiesController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('dashboard/activities');
+        $user = $request->user();
+        $activities = $user->activities()->with('episode.lesson')->orderBy('updated_at', 'desc')->get();
+        return view('dashboard/activities', compact('activities'));
     }
 }

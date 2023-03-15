@@ -54,6 +54,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Favorite::class);
     }
 
+    public function activities()
+    {
+        return $this->hasMany(Activity::class);
+    }
+
     public function hasFavorited($lessonId): bool
     {
         return (bool) $this->favorites->firstWhere('lesson_id', $lessonId);
