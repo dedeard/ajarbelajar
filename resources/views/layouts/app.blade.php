@@ -41,7 +41,7 @@
         @else
           <x-layouts.sidebar-link text="Home" route="home" is="home" icon="home" />
           <x-layouts.sidebar-link text="Pelajaran" route="lessons.index" is="lessons*" icon="film" />
-          <x-layouts.sidebar-link text="Kategori" icon="grid" />
+          <x-layouts.sidebar-link text="Kategori" route="categories.index" is="categories*" icon="grid" />
           <x-layouts.sidebar-link text="Pengguna" icon="users" />
           @auth
             <x-layouts.sidebar-link text="Dasbor Saya" route="dashboard.activities" is="dashboard*" icon="clipboard" />

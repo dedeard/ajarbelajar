@@ -9,4 +9,6 @@ Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::resource('lessons', 'LessonsController')->only(['index', 'show']);
 Route::get('lessons/{lesson}/watch', 'LessonsController@watch')->name('lessons.watch');
 
+Route::resource('categories', 'CategoriesController')->only(['index', 'show']);
+
 require __DIR__ . '/auth.php';
