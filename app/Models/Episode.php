@@ -31,4 +31,15 @@ class Episode extends Model
     {
         return VideoHelper::getUrl($this->name);
     }
+
+    public function getReadableSecondAttribute()
+    {
+        if ($this->seconds) {
+            $hours = floor($this->seconds / 3600);
+            $minutes = floor(($this->seconds / 60) % 60);
+            $seconds = $this->seconds % 60;
+            return gmdate('H:i:s', mktime($hours, $minutes, $seconds));
+        }
+        return '';
+    }
 }

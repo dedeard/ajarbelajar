@@ -1,6 +1,6 @@
 @props(['lesson', 'name' => 'description', 'label' => 'Deskripsi pelajaran'])
 
-<div action="{{ route('dashboard.lessons.update.description', $lesson->id) }}" method="POST" class="mb-3 border bg-white">
+<form action="{{ route('dashboard.lessons.update.description', $lesson->id) }}" method="POST" class="mb-3 border bg-white">
   @csrf
   @method('PUT')
   <div class="border-b p-3">
@@ -10,4 +10,4 @@
   <div class="p-3">
     <x-button value="Simpan" />
   </div>
-</div>
+</form>

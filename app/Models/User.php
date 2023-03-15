@@ -49,6 +49,29 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Lesson::class);
     }
 
+    public function favorites(): HasMany
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function hasFavorited($lessonId): bool
+    {
+        return (bool) $this->favorites->firstWhere('lesson_id', $lessonId);
+    }
+
+    public function favoriteToggle($lessonId): bool
+    {
+        $favorite = $this->favorites->firstWhere('lesson_id', $lessonId);
+        if (!$favorite) {
+            $data = new Favorite(['lesson_id' => $lessonId]);
+            $this->favorites()->save($data);
+            return true;
+        } else {
+            $favorite->delete();
+            return false;
+        }
+    }
+
     public function getAvatarUrlAttribute(): string
     {
         $url = 'https://www.gravatar.com/avatar/';

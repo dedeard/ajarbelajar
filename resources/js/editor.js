@@ -2,7 +2,6 @@ import EditorJS from '@editorjs/editorjs'
 import Paragraph from '@editorjs/paragraph'
 import List from '@editorjs/list'
 import CodeTool from '@editorjs/code'
-import InlineCode from '@editorjs/inline-code'
 
 window.initEditor = ({ holder, value = '', onChange = null } = {}) => {
   let data
@@ -25,11 +24,11 @@ window.initEditor = ({ holder, value = '', onChange = null } = {}) => {
     data,
     autofocus: false,
     minHeight: 150,
+    inlineToolbar: ['bold', 'italic'],
     tools: {
       paragraph: { class: Paragraph, inlineToolbar: true },
       list: { class: List, inlineToolbar: true },
       code: CodeTool,
-      inlineCode: InlineCode,
     },
   })
   return editor
