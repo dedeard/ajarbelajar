@@ -10,7 +10,9 @@ class CategoriesController extends Controller
 {
     public function index()
     {
-        $categories = Category::has('lessons')->orderBy('name', 'asc')->paginate(24);
+        $categories = Category::whereHas('lessons', function ($q) {
+            $q->where('public', true);
+        })->orderBy('name', 'asc')->paginate(24);
         return view('categories.index', compact('categories'));
     }
 

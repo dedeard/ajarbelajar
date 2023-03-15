@@ -12,7 +12,9 @@ class HomeController extends Controller
     public function index()
     {
         $lessons = Lesson::listQuery(Lesson::query())->orderBy('posted_at', 'desc')->take(8)->get();
-        $categories = Category::has('lessons')->withCount('lessons as lesson_count')->orderBy('lesson_count', 'asc')->paginate(8);
+        $categories = Category::whereHas('lessons', function ($q) {
+            $q->where('public', true);
+        })->withCount('lessons as lesson_count')->orderBy('lesson_count', 'asc')->paginate(8);
         $users = User::orderBy('created_at', 'desc')->take(8)->get();
         return view('home', compact('lessons', 'categories', 'users'));
     }
