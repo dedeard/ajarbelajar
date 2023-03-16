@@ -71,5 +71,13 @@
         </div>
       </div>
     </div>
+
+    <div class="mx-auto max-w-3xl">
+      <h3 class="mb-3 text-xl font-semibold uppercase tracking-wider">Komentar</h3>
+      <div class="mb-3 block border bg-white">
+        <x-comment-form :episode="$episode" />
+        <livewire:comments :episode="$episode" :user="Auth::user()" />
+      </div>
+    </div>
   </div>
 </x-app-layout>

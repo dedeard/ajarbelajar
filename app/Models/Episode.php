@@ -6,6 +6,7 @@ use App\Helpers\VideoHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Episode extends Model
 {
@@ -22,6 +23,11 @@ class Episode extends Model
     public function lesson(): BelongsTo
     {
         return $this->belongsTo(Lesson::class);
+    }
+
+    public function comments(): HasMany
+    {
+        return $this->HasMany(Comment::class);
     }
 
     /**

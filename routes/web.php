@@ -9,6 +9,8 @@ Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::resource('lessons', 'LessonsController')->only(['index', 'show']);
 Route::get('lessons/{lesson}/watch', 'LessonsController@watch')->name('lessons.watch');
 
+Route::post('comments/{episode}', 'CommentsController@store')->name('comments.store');
+
 Route::resource('categories', 'CategoriesController')->only(['index', 'show']);
 
 Route::get('users', 'UsersController@index')->name('users.index');
