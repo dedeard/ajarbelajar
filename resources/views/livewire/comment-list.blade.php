@@ -33,11 +33,12 @@
           Hapus
         </button>
       @endif
-      <button class="flex items-center justify-center leading-none" @guest disabled @endguest>
+      <button class="@if ($comment->liked()) text-red-600 @endif flex items-center justify-center leading-none" type="button"
+        wire:click="likeToggle" @guest disabled @endguest>
         <span class="block">
           <x-svg.heart width="20" height="20" fill="currentColor" />
         </span>
-        <span class="ml-1 block">30</span>
+        <span class="ml-1 block">{{ $comment->likeCount }}</span>
       </button>
     </div>
   </div>

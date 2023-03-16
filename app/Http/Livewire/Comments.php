@@ -10,11 +10,11 @@ class Comments extends Component
     public $comments;
     public $user;
 
-    protected $listeners = ['comment-created' => 'mount', 'comment-deleted' => 'mount'];
+    protected $listeners = ['comment-created' => 'mount', 'comment-deleted' => 'mount', 'comment-updated' => 'mount'];
 
     public function mount()
     {
-        $this->comments = $this->episode->comments()->with('user')->orderBy('created_at', 'desc')->get();
+        $this->comments = $this->episode->comments()->with('user', 'likeCounter')->orderBy('created_at', 'desc')->get();
     }
     public function render()
     {
