@@ -34,7 +34,9 @@
         @if ($dashboard)
           <x-layouts.sidebar-link route="dashboard.activities" is="dashboard.activities" text="Aktifitas" icon="activity" />
           <x-layouts.sidebar-link route="dashboard.lessons.index" is="dashboard.lessons*" text="Pelajaran" icon="video" />
-          <x-layouts.sidebar-link text="Favorit" route="dashboard.favorites" is="dashboard.favorites" icon="heart" />
+          <x-layouts.sidebar-link route="dashboard.favorites" is="dashboard.favorites" text="Favorit" icon="heart" />
+          <x-layouts.sidebar-link route="dashboard.notifications.index" is="dashboard.notifications.index" text="Notifikasi"
+            icon="bell" />
           <x-layouts.sidebar-link route="dashboard.edit-profile" is="dashboard.edit-profile" text="Edit Profil" icon="settings" />
           <x-layouts.sidebar-link route="dashboard.edit-password" is="dashboard.edit-password" text="Edit Password" icon="lock" />
           <x-layouts.sidebar-link route="logout" is="logout" text="Keluar" icon="arrow-left-circle" />

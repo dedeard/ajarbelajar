@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\EditorjsHelper;
 use App\Models\Comment;
 use App\Models\Episode;
+use App\Notifications\EpisodeCommentedNotification;
 use Illuminate\Http\Request;
 
 class CommentsController extends Controller
@@ -24,6 +25,7 @@ class CommentsController extends Controller
         $request->validate(['body' => 'required|max:1500']);
         $comment = new Comment(['user_id' => $request->user()->id, 'body' => $body]);
         $episode->comments()->save($comment);
+        $episode->lesson->user->notify(new EpisodeCommentedNotification($comment));
         return response()->noContent();
     }
 

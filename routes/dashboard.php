@@ -14,3 +14,7 @@ Route::post('/lessons/{lesson}/episode', 'LessonsController@uploadEpisode')->nam
 Route::put('/lessons/{lesson}/description', 'LessonsController@updateDescription')->name('lessons.update.description');
 
 Route::get('/favorites', 'FavoritesController@index')->name('favorites');
+
+Route::get('/notifications', 'NotificationsController@index')->name('notifications.index');
+Route::get('/notifications/markall', 'NotificationsController@markall')->name('notifications.markall');
+Route::get('/notifications/{id}', 'NotificationsController@read')->name('notifications.read');

@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Lesson;
 use App\Models\User;
+use App\Notifications\LessonFavoritedNotification;
 use Livewire\Component;
 
 class FavoriteToggle extends Component
@@ -25,6 +26,19 @@ class FavoriteToggle extends Component
     public function onclick()
     {
         $this->favorited = $this->user->favoriteToggle($this->lesson->id);
+        if ($this->favorited) {
+            $notifications = $this->lesson->user->notifications()->where('type', LessonFavoritedNotification::class)->get();
+            $exists = false;
+            foreach ($notifications as $notification) {
+                if ($notification->data['lesson_id'] == $this->lesson->id) {
+                    $exists = true;
+                }
+                break;
+            }
+            if (!$exists) {
+                $this->lesson->user->notify(new LessonFavoritedNotification($this->lesson, $this->user));
+            }
+        }
     }
 
     public function render()

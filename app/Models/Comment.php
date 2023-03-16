@@ -26,7 +26,7 @@ class Comment extends Model
 
     public function episode(): BelongsTo
     {
-        return $this->belongsTo(Post::class);
+        return $this->belongsTo(Episode::class);
     }
 
     public function isMine(): bool
