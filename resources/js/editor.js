@@ -3,7 +3,14 @@ import Paragraph from '@editorjs/paragraph'
 import List from '@editorjs/list'
 import CodeTool from '@editorjs/code'
 
-window.initEditor = ({ holder, value = '', onChange = null } = {}) => {
+window.initEditor = ({
+  holder,
+  value = '',
+  onChange = null,
+  autofocus = false,
+  minHeight = 150,
+  placeholder = 'Let`s write an awesome story!',
+} = {}) => {
   let data
   try {
     data = JSON.parse(value || '')
@@ -22,8 +29,9 @@ window.initEditor = ({ holder, value = '', onChange = null } = {}) => {
       }
     },
     data,
-    autofocus: false,
-    minHeight: 150,
+    autofocus,
+    minHeight,
+    placeholder,
     inlineToolbar: ['bold', 'italic'],
     tools: {
       paragraph: { class: Paragraph, inlineToolbar: true },
