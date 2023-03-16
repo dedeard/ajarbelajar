@@ -23,7 +23,7 @@
                 window.fire.success(data.message)
             }
         } catch (err) {
-            window.fire.error(e.response?.data.message || e.message)
+            window.fire.error(err.response?.data.message || err.message)
         }
         this.uploading = false
     },
