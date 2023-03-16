@@ -1,4 +1,4 @@
-<x-app-layout dashboard header="Pelajaran Saya">
+<x-app-layout dashboard title="Pelajaran Saya" header="Pelajaran Saya">
   <x-slot:actions>
     <a href="{{ route('dashboard.lessons.create') }}"
       class="block rounded-full bg-primary-600 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white hover:bg-primary-700">

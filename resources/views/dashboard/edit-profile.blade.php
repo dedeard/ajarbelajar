@@ -1,4 +1,4 @@
-<x-app-layout dashboard header="Edit Profil">
+<x-app-layout dashboard header="Edit Profil" title="Edit Profil">
   <div class="container p-3">
     <form class="border bg-white" method="POST">
       @csrf

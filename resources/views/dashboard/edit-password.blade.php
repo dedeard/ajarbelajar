@@ -1,4 +1,4 @@
-<x-app-layout dashboard header="Edit Password">
+<x-app-layout dashboard title="Edit Password" header="Edit Password">
   <div class="container p-3">
     <form class="border bg-white" method="POST">
       @csrf

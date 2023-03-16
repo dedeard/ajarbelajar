@@ -1,4 +1,4 @@
-<x-app-layout title="Daftar pelajaran" header="Pelajaran">
+<x-app-layout title="Pelajaran" header="Pelajaran">
   <x-slot:actions>
     <div class="dropdown-wrapper relative">
       <x-button type="button" class="block rounded-full py-2 px-4 text-xs">

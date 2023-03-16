@@ -1,4 +1,4 @@
-<x-app-layout dashboard header="Notifikasi">
+<x-app-layout dashboard title="Notifikasi" header="Notifikasi">
   <x-slot:actions>
     <a href="{{ route('dashboard.notifications.markall') }}"
       class="block rounded-full bg-red-600 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white hover:bg-red-700">

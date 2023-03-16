@@ -1,4 +1,4 @@
-<x-app-layout dashboard title="Edit Pelajaran">
+<x-app-layout dashboard :title="$lesson->title">
   <div class="container p-3">
     <div class="md:flex">
       <div class="md:w-[320px]">

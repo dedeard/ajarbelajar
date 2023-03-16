@@ -1,4 +1,4 @@
-<x-app-layout :title="$lesson->title" :description="$lesson->seo_description" noSidebar>
+<x-app-layout :title="$episode->title" :description="$lesson->seo_description" noSidebar>
   <x-slot:script>
     <script>
       (() => {
