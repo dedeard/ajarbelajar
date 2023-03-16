@@ -13,7 +13,7 @@
       </p>
       @if ($user->website)
         <div class="mb-3 text-center">
-          <a href="{{ $user->website }}" class="text-sm text-primary-600 hover:text-primary-700">
+          <a href="{{ $user->website }}" target="_blank" rel="noopener noreferrer" class="text-sm text-primary-600 hover:text-primary-700">
             {{ $user->website }}
           </a>
         </div>
