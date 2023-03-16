@@ -10,6 +10,7 @@ Route::resource('lessons', 'LessonsController')->only(['index', 'show']);
 Route::get('lessons/{lesson}/watch', 'LessonsController@watch')->name('lessons.watch');
 
 Route::post('comments/{episode}', 'CommentsController@store')->name('comments.store');
+Route::delete('comments/{comment}', 'CommentsController@destroy')->name('comments.delete');
 
 Route::resource('categories', 'CategoriesController')->only(['index', 'show']);
 

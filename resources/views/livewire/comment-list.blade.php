@@ -16,8 +16,25 @@
       {!! $comment->html_body !!}
     </div>
     <div class="flex justify-end">
-      <button class="flex items-center justify-center leading-none">
-        <span class="block text-red-600">
+      @if ($user && $user->id === $comment->user->id)
+        <button x-data="{
+            async submit() {
+                try {
+                    await window.axios.delete('{{ route('comments.delete', $comment->id) }}')
+                    if (typeof window.EDJS?.clear === 'function') window.EDJS.clear()
+                    window.fire.success('Berhasil menghapus komentar')
+                    Livewire.emit('comment-deleted')
+                } catch (e) {
+                    window.fire.error(e.response?.data.message || e.message)
+                }
+            }
+        }" x-on:click="() => $store.deleteConfirm(submit)" type="button"
+          class="mr-6 flex items-center justify-center leading-none text-red-600 hover:text-red-700">
+          Hapus
+        </button>
+      @endif
+      <button class="flex items-center justify-center leading-none" @guest disabled @endguest>
+        <span class="block">
           <x-svg.heart width="20" height="20" fill="currentColor" />
         </span>
         <span class="ml-1 block">30</span>

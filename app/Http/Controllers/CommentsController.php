@@ -13,6 +13,7 @@ class CommentsController extends Controller
     {
         $this->middleware(['auth', 'verified']);
     }
+
     public function store(Request $request, $episodeId)
     {
         $episode = Episode::whereHas('lesson', function ($q) {
@@ -23,6 +24,13 @@ class CommentsController extends Controller
         $request->validate(['body' => 'required|max:1500']);
         $comment = new Comment(['user_id' => $request->user()->id, 'body' => $body]);
         $episode->comments()->save($comment);
+        return response()->noContent();
+    }
+
+    public function destroy(Request $request, $commentId)
+    {
+        $comment = $request->user()->comments()->findOrFail($commentId);
+        $comment->delete();
         return response()->noContent();
     }
 }
