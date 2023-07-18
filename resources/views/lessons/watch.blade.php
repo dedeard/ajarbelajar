@@ -25,7 +25,7 @@
 
   <div class="border-b bg-white">
     <div class="container px-3 py-5">
-      <a href="{{ route('lessons.show', $lesson->id) }}" class="inline-flex text-lg leading-none hover:text-primary-600">
+      <a href="{{ route('lessons.show', $lesson->slug) }}" class="inline-flex text-lg leading-none hover:text-primary-600">
         <span class="my-auto mr-3 block">
           <i class="ft ft-arrow-left-circle"></i>
         </span>

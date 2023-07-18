@@ -30,7 +30,7 @@ class FavoriteToggle extends Component
             $notifications = $this->lesson->user->notifications()->where('type', LessonFavoritedNotification::class)->get();
             $exists = false;
             foreach ($notifications as $notification) {
-                if ($notification->data['lesson_id'] == $this->lesson->id) {
+                if ($notification->data['lesson_id'] == $this->lesson->id && $notification->data['user_id'] == $this->user->id) {
                     $exists = true;
                 }
                 break;

@@ -28,7 +28,8 @@ class CommentLikedNotification extends Notification
     {
         return [
             'comment_id' => $this->comment->id,
-            'message' => $this->user->name . " menyukai komentar anda."
+            'message' => $this->user->name . " menyukai komentar anda.",
+            'user_id' => $this->user->id
         ];
     }
 }

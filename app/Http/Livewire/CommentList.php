@@ -20,10 +20,10 @@ class CommentList extends Component
                 $notifications = $this->comment->user->notifications()->where('type', CommentLikedNotification::class)->get();
                 $exists = false;
                 foreach ($notifications as $notification) {
-                    if ($notification->data['comment_id'] == $this->comment->id) {
+                    if ($notification->data['comment_id'] == $this->comment->id && $notification->data['user_id'] == $this->user->id) {
                         $exists = true;
+                        break;
                     }
-                    break;
                 }
                 if (!$exists) {
                     $this->comment->user->notify(new CommentLikedNotification($this->comment, $this->user));
