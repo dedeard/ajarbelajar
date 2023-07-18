@@ -4,7 +4,7 @@
   <div class="relative flex items-center">
     <div class="flex flex-col items-center justify-center">
       <div class="w-14 rounded-full border bg-white p-1 group-hover:bg-gray-200">
-        <img class="w-full rounded-full" src="{{ $user->avatar_url }}" alt="{{ $user->name }}" />
+        <img class="h-full w-full rounded-full" src="{{ $user->avatar_url }}" alt="{{ $user->name }}" />
       </div>
     </div>
     <div class="flex-1 truncate pl-2">

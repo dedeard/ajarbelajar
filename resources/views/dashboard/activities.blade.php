@@ -5,7 +5,8 @@
         <a href="{{ route('lessons.watch', ['lesson' => $activity->episode->lesson->slug, 'index' => $activity->episode->index]) }}"
           class="flex border bg-white p-3 hover:bg-gray-50">
           <div class="w-16 md:w-24">
-            <img class="block w-full" src="{{ $activity->episode->lesson->cover_url['small'] }}" />
+            <img class="block w-full" src="{{ $activity->episode->lesson->cover_url['small'] }}"
+              alt="{{ $activity->episode->lesson->title }}" />
           </div>
           <div class="my-auto flex-1 pl-3">
             <p class="text-xs">{{ $activity->updated_at->diffForHumans() }}</p>

@@ -25,15 +25,15 @@
         </div>
       </div>
       <div class="p-3 text-center md:text-right">
-        <a href="#" target="_blank" rel="noreferrer"
+        <a href="#" target="_blank" rel="noreferrer" aria-label="Facebook"
           class="inline-flex h-9 w-9 items-center justify-center rounded-full border bg-gray-100 p-0 text-sm hover:bg-gray-200">
           <i class="ft ft-facebook"></i>
         </a>
-        <a href="#" target="_blank" rel="noreferrer"
+        <a href="#" target="_blank" rel="noreferrer" aria-label="Instagram"
           class="ml-3 inline-flex h-9 w-9 items-center justify-center rounded-full border bg-gray-100 p-0 text-sm hover:bg-gray-200">
           <i class="ft ft-instagram"></i>
         </a>
-        <a href="#" target="_blank" rel="noreferrer"
+        <a href="#" target="_blank" rel="noreferrer" aria-label="YouTube"
           class="ml-3 inline-flex h-9 w-9 items-center justify-center rounded-full border bg-gray-100 p-0 text-sm hover:bg-gray-200">
           <i class="ft ft-youtube"></i>
         </a>

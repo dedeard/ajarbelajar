@@ -5,7 +5,7 @@
     <div class="relative mb-2">
       @if ($lesson->category)
         <a href="{{ route('categories.show', $lesson->category->slug) }}"
-          class="absolute top-1 left-1 block bg-primary-600 py-1 px-2 text-2xs font-semibold leading-none text-white shadow hover:shadow-lg">
+          class="absolute left-1 top-1 block bg-primary-600 px-2 py-1 text-2xs font-semibold leading-none text-white shadow hover:shadow-lg">
           {{ $lesson->category->name }}
         </a>
       @endif
@@ -14,9 +14,10 @@
         <livewire:favorite-toggle :lesson="$lesson" :user="Auth::user()" small />
       @endauth
 
-      <img src="{{ $lesson->cover_url['thumb'] }}" alt="{{ $lesson->title }}" class="block w-full" />
-      <div class="absolute right-1 -bottom-4 h-9 w-9 rounded-full bg-white p-px shadow-lg">
-        <img src="{{ $lesson->user->avatar_url }}" alt="{{ $lesson->user->name }}" class="block w-full rounded-full border border-white" />
+      <img src="{{ $lesson->cover_url['thumb'] }}" alt="{{ $lesson->title }}" class="block h-full w-full" />
+      <div class="absolute -bottom-4 right-1 h-9 w-9 rounded-full bg-white p-px shadow-lg">
+        <img src="{{ $lesson->user->avatar_url }}" alt="{{ $lesson->user->name }}"
+          class="block h-full w-full rounded-full border border-white" />
       </div>
     </div>
 
@@ -26,18 +27,18 @@
           {{ $lesson->posted_at->diffForHumans() }}
         </div>
         <h4 class="mb-1 font-bold leading-5">{{ $lesson->title }}</h4>
-        <div class="text-xs font-semibold text-gray-400">
+        <div class="text-xs font-semibold text-gray-600">
           Dari <span class="text-gray-900">{{ $lesson->user->name }}</span>
         </div>
       </div>
       <div class="flex w-full">
         @if ($lesson->episodes_count)
-          <span class="mr-1 block border bg-gray-100 px-1 text-2xs font-bold text-gray-500">
+          <span class="mr-1 block border bg-gray-100 px-1 text-2xs font-bold text-gray-700">
             <i class="ft ft-film"></i> {{ $lesson->episodes_count }} VIDEO
           </span>
         @endif
         @if ($lesson->seconds)
-          <span class="mr-1 block border bg-gray-100 px-1 text-2xs font-bold text-gray-500">
+          <span class="mr-1 block border bg-gray-100 px-1 text-2xs font-bold text-gray-700">
             <i class="ft ft-clock"></i> {{ $lesson->readable_second }}
           </span>
         @endif

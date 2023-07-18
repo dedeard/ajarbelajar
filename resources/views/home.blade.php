@@ -14,7 +14,7 @@
 
 
   <div class="container mb-3 p-3">
-    <h4 class="text-xl font-semibold uppercase tracking-wider">Pelajaran terbaru</h4>
+    <h3 class="text-xl font-semibold uppercase tracking-wider">Pelajaran terbaru</h3>
     <div class="grid grid-cols-1 gap-3 py-3 md:grid-cols-2 xl:grid-cols-4">
       @foreach ($lessons as $lesson)
         <x-lesson-list :lesson="$lesson" :user="Auth::user()" />
@@ -22,14 +22,14 @@
     </div>
     <div class="py-3 text-center">
       <a href="{{ route('lessons.index') }}"
-        class="inline-block bg-primary-600 py-2 px-4 text-sm uppercase text-white hover:bg-primary-700">
+        class="inline-block bg-primary-600 px-4 py-2 text-sm uppercase text-white hover:bg-primary-700">
         Lihat lebih banyak Pelajaran
       </a>
     </div>
   </div>
 
   <div class="container p-3">
-    <h4 class="text-xl font-semibold uppercase tracking-wider">Kategori populer</h4>
+    <h3 class="text-xl font-semibold uppercase tracking-wider">Kategori populer</h3>
     <div class="grid grid-cols-1 gap-3 py-3 md:grid-cols-2 xl:grid-cols-4">
       @foreach ($categories as $category)
         <x-category-list :category="$category" />
@@ -37,21 +37,21 @@
     </div>
     <div class="py-3 text-center">
       <a href="{{ route('categories.index') }}"
-        class="inline-block bg-primary-600 py-2 px-4 text-sm uppercase text-white hover:bg-primary-700">
+        class="inline-block bg-primary-600 px-4 py-2 text-sm uppercase text-white hover:bg-primary-700">
         Lihat lebih banyak kategori
       </a>
     </div>
   </div>
 
   <div class="container p-3">
-    <h4 class="text-xl font-semibold uppercase tracking-wider">Pengguna baru</h4>
+    <h3 class="text-xl font-semibold uppercase tracking-wider">Pengguna baru</h3>
     <div class="grid grid-cols-1 gap-3 py-3 md:grid-cols-2 xl:grid-cols-4">
       @foreach ($users as $user)
         <x-user-list :user="$user" />
       @endforeach
     </div>
     <div class="py-3 text-center">
-      <a href="{{ route('users.index') }}" class="inline-block bg-primary-600 py-2 px-4 text-sm uppercase text-white hover:bg-primary-700">
+      <a href="{{ route('users.index') }}" class="inline-block bg-primary-600 px-4 py-2 text-sm uppercase text-white hover:bg-primary-700">
         Lihat lebih banyak pengguna
       </a>
     </div>
