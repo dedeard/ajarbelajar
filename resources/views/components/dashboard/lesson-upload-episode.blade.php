@@ -2,6 +2,7 @@
 
 <div x-data="{
     name: '',
+    fileInput: null,
     uploading: false,
     progress: 0,
     get message() {
@@ -21,6 +22,7 @@
                 const { data } = await window.axios.post('{{ route('dashboard.lessons.store.episode', ['lesson' => $lesson->id]) }}', formData, { onUploadProgress });
                 Livewire.emit('episode-created')
                 window.fire.success(data.message)
+                this.fileInput = null;
             }
         } catch (err) {
             window.fire.error(err.response?.data.message || err.message)
@@ -38,7 +40,8 @@
       <p class="m-auto text-center text-sm leading-none" x-text="name || 'Klik disini untuk mengupload episode'">
       </p>
       <p class="text-center text-sm" x-show="uploading" x-text="message"></p>
-      <input type="file" accept="video/*" x-on:change="onChange" class="absolute top-0 left-0 z-10 block h-full w-full opacity-0" />
+      <input type="file" accept="video/*" x-model="fileInput" x-on:change="onChange"
+        class="absolute left-0 top-0 z-10 block h-full w-full opacity-0" />
     </div>
   </div>
 </div>
