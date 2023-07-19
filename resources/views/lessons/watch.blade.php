@@ -53,7 +53,7 @@
           </div>
         </div>
 
-        <div class="grid flex-1 grid-cols-1 gap-1 overflow-y-auto">
+        <div class="grid flex-1 auto-rows-max grid-cols-1 gap-1 overflow-y-auto">
           @foreach ($lesson->episodes as $e)
             <a href="{{ route('lessons.watch', ['lesson' => $lesson->slug, 'index' => $e->index]) }}"
               class="flex items-center justify-between border bg-white px-5 py-4 hover:bg-gray-50">
