@@ -20,6 +20,7 @@ module.exports = {
       white: colors.white,
       gray: colors.gray,
       red: colors.red,
+      yellow: colors.yellow,
       primary: colors.blue,
     },
     fill: (theme) => ({

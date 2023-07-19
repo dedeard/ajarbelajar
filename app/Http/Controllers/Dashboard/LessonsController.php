@@ -69,6 +69,7 @@ class LessonsController extends Controller
             VideoHelper::destroy($episode->name);
         }
         CoverHelper::destroy($lesson->cover);
+        $lesson->unsearchable();
         $lesson->delete();
         return redirect()->route('dashboard.lessons.index')->withSuccess('Berhasil menghapus pelajaran.');
     }
@@ -89,9 +90,14 @@ class LessonsController extends Controller
         if ($data['public'] && !$lesson->posted_at) {
             $data['posted_at'] = now();
             $lesson->update($data);
-            // event(new LessonPublished($this->lesson));
         } else {
             $lesson->update($data);
+        }
+
+        if ($lesson->public) {
+            $lesson->searchable();
+        } else {
+            $lesson->unsearchable();
         }
 
         return redirect()->back()->withSuccess('Pelajaran berhasil diperbarui');
@@ -106,6 +112,7 @@ class LessonsController extends Controller
 
         $name = CoverHelper::generate($data['image'], $lesson->cover);
         $lesson->update(['cover' => $name]);
+        $lesson->searchable();
 
         return response()->json($lesson->cover_url);
     }
@@ -116,6 +123,7 @@ class LessonsController extends Controller
         $lesson = $request->user()->lessons()->findOrFail($id);
         $data = $request->validate(['description' => 'required|max:3000']);
         $lesson->update($data);
+        $lesson->searchable();
         return response()->noContent();
     }
 
@@ -140,7 +148,7 @@ class LessonsController extends Controller
             'seconds' => $seconds,
         ]);
         $lesson->episodes()->save($episode);
-
+        $lesson->searchable();
         return response()->json([
             'message' => 'Episode berhasil dibuat',
         ]);

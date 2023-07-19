@@ -9,12 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
+use Laravel\Scout\Searchable;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 class Lesson extends Model
 {
-    use HasFactory, HasSlug;
+    use HasFactory, HasSlug, Searchable;
 
     protected $fillable = [
         'user_id',
@@ -30,6 +31,29 @@ class Lesson extends Model
     protected $casts = [
         'posted_at' => 'datetime'
     ];
+
+    public function toSearchableArray()
+    {
+        return [
+            'title' => $this->title,
+            'slug' => $this->slug,
+            'cover_url' => $this->cover_url['small'],
+            "category" => $this->category->name,
+            'user' => $this->user->name,
+            'episodes' => $this->episodes->pluck('title')->implode(' '),
+            'description' => strip_tags($this->htmlDescription),
+        ];
+    }
+
+    public function shouldBeSearchable(): bool
+    {
+        return $this->isPublished();
+    }
+
+    protected function makeAllSearchableUsing($query)
+    {
+        return $query->with('user')->with('category')->with('episodes');
+    }
 
     public function getSlugOptions(): SlugOptions
     {
@@ -56,6 +80,11 @@ class Lesson extends Model
     public function favorites(): HasMany
     {
         return $this->hasMany(Favorite::class);
+    }
+
+    public function isPublished(): bool
+    {
+        return $this->public ? true : false;
     }
 
     /**

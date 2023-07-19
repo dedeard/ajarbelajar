@@ -4,7 +4,6 @@
 ])
 
 <header x-data="{ openSearchModal: false }" class="fixed left-0 right-0 top-0 z-40 flex h-16 w-full items-center border-b border-gray-200 bg-white">
-
   <div class="@if (!$noContainer) container @endif flex-1">
     <div class="flex">
       <div class="hidden lg:flex lg:w-60">
@@ -20,7 +19,7 @@
           <div class="flex py-3 lg:pl-3">
             <button aria-label="Search"
               class="flex h-9 w-9 items-center justify-center rounded-full border bg-gray-100 p-0 text-sm hover:bg-gray-200 md:w-40 md:justify-between md:px-4 lg:ml-0"
-              @click="openSearchModal = true">
+              @click="() => window.Livewire.emit('openSearchModal')">
               <div class="hidden font-semibold uppercase tracking-wider md:block">Cari</div>
               <i class="ft ft-search md:text-lg"></i>
             </button>

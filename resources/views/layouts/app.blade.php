@@ -74,4 +74,5 @@
       </div>
     </div>
   @endif
+  <livewire:search />
 </x-root-layout>

@@ -17,3 +17,21 @@ pre {
   opacity: 1;
   visibility: visible;
 }
+
+.custom-chrome-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.custom-chrome-scrollbar::-webkit-scrollbar-thumb {
+  background: #666;
+  border-radius: 10px;
+}
+
+.custom-chrome-scrollbar::-webkit-scrollbar-track {
+  background: #ddd;
+  border-radius: 10px;
+}
+
+.search-hits {
+  @apply bg-yellow-200;
+}

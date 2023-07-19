@@ -22,6 +22,7 @@ class EditProfileController extends Controller
             'website' => ['nullable', 'url', 'max:250'],
         ]);
         $request->user()->update($data);
+        $request->user()->lessons()->searchable();
         return redirect()->back()->withSuccess('Profil berhasil diperbarui.');
     }
 }
