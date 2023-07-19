@@ -1,4 +1,9 @@
 @tailwind base;
+
+pre {
+  text-wrap: wrap;
+}
+
 @tailwind components;
 @tailwind utilities;
 
