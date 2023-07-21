@@ -1,5 +1,5 @@
 <x-auth-layout title="Reset Password">
-  <form method="POST" action="{{ route('password.update') }}">
+  <form method="POST" action="{{ route('password.store') }}">
     @csrf
     <input type="hidden" name="token" value="{{ $request->route('token') }}">
     <x-auth.input name="email" label="Alamat Email" :value="old('email', $request->email)" autofocus />

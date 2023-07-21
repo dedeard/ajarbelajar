@@ -16,7 +16,7 @@ class EditPasswordController extends Controller
 
     public function update(Request $request)
     {
-        $data = $request->validate([
+        $data = $request->validateWithBag('updatePassword', [
             'current_password' => ['required', 'current_password'],
             'new_password' => ['required', Password::defaults()]
         ]);
