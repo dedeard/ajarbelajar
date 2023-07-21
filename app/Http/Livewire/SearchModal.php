@@ -6,27 +6,11 @@ use Algolia\AlgoliaSearch\SearchIndex;
 use App\Models\Lesson;
 use Livewire\Component;
 
-class Search extends Component
+class SearchModal extends Component
 {
     public $input = '';
     public $results = [];
     public $queryResult = '';
-    public $open = false;
-
-    protected $listeners = [
-        'openSearchModal' => 'openSearchModal',
-        'closeSearchModal' => 'closeSearchModal',
-    ];
-
-    public function openSearchModal()
-    {
-        $this->open = true;
-    }
-
-    public function closeSearchModal()
-    {
-        $this->open = false;
-    }
 
     public function updatedInput()
     {
@@ -47,7 +31,6 @@ class Search extends Component
         }
     }
 
-
     public function resetInput()
     {
         $this->input = '';
@@ -57,6 +40,6 @@ class Search extends Component
 
     public function render()
     {
-        return view('livewire.search');
+        return view('livewire.search-modal');
     }
 }

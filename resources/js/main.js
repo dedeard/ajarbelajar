@@ -64,4 +64,17 @@ window.fire = {
 
 Alpine.store('fire', window.fire)
 
+Alpine.store('searchModal', {
+  show: false,
+  toggle() {
+    this.show = !this.show
+  },
+  open() {
+    this.show = true
+  },
+  close() {
+    this.show = false
+  },
+})
+
 Alpine.start()
