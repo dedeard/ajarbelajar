@@ -25,7 +25,7 @@
 
   @if ($noSidebar)
   <div class="flex min-h-screen flex-col">
-    <main class="w-full flex-1 pt-16">{{ $slot }}</main>
+    <main class="flex flex-col w-full flex-1 pt-16">{{ $slot }}</main>
     <x-layouts.footer />
   </div>
   @else
@@ -54,7 +54,7 @@
       @endif
     </x-layouts.sidebar-wrap>
     <div class="relative flex min-h-screen max-w-full flex-1 flex-col pl-0 lg:pl-60">
-      <main class="w-full flex-1 pt-16">
+      <main class="flex flex-col w-full flex-1 pt-16">
         @if ($header)
         <div class="h-16 border-b bg-white">
           <div class="container h-full px-3">

@@ -1,6 +1,6 @@
 @props([
-    'head' => '',
-    'script' => '',
+'head' => '',
+'script' => '',
 ])
 
 <!DOCTYPE html>
@@ -22,9 +22,9 @@
 <body x-data="{ sidebarOpen: false }" class="bg-gray-100 text-gray-700">
   <x-alert />
 
-  <main class="min-h-screen">
+  <div class="min-h-screen">
     {{ $slot }}
-  </main>
+  </div>
 
   @vite(['resources/js/main.js'])
   {{ $script }}
