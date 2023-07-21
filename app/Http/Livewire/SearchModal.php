@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use Algolia\AlgoliaSearch\SearchIndex;
+use Meilisearch\Endpoints\Indexes;
 use App\Models\Lesson;
 use Livewire\Component;
 
@@ -17,11 +17,12 @@ class SearchModal extends Component
         if (strlen($this->input) > 1) {
             $this->results = Lesson::search(
                 $this->input,
-                function (SearchIndex $algolia, string $query, array $options) {
+                function (Indexes $meilisearch, string $query, array $options) {
                     $options['highlightPreTag'] = '<span class="search-hits">';
                     $options['highlightPostTag'] = '</span>';
                     $options['hitsPerPage'] = 20;
-                    return $algolia->search($query, $options);
+                    $options['attributesToHighlight'] = ['title', 'author', 'category'];
+                    return $meilisearch->search($query, $options);
                 }
             )->raw()['hits'];
             $this->queryResult = $this->input;

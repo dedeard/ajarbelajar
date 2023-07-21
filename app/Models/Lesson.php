@@ -39,7 +39,7 @@ class Lesson extends Model
             'slug' => $this->slug,
             'cover_url' => $this->cover_url['small'],
             "category" => $this->category->name,
-            'user' => $this->user->name,
+            'author' => $this->user->name,
             'episodes' => $this->episodes->pluck('title')->implode(' '),
             'description' => strip_tags($this->htmlDescription),
         ];
