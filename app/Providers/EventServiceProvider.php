@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Events\CommentDeleted;
+use App\Events\CommentedEpisodeEvent;
 use App\Events\CommentLikedEvent;
 use App\Events\CommentUnlikedEvent;
+use App\Jobs\CommentedEpisodeNotificationJob;
 use App\Jobs\LikedCommentNotificationJob;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -23,7 +26,11 @@ class EventServiceProvider extends ServiceProvider
         CommentLikedEvent::class => [
             LikedCommentNotificationJob::class
         ],
-        CommentUnlikedEvent::class => []
+        CommentUnlikedEvent::class => [],
+        CommentedEpisodeEvent::class => [
+            CommentedEpisodeNotificationJob::class
+        ],
+        CommentDeleted::class => []
     ];
 
     /**
