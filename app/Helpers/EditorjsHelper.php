@@ -7,9 +7,11 @@ class EditorjsHelper extends Helper
 
     public static function normalize(string $string): string
     {
-        $search  = ["&lt;i&gt;", "&lt;b&gt;", "&lt;/i&gt;", "&lt;/b&gt;"];
-        $replace  = ["<i>", "<b>", "</i>", "</b>"];
-        $subject = htmlentities($string);
+
+        $decodedString = html_entity_decode($string, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        $search  = ["&lt;i&gt;", "&lt;b&gt;", "&lt;&sol;i&gt;", "&lt;&sol;b&gt;", "&period;", "&comma;"];
+        $replace = ["<i>", "<b>", "</i>", "</b>", ".", "."];
+        $subject = htmlentities($decodedString, ENT_QUOTES | ENT_HTML5, 'UTF-8');
         return str_replace($search, $replace, $subject);
     }
 
