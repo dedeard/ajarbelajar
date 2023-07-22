@@ -6,7 +6,9 @@ use App\Events\CommentDeleted;
 use App\Events\CommentedEpisodeEvent;
 use App\Events\CommentLikedEvent;
 use App\Events\CommentUnlikedEvent;
+use App\Events\LessonFavoritedEvent;
 use App\Jobs\CommentedEpisodeNotificationJob;
+use App\Jobs\LessonFavoritedNotificationJob;
 use App\Jobs\LikedCommentNotificationJob;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -30,7 +32,10 @@ class EventServiceProvider extends ServiceProvider
         CommentedEpisodeEvent::class => [
             CommentedEpisodeNotificationJob::class
         ],
-        CommentDeleted::class => []
+        CommentDeleted::class => [],
+        LessonFavoritedEvent::class => [
+            LessonFavoritedNotificationJob::class
+        ]
     ];
 
     /**
