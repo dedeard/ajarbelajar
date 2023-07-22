@@ -36,7 +36,7 @@ class EditProfileControllerTest extends TestCase
     // Define the route and data for update
     $data = [
       'name' => $this->faker->name,
-      'username' => $this->faker->userName,
+      'username' => 'new_username',
       'bio' => $this->faker->sentence,
       'website' => $this->faker->url,
     ];
