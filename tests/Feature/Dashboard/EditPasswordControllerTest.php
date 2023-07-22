@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
-class EditPasswordTest extends TestCase
+class EditPasswordControllerTest extends TestCase
 {
     use RefreshDatabase;
 
