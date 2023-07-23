@@ -25,9 +25,11 @@ class FavoriteToggle extends Component
 
     public function onclick()
     {
-        $this->favorited = $this->user->favoriteToggle($this->lesson->id);
-        if ($this->favorited) {
-            LessonFavoritedEvent::dispatch($this->lesson, $this->user);
+        if (isset($this->user)) {
+            $this->favorited = $this->user->favoriteToggle($this->lesson->id);
+            if ($this->favorited) {
+                LessonFavoritedEvent::dispatch($this->lesson, $this->user);
+            }
         }
     }
 
