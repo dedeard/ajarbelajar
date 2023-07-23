@@ -85,6 +85,7 @@ class LessonsController extends Controller
         $public = $request->get('public');
 
         $data['public'] = false;
+        $data['category_id'] = $data['category'];
         if (isset($public) && $public === 'on') $data['public'] = true;
 
         if ($data['public'] && !$lesson->posted_at) {
@@ -137,7 +138,7 @@ class LessonsController extends Controller
         $getID3 = new \getID3();
         $tmp_name = $data['video']->getRealPath();
         $title = pathinfo($data['video']->getClientOriginalName(), PATHINFO_FILENAME);
-        $seconds = $getID3->analyze($tmp_name)['playtime_seconds'];
+        $seconds = $getID3->analyze($tmp_name)['playtime_seconds'] ?? 0;
         $index = $lesson->episodes()->count();
         $name = VideoHelper::upload($data['video']);
 
