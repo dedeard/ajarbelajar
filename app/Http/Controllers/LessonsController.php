@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\AftarWatchEpisodeJob;
+use App\Events\EpisodeWatchedEvent;
 use App\Models\Lesson;
 use Illuminate\Http\Request;
 
@@ -50,7 +50,7 @@ class LessonsController extends Controller
         $lesson = Lesson::listQuery(Lesson::where('slug', $slug))->firstOrFail();
         $episode = $lesson->episodes()->where('index', $index)->firstOrFail();
 
-        AftarWatchEpisodeJob::dispatchAfterResponse($episode, $request->user());
+        EpisodeWatchedEvent::dispatch($episode, $request->user());
 
         return view('lessons.watch', compact('lesson', 'episode', 'index'));
     }

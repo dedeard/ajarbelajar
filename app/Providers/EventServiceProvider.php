@@ -6,7 +6,9 @@ use App\Events\CommentDeleted;
 use App\Events\CommentedEpisodeEvent;
 use App\Events\CommentLikedEvent;
 use App\Events\CommentUnlikedEvent;
+use App\Events\EpisodeWatchedEvent;
 use App\Events\LessonFavoritedEvent;
+use App\Jobs\AftarWatchEpisodeJob;
 use App\Jobs\CommentedEpisodeNotificationJob;
 use App\Jobs\LessonFavoritedNotificationJob;
 use App\Jobs\LikedCommentNotificationJob;
@@ -35,6 +37,9 @@ class EventServiceProvider extends ServiceProvider
         CommentDeleted::class => [],
         LessonFavoritedEvent::class => [
             LessonFavoritedNotificationJob::class
+        ],
+        EpisodeWatchedEvent::class => [
+            AftarWatchEpisodeJob::class
         ]
     ];
 
