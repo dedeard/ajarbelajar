@@ -19,6 +19,8 @@ class HomeControllerTest extends TestCase
    */
   public function testIndex()
   {
+    Category::query()->delete();
+
     // Create sample lessons, categories, and users
     $lessons = Lesson::factory()->count(3)->create(['public' => true]);
     $categories = Category::all(); // auto create when Lesson created

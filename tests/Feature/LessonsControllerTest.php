@@ -21,6 +21,8 @@ class LessonsControllerTest extends TestCase
    */
   public function testIndex()
   {
+    Lesson::query()->delete();
+
     // Create some sample lessons in the database
     Lesson::factory()->count(10)->create(['public' => true]);
 

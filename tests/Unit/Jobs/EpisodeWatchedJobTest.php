@@ -16,12 +16,10 @@ class EpisodeWatchedJobTest extends TestCase
     {
         // Create a mock Episode and User
         $episode1 = Episode::factory()->create();
-        $episode2 = Episode::factory()->create();
-        $episode3 = Episode::factory()->create();
         $user = User::factory()->create();
 
         // Dispatch the job
-        dispatch(new EpisodeWatchedJob($episode1, $user));
+        EpisodeWatchedJob::dispatch($episode1, $user);
 
         // Assert that the activity was created or updated
         $this->assertDatabaseHas('activities', ['episode_id' => $episode1->id, 'user_id' => $user->id]);
@@ -32,8 +30,10 @@ class EpisodeWatchedJobTest extends TestCase
         }
         $this->assertEquals(1, $user->activities()->count());
 
+        $episode2 = Episode::factory()->create();
         dispatch(new EpisodeWatchedJob($episode2, $user));
 
+        $episode3 = Episode::factory()->create();
         dispatch(new EpisodeWatchedJob($episode3, $user));
 
         $this->assertEquals(3, $user->activities()->count());
