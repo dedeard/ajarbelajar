@@ -18,9 +18,7 @@ class EpisodeFactory extends Factory
     public function definition(): array
     {
         return [
-            'lesson_id' => function () {
-                return Lesson::factory()->create()->id;
-            },
+            'lesson_id' => fn () => Lesson::factory()->create()->id,
             'name' => fake()->word,
             'title' => fake()->sentence,
             'index' => fake()->randomNumber(2),

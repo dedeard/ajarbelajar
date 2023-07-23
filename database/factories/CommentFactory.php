@@ -19,15 +19,9 @@ class CommentFactory extends Factory
      */
     public function definition(): array
     {
-        $episodeId = Episode::inRandomOrder()->value('id');
-        if (!$episodeId) $episodeId = Episode::factory()->create()->id;
-
-        $userId = User::inRandomOrder()->value('id');
-        if (!$userId) $userId = User::factory()->create()->id;
-
         return [
-            'user_id' => $userId,
-            'episode_id' => $episodeId,
+            'user_id' => fn () => User::inRandomOrder()->value('id') ?? User::factory()->create()->id,
+            'episode_id' => fn () => Episode::inRandomOrder()->value('id') ?? Episode::factory()->create()->id,
             'body' => json_encode([
                 "blocks" => [
                     [

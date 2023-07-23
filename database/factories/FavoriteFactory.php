@@ -19,12 +19,8 @@ class FavoriteFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => function () {
-                return User::factory()->create()->id;
-            },
-            'lesson_id' => function () {
-                return Lesson::factory()->create()->id;
-            },
+            'user_id' => fn () => User::factory()->create()->id,
+            'lesson_id' => fn () => Lesson::factory()->create()->id,
         ];
     }
 }

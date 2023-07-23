@@ -19,12 +19,8 @@ class LessonFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => function () {
-                return User::factory()->create()->id;
-            },
-            'category_id' => function () {
-                return Category::factory()->create()->id;
-            },
+            'user_id' => fn () => User::factory()->create()->id,
+            'category_id' => fn () => Category::factory()->create()->id,
             'cover' => fake()->imageUrl(640, 480), // You can adjust the image size as per your requirement
             'title' => fake()->sentence,
             'slug' => fake()->slug,

@@ -19,8 +19,8 @@ class ActivityFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
-            'episode_id' => Episode::factory(),
+            'user_id' => fn () => User::factory()->create()->id,
+            'episode_id' => fn () => Episode::factory()->create()->id,
         ];
     }
 }
