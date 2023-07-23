@@ -20,7 +20,7 @@
         <button x-data="{
             async submit() {
                 try {
-                    await window.axios.delete('{{ route('comments.delete', $comment->id) }}')
+                    await window.axios.delete('{{ route('comments.destroy', $comment->id) }}')
                     if (typeof window.EDJS?.clear === 'function') window.EDJS.clear()
                     window.fire.success('Berhasil menghapus komentar')
                     Livewire.emit('comment-deleted')
