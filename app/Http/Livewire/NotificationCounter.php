@@ -11,7 +11,7 @@ class NotificationCounter extends Component
 
     protected function getListeners()
     {
-        return ["echo-private:App.Models.User." . $this->user->id . ",.Illuminate\\Notifications\\Events\\BroadcastNotificationCreated" => 'mount'];
+        return ["echo-private:App.Models.User.{$this->user->id},.Illuminate\\Notifications\\Events\\BroadcastNotificationCreated" => 'mount'];
     }
 
     public function mount()
