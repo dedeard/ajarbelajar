@@ -30,8 +30,9 @@
   </div>
   @else
   <div class="flex">
-    <x-layouts.sidebar-wrap>
+    <x-layouts.sidebar-wrap :$dashboard>
       @if ($dashboard)
+      <x-layouts.sidebar-link  route="home" is="home" text="Home" icon="home" />
       <x-layouts.sidebar-link route="dashboard.activities" is="dashboard.activities" text="Aktifitas" icon="activity" />
       <x-layouts.sidebar-link route="dashboard.lessons.index" is="dashboard.lessons*" text="Pelajaran" icon="video" />
       <x-layouts.sidebar-link route="dashboard.favorites" is="dashboard.favorites" text="Favorit" icon="heart" />
