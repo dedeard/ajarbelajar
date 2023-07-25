@@ -6,29 +6,27 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Category extends Model
 {
-    use HasFactory;
+    use HasFactory, HasSlug;
 
     public $timestamps = false;
 
     protected $fillable = ['slug', 'name'];
 
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug');
+    }
+
     static function getCategoryOrCreate(String $name): Category
     {
-        $slug = Str::slug($name, '-');
-        $category = Category::where('slug', $slug);
-
-        if ($category->exists()) {
-            $category = $category->first();
-        } else {
-            $category = Category::create([
-                'name' => $name,
-                'slug' => $slug
-            ]);
-        }
-        return $category;
+        return self::firstOrCreate(['slug' => Str::slug($name)], ['name' => $name]);
     }
 
     public function lessons(): HasMany
