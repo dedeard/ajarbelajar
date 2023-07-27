@@ -17,10 +17,10 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
-        $name = fake()->words(2, true);
         return [
-            'name' => $name,
-            'description' => $this->faker->paragraph,
+            'name' => fake()->words(2, true),
+            'slug' => fake()->slug(2),
+            'description' => fake()->paragraph,
         ];
     }
 }
