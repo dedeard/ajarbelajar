@@ -13,8 +13,6 @@ class Category extends Model
 {
     use HasFactory, HasSlug;
 
-    public $timestamps = false;
-
     protected $fillable = [
         'name',
         'slug',
