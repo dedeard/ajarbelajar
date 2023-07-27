@@ -132,7 +132,7 @@ class LessonsController extends Controller
     {
         $lesson = $request->user()->lessons()->findOrFail($id);
         $data = $request->validate([
-            'video' => 'required|mimes:mp4,mov,avi,fly|max:' . env('MAX_VIDEO_SIZES', '25000'),
+            'video' => 'required|mimes:mp4,mov,avi,fly,webm|max:' . env('MAX_VIDEO_SIZES', '25000'),
         ]);
 
         $getID3 = new \getID3();
