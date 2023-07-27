@@ -1,4 +1,12 @@
-<div id="backdrop" class="fixed inset-0 z-50 bg-black bg-opacity-50 hidden" :class="$store.searchModal.show ? '!block' : ''">
+<div x-data="{
+        focus: false
+    }" 
+    x-init="$watch('$store.searchModal.show', (val) => {
+        if(val){
+            document.getElementById('search').focus()
+        }
+    })"
+id="backdrop" class="fixed inset-0 z-50 bg-black bg-opacity-50 hidden" :class="$store.searchModal.show ? '!block' : ''">
     <div class="relative flex justify-center lg:container lg:py-14">
         <div x-on:click.stop.outside="(e) => {
             if(e.target === document.getElementById('backdrop')) {
@@ -9,13 +17,13 @@
                 <div :class="focus ? 'text-primary-600' : 'text-gray-400'" class="absolute flex h-full items-center justify-center px-4 text-xl leading-none">
                     <i class="ft ft-search"></i>
                 </div>
-                <input wire:model="input" class="block h-16 w-full flex-1 bg-transparent pl-12 pr-3 text-xl font-semibold leading-none text-gray-500 placeholder-gray-300 outline-none transition-colors focus:text-gray-700" placeholder="Apa yang anda cari?" @focus="focus = true" @blur="focus = false" />
+                <input wire:model="input" id="search" name="search" type="text" autocomplete="off" class="block h-16 w-full flex-1 bg-transparent pl-12 pr-3 text-xl font-semibold leading-none text-gray-500 placeholder-gray-300 !outline-none !border-none appearance-none !ring-0 transition-colors focus:text-gray-700" placeholder="Apa yang anda cari?" @focus="focus = true" @blur="focus = false" />
                 @if ($input)
                 <button wire:click="resetInput" class="my-auto flex h-full w-12 cursor-pointer items-center justify-center text-xl leading-none transition-colors hover:bg-gray-50">
                     <i class="ft ft-x"></i>
                 </button>
                 @endif
-                <div class="my-auto h-3/5 border-l border-gray-200"></div>
+                <div class="my-auto h-3/5 border-l" :class="focus ? 'border-primary-600' : 'border-gray-200'"></div>
                 <button x-on:click="$store.searchModal.close()" class="my-auto flex h-full cursor-pointer items-center justify-center px-4 text-sm font-semibold leading-none text-red-600 transition-colors hover:bg-gray-50">Close</button>
             </div>
             @if (count($results))
