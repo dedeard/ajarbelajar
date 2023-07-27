@@ -19,8 +19,8 @@ class CategoryFactory extends Factory
     {
         $name = fake()->words(2, true);
         return [
-            'slug' => Str::slug($name, '-'),
-            'name' => $name
+            'name' => $name,
+            'description' => $this->faker->paragraph,
         ];
     }
 }

@@ -15,7 +15,11 @@ class Category extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['slug', 'name'];
+    protected $fillable = [
+        'name',
+        'slug',
+        'description'
+    ];
 
     public function getSlugOptions(): SlugOptions
     {
@@ -24,9 +28,9 @@ class Category extends Model
             ->saveSlugsTo('slug');
     }
 
-    static function getCategoryOrCreate(String $name): Category
+    static function getCategoryOrCreate(String $name, ?array $data): Category
     {
-        return self::firstOrCreate(['slug' => Str::slug($name)], ['name' => $name]);
+        return self::firstOrCreate(['slug' => Str::slug($name)], $data);
     }
 
     public function lessons(): HasMany
