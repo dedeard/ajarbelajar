@@ -1,4 +1,4 @@
-<x-app-layout title="Home">
+<x-app-layout title="Belajar, Berbagi, Berkontribusi">
   <div class="container mb-3 p-3">
     <div class="mb-3 overflow-hidden bg-cover bg-fixed" style="background-image: url({{ asset('img/hero.jpg') }})">
       <div class="bg-opacity-30 bg-gradient-to-r from-primary-700 to-transparent p-4">
