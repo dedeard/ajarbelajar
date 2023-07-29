@@ -7,7 +7,9 @@ use Livewire\Component;
 class Comments extends Component
 {
     public $episode;
+
     public $comments;
+
     public $user;
 
     protected $listeners = ['comment-created' => 'mount', 'comment-deleted' => 'mount', 'comment-updated' => 'mount'];
@@ -16,6 +18,7 @@ class Comments extends Component
     {
         $this->comments = $this->episode->comments()->with('user', 'likeCounter')->orderBy('created_at', 'desc')->get();
     }
+
     public function render()
     {
         return view('livewire.comments');

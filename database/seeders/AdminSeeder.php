@@ -17,15 +17,15 @@ class AdminSeeder extends Seeder
         $this->call([PermissionSeeder::class, RoleSeeder::class]);
 
         $data = [
-            "name" => 'Super Admin',
-            "email" => 'super@admin.com',
-            "password" => 'Super Admin',
+            'name' => 'Super Admin',
+            'email' => 'super@admin.com',
+            'password' => 'Super Admin',
             'password' => Hash::make('superadmin'),
             'is_active' => true,
-            'role_id' => Role::where('name', 'Super Admin')->first()->id
+            'role_id' => Role::where('name', 'Super Admin')->first()->id,
         ];
 
-        if (!Admin::where('email', $data['email'])->exists()) {
+        if (! Admin::where('email', $data['email'])->exists()) {
             Admin::factory()->create($data);
         }
     }

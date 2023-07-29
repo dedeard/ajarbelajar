@@ -25,7 +25,7 @@ class AdminFactory extends Factory
             'password' => Hash::make('password'), // Default password for testing
             'is_active' => fake()->boolean(),
             'remember_token' => Str::random(10),
-            'role_id' => fn () => Role::factory()->create()->id
+            'role_id' => fn () => Role::factory()->create()->id,
         ];
     }
 }

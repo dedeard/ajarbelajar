@@ -35,6 +35,7 @@ class Comment extends Model
         if ($user && $user->id === $this->user_id) {
             return true;
         }
+
         return false;
     }
 
@@ -43,6 +44,7 @@ class Comment extends Model
         if ($this->body) {
             return EditorjsHelper::compile($this->body);
         }
+
         return '';
     }
 }

@@ -19,22 +19,20 @@ class CommentLikedEvent implements ShouldBroadcast
      */
     public function __construct(
         public Comment $comment,
-        public  User $user
+        public User $user
     ) {
     }
 
-    public function broadcastAs(): String
+    public function broadcastAs(): string
     {
         return (string) $this->comment->id;
     }
 
     /**
      * Get the channels the event should broadcast on.
-     *
-     * @return Channel
      */
     public function broadcastOn(): Channel
     {
-        return new Channel("Comment.Updated");
+        return new Channel('Comment.Updated');
     }
 }

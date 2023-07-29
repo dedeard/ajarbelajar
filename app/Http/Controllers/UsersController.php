@@ -11,6 +11,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::orderBy('created_at', 'desc')->paginate(24);
+
         return view('users.index', compact('users'));
     }
 
@@ -26,7 +27,7 @@ class UsersController extends Controller
 
         if ($sort === 'oldest') {
             $query->orderBy('posted_at', 'asc');
-        } else if ($sort === 'popularity') {
+        } elseif ($sort === 'popularity') {
             $query->withCount('favorites as favorite_count')->orderBy('favorite_count', 'desc')->orderBy('title', 'asc');
         } else {
             $query->orderBy('posted_at', 'desc');

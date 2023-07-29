@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Lesson;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -16,6 +15,7 @@ class HomeController extends Controller
             $q->where('public', true);
         })->withCount('lessons as lesson_count')->orderBy('lesson_count', 'asc')->paginate(8);
         $users = User::orderBy('created_at', 'desc')->take(8)->get();
+
         return view('home', compact('lessons', 'categories', 'users'));
     }
 }

@@ -16,6 +16,7 @@ class NotificationsController extends Controller
     {
         $user = $request->user();
         $notifications = $user->notifications()->orderBy('created_at', 'desc')->paginate(10);
+
         return view('dashboard.notifications', compact('notifications'));
     }
 
@@ -27,16 +28,19 @@ class NotificationsController extends Controller
         switch ($notification->type) {
             case CommentLikedNotification::class:
                 $comment = Comment::with('episode.lesson')->findOrFail($notification->data['comment_id']);
+
                 return redirect()->route('lessons.watch', ['lesson' => $comment->episode->lesson->slug, 'index' => $comment->episode->index]);
                 break;
 
             case EpisodeCommentedNotification::class:
                 $comment = Comment::with('episode.lesson')->findOrFail($notification->data['comment_id']);
+
                 return redirect()->route('lessons.watch', ['lesson' => $comment->episode->lesson->slug, 'index' => $comment->episode->index]);
                 break;
 
             case LessonFavoritedNotification::class:
                 $lesson = Lesson::findOrFail($notification->data['lesson_id']);
+
                 return redirect()->route('lessons.show', $lesson->slug);
                 break;
         }
@@ -46,6 +50,7 @@ class NotificationsController extends Controller
     {
         $user = $request->user();
         $user->unreadNotifications->markAsRead();
+
         return redirect()->back();
     }
 }

@@ -31,6 +31,7 @@ class Admin extends Authenticatable
     {
         $url = 'https://www.gravatar.com/avatar/';
         $url .= md5(strtolower(trim($this->email)));
+
         return $url;
     }
 }

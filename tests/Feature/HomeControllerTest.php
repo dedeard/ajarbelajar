@@ -10,40 +10,40 @@ use Tests\TestCase;
 
 class HomeControllerTest extends TestCase
 {
-  use RefreshDatabase;
+    use RefreshDatabase;
 
-  /**
-   * Test index method to view home page.
-   *
-   * @return void
-   */
-  public function testIndex()
-  {
-    Category::query()->delete();
+    /**
+     * Test index method to view home page.
+     *
+     * @return void
+     */
+    public function testIndex()
+    {
+        Category::query()->delete();
 
-    // Create sample lessons, categories, and users
-    $lessons = Lesson::factory()->count(3)->create(['public' => true]);
-    $categories = Category::all(); // auto create when Lesson created
-    $users = User::factory()->count(3)->create();
+        // Create sample lessons, categories, and users
+        $lessons = Lesson::factory()->count(3)->create(['public' => true]);
+        $categories = Category::all(); // auto create when Lesson created
+        $users = User::factory()->count(3)->create();
 
-    // Send a GET request to the home index route
-    $response = $this->get(route('home'));
+        // Send a GET request to the home index route
+        $response = $this->get(route('home'));
 
-    // Assert that the response is successful
-    $response->assertSuccessful();
+        // Assert that the response is successful
+        $response->assertSuccessful();
 
-    // Assert that the view has the required variables
-    $response->assertViewHas(['lessons', 'categories', 'users']);
+        // Assert that the view has the required variables
+        $response->assertViewHas(['lessons', 'categories', 'users']);
 
-    // Assert that the lessons, categories, and users are present in the view
-    foreach ($lessons as $lesson) {
-      $response->assertSee($lesson->title);
+        // Assert that the lessons, categories, and users are present in the view
+        foreach ($lessons as $lesson) {
+            $response->assertSee($lesson->title);
+        }
+        foreach ($categories as $category) {
+            $response->assertSee($category->name);
+        }
+        foreach ($users as $user) {
+            $response->assertSee($user->name);
+        }
     }
-    foreach ($categories as $category) {
-      $response->assertSee($category->name);
-    }
-    foreach ($users as $user) {
-      $response->assertSee($user->name);
-    }
-  }
 }

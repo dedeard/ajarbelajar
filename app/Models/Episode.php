@@ -44,8 +44,10 @@ class Episode extends Model
             $hours = floor($this->seconds / 3600);
             $minutes = floor(($this->seconds / 60) % 60);
             $seconds = $this->seconds % 60;
+
             return gmdate('H:i:s', mktime($hours, $minutes, $seconds));
         }
+
         return '';
     }
 }

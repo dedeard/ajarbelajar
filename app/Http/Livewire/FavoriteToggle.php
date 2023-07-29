@@ -10,8 +10,11 @@ use Livewire\Component;
 class FavoriteToggle extends Component
 {
     public Lesson $lesson;
+
     public User $user;
+
     public $favorited;
+
     public bool $small = false;
 
     public function mount()

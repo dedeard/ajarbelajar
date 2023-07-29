@@ -10,22 +10,22 @@ use Tests\TestCase;
 
 class CommentedEpisodeEventTest extends TestCase
 {
-  use RefreshDatabase;
+    use RefreshDatabase;
 
-  /** @test */
-  public function it_creates_commented_episode_event_instance_with_comment()
-  {
-    // Create a sample comment
-    $comment = Comment::factory()->create();
+    /** @test */
+    public function it_creates_commented_episode_event_instance_with_comment()
+    {
+        // Create a sample comment
+        $comment = Comment::factory()->create();
 
-    // Trigger the CommentedEpisodeEvent
-    $event = new CommentedEpisodeEvent($comment);
+        // Trigger the CommentedEpisodeEvent
+        $event = new CommentedEpisodeEvent($comment);
 
-    // Assertions
-    Event::fake(); // Fake the event dispatcher
-    event($event); // Trigger the event
-    Event::assertDispatched(CommentedEpisodeEvent::class, function ($e) use ($comment) {
-      return $e->comment->id === $comment->id;
-    });
-  }
+        // Assertions
+        Event::fake(); // Fake the event dispatcher
+        event($event); // Trigger the event
+        Event::assertDispatched(CommentedEpisodeEvent::class, function ($e) use ($comment) {
+            return $e->comment->id === $comment->id;
+        });
+    }
 }

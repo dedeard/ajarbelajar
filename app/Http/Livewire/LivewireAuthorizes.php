@@ -11,6 +11,7 @@ trait LivewireAuthorizes
     {
         $user = Auth::user();
         abort_unless($user, 401);
+
         return $user;
     }
 }

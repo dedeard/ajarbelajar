@@ -2,14 +2,16 @@
 
 namespace App\Http\Livewire;
 
-use Meilisearch\Endpoints\Indexes;
 use App\Models\Lesson;
 use Livewire\Component;
+use Meilisearch\Endpoints\Indexes;
 
 class SearchModal extends Component
 {
     public $input = '';
+
     public $results = [];
+
     public $queryResult = '';
 
     public function updatedInput()
@@ -22,6 +24,7 @@ class SearchModal extends Component
                     $options['highlightPostTag'] = '</span>';
                     $options['hitsPerPage'] = 20;
                     $options['attributesToHighlight'] = ['title', 'author', 'category'];
+
                     return $meilisearch->search($query, $options);
                 }
             )->raw()['hits'];

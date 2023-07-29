@@ -12,7 +12,9 @@ class ShowEpisodes extends Component
     use LivewireAuthorizes;
 
     public Lesson $lesson;
+
     public $episodes;
+
     public $index;
 
     protected $listeners = ['episode-created' => 'mount', 'episode-deleted' => 'mount'];
@@ -40,7 +42,9 @@ class ShowEpisodes extends Component
                 return $episode['id'] == $id;
             });
             $filtered = Arr::first($filtered);
-            if ($filtered) array_push($filtered_episodes, $filtered);
+            if ($filtered) {
+                array_push($filtered_episodes, $filtered);
+            }
         }
 
         if (count($filtered_episodes) === count($this->episodes)) {

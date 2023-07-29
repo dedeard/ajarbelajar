@@ -16,7 +16,7 @@ class Category extends Model
     protected $fillable = [
         'name',
         'slug',
-        'description'
+        'description',
     ];
 
     public function getSlugOptions(): SlugOptions
@@ -26,7 +26,7 @@ class Category extends Model
             ->saveSlugsTo('slug');
     }
 
-    static function getCategoryOrCreate(String $name, ?array $data): Category
+    public static function getCategoryOrCreate(string $name, ?array $data): Category
     {
         return self::firstOrCreate(['slug' => Str::slug($name)], $data);
     }

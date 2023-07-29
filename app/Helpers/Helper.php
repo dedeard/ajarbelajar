@@ -9,8 +9,8 @@ class Helper
     /**
      * Generate unique name
      */
-    static function uniqueName(String $ext = ''): String
+    public static function uniqueName(string $ext = ''): string
     {
-        return now()->format('hisdmY') . Str::random(60) . $ext;
+        return now()->format('hisdmY').Str::random(60).$ext;
     }
 }

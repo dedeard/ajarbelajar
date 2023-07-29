@@ -86,12 +86,14 @@ class User extends Authenticatable implements MustVerifyEmail
     public function favoriteToggle($lessonId): bool
     {
         $favorite = $this->favorites->firstWhere('lesson_id', $lessonId);
-        if (!$favorite) {
+        if (! $favorite) {
             $data = new Favorite(['lesson_id' => $lessonId]);
             $this->favorites()->save($data);
+
             return true;
         } else {
             $favorite->delete();
+
             return false;
         }
     }
@@ -100,6 +102,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $url = 'https://www.gravatar.com/avatar/';
         $url .= md5(strtolower(trim($this->email)));
+
         return $url;
     }
 }

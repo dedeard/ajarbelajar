@@ -11,7 +11,9 @@ class CommentLikedNotification extends Notification
 {
     use Queueable;
 
-    public $comment = null, $user = null;
+    public $comment = null;
+
+    public $user = null;
 
     public function __construct(Comment $comment, User $user)
     {
@@ -28,8 +30,8 @@ class CommentLikedNotification extends Notification
     {
         return [
             'comment_id' => $this->comment->id,
-            'message' => $this->user->name . " menyukai komentar anda.",
-            'user_id' => $this->user->id
+            'message' => $this->user->name.' menyukai komentar anda.',
+            'user_id' => $this->user->id,
         ];
     }
 }

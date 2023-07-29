@@ -10,24 +10,24 @@ use Tests\TestCase;
 
 class FavoritesControllerTest extends TestCase
 {
-  use RefreshDatabase, WithFaker;
+    use RefreshDatabase, WithFaker;
 
-  public function testIndex()
-  {
-    // Create a user and some favorite lessons
-    $user = User::factory()->create();
-    $favorites = Favorite::factory()->count(10)->create(['user_id' => $user->id]);
+    public function testIndex()
+    {
+        // Create a user and some favorite lessons
+        $user = User::factory()->create();
+        $favorites = Favorite::factory()->count(10)->create(['user_id' => $user->id]);
 
-    // Define the route and call the controller method
-    $response = $this->actingAs($user)->get('/dashboard/favorites');
+        // Define the route and call the controller method
+        $response = $this->actingAs($user)->get('/dashboard/favorites');
 
-    // Assert response status and view
-    $response->assertStatus(200);
-    $response->assertViewIs('dashboard.favorites');
+        // Assert response status and view
+        $response->assertStatus(200);
+        $response->assertViewIs('dashboard.favorites');
 
-    // Assert that the favorites data is available in the view
-    $response->assertViewHas('favorites', function ($viewFavorites) use ($favorites) {
-      return $favorites->pluck('id')->diff($viewFavorites->pluck('id'))->isEmpty();
-    });
-  }
+        // Assert that the favorites data is available in the view
+        $response->assertViewHas('favorites', function ($viewFavorites) use ($favorites) {
+            return $favorites->pluck('id')->diff($viewFavorites->pluck('id'))->isEmpty();
+        });
+    }
 }

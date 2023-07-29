@@ -18,11 +18,12 @@ class EditPasswordController extends Controller
     {
         $data = $request->validateWithBag('updatePassword', [
             'current_password' => ['required', 'current_password'],
-            'new_password' => ['required', Password::defaults()]
+            'new_password' => ['required', Password::defaults()],
         ]);
         $request->user()->update([
-            "password" => Hash::make($data['new_password'])
+            'password' => Hash::make($data['new_password']),
         ]);
+
         return redirect()->back()->withSuccess('Password berhasil diperbarui.');
     }
 }

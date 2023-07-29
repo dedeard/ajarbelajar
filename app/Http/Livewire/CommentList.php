@@ -9,6 +9,7 @@ use Livewire\Component;
 class CommentList extends Component
 {
     public $user;
+
     public $comment;
 
     public function likeToggle()

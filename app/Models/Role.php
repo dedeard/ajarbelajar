@@ -13,7 +13,7 @@ class Role extends Model
         'name',
         'display_name',
         'is_protected',
-        'description'
+        'description',
     ];
 
     public function permissions()

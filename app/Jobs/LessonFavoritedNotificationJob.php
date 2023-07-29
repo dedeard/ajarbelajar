@@ -17,7 +17,7 @@ class LessonFavoritedNotificationJob implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param LessonFavoritedEvent $event
+     * @param  LessonFavoritedEvent  $event
      */
     public function __construct()
     {
@@ -36,7 +36,7 @@ class LessonFavoritedNotificationJob implements ShouldQueue
             ->where('data->user_id', $event->user->id)
             ->exists();
 
-        if (!$notifications) {
+        if (! $notifications) {
             $event->lesson->user->notify(new LessonFavoritedNotification($event->lesson, $event->user));
         }
     }

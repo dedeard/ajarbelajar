@@ -8,8 +8,8 @@ use App\Events\CommentLikedEvent;
 use App\Events\CommentUnlikedEvent;
 use App\Events\EpisodeWatchedEvent;
 use App\Events\LessonFavoritedEvent;
-use App\Jobs\EpisodeWatchedJob;
 use App\Jobs\CommentedEpisodeNotificationJob;
+use App\Jobs\EpisodeWatchedJob;
 use App\Jobs\LessonFavoritedNotificationJob;
 use App\Jobs\LikedCommentNotificationJob;
 use Illuminate\Auth\Events\Registered;
@@ -28,19 +28,19 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         CommentLikedEvent::class => [
-            LikedCommentNotificationJob::class
+            LikedCommentNotificationJob::class,
         ],
         CommentUnlikedEvent::class => [],
         CommentedEpisodeEvent::class => [
-            CommentedEpisodeNotificationJob::class
+            CommentedEpisodeNotificationJob::class,
         ],
         CommentDeleted::class => [],
         LessonFavoritedEvent::class => [
-            LessonFavoritedNotificationJob::class
+            LessonFavoritedNotificationJob::class,
         ],
         EpisodeWatchedEvent::class => [
-            EpisodeWatchedJob::class
-        ]
+            EpisodeWatchedJob::class,
+        ],
     ];
 
     /**

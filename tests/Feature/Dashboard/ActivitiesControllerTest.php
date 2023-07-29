@@ -12,23 +12,23 @@ use Tests\TestCase;
 
 class ActivitiesControllerTest extends TestCase
 {
-  use RefreshDatabase, WithFaker;
+    use RefreshDatabase, WithFaker;
 
-  public function testIndex()
-  {
-    // Create a user and some activities with associated episodes and lessons
-    $user = User::factory()->create();
-    $lesson = Lesson::factory()->create();
-    $episode = Episode::factory()->create(['lesson_id' => $lesson->id]);
-    $activity = Activity::factory()->create(['user_id' => $user->id, 'episode_id' => $episode->id]);
+    public function testIndex()
+    {
+        // Create a user and some activities with associated episodes and lessons
+        $user = User::factory()->create();
+        $lesson = Lesson::factory()->create();
+        $episode = Episode::factory()->create(['lesson_id' => $lesson->id]);
+        $activity = Activity::factory()->create(['user_id' => $user->id, 'episode_id' => $episode->id]);
 
-    // Make a GET request to the index endpoint
-    $response = $this->actingAs($user)->get('/dashboard/activities');
+        // Make a GET request to the index endpoint
+        $response = $this->actingAs($user)->get('/dashboard/activities');
 
-    // Assert the response is successful and the view contains the activity data
-    $response->assertStatus(200);
-    $response->assertViewIs('dashboard.activities');
-    $response->assertViewHas('activities');
-    $response->assertSee($activity->episode->title);
-  }
+        // Assert the response is successful and the view contains the activity data
+        $response->assertStatus(200);
+        $response->assertViewIs('dashboard.activities');
+        $response->assertViewHas('activities');
+        $response->assertSee($activity->episode->title);
+    }
 }

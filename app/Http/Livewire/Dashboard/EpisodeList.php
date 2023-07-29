@@ -15,6 +15,7 @@ class EpisodeList extends Component
     public Episode $episode;
 
     public $episode_title;
+
     public $duration;
 
     public function mount()
@@ -29,7 +30,7 @@ class EpisodeList extends Component
         abort_unless($user->id === $this->episode->lesson->user_id, 403);
         $data = $this->validate(['episode_title' => 'required|string|max:250']);
         $this->episode->update([
-            'title' => $data['episode_title']
+            'title' => $data['episode_title'],
         ]);
     }
 

@@ -3,8 +3,6 @@
 namespace App\Jobs;
 
 use App\Events\CommentLikedEvent;
-use App\Models\Comment;
-use App\Models\User;
 use App\Notifications\CommentLikedNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -15,7 +13,6 @@ use Illuminate\Queue\SerializesModels;
 class LikedCommentNotificationJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
 
     /**
      * Create a new job instance.
@@ -36,7 +33,7 @@ class LikedCommentNotificationJob implements ShouldQueue
             ->where('data->user_id', $event->user->id)
             ->exists();
 
-        if (!$exists) {
+        if (! $exists) {
             $event->comment->user->notify(new CommentLikedNotification($event->comment, $event->user));
         }
     }

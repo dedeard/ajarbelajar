@@ -11,6 +11,7 @@ class ActivitiesController extends Controller
     {
         $user = $request->user();
         $activities = $user->activities()->with('episode.lesson')->orderBy('updated_at', 'desc')->get();
+
         return view('dashboard/activities', compact('activities'));
     }
 }

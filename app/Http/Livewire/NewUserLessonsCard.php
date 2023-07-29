@@ -8,7 +8,9 @@ use Livewire\Component;
 class NewUserLessonsCard extends Component
 {
     public $lessons;
+
     public $user;
+
     public $ignoreId;
 
     public function mount()

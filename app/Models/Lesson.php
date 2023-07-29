@@ -29,7 +29,7 @@ class Lesson extends Model
     ];
 
     protected $casts = [
-        'posted_at' => 'datetime'
+        'posted_at' => 'datetime',
     ];
 
     public function toSearchableArray()
@@ -38,7 +38,7 @@ class Lesson extends Model
             'title' => $this->title,
             'slug' => $this->slug,
             'cover_url' => $this->cover_url['small'],
-            "category" => $this->category->name,
+            'category' => $this->category->name,
             'author' => $this->user->name,
             'episodes' => $this->episodes->pluck('title')->implode(' '),
             'description' => strip_tags($this->htmlDescription),
@@ -102,11 +102,19 @@ class Lesson extends Model
             $minutes = floor(($this->seconds / 60) % 60);
             $seconds = $this->seconds % 60;
             $msg = '';
-            if ($hours) $msg .= "$hours Jam ";
-            if ($minutes) $msg .= "$minutes Menit ";
-            if ($seconds) $msg .= "$seconds Detik";
+            if ($hours) {
+                $msg .= "$hours Jam ";
+            }
+            if ($minutes) {
+                $msg .= "$minutes Menit ";
+            }
+            if ($seconds) {
+                $msg .= "$seconds Detik";
+            }
+
             return trim($msg);
         }
+
         return '';
     }
 
@@ -115,9 +123,9 @@ class Lesson extends Model
         if ($this->description) {
             return EditorjsHelper::compile($this->description);
         }
+
         return '';
     }
-
 
     public function getSeoDescriptionAttribute()
     {
@@ -126,13 +134,14 @@ class Lesson extends Model
             $max = 150;
             if (strlen($str) > $max) {
                 $offset = ($max - 3) - strlen($str);
-                $str = substr($str, 0, strrpos($str, ' ', $offset)) . '...';
+                $str = substr($str, 0, strrpos($str, ' ', $offset)).'...';
             }
+
             return $str;
         }
+
         return '';
     }
-
 
     // Query
     public static function listQuery($model, $publicOnly = true)

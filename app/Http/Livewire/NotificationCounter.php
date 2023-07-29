@@ -7,6 +7,7 @@ use Livewire\Component;
 class NotificationCounter extends Component
 {
     public $count = 0;
+
     public $user;
 
     protected function getListeners()

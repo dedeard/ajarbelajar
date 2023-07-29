@@ -16,11 +16,12 @@ class VideoHelper extends Helper
      */
     public static function upload($data, $oldName = null): string
     {
-        $name = parent::uniqueName('.' . $data->extension());
+        $name = parent::uniqueName('.'.$data->extension());
         if ($oldName) {
             self::destroy($oldName);
         }
-        Storage::put(self::DIR . $name, file_get_contents($data->getRealPath()));
+        Storage::put(self::DIR.$name, file_get_contents($data->getRealPath()));
+
         return $name;
     }
 
@@ -29,8 +30,8 @@ class VideoHelper extends Helper
      */
     public static function destroy($name): void
     {
-        if ($name && Storage::exists(self::DIR . $name)) {
-            Storage::delete(self::DIR . $name);
+        if ($name && Storage::exists(self::DIR.$name)) {
+            Storage::delete(self::DIR.$name);
         }
     }
 
@@ -39,6 +40,6 @@ class VideoHelper extends Helper
      */
     public static function getUrl($name): string
     {
-        return $name ? Storage::url(self::DIR . $name) : '';
+        return $name ? Storage::url(self::DIR.$name) : '';
     }
 }

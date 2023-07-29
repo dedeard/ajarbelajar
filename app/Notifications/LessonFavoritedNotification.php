@@ -11,7 +11,9 @@ class LessonFavoritedNotification extends Notification
 {
     use Queueable;
 
-    public $lesson = null, $user = null;
+    public $lesson = null;
+
+    public $user = null;
 
     public function __construct(Lesson $lesson, User $user)
     {
@@ -28,8 +30,8 @@ class LessonFavoritedNotification extends Notification
     {
         return [
             'lesson_id' => $this->lesson->id,
-            'message' => $this->user->name . " menambahkan pelajaran anda ke daftar favorit.",
-            'user_id' => $this->user->id
+            'message' => $this->user->name.' menambahkan pelajaran anda ke daftar favorit.',
+            'user_id' => $this->user->id,
         ];
     }
 }

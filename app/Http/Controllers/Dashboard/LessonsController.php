@@ -30,15 +30,16 @@ class LessonsController extends Controller
         }
 
         $lessons = $query->paginate(10);
+
         return view('dashboard.lessons.index', ['lessons' => $lessons, 'tab' => $tab]);
     }
 
     public function create()
     {
         $categories = Category::select('id', 'name')->orderBy('name')->get();
+
         return view('dashboard.lessons.create', ['categories' => $categories]);
     }
-
 
     public function store(Request $request)
     {
@@ -47,9 +48,12 @@ class LessonsController extends Controller
             'category' => 'required|exists:categories,id',
             'description' => 'required|max:3000',
         ]);
-        if (isset($data['category'])) $data['category_id'] = $data['category'];
+        if (isset($data['category'])) {
+            $data['category_id'] = $data['category'];
+        }
         $lesson = new Lesson($data);
         $request->user()->lessons()->save($lesson);
+
         return redirect()->route('dashboard.lessons.edit', $lesson->id)->withSuccess('Berhasil membuat pelajaran baru.');
     }
 
@@ -59,6 +63,7 @@ class LessonsController extends Controller
         abort_unless(in_array($tab ?? 'info', ['info', 'cover', 'episodes']), 404);
         $lesson = $request->user()->lessons()->findOrFail($id);
         $categories = Category::select('id', 'name')->orderBy('name')->get();
+
         return view('dashboard.lessons.edit', ['categories' => $categories, 'lesson' => $lesson, 'tab' => $tab ?? 'info']);
     }
 
@@ -71,6 +76,7 @@ class LessonsController extends Controller
         CoverHelper::destroy($lesson->cover);
         $lesson->unsearchable();
         $lesson->delete();
+
         return redirect()->route('dashboard.lessons.index')->withSuccess('Berhasil menghapus pelajaran.');
     }
 
@@ -86,9 +92,11 @@ class LessonsController extends Controller
 
         $data['public'] = false;
         $data['category_id'] = $data['category'];
-        if (isset($public) && $public === 'on') $data['public'] = true;
+        if (isset($public) && $public === 'on') {
+            $data['public'] = true;
+        }
 
-        if ($data['public'] && !$lesson->posted_at) {
+        if ($data['public'] && ! $lesson->posted_at) {
             $data['posted_at'] = now();
             $lesson->update($data);
         } else {
@@ -108,7 +116,7 @@ class LessonsController extends Controller
     {
         $lesson = $request->user()->lessons()->findOrFail($id);
         $data = $request->validate([
-            'image' => 'required|image|max:4000'
+            'image' => 'required|image|max:4000',
         ]);
 
         $name = CoverHelper::generate($data['image'], $lesson->cover);
@@ -118,13 +126,13 @@ class LessonsController extends Controller
         return response()->json($lesson->cover_url);
     }
 
-
     public function updateDescription(Request $request, $id)
     {
         $lesson = $request->user()->lessons()->findOrFail($id);
         $data = $request->validate(['description' => 'required|max:3000']);
         $lesson->update($data);
         $lesson->searchable();
+
         return response()->noContent();
     }
 
@@ -132,7 +140,7 @@ class LessonsController extends Controller
     {
         $lesson = $request->user()->lessons()->findOrFail($id);
         $data = $request->validate([
-            'video' => 'required|mimes:mp4,mov,avi,fly,webm|max:' . env('MAX_VIDEO_SIZES', '25000'),
+            'video' => 'required|mimes:mp4,mov,avi,fly,webm|max:'.env('MAX_VIDEO_SIZES', '25000'),
         ]);
 
         $getID3 = new \getID3();
@@ -150,6 +158,7 @@ class LessonsController extends Controller
         ]);
         $lesson->episodes()->save($episode);
         $lesson->searchable();
+
         return response()->json([
             'message' => 'Episode berhasil dibuat',
         ]);

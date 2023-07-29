@@ -1,6 +1,7 @@
 @font-face {
   font-family: 'feather';
-  src: url('fonts/feather.ttf?6djotx') format('truetype'),
+  src:
+    url('fonts/feather.ttf?6djotx') format('truetype'),
     url('fonts/feather.woff?6djotx') format('woff'),
     url('fonts/feather.svg?6djotx#feather') format('svg');
   font-weight: normal;

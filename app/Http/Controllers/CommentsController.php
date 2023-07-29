@@ -7,7 +7,6 @@ use App\Events\CommentedEpisodeEvent;
 use App\Helpers\EditorjsHelper;
 use App\Models\Comment;
 use App\Models\Episode;
-use App\Notifications\EpisodeCommentedNotification;
 use Illuminate\Http\Request;
 
 class CommentsController extends Controller
@@ -28,6 +27,7 @@ class CommentsController extends Controller
         $comment = new Comment(['user_id' => $request->user()->id, 'body' => $body]);
         $episode->comments()->save($comment);
         CommentedEpisodeEvent::dispatch($comment);
+
         return response()->noContent();
     }
 
@@ -36,6 +36,7 @@ class CommentsController extends Controller
         $comment = $request->user()->comments()->findOrFail($commentId);
         $comment->delete();
         CommentDeleted::dispatch($comment->toArray());
+
         return response()->noContent();
     }
 }

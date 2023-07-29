@@ -17,12 +17,13 @@ class EditProfileController extends Controller
     {
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', new Username, 'max:15', 'min:6', 'unique:users,username,' . $request->user()->id],
+            'username' => ['required', 'string', new Username, 'max:15', 'min:6', 'unique:users,username,'.$request->user()->id],
             'bio' => ['nullable', 'string', 'max:250'],
             'website' => ['nullable', 'url', 'max:250'],
         ]);
         $request->user()->update($data);
         $request->user()->lessons()->searchable();
+
         return redirect()->back()->withSuccess('Profil berhasil diperbarui.');
     }
 }
