@@ -1,9 +1,4 @@
 @tailwind base;
-
-pre {
-  text-wrap: wrap;
-}
-
 @tailwind components;
 @tailwind utilities;
 
@@ -38,14 +33,19 @@ pre {
   @apply bg-yellow-200;
 }
 
-.markdown-tab button {
-  @apply block h-8 items-center justify-center bg-white px-8 py-0 text-xs font-bold uppercase tracking-widest;
+pre {
+  @apply my-4 overflow-x-auto rounded;
 }
 
-.markdown-actions {
-  @apply p-2;
+pre code.torchlight {
+  @apply block min-w-max py-4;
 }
 
-.markdown-actions button {
-  @apply mr-2 flex h-8 w-8 items-center justify-center bg-white p-0;
+pre code.torchlight .line {
+  @apply px-4;
+}
+
+pre code.torchlight .line-number,
+pre code.torchlight .summary-caret {
+  @apply mr-4;
 }

@@ -6,6 +6,7 @@ import Echo from 'laravel-echo'
 import Pusher from 'pusher-js'
 import Sortable from 'sortablejs'
 import './editor'
+import './markdown'
 
 window.Alpine = Alpine
 window.axios = axios
