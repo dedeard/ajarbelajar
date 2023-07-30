@@ -15,14 +15,14 @@ const commandMap = {
     icon: 'ft ft-corner-up-right',
     label: 'Redo (Ctrl+Y)',
   },
-  heading: {
-    start: '\n## ',
-    end: '\n',
-    defaultText: 'Heading',
-    shortcut: '',
-    icon: 'ft ft-type',
-    label: 'Heading',
-  },
+  // heading: {
+  //   start: '\n## ',
+  //   end: '\n',
+  //   defaultText: 'Heading',
+  //   shortcut: '',
+  //   icon: 'ft ft-type',
+  //   label: 'Heading',
+  // },
   strong: {
     start: '**',
     end: '**',
