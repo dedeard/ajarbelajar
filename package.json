@@ -6,10 +6,6 @@
         "format": "npx prettier --write resources/"
     },
     "devDependencies": {
-        "@editorjs/code": "^2.8.0",
-        "@editorjs/editorjs": "^2.26.5",
-        "@editorjs/list": "^1.8.0",
-        "@editorjs/paragraph": "^2.9.0",
         "@hotwired/turbo": "^7.3.0",
         "@shufo/prettier-plugin-blade": "^1.10.1",
         "@tailwindcss/forms": "^0.5.2",

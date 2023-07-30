@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Helpers\CoverHelper;
-use App\Helpers\EditorjsHelper;
+use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -121,7 +121,7 @@ class Lesson extends Model
     public function getHtmlDescriptionAttribute()
     {
         if ($this->description) {
-            return EditorjsHelper::compile($this->description);
+            return Markdown::convert($this->description)->getContent();
         }
 
         return '';
@@ -130,7 +130,7 @@ class Lesson extends Model
     public function getSeoDescriptionAttribute()
     {
         if ($this->description) {
-            $str = EditorjsHelper::firstParagraph($this->description);
+            $str = strip_tags($this->html_description);
             $max = 150;
             if (strlen($str) > $max) {
                 $offset = ($max - 3) - strlen($str);

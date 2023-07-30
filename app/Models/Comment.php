@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Helpers\EditorjsHelper;
 use Conner\Likeable\Likeable;
+use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -42,7 +42,7 @@ class Comment extends Model
     public function getHtmlBodyAttribute()
     {
         if ($this->body) {
-            return EditorjsHelper::compile($this->body);
+            return Markdown::convert($this->body)->getContent();
         }
 
         return '';
