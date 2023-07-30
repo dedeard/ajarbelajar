@@ -39,14 +39,6 @@ const commandMap = {
     icon: 'ft ft-italic',
     label: 'Italic (Ctrl+I)',
   },
-  strikeThrough: {
-    start: '~~',
-    end: '~~',
-    defaultText: 'strikethrough text',
-    shortcut: 'KeyS',
-    icon: 'ft ft-x',
-    label: 'Strikethrough',
-  },
   list: {
     start: '\n- ',
     end: '\n',
