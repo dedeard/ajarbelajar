@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "dedeard/ajarbelajar",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Ajarbelajar is an innovative e-learning platform that provides students and educators with access to a wide range of online courses, video tutorials, modules, quizzes, and assessments. The platform was built with the aim of improving the quality of learning by providing easy-to-understand resources for a variety of subjects.",
     "keywords": [
         "framework",
         "laravel"

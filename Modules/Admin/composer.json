@@ -1,18 +1,16 @@
 {
-    "name": "nwidart/admin",
+    "name": "ajarbelajar/admin",
     "description": "",
     "authors": [
         {
-            "name": "Nicolas Widart",
-            "email": "n.widart@gmail.com"
+            "name": "Dede ariansya",
+            "email": "me@dedeard.my.id"
         }
     ],
     "extra": {
         "laravel": {
             "providers": [],
-            "aliases": {
-
-            }
+            "aliases": {}
         }
     },
     "autoload": {
