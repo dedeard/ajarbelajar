@@ -51,7 +51,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware(['web', 'guardswitcher:admin'])
             ->prefix('admin')
             ->as('admin.')
-            ->namespace($this->moduleNamespace)
+            ->namespace($this->moduleNamespace."\Auth")
             ->group(module_path('Admin', '/Routes/auth.php'));
 
         Route::middleware(['web', 'guardswitcher:admin', 'admin'])

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Modules\Admin\Database\factories\AdminFactory;
+use Modules\Admin\Notifications\ResetPasswordNotification;
 
 class Admin extends Authenticatable
 {
@@ -27,6 +28,11 @@ class Admin extends Authenticatable
     protected static function newFactory()
     {
         return AdminFactory::new();
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
     }
 
     public function role()
