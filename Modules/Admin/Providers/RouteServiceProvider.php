@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
+    public const HOME = '/admin';
+
     /**
      * The module namespace to assume when generating URLs to actions.
      *
