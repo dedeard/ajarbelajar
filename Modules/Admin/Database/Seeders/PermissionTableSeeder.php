@@ -1,11 +1,11 @@
 <?php
 
-namespace Database\Seeders;
+namespace Modules\Admin\Database\Seeders;
 
-use App\Models\Permission;
 use Illuminate\Database\Seeder;
+use Modules\Admin\Entities\Permission;
 
-class PermissionSeeder extends Seeder
+class PermissionTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

@@ -73,7 +73,7 @@ class AdminServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
 
-        Blade::anonymousComponentPath($sourcePath . '/components', $this->moduleNameLower);
+        Blade::anonymousComponentPath($sourcePath.'/components', $this->moduleNameLower);
     }
 
     /**

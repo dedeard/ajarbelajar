@@ -1,26 +1,30 @@
 <?php
 
-namespace Database\Factories;
+namespace Modules\Admin\Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Admin\Entities\Permission;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Role>
- */
-class RoleFactory extends Factory
+class PermissionFactory extends Factory
 {
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Permission::class;
+
     /**
      * Define the model's default state.
      *
-     * @return array<string, mixed>
+     * @return array
      */
-    public function definition(): array
+    public function definition()
     {
         return [
             'name' => fake()->words(2, true),
             'display_name' => fake()->words(2, true),
             'description' => fake()->paragraph,
-            'is_protected' => fake()->boolean,
         ];
     }
 }

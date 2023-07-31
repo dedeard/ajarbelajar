@@ -2,8 +2,10 @@
 
 namespace Modules\Admin\Database\Seeders;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Modules\Admin\Entities\Admin;
+use Modules\Admin\Entities\Role;
 
 class AdminDatabaseSeeder extends Seeder
 {
@@ -14,8 +16,20 @@ class AdminDatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Model::unguard();
+        $this->call([PermissionTableSeeder::class, RoleTableSeeder::class]);
 
-        // $this->call("OthersTableSeeder");
+        $data = [
+            'name' => 'Super Admin',
+            'email' => 'super@admin.com',
+            'password' => 'Super Admin',
+            'password' => Hash::make('superadmin'),
+            'is_active' => true,
+            'role_id' => Role::where('name', 'Super Admin')->first()->id,
+        ];
+
+        if (! Admin::where('email', $data['email'])->exists()) {
+            Admin::factory()->create($data);
+        }
+
     }
 }

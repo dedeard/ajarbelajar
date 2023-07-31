@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace Modules\Admin\Entities;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Modules\Admin\Database\factories\AdminFactory;
 
 class Admin extends Authenticatable
 {
@@ -22,6 +23,11 @@ class Admin extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    protected static function newFactory()
+    {
+        return AdminFactory::new();
+    }
 
     public function role()
     {

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace Modules\Admin\Entities;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Admin\Database\factories\RoleFactory;
 
 class Role extends Model
 {
@@ -15,6 +16,11 @@ class Role extends Model
         'is_protected',
         'description',
     ];
+
+    protected static function newFactory()
+    {
+        return RoleFactory::new();
+    }
 
     public function permissions()
     {

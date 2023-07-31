@@ -1,16 +1,18 @@
 <?php
 
-namespace Database\Seeders;
+namespace Modules\Admin\Database\Seeders;
 
-use App\Models\Role;
 use Illuminate\Database\Seeder;
+use Modules\Admin\Entities\Role;
 
-class RoleSeeder extends Seeder
+class RoleTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     *
+     * @return void
      */
-    public function run(): void
+    public function run()
     {
         if (! Role::where('name', 'Super Admin')->exists()) {
             Role::factory()->create([
