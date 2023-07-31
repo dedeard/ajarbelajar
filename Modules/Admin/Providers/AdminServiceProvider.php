@@ -2,6 +2,7 @@
 
 namespace Modules\Admin\Providers;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
@@ -71,6 +72,8 @@ class AdminServiceProvider extends ServiceProvider
         ], ['views', $this->moduleNameLower.'-module-views']);
 
         $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
+
+        Blade::anonymousComponentPath($sourcePath . '/components', $this->moduleNameLower);
     }
 
     /**
