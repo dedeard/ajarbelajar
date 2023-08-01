@@ -54,9 +54,9 @@ class RolesController extends Controller
         ]);
 
         $data['name'] = strtolower($data['name']);
-        Role::create($data);
+        $role = Role::create($data);
 
-        return redirect()->route('admin.roles.index')->withSuccess('Berhasil membuat peran baru.');
+        return redirect()->route('admin.roles.edit', $role->id)->withSuccess('Berhasil membuat peran baru.');
     }
 
     /**
