@@ -41,7 +41,7 @@ class PermissionTableSeeder extends Seeder
                 'description' => 'Memungkinkan untuk melihat detail pengguna.',
             ],
             [
-                'name' => 'edit user',
+                'name' => 'update user',
                 'display_name' => 'Edit Pengguna',
                 'description' => 'Memberikan izin untuk mengubah informasi pengguna.',
             ],
@@ -62,7 +62,7 @@ class PermissionTableSeeder extends Seeder
                 'description' => 'Memungkinkan untuk melihat informasi admin.',
             ],
             [
-                'name' => 'edit admin',
+                'name' => 'update admin',
                 'display_name' => 'Edit Admin',
                 'description' => 'Memberikan izin untuk mengubah detail admin.',
             ],
@@ -79,11 +79,11 @@ class PermissionTableSeeder extends Seeder
 
             [
                 'name' => 'read role',
-                'display_name' => 'Akses Peran',
+                'display_name' => 'Tampilkan Peran',
                 'description' => 'Memungkinkan untuk melihat detail dan penugasan peran.',
             ],
             [
-                'name' => 'edit role',
+                'name' => 'update role',
                 'display_name' => 'Edit Peran',
                 'description' => 'Memberikan izin untuk mengubah konfigurasi peran.',
             ],

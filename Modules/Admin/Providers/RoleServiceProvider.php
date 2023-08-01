@@ -2,8 +2,10 @@
 
 namespace Modules\Admin\Providers;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Modules\Admin\Entities\Permission;
 use Modules\Admin\Entities\Role;
 
 class RoleServiceProvider extends ServiceProvider
@@ -37,7 +39,9 @@ class RoleServiceProvider extends ServiceProvider
 
         // Super Admin has all permissions
         Gate::before(function ($admin) {
-            return $admin->role->name === 'super admin';
+            if($admin->role && $admin->role->name === 'super admin') {
+                return true;
+            }
         });
     }
 }

@@ -22,6 +22,14 @@
               'route' => 'admin.roles.index',
               'is' => 'admin.roles*',
               'icon' => 'lock',
+              'can' => 'read role',
+          ],
+          [
+              'name' => 'Admin',
+              'route' => 'admin.admins.index',
+              'is' => 'admin.admins*',
+              'icon' => 'user',
+              'can' => 'read admin',
           ],
       ],
   ];
@@ -38,7 +46,7 @@
     <li class="py-3"></li>
   @endif
   @foreach ($group as $link)
-    @if (isset($l['can']))
+    @if (isset($link['can']))
       @can($link['can'])
         <li class="nav-item">
           <a href="{{ route($link['route']) }}"
