@@ -31,4 +31,23 @@ class Role extends Model
     {
         return $this->hasMany(Admin::class);
     }
+
+    public function hasPermission($permissionId)
+    {
+        return $this->permissions->contains('id', $permissionId);
+    }
+
+    public function grantPermission($permissionId)
+    {
+        if (! $this->hasPermission($permissionId)) {
+            $this->permissions()->attach($permissionId);
+        }
+    }
+
+    public function revokePermission($permissionId)
+    {
+        if ($this->hasPermission($permissionId)) {
+            $this->permissions()->detach($permissionId);
+        }
+    }
 }

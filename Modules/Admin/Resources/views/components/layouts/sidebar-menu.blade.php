@@ -16,6 +16,14 @@
               'icon' => 'tachometer-alt',
           ],
       ],
+      [
+          [
+              'name' => 'Peran',
+              'route' => 'admin.roles.index',
+              'is' => 'admin.roles*',
+              'icon' => 'lock',
+          ],
+      ],
   ];
   
   $x = true;

@@ -36,7 +36,7 @@ class PermissionTableSeeder extends Seeder
     {
         return [
             [
-                'name' => 'show user',
+                'name' => 'read user',
                 'display_name' => 'Tampilkan Pengguna',
                 'description' => 'Memungkinkan untuk melihat detail pengguna.',
             ],
@@ -57,7 +57,7 @@ class PermissionTableSeeder extends Seeder
             ],
 
             [
-                'name' => 'show admin',
+                'name' => 'read admin',
                 'display_name' => 'Tampilkan Admin',
                 'description' => 'Memungkinkan untuk melihat informasi admin.',
             ],
@@ -78,8 +78,8 @@ class PermissionTableSeeder extends Seeder
             ],
 
             [
-                'name' => 'show role',
-                'display_name' => 'Tampilkan Peran',
+                'name' => 'read role',
+                'display_name' => 'Akses Peran',
                 'description' => 'Memungkinkan untuk melihat detail dan penugasan peran.',
             ],
             [

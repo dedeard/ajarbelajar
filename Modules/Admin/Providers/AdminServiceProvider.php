@@ -4,9 +4,7 @@ namespace Modules\Admin\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
-use Modules\Admin\Entities\Role;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -31,39 +29,6 @@ class AdminServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
-
-        // Define Gates based on user roles and their associated permissions
-        $this->defineGatesForRoles();
-    }
-
-    /**
-     * Define Gates based on user roles and their associated permissions.
-     */
-    public function defineGatesForRoles()
-    {
-        // Retrieve all roles along with their permissions
-        $roles = Role::with('permissions')->get();
-
-        // Prepare an associative array to store permissions and their associated role IDs
-        $permissions = [];
-        foreach ($roles as $role) {
-            foreach ($role->permissions as $permission) {
-                $permissions[$permission->name][] = $role->id;
-            }
-        }
-
-        // Define Gates based on user roles and their associated permissions
-        foreach ($permissions as $permissionName => $roleIds) {
-            Gate::define($permissionName, function ($admin) use ($roleIds) {
-                // Super Admin has all permissions
-                if ($admin->role->name === 'Super Admin') {
-                    return true;
-                }
-
-                // Check if the user's role ID is in the list of required role IDs
-                return in_array($admin->role->id, $roleIds);
-            });
-        }
     }
 
     /**
@@ -73,6 +38,7 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->register(RoleServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
     }
 
