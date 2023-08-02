@@ -10,3 +10,5 @@ Route::get('roles/{role}/{permission}/toggle', 'RolesController@toggleSyncPermis
 Route::resource('admins', 'AdminsController')->except('show');
 
 Route::resource('users', 'UsersController')->except('show');
+
+Route::resource('categories', 'CategoriesController')->except('show');

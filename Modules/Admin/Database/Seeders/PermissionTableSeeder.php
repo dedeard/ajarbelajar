@@ -97,6 +97,26 @@ class PermissionTableSeeder extends Seeder
                 'display_name' => 'Hapus Peran',
                 'description' => 'Mengizinkan penghapusan peran dari sistem.',
             ],
+            [
+                'name' => 'read category',
+                'display_name' => 'Tampilkan Kategori',
+                'description' => 'Memungkinkan untuk melihat detail kategori.',
+            ],
+            [
+                'name' => 'update category',
+                'display_name' => 'Edit Kategori',
+                'description' => 'Memberikan izin untuk mengubah informasi kategori.',
+            ],
+            [
+                'name' => 'create category',
+                'display_name' => 'Buat Kategori',
+                'description' => 'Memungkinkan pembuatan kategori baru.',
+            ],
+            [
+                'name' => 'delete category',
+                'display_name' => 'Hapus Kategori',
+                'description' => 'Mengizinkan penghapusan kategori.',
+            ],
         ];
     }
 }

@@ -40,6 +40,13 @@
               'icon' => 'users',
               'can' => 'read user',
           ],
+          [
+              'name' => 'Kategori',
+              'route' => 'admin.categories.index',
+              'is' => 'admin.categories*',
+              'icon' => 'list',
+              'can' => 'read category',
+          ],
       ],
   ];
   
