@@ -32,6 +32,15 @@
               'can' => 'read admin',
           ],
       ],
+      [
+          [
+              'name' => 'Pengguna',
+              'route' => 'admin.users.index',
+              'is' => 'admin.users*',
+              'icon' => 'users',
+              'can' => 'read user',
+          ],
+      ],
   ];
   
   $x = true;

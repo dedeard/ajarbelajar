@@ -27,6 +27,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'website',
         'bio',
+        'email_verified_at'
     ];
 
     /**
@@ -47,6 +48,15 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function scopeSearch($query, $keyword)
+    {
+        return $query->where(function ($query) use ($keyword) {
+            $query->where('name', 'like', "%$keyword%")
+                ->orWhere('username', 'like', "%$keyword%")
+                ->orWhere('email', 'like', "%$keyword%");
+        });
+    }
 
     public function sendEmailVerificationNotification()
     {

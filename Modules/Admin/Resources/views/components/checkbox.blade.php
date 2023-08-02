@@ -1,6 +1,6 @@
 @props(['label', 'name', 'checked' => false])
 
-<div class="form-check">
+<div class="form-check mb-3">
   <input class="form-check-input @error($name) is-invalid @enderror"
     type="checkbox" name="{{ $name }}" id="{{ $name }}"
     @if ($checked) checked @endif>
