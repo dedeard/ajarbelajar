@@ -15,7 +15,6 @@
         <table class="table">
           <thead>
             <tr>
-              <th>ID</th>
               <th>Avatar</th>
               <th>Nama</th>
               <th>Email</th>
@@ -27,7 +26,6 @@
           <tbody>
             @foreach ($admins as $admin)
               <tr>
-                <td>{{ $admin->id }}</td>
                 <td class="py-0 align-middle"><img
                     src="{{ $admin->avatar_url }}" width="36px" alt="Avatar"
                     class="avatar img-circle">
@@ -52,8 +50,7 @@
                       </button>
                       <form
                         action="{{ route('admin.admins.destroy', $admin->id) }}"
-                        method="post"
-                        id="form-delete-admin-{{ $admin->id }}">
+                        method="post" id="form-delete-admin-{{ $admin->id }}">
                         @csrf
                         @method('delete')
                       </form>
