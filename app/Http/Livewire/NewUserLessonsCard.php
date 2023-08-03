@@ -15,7 +15,7 @@ class NewUserLessonsCard extends Component
 
     public function mount()
     {
-        $this->lessons = Lesson::listQuery(Lesson::query())
+        $this->lessons = Lesson::listQuery()
             ->where('user_id', $this->user->id)
             ->where('id', '!=', $this->ignoreId)
             ->orderBy('posted_at', 'desc')

@@ -16,7 +16,7 @@ class LessonsController extends Controller
         $sort = $request->input('sort');
         abort_unless(in_array($sort ?? 'newest', ['newest', 'oldest', 'popularity']), 404);
 
-        $query = Lesson::listQuery(Lesson::query());
+        $query = Lesson::listQuery();
 
         if ($sort === 'oldest') {
             $query->orderBy('posted_at', 'asc');
@@ -36,7 +36,7 @@ class LessonsController extends Controller
      */
     public function show(string $slug)
     {
-        $lesson = Lesson::listQuery(Lesson::where('slug', $slug))->firstOrFail();
+        $lesson = Lesson::listQuery()->where('slug', $slug)->firstOrFail();
 
         return view('lessons.show', compact('lesson'));
     }
@@ -47,7 +47,7 @@ class LessonsController extends Controller
     public function watch(Request $request, string $slug)
     {
         $index = $request->input('index') ?? 0;
-        $lesson = Lesson::listQuery(Lesson::where('slug', $slug))->firstOrFail();
+        $lesson = Lesson::listQuery()->where('slug', $slug)->firstOrFail();
         $episode = $lesson->episodes()->where('index', $index)->firstOrFail();
 
         EpisodeWatchedEvent::dispatch($episode, $request->user());

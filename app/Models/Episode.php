@@ -18,6 +18,7 @@ class Episode extends Model
         'title',
         'index',
         'seconds',
+        'status'
     ];
 
     public function lesson(): BelongsTo

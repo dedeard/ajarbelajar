@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Lesson;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -23,7 +22,7 @@ class UsersController extends Controller
         $sort = $request->input('sort');
         abort_unless(in_array($sort ?? 'newest', ['newest', 'oldest', 'popularity']), 404);
 
-        $query = Lesson::listQuery($user->lessons());
+        $query = $user->lessons()->listQuery();
 
         if ($sort === 'oldest') {
             $query->orderBy('posted_at', 'asc');

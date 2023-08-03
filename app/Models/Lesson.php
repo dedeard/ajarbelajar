@@ -87,9 +87,6 @@ class Lesson extends Model
         return $this->public ? true : false;
     }
 
-    /**
-     * Atributes
-     */
     public function getCoverUrlAttribute()
     {
         return CoverHelper::getUrl($this->cover);
@@ -143,8 +140,7 @@ class Lesson extends Model
         return '';
     }
 
-    // Query
-    public static function listQuery($model, $publicOnly = true)
+    public function scopeListQuery($model, $publicOnly = true)
     {
         $model->with(['user', 'category'])
             ->withCount(['episodes as seconds' => function ($q) {

@@ -25,7 +25,7 @@ class CategoriesController extends Controller
         $sort = $request->input('sort');
         abort_unless(in_array($sort ?? 'newest', ['newest', 'oldest', 'popularity']), 404);
 
-        $query = Lesson::listQuery($category->lessons());
+        $query = $category->lessons()->listQuery();
 
         if ($sort === 'oldest') {
             $query->orderBy('posted_at', 'asc');

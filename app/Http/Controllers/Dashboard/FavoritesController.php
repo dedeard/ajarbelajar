@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\Lesson;
 use Illuminate\Http\Request;
 
 class FavoritesController extends Controller
@@ -12,9 +11,7 @@ class FavoritesController extends Controller
     {
         $user = $request->user();
 
-        $favorites = $user->favorites()->with('lesson', function ($q) {
-            Lesson::listQuery($q);
-        })->orderBy('created_at', 'desc')->paginate(12);
+        $favorites = $user->favorites()->with('lesson', fn ($q) => $q->listQuery())->orderBy('created_at', 'desc')->paginate(12);
 
         return view('dashboard.favorites', compact('favorites'));
     }

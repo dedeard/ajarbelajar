@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $lessons = Lesson::listQuery(Lesson::query())->orderBy('posted_at', 'desc')->take(8)->get();
+        $lessons = Lesson::listQuery()->orderBy('posted_at', 'desc')->take(8)->get();
         $categories = Category::whereHas('lessons', function ($q) {
             $q->where('public', true);
         })->withCount('lessons as lesson_count')->orderBy('lesson_count', 'asc')->paginate(8);
