@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Helpers\CoverHelper;
 use App\Helpers\VideoHelper;
 use App\Http\Controllers\Controller;
+use App\Jobs\EpisodeProcessJob;
 use App\Models\Category;
 use App\Models\Episode;
 use App\Models\Lesson;
@@ -96,7 +97,7 @@ class LessonsController extends Controller
             $data['public'] = true;
         }
 
-        if ($data['public'] && ! $lesson->posted_at) {
+        if ($data['public'] && !$lesson->posted_at) {
             $data['posted_at'] = now();
             $lesson->update($data);
         } else {
@@ -140,13 +141,10 @@ class LessonsController extends Controller
     {
         $lesson = $request->user()->lessons()->findOrFail($id);
         $data = $request->validate([
-            'video' => 'required|mimes:mp4,mov,avi,fly,webm|max:'.env('MAX_VIDEO_SIZES', '25000'),
+            'video' => 'required|mimes:mp4,mov,avi,fly,webm|max:' . env('MAX_VIDEO_SIZES', '25000'),
         ]);
 
-        $getID3 = new \getID3();
-        $tmp_name = $data['video']->getRealPath();
         $title = pathinfo($data['video']->getClientOriginalName(), PATHINFO_FILENAME);
-        $seconds = $getID3->analyze($tmp_name)['playtime_seconds'] ?? 0;
         $index = $lesson->episodes()->count();
         $name = VideoHelper::upload($data['video']);
 
@@ -154,10 +152,11 @@ class LessonsController extends Controller
             'name' => $name,
             'title' => $title,
             'index' => $index,
-            'seconds' => $seconds,
         ]);
         $lesson->episodes()->save($episode);
         $lesson->searchable();
+
+        EpisodeProcessJob::dispatch($episode->toArray())->onQueue('episode');
 
         return response()->json([
             'message' => 'Episode berhasil dibuat',
