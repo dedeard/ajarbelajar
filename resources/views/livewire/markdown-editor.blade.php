@@ -13,9 +13,9 @@
       <button type="button"
         class="block items-center justify-center border-b-2 bg-white px-4 pb-2 pt-3 text-xs font-bold uppercase tracking-widest text-gray-500"
         :class="preview ? '!border-primary-600 !text-gray-700' : ''"
-        @click="() => {
+        @click="async () => {
+          await $wire?.setInput(textarea.value);
           preview = true;
-          $wire?.setInput(textarea.value);
         }">Preview</button>
       <span class="block flex-1 border-b-2"></span>
     </div>
