@@ -20,7 +20,7 @@ class Lesson extends Model
     protected $fillable = [
         'user_id',
         'category_id',
-        'cover',
+        'covers',
         'title',
         'slug',
         'description',
@@ -30,6 +30,7 @@ class Lesson extends Model
 
     protected $casts = [
         'posted_at' => 'datetime',
+        'covers' => 'array'
     ];
 
     public function toSearchableArray()
@@ -37,7 +38,7 @@ class Lesson extends Model
         return [
             'title' => $this->title,
             'slug' => $this->slug,
-            'cover_url' => $this->cover_url['small'],
+            'cover_url' => $this->cover_urls['small'],
             'category' => $this->category->name,
             'author' => $this->user->name,
             'episodes' => $this->episodes->pluck('title')->implode(' '),
@@ -87,9 +88,10 @@ class Lesson extends Model
         return $this->public ? true : false;
     }
 
-    public function getCoverUrlAttribute()
+    public function getCoverUrlsAttribute()
     {
-        return CoverHelper::getUrl($this->cover);
+        if ($this->covers) return $this->covers;
+        return CoverHelper::getPlaceholderUrls($this->cover);
     }
 
     public function getReadableSecondAttribute()
@@ -131,7 +133,7 @@ class Lesson extends Model
             $max = 150;
             if (strlen($str) > $max) {
                 $offset = ($max - 3) - strlen($str);
-                $str = substr($str, 0, strrpos($str, ' ', $offset)).'...';
+                $str = substr($str, 0, strrpos($str, ' ', $offset)) . '...';
             }
 
             return $str;

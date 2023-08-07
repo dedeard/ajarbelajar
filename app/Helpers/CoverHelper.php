@@ -3,20 +3,18 @@
 namespace App\Helpers;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
 
-class CoverHelper extends Helper
+class CoverHelper
 {
-    /**
-     * define constant variable.
-     */
-    const FORMAT = 'jpg';
+    // Define image format and extension constant variables.
+    const IMAGE_FORMAT = 'jpg';
+    const IMAGE_EXTENSION = '.jpeg';
+    const DIRECTORY = 'cover/';
 
-    const EXT = '.jpeg';
-
-    const DIR = 'cover/';
-
-    const SIZES = [
+    // Image sizes configuration.
+    const IMAGE_SIZES = [
         'large' => ['width' => 1024, 'height' => 576, 'quality' => 75],
         'thumb' => ['width' => 320, 'height' => 180, 'quality' => 75],
         'small' => ['width' => 64, 'height' => 36, 'quality' => 85],
@@ -24,55 +22,48 @@ class CoverHelper extends Helper
     ];
 
     /**
-     * Generate cover name, upload new cover delete old cover.
+     * Generate cover images, upload new cover, and delete old cover.
+     *
+     * @param string $imageData The image data to be processed.
+     *
+     * @return array An array containing URLs of generated cover images.
      */
-    public static function generate($img, $oldName = null): string
+    public static function generateCoverImages($imageData): array
     {
-        $name = parent::uniqueName();
+        $coverUrls = [];
 
-        foreach (self::SIZES as $key => $size) {
-            $tmp = Image::make($img)->fit($size['width'], $size['height'], function ($c) {
-                $c->aspectRatio();
+        foreach (self::IMAGE_SIZES as $sizeKey => $size) {
+            // Resize the image based on the size configuration.
+            $resizedImage = Image::make($imageData)->fit($size['width'], $size['height'], function ($constraint) {
+                $constraint->aspectRatio();
             });
-            $newName = self::DIR.$name.'-'.$key.self::EXT;
-            Storage::put($newName, (string) $tmp->encode(self::FORMAT, $size['quality']));
+
+            // Generate a new name for the resized image.
+            $newCoverName = self::DIRECTORY . Str::uuid() . self::IMAGE_EXTENSION;
+
+            // Store the resized image in storage with specified quality.
+            Storage::put($newCoverName, (string) $resizedImage->encode(self::IMAGE_FORMAT, $size['quality']));
+
+            // Store the URL of the resized image.
+            $coverUrls[$sizeKey] = Storage::url($newCoverName);
         }
 
-        if ($oldName) {
-            self::destroy($oldName);
-        }
-
-        return $name;
+        return $coverUrls;
     }
 
     /**
-     * Delete the cover.
+     * Get the URLs of placeholder cover images.
+     *
+     * @return array An array containing URLs of placeholder cover images.
      */
-    public static function destroy($name): void
+    public static function getPlaceholderUrls(): array
     {
-        foreach (self::SIZES as $key => $size) {
-            $newName = self::DIR.$name.'-'.$key.self::EXT;
-            if (Storage::exists($newName)) {
-                Storage::delete($newName);
-            }
-        }
-    }
-
-    /**
-     * Get the cover urls.
-     */
-    public static function getUrl($name = null): array
-    {
-        $urls = [];
-        foreach (self::SIZES as $key => $size) {
-            if ($name) {
-                $newName = self::DIR.$name.'-'.$key.self::EXT;
-                $urls[$key] = Storage::url($newName);
-            } else {
-                $urls[$key] = asset('/img/placeholder/cover-'.$key.'.jpg');
-            }
+        $placeholderUrls = [];
+        foreach (self::IMAGE_SIZES as $sizeKey => $size) {
+            // Generate the URL of the placeholder image based on the key.
+            $placeholderUrls[$sizeKey] = asset('/img/placeholder/cover-' . $sizeKey . '.jpg');
         }
 
-        return $urls;
+        return $placeholderUrls;
     }
 }

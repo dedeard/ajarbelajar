@@ -4,7 +4,8 @@
       <div class="md:col-span-2">
         <article class="mb-3 border bg-white">
           <div class="relative">
-            <img src="{{ $lesson->cover_url['large'] }}" alt="{{ $lesson->title }}" class="block w-full" />
+            <img src="{{ $lesson->cover_urls['large'] }}"
+              alt="{{ $lesson->title }}" class="block w-full" />
 
             @auth
               <livewire:favorite-toggle :lesson="$lesson" :user="Auth::user()" />
@@ -19,7 +20,7 @@
           <div class="flex p-3 pb-0">
             @if ($lesson->category)
               <a href="{{ route('categories.show', $lesson->category->slug) }}"
-                class="leading-0 block border bg-gray-100 py-1 px-2 text-2xs font-semibold uppercase hover:bg-gray-200">
+                class="leading-0 block border bg-gray-100 px-2 py-1 text-2xs font-semibold uppercase hover:bg-gray-200">
                 {{ $lesson->category->name }}
               </a>
             @endif
@@ -27,8 +28,10 @@
           <h1 class="my-auto flex-1 p-3 font-semibold uppercase leading-none">
             {{ $lesson->title }}
           </h1>
-          <p class="flex items-center border-b p-3 pt-0 text-xs uppercase text-gray-600">
-            <span class="block">{{ $lesson->posted_at->diffForHumans() }}</span>
+          <p
+            class="flex items-center border-b p-3 pt-0 text-xs uppercase text-gray-600">
+            <span
+              class="block">{{ $lesson->posted_at->diffForHumans() }}</span>
             <span class="mx-2 block h-2 w-px bg-gray-600"></span>
             <span class="block">
               <i class="ft ft-film"></i> {{ $lesson->episodes_count }} Video
@@ -50,21 +53,27 @@
       <div>
         <div class="mb-3 overflow-hidden border bg-white">
           <div class="p-3">
-            <div class="flex flex-col items-center justify-center pt-6 pb-3">
+            <div class="flex flex-col items-center justify-center pb-3 pt-6">
               <a href="{{ route('users.show', $lesson->user->username) }}"
                 class="m-auto flex w-24 items-center justify-center rounded-full border bg-gray-100 p-1">
-                <img class="block w-full rounded-full" src="{{ $lesson->user->avatar_url }}" alt="{{ $lesson->user->name }}" />
+                <img class="block w-full rounded-full"
+                  src="{{ $lesson->user->avatar_url }}"
+                  alt="{{ $lesson->user->name }}" />
               </a>
             </div>
-            <h4 class="truncate text-center text-lg font-bold uppercase tracking-wider">
-              <a href="{{ route('users.show', $lesson->user->username) }}">{{ $lesson->user->name }}</a>
+            <h4
+              class="truncate text-center text-lg font-bold uppercase tracking-wider">
+              <a
+                href="{{ route('users.show', $lesson->user->username) }}">{{ $lesson->user->name }}</a>
             </h4>
             <div class="mb-3 truncate text-center text-sm text-gray-500">
-              <a href="{{ route('users.show', $lesson->user->username) }}">{{ '@' . $lesson->user->username }}</a>
+              <a
+                href="{{ route('users.show', $lesson->user->username) }}">{{ '@' . $lesson->user->username }}</a>
             </div>
           </div>
           <div class="bg-gray-100 p-2">
-            <p class="text-center text-xs">Pelajaran ini diibuat oleh {{ $lesson->user->name }}</p>
+            <p class="text-center text-xs">Pelajaran ini diibuat oleh
+              {{ $lesson->user->name }}</p>
           </div>
         </div>
 
