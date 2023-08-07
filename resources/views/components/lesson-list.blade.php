@@ -37,7 +37,7 @@
           @if ($lesson->episodes_count)
             <span
               class="mr-1 block border bg-gray-100 px-1 text-2xs font-bold text-gray-700">
-              <i class="ft ft-film"></i> {{ $lesson->episodes_count }} VIDEO
+              <i class="ft ft-film"></i> {{ $lesson->episodes_count }} EPISODE
             </span>
           @endif
           @if ($lesson->seconds)

@@ -34,7 +34,7 @@
               class="block">{{ $lesson->posted_at->diffForHumans() }}</span>
             <span class="mx-2 block h-2 w-px bg-gray-600"></span>
             <span class="block">
-              <i class="ft ft-film"></i> {{ $lesson->episodes_count }} Video
+              <i class="ft ft-film"></i> {{ $lesson->episodes_count }} Episode
             </span>
             <span class="mx-2 block h-2 w-px bg-gray-600"></span>
             <span class="block">
