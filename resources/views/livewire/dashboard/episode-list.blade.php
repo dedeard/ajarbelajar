@@ -1,6 +1,7 @@
 <li data-id="{{ $episode->id }}" x-data="{
     open: false
-}" class="border-t" @click.outside="open = false">
+}" class="border-t"
+  @click.outside="open = false">
   <div class="flex items-center">
     <div class="handle flex h-12 cursor-grab items-center justify-center p-3">
       <i class="ft ft-menu"></i>
@@ -16,12 +17,13 @@
         <i class="ft ft-play" x-show="!open"></i>
         <i class="ft ft-square" x-show="open"></i>
       </x-button>
-      <x-button variant="red" class="!p-2" @click="$store.deleteConfirm($wire.destroy)">
+      <x-button variant="red" class="!p-2"
+        @click="$store.deleteConfirm($wire.destroy)">
         <i class="ft ft-trash"></i>
       </x-button>
     </div>
   </div>
   <template x-if="open">
-    <video src="{{ $episode->video_url }}" controls autoplay class="block w-full"></video>
+    <x-video-player src="{{ $episode->video_url }}" />
   </template>
 </li>

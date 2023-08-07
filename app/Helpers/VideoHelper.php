@@ -3,8 +3,9 @@
 namespace App\Helpers;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
-class VideoHelper extends Helper
+class VideoHelper
 {
     /**
      * define constant variable.
@@ -14,13 +15,10 @@ class VideoHelper extends Helper
     /**
      * Generate name and upload.
      */
-    public static function upload($data, $oldName = null): string
+    public static function upload($data): string
     {
-        $name = parent::uniqueName('.'.$data->extension());
-        if ($oldName) {
-            self::destroy($oldName);
-        }
-        Storage::put(self::DIR.$name, file_get_contents($data->getRealPath()));
+        $name = str::uuid() . '.' . $data->guessClientExtension();
+        Storage::put(self::DIR . $name, file_get_contents($data->getRealPath()));
 
         return $name;
     }
@@ -30,16 +28,25 @@ class VideoHelper extends Helper
      */
     public static function destroy($name): void
     {
-        if ($name && Storage::exists(self::DIR.$name)) {
-            Storage::delete(self::DIR.$name);
+        if ($name) {
+            Storage::delete(self::DIR . $name);
+            Storage::delete(Storage::allFiles(self::DIR . $name));
         }
+    }
+
+    /**
+     * Get m3u8 playlist url.
+     */
+    public static function getM3u8PlaylistUrl($name): string
+    {
+        return Storage::url(self::DIR . $name . '/playlist.m3u8');
     }
 
     /**
      * Get video url.
      */
-    public static function getUrl($name): string
+    public static function getVideoUrl($name): string
     {
-        return $name ? Storage::url(self::DIR.$name) : '';
+        return Storage::url(self::DIR . $name);
     }
 }

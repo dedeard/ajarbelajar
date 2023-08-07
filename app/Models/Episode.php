@@ -18,7 +18,7 @@ class Episode extends Model
         'title',
         'index',
         'seconds',
-        'status'
+        'm3u8_processing_status'
     ];
 
     public function lesson(): BelongsTo
@@ -36,7 +36,10 @@ class Episode extends Model
      */
     public function getVideoUrlAttribute(): string
     {
-        return VideoHelper::getUrl($this->name);
+        if ($this->m3u8_processing_status === 'success') {
+            return VideoHelper::getM3u8PlaylistUrl($this->name);
+        }
+        return VideoHelper::getVideoUrl($this->name);
     }
 
     public function getReadableSecondAttribute()

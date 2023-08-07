@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('episodes', function (Blueprint $table) {
-            $table->enum('status', ['pending', 'processing', 'success', 'failed'])->default('pending');
+            $table->enum('m3u8_processing_status', ['pending', 'processing', 'success', 'failed'])->default('pending');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('episodes', function (Blueprint $table) {
-            $table->dropColumn('status');
+            $table->dropColumn('m3u8_processing_status');
         });
     }
 };
