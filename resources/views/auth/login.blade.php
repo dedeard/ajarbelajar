@@ -5,12 +5,6 @@
     @csrf
     <x-auth.input name="email" label="Alamat Email" autofocus />
     <x-auth.input type="password" name="password" label="Password" />
-    <div class="mb-3">
-      <input class="border-gray-300 bg-gray-100 !ring-0 hover:border-primary-600"
-        type="checkbox" name="remember" id="remember"
-        {{ old('remember') ? 'checked' : '' }}>
-      <label for="remember">Ingat saya</label>
-    </div>
     <div class="border-b py-3 text-center">
       <x-button value="Masuk" class="w-1/2" />
     </div>

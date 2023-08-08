@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
 /**
@@ -44,7 +45,7 @@ class SocialiteController extends Controller
             $user = $this->getUserOrCreate($providerUser, $provider);
 
             // Log in the user and redirect to the home page
-            auth()->login($user);
+            Auth::login($user, true);
 
             return redirect()->route('home');
         } catch (\Exception $e) {
