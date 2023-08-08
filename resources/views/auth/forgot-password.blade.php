@@ -9,11 +9,12 @@
   <form method="POST" action="{{ route('password.email') }}">
     @csrf
     <x-auth.input name="email" label="Alamat Email" autofocus />
-    <div class="py-3 text-center">
+    <div class="border-b py-3 text-center">
       <x-button value="Kirim" class="w-1/2" />
     </div>
+    <div class="pt-4 text-center">
+      <a class="text-sm font-bold text-primary-700"
+        href="{{ route('login') }}">Kembali ke halaman login</a>
+    </div>
   </form>
-  <div class="mt-3 text-center">
-    <a class="text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">Kembali ke halaman login</a>
-  </div>
 </x-auth-layout>
