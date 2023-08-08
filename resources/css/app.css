@@ -56,6 +56,14 @@ pre code.torchlight .summary-caret {
   @apply block;
 }
 
+.video-js picture.vjs-poster {
+  @apply bg-black;
+}
+
+.video-js .vjs-poster img {
+  @apply opacity-50;
+}
+
 .video-js.vjs-hls-quality-selector .vjs-menu-item-text {
   @apply text-white;
 }

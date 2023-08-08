@@ -42,6 +42,7 @@
     <div class="mb-10 grid grid-cols-1 lg:grid-cols-3 lg:gap-3">
       <div class="mb-3 lg:col-span-2">
         <x-video-player container-id="video-container"
+          poster="{{ $lesson->cover_urls['large'] }}"
           src="{{ $episode->video_url }}" />
       </div>
       <div id="video-player-autoheight" class="flex flex-col">
