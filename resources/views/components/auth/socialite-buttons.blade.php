@@ -6,20 +6,17 @@
 <div class="grid grid-cols-3 gap-3">
   <a class="flex justify-center border border-gray-300 py-3 hover:shadow"
     href="{{ route('login.socialite', 'google') }}" data-turbo="false"
-    title="{{ $type }} dengan Google"
-    aria-label="{{ $type }} dengan Google" rel="noreferrer">
+    title="{{ $type }} dengan Google" rel="noreferrer">
     <x-svg.google width="24" height="24" />
   </a>
   <a class="flex justify-center border border-gray-300 py-3 hover:shadow"
     href="{{ route('login.socialite', 'facebook') }}" data-turbo="false"
-    title="{{ $type }} dengan Facebook"
-    aria-label="{{ $type }} dengan Facebook" rel="noreferrer">
+    title="{{ $type }} dengan Facebook" rel="noreferrer">
     <x-svg.facebook width="24" height="24" />
   </a>
   <a class="flex justify-center border border-gray-300 py-3 hover:shadow"
     href="{{ route('login.socialite', 'github') }}" data-turbo="false"
-    title="{{ $type }} dengan GitHub"
-    aria-label="{{ $type }} dengan GitHub" rel="noreferrer">
+    title="{{ $type }} dengan GitHub" rel="noreferrer">
     <x-svg.github width="24" height="24" />
   </a>
 </div>

@@ -26,8 +26,7 @@
           :key="command">
           <button type="button"
             class="mb-1 mr-1 flex h-7 w-7 items-center justify-center bg-white p-0 text-sm hover:bg-primary-100"
-            @click="formatText(command)" :title="commandMap[command].label"
-            :aria-label="commandMap[command].label">
+            @click="formatText(command)" :title="commandMap[command].label">
             <i :class="commandMap[command].icon"></i>
           </button>
         </template>

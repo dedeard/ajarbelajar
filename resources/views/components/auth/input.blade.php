@@ -18,7 +18,8 @@
 
 <div class="relative pb-3" x-data="{ showPassword: false }">
   @if ($label)
-    <label for="{{ $name }}" class='absolute block pl-3 pt-1 text-xs font-medium'>
+    <label for="{{ $name }}"
+      class='absolute block pl-3 pt-1 text-xs font-medium'>
       {{ $label }}
     </label>
   @endif
@@ -27,7 +28,8 @@
     {{ $attributes->merge([
         'id' => $name,
         'class' => $inputClass,
-        'x-bind:type' => $type === 'password' ? "showPassword ? 'text' : 'password'" : "'text'",
+        'x-bind:type' =>
+            $type === 'password' ? "showPassword ? 'text' : 'password'" : "'text'",
         'name' => $name,
         'placeholder' => $placeholder ? $placeholder : $label,
         'value' => $value,
@@ -36,9 +38,11 @@
     ]) }} />
 
   @if ($type === 'password')
-    <button type="button" class="absolute top-0 right-0 flex h-12 w-10 cursor-pointer items-center justify-center"
-      @click="showPassword = ! showPassword" aria-hidden="true">
-      <i class="ft" x-bind:class="showPassword ? 'ft-eye-off' : 'ft-eye'"></i>
+    <button type="button" aria-label="Toogle show password"
+      class="absolute right-0 top-0 flex h-12 w-10 cursor-pointer items-center justify-center"
+      @click="showPassword = ! showPassword">
+      <i class="ft"
+        x-bind:class="showPassword ? 'ft-eye-off' : 'ft-eye'"></i>
     </button>
   @endif
 
