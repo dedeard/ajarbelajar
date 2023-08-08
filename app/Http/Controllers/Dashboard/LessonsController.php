@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Helpers\CoverHelper;
 use App\Helpers\VideoHelper;
 use App\Http\Controllers\Controller;
 use App\Jobs\EpisodeProcessJob;
@@ -119,8 +118,7 @@ class LessonsController extends Controller
             'image' => 'required|image|max:4000',
         ]);
 
-        $covers = CoverHelper::generateCoverImages($data['image']);
-        $lesson->update(['covers' => $covers]);
+        $lesson->generateCovers($data['image']);
         $lesson->searchable();
 
         return response()->json($lesson->cover_urls);

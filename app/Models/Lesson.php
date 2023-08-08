@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
-use App\Helpers\CoverHelper;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Intervention\Image\ImageManagerStatic as Image;
 use Laravel\Scout\Searchable;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
@@ -30,7 +32,7 @@ class Lesson extends Model
 
     protected $casts = [
         'posted_at' => 'datetime',
-        'covers' => 'array'
+        'covers' => 'array',
     ];
 
     public function toSearchableArray()
@@ -88,10 +90,33 @@ class Lesson extends Model
         return $this->public ? true : false;
     }
 
+    public function generateCovers($imageData)
+    {
+        $coverUrls = [];
+        foreach (config('image.cover.sizes') as $sizeKey => $size) {
+            $resizedImage = Image::make($imageData)->fit($size['width'], $size['height'], function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $newCoverName = config('image.cover.directory') . Str::uuid() . config('image.cover.extension');
+            Storage::put($newCoverName, (string) $resizedImage->encode(config('image.cover.format'), $size['quality']));
+            $coverUrls[$sizeKey] = Storage::url($newCoverName);
+        }
+        $this->covers = $coverUrls;
+        $this->save();
+    }
+
     public function getCoverUrlsAttribute()
     {
-        if ($this->covers) return $this->covers;
-        return CoverHelper::getPlaceholderUrls($this->cover);
+        if ($this->covers) {
+            return $this->covers;
+        }
+
+        $placeholderUrls = [];
+        foreach (config('image.cover.sizes') as $sizeKey => $size) {
+            $placeholderUrls[$sizeKey] = asset('/img/placeholder/cover-' . $sizeKey . '.jpg');
+        }
+
+        return $placeholderUrls;
     }
 
     public function getReadableSecondAttribute()
