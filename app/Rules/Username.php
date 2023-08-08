@@ -14,7 +14,7 @@ class Username implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if (!preg_match('/^(?![_])(?!.*[_]{2})[a-z0-9_]+(?<![_])$/', $value)) {
+        if (! preg_match('/^(?![_])(?!.*[_]{2})[a-z0-9_]+(?<![_])$/', $value)) {
             $fail('Format username tidak valid.');
         }
     }

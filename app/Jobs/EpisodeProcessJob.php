@@ -21,14 +21,12 @@ class EpisodeProcessJob implements ShouldQueue
 
     /**
      * Execute the job.
-     *
-     * @return void
      */
     public function handle(): void
     {
         // Perform the video processing logic here
         // If there is nothing to do, consider removing this method or implementing the logic.
         // Otherwise, handle the video processing appropriately.
-        throw new \Error("Cannot handle this job here");
+        throw new \Error('Cannot handle this job here');
     }
 }

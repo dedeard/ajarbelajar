@@ -13,7 +13,7 @@ class Account extends Model
     protected $fillable = [
         'user_id',
         'provider',
-        'provider_id'
+        'provider_id',
     ];
 
     public function user(): BelongsTo

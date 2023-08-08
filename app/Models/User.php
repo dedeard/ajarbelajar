@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Intervention\Image\ImageManagerStatic as Image;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -27,7 +30,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'website',
         'bio',
-        'email_verified_at'
+        'email_verified_at',
+        'avatar_url',
     ];
 
     /**
@@ -98,10 +102,26 @@ class User extends Authenticatable implements MustVerifyEmail
         return (bool) $this->favorites->firstWhere('lesson_id', $lessonId);
     }
 
+    public function generateAvatar($image)
+    {
+        if (! filter_var($image, FILTER_VALIDATE_URL)) {
+            $resizedImage = Image::make($image)->fit(config('image.avatar.size'), config('image.avatar.size'), function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $name = config('image.avatar.directory').Str::uuid().config('image.avatar.extension');
+            Storage::put($name, (string) $resizedImage->encode(config('image.avatar.format'), config('image.avatar.quality')));
+
+            $this->avatar_url = Storage::url($name);
+        } else {
+            $this->avatar_url = $image;
+        }
+        $this->save();
+    }
+
     public function favoriteToggle($lessonId): bool
     {
         $favorite = $this->favorites->firstWhere('lesson_id', $lessonId);
-        if (!$favorite) {
+        if (! $favorite) {
             $data = new Favorite(['lesson_id' => $lessonId]);
             $this->favorites()->save($data);
 
@@ -111,13 +131,5 @@ class User extends Authenticatable implements MustVerifyEmail
 
             return false;
         }
-    }
-
-    public function getAvatarUrlAttribute(): string
-    {
-        $url = 'https://www.gravatar.com/avatar/';
-        $url .= md5(strtolower(trim($this->email)));
-
-        return $url;
     }
 }

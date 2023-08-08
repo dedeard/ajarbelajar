@@ -2,8 +2,13 @@
   <div class="pr-3">
     <a href="{{ route('users.show', $comment->user->username) }}"
       class="block h-10 w-10 rounded-full border">
-      <img src="{{ $comment->user->avatar_url }}" alt="{{ $comment->user->name }}"
-        class="block w-full rounded-full" />
+      @if ($comment->user->avatar_url)
+        <img src="{{ $comment->user->avatar_url }}"
+          alt="{{ $comment->user->name }}"
+          class="block h-full w-full rounded-full" />
+      @else
+        <x-avatar :name="$comment->user->name" class="block h-full w-full rounded-full" />
+      @endif
     </a>
   </div>
 

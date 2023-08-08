@@ -48,7 +48,7 @@ class UsersController extends Controller
         $data['password'] = Hash::make($request->input('password'));
 
         // Send email verification notification if checkbox is not checked
-        if (!$request->has('email_verified')) {
+        if (! $request->has('email_verified')) {
             $user = User::create($data);
             $user->sendEmailVerificationNotification();
         } else {
@@ -72,8 +72,8 @@ class UsersController extends Controller
 
         $request->validate([
             'name' => 'required|string',
-            'username' => ['required', 'string', new Username, 'max:15', 'min:6', 'unique:users,username,' . $id],
-            'email' => 'required|email|unique:users,email,' . $id,
+            'username' => ['required', 'string', new Username, 'max:15', 'min:6', 'unique:users,username,'.$id],
+            'email' => 'required|email|unique:users,email,'.$id,
             'password' => 'nullable|min:6',
             'website' => 'nullable|string',
             'bio' => 'nullable|string',
@@ -81,12 +81,12 @@ class UsersController extends Controller
 
         $data = $request->except(['email_verified', 'password']);
 
-        if (!empty($request->input('password'))) {
+        if (! empty($request->input('password'))) {
             $data['password'] = Hash::make($request->input('password'));
         }
 
         if ($request->has('email_verified')) {
-            if (!$user->email_verified_at) {
+            if (! $user->email_verified_at) {
                 $data['email_verified_at'] = now();
             }
         } else {

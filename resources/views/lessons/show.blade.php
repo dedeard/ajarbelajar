@@ -55,10 +55,15 @@
           <div class="p-3">
             <div class="flex flex-col items-center justify-center pb-3 pt-6">
               <a href="{{ route('users.show', $lesson->user->username) }}"
-                class="m-auto flex w-24 items-center justify-center rounded-full border bg-gray-100 p-1">
-                <img class="block w-full rounded-full"
-                  src="{{ $lesson->user->avatar_url }}"
-                  alt="{{ $lesson->user->name }}" />
+                class="m-auto flex h-24 w-24 items-center justify-center rounded-full border bg-gray-100 p-1">
+                @if ($lesson->user->avatar_url)
+                  <img src="{{ $lesson->user->avatar_url }}"
+                    alt="{{ $lesson->user->name }}"
+                    class="block h-full w-full rounded-full" />
+                @else
+                  <x-avatar :name="$lesson->user->name"
+                    class="block h-full w-full rounded-full" />
+                @endif
               </a>
             </div>
             <h4

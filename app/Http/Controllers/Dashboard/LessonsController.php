@@ -95,7 +95,7 @@ class LessonsController extends Controller
             $data['public'] = true;
         }
 
-        if ($data['public'] && !$lesson->posted_at) {
+        if ($data['public'] && ! $lesson->posted_at) {
             $data['posted_at'] = now();
             $lesson->update($data);
         } else {
@@ -138,7 +138,7 @@ class LessonsController extends Controller
     {
         $lesson = $request->user()->lessons()->findOrFail($id);
         $data = $request->validate([
-            'video' => 'required|mimes:mp4,mov,avi,fly,webm|max:' . env('MAX_VIDEO_SIZES', '25000'),
+            'video' => 'required|mimes:mp4,mov,avi,fly,webm|max:'.env('MAX_VIDEO_SIZES', '25000'),
         ]);
 
         $title = pathinfo($data['video']->getClientOriginalName(), PATHINFO_FILENAME);

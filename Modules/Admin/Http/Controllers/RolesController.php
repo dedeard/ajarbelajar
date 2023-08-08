@@ -13,7 +13,7 @@ class RolesController extends Controller
     public function __construct()
     {
         $this->middleware('can:read role')->only('index');
-        $this->middleware('can:create role')->only(['create','store']);
+        $this->middleware('can:create role')->only(['create', 'store']);
         $this->middleware('can:update role')->only(['edit', 'update', 'toggleSyncPermission']);
         $this->middleware('can:delete role')->only('destroy');
     }

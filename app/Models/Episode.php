@@ -18,7 +18,7 @@ class Episode extends Model
         'title',
         'index',
         'seconds',
-        'm3u8_processing_status'
+        'm3u8_processing_status',
     ];
 
     public function lesson(): BelongsTo
@@ -39,6 +39,7 @@ class Episode extends Model
         if ($this->m3u8_processing_status === 'success') {
             return VideoHelper::getM3u8PlaylistUrl($this->name);
         }
+
         return VideoHelper::getVideoUrl($this->name);
     }
 

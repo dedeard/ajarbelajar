@@ -28,4 +28,12 @@ return [
             'blur' => ['width' => 16, 'height' => 9, 'quality' => 20],
         ],
     ],
+
+    'avatar' => [
+        'format' => 'jpg',
+        'extension' => '.jpeg',
+        'directory' => 'avatar/',
+        'size' => 256,
+        'quality' => 85,
+    ],
 ];

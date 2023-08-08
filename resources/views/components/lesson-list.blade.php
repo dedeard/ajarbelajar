@@ -17,9 +17,14 @@
           class="block h-full w-full" />
         <div
           class="absolute -bottom-4 right-1 h-9 w-9 rounded-full bg-white p-px shadow-lg">
-          <img src="{{ $lesson->user->avatar_url }}"
-            alt="{{ $lesson->user->name }}"
-            class="block h-full w-full rounded-full border border-white" />
+          @if ($lesson->user->avatar_url)
+            <img src="{{ $lesson->user->avatar_url }}"
+              alt="{{ $lesson->user->name }}"
+              class="block h-full w-full rounded-full border border-white" />
+          @else
+            <x-avatar :name="$lesson->user->name"
+              class="block h-full w-full rounded-full border border-white" />
+          @endif
         </div>
       </div>
 

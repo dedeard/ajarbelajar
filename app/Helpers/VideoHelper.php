@@ -17,8 +17,8 @@ class VideoHelper
      */
     public static function upload($data): string
     {
-        $name = str::uuid() . '.' . $data->guessClientExtension();
-        Storage::put(self::DIR . $name, file_get_contents($data->getRealPath()));
+        $name = str::uuid().'.'.$data->guessClientExtension();
+        Storage::put(self::DIR.$name, file_get_contents($data->getRealPath()));
 
         return $name;
     }
@@ -29,8 +29,8 @@ class VideoHelper
     public static function destroy($name): void
     {
         if ($name) {
-            Storage::delete(self::DIR . $name);
-            Storage::delete(Storage::allFiles(self::DIR . $name));
+            Storage::delete(self::DIR.$name);
+            Storage::delete(Storage::allFiles(self::DIR.$name));
         }
     }
 
@@ -39,7 +39,7 @@ class VideoHelper
      */
     public static function getM3u8PlaylistUrl($name): string
     {
-        return Storage::url(self::DIR . $name . '/playlist.m3u8');
+        return Storage::url(self::DIR.$name.'/playlist.m3u8');
     }
 
     /**
@@ -47,6 +47,6 @@ class VideoHelper
      */
     public static function getVideoUrl($name): string
     {
-        return Storage::url(self::DIR . $name);
+        return Storage::url(self::DIR.$name);
     }
 }

@@ -37,7 +37,7 @@ class SocialiteController extends Controller
             $providerUser = Socialite::driver($provider)->user();
 
             // Check if the provider provided a valid email
-            if (!$providerUser->email) {
+            if (! $providerUser->email) {
                 throw new \Exception("Mohon maaf, penyedia $provider tidak memberikan alamat email yang valid.");
             }
 
@@ -69,7 +69,7 @@ class SocialiteController extends Controller
             ->with('user')
             ->first();
 
-        if (!$account) {
+        if (! $account) {
             // Get or create a user based on the email from the provider
             $user = User::firstOrCreate(
                 ['email' => $providerUser->email],
@@ -85,10 +85,9 @@ class SocialiteController extends Controller
             $user->accounts()->save($account);
         }
 
-
         // If the user associated with the account has not verified their email,
         // send an email verification notification to the user.
-        if (!$account->user->hasVerifiedEmail()) {
+        if (! $account->user->hasVerifiedEmail()) {
             $account->user->sendEmailVerificationNotification();
         }
 
@@ -121,7 +120,7 @@ class SocialiteController extends Controller
         while (User::where('username', $username)->exists()) {
             $newLength = $usernameMaxLen - strlen($counter);
             $shortenedBase = substr($baseUsername, 0, $newLength);
-            $username = $shortenedBase . $counter;
+            $username = $shortenedBase.$counter;
             $counter++;
         }
 
