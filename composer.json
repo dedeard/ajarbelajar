@@ -17,6 +17,7 @@
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
         "laravel/scout": "^10.2",
+        "laravel/socialite": "^5.8",
         "laravel/tinker": "^2.8",
         "league/flysystem-aws-s3-v3": "^3.15",
         "livewire/livewire": "^2.12",

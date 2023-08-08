@@ -1,4 +1,5 @@
 <x-auth-layout title="Buat akun baru">
+  <x-auth.socialite-buttons type="Daftar" />
   <form method="POST" action="{{ route('register') }}">
     @csrf
     <x-auth.input name="name" label="Nama" autofocus />

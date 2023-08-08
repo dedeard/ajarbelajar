@@ -88,6 +88,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Comment::class);
     }
 
+    public function accounts()
+    {
+        return $this->hasMany(Account::class);
+    }
+
     public function hasFavorited($lessonId): bool
     {
         return (bool) $this->favorites->firstWhere('lesson_id', $lessonId);
@@ -96,7 +101,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function favoriteToggle($lessonId): bool
     {
         $favorite = $this->favorites->firstWhere('lesson_id', $lessonId);
-        if (! $favorite) {
+        if (!$favorite) {
             $data = new Favorite(['lesson_id' => $lessonId]);
             $this->favorites()->save($data);
 
