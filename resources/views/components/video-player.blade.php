@@ -8,7 +8,36 @@
   $isM3U8 = pathinfo($src, PATHINFO_EXTENSION) === 'm3u8';
 @endphp
 
-<div x-data="videoplayer"
+<div x-data="{
+    video: null,
+    player: null,
+    init() {
+        if (typeof window.videojs === 'function') {
+            this.initPlayer()
+        }
+        document.addEventListener('videojs-loaded', this.initPlayer.bind(this))
+    },
+    initPlayer() {
+        if (!this.player) {
+            this.video = this.$refs.videoElement
+            this.player = videojs(this.video, {
+                controlBar: {
+                    pictureInPictureToggle: false,
+                },
+                disablePictureInPicture: true,
+            })
+
+            if (this.video.dataset.quality) {
+                this.player?.hlsQualitySelector({
+                    displayCurrentQuality: true,
+                })
+            }
+        }
+    },
+    destroy() {
+        document.removeEventListener('videojs-loaded', this.initPlayer.bind(this))
+    }
+}"
   @if ($containerId) id="{{ $containerId }}" @endif
   class="{{ $containerClass }} relative block aspect-video w-full">
   <video x-ref="videoElement"
