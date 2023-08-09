@@ -1,87 +1,87 @@
 {
-    "name": "dedeard/ajarbelajar",
-    "type": "project",
-    "description": "Ajarbelajar is an innovative e-learning platform that provides students and educators with access to a wide range of online courses, video tutorials, modules, quizzes, and assessments. The platform was built with the aim of improving the quality of learning by providing easy-to-understand resources for a variety of subjects.",
-    "keywords": [
-        "framework",
-        "laravel"
+  "name": "dedeard/ajarbelajar",
+  "type": "project",
+  "description": "Ajarbelajar is an innovative e-learning platform that provides students and educators with access to a wide range of online courses, video tutorials, modules, quizzes, and assessments. The platform was built with the aim of improving the quality of learning by providing easy-to-understand resources for a variety of subjects.",
+  "keywords": [
+    "framework",
+    "laravel"
+  ],
+  "license": "MIT",
+  "require": {
+    "php": "^8.1",
+    "guzzlehttp/guzzle": "^7.2",
+    "http-interop/http-factory-guzzle": "^1.2",
+    "intervention/image": "^2.7",
+    "james-heinrich/getid3": "^1.9",
+    "laravel/framework": "^10.0",
+    "laravel/sanctum": "^3.2",
+    "laravel/scout": "^10.2",
+    "laravel/socialite": "^5.8",
+    "laravel/tinker": "^2.8",
+    "league/commonmark": "^2.4",
+    "league/flysystem-aws-s3-v3": "^3.15",
+    "livewire/livewire": "^2.12",
+    "meilisearch/meilisearch-php": "^1.2",
+    "nwidart/laravel-modules": "^10.0",
+    "opcodesio/log-viewer": "^2.5",
+    "pusher/pusher-php-server": "^7.2",
+    "rtconner/laravel-likeable": "^3.2",
+    "spatie/laravel-sluggable": "^3.4",
+    "torchlight/torchlight-commonmark": "^0.5.5"
+  },
+  "require-dev": {
+    "fakerphp/faker": "^1.9.1",
+    "laravel-lang/common": "^3.1",
+    "laravel/breeze": "^1.19",
+    "laravel/pint": "^1.10",
+    "laravel/sail": "^1.23",
+    "mockery/mockery": "^1.4.4",
+    "nunomaduro/collision": "^7.0",
+    "phpunit/phpunit": "^10.0",
+    "spatie/laravel-ignition": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/",
+      "Modules\\": "Modules/",
+      "Database\\Factories\\": "database/factories/",
+      "Database\\Seeders\\": "database/seeders/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "post-autoload-dump": [
+      "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+      "@php artisan package:discover --ansi"
     ],
-    "license": "MIT",
-    "require": {
-        "php": "^8.1",
-        "graham-campbell/markdown": "^15.0",
-        "guzzlehttp/guzzle": "^7.2",
-        "http-interop/http-factory-guzzle": "^1.2",
-        "intervention/image": "^2.7",
-        "james-heinrich/getid3": "^1.9",
-        "laravel/framework": "^10.0",
-        "laravel/sanctum": "^3.2",
-        "laravel/scout": "^10.2",
-        "laravel/socialite": "^5.8",
-        "laravel/tinker": "^2.8",
-        "league/flysystem-aws-s3-v3": "^3.15",
-        "livewire/livewire": "^2.12",
-        "meilisearch/meilisearch-php": "^1.2",
-        "nwidart/laravel-modules": "^10.0",
-        "opcodesio/log-viewer": "^2.5",
-        "pusher/pusher-php-server": "^7.2",
-        "rtconner/laravel-likeable": "^3.2",
-        "spatie/laravel-sluggable": "^3.4",
-        "torchlight/torchlight-commonmark": "^0.5.5"
-    },
-    "require-dev": {
-        "fakerphp/faker": "^1.9.1",
-        "laravel-lang/common": "^3.1",
-        "laravel/breeze": "^1.19",
-        "laravel/pint": "^1.10",
-        "laravel/sail": "^1.23",
-        "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^7.0",
-        "phpunit/phpunit": "^10.0",
-        "spatie/laravel-ignition": "^2.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "App\\": "app/",
-            "Modules\\": "Modules/",
-            "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
-    },
-    "scripts": {
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
-        ],
-        "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
-        ],
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ],
-        "post-create-project-cmd": [
-            "@php artisan key:generate --ansi"
-        ]
-    },
-    "extra": {
-        "laravel": {
-            "dont-discover": []
-        }
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true,
-        "allow-plugins": {
-            "pestphp/pest-plugin": true,
-            "php-http/discovery": true
-        }
-    },
-    "minimum-stability": "stable",
-    "prefer-stable": true
+    "post-update-cmd": [
+      "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+    ],
+    "post-root-package-install": [
+      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+    ],
+    "post-create-project-cmd": [
+      "@php artisan key:generate --ansi"
+    ]
+  },
+  "extra": {
+    "laravel": {
+      "dont-discover": []
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "allow-plugins": {
+      "pestphp/pest-plugin": true,
+      "php-http/discovery": true
+    }
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
 }

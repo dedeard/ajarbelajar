@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Markdown\CommentMarkdown\CommentMarkdown;
+use App\Markdown\LessonMarkdown\LessonMarkdown;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -97,7 +99,7 @@ class Lesson extends Model
             $resizedImage = Image::make($imageData)->fit($size['width'], $size['height'], function ($constraint) {
                 $constraint->aspectRatio();
             });
-            $newCoverName = config('image.cover.directory').Str::uuid().config('image.cover.extension');
+            $newCoverName = config('image.cover.directory') . Str::uuid() . config('image.cover.extension');
             Storage::put($newCoverName, (string) $resizedImage->encode(config('image.cover.format'), $size['quality']));
             $coverUrls[$sizeKey] = Storage::url($newCoverName);
         }
@@ -113,7 +115,7 @@ class Lesson extends Model
 
         $placeholderUrls = [];
         foreach (config('image.cover.sizes') as $sizeKey => $size) {
-            $placeholderUrls[$sizeKey] = asset('/img/placeholder/cover-'.$sizeKey.'.jpg');
+            $placeholderUrls[$sizeKey] = asset('/img/placeholder/cover-' . $sizeKey . '.jpg');
         }
 
         return $placeholderUrls;
@@ -144,11 +146,7 @@ class Lesson extends Model
 
     public function getHtmlDescriptionAttribute()
     {
-        if ($this->description) {
-            return Markdown::convert($this->description)->getContent();
-        }
-
-        return '';
+        return $this->description ? LessonMarkdown::convert($this->description) : '';
     }
 
     public function getSeoDescriptionAttribute()
@@ -158,7 +156,7 @@ class Lesson extends Model
             $max = 150;
             if (strlen($str) > $max) {
                 $offset = ($max - 3) - strlen($str);
-                $str = substr($str, 0, strrpos($str, ' ', $offset)).'...';
+                $str = substr($str, 0, strrpos($str, ' ', $offset)) . '...';
             }
 
             return $str;

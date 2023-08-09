@@ -1,41 +1,24 @@
 <?php
 
-namespace App\CommonMark;
+namespace App\Markdown\CommentMarkdown;
 
 use League\CommonMark\Environment\EnvironmentBuilderInterface;
 use League\CommonMark\Extension\CommonMark\Delimiter\Processor\EmphasisDelimiterProcessor;
 use League\CommonMark\Extension\CommonMark\Node;
 use League\CommonMark\Extension\CommonMark\Parser;
 use League\CommonMark\Extension\CommonMark\Renderer;
-use League\CommonMark\Extension\ConfigurableExtensionInterface;
+use League\CommonMark\Extension\ExtensionInterface;
 use League\CommonMark\Node as CoreNode;
 use League\CommonMark\Parser as CoreParser;
 use League\CommonMark\Renderer as CoreRenderer;
-use League\Config\ConfigurationBuilderInterface;
-use Nette\Schema\Expect;
 
-class CommonMarkExtension implements ConfigurableExtensionInterface
+class CommentMarkdownExtension implements ExtensionInterface
 {
-    public function configureSchema(ConfigurationBuilderInterface $builder): void
-    {
-        $builder->addSchema('commonmark', Expect::structure([
-            'use_asterisk' => Expect::bool(true),
-            'use_underscore' => Expect::bool(true),
-            'enable_strong' => Expect::bool(true),
-            'enable_em' => Expect::bool(true),
-            'unordered_list_markers' => Expect::listOf('string')->min(1)->default(['*', '+', '-'])->mergeDefaults(false),
-        ]));
-    }
-
-    // phpcs:disable Generic.Functions.FunctionCallArgumentSpacing.TooMuchSpaceAfterComma,Squiz.WhiteSpace.SemicolonSpacing.Incorrect
     public function register(EnvironmentBuilderInterface $environment): void
     {
         $environment
-            ->addBlockStartParser(new Parser\Block\BlockQuoteStartParser(), 70)
-            // ->addBlockStartParser(new Parser\Block\HeadingStartParser(), 60)
             ->addBlockStartParser(new Parser\Block\FencedCodeStartParser(), 50)
             ->addBlockStartParser(new Parser\Block\HtmlBlockStartParser(), 40)
-            ->addBlockStartParser(new Parser\Block\ThematicBreakStartParser(), 20)
             ->addBlockStartParser(new Parser\Block\ListBlockStartParser(), 10)
             ->addBlockStartParser(new Parser\Block\IndentedCodeStartParser(), -100)
 
@@ -49,16 +32,13 @@ class CommonMarkExtension implements ConfigurableExtensionInterface
             ->addInlineParser(new Parser\Inline\OpenBracketParser(), 20)
             ->addInlineParser(new Parser\Inline\BangParser(), 10)
 
-            ->addRenderer(Node\Block\BlockQuote::class, new Renderer\Block\BlockQuoteRenderer(), 0)
             ->addRenderer(CoreNode\Block\Document::class, new CoreRenderer\Block\DocumentRenderer(), 0)
             ->addRenderer(Node\Block\FencedCode::class, new Renderer\Block\FencedCodeRenderer(), 0)
-            // ->addRenderer(Node\Block\Heading::class, new Renderer\Block\HeadingRenderer(), 0)
             ->addRenderer(Node\Block\HtmlBlock::class, new Renderer\Block\HtmlBlockRenderer(), 0)
             ->addRenderer(Node\Block\IndentedCode::class, new Renderer\Block\IndentedCodeRenderer(), 0)
             ->addRenderer(Node\Block\ListBlock::class, new Renderer\Block\ListBlockRenderer(), 0)
             ->addRenderer(Node\Block\ListItem::class, new Renderer\Block\ListItemRenderer(), 0)
             ->addRenderer(CoreNode\Block\Paragraph::class, new CoreRenderer\Block\ParagraphRenderer(), 0)
-            ->addRenderer(Node\Block\ThematicBreak::class, new Renderer\Block\ThematicBreakRenderer(), 0)
 
             ->addRenderer(Node\Inline\Code::class, new Renderer\Inline\CodeRenderer(), 0)
             ->addRenderer(Node\Inline\Emphasis::class, new Renderer\Inline\EmphasisRenderer(), 0)
@@ -67,14 +47,9 @@ class CommonMarkExtension implements ConfigurableExtensionInterface
             ->addRenderer(Node\Inline\Link::class, new Renderer\Inline\LinkRenderer(), 0)
             ->addRenderer(CoreNode\Inline\Newline::class, new CoreRenderer\Inline\NewlineRenderer(), 0)
             ->addRenderer(Node\Inline\Strong::class, new Renderer\Inline\StrongRenderer(), 0)
-            ->addRenderer(CoreNode\Inline\Text::class, new CoreRenderer\Inline\TextRenderer(), 0);
+            ->addRenderer(CoreNode\Inline\Text::class, new CoreRenderer\Inline\TextRenderer(), 0)
 
-        if ($environment->getConfiguration()->get('commonmark/use_asterisk')) {
-            $environment->addDelimiterProcessor(new EmphasisDelimiterProcessor('*'));
-        }
-
-        if ($environment->getConfiguration()->get('commonmark/use_underscore')) {
-            $environment->addDelimiterProcessor(new EmphasisDelimiterProcessor('_'));
-        }
+            ->addDelimiterProcessor(new EmphasisDelimiterProcessor('*'))
+            ->addDelimiterProcessor(new EmphasisDelimiterProcessor('_'));
     }
 }
