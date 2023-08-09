@@ -1,21 +1,21 @@
 {
-    "name": "ajarbelajar/admin",
-    "description": "",
-    "authors": [
-        {
-            "name": "Dede ariansya",
-            "email": "me@dedeard.my.id"
-        }
-    ],
-    "extra": {
-        "laravel": {
-            "providers": [],
-            "aliases": {}
-        }
-    },
-    "autoload": {
-        "psr-4": {
-            "Modules\\Admin\\": ""
-        }
+  "name": "ajarbelajar/admin",
+  "description": "",
+  "authors": [
+    {
+      "name": "Dede ariansya",
+      "email": "me@dedeard.my.id"
     }
+  ],
+  "extra": {
+    "laravel": {
+      "providers": [],
+      "aliases": {}
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Modules\\Admin\\": ""
+    }
+  }
 }

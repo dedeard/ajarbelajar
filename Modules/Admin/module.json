@@ -1,11 +1,9 @@
 {
-    "name": "Admin",
-    "alias": "admin",
-    "description": "",
-    "keywords": [],
-    "priority": 0,
-    "providers": [
-        "Modules\\Admin\\Providers\\AdminServiceProvider"
-    ],
-    "files": []
+  "name": "Admin",
+  "alias": "admin",
+  "description": "",
+  "keywords": [],
+  "priority": 0,
+  "providers": ["Modules\\Admin\\Providers\\AdminServiceProvider"],
+  "files": []
 }

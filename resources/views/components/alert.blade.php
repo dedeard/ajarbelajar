@@ -20,7 +20,6 @@
   </script>
 @endif
 
-
 <script>
   if (window.flash) {
     if (window.fire) {

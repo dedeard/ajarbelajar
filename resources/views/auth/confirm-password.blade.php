@@ -1,6 +1,7 @@
 <x-auth-layout title="Konfirmasi Password">
   <x-auth.message>
-    Ini adalah area aman pada aplikasi. Harap konfirmasi password anda sebelum melanjutkan.
+    Ini adalah area aman pada aplikasi. Harap konfirmasi password anda sebelum
+    melanjutkan.
   </x-auth.message>
   <form method="POST" action="{{ route('password.confirm') }}">
     @csrf

@@ -1,15 +1,17 @@
 <div>
-  @if(!count($comments))
-  <div class="p-3">
-    <div class="border p-5 bg-gray-50">
-      <p class="text-center text-xl px-3 py-8 md:text-2xl font-light">BELUM ADA KOMENTAR</p>
+  @if (!count($comments))
+    <div class="p-3">
+      <div class="border bg-gray-50 p-5">
+        <p class="px-3 py-8 text-center text-xl font-light md:text-2xl">BELUM ADA
+          KOMENTAR</p>
+      </div>
     </div>
-  </div>
   @else
-  <ul>
-    @foreach ($comments as $comment)
-    <livewire:comment-list :key="$comment->id" :comment="$comment" :user="$user" />
-    @endforeach
-  </ul>
+    <ul>
+      @foreach ($comments as $comment)
+        <livewire:comment-list :key="$comment->id" :comment="$comment"
+          :user="$user" />
+      @endforeach
+    </ul>
   @endif
 </div>

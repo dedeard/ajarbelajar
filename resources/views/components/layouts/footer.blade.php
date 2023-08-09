@@ -5,7 +5,8 @@
     <div class="grid grid-cols-1 gap-3 py-14 md:grid-cols-3">
       <div class="p-3 text-center md:text-left">
         <x-svg.brand class="mx-auto h-10 md:mx-0" />
-        <p class="py-3 text-sm leading-none tracking-wider">BELAJAR, BERBAGI, BERKONTRIBUSI</p>
+        <p class="py-3 text-sm leading-none tracking-wider">BELAJAR, BERBAGI,
+          BERKONTRIBUSI</p>
       </div>
       <div class="p-3 text-center md:text-left">
         <div class="mb-2">
@@ -29,7 +30,8 @@
           class="inline-flex h-9 w-9 items-center justify-center rounded-full border bg-gray-100 p-0 text-sm hover:bg-gray-200">
           <i class="ft ft-facebook"></i>
         </a>
-        <a href="#" target="_blank" rel="noreferrer" aria-label="Instagram"
+        <a href="#" target="_blank" rel="noreferrer"
+          aria-label="Instagram"
           class="ml-3 inline-flex h-9 w-9 items-center justify-center rounded-full border bg-gray-100 p-0 text-sm hover:bg-gray-200">
           <i class="ft ft-instagram"></i>
         </a>
@@ -42,8 +44,10 @@
   </div>
   <div class="bg-gray-100 py-6">
     <p class="text-center text-xs">
-      © {{ now()->year }} All Right Reserved AjarBelajar - By{{ ' ' }}
-      <a href="https://dedeard.my.id" class="text-primary-600" target="_blank" rel="noreferrer">
+      © {{ now()->year }} All Right Reserved AjarBelajar -
+      By{{ ' ' }}
+      <a href="https://dedeard.my.id" class="text-primary-600" target="_blank"
+        rel="noreferrer">
         Dede ariansya
       </a>
     </p>
