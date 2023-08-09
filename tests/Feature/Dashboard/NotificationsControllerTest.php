@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Dashboard;
+namespace Tests\Feature\Dashboard;
 
 use App\Models\Comment;
 use App\Models\Lesson;

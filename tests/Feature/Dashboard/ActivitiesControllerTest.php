@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Controllers\Dashboard;
+namespace Tests\Feature\Dashboard;
 
 use App\Models\Activity;
 use App\Models\Episode;
