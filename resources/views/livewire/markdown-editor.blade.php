@@ -20,15 +20,17 @@
       <span class="block flex-1 border-b-2"></span>
     </div>
     <div :class="preview ? '!hidden' : ''">
-      <div
+      <div x-data="{ disableds: @js($disabledTools) }"
         class="flex flex-wrap items-center justify-center border-b bg-gray-100 px-1 pt-1">
         <template x-for="(command) in Object.keys(commandMap)"
           :key="command">
-          <button type="button"
-            class="mb-1 mr-1 flex h-7 w-7 items-center justify-center bg-white p-0 text-sm hover:bg-primary-100"
-            @click="formatText(command)" :title="commandMap[command].label">
-            <i :class="commandMap[command].icon"></i>
-          </button>
+          <template x-if="!disableds?.includes(command)">
+            <button type="button"
+              class="mb-1 mr-1 flex h-7 w-7 items-center justify-center bg-white p-0 text-sm hover:bg-primary-100"
+              @click="formatText(command)" :title="commandMap[command].label">
+              <i :class="commandMap[command].icon"></i>
+            </button>
+          </template>
         </template>
       </div>
       <label class="relative flex w-full pb-24">
@@ -49,7 +51,7 @@
     </div>
     <div class="hidden bg-gray-300" :class="preview ? '!block' : ''">
       <div class="prose max-w-none bg-white p-3">
-        @markdown($input)
+        {!! \Str::marked($input, 'minimal') !!}
       </div>
     </div>
   </div>

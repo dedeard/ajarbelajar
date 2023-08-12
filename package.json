@@ -6,6 +6,7 @@
     "format": "npx prettier --write {**/*,*}.{json,js,ts,jsx,tsx,blade.php}"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^6.4.2",
     "@hotwired/turbo": "^7.3.0",
     "@shufo/prettier-plugin-blade": "^1.10.1",
     "@tailwindcss/forms": "^0.5.2",

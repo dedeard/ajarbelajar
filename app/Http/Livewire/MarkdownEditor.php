@@ -16,6 +16,8 @@ class MarkdownEditor extends Component
 
     public $preview = false;
 
+    public array $disabledTools;
+
     public function setInput($value)
     {
         $this->input = $value;

@@ -28,7 +28,7 @@
           </x-input>
         </x-input-wrap>
         <x-input-wrap label="Deskripsi" useDiv>
-          <livewire:markdown-editor name="description" />
+          <livewire:markdown-editor name="description" :disabled-tools="['heading', 'blockquote', 'table', 'horizontalRule']" />
         </x-input-wrap>
       </div>
 

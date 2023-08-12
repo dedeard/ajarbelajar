@@ -20,7 +20,7 @@
     Tulis Komentar
   </h4>
   <div class="border-b">
-    <livewire:markdown-editor name="body" />
+    <livewire:markdown-editor name="body" :disabled-tools="['heading', 'blockquote', 'table', 'horizontalRule']" />
   </div>
   <div class="border-b p-3">
     <x-button>Komentar</x-button>

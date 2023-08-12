@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-use App\Markdown\CommentMarkdown\CommentMarkdown;
-use App\Markdown\LessonMarkdown\LessonMarkdown;
-use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -146,7 +143,7 @@ class Lesson extends Model
 
     public function getHtmlDescriptionAttribute()
     {
-        return $this->description ? LessonMarkdown::convert($this->description) : '';
+        return $this->description ? Str::marked($this->description, 'minimal') : '';
     }
 
     public function getSeoDescriptionAttribute()

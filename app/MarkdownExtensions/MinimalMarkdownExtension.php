@@ -1,19 +1,32 @@
 <?php
 
-namespace App\Markdown\CommentMarkdown;
+namespace App\MarkdownExtensions;
 
 use League\CommonMark\Environment\EnvironmentBuilderInterface;
 use League\CommonMark\Extension\CommonMark\Delimiter\Processor\EmphasisDelimiterProcessor;
 use League\CommonMark\Extension\CommonMark\Node;
 use League\CommonMark\Extension\CommonMark\Parser;
 use League\CommonMark\Extension\CommonMark\Renderer;
-use League\CommonMark\Extension\ExtensionInterface;
+use League\CommonMark\Extension\ConfigurableExtensionInterface;
 use League\CommonMark\Node as CoreNode;
 use League\CommonMark\Parser as CoreParser;
 use League\CommonMark\Renderer as CoreRenderer;
+use League\Config\ConfigurationBuilderInterface;
+use Nette\Schema\Expect;
 
-class CommentMarkdownExtension implements ExtensionInterface
+class MinimalMarkdownExtension implements ConfigurableExtensionInterface
 {
+    public function configureSchema(ConfigurationBuilderInterface $builder): void
+    {
+        $builder->addSchema('commonmark', Expect::structure([
+            'use_asterisk' => Expect::bool(true),
+            'use_underscore' => Expect::bool(true),
+            'enable_strong' => Expect::bool(true),
+            'enable_em' => Expect::bool(true),
+            'unordered_list_markers' => Expect::listOf('string')->min(1)->default(['*', '+', '-'])->mergeDefaults(false),
+        ]));
+    }
+
     public function register(EnvironmentBuilderInterface $environment): void
     {
         $environment
