@@ -36,6 +36,9 @@
     },
     destroy() {
         document.removeEventListener('videojs-loaded', this.initPlayer.bind(this))
+        if (this.player) {
+            this.player.dispose()
+        }
     }
 }"
   @if ($containerId) id="{{ $containerId }}" @endif
@@ -50,8 +53,7 @@
     @if ($isM3U8)
       <source src="{{ $src }}" type="application/x-mpegURL" />
     @else
-      <source src="{{ $src }}"
-        type="video/{{ pathinfo($src, PATHINFO_EXTENSION) }}" />
+      <source src="{{ $src }}" />
     @endif
   </video>
 </div>
