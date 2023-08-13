@@ -9,27 +9,29 @@
       Batal
     </a>
   </x-slot:actions>
-  <div class="bg-gray-300">
-    <div class="grid grid-cols-3 gap-px">
-      <a href="{{ route('dashboard.lessons.edit', ['lesson' => $lesson->id]) }}"
-        class="@if ($tab === 'details') bg-gray-50 border-primary-600 @else hover:bg-gray-50 bg-white @endif block border-b pb-3 pt-4 text-center text-sm font-semibold uppercase leading-none tracking-wider">Detail</a>
-      <a href="{{ route('dashboard.lessons.edit', ['lesson' => $lesson->id, 'tab' => 'cover']) }}"
-        class="@if ($tab === 'cover') bg-gray-50 border-primary-600 @else hover:bg-gray-50 bg-white @endif block border-b pb-3 pt-4 text-center text-sm font-semibold uppercase leading-none tracking-wider">Poster</a>
-      <a href="{{ route('dashboard.lessons.edit', ['lesson' => $lesson->id, 'tab' => 'episodes']) }}"
-        class="@if ($tab === 'episodes') bg-gray-50 border-primary-600 @else hover:bg-gray-50 bg-white @endif block border-b pb-3 pt-4 text-center text-sm font-semibold uppercase leading-none tracking-wider">Episode</a>
-    </div>
-  </div>
 
-  <div class="container p-3">
-    @if ($tab === 'details')
-      <x-dashboard.lesson-edit-details :lesson="$lesson" />
-    @endif
-    @if ($tab === 'cover')
-      <x-dashboard.lesson-edit-cover :lesson="$lesson" />
-    @endif
-    @if ($tab === 'episodes')
-      <x-dashboard.lesson-upload-episode :lesson="$lesson" />
-      <livewire:dashboard.show-episodes :lesson="$lesson" />
-    @endif
-  </div>
+  <x-tab route="dashboard.lessons.edit" :tab="$tab" :lists="[
+      'details' => ['params' => ['lesson' => $lesson->id], 'text' => 'Detail'],
+      'cover' => [
+          'params' => ['lesson' => $lesson->id, 'tab' => 'cover'],
+          'text' => 'Sampul',
+      ],
+      'episodes' => [
+          'params' => ['lesson' => $lesson->id, 'tab' => 'episodes'],
+          'text' => 'Episode',
+      ],
+  ]">
+    <div class="container p-3">
+      @if ($tab === 'details')
+        <x-dashboard.lesson-edit-details :lesson="$lesson" />
+      @endif
+      @if ($tab === 'cover')
+        <x-dashboard.lesson-edit-cover :lesson="$lesson" />
+      @endif
+      @if ($tab === 'episodes')
+        <x-dashboard.lesson-upload-episode :lesson="$lesson" />
+        <livewire:dashboard.show-episodes :lesson="$lesson" />
+      @endif
+    </div>
+  </x-tab>
 </x-app-layout>
