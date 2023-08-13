@@ -59,12 +59,14 @@ class LessonsController extends Controller
 
     public function edit(Request $request, $id)
     {
-        $tab = $request->input('tab');
-        abort_unless(in_array($tab ?? 'info', ['info', 'cover', 'episodes']), 404);
+        $tab = $request->input('tab') ?? 'details';
+        abort_unless(in_array($tab, ['details', 'cover', 'episodes']), 404);
         $lesson = $request->user()->lessons()->findOrFail($id);
-        $categories = Category::select('id', 'name')->orderBy('name')->get();
 
-        return view('dashboard.lessons.edit', ['categories' => $categories, 'lesson' => $lesson, 'tab' => $tab ?? 'info']);
+        $categories = null;
+        if ($tab === 'details') $categories = Category::select('id', 'name')->orderBy('name')->get();
+
+        return view('dashboard.lessons.edit', compact('categories', 'lesson', 'tab'));
     }
 
     public function destroy(Request $request, $id)
@@ -86,6 +88,7 @@ class LessonsController extends Controller
         $data = $request->validate([
             'title' => 'required|string|max:250',
             'category' => 'required|exists:categories,id',
+            'description' => 'required|max:3000'
         ]);
         $public = $request->get('public');
 
@@ -95,7 +98,7 @@ class LessonsController extends Controller
             $data['public'] = true;
         }
 
-        if ($data['public'] && ! $lesson->posted_at) {
+        if ($data['public'] && !$lesson->posted_at) {
             $data['posted_at'] = now();
             $lesson->update($data);
         } else {
@@ -124,21 +127,11 @@ class LessonsController extends Controller
         return response()->json($lesson->cover_urls);
     }
 
-    public function updateDescription(Request $request, $id)
-    {
-        $lesson = $request->user()->lessons()->findOrFail($id);
-        $data = $request->validate(['description' => 'required|max:3000']);
-        $lesson->update($data);
-        $lesson->searchable();
-
-        return response()->noContent();
-    }
-
     public function uploadEpisode(Request $request, $id)
     {
         $lesson = $request->user()->lessons()->findOrFail($id);
         $data = $request->validate([
-            'video' => 'required|mimes:mp4,mov,avi,fly,webm|max:'.env('MAX_VIDEO_SIZES', '25000'),
+            'video' => 'required|mimes:mp4,mov,avi,fly,webm|max:' . env('MAX_VIDEO_SIZES', '25000'),
         ]);
 
         $title = pathinfo($data['video']->getClientOriginalName(), PATHINFO_FILENAME);

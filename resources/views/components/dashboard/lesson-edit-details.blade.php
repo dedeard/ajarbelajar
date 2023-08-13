@@ -19,6 +19,10 @@
           @endforeach
         </x-input>
       </x-input-wrap>
+      <x-input-wrap label="Deskripsi" useDiv>
+        <livewire:markdown-editor name="description" :value="$lesson->description"
+          :disabled-tools="['heading', 'blockquote', 'table', 'horizontalRule']" />
+      </x-input-wrap>
       <div class="flex items-center py-3">
         <input name="public" id="public-checkbox" type="checkbox"
           @if ($lesson->public) checked @endif
