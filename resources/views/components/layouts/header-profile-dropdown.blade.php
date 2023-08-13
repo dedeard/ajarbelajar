@@ -36,12 +36,10 @@
         <a href="{{ route('dashboard.edit-profile') }}"
           class="mb-3 flex h-9 w-full items-center justify-center rounded-full border bg-gray-100 p-0 text-sm font-semibold uppercase tracking-wider hover:bg-gray-200">
           Edit Profil</a>
-
-        <form method="POST" action="{{ route('logout') }}">
-          @csrf
-          <x-button class="h-9 rounded-full !py-0"
-            variant="red">Keluar</x-button>
-        </form>
+        <x-auth.logout-button
+          class="inline-block rounded-full bg-red-600 px-4 py-3 text-sm font-semibold uppercase leading-none tracking-wider text-white hover:bg-red-700">
+          Keluar
+        </x-auth.logout-button>
       </div>
     </div>
   </div>

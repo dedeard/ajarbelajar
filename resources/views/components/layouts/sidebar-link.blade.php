@@ -15,15 +15,14 @@
     {{ $text }}
   </a>
 @else
-  <form class="inline" action="{{ route('logout') }}" method="post">
-    @csrf
-    <button href="{{ route($route) }}"
-      class="@if (Route::is($is)) bg-gray-100 @endif mb-1 flex w-full items-center rounded-full px-4 py-3 text-sm font-semibold leading-none hover:bg-gray-200"
-      {{ $attributes }}>
-      <span class="mr-3 text-red-600">
-        <i class="ft ft-{{ $icon }}"></i>
-      </span>
-      {{ $text }}
-    </button>
-  </form>
+  <x-auth.logout-button
+    {{ $attributes->merge([
+        'class' =>
+            'mb-1 flex w-full items-center rounded-full px-4 py-3 text-sm font-semibold leading-none hover:bg-gray-200',
+    ]) }}>
+    <span class="mr-3 text-red-600">
+      <i class="ft ft-{{ $icon }}"></i>
+    </span>
+    {{ $text }}
+  </x-auth.logout-button>
 @endif
