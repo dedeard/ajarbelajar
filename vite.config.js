@@ -10,6 +10,7 @@ export default defineConfig({
         'resources/js/app.js',
         'resources/js/main.js',
         'resources/js/videoplayer.js',
+        'resources/js/sortable.js',
       ],
       refresh: true,
     }),
