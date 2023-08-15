@@ -1,6 +1,6 @@
 <x-app-layout dashboard :title="$lesson->title" header="Edit Pelajaran">
   <x-slot:head>
-    @vite(['resources/js/videoplayer.js', 'resources/js/sortable.js'])
+    @vite(['resources/js/sortable.js'])
   </x-slot:head>
 
   <x-slot:actions>

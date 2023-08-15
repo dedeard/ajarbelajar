@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use App\Helpers\VideoHelper;
+use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 
 class Episode extends Model
 {
@@ -16,6 +18,7 @@ class Episode extends Model
         'lesson_id',
         'name',
         'title',
+        'description',
         'index',
         'seconds',
         'm3u8_processing_status',
@@ -45,14 +48,11 @@ class Episode extends Model
 
     public function getReadableSecondAttribute()
     {
-        if ($this->seconds) {
-            $hours = floor($this->seconds / 3600);
-            $minutes = floor(($this->seconds / 60) % 60);
-            $seconds = $this->seconds % 60;
+        return CarbonInterval::seconds($this->seconds)->cascade()->format('%H:%I:%S');
+    }
 
-            return gmdate('H:i:s', mktime($hours, $minutes, $seconds));
-        }
-
-        return '';
+    public function getHtmlDescriptionAttribute()
+    {
+        return $this->description ? Str::marked($this->description, 'minimal') : '';
     }
 }
