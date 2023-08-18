@@ -4,10 +4,22 @@
   </x-slot:head>
 
   <x-slot:actions>
-    <a href="{{ route('dashboard.lessons.edit', ['lesson' => $lesson->id, 'tab' => 'episodes']) }}"
-      class="block rounded-full bg-primary-600 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white hover:bg-primary-700">
-      Kembali
-    </a>
+    <div class="flex" x-data>
+      <form class="hidden" x-ref="formDelete"
+        action="{{ route('dashboard.lessons.episode.destroy', ['lesson' => $lesson->id, 'episode' => $episode->id]) }}"
+        method="POST">
+        @csrf
+        @method('DELETE')
+      </form>
+      <button x-on:click="$store.deleteConfirm(() => $refs.formDelete.submit())"
+        class="mr-2 block rounded-full bg-red-600 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white hover:bg-red-700">
+        Hapus
+      </button>
+      <a href="{{ route('dashboard.lessons.edit', ['lesson' => $lesson->id, 'tab' => 'episodes']) }}"
+        class="block rounded-full bg-primary-600 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white hover:bg-primary-700">
+        Kembali
+      </a>
+    </div>
   </x-slot:actions>
 
   <div class="container p-3">
