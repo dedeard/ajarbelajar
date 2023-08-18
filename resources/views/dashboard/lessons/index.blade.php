@@ -46,6 +46,6 @@
         </div>
         {{ $lessons->links() }}
       </div>
+    @endif
   </x-tab>
-  @endif
 </x-app-layout>
