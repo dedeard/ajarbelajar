@@ -28,4 +28,12 @@ class EpisodesController extends Controller
 
         return redirect()->back()->withSuccess('Episode berhasil diperbarui');
     }
+
+    public function destroy(Request $request, $lessonId, $episodeId)
+    {
+        $lesson = $request->user()->lessons()->findOrFail($lessonId);
+        $episode = $lesson->episodes()->findOrFail($episodeId);
+        $episode->delete();
+        return redirect()->route('dashboard.lessons.edit', ['lesson' => $lessonId, 'tab' => 'episodes'])->withSuccess('Episode berhasil dihapus.');
+    }
 }
