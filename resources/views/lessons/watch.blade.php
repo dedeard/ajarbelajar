@@ -11,7 +11,7 @@
             const targetEl = document.getElementById('video-player-autoheight')
 
             if (videoEl && targetEl) {
-              targetEl.style.height = videoEl.clientHeight + 'px'
+              targetEl.style.maxHeight = videoEl.clientHeight + 'px'
             }
           }
         }
@@ -38,56 +38,75 @@
     </div>
   </div>
 
-  <div class="container p-3">
-    <div class="mb-10 grid grid-cols-1 lg:grid-cols-3 lg:gap-3">
-      <div class="mb-3 lg:col-span-2">
-        <x-video-player container-id="video-container"
-          poster="{{ $lesson->cover_urls['large'] }}"
-          src="{{ $episode->video_url }}" />
-      </div>
-      <div id="video-player-autoheight" class="flex flex-col">
-        <div
-          class="mb-1 flex w-full items-center justify-between border bg-white px-5 py-4">
-          <div class="min-w-0 flex-grow">
-            <div class="text-xs uppercase tracking-wide opacity-75">Now playing
-            </div>
-            <h2 class="truncate text-ellipsis text-sm">
-              {{ sprintf('%02d', $episode->index + 1) }}. {{ $episode->title }}
-            </h2>
-          </div>
-          <div class="ml-4 flex items-center text-xs opacity-75">
-            <div class="my-auto mr-1">
-              <i class="ft ft-clock"></i>
-            </div>
-            <div class="my-auto whitespace-nowrap">
-              {{ $episode->readable_second }}</div>
+  <div class="mb-3">
+    <div class="container p-3">
+      <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-3">
+        <div class="mb-3 lg:col-span-2 lg:mb-0">
+          <div id="video-container">
+            <x-video-player poster="{{ $lesson->cover_urls['large'] }}"
+              src="{{ $episode->video_url }}" :autoplay="false" />
+            @if ($episode->description)
+              <div class="border bg-white">
+                <h1 class="border-b px-3 py-4 font-semibold">
+                  {{ $episode->title }}
+                </h1>
+                <div class="prose max-w-none p-3 pb-6 text-sm">
+                  {!! $episode->html_description !!}
+                </div>
+              </div>
+            @endif
           </div>
         </div>
+        <div id="video-player-autoheight" class="flex flex-col">
+          <div
+            class="mb-1 flex w-full items-center justify-between border bg-white px-5 py-4">
+            <div class="min-w-0 flex-grow">
+              <div class="text-xs uppercase tracking-wide opacity-75">Now
+                playing
+              </div>
+              <h2 class="truncate text-ellipsis text-sm">
+                {{ sprintf('%02d', $episode->index + 1) }}.
+                {{ $episode->title }}
+              </h2>
+            </div>
+            <div class="ml-4 flex items-center text-xs opacity-75">
+              <div class="my-auto mr-1">
+                <i class="ft ft-clock"></i>
+              </div>
+              <div class="my-auto whitespace-nowrap">
+                {{ $episode->readable_second }}</div>
+            </div>
+          </div>
 
-        <div
-          class="grid flex-1 auto-rows-max grid-cols-1 gap-1 overflow-y-auto">
-          @foreach ($lesson->episodes as $e)
-            <a href="{{ route('lessons.watch', ['lesson' => $lesson->slug, 'index' => $e->index]) }}"
-              class="flex items-center justify-between border bg-white px-5 py-4 hover:bg-gray-50">
-              <div class="min-w-0 flex-grow">
-                <h2 class="truncate text-ellipsis text-sm">
-                  {{ sprintf('%02d', $e->index + 1) }}. {{ $e->title }}</h2>
-              </div>
-              <div class="ml-4 flex items-center text-xs opacity-75">
-                <div class="my-auto mr-1">
-                  <i class="ft ft-clock"></i>
+          <div
+            class="grid flex-1 auto-rows-max grid-cols-1 gap-1 overflow-y-auto">
+            @foreach ($lesson->episodes as $e)
+              <a href="{{ route('lessons.watch', ['lesson' => $lesson->slug, 'index' => $e->index]) }}"
+                class="flex items-center justify-between border bg-white px-5 py-4 hover:bg-gray-50">
+                <div class="min-w-0 flex-grow">
+                  <h2 class="truncate text-ellipsis text-sm">
+                    {{ sprintf('%02d', $e->index + 1) }}. {{ $e->title }}
+                  </h2>
                 </div>
-                <div class="my-auto whitespace-nowrap">
-                  {{ $e->readable_second }}
+                <div class="ml-4 flex items-center text-xs opacity-75">
+                  <div class="my-auto mr-1">
+                    <i class="ft ft-clock"></i>
+                  </div>
+                  <div class="my-auto whitespace-nowrap">
+                    {{ $e->readable_second }}
+                  </div>
                 </div>
-              </div>
-            </a>
-          @endforeach
+              </a>
+            @endforeach
+          </div>
         </div>
       </div>
     </div>
+  </div>
 
+  <div class="container px-3">
     <div class="mx-auto max-w-3xl">
+
       <h3 class="mb-3 text-xl font-semibold uppercase tracking-wider">Komentar
       </h3>
       <div class="mb-3 block border bg-white">
