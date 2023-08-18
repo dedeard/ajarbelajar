@@ -16,7 +16,7 @@ class Comments extends Component
 
     public function mount()
     {
-        $this->comments = $this->episode->comments()->with('user', 'likeCounter')->orderBy('created_at', 'desc')->get();
+        $this->comments = $this->episode->comments()->with('user')->orderBy('created_at', 'desc')->get();
     }
 
     public function render()

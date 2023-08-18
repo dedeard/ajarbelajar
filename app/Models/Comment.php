@@ -43,4 +43,10 @@ class Comment extends Model
     {
         return $this->body ? Str::marked($this->body, 'minimal') : '';
     }
+
+    public function getLikeCountAttribute()
+    {
+        $counter = $this->likeCounter()->first();
+        return $counter ? $counter->count : 0;
+    }
 }
