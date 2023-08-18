@@ -14,7 +14,7 @@ class RoleTableSeeder extends Seeder
      */
     public function run()
     {
-        if (! Role::where('name', 'Super Admin')->exists()) {
+        if (!Role::where('name', 'super admin')->exists()) {
             Role::factory()->create([
                 'name' => 'super admin',
                 'display_name' => 'Super Admin',

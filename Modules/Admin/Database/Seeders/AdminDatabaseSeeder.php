@@ -24,12 +24,11 @@ class AdminDatabaseSeeder extends Seeder
             'password' => 'Super Admin',
             'password' => Hash::make('superadmin'),
             'is_active' => true,
-            'role_id' => Role::where('name', 'Super Admin')->first()->id,
+            'role_id' => Role::where('name', 'super admin')->first()->id,
         ];
 
-        if (! Admin::where('email', $data['email'])->exists()) {
+        if (!Admin::where('email', $data['email'])->exists()) {
             Admin::factory()->create($data);
         }
-
     }
 }
