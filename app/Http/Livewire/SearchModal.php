@@ -3,8 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Models\Lesson;
+use Illuminate\Support\Arr;
 use Livewire\Component;
-use Meilisearch\Endpoints\Indexes;
 
 class SearchModal extends Component
 {
@@ -17,17 +17,31 @@ class SearchModal extends Component
     public function updatedInput()
     {
         if (strlen($this->input) > 1) {
-            $this->results = Lesson::search(
+            $results = Lesson::search(
                 $this->input,
-                function (Indexes $meilisearch, string $query, array $options) {
+                function ($search, string $query, array $options) {
                     $options['highlightPreTag'] = '<span class="search-hits">';
                     $options['highlightPostTag'] = '</span>';
                     $options['hitsPerPage'] = 20;
                     $options['attributesToHighlight'] = ['title', 'author', 'category'];
 
-                    return $meilisearch->search($query, $options);
+                    return $search->search($query, $options);
                 }
             )->raw()['hits'];
+
+            $this->results = Arr::map($results, function ($result) {
+                if (config('scout.driver') === 'algolia') {
+                    $result['title'] = $result['_highlightResult']['title']['value'];
+                    $result['author'] = $result['_highlightResult']['author']['value'];
+                    $result['category'] = $result['_highlightResult']['category']['value'];
+                } else if (config('scout.driver') === 'meilisearch') {
+                    $result['title'] = $result['_formatted']['title'];
+                    $result['author'] = $result['_formatted']['author'];
+                    $result['category'] = $result['_formatted']['category'];
+                }
+                return $result;
+            });
+
             $this->queryResult = $this->input;
         } else {
             $this->results = [];

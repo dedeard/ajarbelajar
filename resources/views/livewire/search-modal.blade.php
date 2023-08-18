@@ -57,18 +57,18 @@
                 </div>
                 <div class="flex flex-1 flex-col justify-center px-3">
                   <h3 class="font-semibold text-gray-700">
-                    {!! $result['_formatted']['title'] !!}</h3>
+                    {!! $result['title'] !!}</h3>
                   <p
                     class="m-0 mt-2 flex items-center p-0 text-xs font-semibold">
                     <span
                       class="block pr-1 leading-none text-gray-500">by</span>
                     <span
-                      class="block leading-none text-gray-700">{!! $result['_formatted']['author'] !!}</span>
+                      class="block leading-none text-gray-700">{!! $result['author'] !!}</span>
                   </p>
                 </div>
                 <div class="flex items-center">
                   <span
-                    class="text-sm text-gray-500">{!! $result['_formatted']['category'] !!}</span>
+                    class="text-sm text-gray-500">{!! $result['category'] !!}</span>
                 </div>
               </div>
             </a>
