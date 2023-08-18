@@ -47,7 +47,7 @@ class LessonsController extends Controller
     public function watch(Request $request, string $slug)
     {
         $index = $request->input('index') ?? 0;
-        $lesson = Lesson::listQuery()->with('episodes')->where('slug', $slug)->firstOrFail();
+        $lesson = Lesson::listQuery()->with(['episodes' => fn ($q) => $q->orderBy('index', 'asc')])->where('slug', $slug)->firstOrFail();
         $episode = $lesson->episodes()->where('index', $index)->firstOrFail();
 
         EpisodeWatchedEvent::dispatch($episode, $request->user());
