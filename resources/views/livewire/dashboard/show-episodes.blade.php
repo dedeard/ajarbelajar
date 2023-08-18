@@ -1,22 +1,19 @@
-<div>
+<span>
   @if (session()->has('error'))
     <div
       class="border-l-4 border-primary-600 bg-primary-100 px-3 py-4 text-primary-600">
       {{ session('error') }}
     </div>
   @endif
-  @if (!count($episodes))
-    <x-dashboard.blank>Untuk pelajaran ini, belum ada episode yang telah anda
-      dibuat.</x-dashboard.blank>
-  @else
-    <div class="border bg-white">
+  @if (count($episodes))
+    <div class="border border-t-0 bg-white">
       <input type="text" id="index" wire:model="index" class="hidden" />
       <ul id="sortable">
         @foreach ($episodes as $episode)
           <li data-id="{{ $episode->id }}" x-data="{
               open: false
           }"
-            class="border-t">
+            class="border-t first:border-t-0">
             <div class="flex items-center">
               <div class="handle flex flex-1 cursor-grab items-center py-3">
                 <div class="flex items-center justify-center px-3">
@@ -77,4 +74,4 @@
     </div>
   @endif
 
-</div>
+</span>

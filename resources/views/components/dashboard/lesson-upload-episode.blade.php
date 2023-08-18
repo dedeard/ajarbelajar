@@ -22,11 +22,11 @@
                 const { data } = await window.axios.post('{{ route('dashboard.lessons.store.episode', ['lesson' => $lesson->id]) }}', formData, { onUploadProgress });
                 Livewire.emit('episode-created')
                 window.fire.success(data.message)
-                this.fileInput = null;
             }
         } catch (err) {
             window.fire.error(err.response?.data.message || err.message)
         }
+        this.fileInput = null;
         this.uploading = false
     },
     onComplete() {
@@ -34,7 +34,7 @@
         this.uploading = false
         this.progress = 0
     }
-}" class="mb-3 border bg-white">
+}" class="border bg-white">
   <div class="flex min-h-[100px] w-full p-3">
     <div
       class="relative flex flex-1 flex-col border border-dashed bg-gray-50 p-3">
