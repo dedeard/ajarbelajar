@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Helpers\VideoHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -33,6 +34,7 @@ class EpisodesController extends Controller
     {
         $lesson = $request->user()->lessons()->findOrFail($lessonId);
         $episode = $lesson->episodes()->findOrFail($episodeId);
+        VideoHelper::destroy($episode->name);
         $episode->delete();
         return redirect()->route('dashboard.lessons.edit', ['lesson' => $lessonId, 'tab' => 'episodes'])->withSuccess('Episode berhasil dihapus.');
     }
