@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
 
-            $table->string('cover')->unique()->nullable();
+            $table->json('covers')->nullable();
             $table->string('title');
             $table->string('slug')->unique();
             $table->longText('description')->nullable();

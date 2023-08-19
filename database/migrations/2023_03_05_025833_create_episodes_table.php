@@ -19,8 +19,10 @@ return new class extends Migration
 
             $table->string('name')->unique();
             $table->string('title');
+            $table->text('description')->nullable();
             $table->integer('index');
-            $table->decimal('seconds');
+            $table->decimal('seconds')->default(0);
+            $table->enum('m3u8_processing_status', ['pending', 'processing', 'success', 'failed'])->default('pending');
 
             $table->timestamps();
         });
