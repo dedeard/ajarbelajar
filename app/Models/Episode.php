@@ -34,6 +34,11 @@ class Episode extends Model
         return $this->HasMany(Comment::class);
     }
 
+    public function subtitles(): HasMany
+    {
+        return $this->HasMany(Subtitle::class);
+    }
+
     /**
      * Atributes
      */
