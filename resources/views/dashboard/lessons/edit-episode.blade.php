@@ -50,6 +50,7 @@
             <x-button value="Simpan" />
           </div>
         </form>
+        <livewire:dashboard.subtitle-management :episode="$episode" />
       </div>
     </div>
   </div>

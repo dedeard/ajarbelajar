@@ -13,7 +13,7 @@
   if (!$value) {
       $value = $type !== 'password' ? old($name) : '';
   }
-  $inputClass = 'block w-full flex-1 border-gray-300 placeholder:text-gray-500';
+  $inputClass = 'block w-full border flex-1 border-gray-300 placeholder:text-gray-500';
   if ($error) {
       $inputClass = $inputClass . ' border-red-600';
   }
@@ -36,6 +36,17 @@
       placeholder="{{ $placeholder }}"
       @if ($model) wire:model="{{ $name }}" @endif
       {{ $attributes }}>{{ $value }}</textarea>
+  @elseif($type === 'file')
+    <div class="{{ $inputClass }} !flex">
+      <span class="h-100 flex h-10 items-center bg-gray-300 px-3">PILIH
+        FILE</span>
+      <span
+        class="my-auto block flex-1 px-3 leading-6">{{ $placeholder }}</span>
+    </div>
+    <input id="{{ $name }}" class="hidden" type="file"
+      name="{{ $name }}"
+      @if ($model) wire:model="{{ $name }}" @endif
+      {{ $attributes }} />
   @else
     <input id="{{ $name }}" class="{{ $inputClass }}"
       type="{{ $type }}" name="{{ $name }}"
