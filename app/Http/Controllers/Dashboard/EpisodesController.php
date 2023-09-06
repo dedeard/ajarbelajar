@@ -12,7 +12,11 @@ class EpisodesController extends Controller
     {
         $lesson = $request->user()->lessons()->findOrFail($lessonId);
         $episode = $lesson->episodes()->findOrFail($episodeId);
-        return view('dashboard.lessons.edit-episode', compact('lesson', 'episode'));
+
+        $tab = $request->input('tab') ?? 'details';
+        abort_unless(in_array($tab, ['details', 'subtitles']), 404);
+
+        return view('dashboard.lessons.edit-episode', compact('lesson', 'episode', 'tab'));
     }
 
     public function update(Request $request, $lessonId, $episodeId)

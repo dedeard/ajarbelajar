@@ -17,8 +17,9 @@ return new class extends Migration
             $table->foreignId('episode_id');
             $table->foreign('episode_id')->references('id')->on('episodes')->onDelete('cascade');
 
-            $table->string('name')->unique();
-            $table->string('language')->default('english');
+            $table->string('url');
+            $table->string('code');
+            $table->string('name');
 
             $table->timestamps();
         });

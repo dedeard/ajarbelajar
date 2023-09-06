@@ -21,38 +21,62 @@
       </a>
     </div>
   </x-slot:actions>
-
-  <div class="container p-3">
-    <div class="md:flex md:flex-row-reverse">
-      <div class="md:w-[320px]">
-        <x-video-player src="{{ $episode->video_url }}" :autoplay="false" />
-      </div>
-      <div class="md:flex-1 md:pr-3">
-        <form
-          action="{{ route('dashboard.lessons.episode.update', ['lesson' => $lesson->id, 'episode' => $episode->id]) }}"
-          method="POST" class="mb-3 border bg-white">
-          @csrf
-          @method('PUT')
-          <div class="border-b p-3">
-            <h3 class="font-bold uppercase">Edit Detail</h3>
-          </div>
-          <div class="border-b p-3">
-            <x-input-wrap label="Judul">
-              <x-input name="title" placeholder="Judul"
-                value="{{ $episode->title }}" />
-            </x-input-wrap>
-            <x-input-wrap label="Deskripsi" useDiv>
-              <livewire:markdown-editor name="description" :value="$episode->description"
-                :disabled-tools="['heading', 'blockquote', 'table', 'horizontalRule']" />
-            </x-input-wrap>
-          </div>
-          <div class="p-3">
-            <x-button value="Simpan" />
-          </div>
-        </form>
-        <livewire:dashboard.subtitle-management :episode="$episode" />
+  <x-tab route="dashboard.lessons.episode.edit" :tab="$tab"
+    class="grid-cols-2" :lists="[
+        'details' => [
+            'params' => ['episode' => $episode->id, 'lesson' => $lesson->id],
+            'text' => 'Edit Detail',
+        ],
+        'subtitles' => [
+            'params' => [
+                'episode' => $episode->id,
+                'lesson' => $lesson->id,
+                'tab' => 'subtitles',
+            ],
+            'text' => 'Edit Subtitle',
+        ],
+    ]">
+    <div class="container p-3">
+      <div class="md:flex md:flex-row-reverse">
+        <div class="md:w-[320px]">
+          <x-video-player src="{{ $episode->video_url }}" :autoplay="false"
+            :subtitles="$episode->subtitles" />
+        </div>
+        <div class="md:flex-1 md:pr-3">
+          @if ($tab === 'details')
+            <form
+              action="{{ route('dashboard.lessons.episode.update', ['lesson' => $lesson->id, 'episode' => $episode->id]) }}"
+              method="POST" class="mb-3 border bg-white">
+              @csrf
+              @method('PUT')
+              <div class="border-b p-3">
+                <h3 class="font-bold uppercase">Edit Detail</h3>
+              </div>
+              <div class="border-b p-3">
+                <x-input-wrap label="Judul">
+                  <x-input name="title" placeholder="Judul"
+                    value="{{ $episode->title }}" />
+                </x-input-wrap>
+                <x-input-wrap label="Deskripsi" useDiv>
+                  <livewire:markdown-editor name="description" :value="$episode->description"
+                    :disabled-tools="[
+                        'heading',
+                        'blockquote',
+                        'table',
+                        'horizontalRule',
+                    ]" />
+                </x-input-wrap>
+              </div>
+              <div class="p-3">
+                <x-button value="Simpan" />
+              </div>
+            </form>
+          @else
+            <livewire:dashboard.subtitle-management :episode="$episode" />
+          @endif
+        </div>
       </div>
     </div>
-  </div>
+  </x-tab>
 
 </x-app-layout>

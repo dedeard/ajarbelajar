@@ -2,6 +2,7 @@
     'src' => '',
     'containerId' => null,
     'containerClass' => '',
+    'subtitles' => [],
 ])
 
 @php
@@ -49,11 +50,18 @@
         'autoplay' => true,
         'data-quality' => $isM3U8,
         'class' => 'video-js vjs-theme-ab absolute left-0 top-0 h-full w-full',
-    ]) }}>
+    ]) }}
+    crossorigin="anonymous">
     @if ($isM3U8)
       <source src="{{ $src }}" type="application/x-mpegURL" />
     @else
       <source src="{{ $src }}" />
     @endif
+
+    @foreach ($subtitles as $sub)
+      <track label="{{ $sub->name }}" srclang="{{ $sub->code }}"
+        kind="subtitles" src="{{ $sub->url }}">
+      </track>
+    @endforeach
   </video>
 </div>

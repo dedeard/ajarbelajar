@@ -44,7 +44,8 @@
         <div class="mb-3 lg:col-span-2 lg:mb-0">
           <div id="video-container">
             <x-video-player poster="{{ $lesson->cover_urls['large'] }}"
-              src="{{ $episode->video_url }}" :autoplay="false" />
+              src="{{ $episode->video_url }}" :autoplay="false"
+              :subtitles="$episode->subtitles" />
             @if ($episode->description)
               <div class="border bg-white">
                 <h1 class="border-b px-3 py-4 font-semibold">

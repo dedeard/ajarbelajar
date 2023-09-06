@@ -4,8 +4,9 @@ namespace App\Http\Livewire\Dashboard;
 
 use App\Models\Episode;
 use App\Models\Subtitle;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -19,7 +20,14 @@ class SubtitleManagement extends Component
 
     public $language;
 
+    public $languages;
+
     public $file;
+
+    public function __construct()
+    {
+        $this->languages = config('languages');
+    }
 
     public function mount()
     {
@@ -28,16 +36,38 @@ class SubtitleManagement extends Component
 
     public function save()
     {
+        $codes = implode(',', array_map(fn ($item) => $item['code'], $this->languages));
         $this->validate([
-            'language' => 'required|string',
-            'file' => 'required|max:512|mimetypes:text/plain,application/octet-stream'
+            'language' => ['required', 'in:' . $codes, Rule::unique('subtitles', 'code')->where(fn ($q) => $q->where('episode_id', $this->episode->id))],
+            'file' => 'required|max:512|mimes:txt'
         ]);
-        $name = Str::uuid() . '.srt';
-        $this->file->store('subtitles/' . $name, 'public');
-        $subtitle = new Subtitle(['name' => 'subtitles/' . $name, 'language' => $this->language]);
+        $ext = pathinfo($this->file->getClientOriginalName(), PATHINFO_EXTENSION);
+        $path = $this->file->storeAs('subtitles/' . Str::uuid() . ".$ext");
+        $language = collect($this->languages)->first(fn ($item) => $item['code'] === $this->language);
+
+        $subtitle = new Subtitle(
+            [
+                'name' =>  $language['name'],
+                'code' => $language['code'],
+                'url' => Storage::url($path)
+            ]
+        );
+
         $this->episode->subtitles()->save($subtitle);
+        $this->file = null;
+        $this->language = "";
 
         $this->mount();
+
+        session()->flash('create_message', 'Subtitle berhasil dibuat.');
+    }
+
+    public function remove($id)
+    {
+        $subtitle = $this->episode->subtitles()->find($id);
+        if ($subtitle) $subtitle->delete();
+        $this->mount();
+        session()->flash('delete_message', 'Subtitle berhasil dihapus.');
     }
 
     public function render()
