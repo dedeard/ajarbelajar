@@ -2,7 +2,9 @@
 
 namespace Modules\Admin\Providers;
 
+use Exception;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Modules\Admin\Entities\Role;
@@ -16,9 +18,7 @@ class RoleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (Schema::hasTable('roles')) {
-
-            // Retrieve all roles along with their permissions
+        try {
             $roles = Role::with('permissions')->get();
 
             // Prepare an associative array to store permissions and their associated role IDs
@@ -44,6 +44,8 @@ class RoleServiceProvider extends ServiceProvider
                     return true;
                 }
             });
+        } catch (Exception $e) {
+            Log::error($e->getMessage(), (array) $e);
         }
     }
 }
