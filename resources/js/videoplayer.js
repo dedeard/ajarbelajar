@@ -1,9 +1,8 @@
-import videojs from 'video.js'
-import hlsQualitySelector from './hlsQualitySelector'
-import 'video.js/dist/video-js.css'
+import Plyr from 'plyr';
+import Hls from 'hls.js'
+import 'plyr/dist/plyr.css'
 
-hlsQualitySelector(videojs)
+window.Plyr = Plyr
+window.Hls = Hls
 
-window.videojs = videojs
-
-document.dispatchEvent(new Event('videojs-loaded'))
+document.dispatchEvent(new Event('plyr-loaded'))

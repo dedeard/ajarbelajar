@@ -1,67 +1,89 @@
 @props([
-    'src' => '',
     'containerId' => null,
     'containerClass' => '',
-    'subtitles' => [],
+    'poster' => '',
+    'episode',
 ])
 
 @php
-  $isM3U8 = pathinfo($src, PATHINFO_EXTENSION) === 'm3u8';
+    // $source = $episode->video_url;
+    $source = 'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8';
+    $isHls = pathinfo($source, PATHINFO_EXTENSION) === 'm3u8';
+    $options = [
+        'title' => $episode->title,
+        'poster' => $poster,
+        'controls' => true,
+        'autoplay' => true,
+    ];
 @endphp
 
 <div x-data="{
     video: null,
     player: null,
+    hls: null,
+    source: '{{ $source }}',
+    options: @js($options),
+    isHls: {{ $isHls ? 'true' : 'false' }},
     init() {
-        if (typeof window.videojs === 'function') {
+        if (typeof window.Plyr === 'function') {
             this.initPlayer()
         }
-        document.addEventListener('videojs-loaded', this.initPlayer.bind(this))
+        document.addEventListener('plyr-loaded', this.initPlayer.bind(this))
     },
     initPlayer() {
         if (!this.player) {
             this.video = this.$refs.videoElement
-            this.player = videojs(this.video, {
-                controlBar: {
-                    pictureInPictureToggle: false,
-                },
-                disablePictureInPicture: true,
-            })
+            if (this.isHls && window.Hls.isSupported()) {
+                this.hls = new window.Hls()
+                this.hls.loadSource(this.source)
 
-            if (this.video.dataset.quality) {
-                this.player?.hlsQualitySelector({
-                    displayCurrentQuality: true,
-                })
+                this.hls.on(window.Hls.Events.MANIFEST_PARSED, (event, data) => {
+                    const availableQualities = this.hls.levels.map((l) => l.height)
+                    this.defaultOptions = {
+                        ...this.defaultOptions,
+                        quality: {
+                            default: availableQualities[0],
+                            options: availableQualities,
+                            forced: true,
+                            onChange: (e) => this.updateQuality(e),
+                        }
+                    }
+                    this.player = new window.Plyr(this.video, this.defaultOptions);
+                });
+            } else {
+                this.player = new window.Plyr(this.video, this.defaultOptions);
             }
         }
+        window.Self = this
+    },
+    updateQuality(newQuality) {
+        console.log(newQuality)
+        this.hls.levels.forEach((level, levelIndex) => {
+            if (level.height === newQuality) {
+                this.hls.currentLevel = levelIndex;
+            }
+        });
     },
     destroy() {
-        document.removeEventListener('videojs-loaded', this.initPlayer.bind(this))
+        document.removeEventListener('plyr-loaded', this.initPlayer.bind(this))
         if (this.player) {
-            this.player.dispose()
+            this.player.destroy()
         }
     }
-}"
-  @if ($containerId) id="{{ $containerId }}" @endif
-  class="{{ $containerClass }} relative block aspect-video w-full">
-  <video x-ref="videoElement"
-    {{ $attributes->merge([
-        'controls' => true,
-        'autoplay' => true,
-        'data-quality' => $isM3U8,
-        'class' => 'video-js vjs-theme-ab absolute left-0 top-0 h-full w-full',
-    ]) }}
-    crossorigin="anonymous">
-    @if ($isM3U8)
-      <source src="{{ $src }}" type="application/x-mpegURL" />
-    @else
-      <source src="{{ $src }}" />
+}" @if ($containerId)
+    id="{{ $containerId }}"
     @endif
+    class="{{ $containerClass }} relative block aspect-video w-full">
 
-    @foreach ($subtitles as $sub)
-      <track label="{{ $sub->name }}" srclang="{{ $sub->code }}"
-        kind="subtitles" src="{{ $sub->url }}">
-      </track>
-    @endforeach
-  </video>
+    <video x-ref="videoElement" controls crossorigin playsinline class="h-full w-full">
+        @if ($isHls)
+            <source src="{{ $source }}" type="application/x-mpegURL" />
+        @else
+            <source src="{{ $source }}" />
+        @endif
+
+        @foreach ($episode->subtitles as $sub)
+            <track kind="subtitles" label="{{ $sub->name }}" srclang="{{ $sub->code }}" src="{{ $sub->url }}" />
+        @endforeach
+    </video>
 </div>

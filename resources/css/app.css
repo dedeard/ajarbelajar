@@ -1,8 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --plyr-color-main: theme('colors.primary.600');
+}
 
 .dropdown-drop {
   opacity: 0;
@@ -50,54 +53,4 @@ pre code.torchlight .line {
 pre code.torchlight .line-number,
 pre code.torchlight .summary-caret {
   @apply mr-4;
-}
-
-.video-js.vjs-hls-quality-selector {
-  @apply block;
-}
-
-.video-js picture.vjs-poster {
-  @apply bg-black;
-}
-
-.video-js .vjs-poster img {
-  @apply opacity-50;
-}
-
-.video-js.vjs-hls-quality-selector .vjs-menu-item-text {
-  @apply text-white;
-}
-
-.video-js.vjs-hls-quality-selector
-  .vjs-menu-item.vjs-selected
-  .vjs-menu-item-text {
-  @apply text-primary-600;
-}
-
-.video-js.vjs-hls-quality-selector .vjs-menu-title {
-  @apply pt-2 text-white;
-}
-
-.video-js.vjs-theme-ab .vjs-big-play-button {
-  @apply border-none !bg-primary-600 hover:!bg-primary-700;
-}
-
-.video-js.vjs-theme-ab .vjs-control-bar {
-  @apply bg-black/30 backdrop-blur;
-}
-
-.video-js.vjs-theme-ab .vjs-button {
-  @apply hover:bg-white/50 hover:text-primary-600;
-}
-
-.video-js.vjs-theme-ab .vjs-progress-control .vjs-play-progress {
-  @apply bg-primary-600;
-}
-
-.video-js.vjs-theme-ab .vjs-progress-control .vjs-slider {
-  @apply bg-gray-900;
-}
-
-.video-js.vjs-theme-ab .vjs-progress-control .vjs-load-progress div {
-  @apply bg-primary-600/30;
 }
