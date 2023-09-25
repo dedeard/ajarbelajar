@@ -20,8 +20,14 @@ class LessonFactory extends Factory
     {
         return [
             'user_id' => fn () => User::factory()->create()->id,
-            'category_id' => fn () => Category::factory()->create()->id,
-            'cover' => fake()->imageUrl(640, 480), // You can adjust the image size as per your requirement
+            'category_id' => function () {
+                $categories = Category::all();
+                $ids = $categories->map(fn ($c) => $c->id);
+                if (count($ids)) {
+                    return $ids->random();
+                }
+                return Category::factory()->create()->id;
+            },
             'title' => fake()->sentence,
             'slug' => fake()->slug,
             'description' => fake()->paragraph,
