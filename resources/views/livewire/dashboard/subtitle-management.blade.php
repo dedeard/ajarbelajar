@@ -22,8 +22,7 @@
         </x-input-wrap>
 
         <x-input-wrap label="Subtitle">
-          <x-input type="file" name="file" model="file" title="Subtitle"
-            accept="text/vtt" :placeholder="$file ? $file->getClientOriginalName() : 'Subtitle'" />
+          <x-input type="file" name="file" model="file" title="Subtitle" :placeholder="$file ? $file->getClientOriginalName() : 'Subtitle'" />
         </x-input-wrap>
       </div>
       <div class="p-3">

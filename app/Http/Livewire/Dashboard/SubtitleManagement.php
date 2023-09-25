@@ -42,7 +42,7 @@ class SubtitleManagement extends Component
             'file' => 'required|max:512|mimes:txt'
         ]);
         $ext = pathinfo($this->file->getClientOriginalName(), PATHINFO_EXTENSION);
-        $path = $this->file->storeAs('subtitles/' . Str::uuid() . ".$ext");
+        $path = $this->file->storeAs('subtitles', Str::uuid() . ".$ext", 's3');
         $language = collect($this->languages)->first(fn ($item) => $item['code'] === $this->language);
 
         $subtitle = new Subtitle(

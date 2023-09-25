@@ -6,15 +6,14 @@
 ])
 
 @php
-    // $source = $episode->video_url;
-    $source = 'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8';
-    $isHls = pathinfo($source, PATHINFO_EXTENSION) === 'm3u8';
-    $options = [
-        'title' => $episode->title,
-        'poster' => $poster,
-        'controls' => true,
-        'autoplay' => true,
-    ];
+  $source = $episode->video_url;
+  $isHls = pathinfo($source, PATHINFO_EXTENSION) === 'm3u8';
+  $options = [
+      'title' => $episode->title,
+      'poster' => $poster,
+      'controls' => true,
+      'autoplay' => true,
+  ];
 @endphp
 
 <div x-data="{
@@ -36,7 +35,7 @@
             if (this.isHls && window.Hls.isSupported()) {
                 this.hls = new window.Hls()
                 this.hls.loadSource(this.source)
-
+                this.hls.attachMedia(this.video)
                 this.hls.on(window.Hls.Events.MANIFEST_PARSED, (event, data) => {
                     const availableQualities = this.hls.levels.map((l) => l.height)
                     this.defaultOptions = {
@@ -71,19 +70,21 @@
         }
     }
 }" @if ($containerId)
-    id="{{ $containerId }}"
+  id="{{ $containerId }}"
+  @endif
+  class="{{ $containerClass }} relative block aspect-video w-full">
+
+  <video x-ref="videoElement" controls crossorigin="anonymous" playsinline
+    class="h-full w-full">
+    @if ($isHls)
+      <source src="{{ $source }}" type="application/x-mpegURL" />
+    @else
+      <source src="{{ $source }}" />
     @endif
-    class="{{ $containerClass }} relative block aspect-video w-full">
 
-    <video x-ref="videoElement" controls crossorigin playsinline class="h-full w-full">
-        @if ($isHls)
-            <source src="{{ $source }}" type="application/x-mpegURL" />
-        @else
-            <source src="{{ $source }}" />
-        @endif
-
-        @foreach ($episode->subtitles as $sub)
-            <track kind="subtitles" label="{{ $sub->name }}" srclang="{{ $sub->code }}" src="{{ $sub->url }}" />
-        @endforeach
-    </video>
+    @foreach ($episode->subtitles as $sub)
+      <track kind="subtitles" label="{{ $sub->name }}"
+        srclang="{{ $sub->code }}" src="{{ $sub->url }}" />
+    @endforeach
+  </video>
 </div>
