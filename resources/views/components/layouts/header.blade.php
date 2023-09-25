@@ -43,7 +43,9 @@
               href="{{ route('dashboard.notifications.index') }}"
               class="toggle-color relative flex h-9 w-9 items-center justify-center rounded-full border p-0 text-sm">
               <i class="ft ft-bell"></i>
-              <livewire:notification-counter :user="Auth::user()" />
+              <span
+                class="min-w-4 absolute -right-1 -top-1 block h-4 rounded-full bg-red-600 px-1 text-center text-xs leading-4 text-white empty:hidden"
+                x-text="$store.notificationStore.count || ''"></span>
             </a>
             <x-layouts.header-profile-dropdown />
           </div>
@@ -60,3 +62,4 @@
     </div>
   </div>
 </header>
+

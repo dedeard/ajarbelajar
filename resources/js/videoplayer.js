@@ -1,4 +1,4 @@
-import Plyr from 'plyr';
+import Plyr from 'plyr'
 import Hls from 'hls.js'
 import 'plyr/dist/plyr.css'
 
