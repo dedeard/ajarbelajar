@@ -82,11 +82,10 @@
           </div>
         </div>
 
-        <livewire:new-user-lessons-card :user="$lesson->user" :ignore-id="$lesson->id" />
+        <x-new-user-lessons-card :user="$lesson->user" :ignore-id="$lesson->id" />
 
-        <livewire:new-lessons-card :ignore-id="$lesson->id" />
+        <x-new-lessons-card :ignore-id="$lesson->id" />
       </div>
     </div>
   </div>
 </x-app-layout>
-
