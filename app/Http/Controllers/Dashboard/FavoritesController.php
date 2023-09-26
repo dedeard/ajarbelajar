@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Events\LessonFavoritedEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Favorite;
 use App\Models\Lesson;
@@ -23,9 +24,11 @@ class FavoritesController extends Controller
         $user = $request->user();
         $favorite = $user->favorites()->firstWhere('lesson_id', $lessonId);
         $favorited = false;
-        if (!$favorite && Lesson::where('public', true)->exists()) {
+        if (!$favorite) {
+            $lesson = Lesson::where('public', true)->findOrFail($lessonId);
             $data = new Favorite(['lesson_id' => $lessonId]);
             $user->favorites()->save($data);
+            LessonFavoritedEvent::dispatch($lesson, $user);
             $favorited = true;
         } else if ($favorite) {
             $favorite->delete();
