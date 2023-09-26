@@ -10,7 +10,7 @@
         @endif
 
         @auth
-          <livewire:favorite-toggle :lesson="$lesson" :user="Auth::user()" small />
+          <x-favorite-toggle lessonId="{{ $lesson->id }}" :small="true" />
         @endauth
 
         <img src="{{ $lesson->cover_urls['thumb'] }}" alt="{{ $lesson->title }}"
@@ -62,3 +62,4 @@
     </div>
   </div>
 @endif
+

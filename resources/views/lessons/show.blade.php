@@ -8,7 +8,7 @@
               alt="{{ $lesson->title }}" class="block w-full" />
 
             @auth
-              <livewire:favorite-toggle :lesson="$lesson" :user="Auth::user()" />
+              <x-favorite-toggle lessonId="{{ $lesson->id }}" />
             @endauth
 
             <a href="{{ route('lessons.watch', $lesson->slug) }}"
@@ -89,3 +89,4 @@
     </div>
   </div>
 </x-app-layout>
+

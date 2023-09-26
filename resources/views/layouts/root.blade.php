@@ -22,13 +22,18 @@
     window.NOTIFICATION_COUNT = @js(
         Auth::user()->notifications()->count()
     );
+    window.FAVORITE_DATA = @js(
+        Auth::user()->favorites()->select('lesson_id')->get()->map(fn($el) => $el->lesson_id)
+    );
     window.Alpine?.store('authStore')?.set(window.AUTH_DATA)
     window.Alpine?.store('notificationStore')?.set(window.NOTIFICATION_COUNT)
+    window.Alpine?.store('favoriteStore')?.set(window.FAVORITE_DATA)
   </script>
 @else
   <script>
     window.Alpine?.store('authStore')?.set(null)
     window.Alpine?.store('notificationStore')?.set(0)
+    window.Alpine?.store('favoriteStore')?.set([])
   </script>
 @endauth
 
@@ -44,3 +49,4 @@
 </body>
 
 </html>
+

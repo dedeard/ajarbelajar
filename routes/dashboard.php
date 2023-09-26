@@ -16,6 +16,7 @@ Route::put('/lessons/{lesson}/{episode}', 'EpisodesController@update')->name('le
 Route::delete('/lessons/{lesson}/{episode}', 'EpisodesController@destroy')->name('lessons.episode.destroy');
 
 Route::get('/favorites', 'FavoritesController@index')->name('favorites');
+Route::put('/favorites/{lesson}/toggle', 'FavoritesController@toggle')->name('favorites.toggle');
 
 Route::get('/notifications', 'NotificationsController@index')->name('notifications.index');
 Route::get('/notifications/markall', 'NotificationsController@markall')->name('notifications.markall');
