@@ -36,12 +36,9 @@
 }" class="mb-3 border bg-white p-3">
   <img x-bind:src="url" class="block w-full" />
   <div class="flex">
-    <div
-      class="relative flex flex-1 flex-col border border-dashed bg-gray-50/10 p-3">
-      <p class="m-auto text-center text-sm leading-none"
-        x-text="uploading ? message : 'Klik disini untuk mengedit gambar'"></p>
-      <input x-bind:disabled="uploading" type="file" aria-hidden="true"
-        accept="image/*" x-on:change="onChange"
+    <div class="relative flex flex-1 flex-col border border-dashed bg-gray-50/10 p-3">
+      <p class="m-auto text-center text-sm leading-none" x-text="uploading ? message : 'Klik disini untuk mengedit gambar'"></p>
+      <input x-bind:disabled="uploading" type="file" aria-hidden="true" accept="image/*" x-on:change="onChange"
         class="absolute z-10 block h-full w-full opacity-0" />
     </div>
   </div>

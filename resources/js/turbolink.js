@@ -10,9 +10,7 @@ if (window.Livewire) {
 
     window.Livewire.restart()
 
-    window.Alpine &&
-      window.Alpine.flushAndStopDeferringMutations &&
-      window.Alpine.flushAndStopDeferringMutations()
+    window.Alpine && window.Alpine.flushAndStopDeferringMutations && window.Alpine.flushAndStopDeferringMutations()
   }
 
   function wireTurboBeforeCache() {

@@ -9,8 +9,7 @@
       <x-button value="Masuk" class="w-1/2" />
     </div>
     <div class="pt-4 text-center">
-      <a class="text-sm font-bold text-primary-700"
-        href="{{ route('password.request') }}">Lupa password anda?</a>
+      <a class="text-sm font-bold text-primary-700" href="{{ route('password.request') }}">Lupa password anda?</a>
     </div>
   </form>
 </x-auth-layout>

@@ -5,11 +5,9 @@
         {{ $user->name }}</h4>
     </div>
     @foreach ($lessons as $lesson)
-      <a href="{{ route('lessons.show', $lesson->slug) }}"
-        class="block border-t px-3 py-2 text-sm first:border-t-0 hover:bg-gray-100">
+      <a href="{{ route('lessons.show', $lesson->slug) }}" class="block border-t px-3 py-2 text-sm first:border-t-0 hover:bg-gray-100">
         @if ($lesson->category)
-          <span
-            class="block text-xs font-semibold leading-none">{{ $lesson->category->name }}</span>
+          <span class="block text-xs font-semibold leading-none">{{ $lesson->category->name }}</span>
         @endif
         {{ $lesson->title }}
       </a>

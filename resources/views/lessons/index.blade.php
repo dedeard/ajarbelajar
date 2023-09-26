@@ -13,8 +13,7 @@
           Popularitas
         @endif
       </x-button>
-      <div
-        class="dropdown-drop absolute right-0 top-full z-10 mt-1 w-48 border bg-white p-3 shadow">
+      <div class="dropdown-drop absolute right-0 top-full z-10 mt-1 w-48 border bg-white p-3 shadow">
         <a href="{{ route('lessons.index') }}"
           class="@if (!$sort) bg-gray-100 @endif mb-3 flex h-9 w-full items-center justify-center rounded-full border px-4 text-sm uppercase hover:bg-gray-200">
           Terbaru

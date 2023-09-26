@@ -4,8 +4,7 @@
     alamat email dengan mengklik tautan yang kami kirim? Jika
     Anda tidak menerima email, kami akan mengirim ulang. </x-auth.message>
   @if (session('status') == 'verification-link-sent')
-    <x-auth.session-status
-      status="Tautan verifikasi baru telah dikirim ke alamat email yang Anda berikan saat pendaftaran." />
+    <x-auth.session-status status="Tautan verifikasi baru telah dikirim ke alamat email yang Anda berikan saat pendaftaran." />
   @endif
   <form method="POST" action="{{ route('verification.send') }}">
     @csrf

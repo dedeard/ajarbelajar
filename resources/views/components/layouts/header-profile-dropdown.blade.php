@@ -1,25 +1,20 @@
 <div class="dropdown-wrapper relative ml-3 h-9 w-9">
   <button class="block h-9 w-9 rounded-full p-0">
     @if (Auth::user()->avatar_url)
-      <img src="{{ Auth::user()->avatar_url }}" alt="{{ Auth::user()->name }}"
-        class="block h-full w-full rounded-full" />
+      <img src="{{ Auth::user()->avatar_url }}" alt="{{ Auth::user()->name }}" class="block h-full w-full rounded-full" />
     @else
       <x-avatar :name="Auth::user()->name" class="block h-full w-full rounded-full" />
     @endif
   </button>
   <div class="dropdown-drop absolute right-0 top-full mt-3 w-60">
-    <span
-      class="absolute -top-1 right-1 h-6 w-6 rotate-45 transform rounded bg-primary-600"></span>
+    <span class="absolute -top-1 right-1 h-6 w-6 rotate-45 transform rounded bg-primary-600"></span>
     <div class="relative z-10 border border-gray-100 bg-white p-3 shadow-lg">
       <div class="flex p-3">
         <figure class="m-auto block h-24 w-24 rounded-full">
           @if (Auth::user()->avatar_url)
-            <img src="{{ Auth::user()->avatar_url }}"
-              alt="{{ Auth::user()->name }}"
-              class="block h-full w-full rounded-full" />
+            <img src="{{ Auth::user()->avatar_url }}" alt="{{ Auth::user()->name }}" class="block h-full w-full rounded-full" />
           @else
-            <x-avatar :name="Auth::user()->name"
-              class="block h-full w-full rounded-full" />
+            <x-avatar :name="Auth::user()->name" class="block h-full w-full rounded-full" />
           @endif
         </figure>
       </div>

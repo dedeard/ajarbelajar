@@ -4,8 +4,7 @@
       <div class="card-header d-flex">
         <h3 class="card-title my-auto">Buat Kategori Baru</h3>
         <div class="my-auto ml-auto">
-          <a href="{{ route('admin.categories.index') }}"
-            class="btn btn-sm btn-primary">Kembali</a>
+          <a href="{{ route('admin.categories.index') }}" class="btn btn-sm btn-primary">Kembali</a>
         </div>
       </div>
       <div class="card-body">

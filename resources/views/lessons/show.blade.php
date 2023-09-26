@@ -4,8 +4,7 @@
       <div class="md:col-span-2">
         <article class="mb-3 border bg-white">
           <div class="relative">
-            <img src="{{ $lesson->cover_urls['large'] }}"
-              alt="{{ $lesson->title }}" class="block w-full" />
+            <img src="{{ $lesson->cover_urls['large'] }}" alt="{{ $lesson->title }}" class="block w-full" />
 
             @auth
               <x-favorite-toggle lessonId="{{ $lesson->id }}" />
@@ -28,10 +27,8 @@
           <h1 class="my-auto flex-1 p-3 font-semibold uppercase leading-none">
             {{ $lesson->title }}
           </h1>
-          <p
-            class="flex items-center border-b p-3 pt-0 text-xs uppercase text-gray-600">
-            <span
-              class="block">{{ $lesson->posted_at->diffForHumans() }}</span>
+          <p class="flex items-center border-b p-3 pt-0 text-xs uppercase text-gray-600">
+            <span class="block">{{ $lesson->posted_at->diffForHumans() }}</span>
             <span class="mx-2 block h-2 w-px bg-gray-600"></span>
             <span class="block">
               <i class="ft ft-film"></i> {{ $lesson->episodes_count }} Episode
@@ -57,23 +54,17 @@
               <a href="{{ route('users.show', $lesson->user->username) }}"
                 class="m-auto flex h-24 w-24 items-center justify-center rounded-full border bg-gray-100 p-1">
                 @if ($lesson->user->avatar_url)
-                  <img src="{{ $lesson->user->avatar_url }}"
-                    alt="{{ $lesson->user->name }}"
-                    class="block h-full w-full rounded-full" />
+                  <img src="{{ $lesson->user->avatar_url }}" alt="{{ $lesson->user->name }}" class="block h-full w-full rounded-full" />
                 @else
-                  <x-avatar :name="$lesson->user->name"
-                    class="block h-full w-full rounded-full" />
+                  <x-avatar :name="$lesson->user->name" class="block h-full w-full rounded-full" />
                 @endif
               </a>
             </div>
-            <h4
-              class="truncate text-center text-lg font-bold uppercase tracking-wider">
-              <a
-                href="{{ route('users.show', $lesson->user->username) }}">{{ $lesson->user->name }}</a>
+            <h4 class="truncate text-center text-lg font-bold uppercase tracking-wider">
+              <a href="{{ route('users.show', $lesson->user->username) }}">{{ $lesson->user->name }}</a>
             </h4>
             <div class="mb-3 truncate text-center text-sm text-gray-500">
-              <a
-                href="{{ route('users.show', $lesson->user->username) }}">{{ '@' . $lesson->user->username }}</a>
+              <a href="{{ route('users.show', $lesson->user->username) }}">{{ '@' . $lesson->user->username }}</a>
             </div>
           </div>
           <div class="bg-gray-100 p-2">

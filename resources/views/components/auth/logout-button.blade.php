@@ -19,11 +19,9 @@
             }
         })
     }
-}" x-on:click.prevent="logout" href="{{ route('logout') }}"
-  {{ $attributes }}>
+}" x-on:click.prevent="logout" href="{{ route('logout') }}" {{ $attributes }}>
   {{ $slot }}
-  <form x-ref="logoutForm" class="hidden" action="{{ route('logout') }}"
-    method="post">
+  <form x-ref="logoutForm" class="hidden" action="{{ route('logout') }}" method="post">
     @csrf
   </form>
 </a>

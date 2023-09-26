@@ -74,8 +74,7 @@
   @endif
   class="{{ $containerClass }} relative block aspect-video w-full">
 
-  <video x-ref="videoElement" controls crossorigin="anonymous" playsinline
-    class="h-full w-full">
+  <video x-ref="videoElement" controls crossorigin="anonymous" playsinline class="h-full w-full">
     @if ($isHls)
       <source src="{{ $source }}" type="application/x-mpegURL" />
     @else
@@ -83,8 +82,7 @@
     @endif
 
     @foreach ($episode->subtitles as $sub)
-      <track kind="subtitles" label="{{ $sub->name }}"
-        srclang="{{ $sub->code }}" src="{{ $sub->url }}" />
+      <track kind="subtitles" label="{{ $sub->name }}" srclang="{{ $sub->code }}" src="{{ $sub->url }}" />
     @endforeach
   </video>
 </div>

@@ -5,8 +5,7 @@
         <h3 class="card-title my-auto">Daftar Peran</h3>
         <div class="my-auto ml-auto">
           @can('create role')
-            <a href="{{ route('admin.roles.create') }}"
-              class="btn btn-sm btn-primary">Buat Peran Baru</a>
+            <a href="{{ route('admin.roles.create') }}" class="btn btn-sm btn-primary">Buat Peran Baru</a>
           @endcan
         </div>
       </div>
@@ -32,19 +31,16 @@
                 <td class="py-0 text-center align-middle">
                   @if (!$role->is_protected)
                     @can('update role')
-                      <a href="{{ route('admin.roles.edit', $role->id) }}"
-                        class="btn btn-default btn-sm" title="Edit peran">
+                      <a href="{{ route('admin.roles.edit', $role->id) }}" class="btn btn-default btn-sm" title="Edit peran">
                         <i class="fas fa-edit"></i>
                       </a>
                     @endcan
                     @can('delete role')
-                      <button class="btn btn-danger btn-sm btn-icon"
-                        title="Hapus peran"
+                      <button class="btn btn-danger btn-sm btn-icon" title="Hapus peran"
                         delete-confirm="#form-delete-role-{{ $role->id }}">
                         <i class="fas fa-trash"></i>
                       </button>
-                      <form action="{{ route('admin.roles.destroy', $role->id) }}"
-                        method="post" id="form-delete-role-{{ $role->id }}">
+                      <form action="{{ route('admin.roles.destroy', $role->id) }}" method="post" id="form-delete-role-{{ $role->id }}">
                         @csrf
                         @method('delete')
                       </form>

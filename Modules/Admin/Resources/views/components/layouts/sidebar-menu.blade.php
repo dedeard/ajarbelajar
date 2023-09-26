@@ -65,8 +65,7 @@
     @if (isset($link['can']))
       @can($link['can'])
         <li class="nav-item">
-          <a href="{{ route($link['route']) }}"
-            class="nav-link @if (Route::is($link['is'])) active @endif">
+          <a href="{{ route($link['route']) }}" class="nav-link @if (Route::is($link['is'])) active @endif">
             <i class="nav-icon fas fa-{{ $link['icon'] }}"></i>
             <p>
               {{ $link['name'] }}
@@ -77,8 +76,7 @@
       @endcan
     @else
       <li class="nav-item">
-        <a href="{{ route($link['route']) }}"
-          class="nav-link @if (Route::is($link['is'])) active @endif">
+        <a href="{{ route($link['route']) }}" class="nav-link @if (Route::is($link['is'])) active @endif">
           <i class="nav-icon fas fa-{{ $link['icon'] }}"></i>
           <p>
             {{ $link['name'] }}

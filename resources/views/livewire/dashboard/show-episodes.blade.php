@@ -1,7 +1,6 @@
 <span>
   @if (session()->has('error'))
-    <div
-      class="border-l-4 border-primary-600 bg-primary-100 px-3 py-4 text-primary-600">
+    <div class="border-l-4 border-primary-600 bg-primary-100 px-3 py-4 text-primary-600">
       {{ session('error') }}
     </div>
   @endif
@@ -12,16 +11,14 @@
         @foreach ($episodes as $episode)
           <li data-id="{{ $episode->id }}" x-data="{
               open: false
-          }"
-            class="border-t first:border-t-0">
+          }" class="border-t first:border-t-0">
             <div class="flex items-center">
               <div class="handle flex flex-1 cursor-grab items-center py-3">
                 <div class="flex items-center justify-center px-3">
                   <i class="ft ft-menu"></i>
                 </div>
                 <div class="flex flex-1 items-center">
-                  <span
-                    class="block pr-3 text-sm font-semibold">{{ $episode->readable_second }}</span>
+                  <span class="block pr-3 text-sm font-semibold">{{ $episode->readable_second }}</span>
                   <span class="block flex-1 text-sm">
                     {{ $episode->title }}
                   </span>

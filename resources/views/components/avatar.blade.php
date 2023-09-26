@@ -21,13 +21,9 @@
   
 @endphp
 
-<svg
-  {{ $attributes->merge(['viewBox' => '0 0 60 60', 'class' => 'h-full w-full block']) }}>
+<svg {{ $attributes->merge(['viewBox' => '0 0 60 60', 'class' => 'h-full w-full block']) }}>
   <title>{{ $name }}</title>
-  <rect class="fill-primary-100" x="0" y="0" width="60"
-    height="60" />
-  <text class="fill-primary-700" x="50%" y="50%"
-    transform="translate(0 {{ $translateY }})" text-anchor="middle"
-    font-family="Roboto, sans-serif" font-weight="700"
-    font-size="{{ $fontsize }}">{{ $initials }}</text>
+  <rect class="fill-primary-100" x="0" y="0" width="60" height="60" />
+  <text class="fill-primary-700" x="50%" y="50%" transform="translate(0 {{ $translateY }})" text-anchor="middle"
+    font-family="Roboto, sans-serif" font-weight="700" font-size="{{ $fontsize }}">{{ $initials }}</text>
 </svg>

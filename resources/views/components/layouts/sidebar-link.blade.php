@@ -17,8 +17,7 @@
 @else
   <x-auth.logout-button
     {{ $attributes->merge([
-        'class' =>
-            'mb-1 flex w-full items-center rounded-full px-4 py-3 text-sm font-semibold leading-none hover:bg-gray-200',
+        'class' => 'mb-1 flex w-full items-center rounded-full px-4 py-3 text-sm font-semibold leading-none hover:bg-gray-200',
     ]) }}>
     <span class="mr-3 text-red-600">
       <i class="ft ft-{{ $icon }}"></i>

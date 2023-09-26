@@ -16,4 +16,3 @@
   x-on:click="$store.favoriteStore.toggle({{ $lessonId }})">
   <x-svg.heart width="14" height="14" fill="currentColor" />
 </button>
-

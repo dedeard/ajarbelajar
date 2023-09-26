@@ -21,8 +21,7 @@
   <div class="login-box">
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
-        <a href="{{ route('admin.dashboard') }}"
-          class="h1"><b>Admin</b><span class="text-primary">AB</span></a>
+        <a href="{{ route('admin.dashboard') }}" class="h1"><b>Admin</b><span class="text-primary">AB</span></a>
       </div>
       <div class="card-body">
         {{ $slot }}

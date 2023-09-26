@@ -2,19 +2,15 @@
   <div class="border-b bg-white">
     <div class="p-3">
       <div class="flex flex-col items-center justify-center pb-3 pt-6">
-        <div
-          class="m-auto flex h-24 w-24 items-center justify-center rounded-full border bg-gray-100 p-1">
+        <div class="m-auto flex h-24 w-24 items-center justify-center rounded-full border bg-gray-100 p-1">
           @if ($user->avatar_url)
-            <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}"
-              class="block h-full w-full rounded-full" />
+            <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="block h-full w-full rounded-full" />
           @else
-            <x-avatar :name="$user->name"
-              class="block h-full w-full rounded-full" />
+            <x-avatar :name="$user->name" class="block h-full w-full rounded-full" />
           @endif
         </div>
       </div>
-      <h4
-        class="truncate text-center text-lg font-bold uppercase tracking-wider">
+      <h4 class="truncate text-center text-lg font-bold uppercase tracking-wider">
         {{ $user->name }}</h4>
       <div class="mb-3 truncate text-center text-sm text-gray-500">
         {{ '@' . $user->username }}</div>
@@ -23,9 +19,7 @@
       </p>
       @if ($user->website)
         <div class="mb-3 text-center">
-          <a href="{{ $user->website }}" target="_blank"
-            rel="noopener noreferrer"
-            class="text-sm text-primary-600 hover:text-primary-700">
+          <a href="{{ $user->website }}" target="_blank" rel="noopener noreferrer" class="text-sm text-primary-600 hover:text-primary-700">
             {{ $user->website }}
           </a>
         </div>
@@ -54,8 +48,7 @@
               Popularitas
             @endif
           </x-button>
-          <div
-            class="dropdown-drop absolute right-0 top-full z-10 mt-1 w-48 border bg-white p-3 shadow">
+          <div class="dropdown-drop absolute right-0 top-full z-10 mt-1 w-48 border bg-white p-3 shadow">
             <a href="{{ route('users.show', $user->username) }}"
               class="@if (!$sort) bg-gray-100 @endif mb-3 flex h-9 w-full items-center justify-center rounded-full border px-4 text-sm uppercase hover:bg-gray-200">
               Terbaru

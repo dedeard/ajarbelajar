@@ -13,17 +13,13 @@
           <x-favorite-toggle lessonId="{{ $lesson->id }}" :small="true" />
         @endauth
 
-        <img src="{{ $lesson->cover_urls['thumb'] }}" alt="{{ $lesson->title }}"
-          class="block h-full w-full" />
-        <div
-          class="absolute -bottom-4 right-1 h-9 w-9 rounded-full bg-white p-px shadow-lg">
+        <img src="{{ $lesson->cover_urls['thumb'] }}" alt="{{ $lesson->title }}" class="block h-full w-full" />
+        <div class="absolute -bottom-4 right-1 h-9 w-9 rounded-full bg-white p-px shadow-lg">
           @if ($lesson->user->avatar_url)
-            <img src="{{ $lesson->user->avatar_url }}"
-              alt="{{ $lesson->user->name }}"
+            <img src="{{ $lesson->user->avatar_url }}" alt="{{ $lesson->user->name }}"
               class="block h-full w-full rounded-full border border-white" />
           @else
-            <x-avatar :name="$lesson->user->name"
-              class="block h-full w-full rounded-full border border-white" />
+            <x-avatar :name="$lesson->user->name" class="block h-full w-full rounded-full border border-white" />
           @endif
         </div>
       </div>
@@ -40,14 +36,12 @@
         </div>
         <div class="flex w-full">
           @if ($lesson->episodes_count)
-            <span
-              class="mr-1 block border bg-gray-100 px-1 text-2xs font-bold text-gray-700">
+            <span class="mr-1 block border bg-gray-100 px-1 text-2xs font-bold text-gray-700">
               <i class="ft ft-film"></i> {{ $lesson->episodes_count }} EPISODE
             </span>
           @endif
           @if ($lesson->seconds)
-            <span
-              class="mr-1 block border bg-gray-100 px-1 text-2xs font-bold text-gray-700">
+            <span class="mr-1 block border bg-gray-100 px-1 text-2xs font-bold text-gray-700">
               <i class="ft ft-clock"></i> {{ $lesson->readable_second }}
             </span>
           @endif
@@ -62,4 +56,3 @@
     </div>
   </div>
 @endif
-

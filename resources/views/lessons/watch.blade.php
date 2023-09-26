@@ -28,8 +28,7 @@
 
   <div class="border-b bg-white">
     <div class="container px-3 py-5">
-      <a href="{{ route('lessons.show', $lesson->slug) }}"
-        class="inline-flex text-lg leading-none hover:text-primary-600">
+      <a href="{{ route('lessons.show', $lesson->slug) }}" class="inline-flex text-lg leading-none hover:text-primary-600">
         <span class="my-auto mr-3 block">
           <i class="ft ft-arrow-left-circle"></i>
         </span>
@@ -43,8 +42,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-3">
         <div class="mb-3 lg:col-span-2 lg:mb-0">
           <div id="video-container">
-            <x-video-player poster="{{ $lesson->cover_urls['large'] }}"
-              :episode="$episode" :autoplay="false" :subtitles="$episode->subtitles" />
+            <x-video-player poster="{{ $lesson->cover_urls['large'] }}" :episode="$episode" :autoplay="false" :subtitles="$episode->subtitles" />
             @if ($episode->description)
               <div class="border bg-white">
                 <h1 class="border-b px-3 py-4 font-semibold">
@@ -58,8 +56,7 @@
           </div>
         </div>
         <div id="video-player-autoheight" class="flex flex-col">
-          <div
-            class="mb-1 flex w-full items-center justify-between border bg-white px-5 py-4">
+          <div class="mb-1 flex w-full items-center justify-between border bg-white px-5 py-4">
             <div class="min-w-0 flex-grow">
               <div class="text-xs uppercase tracking-wide opacity-75">Now
                 playing
@@ -78,8 +75,7 @@
             </div>
           </div>
 
-          <div
-            class="grid flex-1 auto-rows-max grid-cols-1 gap-1 overflow-y-auto">
+          <div class="grid flex-1 auto-rows-max grid-cols-1 gap-1 overflow-y-auto">
             @foreach ($lesson->episodes as $e)
               <a href="{{ route('lessons.watch', ['lesson' => $lesson->slug, 'index' => $e->index]) }}"
                 class="flex items-center justify-between border bg-white px-5 py-4 hover:bg-gray-50">

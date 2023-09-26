@@ -7,8 +7,7 @@
   </x-slot:actions>
 
   <div class="container p-3">
-    <form method="POST" action="{{ route('dashboard.lessons.store') }}"
-      class="border bg-white">
+    <form method="POST" action="{{ route('dashboard.lessons.store') }}" class="border bg-white">
       @csrf
       <div class="p-3">
         <x-input-wrap label="Judul">
@@ -16,13 +15,11 @@
         </x-input-wrap>
         <x-input-wrap label="Kategori">
           <x-input name="category" type="select">
-            <option value=""
-              @if (!old('category')) selected @endif disabled>Pilih
+            <option value="" @if (!old('category')) selected @endif disabled>Pilih
               Kategori
             </option>
             @foreach ($categories as $category)
-              <option value="{{ $category->id }}"
-                @if (old('category') == $category->id) selected @endif>
+              <option value="{{ $category->id }}" @if (old('category') == $category->id) selected @endif>
                 {{ $category->name }}</option>
             @endforeach
           </x-input>

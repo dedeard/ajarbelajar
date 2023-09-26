@@ -4,22 +4,17 @@
       <div class="card-header d-flex">
         <h3 class="card-title my-auto">Edit Peran</h3>
         <div class="my-auto ml-auto">
-          <a href="{{ route('admin.roles.index') }}"
-            class="btn btn-sm btn-primary">Kembali</a>
+          <a href="{{ route('admin.roles.index') }}" class="btn btn-sm btn-primary">Kembali</a>
         </div>
       </div>
       <div class="card-body">
-        <form action="{{ route('admin.roles.update', $role->id) }}"
-          method="post">
+        <form action="{{ route('admin.roles.update', $role->id) }}" method="post">
           @csrf
           @method('PUT')
 
-          <x-admin::input name="name" label="Nama Peran"
-            value="{{ $role->name }}" />
-          <x-admin::input name="display_name" label="Nama Tampilan Peran"
-            value="{{ $role->display_name }}" />
-          <x-admin::textarea name="description" label="Deskripsi Peran"
-            value="{{ $role->description }}" />
+          <x-admin::input name="name" label="Nama Peran" value="{{ $role->name }}" />
+          <x-admin::input name="display_name" label="Nama Tampilan Peran" value="{{ $role->display_name }}" />
+          <x-admin::textarea name="description" label="Deskripsi Peran" value="{{ $role->description }}" />
 
           <div class="form-group">
             <button type="submit" class="btn btn-primary">Edit Role</button>

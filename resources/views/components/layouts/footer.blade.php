@@ -30,8 +30,7 @@
           class="inline-flex h-9 w-9 items-center justify-center rounded-full border bg-gray-100 p-0 text-sm hover:bg-gray-200">
           <i class="ft ft-facebook"></i>
         </a>
-        <a href="#" target="_blank" rel="noreferrer"
-          aria-label="Instagram"
+        <a href="#" target="_blank" rel="noreferrer" aria-label="Instagram"
           class="ml-3 inline-flex h-9 w-9 items-center justify-center rounded-full border bg-gray-100 p-0 text-sm hover:bg-gray-200">
           <i class="ft ft-instagram"></i>
         </a>
@@ -46,8 +45,7 @@
     <p class="text-center text-xs">
       © {{ now()->year }} All Right Reserved AjarBelajar -
       By{{ ' ' }}
-      <a href="https://dedeard.my.id" class="text-primary-600" target="_blank"
-        rel="noreferrer">
+      <a href="https://dedeard.my.id" class="text-primary-600" target="_blank" rel="noreferrer">
         Dede ariansya
       </a>
     </p>

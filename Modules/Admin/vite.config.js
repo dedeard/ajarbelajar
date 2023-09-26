@@ -14,10 +14,7 @@ export default defineConfig({
     laravel({
       publicDirectory: '../../public',
       buildDirectory: 'build/admin',
-      input: [
-        __dirname + '/Resources/assets/scss/app.scss',
-        __dirname + '/Resources/assets/js/app.js',
-      ],
+      input: [__dirname + '/Resources/assets/scss/app.scss', __dirname + '/Resources/assets/js/app.js'],
       refresh: './Resources/**/*',
       hotFile: `../../public/admin.hot`,
     }),

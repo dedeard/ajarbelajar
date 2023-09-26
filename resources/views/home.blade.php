@@ -1,9 +1,7 @@
 <x-app-layout title="Belajar, Berbagi, Berkontribusi">
   <div class="container mb-3 p-3">
-    <div class="mb-3 overflow-hidden bg-cover bg-fixed"
-      style="background-image: url({{ asset('img/hero.jpg') }})">
-      <div
-        class="bg-opacity-30 bg-gradient-to-r from-primary-700 to-transparent p-4">
+    <div class="mb-3 overflow-hidden bg-cover bg-fixed" style="background-image: url({{ asset('img/hero.jpg') }})">
+      <div class="bg-opacity-30 bg-gradient-to-r from-primary-700 to-transparent p-4">
         <div class="flex flex-col items-center justify-center py-16 text-center">
           <h1 class="mb-3 text-2xl font-bold text-white md:text-3xl lg:text-4xl">
             Belajar, Berbagi, Berkontribusi.</h1>
@@ -57,8 +55,7 @@
       @endforeach
     </div>
     <div class="py-3 text-center">
-      <a href="{{ route('users.index') }}"
-        class="inline-block bg-primary-600 px-4 py-2 text-sm uppercase text-white hover:bg-primary-700">
+      <a href="{{ route('users.index') }}" class="inline-block bg-primary-600 px-4 py-2 text-sm uppercase text-white hover:bg-primary-700">
         Lihat lebih banyak pengguna
       </a>
     </div>

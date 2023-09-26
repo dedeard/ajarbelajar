@@ -6,15 +6,11 @@
       @auth
         <div class="flex h-16 w-full items-center border-b px-3">
           <div class="pr-2">
-            <figure
-              class="m-auto block h-12 w-12 rounded-full border border-gray-200 bg-white p-1">
+            <figure class="m-auto block h-12 w-12 rounded-full border border-gray-200 bg-white p-1">
               @if (Auth::user()->avatar_url)
-                <img src="{{ Auth::user()->avatar_url }}"
-                  alt="{{ Auth::user()->name }}"
-                  class="block h-full w-full rounded-full" />
+                <img src="{{ Auth::user()->avatar_url }}" alt="{{ Auth::user()->name }}" class="block h-full w-full rounded-full" />
               @else
-                <x-avatar :name="Auth::user()->name"
-                  class="block h-full w-full rounded-full" />
+                <x-avatar :name="Auth::user()->name" class="block h-full w-full rounded-full" />
               @endif
             </figure>
           </div>

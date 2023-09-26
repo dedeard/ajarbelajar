@@ -5,8 +5,7 @@
         <h3 class="card-title my-auto">Daftar Admin</h3>
         <div class="my-auto ml-auto">
           @can('create admin')
-            <a href="{{ route('admin.admins.create') }}"
-              class="btn btn-sm btn-primary">Buat Admin Baru</a>
+            <a href="{{ route('admin.admins.create') }}" class="btn btn-sm btn-primary">Buat Admin Baru</a>
           @endcan
         </div>
       </div>
@@ -26,9 +25,7 @@
           <tbody>
             @foreach ($admins as $admin)
               <tr>
-                <td class="py-0 align-middle"><img
-                    src="{{ $admin->avatar_url }}" width="36px" alt="Avatar"
-                    class="avatar img-circle">
+                <td class="py-0 align-middle"><img src="{{ $admin->avatar_url }}" width="36px" alt="Avatar" class="avatar img-circle">
                 </td>
                 <td>{{ $admin->name }}</td>
                 <td>{{ $admin->email }}</td>
@@ -37,20 +34,17 @@
                 <td class="py-0 text-center align-middle">
                   @if (!$admin->role || ($admin->role && $admin->role->name !== 'super admin'))
                     @can('update admin')
-                      <a href="{{ route('admin.admins.edit', $admin->id) }}"
-                        class="btn btn-default btn-sm" title="Edit admin">
+                      <a href="{{ route('admin.admins.edit', $admin->id) }}" class="btn btn-default btn-sm" title="Edit admin">
                         <i class="fas fa-edit"></i>
                       </a>
                     @endcan
                     @can('delete admin')
-                      <button class="btn btn-danger btn-sm btn-icon"
-                        title="Hapus admin"
+                      <button class="btn btn-danger btn-sm btn-icon" title="Hapus admin"
                         delete-confirm="#form-delete-admin-{{ $admin->id }}">
                         <i class="fas fa-trash"></i>
                       </button>
-                      <form
-                        action="{{ route('admin.admins.destroy', $admin->id) }}"
-                        method="post" id="form-delete-admin-{{ $admin->id }}">
+                      <form action="{{ route('admin.admins.destroy', $admin->id) }}" method="post"
+                        id="form-delete-admin-{{ $admin->id }}">
                         @csrf
                         @method('delete')
                       </form>

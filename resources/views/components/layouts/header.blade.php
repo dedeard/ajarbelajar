@@ -3,19 +3,16 @@
     'noSidebar' => false,
 ])
 
-<header x-data
-  class="fixed left-0 right-0 top-0 z-40 flex h-16 w-full items-center border-b border-gray-200 bg-white">
+<header x-data class="fixed left-0 right-0 top-0 z-40 flex h-16 w-full items-center border-b border-gray-200 bg-white">
   <div class="@if (!$noContainer) container @endif flex-1">
     <div class="flex">
       <div class="hidden lg:flex lg:w-60">
-        <a href="{{ route('home') }}" class="flex items-center p-3"
-          aria-label="Ajarbelajar.com">
+        <a href="{{ route('home') }}" class="flex items-center p-3" aria-label="Ajarbelajar.com">
           <x-svg.brand class="block h-7" />
         </a>
       </div>
       <div class="container flex flex-1">
-        <a href="{{ route('home') }}" class="flex items-center p-3 lg:hidden"
-          aria-label="Ajarbelajar.com">
+        <a href="{{ route('home') }}" class="flex items-center p-3 lg:hidden" aria-label="Ajarbelajar.com">
           <x-svg.brand class="block h-7" />
         </a>
         <div class="flex flex-1 justify-end md:justify-start">
@@ -23,8 +20,7 @@
             <button aria-label="Search"
               class="flex h-9 w-9 items-center justify-center rounded-full border bg-gray-100 p-0 text-sm hover:bg-gray-200 md:w-40 md:justify-between md:px-4 lg:ml-0"
               x-on:click="$store.searchModal.open()">
-              <div
-                class="hidden font-semibold uppercase tracking-wider md:block">
+              <div class="hidden font-semibold uppercase tracking-wider md:block">
                 Cari</div>
               <i class="ft ft-search md:text-lg"></i>
             </button>
@@ -39,8 +35,7 @@
         </div>
         @auth
           <div class="flex p-3 md:ml-auto">
-            <a aria-label="Notifications"
-              href="{{ route('dashboard.notifications.index') }}"
+            <a aria-label="Notifications" href="{{ route('dashboard.notifications.index') }}"
               class="toggle-color relative flex h-9 w-9 items-center justify-center rounded-full border p-0 text-sm">
               <i class="ft ft-bell"></i>
               <span
@@ -62,4 +57,3 @@
     </div>
   </div>
 </header>
-

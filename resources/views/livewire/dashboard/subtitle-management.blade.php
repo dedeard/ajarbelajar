@@ -11,8 +11,7 @@
     <form wire:submit.prevent="save" enctype="multipart/form-data">
       <div class="border-b p-3">
         <x-input-wrap label="Bahasa">
-          <x-input name="language" type="select" model="language" title="Bahasa"
-            placeholder="Bahasa">
+          <x-input name="language" type="select" model="language" title="Bahasa" placeholder="Bahasa">
             <option value="" selected>Pilih</option>
             @foreach ($languages as $lang)
               <option value="{{ $lang['code'] }}">{{ $lang['code'] }} :
@@ -22,8 +21,7 @@
         </x-input-wrap>
 
         <x-input-wrap label="Subtitle">
-          <x-input type="file" name="file" model="file" title="Subtitle"
-            :placeholder="$file ? $file->getClientOriginalName() : 'Subtitle'" />
+          <x-input type="file" name="file" model="file" title="Subtitle" :placeholder="$file ? $file->getClientOriginalName() : 'Subtitle'" />
         </x-input-wrap>
       </div>
       <div class="p-3">
@@ -55,8 +53,7 @@
             <td class="border text-center">{{ $sub->code }}</td>
             <td class="border px-3">{{ $sub->name }}</td>
             <td class="border py-1 text-center">
-              <button
-                x-on:click="$store.deleteConfirm(() => $wire.remove({{ $sub->id }}))"
+              <button x-on:click="$store.deleteConfirm(() => $wire.remove({{ $sub->id }}))"
                 class="inline-block rounded-full bg-red-600 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white hover:bg-red-700">
                 Hapus
               </button>

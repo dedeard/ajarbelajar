@@ -172,16 +172,7 @@ document.addEventListener('alpine:init', () => {
       this.textarea.addEventListener('input', this.handleInput.bind(this))
 
       this.refreshLine()
-      const eventListeners = [
-        'select',
-        'keyup',
-        'keypress',
-        'click',
-        'mousemove',
-        'mousedown',
-        'mouseup',
-        'mouseleave',
-      ]
+      const eventListeners = ['select', 'keyup', 'keypress', 'click', 'mousemove', 'mousedown', 'mouseup', 'mouseleave']
       eventListeners.forEach((eventName) => {
         this.textarea.addEventListener(eventName, this.refreshLine.bind(this))
       })
@@ -213,10 +204,7 @@ document.addEventListener('alpine:init', () => {
     refreshLine() {
       const { value, selectionStart, selectionEnd } = this.textarea
       this.lines = value.split('\n')
-      this.activeLineNumber =
-        selectionStart === selectionEnd
-          ? String(value).slice(0, selectionStart).split('\n').length - 1
-          : -1
+      this.activeLineNumber = selectionStart === selectionEnd ? String(value).slice(0, selectionStart).split('\n').length - 1 : -1
       this.activeLine = this.lines[this.activeLineNumber]
     },
 
@@ -249,8 +237,7 @@ document.addEventListener('alpine:init', () => {
       if (command === 'undo') {
         if (this.position > 0) {
           this.position--
-          const { value, selectionStart, selectionEnd } =
-            this.history[this.position]
+          const { value, selectionStart, selectionEnd } = this.history[this.position]
           this.textarea.value = value
           this.setSelection(selectionStart, selectionEnd)
         } else if (this.position === 0) {
@@ -261,8 +248,7 @@ document.addEventListener('alpine:init', () => {
       } else if (command === 'redo') {
         if (this.position < this.history.length - 1) {
           this.position++
-          const { value, selectionStart, selectionEnd } =
-            this.history[this.position]
+          const { value, selectionStart, selectionEnd } = this.history[this.position]
           this.textarea.value = value
           this.setSelection(selectionStart, selectionEnd)
         }
@@ -270,10 +256,7 @@ document.addEventListener('alpine:init', () => {
         const { start, end, defaultText } = this.commandMap[command]
         selectedText = selectedText || defaultText || ''
         this.textarea.value = startText + start + selectedText + end + endText
-        this.setSelection(
-          selectionStart + start.length,
-          selectionStart + start.length + selectedText.length,
-        )
+        this.setSelection(selectionStart + start.length, selectionStart + start.length + selectedText.length)
         this.textarea.dispatchEvent(new Event('input'))
       }
     },

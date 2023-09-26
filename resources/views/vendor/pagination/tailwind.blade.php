@@ -1,6 +1,5 @@
 @if ($paginator->hasPages())
-  <nav role="navigation" aria-label="{{ __('Pagination Navigation') }}"
-    class="flex items-center justify-between pt-3">
+  <nav role="navigation" aria-label="{{ __('Pagination Navigation') }}" class="flex items-center justify-between pt-3">
     <div class="flex flex-1 justify-between sm:hidden">
       @if ($paginator->onFirstPage())
         <span
@@ -48,8 +47,7 @@
         <span class="relative z-0 inline-flex">
           {{-- Previous Page Link --}}
           @if ($paginator->onFirstPage())
-            <span aria-disabled="true"
-              aria-label="{{ __('pagination.previous') }}">
+            <span aria-disabled="true" aria-label="{{ __('pagination.previous') }}">
               <span
                 class="relative inline-flex cursor-default items-center border border-gray-300 bg-white px-2 py-2 text-sm font-medium leading-5 text-gray-500"
                 aria-hidden="true">
@@ -113,8 +111,7 @@
               </svg>
             </a>
           @else
-            <span aria-disabled="true"
-              aria-label="{{ __('pagination.next') }}">
+            <span aria-disabled="true" aria-label="{{ __('pagination.next') }}">
               <span
                 class="relative -ml-px inline-flex cursor-default items-center border border-gray-300 bg-white px-2 py-2 text-sm font-medium leading-5 text-gray-500"
                 aria-hidden="true">
