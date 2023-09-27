@@ -27,7 +27,6 @@
     "opcodesio/log-viewer": "^2.5",
     "predis/predis": "*",
     "pusher/pusher-php-server": "^7.2",
-    "rtconner/laravel-likeable": "^3.2",
     "spatie/laravel-sluggable": "^3.4",
     "torchlight/torchlight-commonmark": "^0.5.5"
   },

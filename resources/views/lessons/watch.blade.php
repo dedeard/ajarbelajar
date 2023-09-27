@@ -109,8 +109,9 @@
         @auth
           <x-comment-form :episode="$episode" />
         @endauth
-        <livewire:comments :episode="$episode" :user="Auth::user()" />
+        <x-comments episode-id="{{ $episode->id }}" />
       </div>
     </div>
   </div>
 </x-app-layout>
+
