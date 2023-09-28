@@ -10,6 +10,7 @@ Route::put('/edit-password', 'EditPasswordController@update')->name('edit-passwo
 
 Route::resource('/lessons', 'LessonsController');
 Route::post('/lessons/{lesson}/cover', 'LessonsController@updateCover')->name('lessons.update.cover');
+Route::put('/lessons/{lesson}/index', 'LessonsController@updateIndex')->name('lessons.update.index');
 Route::post('/lessons/{lesson}/episode', 'LessonsController@uploadEpisode')->name('lessons.store.episode');
 Route::get('/lessons/{lesson}/{episode}/edit', 'EpisodesController@edit')->name('lessons.episode.edit');
 Route::put('/lessons/{lesson}/{episode}', 'EpisodesController@update')->name('lessons.episode.update');

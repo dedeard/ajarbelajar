@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Episode;
 use App\Models\Lesson;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class LessonsController extends Controller
 {
@@ -151,5 +152,34 @@ class LessonsController extends Controller
         return response()->json([
             'message' => 'Episode berhasil dibuat',
         ]);
+    }
+
+    public function updateIndex(Request $request, $id)
+    {
+        $lesson = $request->user()->lessons()->with('episodes')->findOrFail($id);
+
+        $data = $request->validate([
+            'index' => 'required|array|size:' . count($lesson->episodes),
+            'index.*' => 'required|integer|distinct|in:' . implode(',', $lesson->episodes->pluck('id')->all()),
+        ]);
+
+        $index = $data['index'];
+        $filtered_episodes = [];
+        $episodes = $lesson->episodes->toArray();
+
+        foreach ($index as $id) {
+            $filtered = Arr::where($episodes, fn ($episode) =>  $episode['id'] == $id);
+            $filtered = Arr::first($filtered);
+            if ($filtered) {
+                array_push($filtered_episodes, $filtered);
+            }
+        }
+
+        foreach ($filtered_episodes as $key => $filtered) {
+            $episode = $lesson->episodes->firstWhere('id', $filtered['id']);
+            $episode->update(['index' => $key]);
+        }
+
+        return response()->noContent();
     }
 }
