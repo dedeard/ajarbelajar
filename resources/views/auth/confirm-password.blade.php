@@ -7,14 +7,14 @@
     @csrf
     <x-auth.input type="password" name="password" label="Password" autofocus />
     <div class="py-3 text-center">
-      <x-button value="Konfirmasi" class="w-1/2" />
+      <x-auth.button value="Konfirmasi" />
     </div>
   </form>
   <hr>
   <form method="POST" action="{{ route('logout') }}" class="text-center">
     @csrf
     <div class="py-3 text-center">
-      <x-button value="Keluar" class="w-1/2" variant="red" />
+      <x-auth.button value="Keluar" variant="red" />
     </div>
   </form>
 </x-auth-layout>

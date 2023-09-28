@@ -7,7 +7,7 @@
     <x-auth.input name="email" label="Alamat Email" />
     <x-auth.input type="password" name="password" label="Password" />
     <div class="py-3 text-center">
-      <x-button value="Daftar" class="w-1/2" />
+      <x-auth.button value="Daftar" />
     </div>
   </form>
 </x-auth-layout>

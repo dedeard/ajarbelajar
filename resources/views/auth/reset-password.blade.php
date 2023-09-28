@@ -5,7 +5,7 @@
     <x-auth.input name="email" label="Alamat Email" :value="old('email', $request->email)" autofocus />
     <x-auth.input type="password" name="password" label="Password" />
     <div class="border-b py-3 text-center">
-      <x-button value="Atur ulang Password" class="w-1/2" />
+      <x-auth.button value="Atur ulang Password" />
     </div>
     <div class="pt-4 text-center">
       <a class="text-sm font-bold text-primary-700" href="{{ route('login') }}">Kembali ke halaman login</a>

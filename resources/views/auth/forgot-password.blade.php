@@ -10,7 +10,7 @@
     @csrf
     <x-auth.input name="email" label="Alamat Email" autofocus />
     <div class="border-b py-3 text-center">
-      <x-button value="Kirim" class="w-1/2" />
+      <x-auth.button value="Kirim" />
     </div>
     <div class="pt-4 text-center">
       <a class="text-sm font-bold text-primary-700" href="{{ route('login') }}">Kembali ke halaman login</a>
