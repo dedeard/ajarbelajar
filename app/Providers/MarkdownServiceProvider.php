@@ -19,7 +19,7 @@ class MarkdownServiceProvider extends ServiceProvider
     {
         // Define a macro for converting Markdown based on type
         $self = $this;
-        Str::macro('marked', function (string $value, string $type = 'full') use ($self) {
+        Str::macro('marked', function (string $value, string $type = 'minimal') use ($self) {
             return $self->convertMarkdown($value, $type);
         });
     }
