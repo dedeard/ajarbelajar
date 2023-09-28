@@ -18,4 +18,6 @@ Route::resource('categories', 'CategoriesController')->only(['index', 'show']);
 Route::get('users', 'UsersController@index')->name('users.index');
 Route::get('@{user}', 'UsersController@show')->name('users.show');
 
+Route::post('markdown/preview', 'MarkdownController@preview')->name('markdown.preview');
+
 require __DIR__ . '/auth.php';
