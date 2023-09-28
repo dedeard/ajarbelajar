@@ -16,6 +16,9 @@ Route::get('/lessons/{lesson}/{episode}/edit', 'EpisodesController@edit')->name(
 Route::put('/lessons/{lesson}/{episode}', 'EpisodesController@update')->name('lessons.episode.update');
 Route::delete('/lessons/{lesson}/{episode}', 'EpisodesController@destroy')->name('lessons.episode.destroy');
 
+Route::post('/subtitles/{episode}', 'SubtitlesController@store')->name('subtitles.store');
+Route::delete('/subtitles/{subtitle}', 'SubtitlesController@destroy')->name('subtitles.destroy');
+
 Route::get('/favorites', 'FavoritesController@index')->name('favorites');
 Route::put('/favorites/{lesson}/toggle', 'FavoritesController@toggle')->name('favorites.toggle');
 
