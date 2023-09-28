@@ -150,7 +150,7 @@ class LessonsController extends Controller
         EpisodeProcessJob::dispatch($episode->toArray())->onQueue('episode');
 
         return response()->json([
-            'message' => 'Episode berhasil dibuat',
+            'episode' => $episode
         ]);
     }
 

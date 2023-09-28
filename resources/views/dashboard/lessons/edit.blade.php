@@ -29,8 +29,7 @@
         <x-dashboard.lesson-edit-cover :lesson="$lesson" />
       @endif
       @if ($tab === 'episodes')
-        <x-dashboard.lesson-upload-episode :lesson="$lesson" />
-        <livewire:dashboard.show-episodes :lesson="$lesson" />
+        <x-dashboard.lesson-edit-episodes :lesson="$lesson" />
       @endif
     </div>
   </x-tab>
