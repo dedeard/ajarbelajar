@@ -4,7 +4,7 @@ const Alpine = window.Alpine
 const Echo = window.Echo
 
 Alpine.store('notificationStore', {
-  count: NOTIFICATION_COUNT || 0,
+  count: window.NOTIFICATION_COUNT || 0,
   init() {
     Echo.private(`App.Models.User.${AUTH_DATA?.id}`).notification(() => {
       this.count++

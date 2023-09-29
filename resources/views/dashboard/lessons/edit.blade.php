@@ -1,6 +1,8 @@
 <x-app-layout dashboard :title="$lesson->title" header="Edit Pelajaran">
   <x-slot:head>
-    @vite(['resources/js/sortable.js'])
+    @if ($tab === 'episodes')
+      @vite(['resources/js/sortable.js'])
+    @endif
   </x-slot:head>
 
   <x-slot:actions>

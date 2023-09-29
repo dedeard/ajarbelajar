@@ -10,11 +10,11 @@
     <form method="POST" action="{{ route('dashboard.lessons.store') }}" class="border bg-white">
       @csrf
       <div class="p-3">
-        <x-input-wrap label="Judul">
-          <x-input name="title" placeholder="Judul" />
-        </x-input-wrap>
-        <x-input-wrap label="Kategori">
-          <x-input name="category" type="select">
+        <x-input.wrapper label="Judul">
+          <x-input.text name="title" placeholder="Judul" />
+        </x-input.wrapper>
+        <x-input.wrapper label="Kategori">
+          <x-input.select name="category">
             <option value="" @if (!old('category')) selected @endif disabled>Pilih
               Kategori
             </option>
@@ -22,11 +22,11 @@
               <option value="{{ $category->id }}" @if (old('category') == $category->id) selected @endif>
                 {{ $category->name }}</option>
             @endforeach
-          </x-input>
-        </x-input-wrap>
-        <x-input-wrap label="Deskripsi" useDiv>
-          <livewire:markdown-editor name="description" :disabled-tools="['heading', 'blockquote', 'table', 'horizontalRule']" />
-        </x-input-wrap>
+          </x-input.select>
+        </x-input.wrapper>
+        <x-input.wrapper label="Deskripsi" useDiv>
+          <x-input.markdown name="description" :disabled-tools="['heading', 'blockquote', 'table', 'horizontalRule']" />
+        </x-input.wrapper>
       </div>
 
       <div class="block border-t p-3">

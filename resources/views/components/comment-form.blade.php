@@ -7,7 +7,6 @@
             try {
                 await window.axios.post('{{ route('comments.store', $episode->id) }}', { body: bodyEl.value })
                 if (typeof window.EDJS?.clear === 'function') window.EDJS.clear()
-                Livewire.emit('comment-created')
                 window.fire.success('Berhasil membuat komentar')
                 e.target.reset()
             } catch (e) {

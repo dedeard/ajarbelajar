@@ -1,3 +1,6 @@
+/** @type {import('alpinejs').Alpine} */
+const Alpine = window.Alpine
+
 Alpine.store('deleteConfirm', (accept = null, reject = null, options = {}) => {
   Swal.fire({
     title: 'Anda yakin?',

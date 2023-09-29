@@ -1,6 +1,6 @@
 <x-app-layout :title="$episode->title" :description="$lesson->seo_description" noSidebar>
   <x-slot:head>
-    @vite(['resources/js/videoplayer.js'])
+    @vite(['resources/js/plyr.js'])
   </x-slot:head>
   <x-slot:script>
     <script>
@@ -106,12 +106,8 @@
       <h3 class="mb-3 text-xl font-semibold uppercase tracking-wider">Komentar
       </h3>
       <div class="mb-3 block border bg-white">
-        @auth
-          <x-comment-form :episode="$episode" />
-        @endauth
         <x-comments episode-id="{{ $episode->id }}" />
       </div>
     </div>
   </div>
 </x-app-layout>
-

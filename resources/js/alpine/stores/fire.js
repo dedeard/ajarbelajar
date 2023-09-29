@@ -1,3 +1,6 @@
+/** @type {import('alpinejs').Alpine} */
+const Alpine = window.Alpine
+
 window.fire = {
   success(text, options = {}) {
     Swal.fire({

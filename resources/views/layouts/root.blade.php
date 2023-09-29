@@ -44,7 +44,6 @@
     {{ $slot }}
   </div>
 
-  @vite(['resources/js/main.js'])
   {{ $script }}
 </body>
 

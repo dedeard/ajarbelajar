@@ -1,7 +1,8 @@
-import axios from 'axios'
+/** @type {import('alpinejs').Alpine} */
+const Alpine = window.Alpine
 
 Alpine.store('favoriteStore', {
-  favorites: FAVORITE_DATA || [],
+  favorites: window.FAVORITE_DATA || [],
 
   set(val) {
     this.favorites = val

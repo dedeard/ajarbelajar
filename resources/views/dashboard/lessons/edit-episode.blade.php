@@ -1,6 +1,6 @@
 <x-app-layout dashboard :title="$episode->index + 1 . '. ' . $episode->title" :header="'Edit Episode ' . $episode->index + 1">
   <x-slot:head>
-    @vite(['resources/js/videoplayer.js'])
+    @vite(['resources/js/plyr.js'])
   </x-slot:head>
 
   <x-slot:actions>

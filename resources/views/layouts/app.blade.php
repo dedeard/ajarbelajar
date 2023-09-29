@@ -14,10 +14,8 @@
     <title>{{ $title }} - {{ config('app.name', 'Laravel') }}</title>
     <meta name="description" content="{{ $description }}" />
     {!! $head !!}
-    @livewireStyles
   </x-slot:head>
   <x-slot:script>
-    @livewireScripts
     {!! $script !!}
   </x-slot:script>
 
@@ -75,5 +73,4 @@
       </div>
     </div>
   @endif
-  <livewire:search-modal />
 </x-root-layout>
