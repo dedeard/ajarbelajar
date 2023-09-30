@@ -3,7 +3,6 @@
     'label' => '',
     'value' => '',
     'help' => '',
-    'disabled-tools' => [],
     'type' => 'minimal',
     'error' => $errors->first($name),
 ])
@@ -20,31 +19,13 @@
       <span class="block flex-1 border-b-2"></span>
     </div>
 
-    <div :class="preview ? '!hidden' : ''">
-      <div x-data="{ disableds: @js($disabledTools) }" class="flex flex-wrap items-center justify-center border-b bg-gray-100 px-1 pt-1">
-        <template x-for="(command) in Object.keys(commandMap)" :key="command">
-          <template x-if="!disableds?.includes(command)">
-            <button type="button" class="mb-1 mr-1 flex h-7 w-7 items-center justify-center bg-white p-0 text-sm hover:bg-primary-100"
-              x-on:click="formatText(command)" :title="commandMap[command].label">
-              <i :class="commandMap[command].icon"></i>
-            </button>
-          </template>
-        </template>
-      </div>
-      <label class="relative flex w-full pb-24">
-        <ul class="w-full select-none break-words text-sm leading-5">
-          <template x-for="(line, i) in lines" :key="i">
-            <li class="relative w-full break-words pl-3 pr-10" :class="activeLineNumber === i ? 'bg-primary-100' : ''">
-              <span x-text="i + 1" class="absolute bottom-0 left-0 top-0 w-10 bg-gray-100 text-center text-xs leading-5"
-                :class="activeLineNumber === i ? 'text-primary-700' : 'text-gray-700'"></span>
-              <span class="opacity-0" x-text="line ? line : '-'"></span>
-            </li>
-          </template>
-        </ul>
-        <textarea x-ref="textarea" name="{{ $name }}" id="{{ $name }}"
-          class="absolute bottom-0 left-0 right-0 top-0 z-10 block h-auto w-full resize-none overflow-visible !border-0 bg-transparent p-0 pl-10 text-sm leading-5 text-gray-700 !ring-0 selection:bg-primary-600 selection:text-white">{{ $value ?? old($name) }}</textarea>
-      </label>
-    </div>
+    <textarea x-ref="textarea" rows="5"
+      x-on:input="(e) => {
+        e.target.style.height = 'auto';
+        e.target.style.height = e.target.scrollHeight + 'px';
+      }"
+      x-bind:class="preview ? 'hidden' : 'block'" name="{{ $name }}" id="{{ $name }}"
+      class="block w-full resize-none overflow-visible border-0 bg-transparent text-sm leading-5 text-gray-700 !ring-0 selection:bg-primary-600 selection:text-white">{{ $value ?? old($name) }}</textarea>
 
     <template x-if="preview">
       <div x-data="{
@@ -53,26 +34,28 @@
           error: '',
           async load() {
               try {
-                  this.html = (await window.axios.post('/markdown/preview?type={{ $type }}', {
-                      markdown: this.$refs.textarea.value
-                  })).data.html;
-                  this.loading = false
+                  console.log(this.$refs.textarea)
+                  this.html = (await window.axios.post('/markdown/preview?type={{ $type }}', { markdown: this.$refs.textarea.value })).data.html;
               } catch (e) {
-                  this.error = e.response?.data.message || e.message
-                  window.fire.error(this.error)
+                  this.error = e.response?.data.message || e.message;
+                  window.fire.error(this.error);
+              } finally {
+                  this.loading = false;
               }
+          },
+          get message() {
+              return this.loading ? 'Sedang memuat kontent' : this.error
           }
       }" x-init="load" class="bg-gray-300">
-        <template x-if="loading || error">
-          <div class="p-3">
-            <div class="border bg-gray-50 p-5">
-              <p class="px-3 py-8 text-center text-xl font-light empty:hidden md:text-2xl" x-text="loading ? 'Sedang memuat kontent' : ''">
-              </p>
-              <p class="px-3 py-8 text-center text-xl font-light empty:hidden md:text-2xl" x-text="error"></p>
-            </div>
+        <template x-if="message">
+          <div class="h-[116px] border bg-gray-50 p-3">
+            <p class="flex h-full items-center justify-center px-3 text-center text-xl font-light" x-text="message"></p>
           </div>
         </template>
-        <div class="prose max-w-none bg-white p-3 empty:hidden" x-html="html"></div>
+        <template x-if="!message">
+          <div class="prose min-h-[116px] max-w-none bg-white p-3" x-html="html">
+          </div>
+        </template>
       </div>
     </template>
   </div>

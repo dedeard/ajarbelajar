@@ -12,7 +12,7 @@ class MarkdownController extends Controller
         $data = $request->input('markdown');
         $type = $request->input('type', 'minimal');
 
-        $html = Str::marked($data, $type);
+        $html = Str::marked($data ?? '', $type);
 
         return response()->json(['html' => $html]);
     }
