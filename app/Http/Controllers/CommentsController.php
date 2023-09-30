@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\CommentDeleted;
+use App\Events\CommentDeletedEvent;
 use App\Events\CommentedEpisodeEvent;
-use App\Events\CommentLikedEvent;
 use App\Http\Resources\CommentResource;
 use App\Models\Comment;
-use App\Models\CommentLike;
 use App\Models\Episode;
 use Illuminate\Http\Request;
 
@@ -43,7 +41,7 @@ class CommentsController extends Controller
     {
         $comment = $request->user()->comments()->findOrFail($commentId);
         $comment->delete();
-        CommentDeleted::dispatch($comment->toArray());
+        CommentDeletedEvent::dispatch($comment->toArray());
 
         return response()->noContent();
     }

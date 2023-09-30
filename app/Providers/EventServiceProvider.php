@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Events\CommentDeleted;
+use App\Events\CommentDeletedEvent;
 use App\Events\CommentedEpisodeEvent;
 use App\Events\CommentLikedEvent;
 use App\Events\CommentUnlikedEvent;
@@ -34,7 +34,7 @@ class EventServiceProvider extends ServiceProvider
         CommentedEpisodeEvent::class => [
             CommentedEpisodeNotificationJob::class,
         ],
-        CommentDeleted::class => [],
+        CommentDeletedEvent::class => [],
         LessonFavoritedEvent::class => [
             LessonFavoritedNotificationJob::class,
         ],
