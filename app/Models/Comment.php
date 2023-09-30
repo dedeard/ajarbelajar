@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Events\CommentLikedEvent;
+use App\Events\CommentUnlikedEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -45,26 +47,28 @@ class Comment extends Model
         return $this->hasMany(CommentLike::class);
     }
 
-    public function liked(int $userId): bool
+    public function liked(User $user): bool
     {
-        return  $this->likes()->where('user_id', $userId)->exists();
+        return  $this->likes()->where('user_id', $user->id)->exists();
     }
 
-    public function like(int $userId): void
+    public function like(User $user): void
     {
-        if (!$this->liked($userId)) {
-            CommentLike::create(['user_id' => $userId, 'comment_id' => $this->id]);
+        if (!$this->liked($user)) {
+            CommentLike::create(['user_id' => $user->id, 'comment_id' => $this->id]);
             $this->increment('like_count');
+            CommentLikedEvent::dispatch($this, $user);
         }
     }
 
-    public function unlike(int $userId): void
+    public function unlike(User $user): void
     {
-        if ($this->liked($userId)) {
-            $this->likes()->where('user_id', $userId)->delete();
+        if ($this->liked($user)) {
+            $this->likes()->where('user_id', $user->id)->delete();
             if ($this->like_count > 0) {
                 $this->decrement('like_count');
             }
+            CommentUnlikedEvent::dispatch($this, $user);
         }
     }
 

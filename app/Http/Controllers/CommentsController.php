@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Events\CommentDeleted;
 use App\Events\CommentedEpisodeEvent;
+use App\Events\CommentLikedEvent;
 use App\Http\Resources\CommentResource;
 use App\Models\Comment;
+use App\Models\CommentLike;
 use App\Models\Episode;
 use Illuminate\Http\Request;
 
@@ -44,5 +46,20 @@ class CommentsController extends Controller
         CommentDeleted::dispatch($comment->toArray());
 
         return response()->noContent();
+    }
+
+    public function likeToggle(Request $request, $commentId)
+    {
+        $user = $request->user();
+        $comment = Comment::findOrFail($commentId);
+        $liked = true;
+        if ($comment->liked($user)) {
+            $liked = false;
+            $comment->unlike($user);
+        } else {
+            $comment->like($user);
+        }
+
+        return response()->json(['liked' => $liked]);
     }
 }

@@ -7,6 +7,7 @@ Alpine.store('commentStore', {
   loadErrorMessage: '',
   createLoading: false,
   destroyLoading: false,
+  likeLoading: false,
   async load(route) {
     this.loadErrorMessage = ''
     this.loadLoading = true
@@ -42,5 +43,24 @@ Alpine.store('commentStore', {
       window.fire.error(e.response?.data.message || e.message)
     }
     this.destroyLoading = false
+  },
+  async likeToggle(route, id) {
+    this.likeLoading = true
+    try {
+      const { data } = await axios.get(route)
+      this.comments = [
+        ...this.comments.map((el) => {
+          if (el.id == id) {
+            return {
+              ...el,
+              liked: data.liked,
+              like_count: data.liked ? el.like_count++ : el.like_count--,
+            }
+          }
+          return el
+        }),
+      ]
+    } catch {}
+    this.likeLoading = false
   },
 })

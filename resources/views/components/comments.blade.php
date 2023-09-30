@@ -16,7 +16,7 @@
       }">
       <x-input.markdown name="body" placeholder="Tulis komentarmu disini..." />
       <div class="border-x p-3">
-        <x-input.button>Komentar</x-input.button>
+        <x-input.button X-bind:disabled="$store.commentStore.createLoading">Komentar</x-input.button>
       </div>
     </form>
   @else
@@ -63,13 +63,14 @@
           @auth
             <div class="flex">
               <div>
-                <button x-bind:class="{ 'text-red-600': comment.liked }">
+                <button x-bind:class="{ 'text-red-600': comment.liked }" X-bind:disabled="$store.commentStore.likeLoading"
+                  x-on:click="$store.commentStore.likeToggle('{{ route('comments.like-toggle', '__id__') }}'.replace('__id__', comment.id), comment.id)">
                   <i class="ft ft-heart"></i>
                   <span x-text="comment.like_count"></span></button>
               </div>
               <div class="ml-auto">
                 <template x-if="$store.authStore.auth.id === comment.user.id">
-                  <button class="text-red-600"
+                  <button class="text-red-600" X-bind:disabled="$store.commentStore.destroyLoading"
                     x-on:click="$store.deleteConfirm(() => $store.commentStore.destroy('{{ route('comments.destroy', '__id__') }}'.replace('__id__', comment.id), comment.id))">
                     <i class="ft ft-trash"></i>
                   </button>

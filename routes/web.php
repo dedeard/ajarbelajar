@@ -12,6 +12,7 @@ Route::get('lessons/{lesson}/watch', 'LessonsController@watch')->name('lessons.w
 Route::get('comments/{episode}', 'CommentsController@index')->name('comments.index');
 Route::post('comments/{episode}', 'CommentsController@store')->name('comments.store');
 Route::delete('comments/{comment}', 'CommentsController@destroy')->name('comments.destroy');
+Route::get('comments/{comment}/like-toggle', 'CommentsController@likeToggle')->name('comments.like-toggle');
 
 Route::resource('categories', 'CategoriesController')->only(['index', 'show']);
 
