@@ -8,8 +8,8 @@
 ])
 
 <x-input.wrapper label="{{ $label }}" for="{{ $name }}">
-  <div x-data="markdown" class="border bg-white">
-    <div class="flex">
+  <div x-data="markdown" class="bg-white">
+    <div class="flex border border-b-0 border-gray-300">
       <button type="button"
         class="block items-center justify-center border-b-2 bg-white px-4 pb-2 pt-3 text-xs font-bold uppercase tracking-widest text-gray-500"
         :class="!preview ? '!border-primary-600 !text-gray-700' : ''" x-on:click="preview = false">Markdown</button>
@@ -25,7 +25,7 @@
         e.target.style.height = e.target.scrollHeight + 'px';
       }"
       x-bind:class="preview ? 'hidden' : 'block'" name="{{ $name }}" id="{{ $name }}"
-      class="block w-full resize-none overflow-visible border-0 bg-transparent text-sm leading-5 text-gray-700 !ring-0 selection:bg-primary-600 selection:text-white">{{ $value ?? old($name) }}</textarea>
+      class="{{ $error ? 'border-red-600' : '' }} relative z-10 block w-full resize-none overflow-hidden border-gray-300 bg-transparent text-sm leading-5 text-gray-700 ring-primary-600 selection:bg-primary-600 selection:text-white">{{ $value ?? old($name) }}</textarea>
 
     <template x-if="preview">
       <div x-data="{
@@ -48,12 +48,12 @@
           }
       }" x-init="load" class="bg-gray-300">
         <template x-if="message">
-          <div class="h-[116px] border bg-gray-50 p-3">
+          <div class="h-[116px] border border-gray-300 bg-gray-50 p-3">
             <p class="flex h-full items-center justify-center px-3 text-center text-xl font-light" x-text="message"></p>
           </div>
         </template>
         <template x-if="!message">
-          <div class="prose min-h-[116px] max-w-none bg-white p-3" x-html="html">
+          <div class="prose min-h-[116px] max-w-none border border-gray-300 bg-white p-3" x-html="html">
           </div>
         </template>
       </div>
