@@ -12,16 +12,6 @@
 <button {{ $attributes->merge(['type' => 'submit', 'class' => $btnClass]) }}>
   {{ $value ?? $slot }}
   <span aria-hidden="true" class="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 transform group-disabled:block">
-    <svg viewBox="0 0 50 50" class="h-9 w-9 text-white">
-      <circle fill="currentColor" stroke="none" cx="5" cy="25" r="5">
-        <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.1" />
-      </circle>
-      <circle fill="currentColor" stroke="none" cx="25" cy="25" r="5">
-        <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.2" />
-      </circle>
-      <circle fill="currentColor" stroke="none" cx="45" cy="25" r="5">
-        <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.3" />
-      </circle>
-    </svg>
+    <x-svg.loading class="h-9 w-9 text-white" />
   </span>
 </button>
