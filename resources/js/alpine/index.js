@@ -1,5 +1,6 @@
 import './stores/notifications'
 import './stores/auth'
+import './stores/comment'
 import './stores/delete-confirm'
 import './stores/fire'
 import './stores/favorite'

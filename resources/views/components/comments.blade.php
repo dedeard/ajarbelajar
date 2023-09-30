@@ -1,38 +1,19 @@
 @props(['episode-id'])
 
 <div x-data="{
-    episodeId: {{ $episodeId }},
-    loading: true,
-    comments: [],
-    error: '',
-    async loadComments() {
-        try {
-            this.comments = (await window.axios.get(`/comments/${this.episodeId}`)).data;
-        } catch (e) {
-            this.error = e.response?.data.message || e.message
-            window.fire.error(this.error)
-        }
-        this.loading = false
-    }
-}" x-init="loadComments">
+    episodeId: {{ $episodeId }}
+}" x-init="$store.commentStore.load('{{ route('comments.index', $episodeId) }}')">
 
   <h4 class="border border-b-0 px-5 py-4 text-sm font-semibold uppercase">
     Tulis Komentar
   </h4>
   @auth
-    <form x-data="{
-        async submit(e) {
-            const bodyEl = document.getElementsByName('body')[0]
-            try {
-                const comment = (await window.axios.post('{{ route('comments.store', $episodeId) }}', { body: bodyEl.value })).data
-                window.fire.success('Berhasil membuat komentar')
-                this.comments = [comment, ...this.comments]
-                e.target.reset()
-            } catch (e) {
-                window.fire.error(e.response?.data.message || e.message)
-            }
-        }
-    }" x-on:submit.prevent="submit">
+    <form
+      x-on:submit.prevent="(e) => {
+        const route = '{{ route('comments.store', $episodeId) }}'
+        const body = document.getElementsByName('body')[0]
+        Alpine.store('commentStore').create(route, body.value).then((ok) => ok && e.target.reset())
+      }">
       <x-input.markdown name="body" placeholder="Tulis komentarmu disini..." />
       <div class="border-x p-3">
         <x-input.button>Komentar</x-input.button>
@@ -50,16 +31,17 @@
     </div>
   @endauth
 
-  <template x-if="comments.length == 0">
+  <template x-if="$store.commentStore.comments.length == 0">
     <div class="p-3">
       <div class="border bg-gray-50 p-5">
-        <p class="px-3 py-8 text-center text-xl font-light md:text-2xl" x-text="loading ? 'Sedang memuat komentar' : 'Belum ada komentar'">
+        <p class="px-3 py-8 text-center text-xl font-light md:text-2xl"
+          x-text="$store.commentStore.loadLoading ? 'Sedang memuat komentar' : 'Belum ada komentar'">
         </p>
       </div>
     </div>
   </template>
   <ul class="border">
-    <template x-for="comment in comments" x-bind:key="comment.id">
+    <template x-for="comment in $store.commentStore.comments" x-bind:key="comment.id">
       <li class="flex px-3 py-5 odd:bg-gray-50">
         <div class="pr-3">
           <a x-bind:href="'/users/' + comment.user.username" class="block h-10 w-10 rounded-full border">
@@ -87,7 +69,8 @@
               </div>
               <div class="ml-auto">
                 <template x-if="$store.authStore.auth.id === comment.user.id">
-                  <button class="text-red-600">
+                  <button class="text-red-600"
+                    x-on:click="$store.deleteConfirm(() => $store.commentStore.destroy('{{ route('comments.destroy', '__id__') }}'.replace('__id__', comment.id), comment.id))">
                     <i class="ft ft-trash"></i>
                   </button>
                 </template>

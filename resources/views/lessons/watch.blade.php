@@ -9,7 +9,6 @@
           window.resizeVideoplayer = () => {
             const videoEl = document.getElementById('video-container')
             const targetEl = document.getElementById('video-player-autoheight')
-
             if (videoEl && targetEl) {
               targetEl.style.maxHeight = videoEl.clientHeight + 'px'
             }
