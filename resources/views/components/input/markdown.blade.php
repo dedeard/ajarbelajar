@@ -4,6 +4,7 @@
     'value' => '',
     'help' => '',
     'type' => 'minimal',
+    'placeholder' => '',
     'error' => $errors->first($name),
 ])
 
@@ -24,9 +25,8 @@
         e.target.style.height = 'auto';
         e.target.style.height = e.target.scrollHeight + 'px';
       }"
-      x-bind:class="preview ? 'hidden' : 'block'" name="{{ $name }}" id="{{ $name }}"
-      class="{{ $error ? 'border-red-600' : '' }} relative z-10 block w-full resize-none overflow-hidden border-gray-200 bg-transparent text-sm leading-5 text-gray-700 ring-primary-600 selection:bg-primary-600 selection:text-white"
-      {{ $attributes }}>{{ $value ?? old($name) }}</textarea>
+      x-bind:class="preview ? 'hidden' : 'block'" name="{{ $name }}" id="{{ $name }}" placeholder="{{ $placeholder ?? '' }}"
+      class="{{ $error ? 'border-red-600' : '' }} relative z-10 block w-full resize-none overflow-hidden border-gray-200 bg-transparent text-sm leading-5 text-gray-700 ring-primary-600 selection:bg-primary-600 selection:text-white">{{ old($name, $value) }}</textarea>
 
     <template x-if="preview">
       <div x-data="{
