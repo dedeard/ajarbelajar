@@ -3,7 +3,11 @@
     'for' => '',
 ])
 
-<div {{ $attributes->merge(['class' => 'mb-3']) }}>
-  <label @if ($for) for="{{ $for }}" @endif class="text-sm">{{ $label }}</label>
+@if ($label === '')
   {{ $slot }}
-</div>
+@else
+  <div {{ $attributes->merge(['class' => 'mb-3']) }}>
+    <label @if ($for) for="{{ $for }}" @endif class="text-sm">{{ $label }}</label>
+    {{ $slot }}
+  </div>
+@endif

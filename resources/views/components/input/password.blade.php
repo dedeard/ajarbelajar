@@ -14,7 +14,7 @@
           'id' => $name,
           'name' => $name,
           'value' => old($name, $value),
-          'class' => ($error ? ' border-red-600' : '') . 'block pr-8 w-full flex-1 border border-gray-300 placeholder:text-gray-500',
+          'class' => ($error ? ' border-red-600' : '') . 'block pr-8 w-full flex-1 border border-gray-200 placeholder:text-gray-500',
       ]) }} />
 
     <button type="button" class="absolute right-0 top-0 flex h-10 w-10 cursor-pointer items-center justify-center" aria-hidden="true"

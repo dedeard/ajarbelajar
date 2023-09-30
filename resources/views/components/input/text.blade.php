@@ -13,7 +13,7 @@
         'id' => $name,
         'name' => $name,
         'value' => old($name, $value),
-        'class' => ($error ? ' border-red-600' : '') . 'block w-full flex-1 border border-gray-300 placeholder:text-gray-500',
+        'class' => ($error ? ' border-red-600' : '') . 'block w-full flex-1 border border-gray-200 placeholder:text-gray-500',
     ]) }} />
 
   @if ($error)
