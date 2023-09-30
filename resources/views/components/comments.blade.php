@@ -16,6 +16,9 @@
     }
 }" x-init="loadComments">
 
+  <h4 class="border border-b-0 px-5 py-4 text-sm font-semibold uppercase">
+    Tulis Komentar
+  </h4>
   @auth
     <form x-data="{
         async submit(e) {
@@ -30,17 +33,21 @@
             }
         }
     }" x-on:submit.prevent="submit">
-      <h4 class="border-b px-5 py-4 text-sm font-semibold uppercase">
-        Tulis Komentar
-      </h4>
-      <div class="border-b">
-        <x-form.markdown name="body" :disabled-tools="['heading', 'blockquote', 'table', 'horizontalRule']" />
+      <x-input.markdown name="body" placeholder="Tulis komentarmu disini..." />
+      <div class="border-x p-3">
+        <x-input.button>Komentar</x-input.button>
       </div>
-      <div class="border-b p-3">
-        <x-button>Komentar</x-button>
-      </div>
-      <div>
     </form>
+  @else
+    <div class="h-32 border border-b-0 p-3">
+      <p class="flex h-full flex-col items-center justify-center px-3">
+        <span class="mb-3 block text-center text-xl font-light">
+          Kamu harus login untuk dapat menulis komentar
+        </span>
+        <a href="{{ route('login') }}"
+          class="select-none bg-primary-600 px-6 py-3 text-center text-sm font-semibold uppercase leading-none tracking-wider text-white hover:bg-primary-700">Login</a>
+      </p>
+    </div>
   @endauth
 
   <template x-if="comments.length == 0">
@@ -51,7 +58,7 @@
       </div>
     </div>
   </template>
-  <ul>
+  <ul class="border">
     <template x-for="comment in comments" x-bind:key="comment.id">
       <li class="flex px-3 py-5 odd:bg-gray-50">
         <div class="pr-3">
@@ -68,11 +75,25 @@
           <div class="mb-3 flex h-10 flex-col justify-center">
             <a x-bind:href="'/users/' + comment.user.username" class="block text-sm font-semibold capitalize text-primary-600"
               x-text='comment.user.name'></a>
-            <span class="block text-xs">Time ago</span>
+            <span class="block text-xs" x-text="comment.time_ago"></span>
           </div>
           <div class='prose mb-3 max-w-none' x-html='comment.html_body'></div>
-          <button type='button' x-show="($store.authStore.auth?.id === comment.user.id)">Delete</button>
-          <button x-bind:class="{ 'text-red': liked }">Like<span x-text='comment.like_count'></span></button>
+          @auth
+            <div class="flex">
+              <div>
+                <button x-bind:class="{ 'text-red-600': comment.liked }">
+                  <i class="ft ft-heart"></i>
+                  <span x-text="comment.like_count"></span></button>
+              </div>
+              <div class="ml-auto">
+                <template x-if="$store.authStore.auth.id === comment.user.id">
+                  <button class="text-red-600">
+                    <i class="ft ft-trash"></i>
+                  </button>
+                </template>
+              </div>
+            </div>
+          @endauth
         </div>
       </li>
     </template>

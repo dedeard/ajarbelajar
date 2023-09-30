@@ -72,4 +72,15 @@ class Comment extends Model
     {
         return $this->body ? Str::marked($this->body, 'minimal') : '';
     }
+
+
+    public function scopeListQuery($model, $auth = null)
+    {
+        if ($auth) {
+            $model->with(['likes' => fn ($q) => $q->where('user_id', $auth->id)]);
+        }
+        $model->with('user');
+
+        return $model;
+    }
 }

@@ -105,7 +105,7 @@
 
       <h3 class="mb-3 text-xl font-semibold uppercase tracking-wider">Komentar
       </h3>
-      <div class="mb-3 block border bg-white">
+      <div class="mb-3 block bg-white">
         <x-comments episode-id="{{ $episode->id }}" />
       </div>
     </div>

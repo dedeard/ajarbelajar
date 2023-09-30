@@ -19,7 +19,7 @@ class CommentsController extends Controller
     public function index($episodeId)
     {
         $episode = Episode::whereHas('lesson', fn ($q)  => $q->where('public', true))->findOrFail($episodeId);
-        $comments = $episode->comments()->with('user')->orderBy('created_at', 'desc')->get();
+        $comments = $episode->comments()->listQuery(auth()->user())->orderBy('created_at', 'desc')->get();
 
         return response()->json(CommentResource::collection($comments));
     }
@@ -32,7 +32,7 @@ class CommentsController extends Controller
         $episode->comments()->save($comment);
         CommentedEpisodeEvent::dispatch($comment);
 
-        $comment->load('user');
+        $comment = Comment::listQuery(auth()->user())->find($comment->id);
 
         return response()->json(CommentResource::make($comment));
     }
