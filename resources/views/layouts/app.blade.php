@@ -2,7 +2,6 @@
     'head' => '',
     'script' => '',
     'noSidebar' => false,
-    'dashboard' => false,
     'header' => false,
     'actions' => null,
     'title' => config('app.name', 'Laravel'),
@@ -28,30 +27,27 @@
     </div>
   @else
     <div class="flex">
-      <x-layouts.sidebar-wrap :$dashboard>
-        @if ($dashboard)
-          <x-layouts.sidebar-link route="home" is="home" text="Home" icon="home" />
-          <x-layouts.sidebar-link route="dashboard.activities" is="dashboard.activities" text="Aktifitas" icon="activity" />
+      <x-layouts.sidebar-wrap>
+        <x-layouts.sidebar-link text="Home" route="home" is="home" icon="home" />
+        <x-layouts.sidebar-link text="Telusuri" route="lessons.index" is="lessons*" icon="film" />
+        <x-layouts.sidebar-link text="Kategori" route="categories.index" is="categories*" icon="grid" />
+        <x-layouts.sidebar-link text="Pengguna" route="users.index" is="users*" icon="users" />
+
+        <span class="my-3 block"></span>
+        @auth
+          <x-layouts.sidebar-link route="dashboard.activities" is="dashboard.activities" text="Riwayat" icon="activity" />
           <x-layouts.sidebar-link route="dashboard.lessons.index" is="dashboard.lessons*" text="Pelajaran" icon="video" />
           <x-layouts.sidebar-link route="dashboard.favorites" is="dashboard.favorites" text="Favorit" icon="heart" />
-          <x-layouts.sidebar-link route="dashboard.notifications.index" is="dashboard.notifications.index" text="Notifikasi"
-            icon="bell" />
-          <x-layouts.sidebar-link route="dashboard.edit-profile" is="dashboard.edit-profile" text="Edit Profil" icon="settings" />
-          <x-layouts.sidebar-link route="dashboard.edit-password" is="dashboard.edit-password" text="Edit Password" icon="lock" />
+          <x-layouts.sidebar-link route="dashboard.edit-profile" is="dashboard.edit-profile" text="Pengaturan" icon="settings" />
+
+          <span class="my-3 block"></span>
+
           <x-layouts.sidebar-link route="logout" is="logout" text="Keluar" icon="arrow-left-circle" />
         @else
-          <x-layouts.sidebar-link text="Home" route="home" is="home" icon="home" />
-          <x-layouts.sidebar-link text="Pelajaran" route="lessons.index" is="lessons*" icon="film" />
-          <x-layouts.sidebar-link text="Kategori" route="categories.index" is="categories*" icon="grid" />
-          <x-layouts.sidebar-link text="Pengguna" route="users.index" is="users*" icon="users" />
-          @auth
-            <x-layouts.sidebar-link text="Dasbor Saya" route="dashboard.activities" is="dashboard*" icon="clipboard" />
-            <x-layouts.sidebar-link route="logout" is="logout" text="Keluar" icon="arrow-left-circle" />
-          @else
-            <x-layouts.sidebar-link text="Masuk" route="login" is="login" icon="user" />
-            <x-layouts.sidebar-link text="Buat Akun" route="register" is="register" icon="user" />
-          @endauth
-        @endif
+          <x-layouts.sidebar-link text="Masuk" route="login" is="login" icon="user" />
+          <x-layouts.sidebar-link text="Buat Akun" route="register" is="register" icon="user" />
+        @endauth
+
       </x-layouts.sidebar-wrap>
       <div class="relative flex min-h-screen max-w-full flex-1 flex-col pl-0 lg:pl-60">
         <main class="flex w-full flex-1 flex-col pt-16">
