@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
@@ -17,7 +17,7 @@ class NotificationsController extends Controller
         $user = $request->user();
         $notifications = $user->notifications()->orderBy('created_at', 'desc')->paginate(10);
 
-        return view('dashboard.notifications', compact('notifications'));
+        return view('notifications', compact('notifications'));
     }
 
     public function read(Request $request, $id)

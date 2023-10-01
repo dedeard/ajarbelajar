@@ -10,3 +10,7 @@ Route::post('/settings/update-password', 'SettingsController@updatePassword')->n
 
 Route::get('/favorites', 'FavoritesController@index')->name('favorites');
 Route::put('/favorites/{lesson}/toggle', 'FavoritesController@toggle')->name('favorites.toggle');
+
+Route::get('/notifications', 'NotificationsController@index')->name('notifications.index');
+Route::get('/notifications/markall', 'NotificationsController@markall')->name('notifications.markall');
+Route::get('/notifications/{id}', 'NotificationsController@read')->name('notifications.read');
