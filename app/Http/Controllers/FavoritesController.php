@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers;
 
 use App\Events\LessonFavoritedEvent;
 use App\Http\Controllers\Controller;
@@ -16,7 +16,7 @@ class FavoritesController extends Controller
 
         $favorites = $user->favorites()->with('lesson', fn ($q) => $q->listQuery())->orderBy('created_at', 'desc')->paginate(12);
 
-        return view('dashboard.favorites', compact('favorites'));
+        return view('favorites', compact('favorites'));
     }
 
     public function toggle(Request $request, $lessonId)

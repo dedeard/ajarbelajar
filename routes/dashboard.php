@@ -13,9 +13,6 @@ Route::delete('/lessons/{lesson}/{episode}', 'EpisodesController@destroy')->name
 Route::post('/subtitles/{episode}', 'SubtitlesController@store')->name('subtitles.store');
 Route::delete('/subtitles/{subtitle}', 'SubtitlesController@destroy')->name('subtitles.destroy');
 
-Route::get('/favorites', 'FavoritesController@index')->name('favorites');
-Route::put('/favorites/{lesson}/toggle', 'FavoritesController@toggle')->name('favorites.toggle');
-
 Route::get('/notifications', 'NotificationsController@index')->name('notifications.index');
 Route::get('/notifications/markall', 'NotificationsController@markall')->name('notifications.markall');
 Route::get('/notifications/{id}', 'NotificationsController@read')->name('notifications.read');

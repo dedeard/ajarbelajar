@@ -1,4 +1,4 @@
-<x-app-layout dashboard title="Favorit saya" header="Favorit saya">
+<x-app-layout title="Favorit saya" header="Favorit saya">
   @if (!count($favorites))
     <x-dashboard.blank>BELUM ADA PELAJARAN FAVORIT</x-dashboard.blank>
   @else
