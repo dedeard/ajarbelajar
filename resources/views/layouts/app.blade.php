@@ -38,7 +38,7 @@
           <x-layouts.sidebar-link route="histories" is="histories" text="Riwayat" icon="activity" />
           <x-layouts.sidebar-link route="dashboard.lessons.index" is="dashboard.lessons*" text="Pelajaran" icon="video" />
           <x-layouts.sidebar-link route="dashboard.favorites" is="dashboard.favorites" text="Favorit" icon="heart" />
-          <x-layouts.sidebar-link route="dashboard.edit-profile" is="dashboard.edit-profile" text="Pengaturan" icon="settings" />
+          <x-layouts.sidebar-link route="settings" is="settings" text="Pengaturan" icon="settings" />
 
           <span class="my-3 block"></span>
 

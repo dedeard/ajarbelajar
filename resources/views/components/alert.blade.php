@@ -1,14 +1,3 @@
-@if ($message = Session::get('success'))
-  <script>
-    window.flash = ['success', '{{ $message }}']
-  </script>
-@endif
-@if ($message = Session::get('error'))
-  <script>
-    window.flash = ['error', '{{ $message }}']
-  </script>
-@endif
-
 @if (session()->has('success'))
   <script>
     window.flash = ['success', '{{ session('success') }}']
