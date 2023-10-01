@@ -25,9 +25,9 @@
         {{ '@' }}{{ Auth::user()->username }}
       </p>
       <div class="pt-3">
-        <a href="{{ route('dashboard.activities') }}"
+        <a href="{{ route('histories') }}"
           class="mb-3 flex h-9 w-full items-center justify-center rounded-full border bg-gray-100 p-0 text-sm font-semibold uppercase tracking-wider hover:bg-gray-200">
-          Dasbor Saya</a>
+          Riwayat</a>
         <a href="{{ route('dashboard.edit-profile') }}"
           class="mb-3 flex h-9 w-full items-center justify-center rounded-full border bg-gray-100 p-0 text-sm font-semibold uppercase tracking-wider hover:bg-gray-200">
           Edit Profil</a>

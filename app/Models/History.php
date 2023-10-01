@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Activity extends Model
+class History extends Model
 {
     use HasFactory;
 
@@ -14,12 +15,12 @@ class Activity extends Model
         'episode_id',
     ];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function episode()
+    public function episode(): BelongsTo
     {
         return $this->belongsTo(Episode::class);
     }
