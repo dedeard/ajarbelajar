@@ -4,7 +4,7 @@
   <div class="border-b p-3">
     <h3 class="font-bold uppercase">Buat Subtitle</h3>
   </div>
-  <form method="POST" action="{{ route('dashboard.subtitles.store', $episode->id) }}" enctype="multipart/form-data">
+  <form method="POST" action="{{ route('subtitles.store', $episode->id) }}" enctype="multipart/form-data">
     <div class="border-b p-3">
       <x-input.select name="language" title="Bahasa" placeholder="Bahasa">
         <option value="" selected>Pilih</option>
@@ -16,7 +16,7 @@
       <x-input.file name="file" label="Subtitle" placeholder="Pilih file subtitle" />
     </div>
     <div class="p-3">
-      <x-button value="Buat Subtitle" />
+      <x-input.button value="Buat Subtitle" />
     </div>
   </form>
 </div>
@@ -39,7 +39,7 @@
           <td class="border text-center">{{ $sub->code }}</td>
           <td class="border px-3">{{ $sub->name }}</td>
           <td class="border py-1 text-center">
-            <form method="POST" x-ref="formDeleteSubtitle" action="{{ route('dashboard.subtitles.destroy', $sub->id) }}">
+            <form method="POST" x-ref="formDeleteSubtitle" action="{{ route('subtitles.destroy', $sub->id) }}">
               @csrf
               @method('DELETE')
             </form>
@@ -53,3 +53,4 @@
     </tbody>
   </table>
 </div>
+

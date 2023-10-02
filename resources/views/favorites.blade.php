@@ -1,6 +1,6 @@
 <x-app-layout title="Favorit saya" header="Favorit saya">
   @if (!count($favorites))
-    <x-dashboard.blank>BELUM ADA PELAJARAN FAVORIT</x-dashboard.blank>
+    <x-blank>BELUM ADA PELAJARAN FAVORIT</x-blank>
   @else
     <div class="container p-3">
       <div class="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
@@ -12,3 +12,4 @@
     </div>
   @endif
 </x-app-layout>
+

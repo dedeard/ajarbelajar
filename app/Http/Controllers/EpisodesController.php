@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers;
 
 use App\Helpers\VideoHelper;
 use App\Http\Controllers\Controller;
@@ -16,7 +16,7 @@ class EpisodesController extends Controller
         $tab = $request->input('tab') ?? 'details';
         abort_unless(in_array($tab, ['details', 'subtitles']), 404);
 
-        return view('dashboard.lessons.edit-episode', compact('lesson', 'episode', 'tab'));
+        return view('my-lessons.edit-episode', compact('lesson', 'episode', 'tab'));
     }
 
     public function update(Request $request, $lessonId, $episodeId)
@@ -40,6 +40,6 @@ class EpisodesController extends Controller
         $episode = $lesson->episodes()->findOrFail($episodeId);
         VideoHelper::destroy($episode->name);
         $episode->delete();
-        return redirect()->route('dashboard.lessons.edit', ['lesson' => $lessonId, 'tab' => 'episodes'])->withSuccess('Episode berhasil dihapus.');
+        return redirect()->route('my-lessons.edit', ['lesson' => $lessonId, 'tab' => 'episodes'])->withSuccess('Episode berhasil dihapus.');
     }
 }

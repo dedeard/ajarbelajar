@@ -1,6 +1,6 @@
 <x-app-layout title="Riwayat" header="Riwayat">
   @if (!count($histories))
-    <x-dashboard.blank>BELUM ADA RIWAYAT</x-dashboard.blank>
+    <x-blank>BELUM ADA RIWAYAT</x-blank>
   @else
     <div class="container p-3">
       <div class="grid-col-1 grid gap-3">
@@ -23,3 +23,4 @@
     </div>
   @endif
 </x-app-layout>
+

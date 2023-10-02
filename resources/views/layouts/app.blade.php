@@ -29,14 +29,14 @@
     <div class="flex">
       <x-layouts.sidebar-wrap>
         <x-layouts.sidebar-link text="Home" route="home" is="home" icon="home" />
-        <x-layouts.sidebar-link text="Telusuri" route="lessons.index" is="lessons*" icon="film" />
+        <x-layouts.sidebar-link text="Pelajaran" route="lessons.index" is="lessons*" icon="film" />
         <x-layouts.sidebar-link text="Kategori" route="categories.index" is="categories*" icon="grid" />
         <x-layouts.sidebar-link text="Pengguna" route="users.index" is="users*" icon="users" />
 
         <span class="my-3 block"></span>
         @auth
           <x-layouts.sidebar-link route="histories" is="histories" text="Riwayat" icon="activity" />
-          <x-layouts.sidebar-link route="dashboard.lessons.index" is="dashboard.lessons*" text="Pelajaran" icon="video" />
+          <x-layouts.sidebar-link route="my-lessons.index" is="my-lessons*" text="Pelajaran Saya" icon="video" />
           <x-layouts.sidebar-link route="favorites" is="favorites" text="Favorit" icon="heart" />
           <x-layouts.sidebar-link route="settings" is="settings" text="Pengaturan" icon="settings" />
 
@@ -70,3 +70,4 @@
     </div>
   @endif
 </x-root-layout>
+

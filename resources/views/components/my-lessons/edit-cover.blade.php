@@ -19,7 +19,7 @@
                 const formData = new FormData();
                 formData.append('image', file);
                 this.name = file ? file.name : ''
-                const { data } = await window.axios.post('{{ route('dashboard.lessons.update.cover', ['lesson' => $lesson->id]) }}', formData, { onUploadProgress });
+                const { data } = await window.axios.post('{{ route('my-lessons.update.cover', ['lesson' => $lesson->id]) }}', formData, { onUploadProgress });
                 this.url = data.large
                 window.fire.success('Gambar berhasil diubah.')
             }
@@ -43,3 +43,4 @@
     </div>
   </div>
 </div>
+

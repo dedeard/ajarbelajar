@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers;
 
 use App\Helpers\VideoHelper;
 use App\Http\Controllers\Controller;
@@ -11,7 +11,7 @@ use App\Models\Lesson;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
-class LessonsController extends Controller
+class MyLessonsController extends Controller
 {
     public function index(Request $request)
     {
@@ -32,14 +32,14 @@ class LessonsController extends Controller
 
         $lessons = $query->paginate(10);
 
-        return view('dashboard.lessons.index', ['lessons' => $lessons, 'tab' => $tab]);
+        return view('my-lessons.index', ['lessons' => $lessons, 'tab' => $tab]);
     }
 
     public function create()
     {
         $categories = Category::select('id', 'name')->orderBy('name')->get();
 
-        return view('dashboard.lessons.create', ['categories' => $categories]);
+        return view('my-lessons.create', ['categories' => $categories]);
     }
 
     public function store(Request $request)
@@ -55,7 +55,7 @@ class LessonsController extends Controller
         $lesson = new Lesson($data);
         $request->user()->lessons()->save($lesson);
 
-        return redirect()->route('dashboard.lessons.edit', $lesson->id)->withSuccess('Berhasil membuat pelajaran baru.');
+        return redirect()->route('my-lessons.edit', $lesson->id)->withSuccess('Berhasil membuat pelajaran baru.');
     }
 
     public function edit(Request $request, $id)
@@ -67,7 +67,7 @@ class LessonsController extends Controller
         $categories = null;
         if ($tab === 'details') $categories = Category::select('id', 'name')->orderBy('name')->get();
 
-        return view('dashboard.lessons.edit', compact('categories', 'lesson', 'tab'));
+        return view('my-lessons.edit', compact('categories', 'lesson', 'tab'));
     }
 
     public function destroy(Request $request, $id)
@@ -79,7 +79,7 @@ class LessonsController extends Controller
         $lesson->unsearchable();
         $lesson->delete();
 
-        return redirect()->route('dashboard.lessons.index')->withSuccess('Berhasil menghapus pelajaran.');
+        return redirect()->route('my-lessons.index')->withSuccess('Berhasil menghapus pelajaran.');
     }
 
     public function update(Request $request, $id)

@@ -22,7 +22,7 @@
                   const formData = new FormData();
                   formData.append('video', file);
                   this.name = file ? file.name : ''
-                  const { data } = await window.axios.post('{{ route('dashboard.lessons.store.episode', ['lesson' => $lesson->id]) }}', formData, { onUploadProgress });
+                  const { data } = await window.axios.post('{{ route('my-lessons.store.episode', $lesson->id) }}', formData, { onUploadProgress });
                   this.episodes = [...this.episodes, data.episode]
                   window.fire.success('Berhasil membuat episode.')
               }
@@ -65,7 +65,7 @@
                         }
                     }
                     try {
-                        await axios.put('{{ route('dashboard.lessons.update.index', $lesson->id) }}', { index })
+                        await axios.put('{{ route('my-lessons.update.index', $lesson->id) }}', { index })
                         window.fire.success('Index telah diupdate.')
                     } catch (err) {
                         window.fire.error(err.response?.data.message || err.message)
@@ -88,7 +88,7 @@
                 </div>
               </div>
               <div class="p-3">
-                <a x-bind:href="`{{ route('dashboard.lessons.episode.edit', ['episode' => 'episode_id', 'lesson' => 'lesson_id']) }}`.replace('episode_id',
+                <a x-bind:href="`{{ route('my-lessons.episode.edit', ['episode' => 'episode_id', 'my_lesson' => 'lesson_id']) }}`.replace('episode_id',
                     episode.id).replace('lesson_id', episode.lesson_id)"
                   class="block rounded-full bg-primary-600 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white hover:bg-primary-700">
                   Edit
@@ -101,3 +101,4 @@
     </div>
   </template>
 </div>
+

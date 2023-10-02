@@ -19,7 +19,7 @@
                 const formData = new FormData();
                 formData.append('video', file);
                 this.name = file ? file.name : ''
-                const { data } = await window.axios.post('{{ route('dashboard.lessons.store.episode', ['lesson' => $lesson->id]) }}', formData, { onUploadProgress });
+                const { data } = await window.axios.post('{{ route('my-lessons.store.episode', $lesson->id) }}', formData, { onUploadProgress });
                 Livewire.emit('episode-created')
                 window.fire.success(data.message)
             }
@@ -45,3 +45,4 @@
     </div>
   </div>
 </div>
+

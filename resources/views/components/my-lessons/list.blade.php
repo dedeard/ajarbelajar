@@ -1,6 +1,6 @@
 @props(['lesson'])
 
-<a class="flex flex-col border bg-white hover:bg-gray-50 md:flex-row" href="{{ route('dashboard.lessons.edit', $lesson->id) }}">
+<a class="flex flex-col border bg-white hover:bg-gray-50 md:flex-row" href="{{ route('my-lessons.edit', $lesson->id) }}">
   <div class="relative p-3 md:w-52">
     @if ($lesson->public)
       <span class="bg-primary absolute left-2 top-2 bg-primary-600 px-2 py-1 text-xs text-white shadow">PUBLIK</span>
@@ -20,3 +20,4 @@
       {{ $lesson->created_at->translatedFormat('l, d F Y') }}</p>
   </div>
 </a>
+
