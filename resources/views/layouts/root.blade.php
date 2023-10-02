@@ -20,7 +20,7 @@
   <script>
     window.AUTH_DATA = @js(Auth::user());
     window.NOTIFICATION_COUNT = @js(
-        Auth::user()->notifications()->count()
+        Auth::user()->notifications()->unread()->count()
     );
     window.FAVORITE_DATA = @js(
         Auth::user()->favorites()->select('lesson_id')->get()->map(fn($el) => $el->lesson_id)
@@ -48,3 +48,4 @@
 </body>
 
 </html>
+
