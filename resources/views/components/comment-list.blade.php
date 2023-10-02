@@ -20,15 +20,14 @@
       @auth
         <div class="flex">
           <div class="ml-auto">
-            <button x-bind:class="{ 'text-red-600': comment.liked }" class="flex items-center justify-center"
-              X-bind:disabled="$store.commentStore.likeLoading"
+            <button x-bind:class="{ 'text-red-600': comment.liked }" class="leading-6" X-bind:disabled="$store.commentStore.likeLoading"
               x-on:click="$store.commentStore.likeToggle('{{ route('comments.like-toggle', '__id__') }}'.replace('__id__', comment.id), comment.id)">
-              <x-svg.heart x-bind:fill="comment.liked ? 'currentColor' : 'none'" class="block h-5 w-5" />
-              <span x-text="comment.like_count" class="ml-1 block"></span></button>
+              <i class="ft ft-heart"></i>
+              <span x-text="comment.like_count || ''"></span></button>
           </div>
           <div class="ml-2">
             <template x-if="$store.authStore.auth.id === comment.user.id">
-              <button class="text-red-600" X-bind:disabled="$store.commentStore.destroyLoading"
+              <button class="ml-2 leading-6 text-red-600" X-bind:disabled="$store.commentStore.destroyLoading"
                 x-on:click="$store.deleteConfirm(() => $store.commentStore.destroy('{{ route('comments.destroy', '__id__') }}'.replace('__id__', comment.id), comment.id))">
                 <i class="ft ft-trash"></i>
               </button>
@@ -39,3 +38,4 @@
     </div>
   </li>
 </template>
+
