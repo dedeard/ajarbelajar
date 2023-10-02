@@ -36,39 +36,37 @@
       ],
   ]">
     <div class="container p-3">
-      <turbo-frame id="my-lessons.edit-episode">
-        <x-ui.alert />
-        <div class="md:flex md:flex-row-reverse">
-          <div class="md:w-[320px]">
-            <x-blocks.video-player :$episode />
-          </div>
-          <div class="md:flex-1 md:pr-3">
-            @if ($tab === 'details')
-              <form action="{{ route('my-lessons.episode.update', ['my_lesson' => $lesson->id, 'episode' => $episode->id]) }}"
-                method="POST" class="mb-3 border bg-white">
-                @csrf
-                @method('PUT')
-                <div class="border-b p-3">
-                  <h3 class="font-bold uppercase">Edit Detail</h3>
-                </div>
-                <div class="border-b p-3">
-                  <x-inputs.wrapper label="Judul">
-                    <x-inputs.text name="title" placeholder="Judul" value="{{ $episode->title }}" />
-                  </x-inputs.wrapper>
-                  <x-inputs.wrapper label="Deskripsi" useDiv>
-                    <x-inputs.markdown name="description" :value="$episode->description" :disabled-tools="['heading', 'blockquote', 'table', 'horizontalRule']" />
-                  </x-inputs.wrapper>
-                </div>
-                <div class="p-3">
-                  <x-inputs.button value="Simpan" />
-                </div>
-              </form>
-            @else
-              <x-my-lessons.subtitle-management :episode="$episode" />
-            @endif
-          </div>
+      <x-ui.alert />
+      <div class="md:flex md:flex-row-reverse">
+        <div class="md:w-[320px]">
+          <x-blocks.video-player :$episode />
         </div>
-      </turbo-frame>
+        <div class="md:flex-1 md:pr-3">
+          @if ($tab === 'details')
+            <form action="{{ route('my-lessons.episode.update', ['my_lesson' => $lesson->id, 'episode' => $episode->id]) }}" method="POST"
+              class="mb-3 border bg-white">
+              @csrf
+              @method('PUT')
+              <div class="border-b p-3">
+                <h3 class="font-bold uppercase">Edit Detail</h3>
+              </div>
+              <div class="border-b p-3">
+                <x-inputs.wrapper label="Judul">
+                  <x-inputs.text name="title" placeholder="Judul" value="{{ $episode->title }}" />
+                </x-inputs.wrapper>
+                <x-inputs.wrapper label="Deskripsi" useDiv>
+                  <x-inputs.markdown name="description" :value="$episode->description" :disabled-tools="['heading', 'blockquote', 'table', 'horizontalRule']" />
+                </x-inputs.wrapper>
+              </div>
+              <div class="p-3">
+                <x-inputs.button value="Simpan" />
+              </div>
+            </form>
+          @else
+            <x-my-lessons.subtitle-management :episode="$episode" />
+          @endif
+        </div>
+      </div>
     </div>
   </x-blocks.tab>
 

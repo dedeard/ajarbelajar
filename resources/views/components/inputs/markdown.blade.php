@@ -39,7 +39,7 @@
                   this.html = (await window.axios.post('/markdown/preview?type={{ $type }}', { markdown: this.$refs.textarea.value })).data.html;
               } catch (e) {
                   this.error = e.response?.data.message || e.message;
-                  window.fire.error(this.error);
+                  window.toast.error(this.error);
               } finally {
                   this.loading = false;
               }

@@ -17,13 +17,13 @@ Alpine.store('favoriteStore', {
       const { favorited } = (await axios.put(`/favorites/${lessonId}/toggle`)).data
       if (favorited) {
         this.favorites = [...[...this.favorites, lessonId].filter((x, i, a) => a.indexOf(x) == i)]
-        window.fire.success('Pelajaran telah di tambahkan ke daftar favorit.')
+        window.toast.success('Pelajaran telah di tambahkan ke daftar favorit.')
       } else {
         this.favorites = [...this.favorites.filter((el) => el !== lessonId)]
-        window.fire.success('Pelajaran telah di hapus dari daftar favorit.')
+        window.toast.success('Pelajaran telah di hapus dari daftar favorit.')
       }
     } catch (e) {
-      window.fire.error(e.message)
+      window.toast.error(e.message)
     }
   },
 })

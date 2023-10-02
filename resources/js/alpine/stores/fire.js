@@ -5,7 +5,7 @@ window.fire = {
   success(text, options = {}) {
     Swal.fire({
       icon: 'success',
-      title: 'Sukses',
+      title: 'Success',
       text,
       ...options,
     })
