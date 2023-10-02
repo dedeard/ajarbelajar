@@ -10,11 +10,11 @@
     <form method="POST" action="{{ route('my-lessons.store') }}" class="border bg-white">
       @csrf
       <div class="p-3">
-        <x-input.wrapper label="Judul">
-          <x-input.text name="title" placeholder="Judul" />
-        </x-input.wrapper>
-        <x-input.wrapper label="Kategori">
-          <x-input.select name="category">
+        <x-inputs.wrapper label="Judul">
+          <x-inputs.text name="title" placeholder="Judul" />
+        </x-inputs.wrapper>
+        <x-inputs.wrapper label="Kategori">
+          <x-inputs.select name="category">
             <option value="" @if (!old('category')) selected @endif disabled>Pilih
               Kategori
             </option>
@@ -22,15 +22,15 @@
               <option value="{{ $category->id }}" @if (old('category') == $category->id) selected @endif>
                 {{ $category->name }}</option>
             @endforeach
-          </x-input.select>
-        </x-input.wrapper>
-        <x-input.wrapper label="Deskripsi" useDiv>
-          <x-input.markdown name="description" :disabled-tools="['heading', 'blockquote', 'table', 'horizontalRule']" />
-        </x-input.wrapper>
+          </x-inputs.select>
+        </x-inputs.wrapper>
+        <x-inputs.wrapper label="Deskripsi" useDiv>
+          <x-inputs.markdown name="description" :disabled-tools="['heading', 'blockquote', 'table', 'horizontalRule']" />
+        </x-inputs.wrapper>
       </div>
 
       <div class="block border-t p-3">
-        <x-input.button value="Buat Pelajaran" />
+        <x-inputs.button value="Buat Pelajaran" />
       </div>
     </form>
   </div>

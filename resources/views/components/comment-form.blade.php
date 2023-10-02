@@ -10,9 +10,9 @@
       const body = document.getElementsByName('body')[0]
       Alpine.store('commentStore').create(route, body.value).then((ok) => ok && e.target.reset())
     }">
-    <x-input.markdown name="body" placeholder="Tulis komentarmu disini..." />
+    <x-inputs.markdown name="body" placeholder="Tulis komentarmu disini..." />
     <div class="border-x p-3">
-      <x-input.button X-bind:disabled="$store.commentStore.createLoading">Komentar</x-input.button>
+      <x-inputs.button X-bind:disabled="$store.commentStore.createLoading">Komentar</x-inputs.button>
     </div>
   </form>
 @else
@@ -26,3 +26,4 @@
     </p>
   </div>
 @endauth
+

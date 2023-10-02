@@ -37,23 +37,24 @@
 
         </div>
         <div class="flex-1 pl-3">
-          <x-input.wrapper label="Nama">
-            <x-input.text name="name" placeholder="Nama kamu" value="{{ Auth::user()->name }}" />
-          </x-input.wrapper>
-          <x-input.wrapper label="Username">
-            <x-input.text name="username" placeholder="Username" value="{{ Auth::user()->username }}" />
-          </x-input.wrapper>
+          <x-inputs.wrapper label="Nama">
+            <x-inputs.text name="name" placeholder="Nama kamu" value="{{ Auth::user()->name }}" />
+          </x-inputs.wrapper>
+          <x-inputs.wrapper label="Username">
+            <x-inputs.text name="username" placeholder="Username" value="{{ Auth::user()->username }}" />
+          </x-inputs.wrapper>
         </div>
       </div>
-      <x-input.wrapper label="Website">
-        <x-input.text name="website" placeholder="https://example.com" value="{{ Auth::user()->website }}" />
-      </x-input.wrapper>
-      <x-input.wrapper label="Bio">
-        <x-input.textarea name="bio" placeholder="Bio" value="{{ Auth::user()->bio }}" />
-      </x-input.wrapper>
+      <x-inputs.wrapper label="Website">
+        <x-inputs.text name="website" placeholder="https://example.com" value="{{ Auth::user()->website }}" />
+      </x-inputs.wrapper>
+      <x-inputs.wrapper label="Bio">
+        <x-inputs.textarea name="bio" placeholder="Bio" value="{{ Auth::user()->bio }}" />
+      </x-inputs.wrapper>
     </div>
     <div class="border-t p-3">
-      <x-input.button value="Simpan" />
+      <x-inputs.button value="Simpan" />
     </div>
   </form>
 </turbo-frame>
+

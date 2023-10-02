@@ -52,15 +52,15 @@
                   <h3 class="font-bold uppercase">Edit Detail</h3>
                 </div>
                 <div class="border-b p-3">
-                  <x-input.wrapper label="Judul">
-                    <x-input.text name="title" placeholder="Judul" value="{{ $episode->title }}" />
-                  </x-input.wrapper>
-                  <x-input.wrapper label="Deskripsi" useDiv>
-                    <x-input.markdown name="description" :value="$episode->description" :disabled-tools="['heading', 'blockquote', 'table', 'horizontalRule']" />
-                  </x-input.wrapper>
+                  <x-inputs.wrapper label="Judul">
+                    <x-inputs.text name="title" placeholder="Judul" value="{{ $episode->title }}" />
+                  </x-inputs.wrapper>
+                  <x-inputs.wrapper label="Deskripsi" useDiv>
+                    <x-inputs.markdown name="description" :value="$episode->description" :disabled-tools="['heading', 'blockquote', 'table', 'horizontalRule']" />
+                  </x-inputs.wrapper>
                 </div>
                 <div class="p-3">
-                  <x-input.button value="Simpan" />
+                  <x-inputs.button value="Simpan" />
                 </div>
               </form>
             @else

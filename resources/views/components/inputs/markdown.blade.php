@@ -8,7 +8,7 @@
     'error' => $errors->first($name),
 ])
 
-<x-input.wrapper label="{{ $label }}" for="{{ $name }}">
+<x-inputs.wrapper label="{{ $label }}" for="{{ $name }}">
   <div x-data="markdown" class="bg-white">
     <div class="flex border border-b-0">
       <button type="button"
@@ -66,4 +66,5 @@
   @elseif($help)
     <span class="block text-xs">{{ $help }}</span>
   @endif
-</x-input.wrapper>
+</x-inputs.wrapper>
+

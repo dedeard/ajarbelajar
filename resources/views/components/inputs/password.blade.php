@@ -6,7 +6,7 @@
     'error' => $errors->first($name),
 ])
 
-<x-input.wrapper label="{{ $label }}" for="{{ $name }}">
+<x-inputs.wrapper label="{{ $label }}" for="{{ $name }}">
   <div class="relative" x-data="{ showPassword: false }">
     <input x-bind:type="showPassword ? 'text' : 'password'"
       {{ $attributes->merge([
@@ -28,4 +28,5 @@
   @elseif($help)
     <span class="block text-xs">{{ $help }}</span>
   @endif
-</x-input.wrapper>
+</x-inputs.wrapper>
+

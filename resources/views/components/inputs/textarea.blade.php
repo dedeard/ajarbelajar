@@ -6,7 +6,7 @@
     'error' => $errors->first($name),
 ])
 
-<x-input.wrapper label="{{ $label }}" for="{{ $name }}">
+<x-inputs.wrapper label="{{ $label }}" for="{{ $name }}">
   <textarea
     {{ $attributes->merge([
         'type' => 'text',
@@ -20,4 +20,5 @@
   @elseif($help)
     <span class="block text-xs">{{ $help }}</span>
   @endif
-</x-input.wrapper>
+</x-inputs.wrapper>
+

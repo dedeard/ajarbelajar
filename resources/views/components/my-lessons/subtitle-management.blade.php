@@ -6,17 +6,17 @@
   </div>
   <form method="POST" action="{{ route('subtitles.store', $episode->id) }}" enctype="multipart/form-data">
     <div class="border-b p-3">
-      <x-input.select name="language" title="Bahasa" placeholder="Bahasa">
+      <x-inputs.select name="language" title="Bahasa" placeholder="Bahasa">
         <option value="" selected>Pilih</option>
         @foreach (config('languages') as $lang)
           <option value="{{ $lang['code'] }}" @if (old('language') === $lang['code']) selected @endif>{{ $lang['code'] }} : {{ $lang['name'] }}
           </option>
         @endforeach
-      </x-input.select>
-      <x-input.file name="file" label="Subtitle" placeholder="Pilih file subtitle" />
+      </x-inputs.select>
+      <x-inputs.file name="file" label="Subtitle" placeholder="Pilih file subtitle" />
     </div>
     <div class="p-3">
-      <x-input.button value="Buat Subtitle" />
+      <x-inputs.button value="Buat Subtitle" />
     </div>
   </form>
 </div>

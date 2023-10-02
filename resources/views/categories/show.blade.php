@@ -1,7 +1,7 @@
 <x-app-layout :title="$category->name" :header="$category->name">
   <x-slot:actions>
     <div class="dropdown-wrapper relative">
-      <x-input.button type="button" class="block rounded-full px-4 py-2 text-xs">
+      <x-inputs.button type="button" class="block rounded-full px-4 py-2 text-xs">
         Sortir :
         @if (!$sort)
           Terbaru
@@ -12,7 +12,7 @@
         @if ($sort == 'popularity')
           Popularitas
         @endif
-      </x-input.button>
+      </x-inputs.button>
       <div class="dropdown-drop absolute right-0 top-full z-10 mt-1 w-48 border bg-white p-3 shadow">
         <a href="{{ route('categories.show', $category->slug) }}"
           class="@if (!$sort) bg-gray-100 @endif mb-3 flex h-9 w-full items-center justify-center rounded-full border px-4 text-sm uppercase hover:bg-gray-200">
