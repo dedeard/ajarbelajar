@@ -41,7 +41,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-3">
         <div class="mb-3 lg:col-span-2 lg:mb-0">
           <div id="video-container">
-            <x-video-player poster="{{ $lesson->cover_urls['large'] }}" :episode="$episode" :autoplay="false" :subtitles="$episode->subtitles" />
+            <x-blocks.video-player poster="{{ $lesson->cover_urls['large'] }}" :episode="$episode" :autoplay="false" :subtitles="$episode->subtitles" />
             @if ($episode->description)
               <div class="border bg-white">
                 <h1 class="border-b px-3 py-4 font-semibold">
@@ -105,8 +105,9 @@
       <h3 class="mb-3 text-xl font-semibold uppercase tracking-wider">Komentar
       </h3>
       <div class="mb-3 block bg-white">
-        <x-comments episode-id="{{ $episode->id }}" />
+        <x-blocks.comment episode-id="{{ $episode->id }}" />
       </div>
     </div>
   </div>
 </x-app-layout>
+

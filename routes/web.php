@@ -22,3 +22,7 @@ Route::get('@{user}', 'UsersController@show')->name('users.show');
 Route::post('markdown/preview', 'MarkdownController@preview')->name('markdown.preview');
 
 require __DIR__ . '/auth.php';
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    require __DIR__ . '/private.php';
+});

@@ -3,7 +3,7 @@
 namespace App\Jobs;
 
 use App\Events\EpisodeWatchedEvent;
-use App\Models\Activity;
+use App\Models\History;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -27,16 +27,16 @@ class EpisodeWatchedJob implements ShouldQueue
     public function handle(EpisodeWatchedEvent $event): void
     {
         if ($event->user) {
-            $q = $event->user->activities()->where('episode_id', $event->episode->id);
+            $q = $event->user->histories()->where('episode_id', $event->episode->id);
             if ($q->exists()) {
-                $activity = $q->first();
-                $activity->touch();
+                $history = $q->first();
+                $history->touch();
             } else {
-                $activity = new Activity(['episode_id' => $event->episode->id]);
-                $event->user->activities()->save($activity);
-                if ($event->user->activities()->count() > 20) {
-                    $activity = $event->user->activities()->orderBy('updated_at', 'asc')->first();
-                    $activity->delete();
+                $history = new History(['episode_id' => $event->episode->id]);
+                $event->user->histories()->save($history);
+                if ($event->user->histories()->count() > 20) {
+                    $history = $event->user->histories()->orderBy('updated_at', 'asc')->first();
+                    $history->delete();
                 }
             }
         }

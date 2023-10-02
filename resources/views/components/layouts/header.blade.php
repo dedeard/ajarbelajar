@@ -35,7 +35,7 @@
         </div>
         @auth
           <div class="flex p-3 md:ml-auto">
-            <a aria-label="Notifications" href="{{ route('dashboard.notifications.index') }}"
+            <a aria-label="Notifications" href="{{ route('notifications.index') }}"
               class="toggle-color relative flex h-9 w-9 items-center justify-center rounded-full border p-0 text-sm">
               <i class="ft ft-bell"></i>
               <span

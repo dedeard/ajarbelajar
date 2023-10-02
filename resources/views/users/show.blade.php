@@ -6,7 +6,7 @@
           @if ($user->avatar_url)
             <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="block h-full w-full rounded-full" />
           @else
-            <x-avatar :name="$user->name" class="block h-full w-full rounded-full" />
+            <x-ui.avatar :name="$user->name" class="block h-full w-full rounded-full" />
           @endif
         </div>
       </div>
@@ -36,7 +36,7 @@
         <h2 class="my-auto flex-1 pr-3 font-semibold uppercase leading-none">
           Pelajaran</h2>
         <div class="dropdown-wrapper relative">
-          <x-button type="button" class="block rounded-full px-4 py-2 text-xs">
+          <x-inputs.button type="button" class="block rounded-full px-4 py-2 text-xs">
             Sortir :
             @if (!$sort)
               Terbaru
@@ -47,7 +47,7 @@
             @if ($sort == 'popularity')
               Popularitas
             @endif
-          </x-button>
+          </x-inputs.button>
           <div class="dropdown-drop absolute right-0 top-full z-10 mt-1 w-48 border bg-white p-3 shadow">
             <a href="{{ route('users.show', $user->username) }}"
               class="@if (!$sort) bg-gray-100 @endif mb-3 flex h-9 w-full items-center justify-center rounded-full border px-4 text-sm uppercase hover:bg-gray-200">
@@ -67,15 +67,16 @@
     </div>
   </div>
   @if (!count($lessons))
-    <x-dashboard.blank>BELUM ADA PELAJARAN</x-dashboard.blank>
+    <x-blocks.blank>BELUM ADA PELAJARAN</x-blocks.blank>
   @else
     <div class="container p-3">
       <div class="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
         @foreach ($lessons as $lesson)
-          <x-lesson-list :lesson="$lesson" :user="Auth::user()" />
+          <x-cards.lesson-list :$lesson />
         @endforeach
       </div>
       {{ $lessons->links() }}
     </div>
   @endif
 </x-app-layout>
+

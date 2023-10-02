@@ -7,18 +7,16 @@
         <div class="flex h-16 w-full items-center border-b px-3">
           <div class="pr-2">
             <figure class="m-auto block h-12 w-12 rounded-full border border-gray-200 bg-white p-1">
-              @if (Auth::user()->avatar_url)
-                <img src="{{ Auth::user()->avatar_url }}" alt="{{ Auth::user()->name }}" class="block h-full w-full rounded-full" />
-              @else
-                <x-avatar :name="Auth::user()->name" class="block h-full w-full rounded-full" />
-              @endif
+              <template x-if="$store.authStore.auth.avatar_url">
+                <img :src="$store.authStore.auth.avatar_url" :alt="$store.authStore.auth.name" class="block h-full w-full rounded-full" />
+              </template>
+              <x-ui.avatar :name="Auth::user()->name" x-bind:name="$store.authStore.auth.name"
+                x-bind:class="$store.authStore.auth.avatar_url ? '!hidden' : ''" class="block h-full w-full rounded-full" />
             </figure>
           </div>
           <div class="flex-1 overflow-hidden">
-            <h3 class="mb-1 truncate font-semibold capitalize leading-none">
-              {{ Auth::user()->name }}</h3>
-            <p class="truncate text-sm leading-none">
-              {{ '@' . Auth::user()->username }}</p>
+            <h3 class="mb-1 truncate font-semibold capitalize leading-none" x-text="$store.authStore.auth.name">{{ Auth::user()->name }}</h3>
+            <p class="truncate text-sm leading-none" x-text="'@' + $store.authStore.auth.username">{{ '@' . Auth::user()->username }}</p>
           </div>
         </div>
       @endauth
@@ -26,3 +24,4 @@
     </nav>
   </div>
 </aside>
+

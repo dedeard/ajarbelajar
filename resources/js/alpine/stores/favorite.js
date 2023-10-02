@@ -14,7 +14,7 @@ Alpine.store('favoriteStore', {
 
   async toggle(lessonId) {
     try {
-      const { favorited } = (await axios.put(`/dashboard/favorites/${lessonId}/toggle`)).data
+      const { favorited } = (await axios.put(`/favorites/${lessonId}/toggle`)).data
       if (favorited) {
         this.favorites = [...[...this.favorites, lessonId].filter((x, i, a) => a.indexOf(x) == i)]
         window.fire.success('Pelajaran telah di tambahkan ke daftar favorit.')
