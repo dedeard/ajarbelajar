@@ -38,4 +38,3 @@
     {{ $lessons->links() }}
   </div>
 </x-app-layout>
-

@@ -71,4 +71,3 @@
   </x-blocks.tab>
 
 </x-app-layout>
-

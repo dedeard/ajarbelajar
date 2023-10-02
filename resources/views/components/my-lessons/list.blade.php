@@ -20,4 +20,3 @@
       {{ $lesson->created_at->translatedFormat('l, d F Y') }}</p>
   </div>
 </a>
-

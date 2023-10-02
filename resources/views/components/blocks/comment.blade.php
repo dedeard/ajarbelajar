@@ -19,4 +19,3 @@
     <x-blocks.comment.list x-for="comment in $store.commentStore.comments" x-bind:key="comment.id" />
   </ul>
 </div>
-

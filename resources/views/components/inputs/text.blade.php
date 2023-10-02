@@ -22,4 +22,3 @@
     <span class="block text-xs">{{ $help }}</span>
   @endif
 </x-inputs.wrapper>
-

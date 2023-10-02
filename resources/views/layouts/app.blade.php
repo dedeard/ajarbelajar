@@ -70,4 +70,3 @@
     </div>
   @endif
 </x-root-layout>
-
