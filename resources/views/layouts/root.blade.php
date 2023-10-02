@@ -38,7 +38,7 @@
 @endauth
 
 <body x-data="{ sidebarOpen: false }" class="bg-gray-100 text-gray-700">
-  <x-alert />
+  <x-ui.alert />
 
   <div class="min-h-screen">
     {{ $slot }}

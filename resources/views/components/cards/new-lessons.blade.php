@@ -1,8 +1,17 @@
+@props(['ignore-id'])
+
+@php
+  $lessons = \App\Models\Lesson::listQuery()
+      ->where('id', '!=', $ignoreId)
+      ->orderBy('posted_at', 'desc')
+      ->take(6)
+      ->get();
+@endphp
+
 @if (count($lessons))
   <div class="mb-3 overflow-hidden border bg-white">
     <div class="px-3 py-4">
-      <h4 class="text-sm font-semibold leading-none">Lainnya dari
-        {{ $user->name }}</h4>
+      <h4 class="text-sm font-semibold leading-none">Baru di Ajarbelajar</h4>
     </div>
     @foreach ($lessons as $lesson)
       <a href="{{ route('lessons.show', $lesson->slug) }}" class="block border-t px-3 py-2 text-sm first:border-t-0 hover:bg-gray-100">
@@ -14,3 +23,4 @@
     @endforeach
   </div>
 @endif
+

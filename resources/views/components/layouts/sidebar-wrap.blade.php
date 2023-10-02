@@ -10,7 +10,7 @@
               <template x-if="$store.authStore.auth.avatar_url">
                 <img :src="$store.authStore.auth.avatar_url" :alt="$store.authStore.auth.name" class="block h-full w-full rounded-full" />
               </template>
-              <x-avatar :name="Auth::user()->name" x-bind:name="$store.authStore.auth.name"
+              <x-ui.avatar :name="Auth::user()->name" x-bind:name="$store.authStore.auth.name"
                 x-bind:class="$store.authStore.auth.avatar_url ? '!hidden' : ''" class="block h-full w-full rounded-full" />
             </figure>
           </div>
@@ -24,3 +24,4 @@
     </nav>
   </div>
 </aside>
+

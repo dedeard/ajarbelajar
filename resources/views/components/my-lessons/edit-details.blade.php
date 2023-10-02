@@ -1,7 +1,7 @@
 @props(['lesson'])
 
 <turbo-frame id="my-lessons.edit-details">
-  <x-alert />
+  <x-ui.alert />
   <div class="mb-3 border bg-white">
     <form action="{{ route('my-lessons.update', $lesson->id) }}" method="POST">
       @csrf

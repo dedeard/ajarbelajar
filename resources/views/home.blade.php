@@ -19,7 +19,7 @@
     </h3>
     <div class="grid grid-cols-1 gap-3 py-3 md:grid-cols-2 xl:grid-cols-4">
       @foreach ($lessons as $lesson)
-        <x-lesson-list :lesson="$lesson" :user="Auth::user()" />
+        <x-cards.lesson-list :$lesson />
       @endforeach
     </div>
     <div class="py-3 text-center">
@@ -35,7 +35,7 @@
     </h3>
     <div class="grid grid-cols-1 gap-3 py-3 md:grid-cols-2 xl:grid-cols-4">
       @foreach ($categories as $category)
-        <x-category-list :category="$category" />
+        <x-cards.category-list :category="$category" />
       @endforeach
     </div>
     <div class="py-3 text-center">
@@ -51,7 +51,7 @@
     </h3>
     <div class="grid grid-cols-1 gap-3 py-3 md:grid-cols-2 xl:grid-cols-4">
       @foreach ($users as $user)
-        <x-user-list :user="$user" />
+        <x-cards.user-list :$user />
       @endforeach
     </div>
     <div class="py-3 text-center">
@@ -62,3 +62,4 @@
   </div>
 
 </x-app-layout>
+

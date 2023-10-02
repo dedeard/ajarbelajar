@@ -12,7 +12,7 @@
     </a>
   </x-slot:actions>
 
-  <x-tab route="my-lessons.edit" :tab="$tab" :lists="[
+  <x-blocks.tab route="my-lessons.edit" :tab="$tab" :lists="[
       'details' => ['params' => ['my_lesson' => $lesson->id], 'text' => 'Detail'],
       'cover' => [
           'params' => ['my_lesson' => $lesson->id, 'tab' => 'cover'],
@@ -34,6 +34,6 @@
         <x-my-lessons.edit-episodes :lesson="$lesson" />
       @endif
     </div>
-  </x-tab>
+  </x-blocks.tab>
 </x-app-layout>
 

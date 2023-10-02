@@ -1,5 +1,5 @@
 <turbo-frame id="form.update-password">
-  <x-alert />
+  <x-ui.alert />
   <form class="border bg-white" method="POST" action="{{ route('settings.update-password') }}">
     @csrf
     <h2 class="border-b p-3 pt-4 font-semibold uppercase">Pengaturan Password</h2>

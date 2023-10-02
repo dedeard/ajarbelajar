@@ -1,3 +1,5 @@
+@props(['lesson'])
+
 @if ($lesson)
   <div class="flex flex-col border bg-white">
     <div class="block w-full flex-1 p-2">
@@ -10,7 +12,7 @@
         @endif
 
         @auth
-          <x-favorite-toggle lessonId="{{ $lesson->id }}" :small="true" />
+          <x-ui.favorite-toggle lessonId="{{ $lesson->id }}" :small="true" />
         @endauth
 
         <img src="{{ $lesson->cover_urls['thumb'] }}" alt="{{ $lesson->title }}" class="block h-full w-full" />
@@ -19,7 +21,7 @@
             <img src="{{ $lesson->user->avatar_url }}" alt="{{ $lesson->user->name }}"
               class="block h-full w-full rounded-full border border-white" />
           @else
-            <x-avatar :name="$lesson->user->name" class="block h-full w-full rounded-full border border-white" />
+            <x-ui.avatar :name="$lesson->user->name" class="block h-full w-full rounded-full border border-white" />
           @endif
         </div>
       </div>
@@ -56,3 +58,4 @@
     </div>
   </div>
 @endif
+

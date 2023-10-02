@@ -7,7 +7,7 @@
         @if ($user->avatar_url)
           <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="block h-full w-full rounded-full" />
         @else
-          <x-avatar :name="$user->name" class="block h-full w-full rounded-full" />
+          <x-ui.avatar :name="$user->name" class="block h-full w-full rounded-full" />
         @endif
       </div>
     </div>
@@ -19,3 +19,4 @@
     </div>
   </div>
 </a>
+

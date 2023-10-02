@@ -6,7 +6,7 @@
           <img x-bind:src="comment.user.avatar_url" x-bind:alt="comment.user.name" class="block h-full w-full rounded-full" />
         </template>
         <template x-if="!comment.user.avatar_url" x-data="{ name: comment.user.name }">
-          <x-avatar alpine class="block h-full w-full rounded-full" />
+          <x-ui.avatar alpine class="block h-full w-full rounded-full" />
         </template>
       </a>
     </div>

@@ -4,7 +4,7 @@
     episodeId: {{ $episodeId }}
 }" x-init="$store.commentStore.load('{{ route('comments.index', $episodeId) }}')">
 
-  <x-comment-form :episode-id="$episodeId" />
+  <x-blocks.comment.form :episode-id="$episodeId" />
 
   <template x-if="$store.commentStore.comments.length == 0">
     <div class="border p-3">
@@ -16,6 +16,7 @@
     </div>
   </template>
   <ul class="border">
-    <x-comment-list x-for="comment in $store.commentStore.comments" x-bind:key="comment.id" />
+    <x-blocks.comment.list x-for="comment in $store.commentStore.comments" x-bind:key="comment.id" />
   </ul>
 </div>
+

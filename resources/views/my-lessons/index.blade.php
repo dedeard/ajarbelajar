@@ -5,14 +5,14 @@
       Buat Pelajaran
     </a>
   </x-slot:actions>
-  <x-tab route="my-lessons.index" :tab="$tab" :lists="[
+  <x-blocks.tab route="my-lessons.index" :tab="$tab" :lists="[
       'all' => ['params' => [], 'text' => 'Semua'],
       'public' => ['params' => ['tab' => 'public'], 'text' => 'Publik'],
       'draft' => ['params' => ['tab' => 'draft'], 'text' => 'Draf'],
   ]">
 
     @if (!count($lessons))
-      <x-blank>BELUM ADA PELAJARAN</x-blank>
+      <x-blocks.blank>BELUM ADA PELAJARAN</x-blocks.blank>
     @else
       <div class="container p-3">
         <div class="grid grid-cols-1 gap-3">
@@ -42,6 +42,6 @@
         {{ $lessons->links() }}
       </div>
     @endif
-  </x-tab>
+  </x-blocks.tab>
 </x-app-layout>
 

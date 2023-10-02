@@ -21,7 +21,7 @@
     </div>
   </x-slot:actions>
 
-  <x-tab route="my-lessons.episode.edit" :tab="$tab" class="grid-cols-2" :lists="[
+  <x-blocks.tab route="my-lessons.episode.edit" :tab="$tab" class="grid-cols-2" :lists="[
       'details' => [
           'params' => ['episode' => $episode->id, 'my_lesson' => $lesson->id],
           'text' => 'Edit Detail',
@@ -37,10 +37,10 @@
   ]">
     <div class="container p-3">
       <turbo-frame id="my-lessons.edit-episode">
-        <x-alert />
+        <x-ui.alert />
         <div class="md:flex md:flex-row-reverse">
           <div class="md:w-[320px]">
-            <x-video-player :$episode />
+            <x-blocks.video-player :$episode />
           </div>
           <div class="md:flex-1 md:pr-3">
             @if ($tab === 'details')
@@ -70,7 +70,7 @@
         </div>
       </turbo-frame>
     </div>
-  </x-tab>
+  </x-blocks.tab>
 
 </x-app-layout>
 

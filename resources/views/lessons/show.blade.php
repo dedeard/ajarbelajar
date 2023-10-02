@@ -7,7 +7,7 @@
             <img src="{{ $lesson->cover_urls['large'] }}" alt="{{ $lesson->title }}" class="block w-full" />
 
             @auth
-              <x-favorite-toggle lessonId="{{ $lesson->id }}" />
+              <x-ui.favorite-toggle lessonId="{{ $lesson->id }}" />
             @endauth
 
             <a href="{{ route('lessons.watch', $lesson->slug) }}"
@@ -56,7 +56,7 @@
                 @if ($lesson->user->avatar_url)
                   <img src="{{ $lesson->user->avatar_url }}" alt="{{ $lesson->user->name }}" class="block h-full w-full rounded-full" />
                 @else
-                  <x-avatar :name="$lesson->user->name" class="block h-full w-full rounded-full" />
+                  <x-ui.avatar :name="$lesson->user->name" class="block h-full w-full rounded-full" />
                 @endif
               </a>
             </div>
@@ -73,10 +73,11 @@
           </div>
         </div>
 
-        <x-new-user-lessons-card :user="$lesson->user" :ignore-id="$lesson->id" />
+        <x-cards.new-user-lessons :user="$lesson->user" :ignore-id="$lesson->id" />
 
-        <x-new-lessons-card :ignore-id="$lesson->id" />
+        <x-cards.new-lessons :ignore-id="$lesson->id" />
       </div>
     </div>
   </div>
 </x-app-layout>
+

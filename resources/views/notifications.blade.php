@@ -6,7 +6,7 @@
     </a>
   </x-slot:actions>
   @if (!count($notifications))
-    <x-blank>BELUM ADA NOTIFIKASI</x-blank>
+    <x-blocks.blank>BELUM ADA NOTIFIKASI</x-blocks.blank>
   @else
     <div class="container p-3">
       <div class="grid grid-cols-1 gap-3">

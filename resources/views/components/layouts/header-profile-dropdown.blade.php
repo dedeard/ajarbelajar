@@ -3,7 +3,7 @@
     <template x-if="$store.authStore.auth.avatar_url">
       <img :src="$store.authStore.auth.avatar_url" :alt="$store.authStore.auth.name" class="block h-full w-full rounded-full" />
     </template>
-    <x-avatar :name="Auth::user()->name" x-bind:name="$store.authStore.auth.name" x-bind:class="$store.authStore.auth.avatar_url ? '!hidden' : ''"
+    <x-ui.avatar :name="Auth::user()->name" x-bind:name="$store.authStore.auth.name" x-bind:class="$store.authStore.auth.avatar_url ? '!hidden' : ''"
       class="block h-full w-full rounded-full" />
   </button>
   <div class="dropdown-drop absolute right-0 top-full mt-3 w-60">
@@ -14,7 +14,7 @@
           <template x-if="$store.authStore.auth.avatar_url">
             <img :src="$store.authStore.auth.avatar_url" :alt="$store.authStore.auth.name" class="block h-full w-full rounded-full" />
           </template>
-          <x-avatar :name="Auth::user()->name" x-bind:name="$store.authStore.auth.name"
+          <x-ui.avatar :name="Auth::user()->name" x-bind:name="$store.authStore.auth.name"
             x-bind:class="$store.authStore.auth.avatar_url ? '!hidden' : ''" class="block h-full w-full rounded-full" />
         </figure>
       </div>
@@ -35,3 +35,4 @@
     </div>
   </div>
 </div>
+

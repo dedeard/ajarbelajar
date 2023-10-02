@@ -1,5 +1,5 @@
 <turbo-frame id="form.update-profile">
-  <x-alert />
+  <x-ui.alert />
   <script>
     window.Alpine?.store('authStore')?.set(@js(Auth::user()))
   </script>
@@ -22,7 +22,7 @@
               }
           }" class="relative h-32 w-32 overflow-hidden rounded-full border border-gray-300 bg-gray-200">
             <template x-if="!url">
-              <x-avatar :name="Auth::user()->name" class="block h-full w-full" />
+              <x-ui.avatar :name="Auth::user()->name" class="block h-full w-full" />
             </template>
             <template x-if="url">
               <img class="block h-full w-full object-cover" :src="url" alt="User Avatar">
