@@ -21,10 +21,10 @@
                 this.name = file ? file.name : ''
                 const { data } = await window.axios.post('{{ route('my-lessons.update.cover', ['lesson' => $lesson->id]) }}', formData, { onUploadProgress });
                 this.url = data.large
-                window.fire.success('Gambar berhasil diubah.')
+                window.toast.success('Gambar berhasil diubah.')
             }
         } catch (err) {
-            window.fire.error(err.response?.data.message || err.message)
+            window.toast.error(err.response?.data.message || err.message)
         }
         this.uploading = false
     },

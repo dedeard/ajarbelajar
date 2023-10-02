@@ -21,10 +21,10 @@
                 this.name = file ? file.name : ''
                 const { data } = await window.axios.post('{{ route('my-lessons.store.episode', $lesson->id) }}', formData, { onUploadProgress });
                 Livewire.emit('episode-created')
-                window.fire.success(data.message)
+                window.toast.success(data.message)
             }
         } catch (err) {
-            window.fire.error(err.response?.data.message || err.message)
+            window.toast.error(err.response?.data.message || err.message)
         }
         this.fileInput = null;
         this.uploading = false

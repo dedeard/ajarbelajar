@@ -12,7 +12,7 @@
       <div class="grid grid-cols-1 gap-3">
         @foreach ($notifications as $notification)
           <a href="{{ route('notifications.read', $notification->id) }}"
-            class="@if (!$notification->read_at) border-red-600 @endif block border border-l-4 bg-white p-3 hover:bg-gray-50">
+            class="@if (!$notification->read_at) border-red-600 @endif block border-l-4 bg-white p-3 shadow-sm hover:bg-gray-50">
             <p class="text-xs">{{ $notification->created_at->diffForHumans() }}
             </p>
             <h3>{{ $notification->data['message'] }}</h3>

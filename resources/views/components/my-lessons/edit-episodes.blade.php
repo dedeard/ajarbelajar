@@ -24,10 +24,10 @@
                   this.name = file ? file.name : ''
                   const { data } = await window.axios.post('{{ route('my-lessons.store.episode', $lesson->id) }}', formData, { onUploadProgress });
                   this.episodes = [...this.episodes, data.episode]
-                  window.fire.success('Berhasil membuat episode.')
+                  window.toast.success('Berhasil membuat episode.')
               }
           } catch (err) {
-              window.fire.error(err.response?.data.message || err.message)
+              window.toast.error(err.response?.data.message || err.message)
           }
           this.fileInput = null;
           this.uploading = false
@@ -66,9 +66,9 @@
                     }
                     try {
                         await axios.put('{{ route('my-lessons.update.index', $lesson->id) }}', { index })
-                        window.fire.success('Index telah diupdate.')
+                        window.toast.success('Index telah diupdate.')
                     } catch (err) {
-                        window.fire.error(err.response?.data.message || err.message)
+                        window.toast.error(err.response?.data.message || err.message)
                     }
                 },
             })

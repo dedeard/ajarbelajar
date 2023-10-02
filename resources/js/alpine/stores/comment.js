@@ -15,7 +15,7 @@ Alpine.store('commentStore', {
       this.comments = (await window.axios.get(route)).data
     } catch (e) {
       this.loadErrorMessage = e.response?.data.message || e.message
-      window.fire.error(this.error)
+      window.toast.error(this.error)
     }
     this.loadLoading = false
   },
@@ -23,12 +23,12 @@ Alpine.store('commentStore', {
     this.createLoading = true
     try {
       const { data } = await axios.post(route, { body })
-      window.fire.success('Berhasil membuat komentar')
+      window.toast.success('Berhasil membuat komentar')
       this.comments = [data, ...this.comments]
       this.createLoading = false
       return true
     } catch (e) {
-      window.fire.error(e.response?.data.message || e.message)
+      window.toast.error(e.response?.data.message || e.message)
       this.createLoading = false
       return false
     }
@@ -37,10 +37,10 @@ Alpine.store('commentStore', {
     this.destroyLoading = true
     try {
       await axios.delete(route)
-      window.fire.success('Berhasil menghapus komentar')
+      window.toast.success('Berhasil menghapus komentar')
       this.comments = [...this.comments.filter((el) => el.id !== id)]
     } catch (e) {
-      window.fire.error(e.response?.data.message || e.message)
+      window.toast.error(e.response?.data.message || e.message)
     }
     this.destroyLoading = false
   },
