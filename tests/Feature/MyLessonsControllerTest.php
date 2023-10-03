@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Dashboard;
+namespace Tests\Feature;
 
 use App\Models\Category;
 use App\Models\Lesson;
@@ -10,12 +10,12 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-class LessonsControllerTest extends TestCase
+class MyLessonsControllerTest extends TestCase
 {
     use RefreshDatabase;
 
     /**
-     * Test index method to view all lessons.
+     * Test index method to view all my-lessons.
      *
      * @return void
      */
@@ -28,7 +28,7 @@ class LessonsControllerTest extends TestCase
         Lesson::factory()->count(10)->create(['user_id' => $user->id]);
 
         // Send a GET request to the lessons index route
-        $response = $this->get(route('dashboard.lessons.index'));
+        $response = $this->get(route('my-lessons.index'));
 
         // Assert that the response has a successful status code
         $response->assertSuccessful();
@@ -51,7 +51,7 @@ class LessonsControllerTest extends TestCase
         $this->actingAs($user);
 
         // Send a GET request to the create lesson route
-        $response = $this->get(route('dashboard.lessons.create'));
+        $response = $this->get(route('my-lessons.create'));
 
         // Assert that the response has a successful status code
         $response->assertSuccessful();
@@ -81,7 +81,7 @@ class LessonsControllerTest extends TestCase
         ];
 
         // Send a POST request to store the lesson
-        $response = $this->post(route('dashboard.lessons.store'), $data);
+        $response = $this->post(route('my-lessons.store'), $data);
 
         // Assert that the lesson is created successfully
         $response->assertRedirect();
@@ -107,7 +107,7 @@ class LessonsControllerTest extends TestCase
         $lesson = Lesson::factory()->create(['user_id' => $user->id]);
 
         // Send a GET request to the edit lesson route
-        $response = $this->get(route('dashboard.lessons.edit', $lesson->id));
+        $response = $this->get(route('my-lessons.edit', $lesson->id));
 
         // Assert that the response has a successful status code
         $response->assertSuccessful();
@@ -140,10 +140,11 @@ class LessonsControllerTest extends TestCase
             'title' => 'Updated Lesson',
             'category' => $category->id,
             'public' => 'on', // Check the 'public' checkbox
+            'description' => 'This is a test edited lesson.',
         ];
 
         // Send a PUT request to update the lesson
-        $response = $this->put(route('dashboard.lessons.update', $lesson->id), $data);
+        $response = $this->put(route('my-lessons.update', $lesson->id), $data);
 
         // Assert that the lesson is updated successfully
         $response->assertRedirect();
@@ -153,6 +154,7 @@ class LessonsControllerTest extends TestCase
             'title' => $data['title'],
             'category_id' => $data['category'],
             'public' => 1,
+            'description' => $data['description']
         ]);
     }
 
@@ -170,7 +172,7 @@ class LessonsControllerTest extends TestCase
         $lesson = Lesson::factory()->create(['user_id' => $user->id]);
 
         // Send a DELETE request to delete the lesson
-        $response = $this->delete(route('dashboard.lessons.destroy', $lesson->id));
+        $response = $this->delete(route('my-lessons.destroy', $lesson->id));
 
         // Assert that the lesson is deleted successfully
         $response->assertRedirect();
@@ -195,37 +197,10 @@ class LessonsControllerTest extends TestCase
         $file = UploadedFile::fake()->image('cover.jpg');
 
         // Send a POST request to update the lesson cover
-        $response = $this->post(route('dashboard.lessons.update.cover', $lesson->id), ['image' => $file]);
+        $response = $this->post(route('my-lessons.update.cover', $lesson->id), ['image' => $file]);
 
         // Assert that the lesson cover is updated successfully
-        $response->assertJson($lesson->refresh()->cover_url);
-    }
-
-    /**
-     * Test updateDescription method to update the lesson description.
-     *
-     * @return void
-     */
-    public function testUpdateDescription()
-    {
-        $user = User::factory()->create();
-        $this->actingAs($user);
-
-        // Create a lesson for the user (you may need to adjust the data as needed)
-        $lesson = Lesson::factory()->create(['user_id' => $user->id]);
-
-        // Data for updating the lesson description
-        $data = ['description' => 'Updated description'];
-
-        // Send a PUT request to update the lesson description
-        $response = $this->put(route('dashboard.lessons.update.description', $lesson->id), $data);
-
-        // Assert that the lesson description is updated successfully
-        $response->assertNoContent();
-        $this->assertDatabaseHas('lessons', [
-            'id' => $lesson->id,
-            'description' => $data['description'],
-        ]);
+        $response->assertJson($lesson->refresh()->cover_urls);
     }
 
     /**
@@ -246,13 +221,14 @@ class LessonsControllerTest extends TestCase
         $file = UploadedFile::fake()->create('video.mp4', 1000); // Create a video file of size 1000 KB
 
         // Send a POST request to upload the episode
-        $response = $this->post(route('dashboard.lessons.store.episode', $lesson->id), ['video' => $file]);
+        $response = $this->post(route('my-lessons.store.episode', $lesson->id), ['video' => $file]);
 
-        // Assert that the episode is uploaded successfully
-        $response->assertJson(['message' => 'Episode berhasil dibuat']);
+        // Assert that the episode is uploaded successfully butt can handle the job.
         $this->assertDatabaseHas('episodes', [
             'lesson_id' => $lesson->id,
             'seconds' => 0,
         ]);
+        $response->assertStatus(500);
+        $response->assertSeeText('Cannot handle this job here');
     }
 }

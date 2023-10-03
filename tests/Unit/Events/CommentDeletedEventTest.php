@@ -2,13 +2,13 @@
 
 namespace Tests\Unit\Events;
 
-use App\Events\CommentDeleted;
+use App\Events\CommentDeletedEvent;
 use App\Models\Comment;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
-class CommentDeletedTest extends TestCase
+class CommentDeletedEventTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -18,13 +18,13 @@ class CommentDeletedTest extends TestCase
         // Create a sample comment data
         $comment = Comment::factory()->create()->toArray();
 
-        // Trigger the CommentDeleted event
-        $event = new CommentDeleted($comment);
+        // Trigger the CommentDeletedEvent event
+        $event = new CommentDeletedEvent($comment);
 
         // Assertions
         Event::fake(); // Fake the event dispatcher
         event($event); // Trigger the event
-        Event::assertDispatched(CommentDeleted::class, function ($e) use ($comment) {
+        Event::assertDispatched(CommentDeletedEvent::class, function ($e) use ($comment) {
             return $e->comment === $comment;
         });
     }

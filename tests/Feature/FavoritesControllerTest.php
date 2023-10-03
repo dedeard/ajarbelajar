@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Dashboard;
+namespace Tests\Feature;
 
 use App\Models\Favorite;
 use App\Models\User;
@@ -19,11 +19,11 @@ class FavoritesControllerTest extends TestCase
         $favorites = Favorite::factory()->count(10)->create(['user_id' => $user->id]);
 
         // Define the route and call the controller method
-        $response = $this->actingAs($user)->get('/dashboard/favorites');
+        $response = $this->actingAs($user)->get('/favorites');
 
         // Assert response status and view
         $response->assertStatus(200);
-        $response->assertViewIs('dashboard.favorites');
+        $response->assertViewIs('favorites');
 
         // Assert that the favorites data is available in the view
         $response->assertViewHas('favorites', function ($viewFavorites) use ($favorites) {

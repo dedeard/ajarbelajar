@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Events\CommentDeleted;
+use App\Events\CommentDeletedEvent;
 use App\Events\CommentedEpisodeEvent;
 use App\Models\Comment;
 use App\Models\Episode;
@@ -56,7 +56,7 @@ class CommentsControllerTest extends TestCase
         // Assert that the CommentedEpisodeEvent event is dispatched
         Event::assertDispatched(CommentedEpisodeEvent::class, function ($event) use ($user, $episode) {
             return $event->comment->user_id === $user->id &&
-              $event->comment->episode_id === $episode->id;
+                $event->comment->episode_id === $episode->id;
         });
     }
 
@@ -86,8 +86,8 @@ class CommentsControllerTest extends TestCase
         // Assert that the comment is no longer present in the database
         $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
 
-        // Assert that the CommentDeleted event is dispatched
-        Event::assertDispatched(CommentDeleted::class, function ($event) use ($comment) {
+        // Assert that the CommentDeletedEvent event is dispatched
+        Event::assertDispatched(CommentDeletedEvent::class, function ($event) use ($comment) {
             return $event->comment['id'] === $comment->id;
         });
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Dashboard;
+namespace Tests\Feature;
 
 use App\Models\Comment;
 use App\Models\Lesson;
@@ -33,7 +33,7 @@ class NotificationsControllerTest extends TestCase
         $this->actingAs($user1);
 
         // Send a GET request to the notifications index route
-        $response = $this->get(route('dashboard.notifications.index'));
+        $response = $this->get(route('notifications.index'));
 
         // Assert that the response has a successful status code
         $response->assertSuccessful();
@@ -81,7 +81,7 @@ class NotificationsControllerTest extends TestCase
         // Get the first notification
         $notification = $user1->unreadNotifications->first();
         // Send a GET request to mark the notification as read
-        $response = $this->get(route('dashboard.notifications.read', ['id' => $notification->id]));
+        $response = $this->get(route('notifications.read', ['id' => $notification->id]));
         // Assert that the response is a redirect
         $response->assertRedirect();
 
@@ -128,10 +128,10 @@ class NotificationsControllerTest extends TestCase
         $this->actingAs($user1);
 
         // Send a GET request to mark all notifications as read
-        $response = $this->from(route('dashboard.notifications.index'))->get(route('dashboard.notifications.markall'));
+        $response = $this->from(route('notifications.index'))->get(route('notifications.markall'));
 
         // Assert that the response is a redirect back
-        $response->assertRedirect(route('dashboard.notifications.index'));
+        $response->assertRedirect(route('notifications.index'));
 
         // Assert that all notifications are marked as read in the database
         $this->assertEquals(0, $user1->unreadNotifications()->count());

@@ -27,7 +27,7 @@ class VideoHelperTest extends TestCase
         $fileName = VideoHelper::upload($file);
 
         // Assert
-        Storage::assertExists('episodes/'.$fileName);
+        Storage::assertExists('episodes/' . $fileName);
     }
 
     /** @test */
@@ -41,7 +41,7 @@ class VideoHelperTest extends TestCase
         VideoHelper::destroy($fileName);
 
         // Assert
-        Storage::assertMissing('episodes/'.$fileName);
+        Storage::assertMissing('episodes/' . $fileName);
     }
 
     /** @test */
@@ -52,9 +52,9 @@ class VideoHelperTest extends TestCase
         $fileName = VideoHelper::upload($file);
 
         // Act
-        $url = VideoHelper::getUrl($fileName);
+        $url = VideoHelper::getVideoUrl($fileName);
 
         // Assert
-        $this->assertEquals(Storage::url('episodes/'.$fileName), $url);
+        $this->assertEquals(Storage::url('episodes/' . $fileName), $url);
     }
 }
