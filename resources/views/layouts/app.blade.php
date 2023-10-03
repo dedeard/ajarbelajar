@@ -18,6 +18,8 @@
     {!! $script !!}
   </x-slot:script>
 
+  <x-blocks.search />
+
   <x-layouts.header :no-container="!$noSidebar" :no-sidebar="$noSidebar" />
 
   @if ($noSidebar)
@@ -70,3 +72,4 @@
     </div>
   @endif
 </x-root-layout>
+

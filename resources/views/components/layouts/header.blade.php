@@ -19,7 +19,7 @@
           <div class="flex py-3 lg:pl-3">
             <button aria-label="Search"
               class="flex h-9 w-9 items-center justify-center rounded-full border bg-gray-100 p-0 text-sm hover:bg-gray-200 md:w-40 md:justify-between md:px-4 lg:ml-0"
-              x-on:click="$store.searchModal.open()">
+              x-on:click="$store.searchStore.toggleOpen(true)">
               <div class="hidden font-semibold uppercase tracking-wider md:block">
                 Cari</div>
               <i class="ft ft-search md:text-lg"></i>
@@ -57,3 +57,4 @@
     </div>
   </div>
 </header>
+
